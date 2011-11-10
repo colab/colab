@@ -1,0 +1,28 @@
+{% load i18n %}
+{% with email.from_address as from %}
+{% if email.subject_clean %}
+<li class="preview-message">
+  <a href="{% url super_archives.views.list_messages %}?list={{ email.thread.mailinglist.name }}">
+    <div class="left">
+      <span class="tag">{{ email.mailinglist }}</span>
+    </div>
+  </a>
+  <div class="subject">
+    <a href="{% url super_archives.views.thread email.thread.subject_token %}">
+      {{ email.subject_clean }}
+    </a>
+  </div>
+  <div class="quiet">
+    <span class="left">
+      {% trans "por" %}
+      <a href="{{ from.get_profile_link }}">
+        {% firstof from.get_full_name "Anônimo" %}
+      </a>
+    </span>          
+    <span class="right">
+      {{ email.received_time|timesince }} {% trans "atrás" %} 
+    </span>
+  </div>
+</li>
+{% endif %}
+{% endwith %}

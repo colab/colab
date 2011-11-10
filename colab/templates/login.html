@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load form_field %}
+{% load i18n %}
+
+{% block main-content %}
+  {% if form.errors %}
+  <div class="error">
+    {{ form.non_field_errors }} 
+  </div>
+  {% endif %}
+  
+  <div id="login-form-wrapper">
+    <form class="span-24" method="post" action="{% url django.contrib.auth.views.login %}">
+    {% csrf_token %}
+
+      <fieldset class="span-10 box">
+        <legend>Login</legend>
+        <p>
+          {{ form.username.label_tag }}:
+          <br/>
+          {{ form.username }}
+        </p>
+        <p>
+          {{ form.password.label_tag }}:
+          <br/>
+          {{ form.password }}
+        </p>
+        
+        <input type="submit" value="Login" />
+        {% url colab.views.user_profile_empty as user_profile_url %}
+        <input type="hidden" name="next" value="{% firstof next_page user_profile_url %}" />
+      </fieldset>
+    
+      <fieldset class="span-12 box last">
+        <legend>Não possui cadastro? Casdastre-se!</legend>
+        <p class="prepend-1 span-10 justify large">
+        Para acessar alguns dos recursos do Colab é necessário estar
+        registrado. Caso você ainda não esteja cadastrado nos sistemas da
+        comunidade Interlegis clique no link abaixo e comece a colaborar!</p>
+
+        <a class="span-11 center large" 
+           href="{% url colab.views.signup %}">Cadastre-se</a>
+      </fieldset>
+    </form>
+  </div>
+{% endblock %}

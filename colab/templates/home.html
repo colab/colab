@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block header %}      
+  <div id="header-logo" class="span-24">
+    <img class="center" src="{{ STATIC_URL }}img/logo.png" />
+  </div>
+
+  <hr class="space"/>
+
+  <h2 class="span-24 center">{% trans "COMUNIDADES INTERLEGIS" %}</h2>
+{% endblock %}
+
+{% block main-content %}
+  <h3 class="span-13">{% trans "Últimas Menssagens:" %}</h3>
+  <h3 class="span-11 last">{% trans "Discussões mais votadas:" %}</h3>
+  
+  <ul id="latest_emails" class="span-12 colborder">
+    {% for thread in latest_threads %}
+    {% with thread.latest_message as email %}
+      {% include "message-preview.html" %}
+    {% endwith %}
+    {% endfor %}
+  </ul>
+
+  <ul id="hotest_emails" class="span-11 last">
+    {% for thread in hotest_threads %}
+    {% with thread.latest_message as email %}
+      {% include "message-preview.html" %}
+    {% endwith %}
+    {% endfor %}
+  </ul>
+  
+  <hr class="space"/>
+  <div class="span-13">
+    <a class="right append-1" href="{% url super_archives.views.list_messages %}">
+      {% trans "Ver mais mensagens..." %}
+    </a>
+  </div>
+  <div class="span-11 last">
+    <a class="right" href="{% url super_archives.views.list_messages %}?order=hotest">
+      {% trans "Ver mais mensagens..." %}
+    </a>
+  </div>
+{% endblock %}

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load form_field %}
+
+{% block head_js %}
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+      
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+      
+      // Callback that creates and populates a data table, 
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+
+      // Create the data table.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+        ['Escolhida pelo autor', 21],
+        ['Bem avaliadas', 50],
+        ['Outras', 230],
+      ]);
+
+      // Set chart options
+      var options = {'width': 350,
+                     'height': 200,
+                     'legend': 'bottom',
+                     chartArea: {
+                        top:10, 
+                        width:"90%", 
+                        height:"75%"},
+      };
+
+      // Instantiate and draw our chart, passing in some options.
+      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+{% endblock %}
+
+
+{% block main-content %}
+  {% if not user_profile %}
+    <span class="notice span-24">
+      <b>Usuário não cadastrado.</b> Você é dono deste perfil? 
+      <a href="{% url colab.views.signup %}">Clique aqui
+      e cadastre-se.</a>
+    </span>
+  {% endif %}
+
+  <div id="user-profile">
+    <h2>{{ email_address.get_full_name }}</h2>
+
+    <div class="span-4">
+      <img class="avatar" width="120px" heigth="120px"
+           src="http://www.gravatar.com/avatar/{{ email_address.md5 }}?s=120&d=identicon" />
+    </div>
+    
+    <div class="span-20 last">
+      <div class="span-11">
+        <form action='.' method='post'>
+          {% csrf_token %}
+          
+          <h3>Informações Pessoais</h3>
+          <ul id="user-info">
+            <li>{{ form.username.label_tag }}: {{ user_profile.user.username }}</li>
+            <li>
+              {% render_form_field form.institution user_profile.institution %}
+            </li>
+            <li>
+              {% render_form_field form.role user_profile.role %}
+            </li>
+          </ul>
+      
+          <hr class="space" />
+        
+          <h3>Outras Informações</h3>
+          <ul>
+            <li>
+              {% render_form_field form.twitter user_profile.twitter %}
+            </li>
+            <li>
+              {% render_form_field form.facebook user_profile.facebook %}
+            </li>
+            <li>
+              {% render_form_field form.google_talk user_profile.google_talk %}
+            </li>
+            <li>
+              {% render_form_field form.webpage user_profile.webpage %}
+            </li>
+          </ul>
+          
+          <hr class="space"/>
+          {% if editable %}
+            <span class="span-5">
+              <input class="right" type="submit" value="Salvar"/>
+            </span>
+          {% endif %}
+        </form>
+      </div>
+  
+      <div class="span-9 last">
+        <h3 class="center">Avaliação das Menssagens</h3>
+        <div id="chart_div"></div>
+      </div>
+    </div>
+    
+    <hr class="space" />
+    
+    <h3>Últimas mensagens enviadas</h3>
+    <ul>
+    {% for email in emails %}
+      {% include "message-preview.html" %}
+    {% empty %}
+      <li>Não existem mensagens enviadas por este usuário até o momento.</li>
+    {% endfor %} 
+    </ul>
+  </div>
+{% endblock %}
