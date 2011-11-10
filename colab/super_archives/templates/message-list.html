@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load append_to_get %}
+{% block main-content %}
+<div id="message-list">
+  <h2 class="span-5">Discussões</h2>
+  <hr/>
+  
+  <div class="span-5 border filters">
+    <h3>Filtros</h3>
+    
+    <h4>Ordenar por</h4>
+    <ul>
+      <li><a href="{% append_to_get order='latest',p=1 %}">Relevância</a></li>
+      <li><a href="{% append_to_get order='latest',p=1 %}">Atividade recente</a></li>
+      <li><a href="{% append_to_get order='voted',p=1 %}">Mais votadas</a></li>
+    </ul>
+    
+    <hr class="space" />
+    
+    <h4>Listas</h4>
+    <ul>
+    {% for list in lists %}
+      <li><a href="{% append_to_get list=list.name,p=1 %}">{{ list.name }}</a></li>
+    {% endfor %}
+    </ul>
+  </div>
+  
+  <div class="span-17 prepend-1 last">
+    <ul>
+      {% for thread in threads.object_list %}
+        {% with thread.latest_message as email %}
+          {% include "message-preview.html" %}
+        {% endwith %}
+      {% empty %}
+        <br/><br/>
+        <span class="span-18 center large">
+          <b>Nenhuma discussão encontrada</b>
+        </span>
+      {% endfor %}
+    </ul>
+    <hr class="space"/>
+    
+    {% if n_results %}
+    <div class="pagination center">
+      <span class="step-links">
+        {% if threads.has_previous %}
+          <a href="{% append_to_get p=threads.previous_page_number %}">Anterior</a>
+        {% endif %}
+
+        <span class="current">
+          Página {{ threads.number }} de {{ threads.paginator.num_pages }}
+        </span>
+
+        {% if threads.has_next %}
+          <a href="{% append_to_get p=threads.next_page_number %}">Próxima</a>
+        {% endif %}
+      </span>
+    </div>
+    {% endif %}
+    
+  </div>
+</div>
+
+{% endblock %}

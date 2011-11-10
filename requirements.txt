@@ -1,0 +1,6 @@
+Django==1.3.1
+South==0.7.3
+django-registration==0.7
+django-piston==0.2.3
+pytz
+chardet==1.0.1
