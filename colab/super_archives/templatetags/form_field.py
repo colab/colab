@@ -38,7 +38,7 @@ class RenderFormField(template.Node):
         try:
             default_value = self.default_value_nocontext.resolve(context)
         except template.VariableDoesNotExist:
-            pass
+            default_value = ''
         
         if editable:
             form_field_tag = '<br/>' + str(form_field)

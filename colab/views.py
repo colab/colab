@@ -104,8 +104,13 @@ def user_profile(request, user, email_address=None, editable=False, form=None):
     emails = Message.objects.raw(query)
     n_sent = Message.objects.filter(from_address__in=email_addresses).count()    
 
+    if user:
+        profile = user.profile
+    else:
+        profile = None
+
     template_data = {
-        'user_profile': user.profile or None,
+        'user_profile': profile,
         'email_address': email_address,
         'emails': emails or [],
         'form': form,
