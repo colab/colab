@@ -13,13 +13,6 @@ PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', 
-        'NAME': os.path.join(PROJECT_PATH, 'colab.db'),
-    }
-}
-
 LOGIN_URL = '/login/'
 
 # Local time zone for this installation. Choices can be found here:
@@ -65,9 +58,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '^$10gkd7%o==sa$f$&au!c*w*@bue^n7fn*o8sederb9a1cup5'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -136,3 +126,6 @@ LOGGING = {
         },
     }
 }
+
+from settings_local import *
+
