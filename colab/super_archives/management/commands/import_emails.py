@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-# -*- encoding: utf8 -*-
+# -*- encoding: utf-8 -*-
 
 """Import emails from a mailman storage to the django database."""
 
 import os
 import re
+import sys
 import mailbox
 from optparse import make_option
 
@@ -13,8 +14,10 @@ from django.template.defaultfilters import slugify
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
 
-from super_archives.models import MailingList, Message, Thread, EmailAddress
-from super_archives.management.commands.message import Message as CustomMessage
+from colab.super_archives.models import MailingList, Message, \
+                                        Thread, EmailAddress
+from colab.super_archives.management.commands.message import Message as \
+                                                             CustomMessage
 
 
 class Command(BaseCommand, object):
@@ -35,7 +38,14 @@ class Command(BaseCommand, object):
             help='Path of email archives to be imported. (default: %s)' % 
                                                     default_archives_path,
             default=default_archives_path),
-            
+        
+        make_option('--exclude-list',
+            dest='exclude_lists',
+            help=("Mailing list that won't be imported. It can be used many"    
+                  "times for more than one list."),
+            action='append',
+            default=None),
+        
         make_option('--all',
             dest='all',
             help='Import all messages (default: False)',
@@ -81,11 +91,12 @@ class Command(BaseCommand, object):
             key += 1
             yield key-1, mbox[key-1]
 
-    def get_emails(self, mailinglist_dir, all):
+    def get_emails(self, mailinglist_dir, all, exclude_lists):
         """Generator function that get the emails from each mailing
         list dump dirctory. If `all` is set to True all the emails in the 
         mbox will be imported if not it will just resume from the last 
-        message previously imported.
+        message previously imported. The lists set in `exclude_lists`
+        won't be imported.
 
         Yield: A tuple in the form: (mailing list name, email message).
 
@@ -100,6 +111,10 @@ class Command(BaseCommand, object):
         for mbox in mailing_lists_mboxes:
             mbox_path = os.path.join(mailinglist_dir, mbox, mbox)
             mailinglist_name = mbox.split('.')[0]
+            
+            # Check if the mailinglist is set not to be imported
+            if exclude_lists and mailinglist_name in exclude_lists:
+                continue
             
             # Find the index of the last imported message
             if all:
@@ -154,10 +169,7 @@ class Command(BaseCommand, object):
         email_addr = self.EMAIL_ADDR_CACHE.get(from_)
         if email_addr is None:
             email_addr = EmailAddress.objects.get_or_create(
-                address=from_,
-                real_name=real_name[:64]
-            )[0]
-            
+                address=from_)[0]
             self.EMAIL_ADDR_CACHE[from_] = email_addr
 
         if not email_addr.real_name and real_name:
@@ -179,16 +191,18 @@ class Command(BaseCommand, object):
         email.save()
 
     @transaction.commit_manually    
-    def import_emails(self, archives_path, all):
+    def import_emails(self, archives_path, all, exclude_lists=None):
         """Get emails from the filesystem from the `archives_path` 
         and store them into the database. If `all` is set to True all 
-        the filesystem storage will be imported otherwise the importation
-        will resume from the last message previously imported.
+        the filesystem storage will be imported otherwise the 
+        importation will resume from the last message previously 
+        imported. The lists set in `exclude_lists` won't be imported.
         
         """
         
         count = 0
-        for mailinglist_name, msg, index in self.get_emails(archives_path, all):
+        email_generator = self.get_emails(archives_path, all, exclude_lists)
+        for mailinglist_name, msg, index in email_generator:
             try:
                 self.save_email(mailinglist_name, msg, index)
             except:
@@ -206,6 +220,20 @@ class Command(BaseCommand, object):
     def handle(self, *args, **options):
         """Main command method."""
         
+        lock_file = '/var/lock/colab/import_emails.lock'
+        
+        # Already running, so quit
+        if os.path.exists(lock_file):
+            self.log(("This script is already running. (If your are sure it's "
+                     "not please delete the lock file in %s')") % lock_file)
+            sys.exit(0)
+    
+        if not os.path.exists(os.path.dirname(lock_file)):
+            os.mkdir(os.path.dirname(lock_file), 0755)
+        
+        run_lock = file(lock_file, 'w')
+        run_lock.close()
+        
         archives_path = options.get('archives_path')
         self.log('Using archives_path `%s`' % self.default_archives_path)
                                                             
@@ -213,5 +241,8 @@ class Command(BaseCommand, object):
             raise CommandError('archives_path (%s) does not exist' %
                                                                 archives_path)
         
-        self.import_emails(archives_path, options.get('all'))
+        self.import_emails(archives_path, 
+                           options.get('all'), options.get('exclude_lists'))
+        
+        os.remove(lock_file)
         

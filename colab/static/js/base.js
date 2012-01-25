@@ -5,6 +5,7 @@ function vote_callback(msg_id, step) {
             return parseInt(count) + step;
         });
         jQuery('#msg-' + msg_id + ' .minus').toggleClass('hide');
+        jQuery('#vote-notification').addClass('hide');
     }
 }
 
@@ -21,6 +22,18 @@ function get_vote_ajax_dict(msg_id, type_) {
         url: "/api/message/" + msg_id + "/vote",
         type: type_,
         success: vote_callback(msg_id, step),
+        error: function (jqXHR, textStatus, errorThrown) {
+            
+            error_msg = '<b>Seu voto não foi computado.</b>'
+            if (jqXHR.status === 401) {
+                error_msg += ' Você deve estar autenticado para votar.';
+            } else {
+                error_msg += ' Erro desconhecido ao tentando votar.';
+            }
+            
+            jQuery('#vote-notification').html(error_msg).removeClass('hide');
+            scroll(0, 0);
+        }
     }
 }
 
@@ -35,7 +48,6 @@ function unvote(msg_id) {
 jQuery(document).ready(function() {
     jQuery('.email_message').each(function() {
         var msg_id = this.getAttribute('id').split('-')[1];
-        console.debug(msg_id);
         jQuery('.plus img', this).bind('click', function() {
             vote(msg_id);
         });
@@ -45,3 +57,11 @@ jQuery(document).ready(function() {
         });
     });
 });
+
+function pagehit(path_info) {
+    jQuery.ajax({
+        url: '/api/hit/',
+        type: 'POST',
+        data: {'path_info': path_info},
+    });
+}

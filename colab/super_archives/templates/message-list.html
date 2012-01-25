@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load append_to_get %}
 {% block main-content %}
 <div id="message-list">
@@ -10,27 +11,30 @@
     
     <h4>Ordenar por</h4>
     <ul>
-      <li><a href="{% append_to_get order='latest',p=1 %}">Relevância</a></li>
-      <li><a href="{% append_to_get order='latest',p=1 %}">Atividade recente</a></li>
-      <li><a href="{% append_to_get order='voted',p=1 %}">Mais votadas</a></li>
+      <li {% ifequal order_by "hotest" %} class="selected" title="{% trans "Retirar filtro" %}" {% endifequal %}>
+        <a href="{% ifequal order_by "hotest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hotest',p=1 %} {% endifequal %}">
+          Relevância</a></li>
+      <li {% ifequal order_by "latest" %} class="selected" title="{% trans "Retirar filtro" %}" {% endifequal %}>
+        <a href="{% ifequal order_by "latest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='latest',p=1 %} {% endifequal %}">
+          Atividade recente</a></li>
     </ul>
     
     <hr class="space" />
     
     <h4>Listas</h4>
     <ul>
-    {% for list in lists %}
-      <li><a href="{% append_to_get list=list.name,p=1 %}">{{ list.name }}</a></li>
-    {% endfor %}
+      {% for list in lists %}
+        <li {% ifequal list.name selected_list %} class="selected" title="{% trans "Retirar filtro" %}" {% endifequal %}>
+          <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
+          {% endifnotequal %}">{{ list.name }}</a></li>
+      {% endfor %}
     </ul>
   </div>
   
   <div class="span-17 prepend-1 last">
     <ul>
       {% for thread in threads.object_list %}
-        {% with thread.latest_message as email %}
-          {% include "message-preview.html" %}
-        {% endwith %}
+        {% include "message-preview.html" with doc=thread.latest_message %}
       {% empty %}
         <br/><br/>
         <span class="span-18 center large">

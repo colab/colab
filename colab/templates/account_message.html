@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main-content %}
+
+<span class="span-24 {{ msg_css_class }}">
+  {% trans msg %}
+</span>
+
+{% endblock %}

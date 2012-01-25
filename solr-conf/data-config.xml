@@ -1,13 +1,13 @@
- <dataConfig>
+<dataConfig>
   <dataSource name="trac"
               type="JdbcDataSource" 
               driver="org.postgresql.Driver"
-              url="jdbc:postgresql://localhost/trac_gitec" 
+              url="jdbc:postgresql://bdinterlegis.interlegis.leg.br/trac_colab" 
               user="colab" />
   <dataSource name="colab"
               type="JdbcDataSource" 
               driver="org.postgresql.Driver"
-              url="jdbc:postgresql://localhost/colab" 
+              url="jdbc:postgresql://bdinterlegis.interlegis.leg.br/colab" 
               user="colab" />
 
   <document>
@@ -17,7 +17,7 @@
             transformer="TemplateTransformer,DateFormatTransformer"
             query="SELECT
                      name,
-                     TIMESTAMP 'epoch' + max(time) * INTERVAL '1s' AS modified,
+                     TIMESTAMP 'epoch' + (max(time)/1000000) * INTERVAL '1s' AS modified,
                      max(version) AS version
                    FROM wiki GROUP BY name"
             deltaQuery="
@@ -26,13 +26,13 @@
               FROM
                 wiki
               WHERE
-                time > EXTRACT(
+                time > (EXTRACT(
                   epoch FROM TIMESTAMP '${dataimporter.wiki.last_index_time}'
-                )"
+                ) * 1000000)"
             deltaImportQuery="
                    SELECT
                      name,
-                     TIMESTAMP 'epoch' + max(time) * INTERVAL '1s' AS modified,
+                     TIMESTAMP 'epoch' + (max(time)/1000000) * INTERVAL '1s' AS modified,
                      max(version) AS version
                    FROM 
                      wiki
@@ -43,8 +43,8 @@
       <entity name="wiki_creation" 
               dataSource="trac"
               query="SELECT 
-                       author AS creator,
-                       TIMESTAMP 'epoch' + time * INTERVAL '1s' AS created
+                       author AS Creator,
+                       TIMESTAMP 'epoch' + (time/1000000) * INTERVAL '1s' AS created
                      FROM 
                        wiki 
                      WHERE
@@ -71,14 +71,15 @@
                        name = '${wiki.name}'
                        AND version = '${wiki.version}'" />
 
-      <field column="uid" template="WIKI_${wiki.name}" />
-      <field column="id" template="${wiki.name}" />
-      <field column="type" template="wiki" />
-      <field column="title" template="${wiki.name}" />
+      <field column="UID" template="WIKI_${wiki.name}" />
+      <field column="getId" template="${wiki.name}" />
+      <field column="Type" template="wiki" />
+      <field column="Title" template="${wiki.name}" />
       <field column="created" name="created" 
              dateTimeFormat="yyyy-MM-dd hh:mm:ss"/>
       <field column="modified" name="modified" 
              dateTimeFormat="yyyy-MM-dd hh:mm:ss"/>
+      <field column="path_string" template="/wiki/${wiki.name}" />
     </entity>
 
     <entity name="ticket"
@@ -91,13 +92,13 @@
                 FROM
                   ticket
               WHERE
-                time > EXTRACT(
+                time > (EXTRACT(
                   epoch FROM TIMESTAMP '${dataimporter.ticket.last_index_time}'
-                )"
+                ) * 1000000)"
             query="SELECT
                      id, 
                      summary,
-                     description,
+                     description AS Description,
                      milestone,
                      priority,
                      component,
@@ -106,8 +107,8 @@
                      reporter,
                      owner,
                      status,
-                     TIMESTAMP 'epoch' + time * INTERVAL '1s' AS created,
-                     TIMESTAMP 'epoch' + changetime * INTERVAL '1s' AS modified
+                     TIMESTAMP 'epoch' + (time/1000000)* INTERVAL '1s' AS created,
+                     TIMESTAMP 'epoch' + (changetime/1000000) * INTERVAL '1s' AS modified
                    FROM
                      ticket">
 
@@ -158,11 +159,13 @@
                        ticket = ${ticket.id}
                        AND field = 'comment'" />
 
-      <field column="uid" template="TICKET_${ticket.id}" />
-      <field column="type" template="ticket" />
-      <field column="title" 
+      <field column="UID" template="TICKET_${ticket.id}" />
+      <field column="getId" template="${ticket.id}" />
+      <field column="Type" template="ticket" />
+      <field column="path_string" template="/ticket/${ticket.id}" />
+      <field column="Title" 
              template="#${ticket.id} (${ticket.status}) - ${ticket.summary}" />
-      <field column="creator" template="${ticket.reporter}" />
+      <field column="Creator" template="${ticket.reporter}" />
       <field column="created" name="created" 
              dateTimeFormat="yyyy-MM-dd hh:mm:ss"/>
       <field column="modified" name="modified" 
@@ -179,24 +182,35 @@
             FROM 
               revision 
             WHERE
-              time > EXTRACT(
+              time > (EXTRACT(
                 epoch FROM TIMESTAMP '${dataimporter.changeset.last_index_time}'
-              )"
+              ) * 1000000)"
 
             query="SELECT
                      rev AS revision, 
-                     author AS creator,
+                     author AS Creator,
                      author AS collaborator,
-                     TIMESTAMP 'epoch' + time * INTERVAL '1s' AS created,
-                     message
+                     repos.value AS repos_name,
+                     TIMESTAMP 'epoch' + (time/1000000) * INTERVAL '1s' AS created,
+                     TIMESTAMP 'epoch' + (time/1000000) * INTERVAL '1s' AS modified,
+                     message                    
                    FROM
-                     revision">
-      <field column="uid" template="CHANGESET_${changeset.revision}" />
-      <field column="id" template="${changeset.revision}" />
-      <field column="type" template="changeset" />
-      <field column="title" 
+                     revision AS rev JOIN
+                     repository AS repos
+                       ON rev.repos = repos.id AND 
+                          repos.name = 'name' AND repos.value != ''">
+
+      <field column="UID" template="CHANGESET_${changeset.revision}" />
+      <field column="getId" template="${changeset.revision}" />
+      <field column="Type" template="changeset" />
+      <field column="path_string" 
+             template="/changeset/${changeset.revision}/${changeset.repos_name}"
+      />
+      <field column="Title" 
              template="[${changeset.revision}] - ${changeset.message}" />
       <field column="created" name="created" 
+             dateTimeFormat="yyyy-MM-dd hh:mm:ss"/>
+      <field column="modified" name="modified" 
              dateTimeFormat="yyyy-MM-dd hh:mm:ss"/>
     </entity>
 
@@ -244,6 +258,8 @@
                        ON sat.id = sam.thread_id
                      JOIN super_archives_mailinglist AS saml
                        ON sat.mailinglist_id = saml.id
+                   WHERE
+                     sat.spam IS NOT True
                    GROUP BY
                      sam.thread_id,
                      sat.subject_token,
@@ -258,10 +274,12 @@
               dataSource="colab"
               transformer="TemplateTransformer"
               query="SELECT DISTINCT ON (sam.thread_id)
-                       sam.body AS description,
+                       sam.body AS Description,
                        sam.received_time AS created,
                        sam.subject_clean AS subject,
-                       au.username AS creator
+                       saea.real_name AS creator_real_name,
+                       saea.md5 AS creator_email_md5,
+                       au.username AS Creator
                      FROM 
                        super_archives_message AS sam
                        JOIN super_archives_emailaddress AS saea
@@ -273,7 +291,9 @@
                      ORDER BY 
                        sam.thread_id,
                        sam.received_time">
-        <field column="title" template="${first_message.subject}" />
+        <field column="Title" template="${first_message.subject}" />
+        <field column="creator_profile_uri" 
+               template="/user/hash/${first_message.creator_email_md5}" />
       </entity>
 
       <entity name="latest_message"
@@ -298,8 +318,10 @@
                      WHERE
                        thread_id = ${thread.id}" />
 
-      <field column="uid" template="THREAD_${thread.id}" />
-      <field column="type" template="thread" />
+      <field column="UID" template="THREAD_${thread.id}" />
+      <field column="getId" template="${thread.name}" />
+      <field column="Type" template="thread" />
+      <field column="path_string" template="/archives/thread/${thread.name}" />
       <field column="created" name="created" 
              dateTimeFormat="yyyy-MM-dd hh:mm:ss" />
       <field column="modified" name="modified" 
@@ -312,3 +334,4 @@
 <!-- 
 vim: ts=2 sw=2 ss=2 expandtab:
 -->
+

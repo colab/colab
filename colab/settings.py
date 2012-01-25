@@ -5,8 +5,12 @@ import os.path
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+if DEBUG:
+    import logging
+    logging.root.setLevel(logging.DEBUG)
+
+
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
 )
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
@@ -22,7 +26,7 @@ LOGIN_URL = '/login/'
 # timezone as the operating system.
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
-TIME_ZONE = 'America/Chicago'
+TIME_ZONE = 'America/Sao_Paulo'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -39,12 +43,12 @@ USE_I18N = True
 USE_L10N = True
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, os.pardir, 'site_media/media')
-MEDIA_URL = '/site_media/media/'
+MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(PROJECT_PATH, os.pardir, 'site_media/static')
-STATIC_URL = '/site_media/static/'
+STATIC_URL = '/static/'
 
-#ADMIN_MEDIA_PREFIX = '/site_media/static/admin/'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -66,12 +70,23 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'colab.urls'
@@ -91,17 +106,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     
     # Not standard apps
     'south',
-    'registration',
+    'cliauth',
+    #'debug_toolbar',
 
     # My apps
-    'super_archives',
-    'api',
+    'colab.super_archives',
+    'colab.api',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -115,7 +131,8 @@ LOGGING = {
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True,
         }
     },
     'loggers': {
@@ -126,6 +143,19 @@ LOGGING = {
         },
     }
 }
+
+SERVER_EMAIL = '"Colab Interlegis" <noreply@interlegis.leg.br>'
+EMAIL_HOST_USER = SERVER_EMAIL
+
+#SOLR_HOSTNAME = 'solr.interlegis.leg.br'
+SOLR_HOSTNAME = '10.1.2.154'
+SOLR_PORT = '8080'
+SOLR_SELECT_PATH = '/solr/select'
+
+SOLR_COLAB_URI = 'http://colab.interlegis.gov.br'
+SOLR_BASE_QUERY = """
+    (Type:changeset OR Type:ticket OR Type:wiki OR Type:thread)
+"""
 
 from settings_local import *
 

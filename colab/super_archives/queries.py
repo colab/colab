@@ -1,5 +1,5 @@
 
-from super_archives.models import Thread, Vote, Message
+from colab.super_archives.models import Thread, Vote, Message, PageHit
 
 
 def get_messages_by_date():
@@ -34,30 +34,14 @@ def get_latest_threads():
     return Thread.objects.order_by('-latest_message__received_time')
 
 
-def get_voted_threads():
-    """Query for the most voted threads sorting by the sum of votes 
-    and latest messages received.
-    
-    NOTE: This implementation has serious performance issues on
-    MySQL databases but it performes quite well on PostgreSQL.
-    
-    """
-    
-    sql = """
-        SELECT 
-            count(sav.id)
-        FROM
-            super_archives_message AS sam 
-            JOIN super_archives_vote AS sav
-                ON sav.message_id = sam.id
-        WHERE
-            super_archives_thread.id = sam.thread_id
-    """
+def get_hotest_threads():
+    return Thread.objects.order_by('-score', '-latest_message__received_time')
 
-    threads = Thread.objects.extra(
-        select={
-            'vote_count': sql
-        }
-    )
-    return threads.order_by('-vote_count', '-latest_message__received_time')
+
+def get_page_hits(path_info):
+    pagehit = PageHit.objects.filter(url_path=path_info)
     
+    if pagehit:
+        return pagehit[0].hit_count
+    return 0
+

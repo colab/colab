@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load form_field %}
+{% load i18n %}
 {% block main-content %}
 
 <h2>Cadastre-se</h2>
@@ -7,6 +8,17 @@
 {% if form.errors %}
 <div class="alert"><b>Por favor, corrija os erros abaixo e tente novamente.</b></div>
 {% endif %}
+
+<div class="avatar-placeholder box">
+  <label class="avatar-placeholder">Avatar</label >
+  <div class="avatar-image avatar">
+    <img  src="{{ STATIC_URL }}img/user.png" alt="user"/>
+  </div>
+  <p>
+    {% trans "Adicione um avatar à sua conta utilizando" %} <a href="http://pt.gravatar.com/" target="_blank">Gravatar</a>.
+  </p>
+</div>
+
 
 <p class="required span-24 last">
   <label>Campos Obrigatórios</label>  

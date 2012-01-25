@@ -1,21 +1,48 @@
+{% load i18n %}
 <html>
   <head>
-    <!-- Framework CSS -->  
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/screen.css" 
-                                  type="text/css" media="screen, projection" />  
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/print.css" 
-                                  type="text/css" media="print" />  
-    <!--[if IE]><link rel="stylesheet" 
-                      href="{{ STATIC_URL }}css/blueprint/ie.css" 
-                      type="text/css" media="screen, projection" /><![endif]-->  
+    <!-- Framework CSS -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/screen.css"
+                                  type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/blueprint/print.css"
+                                  type="text/css" media="print" />
+    <!--[if IE]><link rel="stylesheet"
+                      href="{{ STATIC_URL }}css/blueprint/ie.css"
+                      type="text/css" media="screen, projection" /><![endif]-->
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css" 
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
                                 type="text/css" media="screen" charset="utf-8"/>
 
     <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.min.js"></script>    
     <script type="text/javascript" src="{{ STATIC_URL }}js/base.js"></script>
-    
+
     {% block head_js %}
+    {% endblock %}
+    {% block head_css %}
+      <!-- css used to show the selected item on filters -->
+      <style type="text/css">
+        .selected {
+            font-weight: bold;
+        }
+
+        .selected a {
+            text-decoration: none;
+            color: #000;
+            background-image: url('{{ STATIC_URL }}img/x.png');
+            background-repeat: no-repeat;
+            background-position: 0 3px;
+            padding-left: 16px;
+        }
+
+        .selected a:hover {
+          text-decoration: underline;
+        }
+
+        li.selected:before {
+            content: '';
+        }
+      </style>
+
     {% endblock %}
   </head>
 
@@ -24,55 +51,66 @@
       <div id="top-menu" class="right">
         {% if not user.is_authenticated %}
         <span class="colborder">
-          <a href="{% url colab.views.signup %}">Cadastre-se</a>
+          <a href="{% url signup %}">{% trans "Cadastre-se" %}</a>
         </span>
         <span>
-          <a href="{% url django.contrib.auth.views.login %}">Acessar</a>
+          <a href="{% url login %}?next={{ request.path }}">{% trans "Acessar" %}</a>
         </span>
         {% else %}
         <span class="colborder">
-          <a href="{% url colab.views.user_profile_username user.username %}">Meu Perfil</a>
+          {% trans "autenticado como" %} <b>{{ user.username }}</b>
+        </span>
+        <span class="colborder">
+          <a href="{% url user_profile user.username %}">
+            {% trans "Meu Perfil" %}
+          </a>
         </span>
         <span>
-          <a href="{% url django.contrib.auth.views.logout %}">Sair</a>
+          <a href="{% url logout %}">
+            {% trans "Sair" %}
+          </a>
         </span>
         {% endif %}
       </div>
-      
+
       {% block header %}
         <h1><span class="hide">COLAB</span>
           <a href="/">
             <img src="{{ STATIC_URL }}img/logo_small.png" alt="Colab" /></a>
         </h1>
       {% endblock %}
-      
-        <div id="header-menu" class="span-24">
+
+      <div id="header-menu" class="span-24">
 
         <span class="colborder">
-          <a href="#">Iniciar Discussão</a>
+          <a href="{% url thread_list %}">Discussões</a>
         </span>
         <span class="colborder">
-          <a href="{% url super_archives.views.list_messages %}">Discussões</a>
+          <a href="http://colab.interlegis.gov.br/wiki" target="_blank">Wiki</a>
         </span>
         <span class="colborder">
-          <a href="http://colab.interlegis.gov.br/wiki">Wiki</a>
+          <a href="http://listas.interlegis.gov.br/mailman/listinfo/" 
+             target="_blank">Contribua</a>
         </span>
         <span class="colborder">
-          <a href="#">Contribua</a>
+          <a href="http://colab.interlegis.leg.br/newticket"
+             target="_blank">Reporte um problema</a>
         </span>
-        <span class="colborder">
-          <a href="#">Reporte um problema</a>
-        </span>
-        <span class="colborder">
-          <a href="#">Treco</a>
+        <span>
+          <a href="#">Mensageiro</a>
         </span>
 
-        <input id="header-searchbox" type="text" placeholder="Pesquise aqui..."/>
-        <input type="button" value="Buscar"></input>
+        <span class="right">
+          <form action="/search/" method="GET">
+            <input name="q" id="header-searchbox" value="{{ request.GET.q }}"
+                   type="text" placeholder="Pesquise aqui..." />
+            <input type="submit" value="Buscar"></input>
+          </form>
+        </span>
       </div>
     </div>
-    
-    <hr/> 
+
+    <hr/>
 
     <div id="main-content" class="span-24">
       {% block main-content %} {% endblock %}
@@ -82,8 +120,8 @@
 
     <div id="footer" class="span-24 center">
       {% block footer %}
-        <p>O conteúdo deste site está publicado sob a licença <a 
-          href="http://creativecommons.org/licenses/by-nc-sa/2.0/br/">Creative 
+        <p>O conteúdo deste site está publicado sob a licença <a
+          href="http://creativecommons.org/licenses/by-nc-sa/2.0/br/">Creative
           Commons - atribuição e não-comercial</a>
         </p>
       {% endblock %}

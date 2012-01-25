@@ -1,57 +1,28 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% load form_field %}
 
 {% block head_js %}
-    <!--Load the AJAX API-->
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-    
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1.0', {'packages':['corechart']});
-      
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
-      
-      // Callback that creates and populates a data table, 
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-      // Create the data table.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Topping');
-      data.addColumn('number', 'Slices');
-      data.addRows([
-        ['Escolhida pelo autor', 21],
-        ['Bem avaliadas', 50],
-        ['Outras', 230],
-      ]);
-
-      // Set chart options
-      var options = {'width': 350,
-                     'height': 200,
-                     'legend': 'bottom',
-                     chartArea: {
-                        top:10, 
-                        width:"90%", 
-                        height:"75%"},
-      };
-
-      // Instantiate and draw our chart, passing in some options.
-      var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
-    </script>
+  {% include "pizza-chart.html" with chart_div="collabs" chart_width=390 chart_height=230 %}
 {% endblock %}
-
 
 {% block main-content %}
   {% if not user_profile %}
     <span class="notice span-24">
       <b>Usuário não cadastrado.</b> Você é dono deste perfil? 
-      <a href="{% url colab.views.signup %}">Clique aqui
+      <a href="{% url signup %}">Clique aqui
       e cadastre-se.</a>
     </span>
+
+  {% else %}  
+    
+    {% ifequal request.user.username user_profile.user.username %}
+      <span class="success span-24">
+        Ei, olha você aqui! Quer 
+        <a href="{% url user_profile_update request.user %}">editar seu perfil</a>?
+      </span>
+    {% endifequal %}
+    
   {% endif %}
 
   <div id="user-profile">
@@ -63,13 +34,18 @@
     </div>
     
     <div class="span-20 last">
-      <div class="span-11">
-        <form action='.' method='post'>
+      <div class="span-10">
+        <form action="{% url user_profile_update request.user %}" method='post'>
           {% csrf_token %}
           
           <h3>Informações Pessoais</h3>
           <ul id="user-info">
-            <li>{{ form.username.label_tag }}: {{ user_profile.user.username }}</li>
+            <li>
+              {{ form.username.label_tag }}: {{ user_profile.user.username }}
+              {% ifequal request.user.username user_profile.user.username %}
+                (<a href="{% url change_password %}">{% trans "alterar senha" %}</a>)
+              {% endifequal %}
+            </li>
             <li>
               {% render_form_field form.institution user_profile.institution %}
             </li>
@@ -105,21 +81,37 @@
         </form>
       </div>
   
-      <div class="span-9 last">
-        <h3 class="center">Avaliação das Menssagens</h3>
-        <div id="chart_div"></div>
+      {% if type_count %}
+      <div class="span-10 last">
+        <h3 class="center">{% trans "Colaborações por área" %}</h3>
+        <div id="collabs"></div>
       </div>
+      {% endif %}
     </div>
     
     <hr class="space" />
     
-    <h3>Últimas mensagens enviadas</h3>
-    <ul>
-    {% for email in emails %}
-      {% include "message-preview.html" %}
-    {% empty %}
-      <li>Não existem mensagens enviadas por este usuário até o momento.</li>
-    {% endfor %} 
-    </ul>
+    <div class="span-13">
+      <h3>{% trans "Últimas mensagens enviadas" %} </h3>
+      <ul class="colborder">
+      {% for doc in emails %}
+        {% include "message-preview.html" %}
+      {% empty %}
+        <li>Não existem mensagens enviadas por este usuário até o momento.</li>
+      {% endfor %} 
+      </ul>
+    </div>
+    
+    <div class="span-11 last">
+      <h3>{% trans "Participações na comunidade:" %}</h3>
+      <ul>
+      {% for doc in docs %}
+        {% include "message-preview.html" %}
+      {% empty %}
+        <li>Sem colaborações deste usuário até o momento.</li>
+      {% endfor %}
+      </ul>
+    </div>
+    
   </div>
 {% endblock %}

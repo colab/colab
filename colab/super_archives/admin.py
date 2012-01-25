@@ -1,10 +1,54 @@
 
 from django.contrib import admin
-from super_archives.models import MailingList, MailingListMembership, \
-                                  Message, MessageMetadata, Vote
+from colab.super_archives.models import Message, Thread, UserProfile
 
-admin.site.register(MailingList)
-admin.site.register(MailingListMembership)
-admin.site.register(Message)
-admin.site.register(MessageMetadata)
-admin.site.register(Vote)
+class MessageAdmin(admin.ModelAdmin):
+    list_filter = ('spam', 'mailinglist', 'received_time', )
+    search_fields = (
+        'id',
+        'subject',
+        'subject_clean',
+        'body', 
+        'from_address__real_name',
+        'from_address__address',
+        'from_address__user__first_name',
+        'from_address__user__last_name',
+        'from_address__user__username',
+    )
+    readonly_fields = ('thread', 'from_address', 'mailinglist')
+
+
+class ThreadAdmin(admin.ModelAdmin):
+    list_filter = ('spam', 'mailinglist', 'message__received_time',)
+    search_fields = (
+        'id',
+        'subject_token',
+        'message__subject',
+        'message__subject_clean',
+        'message__from_address__real_name',
+        'message__from_address__address',
+        'message__from_address__user__first_name',
+        'message__from_address__user__last_name',
+        'message__from_address__user__username',
+    )
+    
+    readonly_fields = (
+        'mailinglist',
+        'subject_token',
+        'latest_message',
+        'score',
+    )
+    
+    fields = (
+        'mailinglist',
+        'subject_token',
+        'latest_message',
+        'score',
+        'spam',
+    )
+    
+
+admin.site.register(UserProfile)
+admin.site.register(Thread, ThreadAdmin)
+admin.site.register(Message, MessageAdmin)
+

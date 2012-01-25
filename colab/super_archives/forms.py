@@ -1,15 +1,15 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm as UserCreationForm_
 
-from super_archives.validators import UniqueValidator    
+from colab.super_archives.validators import UniqueValidator    
 
 # XXX: I know that this code does not look nice AT ALL.
-#   probably it should be implemented using formsets instead of the hacking
-#   below. Feel free to improve it! :)
+#   probably it should be implemented using formsets instead of 
+#   the hack below. Feel free to improve it! :)
 
 # User fields
 username_field = UserCreationForm_().fields.get('username')
@@ -21,10 +21,10 @@ email_field = forms.EmailField(validators=[UniqueValidator(User, 'email')])
 institution_field = forms.CharField(max_length=120, label=u'Instituição', 
                                     required=False)
 role_field = forms.CharField(max_length=60, label='Função', required=False)
-twitter_field = forms.CharField(label=u'Twitter', required=False)
-facebook_field = forms.CharField(label=u'Facebook', required=False)
+twitter_field = forms.URLField(label=u'Twitter', required=False)
+facebook_field = forms.URLField(label=u'Facebook', required=False)
 google_talk_field = forms.EmailField(label=u'Google Talk', required=False)
-webpage_field = forms.CharField(label=u'Página Pessoal/Blog', required=False)
+webpage_field = forms.URLField(label=u'Página Pessoal/Blog', required=False)
 
     
 class UserCreationForm(UserCreationForm_):

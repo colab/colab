@@ -1,0 +1,9 @@
+{% load i18n %}
+
+Bem-vindo ao Colab!
+
+Para ativar sua conta por favor valide seu email acessando o link seguinte:
+
+<a href="http://{{ server_name }}{% url email_verification hash %}"> 
+  http://{{ server_name }}{% url email_verification hash %}
+</a>

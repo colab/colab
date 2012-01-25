@@ -1,17 +1,30 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
+import datetime
 from hashlib import md5
 
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, NoReverseMatch
+
+
+class NotSpamManager(models.Manager):
+    """Only return objects which are not marked as spam."""
+
+    def get_query_set(self):
+        return super(NotSpamManager, self).get_query_set().exclude(spam=True)
+
+
+class PageHit(models.Model):
+    url_path = models.CharField(max_length=2048, unique=True, db_index=True)
+    hit_count = models.IntegerField(default=0)
 
 
 class EmailAddress(models.Model):
     user = models.ForeignKey(User, null=True, related_name='emails') 
     address = models.EmailField(unique=True)
-    real_name = models.CharField(max_length=64, blank=True)
+    real_name = models.CharField(max_length=64, blank=True, db_index=True)
     md5 = models.CharField(max_length=32, null=True)
         
     def save(self, *args, **kwargs):
@@ -28,11 +41,13 @@ class EmailAddress(models.Model):
             
     def get_profile_link(self):
         if self.user:
-            return reverse('colab.views.user_profile_username',
-                           args=[self.user.username])
+            return reverse('user_profile', args=[self.user.username])
         else:
-            return reverse('colab.views.user_profile_emailhash',
+            return reverse('colab.views.userprofile.by_emailhash',
                            args=[self.md5])
+
+    def __unicode__(self):
+        return '"%s" <%s>' % (self.get_full_name(), self.address)
 
 
 class UserProfile(models.Model):
@@ -43,6 +58,10 @@ class UserProfile(models.Model):
     facebook = models.CharField(max_length=128, null=True)
     google_talk = models.EmailField(null=True)
     webpage = models.CharField(max_length=256)
+    verification_hash = models.CharField(max_length=32, null=True)
+
+    def __unicode__(self):
+        return '%s (%s)' % (self.user.get_full_name(), self.user.username)
 
 # This does the same the same than related_name argument but it also creates
 #   a profile in the case it doesn't exist yet. 
@@ -69,17 +88,80 @@ class MailingListMembership(models.Model):
 
 
 class Thread(models.Model):
+    class Meta:
+        unique_together = ('subject_token', 'mailinglist')
+    
     subject_token = models.CharField(max_length=512)
     mailinglist = models.ForeignKey(MailingList)
     latest_message = models.OneToOneField('Message', null=True, 
-                                                     related_name='+')           
-    class Meta:
-        unique_together = ('subject_token', 'mailinglist')
+                                                     related_name='+')
+    score = models.IntegerField(default=0)
+    spam = models.BooleanField(default=False)
+    
+    all_objects = models.Manager()
+    objects = NotSpamManager()
+
+    def __unicode__(self):
+        return '%s - %s (%s)' % (self.id,
+                                 self.subject_token, 
+                                 self.message_set.count())
+
+    def update_score(self):
+        """Update the relevance score for this thread.
+        
+        The score is calculated with the following variables:
+
+        * vote_weight: 100 - (minus) 1 for each 3 days since 
+          voted with minimum of 5.
+        * replies_weight: 300 - (minus) 1 for each 3 days since 
+          replied with minimum of 5.
+        * page_view_weight: 10.
+
+        * vote_score: sum(vote_weight)
+        * replies_score: sum(replies_weight)
+        * page_view_score: sum(page_view_weight)
+
+        * score = (vote_score + replies_score + page_view_score) // 10
+        with minimum of 0 and maximum of 5000
+
+        """
+
+        if not self.subject_token:
+            return    
+ 
+        # Save this pseudo now to avoid calling the
+        #   function N times in the loops below
+        now = datetime.datetime.now()
+        days_ago = lambda date: (now - date).days
+        get_score = lambda weight, created: \
+                                  max(weight - (days_ago(created) // 3), 5)
+
+        vote_score = 0
+        replies_score = 0
+        for msg in self.message_set.all():
+            # Calculate replies_score
+            replies_score += get_score(300, msg.received_time)
+
+            # Calculate vote_score
+            for vote in msg.vote_set.all():
+                vote_score += get_score(100, vote.created)
+
+        # Calculate page_view_score       
+        try: 
+            url = reverse('thread_view', args=[self.subject_token])
+            pagehit = PageHit.objects.get(url_path=url)
+            page_view_score = pagehit.hit_count * 10
+        except (NoReverseMatch, PageHit.DoesNotExist):
+            page_view_score = 0
+
+        self.score = (page_view_score + vote_score + replies_score) // 10
+        self.save()
 
 
 class Vote(models.Model):
     user = models.ForeignKey(User)
     message = models.ForeignKey('Message')
+    created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         unique_together = ('user', 'message')
@@ -91,20 +173,26 @@ class Vote(models.Model):
 
 class Message(models.Model):
     
-    from_address = models.ForeignKey(EmailAddress)
+    from_address = models.ForeignKey(EmailAddress, db_index=True)
     mailinglist = models.ForeignKey(MailingList)
-    thread = models.ForeignKey(Thread, null=True)
+    thread = models.ForeignKey(Thread, null=True, db_index=True)
     # RFC 2822 recommends to use 78 chars + CRLF (so 80 chars) for
     #   the max_length of a subject but most of implementations
     #   goes for 256. We use 512 just in case.
-    subject = models.CharField(max_length=512)
-    subject_clean = models.CharField(max_length=512)
+    subject = models.CharField(max_length=512, db_index=True)
+    subject_clean = models.CharField(max_length=512, db_index=True)
     body = models.TextField(default='')
     received_time = models.DateTimeField()
     message_id = models.CharField(max_length=512)
+    spam = models.BooleanField(default=False)
 
+    all_objects = models.Manager()
+    objects = NotSpamManager()
+    
     def __unicode__(self):
-        return 'Email Message Id: %s' % self.id
+        return '(%s) %s: %s' % (self.id, 
+                                self.from_address.get_full_name(), 
+                                self.subject_clean)
         
     def vote_list(self):
         """Return a list of user that voted in this message."""
@@ -125,7 +213,27 @@ class Message(models.Model):
             message=self,
             user=user
         ).delete()
-        
+
+    @property
+    def url(self):
+        """Shortcut to get thread url"""
+        return reverse('thread_view', args=[self.thread.subject_token])
+    
+    @property
+    def Description(self):
+        """Alias to self.body"""
+        return self.body
+
+    @property
+    def Title(self):
+        """Alias to self.subject_clean"""
+        return self.subject_clean
+
+    @property
+    def modified(self):
+        """Alias to self.modified"""
+        return self.received_time
+
 
 class MessageMetadata(models.Model):
     Message = models.ForeignKey(Message)
@@ -137,4 +245,4 @@ class MessageMetadata(models.Model):
     def __unicode__(self):
         return 'Email Message Id: %s - %s: %s' % (self.Message.id,
                                                   self.name, self.value)
-
+    

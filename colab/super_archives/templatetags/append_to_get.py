@@ -1,3 +1,5 @@
+
+import urllib
 from django import template
 
 register = template.Library()
@@ -33,15 +35,10 @@ class AppendGetNode(template.Node):
             get[key] = self.dict_pairs[key].resolve(context)
         
         path = context['request'].META['PATH_INFO']
-        
-        #print "&".join(["%s=%s" % (key, value) 
-        #                for (key, value) in get.items() 
-        #                if value])
-        
+                
         if len(get):
-            path += "?%s" % "&".join(["%s=%s" % (key, value) 
-                                      for (key, value) in get.items() 
-                                      if value])
+            path = '?' + urllib.urlencode(get)
+
         return path
 
 @register.tag()
