@@ -1,0 +1,64 @@
+<VirtualHost *:80>
+    ServerName colab01a.interlegis.leg.br
+    ServerAlias colab.interlegis.leg.br
+    ServerAlias colab.interlegis.gov.br
+
+    <Proxy *>
+        Order deny,allow
+        Allow from all
+    </Proxy>
+
+	RewriteEngine On
+	RewriteRule ^/admin(.*) http://colab-backend.interlegis.leg.br/admin$1 [P]
+	RewriteRule ^/wiki(.*) http://colab-backend.interlegis.leg.br/wiki$1 [P]
+	RewriteRule ^/changeset(.*) http://colab-backend.interlegis.leg.br/changeset$1 [P]
+	RewriteRule ^/newticket(.*) http://colab-backend.interlegis.leg.br/newticket$1 [P]
+	RewriteRule ^/ticket(.*) http://colab-backend.interlegis.leg.br/ticket$1 [P]
+	RewriteRule ^/chrome(.*) http://colab-backend.interlegis.leg.br/chrome$1 [P]
+	RewriteRule ^/timeline(.*) http://colab-backend.interlegis.leg.br/timeline$1 [P]
+	RewriteRule ^/roadmap(.*) http://colab-backend.interlegis.leg.br/roadmap$1 [P]
+	RewriteRule ^/browser(.*) http://colab-backend.interlegis.leg.br/browser$1 [P]
+	RewriteRule ^/report(.*) http://colab-backend.interlegis.leg.br/report$1 [P]
+	RewriteRule ^/tags(.*) http://colab-backend.interlegis.leg.br/tags$1 [P]
+	RewriteRule ^/query(.*) http://colab-backend.interlegis.leg.br/query$1 [P]
+	RewriteRule ^/about(.*) http://colab-backend.interlegis.leg.br/about$1 [P]
+	RewriteRule ^/prefs(.*) http://colab-backend.interlegis.leg.br/prefs$1 [P]
+	RewriteRule ^/login(.*) http://colab-backend.interlegis.leg.br/login$1 [P]
+	RewriteRule ^/logout(.*) http://colab-backend.interlegis.leg.br/logout$1 [P]
+	RewriteRule ^/attachment(.*) http://colab-backend.interlegis.leg.br/attachment$1 [P]
+	RewriteRule ^/raw-attachment(.*) http://colab-backend.interlegis.leg.br/raw-attachment$1 [P]
+
+    WSGIDaemonProcess colab user=www-data group=www-data threads=25
+    WSGIProcessGroup colab
+    
+    Alias /static/admin/ /usr/local/django/colab/lib/python2.6/site-packages/django/contrib/admin/media/
+    <Directory /usr/local/django/colab/lib/python2.6/site-packages/django/contrib/admin/media/>
+        Options -Indexes
+        Order deny,allow
+        Allow from all
+        AllowOverride None
+    </Directory>
+
+    Alias /static/ /usr/local/django/colab/static/
+    <Directory /usr/local/django/colab/static/>
+        Options -Indexes
+        Order deny,allow
+        Allow from all
+        AllowOverride None
+    </Directory>
+
+    WSGIScriptAlias / /usr/local/django/colab/wsgi/colab.wsgi
+    <Directory /usr/local/django/colab/wsgi/>
+        Order deny,allow
+        Allow from all
+        AllowOverride None
+    </Directory>
+
+    ErrorLog /var/log/apache2/error.log
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    CustomLog /var/log/apache2/access.log combined
+</VirtualHost>

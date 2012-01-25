@@ -25,6 +25,9 @@ h4 {
     margin-bottom: 10px;
 }
 
+form {
+    display: inline;
+}
 
 #main-content {
     margin-bottom: 20px;
@@ -48,16 +51,24 @@ h4 {
     text-decoration: none;
 }
 
+.preview-message img {
+    margin-right: 5px;
+}
+
 /* Header */
 
 #header-searchbox {
-    width: 150px;
+    width: 290px;
+}
+
+#header-menu span {
+    line-height: 33px;
 }
 
 /* Thread view */
 
 .plus {
-    border: 1px dashed #ddd;
+    border: 1px dotted #ddd;
     margin: 0;
 }
 
@@ -72,8 +83,13 @@ h4 {
 
 .plus img {
     vertical-align: middle;
-    height: 40px;
     cursor: pointer;
+    margin-top: 8px;
+    margin-right: 20px;
+}
+
+.plus img:hover {
+    opacity: 0.8;
 }
 
 /* User Profile  */
@@ -125,9 +141,30 @@ input[type="password"]  {
     color: #335;
 }
 
+.subject img {
+    margin-right: 5px;
+}
+
 .avatar {
     border: 1px solid #ddd;
     padding: 3px;
+}
+
+div.avatar-placeholder {
+    border: 1px solid #cccccc;
+}
+
+.avatar-image {
+    float: left;
+    margin-right: 10px;
+    height: 40px;
+    padding: 8px 12px 0;
+    background-color: white;
+}
+
+label.avatar-placeholder {
+    display: block;
+    margin-left: 6px;
 }
 
 .tag {
@@ -174,3 +211,15 @@ img.center {
 .filters li:before {
     content: "\00BB\0020";
 }
+
+
+.filters .legend li span {
+    display: inline-block;
+    width: 25px;
+}
+
+.filters .legend li:before {
+    content: '';
+}
+
+

@@ -2,9 +2,11 @@
 {% load i18n %}
 {% load append_to_get %}
 {% block main-content %}
+  <div id="vote-notification" class="error hide"></div>
+
   <h2>{{ first_msg.subject_clean }}</h2>
   <hr/>
-  <div class="span-19 border">
+  <div class="span-17 border">
     <ul>
     {% for email in emails %}
       <li>
@@ -21,7 +23,7 @@
             
             <div class="plus">
               <span>{{ email.votes_count }}</span>
-              <img class="right" src="{{ STATIC_URL }}img/thumbs_up.jpg">
+              <img title="{% trans 'Votar' %}" class="right" src="{{ STATIC_URL }}img/plus.png">
             </div>
 
             <p class="minus {% if not user in email.vote_list %}hide{% endif %}">
@@ -29,7 +31,7 @@
             </p>
           </div>
         
-          <div class="span-15">
+          <div class="span-13">
             <pre>{{ email.body }}</pre>
           </div>
         </div>
@@ -40,11 +42,36 @@
     {% endfor %}
     </ul>
   </div>
-  <div class="span-4 filters last">
-    <h4>Ordenar por</h4>
+  <div class="span-6 filters last">
+    <h4><b>{% trans "Ordenar por" %}:</b></h4>
     <ul>
-      <li><a href="{% append_to_get order='voted' %}">Votos</a></li>
-      <li><a href="{% append_to_get order='date' %}">Data</a></li>
+      <li><a href="{% append_to_get order='voted' %}">{% trans "Votos" %}</a></li>
+      <li><a href="{% append_to_get order='date' %}">{% trans "Data" %}</a></li>
     </ul>
+
+    <hr class="space"/>
+    
+    <h4><b>{% trans "Estatísticas:" %}</b></h4>
+    
+    <ul>
+      <li class="quiet">{% trans "iniciada à" %}
+        <h4>{{ first_msg.received_time|timesince }} {% trans "atrás" %}</h4>
+      </li>
+      <li class="quiet">{% trans "visualizada" %}
+        <h4>{{ pagehits }} {% trans "vezes" %}</h4>
+      </li>
+      <li class="quiet">{% trans "respondida" %}
+        <h4>{{ emails|length }} {% trans "vezes" %}</h4>
+      </li>
+      <li class="quiet">{% trans "votada" %}
+        <h4>{{ total_votes }} {% trans "vezes" %}</h4>
+      </li>
+    </ul>
+    
   </div>
+  
+  <script type="text/javascript" charset="utf-8">
+    pagehit("{{ request.path_info }}");
+  </script>
+  
 {% endblock %}  

@@ -1,0 +1,5 @@
+include colab/templates/*.html
+include colab/super_archives/templates/*.html
+include colab/super_archives/fixtures/initial_data.json
+recursive-include etc *
+recursive-include colab/static *

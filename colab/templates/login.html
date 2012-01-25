@@ -10,8 +10,8 @@
   {% endif %}
   
   <div id="login-form-wrapper">
-    <form class="span-24" method="post" action="{% url django.contrib.auth.views.login %}">
-    {% csrf_token %}
+    <form class="span-24" method="POST" action="{% url login %}">
+      {% csrf_token %}
 
       <fieldset class="span-10 box">
         <legend>Login</legend>
@@ -27,8 +27,9 @@
         </p>
         
         <input type="submit" value="Login" />
-        {% url colab.views.user_profile_empty as user_profile_url %}
-        <input type="hidden" name="next" value="{% firstof next_page user_profile_url %}" />
+        <a class="right" href="{% url request_reset_password %}">Esqueci minha senha</a>
+        
+        <input type="hidden" name="next" value="{% firstof next '/' %}" />
       </fieldset>
     
       <fieldset class="span-12 box last">
@@ -39,7 +40,7 @@
         comunidade Interlegis clique no link abaixo e comece a colaborar!</p>
 
         <a class="span-11 center large" 
-           href="{% url colab.views.signup %}">Cadastre-se</a>
+           href="{% url signup %}">Cadastre-se</a>
       </fieldset>
     </form>
   </div>

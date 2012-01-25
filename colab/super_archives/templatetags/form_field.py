@@ -1,4 +1,5 @@
 from django import template
+from django import forms
 
 def render_form_field(parser, token):
     variables = token.split_contents()
@@ -9,7 +10,7 @@ def render_form_field(parser, token):
     elif len(variables) == 3:
         tag_name, form_field, default_value = variables
     else:
-        raise TemplateSyntaxError
+        raise template.TemplateSyntaxError
         
     return RenderFormField(form_field, default_value)
 
@@ -26,7 +27,10 @@ class RenderFormField(template.Node):
         class_ = ''
         errors = ''
         form_field_tag = ''
-        form_field = self.form_field_nocontext.resolve(context)
+        try:
+            form_field = self.form_field_nocontext.resolve(context)
+        except template.VariableDoesNotExist:
+            return ''
  
         if form_field.errors:
             class_ += 'error'
@@ -42,6 +46,9 @@ class RenderFormField(template.Node):
         
         if editable:
             form_field_tag = '<br/>' + str(form_field)
+        elif isinstance(form_field.field, forms.URLField):
+            form_field_tag = """<a href="%s" target="_blank">%s</a>""" % (
+                default_value, default_value)
         else:
             form_field_tag = default_value
                 
