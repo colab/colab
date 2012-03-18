@@ -26,15 +26,18 @@ def get_messages_by_voted():
     return messages.order_by('-vote_count', 'received_time')
 
 
-def get_first_message_in_thread(thread_token):
-    return get_messages_by_date().filter(thread__subject_token=thread_token)[0]
-    
+def get_first_message_in_thread(mailinglist, thread_token):
+    query = get_messages_by_date()
+    query = query.filter(mailinglist__name=mailinglist)
+    query = query.filter(thread__subject_token=thread_token)[0]
+    return query
+
 
 def get_latest_threads():
     return Thread.objects.order_by('-latest_message__received_time')
 
 
-def get_hotest_threads():
+def get_hottest_threads():
     return Thread.objects.order_by('-score', '-latest_message__received_time')
 
 

@@ -321,7 +321,8 @@
       <field column="UID" template="THREAD_${thread.id}" />
       <field column="getId" template="${thread.name}" />
       <field column="Type" template="thread" />
-      <field column="path_string" template="/archives/thread/${thread.name}" />
+      <field column="path_string" 
+             template="/archives/thread/${thread.mailinglist}/${thread.name}" />
       <field column="created" name="created" 
              dateTimeFormat="yyyy-MM-dd hh:mm:ss" />
       <field column="modified" name="modified" 
