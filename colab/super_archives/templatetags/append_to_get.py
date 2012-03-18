@@ -37,7 +37,16 @@ class AppendGetNode(template.Node):
         path = context['request'].META['PATH_INFO']
                 
         if len(get):
-            path = '?' + urllib.urlencode(get)
+            # Convert all unicode objects in the get dict to 
+            #   str (utf-8 encoded)
+            get_utf_encoded = {}
+            for (key, value) in get.items():
+                if isinstance(value, unicode):
+                    value = value.encode('utf-8')
+                get_utf_encoded.update({key: value})
+            get_utf_encoded = dict(get_utf_encoded)
+
+            path = '?' + urllib.urlencode(get_utf_encoded)
 
         return path
 

@@ -24,40 +24,41 @@ class RenderFormField(template.Node):
     def render(self, context):
         editable = context.get('editable', True)
 
-        class_ = ''
-        errors = ''
-        form_field_tag = ''
+        class_ = u''
+        errors = u''
+        form_field_tag = u''
         try:
             form_field = self.form_field_nocontext.resolve(context)
         except template.VariableDoesNotExist:
-            return ''
+            return u''
  
         if form_field.errors:
-            class_ += 'error'
+            class_ += u'error'
         if form_field.field.required:
-            class_ += ' required'    
+            class_ += u' required'    
         if form_field.errors:
-            errors = '<br/>' + form_field.errors.as_text()
+            errors = u'<br/>' + form_field.errors.as_text()
         
         try:
             default_value = self.default_value_nocontext.resolve(context)
         except template.VariableDoesNotExist:
-            default_value = ''
+            default_value = u''
         
         if editable:
-            form_field_tag = '<br/>' + str(form_field)
+            form_field_tag = u'<br/>' + unicode(form_field)
         elif isinstance(form_field.field, forms.URLField):
-            form_field_tag = """<a href="%s" target="_blank">%s</a>""" % (
+            form_field_tag = u"""<a href="%s" target="_blank">%s</a>""" % (
                 default_value, default_value)
         else:
             form_field_tag = default_value
                 
-        return """<p class="%s">%s: %s %s</p>""" % (
+        return u"""<p class="%s">%s: %s %s</p>""" % (
             class_, 
             form_field.label_tag(), 
             form_field_tag,
             errors
         )
-        
+
+ 
 register = template.Library()
 register.tag('render_form_field', render_form_field)

@@ -18,10 +18,10 @@ def home(request):
     """Index page view"""
 
     latest_threads = queries.get_latest_threads()
-    hotest_threads = queries.get_hotest_threads()
+    hottest_threads = queries.get_hottest_threads()
 
     template_data = {
-        'hotest_threads': hotest_threads[:6],
+        'hottest_threads': hottest_threads[:6],
         'latest_threads': latest_threads[:6],
         'type_count': solrutils.count_types(sample=1000),
         'latest_docs': solrutils.get_latest_collaborations(6),

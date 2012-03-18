@@ -9,20 +9,20 @@
 {% block main-content %}
   {% if not user_profile %}
     <span class="notice span-24">
-      <b>Usuário não cadastrado.</b> Você é dono deste perfil? 
+      <b>Usuário não cadastrado.</b> Você é dono deste perfil?
       <a href="{% url signup %}">Clique aqui
       e cadastre-se.</a>
     </span>
 
-  {% else %}  
-    
+  {% else %}
+
     {% ifequal request.user.username user_profile.user.username %}
       <span class="success span-24">
-        Ei, olha você aqui! Quer 
+        Ei, olha você aqui! Quer
         <a href="{% url user_profile_update request.user %}">editar seu perfil</a>?
       </span>
     {% endifequal %}
-    
+
   {% endif %}
 
   <div id="user-profile">
@@ -32,12 +32,12 @@
       <img class="avatar" width="120px" heigth="120px"
            src="http://www.gravatar.com/avatar/{{ email_address.md5 }}?s=120&d=identicon" />
     </div>
-    
+
     <div class="span-20 last">
       <div class="span-10">
         <form action="{% url user_profile_update request.user %}" method='post'>
           {% csrf_token %}
-          
+
           <h3>Informações Pessoais</h3>
           <ul id="user-info">
             <li>
@@ -53,9 +53,9 @@
               {% render_form_field form.role user_profile.role %}
             </li>
           </ul>
-      
+
           <hr class="space" />
-        
+
           <h3>Outras Informações</h3>
           <ul>
             <li>
@@ -71,7 +71,7 @@
               {% render_form_field form.webpage user_profile.webpage %}
             </li>
           </ul>
-          
+
           <hr class="space"/>
           {% if editable %}
             <span class="span-5">
@@ -80,30 +80,30 @@
           {% endif %}
         </form>
       </div>
-  
+
       {% if type_count %}
       <div class="span-10 last">
-        <h3 class="center">{% trans "Colaborações por área" %}</h3>
+        <h3 class="center">{% trans "Colaborações por Área" %}</h3>
         <div id="collabs"></div>
       </div>
       {% endif %}
     </div>
-    
+
     <hr class="space" />
-    
+
     <div class="span-13">
-      <h3>{% trans "Últimas mensagens enviadas" %} </h3>
+      <h3>{% trans "Últimas Mensagens Enviadas" %} </h3>
       <ul class="colborder">
       {% for doc in emails %}
         {% include "message-preview.html" %}
       {% empty %}
         <li>Não existem mensagens enviadas por este usuário até o momento.</li>
-      {% endfor %} 
+      {% endfor %}
       </ul>
     </div>
-    
+
     <div class="span-11 last">
-      <h3>{% trans "Participações na comunidade:" %}</h3>
+      <h3>{% trans "Participações na Comunidade" %}</h3>
       <ul>
       {% for doc in docs %}
         {% include "message-preview.html" %}
@@ -112,6 +112,6 @@
       {% endfor %}
       </ul>
     </div>
-    
+
   </div>
 {% endblock %}

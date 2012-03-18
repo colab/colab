@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^archives/', include('colab.super_archives.urls')),
 
     url(r'^api/', include('colab.api.urls')),
+    
+    url(r'^rss/', include('colab.rss.urls')),
 
     url(r'^user/(?P<username>[\w@+.-]+)/?$',
         'colab.views.userprofile.by_username', name='user_profile'),
@@ -45,7 +47,7 @@ urlpatterns = patterns('',
 
     url(r'^account/logout/$', 'django.contrib.auth.views.logout', 
         {'next_page': '/'}, name='logout'),
-
+    
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 )

@@ -148,7 +148,8 @@ class Thread(models.Model):
 
         # Calculate page_view_score       
         try: 
-            url = reverse('thread_view', args=[self.subject_token])
+            url = reverse('thread_view', args=[self.mailinglist.name,
+                                               self.subject_token])
             pagehit = PageHit.objects.get(url_path=url)
             page_view_score = pagehit.hit_count * 10
         except (NoReverseMatch, PageHit.DoesNotExist):
@@ -217,7 +218,8 @@ class Message(models.Model):
     @property
     def url(self):
         """Shortcut to get thread url"""
-        return reverse('thread_view', args=[self.thread.subject_token])
+        return reverse('thread_view', args=[self.mailinglist.name,
+                                            self.thread.subject_token])
     
     @property
     def Description(self):

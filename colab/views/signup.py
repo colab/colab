@@ -60,6 +60,11 @@ def signup(request):
     
     signup_.send_verification_email(request, user)
 
+    mailing_lists = form.cleaned_data.get('lists')
+    if mailing_lists:
+        signup_.send_email_lists(user, mailing_lists)
+
+
     # Check if the user's email have been used previously 
     #   in the mainling lists to link the user to old messages  
     email_addr, created = EmailAddress.objects.get_or_create(address=user.email)

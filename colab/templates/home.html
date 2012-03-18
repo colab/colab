@@ -18,7 +18,7 @@
 {% block main-content %}
 
   <div class="span-12 colborder">
-    <h3>{% trans "Últimas Colaborações:" %}</h3>
+    <h3>{% trans "Últimas Colaborações" %}</h3>
     <ul>
       {% for doc in latest_docs %}
         {% include "message-preview.html" %}
@@ -31,7 +31,7 @@
   </div>
 
   <div class="span-11 last">
-    <h3>{% trans "Distribuição das Colaborações:" %}</h3>
+    <h3>{% trans "Distribuição das Colaborações" %}</h3>
     <div id="collabs"></div>
   </div>
 
@@ -39,20 +39,20 @@
   <hr/>
 
   <div class="span-12 colborder">
-    <h3>{% trans "Discussões Mais Relevantes:" %}</h3>
+    <h3>{% trans "Discussões Mais Relevantes" %}</h3>
     <ul>
-      {% for thread in hotest_threads %}
+      {% for thread in hottest_threads %}
         {% include "message-preview.html" with doc=thread.latest_message %}
       {% endfor %}
     </ul>
     <hr class="space"/>
-    <a class="right" href="{% url thread_list %}?order=hotest">
+    <a class="right" href="{% url thread_list %}?order=hottest">
       {% trans "Ver mais discussões relevantes..." %}
     </a>
   </div>
 
   <div class="span-11 last">
-    <h3>{% trans "Últimas Discussões:" %}</h3>
+    <h3>{% trans "Últimas Discussões" %}</h3>
     <ul>
       {% for thread in latest_threads %}
         {% include "message-preview.html" with doc=thread.latest_message %}

@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm as UserCreationForm_
 
+from colab.super_archives.models import MailingList
 from colab.super_archives.validators import UniqueValidator    
 
 # XXX: I know that this code does not look nice AT ALL.
@@ -26,7 +27,20 @@ facebook_field = forms.URLField(label=u'Facebook', required=False)
 google_talk_field = forms.EmailField(label=u'Google Talk', required=False)
 webpage_field = forms.URLField(label=u'Página Pessoal/Blog', required=False)
 
-    
+all_lists = MailingList.objects.all()
+lists_names = []
+for list_ in all_lists:
+   choice = (list_.name, list_.name)
+   lists_names.append(choice)
+
+lists_field = forms.MultipleChoiceField(
+    label=u'Listas',
+    required=False, 
+    widget=forms.CheckboxSelectMultiple,
+    choices=lists_names
+)
+
+
 class UserCreationForm(UserCreationForm_):
     first_name = first_name_field
     last_name = last_name_field
@@ -37,8 +51,9 @@ class UserCreationForm(UserCreationForm_):
     facebook = facebook_field
     google_talk = google_talk_field
     webpage = webpage_field
+    lists = lists_field
 
-
+    
 class UserUpdateForm(forms.Form):
     username = username_field
     username.required = False

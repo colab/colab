@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     # My apps
     'colab.super_archives',
     'colab.api',
+    'colab.rss',
 )
 
 # A sample logging configuration. The only tangible logging

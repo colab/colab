@@ -178,7 +178,7 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     if socks_server: 
         import socks
         logging.debug('Socks enabled: %s:%s', settings.SOCKS_SERVER,
-                                              settings.SOLR_PORT)
+                                              settings.SOCKS_PORT)
 
         socks.setdefaultproxy(settings.SOCKS_TYPE, 
                               settings.SOCKS_SERVER,
