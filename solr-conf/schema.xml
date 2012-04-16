@@ -465,7 +465,7 @@
    <field name="Type" type="string" indexed="true"
           stored="true" required="true" multiValued="false"/>
    <field name="Title" type="text_ptbr" indexed="true"
-          stored="true" required="false" multiValued="false"/>
+          stored="true" required="true" multiValued="false"/>
    <field name="Description" type="text_ptbr" indexed="true"
           stored="true" required="false" multiValued="false"/>
    <field name="Creator" type="string" indexed="true"

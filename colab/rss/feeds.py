@@ -19,7 +19,9 @@ class LatestThreadsFeeds(Feed):
         return item.latest_message.url
 
     def item_title(self, item):
-        return item.latest_message.subject_clean    
+        title = '[' + item.mailinglist.name + '] '
+        title += item.latest_message.subject_clean  
+        return title
 
     def item_description(self, item):
         return item.latest_message.body
@@ -36,7 +38,9 @@ class HottestThreadsFeeds(Feed):
         return item.latest_message.url
 
     def item_title(self, item):
-        return item.latest_message.subject_clean    
+        title = '[' + item.mailinglist.name + '] '
+        title += item.latest_message.subject_clean  
+        return title  
 
     def item_description(self, item):
         return item.latest_message.body

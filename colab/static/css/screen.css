@@ -222,4 +222,8 @@ img.center {
     content: '';
 }
 
+.rss {
+    float: right;
+    padding-top: 2px;
+}
 

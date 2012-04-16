@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     url(r'^user/hash/(?P<emailhash>[\w]+)$',
         'colab.views.userprofile.by_emailhash'),
     
-    url(r'^user/(?P<username>[\w]+)/edit/?$', 
+    url(r'^user/(?P<username>[\w@+.-]+)/edit/?$', 
         'colab.views.userprofile.update', name='user_profile_update'),
         
     url(r'^search/$', 'colab.views.other.search', name='search'),

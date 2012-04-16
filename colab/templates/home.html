@@ -18,7 +18,11 @@
 {% block main-content %}
 
   <div class="span-12 colborder">
-    <h3>{% trans "Últimas Colaborações" %}</h3>
+    <h3>{% trans "Últimas Colaborações" %}<a class="rss" target="_blank" 
+        href="{% url rss_latest_colab %}" 
+        title="{% trans "RSS - Últimas Colaborações" %}">
+        <img src="{{ STATIC_URL }}img/rss.png" alt="RSS"/></a>
+    </h3>
     <ul>
       {% for doc in latest_docs %}
         {% include "message-preview.html" %}
@@ -39,7 +43,11 @@
   <hr/>
 
   <div class="span-12 colborder">
-    <h3>{% trans "Discussões Mais Relevantes" %}</h3>
+    <h3>{% trans "Discussões Mais Relevantes" %}<a class="rss" target="_blank" 
+        href="{% url rss_hottest_threads %}" 
+        title="{% trans "RSS - Discussões Mais Relevantes" %}">
+        <img src="{{ STATIC_URL }}img/rss.png" alt="RSS"/></a>
+    </h3>
     <ul>
       {% for thread in hottest_threads %}
         {% include "message-preview.html" with doc=thread.latest_message %}
@@ -52,7 +60,11 @@
   </div>
 
   <div class="span-11 last">
-    <h3>{% trans "Últimas Discussões" %}</h3>
+    <h3>{% trans "Últimas Discussões" %}<a class="rss" target="_blank" 
+        href="{% url rss_latest_threads %}" 
+        title="{% trans "RSS - Últimas Discussões" %}">
+        <img src="{{ STATIC_URL }}img/rss.png" alt="RSS"/></a>
+    </h3>
     <ul>
       {% for thread in latest_threads %}
         {% include "message-preview.html" with doc=thread.latest_message %}

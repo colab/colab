@@ -56,7 +56,10 @@ def list_messages(request):
         threads = threads.filter(mailinglist__name=mail_list)
     
     paginator = Paginator(threads, 16)
-    page = int(request.GET.get('p', '1'))
+    try:
+        page = int(request.GET.get('p', '1'))
+    except ValueError:
+        page = 1
     threads = paginator.page(page)
     
     lists = MailingList.objects.all()
