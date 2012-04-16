@@ -7,6 +7,7 @@ Created by Sergio Campos on 2012-01-10.
 """
 
 from django.template import RequestContext
+from django.http import HttpResponseNotAllowed
 from django.shortcuts import render_to_response
 from django.utils.translation import ugettext as _
 
@@ -31,12 +32,21 @@ def home(request):
 
 
 def search(request):
-    if request.method == 'GET':
-        query = request.GET.get('q')
-        sort = request.GET.get('o')
-        type_ = request.GET.get('type')
-        page_number = int(request.GET.get('p', 1))
+    if request.method != 'GET':
+        return HttpResponseNotAllowed(['GET'])
+    
+    query = request.GET.get('q')
+    sort = request.GET.get('o')
+    type_ = request.GET.get('type')
+    try:
+        page_number = int(request.GET.get('p', '1'))
+    except ValueError:
+        page_number = 1
+    
+    try:
         results_per_page = int(request.GET.get('per_page', 16))
+    except ValueError:
+        results_per_page = 16
 
     filters = {
         'Type': type_,
