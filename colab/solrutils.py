@@ -76,7 +76,9 @@ def get_document_from_addr(doc):
     
     """
     
-    username = doc.get('Creator')
+    username = doc.get('last_author')
+    if not username:
+        username = doc.get('Creator')
     from_addresses = EmailAddress.objects.filter(user__username=username)
     if username and from_addresses:
         doc.update({'from_address': from_addresses[0]})

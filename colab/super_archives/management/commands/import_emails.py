@@ -11,7 +11,6 @@ from optparse import make_option
 
 from django.db import transaction
 from django.template.defaultfilters import slugify
-from django.core.exceptions import ObjectDoesNotExist
 from django.core.management.base import BaseCommand, CommandError
 
 from colab.super_archives.models import MailingList, Message, \
@@ -154,13 +153,16 @@ class Command(BaseCommand, object):
         mailinglist = MailingList.objects.get_or_create(name=list_name)[0]
         mailinglist.last_imported_index = index
         
-        try:
-            # If the message is already at the database don't do anything
-            message = Message.objects.get(
-                                        message_id=email_msg.get('Message-ID'))
-            if message.thread.mailinglist.name != mailinglist.name:
-                raise ObjectDoesNotExist
-        except ObjectDoesNotExist:
+        # If the message is already at the database don't do anything
+        messages = Message.objects.filter(
+                                    message_id=email_msg.get('Message-ID'))
+        create = False
+        if not messages:
+            create = True 
+        elif messages[0].thread.mailinglist.name != mailinglist.name:
+            create = True
+        
+        if create:
             self.create_email(mailinglist, email_msg)
         
         mailinglist.save() 

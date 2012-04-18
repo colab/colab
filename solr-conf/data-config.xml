@@ -17,7 +17,7 @@
             transformer="TemplateTransformer,DateFormatTransformer"
             query="SELECT
                      name,
-                     TIMESTAMP 'epoch' + (max(time)/1000000) * INTERVAL '1s' AS modified,
+                     TIMESTAMP WITH TIME ZONE 'epoch' + (max(time)/1000000) * INTERVAL '1s' AS modified,
                      max(version) AS version
                    FROM wiki GROUP BY name"
             deltaQuery="
@@ -27,12 +27,11 @@
                 wiki
               WHERE
                 time > (EXTRACT(
-                  epoch FROM TIMESTAMP '${dataimporter.wiki.last_index_time}'
+                  epoch FROM TIMESTAMP WITH TIME ZONE '${dataimporter.wiki.last_index_time}'
                 ) * 1000000)"
             deltaImportQuery="
                    SELECT
                      name,
-                     TIMESTAMP 'epoch' + (max(time)/1000000) * INTERVAL '1s' AS modified,
                      max(version) AS version
                    FROM 
                      wiki
@@ -44,12 +43,23 @@
               dataSource="trac"
               query="SELECT 
                        author AS Creator,
-                       TIMESTAMP 'epoch' + (time/1000000) * INTERVAL '1s' AS created
+                       TIMESTAMP WITH TIME ZONE 'epoch' + (time/1000000) * INTERVAL '1s' AS created
                      FROM 
                        wiki 
                      WHERE
                        name = '${wiki.name}' 
                        AND version = 1" />
+      
+      <entity name="wiki_modification" 
+              dataSource="trac"
+              query="SELECT 
+                       author AS last_author,
+                       TIMESTAMP WITH TIME ZONE 'epoch' + (time/1000000) * INTERVAL '1s' AS modified
+                     FROM 
+                       wiki 
+                     WHERE
+                       name = '${wiki.name}' 
+                       AND version = '${wiki.version}'" />
       
       <entity name="wiki_collaborators"
               dataSource="trac"
@@ -93,7 +103,7 @@
                   ticket
               WHERE
                 time > (EXTRACT(
-                  epoch FROM TIMESTAMP '${dataimporter.ticket.last_index_time}'
+                  epoch FROM TIMESTAMP WITH TIME ZONE '${dataimporter.ticket.last_index_time}'
                 ) * 1000000)"
             query="SELECT
                      id, 
@@ -107,8 +117,8 @@
                      reporter,
                      owner,
                      status,
-                     TIMESTAMP 'epoch' + (time/1000000)* INTERVAL '1s' AS created,
-                     TIMESTAMP 'epoch' + (changetime/1000000) * INTERVAL '1s' AS modified
+                     TIMESTAMP WITH TIME ZONE 'epoch' + (time/1000000)* INTERVAL '1s' AS created,
+                     TIMESTAMP WITH TIME ZONE 'epoch' + (changetime/1000000) * INTERVAL '1s' AS modified
                    FROM
                      ticket">
 
@@ -149,6 +159,18 @@
                        id = ${ticket.id} AND
                        keywords != ''" />
       
+      <entity name="ticket_modification"
+              dataSource="trac"
+              query="SELECT DISTINCT
+                       author AS last_author
+                     FROM 
+                       ticket_change
+                     WHERE
+                       ticket = ${ticket.id} AND
+                       time = (SELECT max(time) 
+                               FROM ticket_change 
+                               WHERE ticket = ${ticket.id});" />
+
       <entity name="ticket_comments"
               dataSource="trac"
               query="SELECT
@@ -183,7 +205,7 @@
               revision 
             WHERE
               time > (EXTRACT(
-                epoch FROM TIMESTAMP '${dataimporter.changeset.last_index_time}'
+                epoch FROM TIMESTAMP WITH TIME ZONE '${dataimporter.changeset.last_index_time}'
               ) * 1000000)"
 
             query="SELECT
@@ -191,8 +213,8 @@
                      author AS Creator,
                      author AS collaborator,
                      repos.value AS repos_name,
-                     TIMESTAMP 'epoch' + (time/1000000) * INTERVAL '1s' AS created,
-                     TIMESTAMP 'epoch' + (time/1000000) * INTERVAL '1s' AS modified,
+                     TIMESTAMP WITH TIME ZONE 'epoch' + (time/1000000) * INTERVAL '1s' AS created,
+                     TIMESTAMP WITH TIME ZONE 'epoch' + (time/1000000) * INTERVAL '1s' AS modified,
                      message                    
                    FROM
                      revision AS rev JOIN
@@ -274,7 +296,6 @@
               dataSource="colab"
               transformer="TemplateTransformer"
               query="SELECT DISTINCT ON (sam.thread_id)
-                       sam.body AS Description,
                        sam.received_time AS created,
                        sam.subject_clean AS subject,
                        saea.real_name AS creator_real_name,
@@ -299,11 +320,17 @@
       <entity name="latest_message"
               dataSource="colab"
               query="SELECT 
-                       received_time AS modified
+                       sam.body AS Description,
+                       sam.received_time AS modified,
+                       au.username AS last_author
                      FROM 
-                       super_archives_message
+                       super_archives_message AS sam
+                       JOIN super_archives_emailaddress AS saea
+                         ON sam.from_address_id = saea.id
+                       LEFT JOIN auth_user AS au
+                         ON au.id = saea.user_id
                      WHERE
-                       id = ${thread.latest_message_id}" />
+                       sam.id = ${thread.latest_message_id}" />
 
       <entity name="thread_collaborators"
               dataSource="colab"
