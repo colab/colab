@@ -470,6 +470,8 @@
           stored="true" required="false" multiValued="false"/>
    <field name="Creator" type="string" indexed="true"
           stored="true" required="false" multiValued="false"/>
+   <field name="last_author" type="string" indexed="true"
+          stored="true" required="false" multiValued="false"/>
    <field name="created" type="date" indexed="true"
           stored="true" required="false" multiValued="false"/>
    <field name="modified" type="date" indexed="true"
