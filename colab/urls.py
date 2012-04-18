@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
+from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -8,10 +9,13 @@ urlpatterns = patterns('',
     url(r'^$', 'colab.views.other.home', name='home'),
 
     url(r'^archives/', include('colab.super_archives.urls')),
-
+    
     url(r'^api/', include('colab.api.urls')),
     
     url(r'^rss/', include('colab.rss.urls')),
+
+    url(r'open-data/$', direct_to_template, {'template': 'open-data.html'}, 
+        name='opendata'),
 
     url(r'^user/(?P<username>[\w@+.-]+)/?$',
         'colab.views.userprofile.by_username', name='user_profile'),

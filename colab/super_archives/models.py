@@ -194,6 +194,14 @@ class Message(models.Model):
         return '(%s) %s: %s' % (self.id, 
                                 self.from_address.get_full_name(), 
                                 self.subject_clean)
+    
+    @property
+    def mailinglist(self):
+        if not self.thread or not self.thread.mailinglist:
+            return None
+        
+        return self.thread.mailinglist
+
         
     def vote_list(self):
         """Return a list of user that voted in this message."""

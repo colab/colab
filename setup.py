@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 from setupext import Data_Files, install_Data_Files
 
 setup(name='colab',
-      version='0.1-dev',
+      version='3.0',
       author='Sergio Oliveira',
       author_email='seocam@seocam.com',
       url='https://bitbucket.org/seocam/atu-colab',

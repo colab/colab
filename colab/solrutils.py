@@ -61,7 +61,7 @@ def get_document_url(doc):
     doc_type = doc.get('Type')
     
     url = ''
-    if doc_type in ('ticket', 'wiki', 'changeset'):
+    if settings.SOLR_COLAB_URI:
         url += settings.SOLR_COLAB_URI
     
     url += doc.get('path_string', '') 

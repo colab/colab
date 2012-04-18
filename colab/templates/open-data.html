@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main-content %}
+    <div class="span-18">
+    {% blocktrans %}
+        <h2>Dados abertos - Comunidades Interlegis</h2>
+        <p>Neste momento o sistema Colab disponibiliza grande parte de seus dados 
+        através do seu sistema de buscas.</p> 
+        <p>Caso você esteja interessado em integrar seu sistema com o ambiente Colab 
+        e necessite de outros dados não fornecidos por esta API, por favor 
+        entre em contato conosco através do sistemas de tiquetes (é necessário
+        estar cadastrado para criar um tiquete).</p>
+
+        <h3>Realizando buscas através da API</h3>
+        <p>A API de buscas do Colab funciona através de um serviço HTTP/REST sempre 
+        retornando objetos JSON com resultado. </p>
+        <p>A URL base utilizada para a busca é: 
+        <a href="/api/search/">http://colab.interlegis.leg.br/api/search/</a></p>
+        
+        <h3>Parâmetros:</h3>
+        <ul class="prepend-1">
+            <li>
+                <h4><i>Query</i> - q</h4>
+                A <i>query</i> é a "pergunta" enviada 
+                para o servidor de buscas. Uma <i>query</i> é composta por 
+                <b>campo:valor</b>, onde campo representa um tipo de dados do sistema,
+                por exemplo <b>collaborator</b> e valor representa o dado armazenado 
+                pelo sistema, por exemplo <b>jeanferri</b>.
+                Segue a lista de campos disponíveis para a busca:
+                <ul class="prepend-1">
+                    <li><b><br/>
+                    Type</b>: wiki, thread, ticket, changeset.</li>
+                    <li><b>Title</b>: nome da página, título da discussão ou tiquete, descrição do changeset.</li>
+                    <li><b>Description</b>: trecho da página ou da discussão, descrição do tíquete ou changeset.</li>
+                    <li><b>Creator</b>: nome de usuário de quem criou o documento.</li>
+                    <li><b>creator_real_name</b>: nome real de quem criou o documento.</li>
+                    <li><b>create</b>: data de criação.</li>
+                    <li><b>modified</b>: data de modificação.</li>
+                    <li><b>mailinglist</b>: lista de discussões (apenas para o tipo thread).</li>
+                    <li><b>name</b>: nome da página wiki.</li>
+                    <li><b>comment</b>: comentários dos tíquetes (todos concatenados).</li>
+                    <li><b>content</b>: contúdo da página wiki ou mensagens da discussão (todas concatenadas). </li>
+                    <li><b>keyword</b>: keywords (apenas para tíquete).</li>
+                    <li><b>milestone</b>: milestone (apenas para tíquete).</li>
+                    <li><b>priority</b>: prioridade (apenas para tíquete).</li>
+                    <li><b>component</b>: componente (apenas para tíquete).</li>
+                    <li><b>version</b>: versão (apenas para tíquete).</li>
+                    <li><b>severity</b>: severidade (apenas para tíquete).</li>
+                    <li><b>owner</b>: responsável (apenas para tíquete).</li>
+                    <li><b>status</b>: status (apenas para tíquete).</li>
+                    <li><b>revision</b>: revisão (apenas para tíquete).</li>
+                    <li><b>subject</b>: sinônimo de título (apenas para discussões).</li>
+                </ul>
+            </li>
+            <br/><hr/>
+            
+            <li>
+                <h4>Resultados por Página - n </h4>
+                Número de resultados que devem ser exibidos por página. Seu 
+                valor deveser um número inteiro entre 1 e 500.
+                <i>Default: 50</i>. 
+            </li>
+            <br/><hr/>
+            
+            <li>
+                <h4>Página - p</h4>
+                Número da página que será exibida. Seu valor deve ser um
+                número inteiro igual ou maior que 1. <i>Default: 1</i>.  
+            </li>
+            <br/><hr/>
+
+            <li>
+                <h4>Ordem - o</h4>
+                Ordem em que os resultados serão exibidos. Seu valor deve
+                ser uma string no formato <b>campo direção</b> onde campo
+                são os mesmos apresentados no parametro <i>query</i> e
+                direção pode ser <b>asc</b> para ascendente ou <b>desc</b>
+                para descendente. <i>Default: score desc</i>.
+            </li>
+            <br/>
+        </ul>
+    {% endblocktrans %}
+{% endblock %}

@@ -23,6 +23,7 @@
 	RewriteRule ^/query(.*) http://colab-backend.interlegis.leg.br/query$1 [P]
 	RewriteRule ^/about(.*) http://colab-backend.interlegis.leg.br/about$1 [P]
 	RewriteRule ^/prefs(.*) http://colab-backend.interlegis.leg.br/prefs$1 [P]
+	RewriteRule ^/log(.*) http://colab-backend.interlegis.leg.br/log$1 [P]
 	RewriteRule ^/login(.*) http://colab-backend.interlegis.leg.br/login$1 [P]
 	RewriteRule ^/logout(.*) http://colab-backend.interlegis.leg.br/logout$1 [P]
 	RewriteRule ^/attachment(.*) http://colab-backend.interlegis.leg.br/attachment$1 [P]
