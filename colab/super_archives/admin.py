@@ -3,7 +3,7 @@ from django.contrib import admin
 from colab.super_archives.models import Message, Thread, UserProfile
 
 class MessageAdmin(admin.ModelAdmin):
-    list_filter = ('spam', 'mailinglist', 'received_time', )
+    list_filter = ('spam', 'thread__mailinglist', 'received_time', )
     search_fields = (
         'id',
         'subject',

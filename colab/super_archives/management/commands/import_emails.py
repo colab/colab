@@ -130,14 +130,14 @@ class Command(BaseCommand, object):
             for index, msg in self.parse_emails(mbox_path, n_msgs):
                 yield mailinglist_name, msg, index
 
-    def get_thread(self, email):
+    def get_thread(self, email, mailinglist):
         """Group messages by thread looking for similar subjects"""
         
         subject_slug = slugify(email.subject_clean)
         thread = self.THREAD_CACHE.get(subject_slug)
         if thread is None:
             thread = Thread.objects.get_or_create(
-                mailinglist=email.mailinglist,
+                mailinglist=mailinglist,
                 subject_token=subject_slug
             )[0]
 
@@ -156,7 +156,10 @@ class Command(BaseCommand, object):
         
         try:
             # If the message is already at the database don't do anything
-            Message.objects.get(message_id=email_msg.get('Message-ID'))
+            message = Message.objects.get(
+                                        message_id=email_msg.get('Message-ID'))
+            if message.thread.mailinglist.name != mailinglist.name:
+                raise ObjectDoesNotExist
         except ObjectDoesNotExist:
             self.create_email(mailinglist, email_msg)
         
@@ -181,13 +184,12 @@ class Command(BaseCommand, object):
         email = Message.objects.create(
             message_id=email_msg.get('Message-ID'),
             from_address=email_addr,
-            mailinglist=mailinglist,
             subject=subject,
             subject_clean=self.RE_SUBJECT_CLEAN.sub('', subject).strip(),
             body=email_msg.get_body(),
             received_time=email_msg.get_received_datetime(),
         )
-        email.thread = self.get_thread(email)
+        email.thread = self.get_thread(email, mailinglist)
         email.save()
 
     @transaction.commit_manually    

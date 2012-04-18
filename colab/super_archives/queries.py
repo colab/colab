@@ -28,7 +28,7 @@ def get_messages_by_voted():
 
 def get_first_message_in_thread(mailinglist, thread_token):
     query = get_messages_by_date()
-    query = query.filter(mailinglist__name=mailinglist)
+    query = query.filter(thread__mailinglist__name=mailinglist)
     query = query.filter(thread__subject_token=thread_token)[0]
     return query
 

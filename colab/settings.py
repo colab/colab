@@ -153,7 +153,7 @@ SOLR_HOSTNAME = '10.1.2.154'
 SOLR_PORT = '8080'
 SOLR_SELECT_PATH = '/solr/select'
 
-SOLR_COLAB_URI = 'http://colab.interlegis.gov.br'
+SOLR_COLAB_URI = 'http://colab.interlegis.leg.br'
 SOLR_BASE_QUERY = """
     ((Type:changeset OR Type:ticket OR Type:wiki OR Type:thread) AND Title:["" TO *]) 
 """

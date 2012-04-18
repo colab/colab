@@ -18,7 +18,7 @@ def thread(request, mailinglist, thread_token):
         msgs_query = queries.get_messages_by_date()
     
     msgs_query = msgs_query.filter(thread__subject_token=thread_token)
-    msgs_query = msgs_query.filter(mailinglist__name=mailinglist)
+    msgs_query = msgs_query.filter(thread__mailinglist__name=mailinglist)
     emails = msgs_query.exclude(id=first_message.id)
     
     total_votes = first_message.votes_count()
