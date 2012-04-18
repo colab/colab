@@ -1,23 +1,17 @@
 TODO
 -----
 
-* Sergio: Permitir que usuario atualize nome e sobrenome
-
-* Jean: Pagina Reporte um problema
-* Jean: Pagina Contribua
-
-* Yure: Adicionar data do ultimo import de emails no footer
-* Yure: Detectar links no conteudo e exibi-los como tal
-* Yure: BUG: Display of HTML emails are wrong
+* Permitir que usuario atualize nome e sobrenome
+* Pagina Reporte um problema
+* Pagina Contribua
+* Adicionar data do ultimo import de emails no footer
+* Detectar links no conteudo e exibi-los como tal
+* BUG: Display of HTML emails are wrong
 * Arquivo "search.html" existente em "atu-colab/colab/templates" pode ser melhorado com relação ao conteúdo repetitivo dos "Tipos" exibidos no "Filtro" da página
 * BUG: Criar validador de urls para twitter, facebook e página pessoal do user profile
 * Mostrar dados do twitter, facebook, gtalk e página pessoal somente para os usuários que estiverem logados
-
 * Configurar ADMINS no arquivo settings_local.py
 * HTTPS para o trac, subversion e colab
-* Autorizar usuarios a commitar no svn pelo django.contrib.admin
-* Enviar emails para usuarios pedindo que se cadastrem no novo colab
-* Timezones no trac/colab/solr nao estao compativeis
 
 * Template de login nao exibe corretamente no firefox/linux
 * Quando usuario se cadastra com email errado o email nunca eh validado, e o username fica preso 'pra sempre'.
