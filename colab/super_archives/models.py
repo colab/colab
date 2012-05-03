@@ -88,8 +88,6 @@ class MailingListMembership(models.Model):
 
 
 class Thread(models.Model):
-    class Meta:
-        unique_together = ('subject_token', 'mailinglist')
     
     subject_token = models.CharField(max_length=512)
     mailinglist = models.ForeignKey(MailingList)
@@ -100,6 +98,9 @@ class Thread(models.Model):
     
     all_objects = models.Manager()
     objects = NotSpamManager()
+    
+    class Meta:
+        unique_together = ('subject_token', 'mailinglist')
 
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,
@@ -175,7 +176,6 @@ class Vote(models.Model):
 class Message(models.Model):
     
     from_address = models.ForeignKey(EmailAddress, db_index=True)
-    mailinglist = models.ForeignKey(MailingList)
     thread = models.ForeignKey(Thread, null=True, db_index=True)
     # RFC 2822 recommends to use 78 chars + CRLF (so 80 chars) for
     #   the max_length of a subject but most of implementations
@@ -189,6 +189,9 @@ class Message(models.Model):
 
     all_objects = models.Manager()
     objects = NotSpamManager()
+    
+    class Meta:
+        unique_together = ('thread', 'message_id')
     
     def __unicode__(self):
         return '(%s) %s: %s' % (self.id, 

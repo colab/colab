@@ -133,14 +133,16 @@ class Command(BaseCommand, object):
         """Group messages by thread looking for similar subjects"""
         
         subject_slug = slugify(email.subject_clean)
-        thread = self.THREAD_CACHE.get(subject_slug)
+        thread = self.THREAD_CACHE.get(subject_slug, {}).get(mailinglist.id)
         if thread is None:
             thread = Thread.objects.get_or_create(
                 mailinglist=mailinglist,
                 subject_token=subject_slug
             )[0]
-
-            self.THREAD_CACHE[subject_slug] = thread
+            
+            if self.THREAD_CACHE.get(subject_slug) is None:
+                self.THREAD_CACHE[subject_slug] = dict()
+            self.THREAD_CACHE[subject_slug][mailinglist.id] = thread
 
         thread.latest_message = email
         thread.save()        
@@ -150,20 +152,24 @@ class Command(BaseCommand, object):
         """Save email message into the database."""
         
         # Update last imported message into the DB
-        mailinglist = MailingList.objects.get_or_create(name=list_name)[0]
+        mailinglist, created = MailingList.objects.get_or_create(name=list_name)
         mailinglist.last_imported_index = index
-        
-        # If the message is already at the database don't do anything
-        messages = Message.objects.filter(
-                                    message_id=email_msg.get('Message-ID'))
-        create = False
-        if not messages:
-            create = True 
-        elif messages[0].thread.mailinglist.name != mailinglist.name:
-            create = True
-        
-        if create:
+       
+        if created: 
+            # if the mailinglist is newly created it's sure that the message
+            #   is not in the DB yet.
             self.create_email(mailinglist, email_msg)
+            
+        else:
+            # If the message is already at the database don't do anything
+            try:
+                messages = Message.objects.get(
+                    message_id=email_msg.get('Message-ID'),
+                    thread__mailinglist=mailinglist
+                )
+            
+            except Message.DoesNotExist:
+                self.create_email(mailinglist, email_msg)
         
         mailinglist.save() 
 
