@@ -9,7 +9,7 @@ from colab.super_archives import queries
 from colab import solrutils
 
 class LatestThreadsFeeds(Feed):
-    title = _(u'Últimas Discussões')
+    title = _(u'Latest Discussions')
     link = '/rss/threads/latest/'
 
     def items(self):
@@ -28,7 +28,7 @@ class LatestThreadsFeeds(Feed):
 
 
 class HottestThreadsFeeds(Feed):
-    title = _(u'Discussões Mais Relevantes')
+    title = _(u'Discussions Most Relevance')
     link = '/rss/threads/hottest/'
 
     def items(self):
@@ -47,7 +47,7 @@ class HottestThreadsFeeds(Feed):
 
 
 class LatestColabFeeds(Feed):
-    title = _(u'Últimas Colaborações')
+    title = _(u'Latest collaborations')
     link = '/rss/colab/latest/'
 
     def items(self):

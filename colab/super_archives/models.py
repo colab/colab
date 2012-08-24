@@ -7,6 +7,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.utils.translation import ugettext_lazy as _
 
 
 class NotSpamManager(models.Manager):
@@ -51,6 +52,7 @@ class EmailAddress(models.Model):
 
 
 class UserProfile(models.Model):
+    
     user = models.OneToOneField(User, unique=True)
     institution = models.CharField(max_length=128, null=True)
     role = models.CharField(max_length=128, null=True)
@@ -59,7 +61,11 @@ class UserProfile(models.Model):
     google_talk = models.EmailField(null=True)
     webpage = models.CharField(max_length=256)
     verification_hash = models.CharField(max_length=32, null=True)
-
+    
+    class Meta:
+        verbose_name = _(u"User Profile")
+        verbose_name_plural = _(u"Users Profiles")
+    
     def __unicode__(self):
         return '%s (%s)' % (self.user.get_full_name(), self.user.username)
 
@@ -90,16 +96,22 @@ class MailingListMembership(models.Model):
 class Thread(models.Model):
     
     subject_token = models.CharField(max_length=512)
-    mailinglist = models.ForeignKey(MailingList)
+    mailinglist = models.ForeignKey(MailingList, 
+                                    verbose_name=_(u"Mailing List"), 
+                                    help_text=_(u"The Mailing List where is the thread"))
     latest_message = models.OneToOneField('Message', null=True, 
-                                                     related_name='+')
-    score = models.IntegerField(default=0)
+                                                     related_name='+', 
+                                                     verbose_name=_(u"Latest message"), 
+                                                     help_text=_(u"Latest message posted"))
+    score = models.IntegerField(default=0, verbose_name=_(u"Score"), help_text=_(u"Thread score"))
     spam = models.BooleanField(default=False)
     
     all_objects = models.Manager()
     objects = NotSpamManager()
     
     class Meta:
+        verbose_name = _(u"Thread")
+        verbose_name_plural = _(u"Threads")
         unique_together = ('subject_token', 'mailinglist')
 
     def __unicode__(self):
@@ -180,9 +192,13 @@ class Message(models.Model):
     # RFC 2822 recommends to use 78 chars + CRLF (so 80 chars) for
     #   the max_length of a subject but most of implementations
     #   goes for 256. We use 512 just in case.
-    subject = models.CharField(max_length=512, db_index=True)
+    subject = models.CharField(max_length=512, db_index=True, 
+                               verbose_name=_(u"Subject"), 
+                               help_text=_(u"Please enter a message subject"))
     subject_clean = models.CharField(max_length=512, db_index=True)
-    body = models.TextField(default='')
+    body = models.TextField(default='', 
+                            verbose_name=_(u"Message body"), 
+                            help_text=_(u"Please enter a message body"))
     received_time = models.DateTimeField()
     message_id = models.CharField(max_length=512)
     spam = models.BooleanField(default=False)
@@ -191,6 +207,8 @@ class Message(models.Model):
     objects = NotSpamManager()
     
     class Meta:
+        verbose_name = _(u"Message")
+        verbose_name_plural = _(u"Messages")
         unique_together = ('thread', 'message_id')
     
     def __unicode__(self):

@@ -22,9 +22,9 @@
       data.addColumn('number', 'Slices');
       data.addRows([
         ['{% trans "Emails"%}', {% firstof type_count.thread '0' %}],
-        ['{% trans "Tiquetes"%}', {% firstof type_count.ticket '0' %}],
+        ['{% trans "Tickets"%}', {% firstof type_count.ticket '0' %}],
         ['{% trans "Wiki"%}', {% firstof type_count.wiki '0' %}],
-        ['{% trans "Código"%}', {% firstof type_count.changeset '0' %}],
+        ['{% trans "Code"%}', {% firstof type_count.changeset '0' %}],
       ]);
 
       // Set chart options

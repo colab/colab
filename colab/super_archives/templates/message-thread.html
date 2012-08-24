@@ -23,11 +23,11 @@
             
             <div class="plus">
               <span>{{ email.votes_count }}</span>
-              <img title="{% trans 'Votar' %}" class="right" src="{{ STATIC_URL }}img/plus.png">
+              <img title="{% trans 'Vote' %}" class="right" src="{{ STATIC_URL }}img/plus.png">
             </div>
 
             <p class="minus {% if not user in email.vote_list %}hide{% endif %}">
-              <a href="#">Remover voto</a>
+              <a href="#">{% trans "Remove votes" %}</a>
             </p>
           </div>
         
@@ -43,28 +43,28 @@
     </ul>
   </div>
   <div class="span-6 filters last">
-    <h4><b>{% trans "Ordenar por" %}:</b></h4>
+    <h4><b>{% trans "Order by" %}:</b></h4>
     <ul>
-      <li><a href="{% append_to_get order='voted' %}">{% trans "Votos" %}</a></li>
+      <li><a href="{% append_to_get order='voted' %}">{% trans "Votes" %}</a></li>
       <li><a href="{% append_to_get order='date' %}">{% trans "Data" %}</a></li>
     </ul>
 
     <hr class="space"/>
     
-    <h4><b>{% trans "Estatísticas:" %}</b></h4>
+    <h4><b>{% trans "Statistics:" %}</b></h4>
     
     <ul>
-      <li class="quiet">{% trans "iniciada à" %}
-        <h4>{{ first_msg.received_time|timesince }} {% trans "atrás" %}</h4>
+      <li class="quiet">{% trans "started at" %}
+        <h4>{{ first_msg.received_time|timesince }} {% trans "back" %}</h4>
       </li>
-      <li class="quiet">{% trans "visualizada" %}
-        <h4>{{ pagehits }} {% trans "vezes" %}</h4>
+      <li class="quiet">{% trans "viewed" %}
+        <h4>{{ pagehits }} {% trans "times" %}</h4>
       </li>
-      <li class="quiet">{% trans "respondida" %}
-        <h4>{{ emails|length }} {% trans "vezes" %}</h4>
+      <li class="quiet">{% trans "answered" %}
+        <h4>{{ emails|length }} {% trans "times" %}</h4>
       </li>
-      <li class="quiet">{% trans "votada" %}
-        <h4>{{ total_votes }} {% trans "vezes" %}</h4>
+      <li class="quiet">{% trans "voted" %}
+        <h4>{{ total_votes }} {% trans "times" %}</h4>
       </li>
     </ul>
     

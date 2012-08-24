@@ -32,8 +32,8 @@
   
   <div class="quiet">
     <span class="left">
-      {% trans "por" %}
-      {% if doc.from_address.get_full_name %}
+      {% trans "by" %}
+																												      {% if doc.from_address.get_full_name %}
       <a href="{{ doc.from_address.get_profile_link }}">
         {{ doc.from_address.get_full_name }}
       </a>
@@ -44,7 +44,7 @@
           
     <span class="right">
       {{ doc.modified|timesince }}
-      {% trans "atrás" %} 
+      {% trans "back" %} 
     </span>
   </div>
 </li>

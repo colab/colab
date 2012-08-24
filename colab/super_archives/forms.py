@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm as UserCreationForm_
+from django.utils.translation import ugettext_lazy as _
 
 from colab.super_archives.models import MailingList
 from colab.super_archives.validators import UniqueValidator    
@@ -13,19 +14,19 @@ from colab.super_archives.validators import UniqueValidator
 #   the hack below. Feel free to improve it! :)
 
 # User fields
-username_field = UserCreationForm_().fields.get('username')
-first_name_field = forms.CharField(max_length=30, label='Nome')
-last_name_field = forms.CharField(max_length=30, label='Sobrenome')
+username_field = UserCreationForm_().fields.get(u'username')
+first_name_field = forms.CharField(max_length=30, label=_(u'Name'))
+last_name_field = forms.CharField(max_length=30, label=_(u'Last name'))
 email_field = forms.EmailField(validators=[UniqueValidator(User, 'email')])
 
 # UserProfile fields
-institution_field = forms.CharField(max_length=120, label=u'Instituição', 
+institution_field = forms.CharField(max_length=120, label=_(u'Institution'), 
                                     required=False)
-role_field = forms.CharField(max_length=60, label='Função', required=False)
-twitter_field = forms.URLField(label=u'Twitter', required=False)
-facebook_field = forms.URLField(label=u'Facebook', required=False)
-google_talk_field = forms.EmailField(label=u'Google Talk', required=False)
-webpage_field = forms.URLField(label=u'Página Pessoal/Blog', required=False)
+role_field = forms.CharField(max_length=60, label=_(u'Function'), required=False)
+twitter_field = forms.URLField(label=_(u'Twitter'), required=False)
+facebook_field = forms.URLField(label=_(u'Facebook'), required=False)
+google_talk_field = forms.EmailField(label=_(u'Google Talk'), required=False)
+webpage_field = forms.URLField(label=_(u'Personal Website/Blog'), required=False)
 
 all_lists = MailingList.objects.all()
 lists_names = []
