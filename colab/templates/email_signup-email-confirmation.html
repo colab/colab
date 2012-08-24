@@ -1,8 +1,8 @@
 {% load i18n %}
 
-Bem-vindo ao Colab!
+{% trans "Welcome to the Colab!" %}
 
-Para ativar sua conta por favor valide seu email acessando o link seguinte:
+{% trans "To activate your account, please confirm your mail's activation by accessing the following link:" %}
 
 <a href="http://{{ server_name }}{% url email_verification hash %}"> 
   http://{{ server_name }}{% url email_verification hash %}

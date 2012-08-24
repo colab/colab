@@ -68,60 +68,60 @@
       <div id="top-menu" class="right">
         {% if not user.is_authenticated %}
         <span class="colborder">
-          <a href="{% url signup %}">{% trans "Cadastre-se" %}</a>
+          <a href="{% url signup %}">{% trans "Sign up" %}</a>
         </span>
         <span>
-          <a href="{% url login %}?next={{ request.path }}">{% trans "Acessar" %}</a>
+          <a href="{% url login %}?next={{ request.path }}">{% trans "Login" %}</a>
         </span>
         {% else %}
         <span class="colborder">
-          {% trans "autenticado como" %} <b>{{ user.username }}</b>
+          {% trans "authenticated as" %} <b>{{ user.username }}</b>
         </span>
         <span class="colborder">
           <a href="{% url user_profile user.username %}">
-            {% trans "Meu Perfil" %}
+            {% trans "My Profile" %}
           </a>
         </span>
         <span>
           <a href="{% url logout %}">
-            {% trans "Sair" %}
+            {% trans "Logout" %}
           </a>
         </span>
         {% endif %}
       </div>
 
       {% block header %}
-        <h1><span class="hide">COLAB</span>
+        <h1><span class="hide">{% trans "COLAB" %}</span>
           <a href="/">
-            <img src="{{ STATIC_URL }}img/logo_small.png" alt="Colab" /></a>
+            <img src="{{ STATIC_URL }}img/logo_small.png" alt="{% trans 'Colab' %}" /></a>
         </h1>
       {% endblock %}
 
       <div id="header-menu" class="span-24">
 
         <span class="colborder">
-          <a href="{% url thread_list %}">Discussões</a>
+          <a href="{% url thread_list %}">{% trans "Discussions" %}</a>
         </span>
         <span class="colborder">
-          <a href="http://colab.interlegis.gov.br/wiki" target="_blank">Wiki</a>
+          <a href="http://colab.interlegis.gov.br/wiki" target="_blank">{% trans "Wiki" %}</a>
         </span>
         <span class="colborder">
           <a href="http://listas.interlegis.gov.br/mailman/listinfo/" 
-             target="_blank">Contribua</a>
+             target="_blank">{% trans "Contribute" %}</a>
         </span>
         <span class="colborder">
           <a href="http://colab.interlegis.leg.br/newticket"
-             target="_blank">Reporte um problema</a>
+             target="_blank">{% trans "Report a problem" %}</a>
         </span>
         <span>
-          <a href="#">Mensageiro</a>
+          <a href="#">{% trans "Messenger" %}</a>
         </span>
 
         <span class="right">
           <form action="/search/" method="GET">
             <input name="q" id="header-searchbox" value="{{ request.GET.q }}"
-                   type="text" placeholder="Pesquise aqui..." />
-            <input type="submit" value="Buscar"></input>
+                   type="text" placeholder="{% trans 'Search here...' %}" />
+            <input type="submit" value="{% trans 'Search' %}"></input>
           </form>
         </span>
       </div>
@@ -138,9 +138,8 @@
     <div id="footer" class="span-24 center">
       {% block footer %}
         <p><a href="{% url opendata %}"><img src="{{ STATIC_URL }}img/opendata3.png"/></a></p>
-        <p>O conteúdo deste site está publicado sob a licença <a
-          href="http://creativecommons.org/licenses/by-nc-sa/2.0/br/">Creative
-          Commons - atribuição e não-comercial</a>
+        <p>{% trans "The contents of this site is published under license" %} <a
+          href="http://creativecommons.org/licenses/by-nc-sa/2.0/br/">{% trans "Creative Commons - attribution, non-commercial" %}</a>
         </p>
       {% endblock %}
     </div>

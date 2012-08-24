@@ -75,8 +75,8 @@ def signup(request):
     email_addr.save()
     
     template_data = {
-        'msg': _((u'Cadastro efetuado com sucesso. Por favor acesse seu '
-                u'endereço de email para validá-lo.')),
+        'msg': _((u'Registration completed successfully. Please visit your '
+                u'email address to validate it.')),
         'msg_css_class': 'success', 
     }
     
@@ -96,7 +96,7 @@ def verify_email(request, hash):
     profile.user.save()
     
     template_data = {
-        'msg': _(u'Endereço de e-mail validado corretamente.'),
+        'msg': _(u'E-mail validated correctly.'),
         'msg_css_class': 'success', 
     }
     
@@ -132,9 +132,9 @@ def request_reset_password(request):
                 
         signup_.send_reset_password_email(request, user)
     
-    msg = _((u'Para sua segurança, dentro de alguns instantes você '
-           u'receberá um email solicitando a confirmação do pedido '
-           u'de troca de senha. Por favor aguarde.'))
+    msg = _((u'For your safety, in a few moments you will receive '
+           u'an email asking you to confirm the password '
+           u'change request. Please wait.'))
     
     template_data = {
         'msg': msg,
@@ -184,7 +184,7 @@ def reset_password(request, hash):
     user.save()
 
     template_data.update({
-        'msg': _(u'Senha alterada com sucesso!'),
+        'msg': _(u'Password changed successfully!'),
         'msg_css_class': 'success',
     })
     return render_to_response('account_message.html', template_data,
@@ -215,7 +215,7 @@ def change_password(request):
     request.user.save()
     
     template_data.update({
-        'msg': _(u'Senha alterada com sucesso!'),
+        'msg': _(u'Password changed successfully!'),
         'msg_css_class': 'success',
     })
     return render_to_response('account_message.html', template_data,

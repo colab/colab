@@ -3,82 +3,77 @@
 
 {% block main-content %}
     <div class="span-18">
-    {% blocktrans %}
-        <h2>Dados abertos - Comunidades Interlegis</h2>
-        <p>Neste momento o sistema Colab disponibiliza grande parte de seus dados 
-        através do seu sistema de buscas.</p> 
-        <p>Caso você esteja interessado em integrar seu sistema com o ambiente Colab 
-        e necessite de outros dados não fornecidos por esta API, por favor 
-        entre em contato conosco através do sistemas de tiquetes (é necessário
-        estar cadastrado para criar um tiquete).</p>
+        <h2>{% trans "OpenData - Communities Interlegis" %}</h2>
+        <p>{% blocktrans %}At this point the system Colab provides much of its data 
+        through its search engine.{% endblocktrans %}</p> 
+        <p>{% blocktrans %}If you are interested in integrating your system with the environment Colab 
+        and requires no other data provided by this API, please contact us via the ticketing 
+        system (you must be registered in order to create a ticket).{% endblocktrans %}</p>
 
-        <h3>Realizando buscas através da API</h3>
-        <p>A API de buscas do Colab funciona através de um serviço HTTP/REST sempre 
-        retornando objetos JSON com resultado. </p>
-        <p>A URL base utilizada para a busca é: 
+        <h3>{% trans "Performing searches via the API" %}</h3>
+        <p>{% trans "The Colab API searches works through an HTTP/REST always 
+        returning JSON objects with result." %} </p>
+        <p>{% trans "The base URL used for the search is:" %} 
         <a href="/api/search/">http://colab.interlegis.leg.br/api/search/</a></p>
         
-        <h3>Parâmetros:</h3>
+        <h3>{% trans "Parameters:" %}</h3>
         <ul class="prepend-1">
             <li>
-                <h4><i>Query</i> - q</h4>
-                A <i>query</i> é a "pergunta" enviada 
-                para o servidor de buscas. Uma <i>query</i> é composta por 
-                <b>campo:valor</b>, onde campo representa um tipo de dados do sistema,
-                por exemplo <b>collaborator</b> e valor representa o dado armazenado 
-                pelo sistema, por exemplo <b>jeanferri</b>.
-                Segue a lista de campos disponíveis para a busca:
+                <h4><i>{% trans "Query" %}</i> - q</h4>
+                {% blocktrans %}The <i>query</i> is the "question" sent 
+                to the search server. A <i>query</i> consists of 
+                <b>field:value</b>, where the field represents a kind of system data,
+                for example <b>collaborator</b> and represents the data stored 
+                by the system, for example <b>jeanferri</b>.{% endblocktrans %}
+                {% trans "The following is a list of available fields to search:" %}<br/>
                 <ul class="prepend-1">
-                    <li><b><br/>
-                    Type</b>: wiki, thread, ticket, changeset.</li>
-                    <li><b>Title</b>: nome da página, título da discussão ou tiquete, descrição do changeset.</li>
-                    <li><b>Description</b>: trecho da página ou da discussão, descrição do tíquete ou changeset.</li>
-                    <li><b>Creator</b>: nome de usuário de quem criou o documento.</li>
-                    <li><b>creator_real_name</b>: nome real de quem criou o documento.</li>
-                    <li><b>create</b>: data de criação.</li>
-                    <li><b>modified</b>: data de modificação.</li>
-                    <li><b>mailinglist</b>: lista de discussões (apenas para o tipo thread).</li>
-                    <li><b>name</b>: nome da página wiki.</li>
-                    <li><b>comment</b>: comentários dos tíquetes (todos concatenados).</li>
-                    <li><b>content</b>: contúdo da página wiki ou mensagens da discussão (todas concatenadas). </li>
-                    <li><b>keyword</b>: keywords (apenas para tíquete).</li>
-                    <li><b>milestone</b>: milestone (apenas para tíquete).</li>
-                    <li><b>priority</b>: prioridade (apenas para tíquete).</li>
-                    <li><b>component</b>: componente (apenas para tíquete).</li>
-                    <li><b>version</b>: versão (apenas para tíquete).</li>
-                    <li><b>severity</b>: severidade (apenas para tíquete).</li>
-                    <li><b>owner</b>: responsável (apenas para tíquete).</li>
-                    <li><b>status</b>: status (apenas para tíquete).</li>
-                    <li><b>revision</b>: revisão (apenas para tíquete).</li>
-                    <li><b>subject</b>: sinônimo de título (apenas para discussões).</li>
+                    <li><b>Type</b>: {% trans "wiki, thread, ticket, changeset." %}</li>
+                    <li><b>Title</b>: {% trans "page name, title of the discussion or ticket, changeset description." %}</li>
+                    <li><b>Description</b>: {% trans "excerpt from the page or the discussion, description of the ticket or changeset." %}</li>
+                    <li><b>Creator</b>: {% trans "name of user who created the document." %}</li>
+                    <li><b>creator_real_name</b>: {% trans "real name who created the document." %}</li>
+                    <li><b>create</b>: {% trans "creation date." %}</li>
+                    <li><b>modified</b>: {% trans "modification date." %}</li>
+                    <li><b>mailinglist</b>: {% trans "mailing list (only for type thread)." %}</li>
+                    <li><b>name</b>: {% trans "name of the wiki page." %}</li>
+                    <li><b>comment</b>: {% trans "comments of tickets (all concatenated)." %}</li>
+                    <li><b>content</b>: {% trans "contents of wiki page or messages of the discussions (all concatenated)." %} </li>
+                    <li><b>keyword</b>: {% trans "keywords (ticket only)." %}</li>
+                    <li><b>milestone</b>: {% trans "milestone (ticket only)." %}</li>
+                    <li><b>priority</b>: {% trans "priority (ticket only)." %}</li>
+                    <li><b>component</b>: {% trans "component (ticket only)." %}</li>
+                    <li><b>version</b>: {% trans "version (ticket only)." %}</li>
+                    <li><b>severity</b>: {% trans "severity (ticket only)." %}</li>
+                    <li><b>owner</b>: {% trans "responsible (ticket only)." %}</li>
+                    <li><b>status</b>: {% trans "status (ticket only)." %}</li>
+                    <li><b>revision</b>: {% trans "review (ticket only)." %}</li>
+                    <li><b>subject</b>: {% trans "synonym for the title (for discussion)." %}</li>
                 </ul>
             </li>
             <br/><hr/>
             
             <li>
-                <h4>Resultados por Página - n </h4>
-                Número de resultados que devem ser exibidos por página. Seu 
-                valor deveser um número inteiro entre 1 e 500.
-                <i>Default: 50</i>. 
+                <h4>{% trans "Results per page - n" %} </h4>
+                {% blocktrans %}Number of results to be displayed per page. 
+                Its value must be an integer between 1 and 500.{% endblocktrans %} 
+                <i>{% trans "Default: 50" %}</i>. 
             </li>
             <br/><hr/>
             
             <li>
-                <h4>Página - p</h4>
-                Número da página que será exibida. Seu valor deve ser um
-                número inteiro igual ou maior que 1. <i>Default: 1</i>.  
+                <h4>{% trans "Page - p" %}</h4>
+                {% blocktrans %}Page number that appears. Its value must be an 
+                integer equal to or greater than 1.{% endblocktrans %} <i>{% trans "Default: 1" %}</i>.
             </li>
             <br/><hr/>
 
             <li>
-                <h4>Ordem - o</h4>
-                Ordem em que os resultados serão exibidos. Seu valor deve
-                ser uma string no formato <b>campo direção</b> onde campo
-                são os mesmos apresentados no parametro <i>query</i> e
-                direção pode ser <b>asc</b> para ascendente ou <b>desc</b>
-                para descendente. <i>Default: score desc</i>.
+                <h4>{% trans "Order - o" %}</h4>
+                {% blocktrans %}Order in which the results will be displayed. Its value must be 
+                a string in the <b>field direction</b> where the same field are 
+                presented in the <i>query</i> parameter and direction can be 
+                <b>asc</b> for ascending or <b>desc</b> for descending.{% endblocktrans %} <i>Default: score desc</i>.
             </li>
             <br/>
         </ul>
-    {% endblocktrans %}
 {% endblock %}

@@ -10,7 +10,7 @@ from django.core.mail import EmailMultiAlternatives, send_mail
 
 def send_verification_email(request, user):
     
-    subject = _(u'Colab: Verificação de email')
+    subject = _(u'Colab: Checking e-mail')
     from_ = settings.SERVER_EMAIL
     to = user.email
     
@@ -29,7 +29,7 @@ def send_verification_email(request, user):
 
 def send_reset_password_email(request, user):
 
-    subject = _(u'Altereção de senha do Colab Interlegis')
+    subject = _(u'Password change of Colab Interlegis')
     from_ = settings.SERVER_EMAIL
     to = user.email
     
@@ -48,7 +48,7 @@ def send_reset_password_email(request, user):
     email_msg.send()
     
 def send_email_lists(user, mailing_lists):
-    subject = _(u'Inscrição na lista de discussão')
+    subject = _(u'Registration on the mailing list')
     from_ = user.email
     to = []
     for list_name in mailing_lists:

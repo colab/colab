@@ -3,28 +3,28 @@
 {% load append_to_get %}
 {% block main-content %}
 <div id="message-list">
-  <h2 class="span-5">Discussões</h2>
+  <h2 class="span-5">{% trans "Discussions" %}</h2>
   <hr/>
   
   <div class="span-5 border filters">
-    <h3>Filtros</h3>
+    <h3>{% trans "Filters" %}</h3>
     
-    <h4>Ordenar por</h4>
+    <h4>{% trans "Sort by" %}</h4>
     <ul>
-      <li {% ifequal order_by "hottest" %} class="selected" title="{% trans "Retirar filtro" %}" {% endifequal %}>
+      <li {% ifequal order_by "hottest" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
         <a href="{% ifequal order_by "hottest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hottest',p=1 %} {% endifequal %}">
-          Relevância</a></li>
-      <li {% ifequal order_by "latest" %} class="selected" title="{% trans "Retirar filtro" %}" {% endifequal %}>
+          {% trans "Relevance" %}</a></li>
+      <li {% ifequal order_by "latest" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
         <a href="{% ifequal order_by "latest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='latest',p=1 %} {% endifequal %}">
-          Atividade recente</a></li>
+          {% trans "Recent activity" %}</a></li>
     </ul>
     
     <hr class="space" />
     
-    <h4>Listas</h4>
+    <h4>{% trans "Lists" %}</h4>
     <ul>
       {% for list in lists %}
-        <li {% ifequal list.name selected_list %} class="selected" title="{% trans "Retirar filtro" %}" {% endifequal %}>
+        <li {% ifequal list.name selected_list %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
           <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
           {% endifnotequal %}">{{ list.name }}</a></li>
       {% endfor %}
@@ -38,7 +38,7 @@
       {% empty %}
         <br/><br/>
         <span class="span-18 center large">
-          <b>Nenhuma discussão encontrada</b>
+          <b>{% trans "No discussion found" %}</b>
         </span>
       {% endfor %}
     </ul>
@@ -48,15 +48,15 @@
     <div class="pagination center">
       <span class="step-links">
         {% if threads.has_previous %}
-          <a href="{% append_to_get p=threads.previous_page_number %}">Anterior</a>
+          <a href="{% append_to_get p=threads.previous_page_number %}">{% trans "Previous" %}</a>
         {% endif %}
 
         <span class="current">
-          Página {{ threads.number }} de {{ threads.paginator.num_pages }}
+          {% trans "Page" %} {{ threads.number }} {% trans "of" %} {{ threads.paginator.num_pages }}
         </span>
 
         {% if threads.has_next %}
-          <a href="{% append_to_get p=threads.next_page_number %}">Próxima</a>
+          <a href="{% append_to_get p=threads.next_page_number %}">{% trans "Next" %}</a>
         {% endif %}
       </span>
     </div>
