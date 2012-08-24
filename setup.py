@@ -5,9 +5,11 @@ from setupext import Data_Files, install_Data_Files
 
 setup(name='colab',
       version='3.0',
+      description = 'Colab, a Software for Communities',
       author='Sergio Oliveira',
       author_email='seocam@seocam.com',
       url='https://bitbucket.org/seocam/atu-colab',
+      license = "GPL 2",
       packages=find_packages(),
       package_data={'colab': ['templates/*.html', 
                               'super_archives/templates/*.html',
