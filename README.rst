@@ -1,3 +1,17 @@
+.. -*- coding: utf-8 -*-
+
+.. highlight:: rest
+
+.. _colab_software:
+
+=================================
+Colab, a Software for Communities
+=================================
+
+
+Installation
+============
+
 Installation instructions for Ubuntu 10.04
 -------------------------------------------
 
