@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm as UserCreationForm_
 from django.utils.translation import ugettext_lazy as _
 
-from colab.super_archives.models import MailingList
-from colab.super_archives.validators import UniqueValidator    
+from .models import MailingList
+from .validators import UniqueValidator    
 
 # XXX: I know that this code does not look nice AT ALL.
 #   probably it should be implemented using formsets instead of 
