@@ -11,8 +11,8 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import render_to_response
 from django.utils.translation import ugettext as _
 
-from colab import solrutils
-from colab.super_archives import queries
+from colab.deprecated import solrutils
+from super_archives import queries
 
 
 def home(request):

@@ -19,9 +19,10 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'cliauth',
 
     # Own apps
-    'api',
     'super_archives',
+    'api',
     'rss',
+    'colab.deprecated',
 )
 
 LOGGING = {
