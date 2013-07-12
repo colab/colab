@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import queries
+
 from django.http import Http404
 from django.template import RequestContext
 from django.core.paginator import Paginator
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render_to_response, get_list_or_404
 
-from colab.super_archives import queries
-from colab.super_archives.models import MailingList, Thread
+from .models import MailingList, Thread
 
 
 def thread(request, mailinglist, thread_token):

@@ -1,6 +1,6 @@
 
 from django.core.exceptions import ObjectDoesNotExist
-from colab.super_archives.models import Thread, Vote, Message, PageHit
+from .models import Thread, Vote, Message, PageHit
 
 
 def get_messages_by_date():
