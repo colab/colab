@@ -1,8 +1,8 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 
 from piston.resource import Resource
 
-from colab.api.handlers import VoteHandler, CountHandler, SearchHandler
+from .handlers import VoteHandler, CountHandler, SearchHandler
 
 
 vote_handler = Resource(VoteHandler)

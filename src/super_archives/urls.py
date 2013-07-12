@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('super_archives.views',
 #    url(r'thread/(?P<thread>\d+)/$', 'thread', name='thread'),

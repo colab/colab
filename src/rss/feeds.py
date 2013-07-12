@@ -4,9 +4,10 @@
 from django.contrib.syndication.views import Feed
 from django.utils.translation import ugettext as _
 
-from colab.super_archives.models import Thread
-from colab.super_archives import queries
-from colab import solrutils
+from super_archives.models import Thread
+from super_archives import queries
+from colab.deprecated import solrutils
+
 
 class LatestThreadsFeeds(Feed):
     title = _(u'Latest Discussions')

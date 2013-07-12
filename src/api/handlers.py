@@ -7,8 +7,8 @@ from django.contrib.auth.decorators import login_required
 from piston.utils import rc
 from piston.handler import BaseHandler
 
-from colab import solrutils
-from colab.super_archives.models import Message, PageHit
+from colab.deprecated import solrutils
+from super_archives.models import Message, PageHit
 
 
 class VoteHandler(BaseHandler):

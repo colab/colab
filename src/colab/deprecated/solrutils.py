@@ -12,7 +12,7 @@ from dateutil.parser import parse as parse_timestamp
 
 from django.conf import settings
 
-from colab.super_archives.models import EmailAddress
+from super_archives.models import EmailAddress
 
 
 def build_query(user_query, filters=None):
