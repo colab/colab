@@ -136,6 +136,9 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     set in settings.py.
     
     """
+
+    if not settings.SOLR_HOSTNAME or not settings.SOCKS_PORT:
+        return {}
     
     data = {
         'q': query, 
