@@ -11,7 +11,7 @@
   {% endif %}
   
   {% if doc.mailinglist %}
-  <a href="{% url super_archives.views.list_messages %}?list={{ doc.mailinglist }}">
+  <a href="{% url 'super_archives.views.list_messages' %}?list={{ doc.mailinglist }}">
     <span class="tag">{{ doc.mailinglist }}</span>
   </a>
   {% endif %}

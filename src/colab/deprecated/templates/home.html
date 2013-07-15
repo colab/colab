@@ -19,7 +19,7 @@
 
   <div class="span-12 colborder">
     <h3>{% trans "Latest collaborations" %}<a class="rss" target="_blank" 
-        href="{% url rss_latest_colab %}" 
+        href="{% url 'rss_latest_colab' %}" 
         title="{% trans 'RSS - Latest collaborations' %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
     </h3>
@@ -29,7 +29,7 @@
       {% endfor %}
     </ul>
     <hr class="space"/>
-    <a class="right" href="{% url search %}?o=modified+desc">
+    <a class="right" href="{% url 'search' %}?o=modified+desc">
       {% trans "View more collaborations..." %}
     </a>
   </div>
@@ -44,7 +44,7 @@
 
   <div class="span-12 colborder">
     <h3>{% trans "Discussions Most Relevance" %}<a class="rss" target="_blank" 
-        href="{% url rss_hottest_threads %}" 
+        href="{% url 'rss_hottest_threads' %}" 
         title="{% trans "RSS - Discussions Most Relevance" %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
     </h3>
@@ -54,14 +54,14 @@
       {% endfor %}
     </ul>
     <hr class="space"/>
-    <a class="right" href="{% url thread_list %}?order=hottest">
+    <a class="right" href="{% url 'thread_list' %}?order=hottest">
       {% trans "View more discussions relevance..." %}
     </a>
   </div>
 
   <div class="span-11 last">
     <h3>{% trans "Latest Discussions" %}<a class="rss" target="_blank" 
-        href="{% url rss_latest_threads %}" 
+        href="{% url 'rss_latest_threads' %}" 
         title="{% trans "RSS - Latest Discussions" %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
     </h3>
@@ -71,7 +71,7 @@
       {% endfor %}
     </ul>
     <hr class="space"/>
-    <a class="right" href="{% url thread_list %}">
+    <a class="right" href="{% url 'thread_list' %}">
       {% trans "View more discussions..." %}
     </a>
   </div>

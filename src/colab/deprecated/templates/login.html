@@ -10,7 +10,7 @@
   {% endif %}
   
   <div id="login-form-wrapper">
-    <form class="span-24" method="POST" action="{% url login %}">
+    <form class="span-24" method="POST" action="{% url 'login' %}">
       {% csrf_token %}
 
       <fieldset class="span-10 box">
@@ -27,7 +27,7 @@
         </p>
         
         <input type="submit" value="Login" />
-        <a class="right" href="{% url request_reset_password %}">{% trans "I forgot my password" %}</a>
+        <a class="right" href="{% url 'request_reset_password' %}">{% trans "I forgot my password" %}</a>
         
         <input type="hidden" name="next" value="{% firstof next '/' %}" />
       </fieldset>
@@ -40,7 +40,7 @@
         click on the link below and get to work!" %}</p>
 
         <a class="span-11 center large" 
-           href="{% url signup %}">{% trans "Sign up" %}</a>
+           href="{% url 'signup' %}">{% trans "Sign up" %}</a>
       </fieldset>
     </form>
   </div>

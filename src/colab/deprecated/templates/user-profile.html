@@ -10,7 +10,7 @@
   {% if not user_profile %}
     <span class="notice span-24">
       <b>{% trans "User not registered." %}</b> {% trans "You are own this profile?" %}
-      <a href="{% url signup %}">{% trans "Click here and sign up." %}</a>
+      <a href="{% url 'signup' %}">{% trans "Click here and sign up." %}</a>
     </span>
 
   {% else %}
@@ -18,7 +18,7 @@
     {% ifequal request.user.username user_profile.user.username %}
       <span class="success span-24">
         {% trans "Hey, look you here! Want to " %}
-        <a href="{% url user_profile_update request.user %}">{% trans "edit your profile" %}</a>?
+        <a href="{% url 'user_profile_update' request.user %}">{% trans "edit your profile" %}</a>?
       </span>
     {% endifequal %}
 
@@ -34,7 +34,7 @@
 
     <div class="span-20 last">
       <div class="span-10">
-        <form action="{% url user_profile_update request.user %}" method='post'>
+        <form action="{% url 'user_profile_update' request.user %}" method='post'>
           {% csrf_token %}
 
           <h3>{% trans "Personal Information" %}</h3>
@@ -42,7 +42,7 @@
             <li>
               {{ form.username.label_tag }}: {{ user_profile.user.username }}
               {% ifequal request.user.username user_profile.user.username %}
-                (<a href="{% url change_password %}">{% trans "change password" %}</a>)
+                (<a href="{% url 'change_password' %}">{% trans "change password" %}</a>)
               {% endifequal %}
             </li>
             <li>
