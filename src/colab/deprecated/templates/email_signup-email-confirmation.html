@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% trans "Welcome to the Colab!" %}
+
+{% trans "To activate your account, please confirm your mail's activation by accessing the following link:" %}
+
+<a href="http://{{ server_name }}{% url email_verification hash %}"> 
+  http://{{ server_name }}{% url email_verification hash %}
+</a>

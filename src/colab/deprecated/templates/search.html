@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load append_to_get %}
+{% block main-content %}
+  <h2 class="span-6">{% trans "Search" %}</h2>
+  <span class="right quiet">
+    {{ docs.numFound }} {% trans "documents found in" %} 
+    {{ docs.QTime|floatformat:3 }} {% trans "seconds" %}
+  </span>
+
+  <hr/>
+
+  <div class="span-5 border filters">
+    <h3>{% trans "Filters" %}</h3>
+
+    <h4>{% trans "Types" %}</h4>
+
+    <ul class="legend">
+      <li {% ifequal type "wiki" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
+        <span>
+          <img src="{{ STATIC_URL }}img/wiki.png">
+        </span>
+        <a href="{% ifnotequal type "wiki" %} {% append_to_get type='wiki' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Wiki" %}</a>
+      </li>
+      <li {% ifequal type "thread" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
+        <span>
+          <img src="{{ STATIC_URL }}img/thread.png"> 
+        </span>
+        <a href="{% ifnotequal type "thread" %} {% append_to_get type='thread' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Discussion" %}</a>
+      </li>
+      <li {% ifequal type "ticket" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
+        <span>
+          <img src="{{ STATIC_URL }}img/ticket.png">
+        </span>
+        <a href="{% ifnotequal type "ticket" %} {% append_to_get type='ticket' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Ticket" %}</a>
+      </li>
+      <li {% ifequal type "changeset" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
+        <span>
+          <img src="{{ STATIC_URL }}img/changeset.png"> 
+        </span>
+        <a href="{% ifnotequal type "changeset" %} {% append_to_get type='changeset' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Changeset" %}</a>
+      </li>
+    </ul>
+  </div>
+  
+  <div class="span-17 prepend-1 last">
+    <ul>
+    {% for doc in docs  %}
+      {% include "message-preview.html" %}
+    {% empty %}
+      <li class="center">
+        {% trans "No results for your search." %}
+      </li>
+    {% endfor %}
+    </ul>
+
+    <hr class="space"/>
+  
+    {% if docs.numFound %}
+    <div class="pagination center">
+      <span>
+        {% if docs.has_previous %}
+          <a href="{% append_to_get p=docs.previous_page_number %}">{% trans "Previous" %}</a>
+        {% endif %}
+
+        <span>
+          {% trans "Page" %} {{ docs.page_num }} {% trans "of" %} {{ docs.num_of_pages }}
+        </span>
+
+        {% if docs.has_next %}
+          <a href="{% append_to_get p=docs.next_page_number %}">{% trans "Next" %}</a>
+        {% endif %}
+      </span>
+    </div>
+    {% endif %}
+  </div>
+
+{% endblock %}
