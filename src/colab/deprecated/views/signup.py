@@ -7,7 +7,7 @@ Created by Sergio Campos on 2012-01-10.
 """
 
 import uuid
-from colab import signup as signup_
+from colab.deprecated import signup as signup_
 
 from django.template import RequestContext
 from django.contrib.auth.models import User
@@ -16,8 +16,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import SetPasswordForm, PasswordChangeForm
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 
-from colab.super_archives.forms import UserCreationForm
-from colab.super_archives.models import UserProfile, EmailAddress
+from super_archives.forms import UserCreationForm
+from super_archives.models import UserProfile, EmailAddress
 
 
 def signup(request):
