@@ -137,7 +137,7 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     
     """
 
-    if not settings.SOLR_HOSTNAME or not settings.SOCKS_PORT:
+    if not settings.SOLR_HOSTNAME and not settings.SOCKS_PORT:
         return {}
     
     data = {
