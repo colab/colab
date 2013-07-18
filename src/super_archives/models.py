@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import datetime
 from hashlib import md5
 
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
@@ -144,7 +144,7 @@ class Thread(models.Model):
  
         # Save this pseudo now to avoid calling the
         #   function N times in the loops below
-        now = datetime.datetime.now()
+        now = timezone.now()
         days_ago = lambda date: (now - date).days
         get_score = lambda weight, created: \
                                   max(weight - (days_ago(created) // 3), 5)

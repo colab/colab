@@ -14,7 +14,8 @@ from .models import MailingList, Thread
 def thread(request, mailinglist, thread_token):
 
     try:
-        first_message = queries.get_first_message_in_thread(mailinglist, thread_token)
+        first_message = queries.get_first_message_in_thread(mailinglist, 
+                                                            thread_token)
     except ObjectDoesNotExist:
         raise Http404
     order_by = request.GET.get('order')
