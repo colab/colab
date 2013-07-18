@@ -12,9 +12,9 @@ from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 
-from colab import solrutils
-from colab.super_archives.forms import UserCreationForm, UserUpdateForm
-from colab.super_archives.models import Message, UserProfile, EmailAddress
+from colab.deprecated import solrutils
+from super_archives.forms import UserCreationForm, UserUpdateForm
+from super_archives.models import Message, UserProfile, EmailAddress
                                         
 
 def read(request, user, email_address=None, editable=False, form=None):
