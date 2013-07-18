@@ -22,7 +22,7 @@ email_field = forms.EmailField(validators=[UniqueValidator(User, 'email')])
 # UserProfile fields
 institution_field = forms.CharField(max_length=120, label=_(u'Institution'), 
                                     required=False)
-role_field = forms.CharField(max_length=60, label=_(u'Function'), required=False)
+role_field = forms.CharField(max_length=60, label=_(u'Role'), required=False)
 twitter_field = forms.URLField(label=_(u'Twitter'), required=False)
 facebook_field = forms.URLField(label=_(u'Facebook'), required=False)
 google_talk_field = forms.EmailField(label=_(u'Google Talk'), required=False)
