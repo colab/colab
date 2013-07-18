@@ -44,7 +44,7 @@ class EmailAddress(models.Model):
         if self.user:
             return reverse('user_profile', args=[self.user.username])
         else:
-            return reverse('colab.views.userprofile.by_emailhash',
+            return reverse('colab.deprecated.views.userprofile.by_emailhash',
                            args=[self.md5])
 
     def __unicode__(self):
