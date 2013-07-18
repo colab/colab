@@ -35,9 +35,10 @@
       <fieldset class="span-12 box last">
         <legend>{% trans "Not already registered? Sign up!" %}</legend>
         <p class="prepend-1 span-10 justify large">
-        {% trans "To access some features of Colab you must be registered. 
+        {% blocktrans %}To access some features of Colab you must be registered. 
         If you are not already registered systems in the community Interlegis 
-        click on the link below and get to work!" %}</p>
+        click on the link below and get to work!"
+        {% endblocktrans %}</p>
 
         <a class="span-11 center large" 
            href="{% url 'signup' %}">{% trans "Sign up" %}</a>
