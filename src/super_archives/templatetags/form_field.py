@@ -52,7 +52,7 @@ class RenderFormField(template.Node):
         else:
             form_field_tag = default_value
                 
-        return u"""<p class="%s">%s: %s %s</p>""" % (
+        return u"""<p class="%s">%s %s %s</p>""" % (
             class_, 
             form_field.label_tag(), 
             form_field_tag,

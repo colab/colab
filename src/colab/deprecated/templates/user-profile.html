@@ -9,7 +9,7 @@
 {% block main-content %}
   {% if not user_profile %}
     <span class="notice span-24">
-      <b>{% trans "User not registered." %}</b> {% trans "You are own this profile?" %}
+      <b>{% trans "User not registered." %}</b> {% trans "Is that you?" %}
       <a href="{% url 'signup' %}">{% trans "Click here and sign up." %}</a>
     </span>
 
@@ -17,8 +17,8 @@
 
     {% ifequal request.user.username user_profile.user.username %}
       <span class="success span-24">
-        {% trans "Hey, look you here! Want to " %}
-        <a href="{% url 'user_profile_update' request.user %}">{% trans "edit your profile" %}</a>?
+        {% trans "Hey, look at you! Do you want to " %}
+        <a href="{% url 'user_profile_update' request.user %}">{% trans "update your profile" %}</a>?
       </span>
     {% endifequal %}
 
