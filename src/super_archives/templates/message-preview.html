@@ -38,7 +38,7 @@
         {{ doc.from_address.get_full_name }}
       </a>
       {% else %}
-        {% firstof doc.last_author doc.Creator _("anônimo") %}
+        {% firstof doc.last_author doc.Creator _("anonymous") %}
       {% endif %}
     </span>    
           

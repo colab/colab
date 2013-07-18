@@ -10,8 +10,10 @@ gettext = lambda s: s
 LANGUAGES = (
     ('en', gettext('English')),
     ('es', gettext('Spanish')),
-    ('pt-BR', gettext('Portuguese')),
+    ('pt-br', gettext('Portuguese')),
 )
+
+LANGUAGE_CODE = 'pt-br'
 
 INSTALLED_APPS = INSTALLED_APPS + (
     # Not standard apps
@@ -67,6 +69,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
 )
+
 
 try:
     from local_settings import *

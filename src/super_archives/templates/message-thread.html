@@ -16,7 +16,8 @@
               <a href="{{ email.from_address.get_profile_link }}">
                 <img class="avatar" width="80px" heigth="80px"
                      src="http://www.gravatar.com/avatar/{{ email.from_address.md5 }}?s=80&d=identicon" />
-                <span>{% firstof email.from_address.get_full_name "Anônimo" %}</span>
+                {% trans "Anonymous" as anonymous %}
+                <span>{% firstof email.from_address.get_full_name anonymous %}</span>
               </a>
             </div>
             <p>{{ email.received_time|date:"SHORT_DATETIME_FORMAT" }}</p>
