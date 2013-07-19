@@ -47,7 +47,7 @@
     <h4><b>{% trans "Order by" %}:</b></h4>
     <ul>
       <li><a href="{% append_to_get order='voted' %}">{% trans "Votes" %}</a></li>
-      <li><a href="{% append_to_get order='date' %}">{% trans "Data" %}</a></li>
+      <li><a href="{% append_to_get order='date' %}">{% trans "Date" %}</a></li>
     </ul>
 
     <hr class="space"/>
@@ -56,7 +56,7 @@
     
     <ul>
       <li class="quiet">{% trans "started at" %}
-        <h4>{{ first_msg.received_time|timesince }} {% trans "back" %}</h4>
+        <h4>{{ first_msg.received_time|timesince }} {% trans "ago" %}</h4>
       </li>
       <li class="quiet">{% trans "viewed" %}
         <h4>{{ pagehits }} {% trans "times" %}</h4>
