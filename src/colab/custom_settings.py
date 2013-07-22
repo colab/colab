@@ -83,6 +83,10 @@ MIDDLEWARE_CLASSES = (
 SOCKS_SERVER = None
 SOCKS_PORT = None
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'colab', 'static'),
+)
+
 try:
     from local_settings import *
 except ImportError:
