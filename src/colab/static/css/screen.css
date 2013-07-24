@@ -227,3 +227,105 @@ img.center {
     padding-top: 2px;
 }
 
+/* Converse JS*/
+
+#chatpanel form#converse-login {
+    padding: 0;
+}
+
+#chatpanel form#converse-login input, #chatpanel form#converse-login label {
+    margin: 3px;
+}
+
+form.sendXMPPMessage textarea {
+    max-width: 189px;
+    max-height: 80px;
+    border: 1px solid #999999;
+    border-radius: 0 0 4px 4px;
+    background: none repeat scroll 0 0 padding-box white;
+}
+
+.chat-area form.sendXMPPMessage textarea {
+    width: 189px;
+    max-width: 285px;
+    max-height: 60px;
+}
+
+#collective-xmpp-chat-data form.sendXMPPMessage {
+    background: none;
+    border: none;
+}
+
+#collective-xmpp-chat-data .chat-content {
+    border-width: 0;
+}
+
+#collective-xmpp-chat-data .chatbox {
+    background-color: #FFF;
+}
+
+#controlbox #converse-roster {
+    top: -7.5px;
+}
+
+#collective-xmpp-chat-data .chatbox dl.dropdown {
+    margin-bottom: 15px;
+    margin-top: -10px;
+}
+
+.chatbox dl.dropdown {
+    margin-left: 0.5em;
+}
+
+#collective-xmpp-chat-data .chat-head-chatbox, .chat-head-chatroom {
+    height: 40.5px;
+}
+
+#chatrooms form.add-chatroom {
+    padding: 0;
+}
+
+img.spinner {
+    display: none;
+    background: blue;
+}
+
+#chatpanel #toggle-controlbox {
+    font-size: 120%;
+    padding: 0 4px 5px;
+}
+
+#chatpanel a{
+    text-decoration: none;
+}
+
+.container #chatpanel {
+    height: 342px;
+}
+
+div.chat-title {
+    font-size: 130%;
+}
+
+form#set-custom-xmpp-status .custom-xmpp-status {
+    width: 136px;
+    margin: 0.5px;
+    padding: 2px;
+}
+
+#fancy-xmpp-status-select #set-custom-xmpp-status button {
+    margin-left: 1px;
+    padding: 0;
+}
+
+#xmpp-status-holder .fancy-dropdown {
+    height: 24.5px;
+}
+
+#users #converse-roster {
+    height: 197.5px;
+}
+
+#available-chatrooms .available-chatroom {
+    margin-left: 1px;
+}
