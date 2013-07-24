@@ -168,17 +168,33 @@ label.avatar-placeholder {
 }
 
 .tag {
+    text-decoration: none;
     background-color: #2183b3;
     padding: 2px 4px;
-    border-radius: 5;
+    border-radius: 5px;
     font-size: 90%;
     color: #fff;
     margin-right: 5px;
+    line-height: 2;
 }
 
 .tag:hover, 
 .tag:focus {
     background-color: #21b6e6;
+    color: #fff;
+}
+
+.tag-cloud .size-1 {
+    font-size: 90%;
+}
+.tag-cloud .size-2 {
+    font-size: 100%;
+}
+.tag-cloud .size-3 {
+    font-size: 130%;
+}
+.tag-cloud .size-4 {
+    font-size: 150%;
 }
 
 .quiet {
