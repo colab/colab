@@ -1,0 +1,38 @@
+{% load i18n %}
+{% if page.paginator.num_pages > 1 %}
+<div class="pagination">
+    {% if page.has_previous %}
+    <a href="{{ alterpath }}{{ page.previous_page_url }}">&laquo; {% trans "previous" %}</a>
+    {% else %}
+    <span class="control">&laquo; {% trans "previous" %}</span>
+    {% endif %}
+
+    {% if page.paginator.frame_start_page > 1 %}
+    <a href="{{ alterpath }}{{ page.first_page_url }}">1</a>
+        {% if page.paginator.frame_start_page > 2 %}
+        <span class="control">...</span>
+        {% endif %}
+    {% endif %}
+
+    {% for number, url in page.paginator.frame %}
+    {% if not url %}..{% else %}
+    <a {% ifequal page.number number%}class="active"{% endifequal %} href="{{ alterpath }}{{ url }}">{{ number }}</a>
+    {% endif %}
+    {% endfor %}
+
+    {% if page.paginator.frame_end_page != page.paginator.num_pages %}
+        {% if page.paginator.frame_end_page != page.paginator.num_pages|add:"-1" %}
+        <span class="control">...</span>
+        {% endif %}
+        <a href="{{ alterpath }}{{ page.last_page_url }}">{{ page.paginator.num_pages }}</a>
+    {% endif %}
+
+    {% if page.has_next %}
+    <a href="{{ alterpath }}{{ page.next_page_url }}">{% trans "next" %} &raquo;</a>
+    {% else %}
+    <span class="control">{% trans "next" %} &raquo;</span>
+    {% endif %}
+
+    <div class="clear"></div>
+</div>
+{% endif %}

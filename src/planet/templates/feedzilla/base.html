@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load feedzilla_tags %}
+
+{% block main-content %}
+    <h2>{% trans 'Planet' %}</h2>
+    <hr/>
+
+    <div class="span-18">
+      {% block feedzilla_content %}{% endblock %}
+    </div>
+
+    <div class="span-6 last">
+      <div class="box">
+        <a href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
+      </div>
+      <div class="box">
+        <h3>{% trans 'Tags' %}</h3>
+        {% feedzilla_tag_cloud %}
+      </div>
+      <div class="box">
+        <h3>{% trans 'Blogs' %}</h3>
+        {% feedzilla_donor_list %}
+      </div>
+    </div>
+{% endblock %}
