@@ -51,6 +51,8 @@ urlpatterns = patterns('',
 
     url(r'^account/logout/$', 'django.contrib.auth.views.logout', 
         {'next_page': '/'}, name='logout'),
+
+    url(r'^planet/', include('feedzilla.urls')),
     
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),

@@ -5,3 +5,9 @@ pytz==2011n
 chardet==1.0.1
 python-dateutil==1.5
 django-cliauth==0.9
+feedzilla
+django-common
+django-tagging
+feedparser
+lxml
+grab

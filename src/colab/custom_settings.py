@@ -16,6 +16,7 @@ LANGUAGES = (
 LANGUAGE_CODE = 'pt-br'
 
 INSTALLED_APPS = INSTALLED_APPS + (
+
     # Not standard apps
     'south',
     'cliauth',
@@ -25,6 +26,12 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'api',
     'rss',
     'colab.deprecated',
+    'planet',
+
+    # Feedzilla and deps
+    'feedzilla',
+    'tagging',
+    'common',
 )
 
 LOGGING = {
@@ -86,6 +93,11 @@ SOCKS_PORT = None
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'colab', 'static'),
 )
+
+from feedzilla.settings import *
+FEEDZILLA_PAGE_SIZE = 5
+FEEDZILLA_SITE_TITLE = gettext(u'Planet Colab')
+FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
 
 try:
     from local_settings import *

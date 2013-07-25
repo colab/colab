@@ -1,0 +1,67 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-24 18:36-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: templates/common/pagination.html:5 templates/common/pagination.html.py:7
+msgid "previous"
+msgstr "anterior"
+
+#: templates/common/pagination.html:31 templates/common/pagination.html:33
+msgid "next"
+msgstr "próxima"
+
+#: templates/feedzilla/_post_template.html:9
+msgid "From"
+msgstr "De"
+
+#: templates/feedzilla/_post_template.html:9
+msgid "on"
+msgstr "em"
+
+#: templates/feedzilla/_post_template.html:17
+msgid "Read original"
+msgstr "Ler original"
+
+#: templates/feedzilla/base.html:6
+msgid "Planet"
+msgstr "Planet"
+
+#: templates/feedzilla/base.html:15
+msgid "Submit a blog"
+msgstr "Solicite a inclusão de um blog"
+
+#: templates/feedzilla/base.html:18
+msgid "Tags"
+msgstr "Tags"
+
+#: templates/feedzilla/base.html:22
+msgid "Source Blogs"
+msgstr "Blogs Fonte"
+
+#: templates/feedzilla/tag.html:5
+#, python-format
+msgid "Posts with &laquo;%(tag)s&raquo; label"
+msgstr ""
+
+#: templates/feedzilla/tag.html:14
+msgid "No posts with such label"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Blogs fonte"
+#~ msgstr "Blogs"
