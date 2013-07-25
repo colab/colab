@@ -1,0 +1,30 @@
+{% load tagging_tags %}
+{% load i18n %}
+
+<div class="blog-post-item">
+    <a name="post-{{ post.pk }}"></a>
+
+    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+
+    <div class="post-meta">{% trans "From" %} <a href="{{ post.feed.site_url }}">{{ post.feed.author_or_title }}</a> {% trans "on" %} {{ post.created }}</div>
+
+
+    <div class="content">
+        {{ post.summary|safe }}
+    </div>
+
+    <div>
+        <b><a href="{{ post.get_absolute_url }}">{% trans "Read original" %}</a></b>
+    </div>
+
+    {% if post.tags %}
+    <div class="tags">
+      <span><b>Tags:</b>
+        {% tags_for_object post as tags %}
+        {% for tag in tags %}
+          <a href="{% url "feedzilla_tag" tag.name %}" class="tag">{{ tag }}</a>
+        {% endfor %}
+      </span>
+    </div>
+    {% endif %}
+</div>

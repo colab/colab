@@ -176,6 +176,7 @@ label.avatar-placeholder {
     color: #fff;
     margin-right: 5px;
     line-height: 2;
+    white-space: nowrap;
 }
 
 .tag:hover, 
@@ -344,4 +345,20 @@ form#set-custom-xmpp-status .custom-xmpp-status {
 
 #available-chatrooms .available-chatroom {
     margin-left: 1px;
+}
+
+.blog-post-item h3 a {
+    text-decoration: none;
+}
+
+.blog-post-item h3 {
+    margin-bottom: 0.5em;
+}
+
+.blog-post-item .post-meta {
+    margin-bottom: 2em;
+}
+
+.blog-post-item .tags {
+    margin-top: 1em;
 }

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-24 15:40-0300\n"
+"POT-Creation-Date: 2013-07-24 18:36-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,18 @@ msgstr "anterior"
 msgid "next"
 msgstr "próxima"
 
+#: templates/feedzilla/_post_template.html:9
+msgid "From"
+msgstr "De"
+
+#: templates/feedzilla/_post_template.html:9
+msgid "on"
+msgstr "em"
+
+#: templates/feedzilla/_post_template.html:17
+msgid "Read original"
+msgstr "Ler original"
+
 #: templates/feedzilla/base.html:6
 msgid "Planet"
 msgstr "Planet"
@@ -38,5 +50,18 @@ msgid "Tags"
 msgstr "Tags"
 
 #: templates/feedzilla/base.html:22
-msgid "Blogs"
-msgstr "Blogs"
+msgid "Source Blogs"
+msgstr "Blogs Fonte"
+
+#: templates/feedzilla/tag.html:5
+#, python-format
+msgid "Posts with &laquo;%(tag)s&raquo; label"
+msgstr ""
+
+#: templates/feedzilla/tag.html:14
+msgid "No posts with such label"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Blogs fonte"
+#~ msgstr "Blogs"
