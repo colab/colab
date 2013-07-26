@@ -7,10 +7,17 @@
 {% if success %}
 <p>{% trans "Thank you. Your application has been accepted and will be reviewed by admin in the near time." %}</p>
 {% else %}
-<form method="post" class="common-form">
+<p class="required span-11 last"><label>{% trans "Required fields" %}</label></p>
+<form method="post" class="span-12">
     {% csrf_token %}
-    {{ form.as_p }}
-    <p><input type="submit" value="{% trans "Submit" %}" /></p>
+    <fieldset class="box span-11">
+        <legend>{% trans "Blog Information" %}</legend>
+        <p class=" required"><label for="id_url">{% trans "Blog URL" %}:</label><br /><input id="id_url" maxlength="255" name="url" type="text" /></p>
+        <p class=" required"><label for="id_title">{% trans "Blog name" %}:</label><br /><input id="id_title" maxlength="255" name="title" type="text" /></p>
+        <p class=""><label for="id_author">{% trans "Name of author of the blog" %}:</label><br /><input id="id_author" maxlength="50" name="author" type="text" /></p>
+        <p class=""><label for="id_feed_url">{% trans "Feed URL" %}:</label><br /><input id="id_feed_url" maxlength="255" name="feed_url" type="text" /><br /><span class="helptext">{% trans "You can specify what exactly feed you want submit" %}</span></p>
+        <p><input type="submit" value="{% trans "Submit" %}"></p>
+    </fieldset>
 </form>
 {% endif %}
 {% endblock %}
