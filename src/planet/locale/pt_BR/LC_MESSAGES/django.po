@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-24 18:36-0300\n"
+"POT-Creation-Date: 2013-07-26 11:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgstr "Ler original"
 msgid "Planet"
 msgstr "Planet"
 
-#: templates/feedzilla/base.html:15
+#: templates/feedzilla/base.html:15 templates/feedzilla/submit_blog.html:5
 msgid "Submit a blog"
 msgstr "Solicite a inclusão de um blog"
 
@@ -53,6 +53,46 @@ msgstr "Tags"
 msgid "Source Blogs"
 msgstr "Blogs Fonte"
 
+#: templates/feedzilla/submit_blog.html:8
+msgid ""
+"Thank you. Your application has been accepted and will be reviewed by admin "
+"in the near time."
+msgstr ""
+
+#: templates/feedzilla/submit_blog.html:10
+msgid "Required fields"
+msgstr ""
+
+#: templates/feedzilla/submit_blog.html:14
+msgid "Blog Information"
+msgstr "Informações do blog"
+
+#: templates/feedzilla/submit_blog.html:15
+msgid "Blog URL"
+msgstr ""
+
+#: templates/feedzilla/submit_blog.html:16
+#, fuzzy
+msgid "Blog name"
+msgstr "Blogs"
+
+#: templates/feedzilla/submit_blog.html:17
+msgid "Name of author of the blog"
+msgstr ""
+
+#: templates/feedzilla/submit_blog.html:18
+msgid "Feed URL"
+msgstr ""
+
+#: templates/feedzilla/submit_blog.html:18
+msgid "You can specify what exactly feed you want submit"
+msgstr ""
+
+#: templates/feedzilla/submit_blog.html:19
+#, fuzzy
+msgid "Submit"
+msgstr "Solicite a inclusão de um blog"
+
 #: templates/feedzilla/tag.html:5
 #, python-format
 msgid "Posts with &laquo;%(tag)s&raquo; label"
@@ -61,7 +101,3 @@ msgstr ""
 #: templates/feedzilla/tag.html:14
 msgid "No posts with such label"
 msgstr ""
-
-#, fuzzy
-#~ msgid "Blogs fonte"
-#~ msgstr "Blogs"
