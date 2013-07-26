@@ -262,11 +262,12 @@ div#controlbox-panes div#login-dialog{
     margin-top: 10px;
 }
 
-#chatpanel .error, #chatpanel .alert, #chatpanel .notice, #chatpanel .success, #chatpanel .info {
+#chatpanel .conn-feedback.error {
     background: none;
     border: none;
     padding: 0;
 }
+
 form.sendXMPPMessage textarea {
     max-width: 189px;
     max-height: 80px;
