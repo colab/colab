@@ -5,7 +5,7 @@ pytz==2011n
 chardet==1.0.1
 python-dateutil==1.5
 django-cliauth==0.9
-https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around
+https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
 django-common
 django-tagging
 feedparser
