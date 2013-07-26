@@ -299,9 +299,12 @@ form.sendXMPPMessage textarea {
     top: -7.5px;
 }
 
-#collective-xmpp-chat-data .chatbox dl.dropdown {
-    margin-bottom: 15px;
-    margin-top: -10px;
+#collective-xmpp-chat-data .chatbox .oc-chat-content dt.fancy-dropdown {
+    margin-top: 7px;
+}
+
+#collective-xmpp-chat-data .chatbox form.set-xmpp-status{
+    padding: 0;
 }
 
 .chatbox dl.dropdown {
@@ -314,11 +317,6 @@ form.sendXMPPMessage textarea {
 
 #chatrooms form.add-chatroom {
     padding: 0;
-}
-
-img.spinner {
-    display: none;
-    background: blue;
 }
 
 #chatpanel #toggle-controlbox {
@@ -354,7 +352,7 @@ form#set-custom-xmpp-status .custom-xmpp-status {
 }
 
 #users #converse-roster {
-    height: 197.5px;
+    height: 215px;
 }
 
 #available-chatrooms .available-chatroom {
@@ -375,4 +373,8 @@ form#set-custom-xmpp-status .custom-xmpp-status {
 
 .blog-post-item .tags {
     margin-top: 1em;
+}
+
+a.configure-chatroom-button, a.close-chatbox-button {
+    background-color: #F6F6F6;
 }
