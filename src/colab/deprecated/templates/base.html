@@ -16,13 +16,13 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
                                 type="text/css" media="screen" charset="utf-8"/>
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}conversejs/converse.css"
+    <link rel="stylesheet" href="{{ STATIC_URL }}third-party/converse.js/converse.css"
                                   type="text/css" media="screen, projection" />
 
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.min.js"></script>    
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery-1.7.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}js/base.js"></script>
 
-    <script data-main="{{ STATIC_URL }}conversejs/main" src="{{ STATIC_URL }}conversejs/Libraries/require-jquery.js"></script>
+    <script data-main="{{ STATIC_URL }}third-party/converse.js/main" src="{{ STATIC_URL }}third-party/converse.js/Libraries/require-jquery.js"></script>
 
     {% block head_js %}
     {% endblock %}
@@ -160,6 +160,22 @@
           </a>
       </div>
   </div>
+
+<script>
+    require(["jquery", "converse"], function ($, converse) {
+        converse.initialize({
+            auto_list_rooms: false,
+            auto_subscribe: false,
+            bosh_service_url: 'https://bind.opkode.im', // Please use this connection manager only for testing purposes
+            hide_muc_server: false,
+            i18n: locales['{{ request.LANGUAGE_CODE }}'], // Refer to ./locale/locales.js to see which locales are supported
+            prebind: false,
+            show_controlbox_by_default: true,
+            xhr_user_search: false
+        });
+    });
+</script>
+
 
   </body>
 </html>
