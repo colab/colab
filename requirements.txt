@@ -11,3 +11,7 @@ django-tagging
 feedparser
 lxml
 grab
+
+# Deps for sentry client (raven)
+raven
+tornado
