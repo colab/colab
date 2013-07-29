@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-18 21:53-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: forms.py:18
+msgid "Name"
+msgstr "Nome"
+
+#: forms.py:19
+msgid "Last name"
+msgstr "Sobrenome"
+
+#: forms.py:23
+msgid "Institution"
+msgstr "Instituição/Empresa"
+
+#: forms.py:25
+msgid "Role"
+msgstr "Função/Cargo"
+
+#: forms.py:26
+msgid "Twitter"
+msgstr "Twitter"
+
+#: forms.py:27
+msgid "Facebook"
+msgstr "Facebook"
+
+#: forms.py:28
+msgid "Google Talk"
+msgstr "Google Talk"
+
+#: forms.py:29
+msgid "Personal Website/Blog"
+msgstr "Website/Blog Pessoal"
+
+#: models.py:66
+msgid "User Profile"
+msgstr "Perfil do Usuário"
+
+#: models.py:67
+msgid "Users Profiles"
+msgstr "Perfis de Usuários"
+
+#: models.py:100
+msgid "Mailing List"
+msgstr "Lista de discussão"
+
+#: models.py:101
+msgid "The Mailing List where is the thread"
+msgstr "Lista de emails da discussão"
+
+#: models.py:104
+msgid "Latest message"
+msgstr "Última mensagem"
+
+#: models.py:105
+msgid "Latest message posted"
+msgstr "Última mensagem enviada"
+
+#: models.py:106
+msgid "Score"
+msgstr "Pontuação"
+
+#: models.py:106
+msgid "Thread score"
+msgstr "Pontuação da discussão"
+
+#: models.py:113
+msgid "Thread"
+msgstr "Discussão"
+
+#: models.py:114
+msgid "Threads"
+msgstr "Discussões"
+
+#: models.py:196
+msgid "Subject"
+msgstr "Assuntos"
+
+#: models.py:197
+msgid "Please enter a message subject"
+msgstr "Por favor digite um assunto de email"
+
+#: models.py:200
+msgid "Message body"
+msgstr "Corpo do email"
+
+#: models.py:201
+msgid "Please enter a message body"
+msgstr "Por favor digite o corpo do email"
+
+#: models.py:210
+msgid "Message"
+msgstr "Mensagem"
+
+#: models.py:211
+msgid "Messages"
+msgstr "Mensagens"
+
+#: templates/message-list.html:6
+msgid "Discussions"
+msgstr "Discussões"
+
+#: templates/message-list.html:10
+msgid "Filters"
+msgstr "Filtros"
+
+#: templates/message-list.html:12
+msgid "Sort by"
+msgstr "Ordenar por"
+
+#: templates/message-list.html:14 templates/message-list.html.py:17
+#: templates/message-list.html:27
+msgid "Remove filter"
+msgstr "Remover filtro"
+
+#: templates/message-list.html:16
+msgid "Relevance"
+msgstr "Relevância"
+
+#: templates/message-list.html:19
+msgid "Recent activity"
+msgstr "Atividade recente"
+
+#: templates/message-list.html:24
+msgid "Lists"
+msgstr "Listas"
+
+#: templates/message-list.html:41
+msgid "No discussion found"
+msgstr "Nenhuma discussão encontrada"
+
+#: templates/message-list.html:51
+msgid "Previous"
+msgstr "Anterior"
+
+#: templates/message-list.html:55
+msgid "Page"
+msgstr "Página"
+
+#: templates/message-list.html:55
+msgid "of"
+msgstr "de"
+
+#: templates/message-list.html:59
+msgid "Next"
+msgstr "Próxima"
+
+#: templates/message-preview.html:35
+msgid "by"
+msgstr "por"
+
+#: templates/message-preview.html:41
+msgid "anonymous"
+msgstr "Anônimo"
+
+#: templates/message-preview.html:47 templates/message-thread.html:59
+msgid "ago"
+msgstr "atrás"
+
+#: templates/message-thread.html:19
+msgid "Anonymous"
+msgstr "Anônimo"
+
+#: templates/message-thread.html:27
+msgid "Vote"
+msgstr "Votar"
+
+#: templates/message-thread.html:31
+msgid "Remove votes"
+msgstr "Remover voto"
+
+#: templates/message-thread.html:47
+msgid "Order by"
+msgstr "Ordenar por"
+
+#: templates/message-thread.html:49
+msgid "Votes"
+msgstr "Votos"
+
+#: templates/message-thread.html:50
+msgid "Date"
+msgstr "Data"
+
+#: templates/message-thread.html:55
+msgid "Statistics:"
+msgstr "Estatísticas:"
+
+#: templates/message-thread.html:58
+msgid "started at"
+msgstr "iniciada em"
+
+#: templates/message-thread.html:61
+msgid "viewed"
+msgstr "vizualizada"
+
+#: templates/message-thread.html:62 templates/message-thread.html.py:65
+#: templates/message-thread.html:68
+msgid "times"
+msgstr "vezes"
+
+#: templates/message-thread.html:64
+msgid "answered"
+msgstr "respondida"
+
+#: templates/message-thread.html:67
+msgid "voted"
+msgstr "votada"

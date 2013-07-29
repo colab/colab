@@ -1,7 +1,17 @@
-Django==1.3.1
-South==0.7.3
+https://www.djangoproject.com/download/1.6b1/tarball/
+South==0.8.1
 django-piston==0.2.3
 pytz==2011n
 chardet==1.0.1
 python-dateutil==1.5
 django-cliauth==0.9
+https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
+django-common
+django-tagging
+feedparser
+lxml
+grab
+
+# Deps for sentry client (raven)
+raven
+tornado

@@ -1,0 +1,380 @@
+/* Base */
+
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-right: 0;
+} 
+
+pre {
+    white-space: pre-wrap;
+}
+
+h2 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+h4 {
+    margin-bottom: 10px;
+}
+
+form {
+    display: inline;
+}
+
+#main-content {
+    margin-bottom: 20px;
+}
+
+#main-content,
+#header {
+    font-size: 105%;
+}
+
+/* Preview Message */ 
+
+.preview-message  {
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 28px;
+    border-bottom: solid 1px #ddd;
+}
+
+.preview-message a {
+    text-decoration: none;
+}
+
+.preview-message img {
+    margin-right: 5px;
+}
+
+/* Header */
+
+#header-searchbox {
+    width: 290px;
+}
+
+#header-menu span {
+    line-height: 33px;
+}
+
+/* Thread view */
+
+.plus {
+    border: 1px dotted #ddd;
+    margin: 0;
+}
+
+.plus span {
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+    font-size: 150%;
+    font-weight: bold;
+    color: #0a0;
+}
+
+.plus img {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-right: 20px;
+}
+
+.plus img:hover {
+    opacity: 0.8;
+}
+
+/* User Profile  */
+
+#user-profile ul {
+    margin-left: 25px;
+}
+
+#user-profile form p {
+    margin: 0;
+}
+
+/* Forms */
+.required label:before {
+    color: #f00;
+    content: "* ";
+}
+
+input[type="text"],
+input[type="password"]  {
+    width: 300px;
+    padding: 3px;
+}
+
+/* Login Form */
+
+#login-form-wrapper {
+    height: 180px;
+}
+
+#login-form-wrapper fieldset {
+    height: 100%;
+}
+
+#login-form-wrapper .large {
+    line-height: 25px;
+} 
+
+/* Generic classes */
+
+.subject, 
+.subject a {
+    color: #000;
+}
+
+.subject a:hover, 
+.subject a:focus {
+    text-decoration: underline;
+    color: #335;
+}
+
+.subject img {
+    margin-right: 5px;
+}
+
+.avatar {
+    border: 1px solid #ddd;
+    padding: 3px;
+}
+
+div.avatar-placeholder {
+    border: 1px solid #cccccc;
+}
+
+.avatar-image {
+    float: left;
+    margin-right: 10px;
+    height: 40px;
+    padding: 8px 12px 0;
+    background-color: white;
+}
+
+label.avatar-placeholder {
+    display: block;
+    margin-left: 6px;
+}
+
+.tag {
+    text-decoration: none;
+    background-color: #2183b3;
+    padding: 2px 4px;
+    border-radius: 5px;
+    font-size: 90%;
+    color: #fff;
+    margin-right: 5px;
+    line-height: 2;
+    white-space: nowrap;
+}
+
+.tag:hover, 
+.tag:focus {
+    background-color: #21b6e6;
+    color: #fff;
+}
+
+.tag-cloud .size-1 {
+    font-size: 90%;
+}
+.tag-cloud .size-2 {
+    font-size: 100%;
+}
+.tag-cloud .size-3 {
+    font-size: 130%;
+}
+.tag-cloud .size-4 {
+    font-size: 150%;
+}
+
+.quiet {
+    color: #999;
+    font-size: 95%;
+}
+
+.center {
+    text-align: center;
+}
+
+.justify {
+    text-align: justify;
+}
+
+img.center {
+    margin: auto; 
+    display: block;
+}
+
+.filters {
+    height: 100%;
+    padding-left: 20px;
+}
+
+.filters ul {
+    padding-left: 20px;
+}
+
+.filters li:before {
+    content: "\00BB\0020";
+}
+
+
+.filters .legend li span {
+    display: inline-block;
+    width: 25px;
+}
+
+.filters .legend li:before {
+    content: '';
+}
+
+.rss {
+    float: right;
+    padding-top: 2px;
+}
+
+/* Converse JS*/
+
+#chatpanel form#converse-login {
+    padding: 0;
+}
+
+div#controlbox-panes div#login-dialog{
+    margin-top: 7px;
+}
+
+#chatpanel form#converse-login input, #chatpanel form#converse-login label {
+    margin: 2px 10px;
+}
+
+#chatpanel form#converse-login .login-submit{
+    margin-top: 10px;
+}
+
+#chatpanel .conn-feedback.error {
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+form.sendXMPPMessage textarea {
+    max-width: 189px;
+    max-height: 80px;
+    border: 1px solid #999999;
+    border-radius: 0 0 4px 4px;
+    background: none repeat scroll 0 0 padding-box white;
+}
+
+.chat-area form.sendXMPPMessage textarea {
+    width: 189px;
+    max-width: 285px;
+    max-height: 60px;
+}
+
+#collective-xmpp-chat-data form.sendXMPPMessage {
+    background: none;
+    border: none;
+}
+
+#collective-xmpp-chat-data .chat-content {
+    border-width: 0;
+}
+
+#collective-xmpp-chat-data .chatbox {
+    background-color: #FFF;
+}
+
+#controlbox #converse-roster {
+    top: -7.5px;
+}
+
+#collective-xmpp-chat-data .chatbox .oc-chat-content dt.fancy-dropdown {
+    margin-top: 7px;
+}
+
+#collective-xmpp-chat-data .chatbox form.set-xmpp-status{
+    padding: 0;
+}
+
+.chatbox dl.dropdown {
+    margin-left: 0.5em;
+}
+
+#collective-xmpp-chat-data .chat-head-chatbox, .chat-head-chatroom {
+    height: 40.5px;
+}
+
+#chatrooms form.add-chatroom {
+    padding: 0;
+}
+
+#chatpanel #toggle-controlbox {
+    font-size: 120%;
+    padding: 0 4px 5px;
+}
+
+#chatpanel a{
+    text-decoration: none;
+}
+
+.container #chatpanel {
+    height: 342px;
+}
+
+div.chat-title {
+    font-size: 130%;
+}
+
+form#set-custom-xmpp-status .custom-xmpp-status {
+    width: 128px;
+    margin: 0.5px;
+    padding: 2px;
+}
+
+#fancy-xmpp-status-select #set-custom-xmpp-status button {
+    margin-left: 1px;
+    padding: 0;
+}
+
+#xmpp-status-holder .fancy-dropdown {
+    height: 24.5px;
+}
+
+#users #converse-roster {
+    height: 215px;
+}
+
+#available-chatrooms .available-chatroom {
+    margin-left: 1px;
+}
+
+.blog-post-item h3 a {
+    text-decoration: none;
+}
+
+.blog-post-item h3 {
+    margin-bottom: 0.5em;
+}
+
+.blog-post-item .post-meta {
+    margin-bottom: 2em;
+}
+
+.blog-post-item .tags {
+    margin-top: 1em;
+}
+
+a.configure-chatroom-button, a.close-chatbox-button {
+    background-color: #F6F6F6;
+}

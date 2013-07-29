@@ -1,0 +1,11 @@
+{% extends 'feedzilla/base.html' %}
+{% load i18n %}
+
+{% block feedzilla_content %}
+  {% for post in page.object_list %}
+    {% include 'feedzilla/_post_template.html' %}
+    <hr>
+  {% endfor %}
+  
+  {% include "pagination.html" %}
+{% endblock %}

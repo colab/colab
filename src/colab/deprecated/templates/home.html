@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block head_js %}
+  {% include "pizza-chart.html" with chart_div="collabs" chart_width=410 chart_height=330 %}
+{% endblock %}
+
+{% block header %}
+  <div id="header-logo" class="span-24">
+    <img class="center" src="{{ STATIC_URL }}img/logo.png" />
+  </div>
+
+  <hr class="space"/>
+
+  <h2 class="span-24 center">{% trans "INTERLEGIS COMMUNITIES" %}</h2>
+{% endblock %}
+
+{% block main-content %}
+
+  <div class="span-12 colborder">
+    <h3>{% trans "Latest collaborations" %}<a class="rss" target="_blank" 
+        href="{% url 'rss_latest_colab' %}" 
+        title="{% trans 'RSS - Latest collaborations' %}">
+        <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
+    </h3>
+    <ul>
+      {% for doc in latest_docs %}
+        {% include "message-preview.html" %}
+      {% endfor %}
+    </ul>
+    <hr class="space"/>
+    <a class="right" href="{% url 'search' %}?o=modified+desc">
+      {% trans "View more collaborations..." %}
+    </a>
+  </div>
+
+  <div class="span-11 last">
+    <h3>{% trans "Distribution of Collaborations" %}</h3>
+    <div id="collabs"></div>
+  </div>
+
+  <hr class="space"/>
+  <hr/>
+
+  <div class="span-12 colborder">
+    <h3>{% trans "Discussions Most Relevance" %}<a class="rss" target="_blank" 
+        href="{% url 'rss_hottest_threads' %}" 
+        title="{% trans "RSS - Discussions Most Relevance" %}">
+        <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
+    </h3>
+    <ul>
+      {% for thread in hottest_threads %}
+        {% include "message-preview.html" with doc=thread.latest_message %}
+      {% endfor %}
+    </ul>
+    <hr class="space"/>
+    <a class="right" href="{% url 'thread_list' %}?order=hottest">
+      {% trans "View more discussions relevance..." %}
+    </a>
+  </div>
+
+  <div class="span-11 last">
+    <h3>{% trans "Latest Discussions" %}<a class="rss" target="_blank" 
+        href="{% url 'rss_latest_threads' %}" 
+        title="{% trans "RSS - Latest Discussions" %}">
+        <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
+    </h3>
+    <ul>
+      {% for thread in latest_threads %}
+        {% include "message-preview.html" with doc=thread.latest_message %}
+      {% endfor %}
+    </ul>
+    <hr class="space"/>
+    <a class="right" href="{% url 'thread_list' %}">
+      {% trans "View more discussions..." %}
+    </a>
+  </div>
+
+{% endblock %}
