@@ -1,19 +1,18 @@
 #!/bin/bash
 
-cd /usr/local/src/colab/
-hg pull
-hg up
-rm -fR dist/
-python setup.py sdist
+apt-get install apache2 libapache2-mod-wsgi
+apt-get install libxml2-dev libxslt1-dev # lxml
+apt-get install libpq-dev # psycopg2
+
+cd /usr/local/src/colab2/
+git pull
 
 if [[ $1 == 'deps' ]] ; then
     # com dependencias
-    /usr/local/django/colab/bin/pip install dist/*.gz -U
-else
-    # sem dependencias
-    /usr/local/django/colab/bin/pip install dist/*.gz -U --no-deps
+
+    /usr/local/django/colab2/bin/pip install -r /usr/local/src/colab2/requirements.txt -U
 fi
 
-/usr/local/django/colab/bin/python colab/manage.py syncdb
-/usr/local/django/colab/bin/python colab/manage.py migrate
-touch /usr/local/django/colab/wsgi/colab.wsgi
+/usr/local/django/colab2/bin/python src/manage.py syncdb
+/usr/local/django/colab2/bin/python src/manage.py migrate
+touch src/colab/wsgi.py

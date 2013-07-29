@@ -1,10 +1,13 @@
 https://www.djangoproject.com/download/1.6b1/tarball/
 South==0.8.1
+psycopg2==2.5.1
 django-piston==0.2.3
 pytz==2011n
 chardet==1.0.1
 python-dateutil==1.5
 django-cliauth==0.9
+
+# Feedzilla (planet) and deps
 https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
 django-common
 django-tagging
