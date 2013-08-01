@@ -1,5 +1,6 @@
 
 class colab {
+  # Common
   include ps1
   include vim
   include ntp
@@ -8,12 +9,16 @@ class colab {
   include postfix
 
   include supervisor
-
   include colab::requirements
 
   user { 'colab':
     ensure     => present,
     managehome => true,
     shell      => '/bin/bash',
+  }
+
+  mailalias { 'colab':
+    ensure    => present,
+    recipient => 'root',
   }
 }
