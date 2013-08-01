@@ -7,6 +7,9 @@ chardet==1.0.1
 python-dateutil==1.5
 django-cliauth==0.9
 
+gunicorn
+gevent
+
 # Feedzilla (planet) and deps
 https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
 django-common
