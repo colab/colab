@@ -1,0 +1,17 @@
+postfix	postfix/root_address	string	<%= @admin_email %>
+postfix	postfix/rfc1035_violation	boolean	false
+postfix	postfix/mydomain_warning	boolean	
+postfix	postfix/mynetworks	string	
+postfix	postfix/mailname	string	<%= @server_name %>
+postfix	postfix/tlsmgr_upgrade_warning	boolean	
+postfix	postfix/recipient_delim	string	
+postfix	postfix/main_mailer_type	select	Internet Site
+postfix	postfix/destinations	string	localhost, <%= @fqdn %>, <%= @hostname %>
+postfix	postfix/retry_upgrade_warning	boolean	
+postfix	postfix/kernel_version_warning	boolean	
+postfix	postfix/sqlite_warning	boolean	
+postfix	postfix/mailbox_limit	string	<%= @mailbox_limit %>
+postfix	postfix/relayhost	string	
+postfix	postfix/procmail	boolean	false
+postfix	postfix/protocols	select	all
+postfix	postfix/chattr	boolean	false

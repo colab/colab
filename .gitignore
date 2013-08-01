@@ -6,3 +6,4 @@ local_settings.py
 *.swp
 *.sqlite3
 .DS_Store
+.vagrant

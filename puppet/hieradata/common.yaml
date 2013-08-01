@@ -1,0 +1,6 @@
+---
+locale::locales: pt_BR pt_BR.UTF-8 en_US en_US.UTF-8
+
+timezone::timezone: America/Sao_Paulo
+
+postfix::admin_email: test@test.test
