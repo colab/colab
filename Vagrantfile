@@ -81,4 +81,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "init.pp"
   end
+
+  config.vm.provision :shell, :path => "puppet/colab-key.sh"
 end
