@@ -1,7 +1,13 @@
 class vim (
   $vim_file = 'puppet:///modules/vim/vimrc.local'
   ) {
-  
+
+  if ! defined(Package['vim']) {
+    package { 'vim':
+      ensure => installed
+    }
+  }
+
   file { 'editor_vim':
     path    => '/etc/profile.d/editor.sh',
     ensure  => present,
