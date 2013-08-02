@@ -128,7 +128,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'colab', 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
 
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
