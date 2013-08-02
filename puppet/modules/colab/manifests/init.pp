@@ -8,6 +8,7 @@ class colab {
   include timezone
   include postfix
 
+  include nginx
   include supervisor
   include colab::requirements
 
@@ -41,5 +42,13 @@ class colab {
     command   => '/home/colab/.virtualenvs/colab/bin/gunicorn_django colab/src/colab',
     directory => '/home/colab/',
     user      => 'colab',
+  }
+
+  nginx::config { 'nginx':
+    content => template('colab/nginx/extra_conf.erb'),
+  }
+
+  nginx::site { '000-colab':
+    content => template('colab/nginx/site_default.erb'),
   }
 }
