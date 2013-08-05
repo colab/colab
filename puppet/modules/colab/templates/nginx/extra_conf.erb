@@ -1,0 +1,8 @@
+add_header Vary Accept-Encoding;
+add_header Cache-control public;
+
+log_format proxy '$remote_addr $http_x_forwarded_for '
+                 '$remote_user [$time_local] "$request" '
+                 '$upstream_status "$http_referer" '
+                 'response_time: $upstream_response_time '
+                 'cache_status: $upstream_cache_status';

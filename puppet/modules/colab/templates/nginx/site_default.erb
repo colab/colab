@@ -1,0 +1,31 @@
+upstream django {
+    server 127.0.0.1:8000;
+}
+
+server {
+    listen 80 default_server;
+
+    root /;
+    server_name localhost colab.interlegis.leg.br colab.interlegis.gov.br;
+    
+    location @django {
+        proxy_hide_header Vary;
+        proxy_read_timeout 300s;
+        proxy_connect_timeout 300s;
+        proxy_pass_header Server;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Scheme $scheme;
+        proxy_pass http://django;
+        access_log /var/log/nginx/proxy-access.log proxy;
+    }
+
+    location / {
+        try_files /home/colab/colab/www$uri @django;
+    }
+    
+    location /static {
+      try_files /home/colab/colab/www$uri @django;
+    }
+}
