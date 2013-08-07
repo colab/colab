@@ -9,112 +9,126 @@ Colab, a Software for Communities
 =================================
 
 
-Installation
-============
+Installation (Development Environment)
+==========================================
 
-Installation instructions for Ubuntu 10.04
--------------------------------------------
+Here we'll cover how to setup a development environment using a Vagrant 
+virtual machine.
 
-* Install Apache2 with WSGI support:
+Before getting started you should install the following softwares:
 
-  * apt-get install apache2 libapache2-mod-wsgi
+* Vagrant (tested with version 1.2.7)
 
-* Install dependencies to compile psycopg2:
+* Virtualbox (version >= 4.0)
 
-  * apt-get build-dep python-psycopg2
+* fabric (tested with version 1.7.0)
 
-* Install Python PIP and update it:
-  
-  * apt-get install python-pip
-  * pip install -U pip
+* Git
 
-* Install python virtualenv:
-  
-  * pip install virtualenv 
 
-* Create a virtualenv for the deploy
+Getting started with the Virtual Machine
+------------------------------------------
+
+First you will need to clone the repository:
+
+.. code-block::
+
+  git clone git@github.com:interlegis/colab.git
+
+
+*NOTE:*
+
+  Here we are assuming you have ssh permissions to clone the repo using ssh. If not
+  fork it and clone your own fork (or use https instead of ssh).
+
+
+Enter in the repository you've just cloned.
+To start working all you need is to turn the virtual machine on with the command:
+
+.. code-block::
+
+  vagrant up
+
+
+*NOTE:*
+
+  BE PATIENT!
  
-  * mkdir /usr/local/django/
-  * virtualenv /usr/local/django/colab/
-
-* Download the colab src code:
-
-  * hg clone https://bitbucket.org/seocam/atu-colab /usr/local/src/colab/
-
-* Install the django site:
-
-  * pip install /usr/local/src/colab -E /usr/local/django/colab/
-
-* Configure your database settings in /usr/local/django/colab/lib/python2.6/site-packages/settings_local.py
-  
-* Enable the colab site on apache and reload it:
-
-  * ln -s /usr/local/django/colab/apache-site/colab /etc/apache2/sites-available
-  * a2ensite colab
-  * service apache2 restart
+  This will take a while. The `vagrant up` will download a full vm (virtualbox)
+  running a Ubuntu 12.04 64bits. After the vm is up and running the command
+  will also configure it (using puppet) and that will also take a bit.
   
 
-Configuring server to send emails
-----------------------------------
+Running Colab
+--------------
 
-* Install postfix and mailutils:
+Now that you have a vm running we have two options to run Colab:
+
+* Django development server (runserver)
  
-  * apt-get install mailutils postfix
-
-* Update the file /etc/aliases adding users that should receive root's messages and run the update command:
-
-  * newaliases
+* Gunicorn + supervisor + Nginx
 
 
-Cron job to import emails
----------------------------
+Django development server (runserver)
+++++++++++++++++++++++++++++++++++++++
 
-* Install sshfs:
+This option is advised for developers working in new features for Colab.
+The code used to run Colab will be the same code placed on your machine,
+that means that if you change the code in your own computer the code on
+the vm will also change.
+
+Make sure you have a ``local_settings.py`` file placed in your repository. It
+should be located in ``src/colab/``.
+
+To get started you can copy the example file as follow:
+
+.. code-block::
+
+  cp src/colab/local_settings-dev.py src/colab/local_settings.py 
+
+
+Now we are ready to run:
+
+.. code-block::
+
+  fab runserver
   
-  * apt-get install sshfs autofs
+
+*Note*
+
+  As this is the first time you run this command it will install all 
+  requirements from ``requirements.txt`` into a virtualenv. To update 
+  those requirements you should run ``fab runserver:update``. 
+
+
+The ``fab runserver`` command will open the django builtin development
+server on the port 7000 but due to vagrant magic you will be able to 
+access it on ``http://localhost:8000/``.
+
+
+Gunicorn + supervisor + Nginx
+++++++++++++++++++++++++++++++
+
+This option will run Colab in a way very similar to the production
+environment. This should be used to test puppet manifests and also 
+the configuration of each one of the services running.
+
+First of all we need to clone the repo and configure your ``local_settings.py``.
+That is done by calling the command:
+
+.. code-block::
+
+  fab install:path/to/your/local_settings.py
+
+
+Now you need to deploy the code using the command:
+
+.. code-block::
+
+  fab deploy
   
-* Create SSH keys. You should use a password but this tutorial won't cover it (if you use you will need to install and configure keychain process to be able to proceed):
 
-  * ssh-keygen
-  
-* Copy the content of your key (/root/.ssh/id_rsa.pub) to the file /root/.ssh/authorized_keys on the mailinglist server.
+For the next deploy you can just run ``fab deploy`` and in case your
+``requirements.txt`` changes ``fab deploy:update``.
 
-* Append the following content to /etc/auto.master file:
-
-  * /usr/local/django/colab/mnt /usr/local/django/colab/autofs/listas --timeout=600,--ghost
-
-* Restart autofs:
-
-  * service autofs restart
-  
-* Link cron script into /etc/cron.d/ folder:
-
-  * ln -s /usr/local/django/colab/cron.d/colab_import_emails /etc/cron.d/ 
-  
-* From now on the emails should be imported every minute
-
-
-Cron job to reindex Solr
--------------------------
-
-* Install wget:
-  
-  * apt-get install wget
-  
-* Link cron script into /etc/cron.d/ folder:
-  
-  * ln -s /usr/local/django/colab/cron.d/colab_solr_reindex /etc/cron.d/
-  
-* From now on delta reindex should run every 10 minutes and full reindex once a day. 
-
-
-Updating an installed version
-------------------------------
-
-* Update the source code:
-  
-  * cd /usr/local/src/colab/
-  * hg pull
-  * hg up
-  * pip install /usr/local/src/colab/ -E /usr/local/django/colab/ -U
-  * service apache2 restart
+The deployed code will be accessible on ``http://localhost:8080``.
