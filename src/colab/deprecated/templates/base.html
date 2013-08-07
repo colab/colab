@@ -4,6 +4,14 @@
 
     <!-- Framework CSS -->
 
+    <link rel="stylesheet" href="{{ STATIC_URL }}third-party/dist/css/bootstrap.css" type="text/css" media="screen, projection" />
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}third-party/converse.js/converse.css" type="text/css" media="screen, projection" />
+
+    <script data-main="{{ STATIC_URL }}third-party/dist/css/bootstrap.js" src="{{ STATIC_URL }}third-party/converse.js/Libraries/require-jquery.js"></script>
+
+    <script data-main="{{ STATIC_URL }}third-party/converse.js/main" src="{{ STATIC_URL }}third-party/converse.js/Libraries/require-jquery.js"></script>
+
     {% block head_js %}
     {% endblock %}
     {% block head_css %}
