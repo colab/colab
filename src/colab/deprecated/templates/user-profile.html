@@ -8,7 +8,7 @@
 
 {% block main-content %}
   {% if not user_profile %}
-    <span class="notice span-24">
+    <span>
       <b>{% trans "User not registered." %}</b> {% trans "Is that you?" %}
       <a href="{% url 'signup' %}">{% trans "Click here and sign up." %}</a>
     </span>
@@ -16,7 +16,7 @@
   {% else %}
 
     {% ifequal request.user.username user_profile.user.username %}
-      <span class="success span-24">
+      <span>
         {% trans "Hey, look at you! Do you want to " %}
         <a href="{% url 'user_profile_update' request.user %}">{% trans "update your profile" %}</a>?
       </span>
@@ -24,21 +24,21 @@
 
   {% endif %}
 
-  <div id="user-profile">
+  <div>
     <h2>{{ email_address.get_full_name }}</h2>
 
-    <div class="span-4">
+    <div>
       <img class="avatar" width="120px" heigth="120px"
            src="http://www.gravatar.com/avatar/{{ email_address.md5 }}?s=120&d=identicon" />
     </div>
 
-    <div class="span-20 last">
-      <div class="span-10">
+    <div>
+      <div>
         <form action="{% url 'user_profile_update' request.user %}" method='post'>
           {% csrf_token %}
 
           <h3>{% trans "Personal Information" %}</h3>
-          <ul id="user-info">
+          <ul>
             <li>
               {{ form.username.label_tag }}: {{ user_profile.user.username }}
               {% ifequal request.user.username user_profile.user.username %}
@@ -53,7 +53,7 @@
             </li>
           </ul>
 
-          <hr class="space" />
+          <hr />
 
           <h3>{% trans "Other informations" %}</h3>
           <ul>
@@ -71,28 +71,28 @@
             </li>
           </ul>
 
-          <hr class="space"/>
+          <hr />
           {% if editable %}
-            <span class="span-5">
-              <input class="right" type="submit" value="{% trans 'Save' %}"/>
+            <span>
+              <input type="submit" value="{% trans 'Save' %}"/>
             </span>
           {% endif %}
         </form>
       </div>
 
       {% if type_count %}
-      <div class="span-10 last">
-        <h3 class="center">{% trans "Collaborations by Area" %}</h3>
-        <div id="collabs"></div>
+      <div>
+        <h3>{% trans "Collaborations by Area" %}</h3>
+        <div></div>
       </div>
       {% endif %}
     </div>
 
-    <hr class="space" />
+    <hr />
 
-    <div class="span-13">
+    <div>
       <h3>{% trans "Latest posted" %} </h3>
-      <ul class="colborder">
+      <ul>
       {% for doc in emails %}
         {% include "message-preview.html" %}
       {% empty %}
@@ -101,7 +101,7 @@
       </ul>
     </div>
 
-    <div class="span-11 last">
+    <div>
       <h3>{% trans "Community inside participations" %}</h3>
       <ul>
       {% for doc in docs %}
