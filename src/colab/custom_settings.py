@@ -85,6 +85,10 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': False,
         },
+        'django_browserid': {
+            'handlers': ['sentry', 'console'],
+            'level': 'DEBUG',
+        }
     }
 }
 
