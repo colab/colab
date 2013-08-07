@@ -22,3 +22,6 @@ grab
 # Deps for sentry client (raven)
 raven
 tornado
+
+# Persona
+django-browserid

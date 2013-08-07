@@ -21,6 +21,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'raven.contrib.django.raven_compat',
     'south',
     'cliauth',
+    'django_browserid',
 
     # Own apps
     'super_archives',
@@ -109,6 +110,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
+    'django_browserid.context_processors.browserid',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -120,6 +122,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+# Add the django_browserid authentication backend.
+AUTHENTICATION_BACKENDS = (
+   'django_browserid.auth.BrowserIDBackend',
+)
+
+
 
 SOCKS_SERVER = None
 SOCKS_PORT = None
