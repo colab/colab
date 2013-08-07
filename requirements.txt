@@ -1,4 +1,5 @@
-https://www.djangoproject.com/download/1.6b1/tarball/
+#https://www.djangoproject.com/download/1.6b1/tarball/
+Django==1.5
 South==0.8.1
 psycopg2==2.5.1
 django-piston==0.2.3
