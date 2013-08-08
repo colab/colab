@@ -20,8 +20,8 @@
   <div class="row">
     <div class="col-lg-6">
       <h3>
-        <span class="col-lg-11">{% trans "Latest collaborations" %}</span>
-        <a class="col-lg-1" target="_blank"
+        <span>{% trans "Latest collaborations" %}</span>
+        <a class="pull-right" target="_blank"
           href="{% url 'rss_latest_colab' %}" 
           title="{% trans 'RSS - Latest collaborations' %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
@@ -31,8 +31,7 @@
           {% include "message-preview.html" %}
         {% endfor %}
       </ul>
-      <hr />
-      <a class="col-lg-8 col-lg-offset-4 text-right"
+      <a class="pull-right"
          href="{% url 'search' %}?o=modified+desc">
         {% trans "View more collaborations..." %}
       </a>
@@ -49,8 +48,8 @@
   <div class="row">
     <div class="col-lg-6">
       <h3>
-        <span class="col-lg-11">{% trans "Discussions Most Relevance" %}</span>
-        <a class="col-lg-1" target="_blank"
+        <span>{% trans "Discussions Most Relevance" %}</span>
+        <a class="pull-right" target="_blank"
             href="{% url 'rss_hottest_threads' %}" 
             title="{% trans "RSS - Discussions Most Relevance" %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
@@ -60,8 +59,7 @@
           {% include "message-preview.html" with doc=thread.latest_message %}
         {% endfor %}
       </ul>
-      <hr />
-      <a class="col-lg-8 col-lg-offset-4 text-right"
+      <a class="pull-right"
          href="{% url 'thread_list' %}?order=hottest">
         {% trans "View more discussions relevance..." %}
       </a>
@@ -69,8 +67,8 @@
    
     <div class="col-lg-6">
       <h3>
-        <span class="col-lg-11">{% trans "Latest Discussions" %}</span>
-        <a class="col-lg-1" target="_blank"
+        <span>{% trans "Latest Discussions" %}</span>
+        <a class="pull-right" target="_blank"
            href="{% url 'rss_latest_threads' %}" 
            title="{% trans "RSS - Latest Discussions" %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
@@ -80,9 +78,7 @@
           {% include "message-preview.html" with doc=thread.latest_message %}
         {% endfor %}
       </ul>
-      <hr />
-      <a class="col-lg-8 col-lg-offset-4 text-right"
-         href="{% url 'thread_list' %}">
+      <a class="pull-right" href="{% url 'thread_list' %}">
         {% trans "View more discussions..." %}
       </a>
     </div>

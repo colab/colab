@@ -40,30 +40,28 @@
   <body>
   <div class="container">
     <div class="row">
-      <div class="col-lg-12">
-        {% if not user.is_authenticated %}
-        <span class="col-lg-2 col-lg-offset-9 text-right">
-          <a href="{% url 'signup' %}">{% trans "Sign up" %}</a>
-        </span>
-        <span class="col-lg-1 text-center">
-          <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Login" %}</a>
-        </span>
-        {% else %}
-        <span class="col-lg-10 text-right">
-          {% trans "authenticated as" %} <b>{{ user.username }}</b>
-        </span>
-        <span class="col-lg-1 text-center">
-          <a href="{% url 'user_profile' user.username %}">
-            {% trans "My Profile" %}
-          </a>
-        </span>
-        <span class="col-lg-1 text-center">
-          <a href="{% url 'logout' %}">
-            {% trans "Logout" %}
-          </a>
-        </span>
-        {% endif %}
+     {% if not user.is_authenticated %}
+      <div class="col-lg-2 col-lg-offset-9 text-right">
+        <a href="{% url 'signup' %}">{% trans "Sign up" %}</a>
       </div>
+      <div class="col-lg-1 text-center">
+        <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Login" %}</a>
+      </div>
+      {% else %}
+      <div class="col-lg-10 text-right">
+        {% trans "authenticated as" %} <b>{{ user.username }}</b>
+      </div>
+      <div class="col-lg-1 text-center">
+        <a href="{% url 'user_profile' user.username %}">
+          {% trans "My Profile" %}
+        </a>
+      </div>
+      <div class="col-lg-1 text-center">
+        <a href="{% url 'logout' %}">
+          {% trans "Logout" %}
+        </a>
+      </div>
+        {% endif %}
     </div>
 
       {% block header %}
@@ -73,7 +71,7 @@
         </h1>
       {% endblock %}
 
-      <div class="row vertical-center">
+      <div id="header-menu" class="row">
 
         <span class="col-lg-1 text-center">
           <a href="{% url 'thread_list' %}">{% trans "Discussions" %}</a>
@@ -95,14 +93,14 @@
 
         <span class="col-lg-4 col-lg-offset-2 text-right">
           <form action="/search/" method="GET">
-            <input name="q" class="col-lg-9" value="{{ request.GET.q }}"
+            <input name="q" id="header-searchbox" value="{{ request.GET.q }}"
                    type="text" placeholder="{% trans 'Search here...' %}" />
             <input type="submit" value="{% trans 'Search' %}"></input>
           </form>
         </span>
       </div>
 
-    <hr/>
+    <hr id="header-hr"/>
 
     <div>
       {% block main-content %} {% endblock %}
