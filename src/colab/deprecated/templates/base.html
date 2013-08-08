@@ -80,7 +80,7 @@
         <span class="colborder">
           <a href="{% url 'signup' %}">{% trans "Register" %}</a>
         </span>
-        {% browserid_login text='Login' %}
+        {% browserid_login text='Login' next=request.path %}
         {% else %}
         <span class="colborder">
           {% trans "authenticated as" %} <b>{{ user.email }}</b>
