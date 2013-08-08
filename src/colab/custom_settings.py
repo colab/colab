@@ -129,19 +129,18 @@ MIDDLEWARE_CLASSES = (
 
 # Add the django_browserid authentication backend.
 AUTHENTICATION_BACKENDS = (
-   'django_browserid.auth.BrowserIDBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'accounts.auth.ColabBrowserIDBackend',
 )
-
-
-
-SOCKS_SERVER = None
-SOCKS_PORT = None
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'colab', 'static'),
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
+
+SOCKS_SERVER = None
+SOCKS_PORT = None
 
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
