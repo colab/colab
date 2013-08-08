@@ -6,74 +6,86 @@
 {% endblock %}
 
 {% block header %}
-  <div id="header-logo" class="span-24">
-    <img class="center" src="{{ STATIC_URL }}img/logo.png" />
+  <div class="row">
+    <div class="col-lg-2 col-lg-offset-5">
+      <img class="text-center" src="{{ STATIC_URL }}img/logo.png" />
+    </div>
   </div>
 
-  <hr class="space"/>
-
-  <h2 class="span-24 center">{% trans "INTERLEGIS COMMUNITIES" %}</h2>
+  <h3 class="text-center"><strong>{% trans "INTERLEGIS COMMUNITIES" %}</strong></h3>
 {% endblock %}
 
 {% block main-content %}
 
-  <div class="span-12 colborder">
-    <h3>{% trans "Latest collaborations" %}<a class="rss" target="_blank" 
-        href="{% url 'rss_latest_colab' %}" 
-        title="{% trans 'RSS - Latest collaborations' %}">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>
+        <span class="col-lg-11">{% trans "Latest collaborations" %}</span>
+        <a class="col-lg-1" target="_blank"
+          href="{% url 'rss_latest_colab' %}" 
+          title="{% trans 'RSS - Latest collaborations' %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
-    </h3>
-    <ul>
-      {% for doc in latest_docs %}
-        {% include "message-preview.html" %}
-      {% endfor %}
-    </ul>
-    <hr class="space"/>
-    <a class="right" href="{% url 'search' %}?o=modified+desc">
-      {% trans "View more collaborations..." %}
-    </a>
+      </h3>
+      <ul>
+        {% for doc in latest_docs %}
+          {% include "message-preview.html" %}
+        {% endfor %}
+      </ul>
+      <hr />
+      <a class="col-lg-8 col-lg-offset-4 text-right"
+         href="{% url 'search' %}?o=modified+desc">
+        {% trans "View more collaborations..." %}
+      </a>
+    </div>
+   
+    <div class="col-lg-6">
+      <h3>{% trans "Distribution of Collaborations" %}</h3>
+      <div></div>
+    </div>
   </div>
 
-  <div class="span-11 last">
-    <h3>{% trans "Distribution of Collaborations" %}</h3>
-    <div id="collabs"></div>
-  </div>
+  <hr />
 
-  <hr class="space"/>
-  <hr/>
-
-  <div class="span-12 colborder">
-    <h3>{% trans "Discussions Most Relevance" %}<a class="rss" target="_blank" 
-        href="{% url 'rss_hottest_threads' %}" 
-        title="{% trans "RSS - Discussions Most Relevance" %}">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3>
+        <span class="col-lg-11">{% trans "Discussions Most Relevance" %}</span>
+        <a class="col-lg-1" target="_blank"
+            href="{% url 'rss_hottest_threads' %}" 
+            title="{% trans "RSS - Discussions Most Relevance" %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
-    </h3>
-    <ul>
-      {% for thread in hottest_threads %}
-        {% include "message-preview.html" with doc=thread.latest_message %}
-      {% endfor %}
-    </ul>
-    <hr class="space"/>
-    <a class="right" href="{% url 'thread_list' %}?order=hottest">
-      {% trans "View more discussions relevance..." %}
-    </a>
-  </div>
-
-  <div class="span-11 last">
-    <h3>{% trans "Latest Discussions" %}<a class="rss" target="_blank" 
-        href="{% url 'rss_latest_threads' %}" 
-        title="{% trans "RSS - Latest Discussions" %}">
+      </h3>
+      <ul>
+        {% for thread in hottest_threads %}
+          {% include "message-preview.html" with doc=thread.latest_message %}
+        {% endfor %}
+      </ul>
+      <hr />
+      <a class="col-lg-8 col-lg-offset-4 text-right"
+         href="{% url 'thread_list' %}?order=hottest">
+        {% trans "View more discussions relevance..." %}
+      </a>
+    </div>
+   
+    <div class="col-lg-6">
+      <h3>
+        <span class="col-lg-11">{% trans "Latest Discussions" %}</span>
+        <a class="col-lg-1" target="_blank"
+           href="{% url 'rss_latest_threads' %}" 
+           title="{% trans "RSS - Latest Discussions" %}">
         <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
-    </h3>
-    <ul>
-      {% for thread in latest_threads %}
-        {% include "message-preview.html" with doc=thread.latest_message %}
-      {% endfor %}
-    </ul>
-    <hr class="space"/>
-    <a class="right" href="{% url 'thread_list' %}">
-      {% trans "View more discussions..." %}
-    </a>
+      </h3>
+      <ul>
+        {% for thread in latest_threads %}
+          {% include "message-preview.html" with doc=thread.latest_message %}
+        {% endfor %}
+      </ul>
+      <hr />
+      <a class="col-lg-8 col-lg-offset-4 text-right"
+         href="{% url 'thread_list' %}">
+        {% trans "View more discussions..." %}
+      </a>
+    </div>
   </div>
 
 {% endblock %}
