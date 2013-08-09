@@ -10,3 +10,5 @@ if [ "$PUPPET_VERSION" != '3.2.3-1puppetlabs1' ] ; then
 fi
 
 cp /vagrant/puppet/hiera.yaml /etc/puppet/hiera.yaml -f
+
+update-locale LC_ALL=''
