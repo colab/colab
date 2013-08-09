@@ -35,13 +35,12 @@ class EmailAddress(models.Model):
     def get_full_name(self):
         if self.user and self.user.get_full_name():
             return self.user.get_full_name()
-        elif self.user and self.username:
-            return self.username
         elif self.real_name:
             return self.real_name
             
     def get_profile_link(self):
         if self.user:
+            # TODO: stop using username in url
             return reverse('user_profile', args=[self.user.username])
         else:
             return reverse('colab.deprecated.views.userprofile.by_emailhash',
@@ -67,7 +66,7 @@ class UserProfile(models.Model):
         verbose_name_plural = _(u"Users Profiles")
     
     def __unicode__(self):
-        return '%s (%s)' % (self.user.get_full_name(), self.user.username)
+        return '"%s" <%s>' % (self.get_full_name(), self.email)
 
 # This does the same the same than related_name argument but it also creates
 #   a profile in the case it doesn't exist yet. 
@@ -90,7 +89,7 @@ class MailingListMembership(models.Model):
     mailinglist = models.ForeignKey(MailingList)
 
     def __unicode__(self):
-        return '%s on %s' % (self.user.username, self.mailinglist.name)
+        return '%s on %s' % (self.user.email, self.mailinglist.name)
 
 
 class Thread(models.Model):
