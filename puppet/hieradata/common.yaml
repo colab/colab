@@ -1,5 +1,7 @@
 ---
-locale::locales: pt_BR pt_BR.UTF-8 en_US en_US.UTF-8
+locale::locales: pt_BR.UTF-8 en_US.UTF-8
+locale::lang: pt_BR.UTF-8
+locale::language: pt_BR
 
 timezone::timezone: America/Sao_Paulo
 
