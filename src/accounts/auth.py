@@ -6,5 +6,4 @@ class ColabBrowserIDBackend(BrowserIDBackend):
         return self.User.objects.filter(emails__address=email)
 
     def authenticate(self, *args, **kw):
-        #import pdb; pdb.set_trace();
         return super(ColabBrowserIDBackend, self).authenticate(*args, **kw)

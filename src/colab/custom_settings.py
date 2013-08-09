@@ -49,11 +49,17 @@ LOGGING = {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
         },
     },
+    'filters': {
+         'require_debug_false': {
+             '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
     'handlers': {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             'include_html': True,
+            'filters': ['require_debug_false'],
         },
         'sentry': {
             'level': 'ERROR',
@@ -96,16 +102,6 @@ LOGGING = {
 SERVER_EMAIL = '"Colab Interlegis" <noreply@interlegis.leg.br>'
 EMAIL_HOST_USER = SERVER_EMAIL
 
-#SOLR_HOSTNAME = 'solr.interlegis.leg.br'
-SOLR_HOSTNAME = '10.1.2.154'
-SOLR_PORT = '8080'
-SOLR_SELECT_PATH = '/solr/select'
-
-SOLR_COLAB_URI = 'http://colab.interlegis.leg.br'
-SOLR_BASE_QUERY = """
-    ((Type:changeset OR Type:ticket OR Type:wiki OR Type:thread) AND Title:["" TO *])
-"""
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -140,13 +136,39 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
 
+
+### Proxy configuration
 SOCKS_SERVER = None
 SOCKS_PORT = None
 
+
+### Feedzilla  (planet)
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
 FEEDZILLA_SITE_TITLE = gettext(u'Planet Colab')
 FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
+
+
+### BrowserID / Persona
+SITE_URL = 'http://colab.interlegis.leg.br'
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL_FAILURE = '/'
+LOGOUT_REDIRECT_URL = '/'
+BROWSERID_CREATE_USER = False
+
+
+### Apache Solr
+#SOLR_HOSTNAME = 'solr.interlegis.leg.br'
+SOLR_HOSTNAME = '10.1.2.154'
+SOLR_PORT = '8080'
+SOLR_SELECT_PATH = '/solr/select'
+
+SOLR_COLAB_URI = 'http://colab.interlegis.leg.br'
+SOLR_BASE_QUERY = """
+    ((Type:changeset OR Type:ticket OR Type:wiki OR Type:thread) AND Title:["" TO *])
+"""
+
 
 try:
     from local_settings import *
