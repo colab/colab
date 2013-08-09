@@ -14,7 +14,6 @@ from .validators import UniqueValidator
 #   the hack below. Feel free to improve it! :)
 
 # User fields
-username_field = UserCreationForm_().fields.get(u'username')
 first_name_field = forms.CharField(max_length=30, label=_(u'Name'))
 last_name_field = forms.CharField(max_length=30, label=_(u'Last name'))
 email_field = forms.EmailField(validators=[UniqueValidator(User, 'email')])
@@ -56,8 +55,6 @@ class UserCreationForm(UserCreationForm_):
 
     
 class UserUpdateForm(forms.Form):
-    username = username_field
-    username.required = False
     institution = institution_field
     role = role_field
     twitter = twitter_field
