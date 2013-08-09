@@ -12,21 +12,21 @@
     </div>
   </div>
 
-  <h3 class="text-center"><strong>{% trans "INTERLEGIS COMMUNITIES" %}</strong></h3>
+  <h3 class="text-center">{% trans "INTERLEGIS COMMUNITIES" %}</h3>
 {% endblock %}
 
 {% block main-content %}
 
   <div class="row">
     <div class="col-lg-6">
-      <h3>
-        <span>{% trans "Latest collaborations" %}</span>
-        <a class="pull-right" target="_blank"
-          href="{% url 'rss_latest_colab' %}" 
-          title="{% trans 'RSS - Latest collaborations' %}">
-          <div class="rss-icon"></div>
-        </a>
+      <h3 class="column-title">
+        {% trans "Latest collaborations" %}
       </h3>
+      <a class="pull-right" target="_blank"
+         href="{% url 'rss_latest_colab' %}"
+         title="{% trans 'RSS - Latest collaborations' %}">
+         <div class="rss-icon"></div>
+      </a>
       <ul>
         {% for doc in latest_docs %}
           {% include "message-preview.html" %}
@@ -37,9 +37,9 @@
         {% trans "View more collaborations..." %}
       </a>
     </div>
-   
+
     <div class="col-lg-6">
-      <h3>{% trans "Distribution of Collaborations" %}</h3>
+      <h3 class="column-title">{% trans "Distribution of Collaborations" %}</h3>
       <div></div>
     </div>
   </div>
@@ -48,14 +48,14 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <h3>
-        <span>{% trans "Discussions Most Relevance" %}</span>
-        <a class="pull-right" target="_blank"
-            href="{% url 'rss_hottest_threads' %}" 
-            title="{% trans "RSS - Discussions Most Relevance" %}">
-          <div class="rss-icon"></div>
-        </a>
+      <h3 class="column-title">
+        {% trans "Discussions Most Relevance" %}
       </h3>
+      <a class="pull-right" target="_blank"
+         href="{% url 'rss_hottest_threads' %}"
+         title="{% trans "RSS - Discussions Most Relevance" %}">
+         <div class="rss-icon"></div>
+      </a>
       <ul>
         {% for thread in hottest_threads %}
           {% include "message-preview.html" with doc=thread.latest_message %}
@@ -66,16 +66,16 @@
         {% trans "View more discussions relevance..." %}
       </a>
     </div>
-   
+
     <div class="col-lg-6">
-      <h3>
-        <span>{% trans "Latest Discussions" %}</span>
-        <a class="pull-right" target="_blank"
-           href="{% url 'rss_latest_threads' %}" 
-           title="{% trans "RSS - Latest Discussions" %}">
-          <div class="rss-icon"></div>
-        </a>
+      <h3 class="column-title">
+        {% trans "Latest Discussions" %}
       </h3>
+      <a class="pull-right" target="_blank"
+         href="{% url 'rss_latest_threads' %}"
+         title="{% trans "RSS - Latest Discussions" %}">
+         <div class="rss-icon"></div>
+      </a>
       <ul>
         {% for thread in latest_threads %}
           {% include "message-preview.html" with doc=thread.latest_message %}
