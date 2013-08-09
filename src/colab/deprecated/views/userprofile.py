@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 
 from colab.deprecated import solrutils
-from super_archives.forms import UserCreationForm, UserUpdateForm
+from accounts.forms import UserCreationForm, UserUpdateForm
 from super_archives.models import Message, UserProfile, EmailAddress
 
 

@@ -19,34 +19,14 @@ def send_verification_email(request, user):
         'server_name': request.get_host(),
     }
 
-    html_content = render_to_string('email_signup-email-confirmation.html', 
-                                     email_data)
-    text_content = strip_tags(html_content)
-    email_msg = EmailMultiAlternatives(subject, text_content, from_, [to])
-    email_msg.attach_alternative(html_content, 'text/html')
-    email_msg.send()
-
-
-def send_reset_password_email(request, user):
-
-    subject = _(u'Password change of Colab Interlegis')
-    from_ = settings.SERVER_EMAIL
-    to = user.email
-    
-    email_data = {
-        'hash': user.profile.verification_hash,
-        'server_name': request.get_host(),
-        'username': user.username,
-    }
-    
-    html_content = render_to_string('email_account-reset-password.html', 
+    html_content = render_to_string('accounts/email_signup-email-confirmation.html',
                                     email_data)
     text_content = strip_tags(html_content)
-    
     email_msg = EmailMultiAlternatives(subject, text_content, from_, [to])
     email_msg.attach_alternative(html_content, 'text/html')
     email_msg.send()
-    
+
+
 def send_email_lists(user, mailing_lists):
     subject = _(u'Registration on the mailing list')
     from_ = user.email

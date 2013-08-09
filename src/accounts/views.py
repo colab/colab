@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
 
-from super_archives.forms import UserCreationForm
+from .forms import UserCreationForm
 from super_archives.models import UserProfile, EmailAddress
 
 

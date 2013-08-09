@@ -66,7 +66,7 @@ class UserProfile(models.Model):
         verbose_name_plural = _(u"Users Profiles")
     
     def __unicode__(self):
-        return '"%s" <%s>' % (self.get_full_name(), self.email)
+        return '"%s" <%s>' % (self.user.get_full_name(), self.user.email)
 
 # This does the same the same than related_name argument but it also creates
 #   a profile in the case it doesn't exist yet. 
