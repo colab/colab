@@ -1,5 +1,4 @@
 /* Header */
-
 #header-searchbox {
     width: 290px;
 }
@@ -11,6 +10,8 @@
 #header-hr{
     margin-top: 0;
 }
+/* End of Header */
+
 
 /* From message-preview.html*/
 .quiet {
@@ -77,4 +78,11 @@
 
 .subject img {
     margin-right: 5px;
+}
+/* End of message-preview.html */
+
+.rss-icon{
+    background-image: url(../img/rss.png);
+    width: 16px;
+    height: 16px;
 }

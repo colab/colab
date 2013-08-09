@@ -24,7 +24,8 @@
         <a class="pull-right" target="_blank"
           href="{% url 'rss_latest_colab' %}" 
           title="{% trans 'RSS - Latest collaborations' %}">
-        <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
+          <div class="rss-icon"></div>
+        </a>
       </h3>
       <ul>
         {% for doc in latest_docs %}
@@ -52,7 +53,8 @@
         <a class="pull-right" target="_blank"
             href="{% url 'rss_hottest_threads' %}" 
             title="{% trans "RSS - Discussions Most Relevance" %}">
-        <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
+          <div class="rss-icon"></div>
+        </a>
       </h3>
       <ul>
         {% for thread in hottest_threads %}
@@ -71,7 +73,8 @@
         <a class="pull-right" target="_blank"
            href="{% url 'rss_latest_threads' %}" 
            title="{% trans "RSS - Latest Discussions" %}">
-        <img src="{{ STATIC_URL }}img/rss.png" alt="{% trans 'RSS' %}"/></a>
+          <div class="rss-icon"></div>
+        </a>
       </h3>
       <ul>
         {% for thread in latest_threads %}
