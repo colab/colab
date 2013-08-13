@@ -87,9 +87,15 @@
     height: 16px;
 }
 
-.column-title{
+.column-align{
     display: inline-block;
     margin-left: 20px;
     margin-top: 0;
+    margin-bottom: 10px;
     vertical-align: middle;
+}
+
+.container{
+    /* Overwritting max-width for better web responsive */
+    max-width: 95% !important;
 }
