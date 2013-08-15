@@ -99,3 +99,39 @@
     /* Overwritting max-width for better web responsive */
     max-width: 95% !important;
 }
+
+/* Forms */ 
+.required label:before {
+    color: #f00;
+    content: "* ";
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 300px;
+    padding: 3px;
+}
+/* End Forms */
+
+/* Changing Bootstrap*/
+fieldset>legend {
+    display:block;
+    font-weight:bold;
+    font-size:1.2em;
+    margin-top:-0.2em;
+    margin-bottom:0em;
+    border: none;
+}
+
+.well {
+    background:#e5eCf9 !important;
+}
+
+.col-lg-6 .well{
+    max-width:570px;
+}
+
+.col-lg-3 .well{
+    max-width:285px;
+}
+/* End changes */

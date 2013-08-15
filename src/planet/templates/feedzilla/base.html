@@ -6,25 +6,21 @@
     <h2>{% trans 'Planet' %}</h2>
     <hr/>
 
-    <div>
-      {% block feedzilla_content %}{% endblock %}
-    </div>
-
     <div class="row">
-      <div class="well col-lg-2">
-        <a href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="well col-lg-2">
-        <h3>{% trans 'Tags' %}</h3>
-        {% feedzilla_tag_cloud %}
-      </div>
-    </div>
-    <div class="row">
-      <div class="well col-lg-2">
-        <h3>{% trans 'Source Blogs' %}</h3>
-        {% feedzilla_donor_list %}
+        {% block feedzilla_content %}{% endblock %}
+  
+      <div class="col-lg-3">
+        <div class="well">
+          <a href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
+        </div>
+        <div class="well">
+          <h3>{% trans 'Tags' %}</h3>
+          {% feedzilla_tag_cloud %}
+        </div>
+        <div class="well">
+          <h3>{% trans 'Source Blogs' %}</h3>
+          {% feedzilla_donor_list %}
+        </div>
       </div>
     </div>
 {% endblock %}
