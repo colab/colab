@@ -7,7 +7,7 @@
     line-height: 33px;
 }
 
-#header-hr{
+#header-hr {
     margin-top: 0;
 }
 /* End of Header */
@@ -81,21 +81,7 @@
 }
 /* End of message-preview.html */
 
-.rss-icon{
-    background-image: url(../img/rss.png);
-    width: 16px;
-    height: 16px;
-}
-
-.column-align{
-    display: inline-block;
-    margin-left: 20px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    vertical-align: middle;
-}
-
-.container{
+.container {
     /* Overwritting max-width for better web responsive */
     max-width: 95% !important;
 }
@@ -127,11 +113,31 @@ fieldset>legend {
     background:#e5eCf9 !important;
 }
 
-.col-lg-6 .well{
+.col-lg-6 .well{ 
     max-width:570px;
 }
 
-.col-lg-3 .well{
+.col-lg-3 .well {
     max-width:285px;
 }
 /* End changes */
+
+.rss-icon {
+    background-image: url(../img/rss.png);
+    width: 16px;
+    height: 16px;
+}
+
+.column-align {
+    display: inline-block;
+    margin-left: 20px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    vertical-align: middle;
+}
+
+ul.none {
+    list-style-type:none;
+    padding:3px 0;
+    margin:10px 0;
+}
