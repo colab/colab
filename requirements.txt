@@ -23,5 +23,6 @@ grab
 raven
 tornado
 
-# Persona
+# Deps for Single SignOn (SSO)
 django-browserid
+git+https://github.com/TracyWebTech/django-revproxy/
