@@ -169,6 +169,9 @@ SOLR_BASE_QUERY = """
     ((Type:changeset OR Type:ticket OR Type:wiki OR Type:thread) AND Title:["" TO *])
 """
 
+COLAB_TRAC_URL = 'http://colab-backend.interlegis.leg.br/'
+
+REVPROXY_ADD_REMOTE_USER = True
 
 try:
     from local_settings import *
