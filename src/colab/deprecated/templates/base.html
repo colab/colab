@@ -1,16 +1,22 @@
+<!DOCTYPE html>
 {% load i18n %}
 <html>
   <head>
 
     <!-- Framework CSS -->
 
+
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/dist/css/bootstrap.css" type="text/css" media="screen, projection" />
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}third-party/dist/css/bootstrap-glyphicons.css" type="text/css" media="screen, projection" />
 
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/converse.js/converse.css" type="text/css" media="screen, projection" />
 
     <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css" type="text/css" media="screen, projection" />
 
-    <script src="{{ STATIC_URL }}third-party/dist/css/bootstrap.js"></script>
+    <script src="{{ STATIC_URL }}third-party/jquery/jquery-2.0.3.min.js"></script>
+
+    <script src="{{ STATIC_URL }}third-party/dist/js/bootstrap.js"></script>
 
     <script data-main="{{ STATIC_URL }}third-party/converse.js/main" src="{{ STATIC_URL }}third-party/converse.js/Libraries/require-jquery.js"></script>
 
@@ -106,7 +112,7 @@
       {% block main-content %} {% endblock %}
     </div>
 
-    <div class="row">&nbsp</div>
+    <div class="row">&nbsp;</div>
 
     <div class="row">
       {% block footer %}

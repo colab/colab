@@ -2,66 +2,68 @@
 {% load i18n %}
 {% load append_to_get %}
 {% block main-content %}
-<div id="message-list">
-  <h2 class="span-5">{% trans "Discussions" %}</h2>
+<div>
+  <h2>{% trans "Discussions" %}</h2>
   <hr/>
-  
-  <div class="span-5 border filters">
-    <h3>{% trans "Filters" %}</h3>
-    
-    <h4>{% trans "Sort by" %}</h4>
-    <ul>
-      <li {% ifequal order_by "hottest" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
-        <a href="{% ifequal order_by "hottest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hottest',p=1 %} {% endifequal %}">
-          {% trans "Relevance" %}</a></li>
-      <li {% ifequal order_by "latest" %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
-        <a href="{% ifequal order_by "latest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='latest',p=1 %} {% endifequal %}">
-          {% trans "Recent activity" %}</a></li>
-    </ul>
-    
-    <hr class="space" />
-    
-    <h4>{% trans "Lists" %}</h4>
-    <ul>
-      {% for list in lists %}
-        <li {% ifequal list.name selected_list %} class="selected" title="{% trans "Remove filter" %}" {% endifequal %}>
-          <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
-          {% endifnotequal %}">{{ list.name }}</a></li>
-      {% endfor %}
-    </ul>
-  </div>
-  
-  <div class="span-17 prepend-1 last">
-    <ul>
-      {% for thread in threads.object_list %}
-        {% include "message-preview.html" with doc=thread.latest_message %}
-      {% empty %}
-        <br/><br/>
-        <span class="span-18 center large">
-          <b>{% trans "No discussion found" %}</b>
-        </span>
-      {% endfor %}
-    </ul>
-    <hr class="space"/>
-    
-    {% if n_results %}
-    <div class="pagination center">
-      <span class="step-links">
-        {% if threads.has_previous %}
-          <a href="{% append_to_get p=threads.previous_page_number %}">{% trans "Previous" %}</a>
-        {% endif %}
 
-        <span class="current">
-          {% trans "Page" %} {{ threads.number }} {% trans "of" %} {{ threads.paginator.num_pages }}
-        </span>
+  <div class="row">
+    <div class="col-lg-2">
+      <h3>{% trans "Filters" %}</h3>
 
-        {% if threads.has_next %}
-          <a href="{% append_to_get p=threads.next_page_number %}">{% trans "Next" %}</a>
-        {% endif %}
-      </span>
+      <h4>{% trans "Sort by" %}</h4>
+      <ul>
+        <li {% ifequal order_by "hottest" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+          <a href="{% ifequal order_by "hottest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hottest',p=1 %} {% endifequal %}">
+            {% trans "Relevance" %}</a></li>
+        <li {% ifequal order_by "latest" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+          <a href="{% ifequal order_by "latest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='latest',p=1 %} {% endifequal %}">
+            {% trans "Recent activity" %}</a></li>
+      </ul>
+
+      <div class="row">&nbsp;</div>
+
+      <h4>{% trans "Lists" %}</h4>
+      <ul>
+        {% for list in lists %}
+          <li {% ifequal list.name selected_list %} title="{% trans "Remove filter" %}" {% endifequal %}>
+            <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
+            {% endifnotequal %}">{{ list.name }}</a></li>
+        {% endfor %}
+      </ul>
     </div>
-    {% endif %}
-    
+
+    <div class="col-lg-10 last">
+      <ul>
+        {% for thread in threads.object_list %}
+          {% include "message-preview.html" with doc=thread.latest_message %}
+        {% empty %}
+          <br/><br/>
+          <span>
+            <b>{% trans "No discussion found" %}</b>
+          </span>
+        {% endfor %}
+      </ul>
+      <div class="row">&nbsp;</div>
+
+      {% if n_results %}
+      <div>
+        <span>
+          {% if threads.has_previous %}
+            <a href="{% append_to_get p=threads.previous_page_number %}">{% trans "Previous" %}</a>
+          {% endif %}
+
+          <span>
+            {% trans "Page" %} {{ threads.number }} {% trans "of" %} {{ threads.paginator.num_pages }}
+          </span>
+
+          {% if threads.has_next %}
+            <a href="{% append_to_get p=threads.next_page_number %}">{% trans "Next" %}</a>
+          {% endif %}
+        </span>
+      </div>
+      {% endif %}
+
+    </div>
   </div>
 </div>
 

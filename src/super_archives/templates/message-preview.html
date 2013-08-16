@@ -3,13 +3,14 @@
 {% if doc.Title %}
 <li class="preview-message">
   {% if doc.Type %}
-  <img alt="{{ doc.Type }}" title="{{ doc.Type }}" 
+  <img alt="{{ doc.Type }}" title="{{ doc.Type }}"
        src="{{ STATIC_URL }}img/{{ doc.Type }}.png" />
   {% else %}
-  <img alt="thread" title="thread" 
-       src="{{ STATIC_URL }}img/thread.png" />
+      <span class="glyphicon glyphicon-envelope"></span>
+<!--  <img alt="thread" title="thread"
+       src="{{ STATIC_URL }}img/thread.png" /> -->
   {% endif %}
-  
+
   {% if doc.mailinglist %}
   <a href="{% url 'super_archives.views.list_messages' %}?list={{ doc.mailinglist }}">
     <span class="tag">{{ doc.mailinglist }}</span>
@@ -18,18 +19,18 @@
 
   <span class="subject">
     <a href="{{ doc.url }}"
-       {% if 
+       {% if
        title="{% filter striptags|truncatewords:50 %}
                 {{ doc.Description|escape }}
               {% endfilter %}">
       {{ doc.Title }}
     </a>
   </span>
-  
-  <span class="quiet">- 
+
+  <span class="quiet">-
     {{ doc.Description|striptags }}
   </span>
-  
+
   <div class="quiet">
     <span class="left">
       {% trans "by" %}
@@ -40,11 +41,11 @@
       {% else %}
         {% firstof doc.last_author doc.Creator _("anonymous") %}
       {% endif %}
-    </span>    
-          
+    </span>
+
     <span class="right">
       {{ doc.modified|timesince }}
-      {% trans "ago" %} 
+      {% trans "ago" %}
     </span>
   </div>
 </li>
