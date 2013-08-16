@@ -15,7 +15,7 @@
 
   {% else %}
 
-    {% ifequal request.user.username user_profile.user.username %}
+    {% ifequal request.user user_profile.user %}
       <span class="success span-24">
         {% trans "Hey, look at you! Do you want to " %}
         <a href="{% url 'user_profile_update' request.user %}">{% trans "update your profile" %}</a>?
@@ -39,12 +39,6 @@
 
           <h3>{% trans "Personal Information" %}</h3>
           <ul id="user-info">
-            <li>
-              {{ form.username.label_tag }}: {{ user_profile.user.username }}
-              {% ifequal request.user.username user_profile.user.username %}
-                (<a href="{% url 'change_password' %}">{% trans "change password" %}</a>)
-              {% endifequal %}
-            </li>
             <li>
               {% render_form_field form.institution user_profile.institution %}
             </li>

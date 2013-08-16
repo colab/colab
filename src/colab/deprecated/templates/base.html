@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load browserid %}
 <html>
   <head>
 
@@ -72,29 +73,24 @@
   </head>
 
   <body class="container">
+    {% browserid_info %}
     <div id="header" class="span-24">
       <div id="top-menu" class="right">
         {% if not user.is_authenticated %}
         <span class="colborder">
-          <a href="{% url 'signup' %}">{% trans "Sign up" %}</a>
+          <a href="{% url 'signup' %}">{% trans "Register" %}</a>
         </span>
-        <span>
-          <a href="{% url 'login' %}?next={{ request.path }}">{% trans "Login" %}</a>
-        </span>
+        {% browserid_login text='Login' next=request.path %}
         {% else %}
         <span class="colborder">
-          {% trans "authenticated as" %} <b>{{ user.username }}</b>
+          {% trans "authenticated as" %} <b>{{ user.email }}</b>
         </span>
         <span class="colborder">
           <a href="{% url 'user_profile' user.username %}">
             {% trans "My Profile" %}
           </a>
         </span>
-        <span>
-          <a href="{% url 'logout' %}">
-            {% trans "Logout" %}
-          </a>
-        </span>
+        {% browserid_logout text='Logout '%}
         {% endif %}
       </div>
 
@@ -175,6 +171,7 @@
         });
     });
 </script>
+  {% browserid_js %}
 
 
   </body>

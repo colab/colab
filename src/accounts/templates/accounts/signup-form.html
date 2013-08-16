@@ -21,17 +21,18 @@
 
 
 <p class="required span-24 last">
-  <label>{% trans "Required fields" %}</label>  
+  <label>{% trans "Required fields" %}</label>
 </p>
 
 <form class="span-24" id="signup" action="." method="post">
   {% csrf_token %}
-  
+
   <fieldset class="box span-11">
-    <legend>{% trans "Access Information" %}</legend>
+    <legend>{% trans "Personal Information" %}</legend>
+    {% render_form_field form.first_name %}
+    {% render_form_field form.last_name %}
+    {% render_form_field form.email %}
     {% render_form_field form.username %}
-    {% render_form_field form.password1 %}
-    {% render_form_field form.password2 %}
   </fieldset>
 
   <fieldset class="box last">
@@ -39,27 +40,20 @@
     {% render_form_field form.institution %}
     {% render_form_field form.role %}
   </fieldset>
-  
-  <fieldset class="box span-11">
-    <legend>{% trans "Personal Information" %}</legend>    
-    {% render_form_field form.first_name %}
-    {% render_form_field form.last_name %}
-    {% render_form_field form.email %}
-  </fieldset>
 
-  <fieldset class="box last">
+  <fieldset class="box span-11">
     <legend>{% trans "Others" %}</legend>
     {% render_form_field form.twitter %}
     {% render_form_field form.facebook %}
     {% render_form_field form.google_talk %}
     {% render_form_field form.webpage %}
   </fieldset>
- 
-  <fieldset class="box span-11">
+
+  <fieldset class="box last">
     <legend>{% trans "Subscribe to mail lists" %}</legend>
     {% render_form_field form.lists %}
   </fieldset>
- 
+
   <div class="span-24">
     <input class="right" type="submit" value="{% trans 'Register' %}"/>
   </div>

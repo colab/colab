@@ -1,6 +1,18 @@
 TODO
 -----
 
+Auth
+=====
+
+* Remover username da URL do perfil do usuario
+* Setar email principal na conta do usuario
+* User email principal como identificador do usuario (ao inves de username)
+* Garantir que emails sao User IDs
+
+
+Outros
+=======
+
 * Permitir que usuario atualize nome e sobrenome
 * Pagina Reporte um problema
 * Pagina Contribua
