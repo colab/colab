@@ -37,31 +37,15 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Ooopz... algo saiu errado!"
 
-#: templates/account_change_password.html:9 templates/signup-form.html:9
+#: templates/signup-form.html:9
 msgid "Please correct the errors below and try again."
 msgstr "Por favor, corrija os erros abaixo e tente novamente."
-
-#: templates/account_change_password.html:20
-msgid "Change password"
-msgstr "Alterar senha"
-
-#: templates/account_request_reset_password.html:5 templates/login.html:30
-msgid "I forgot my password"
-msgstr "Esqueci minha senha"
-
-#: templates/account_request_reset_password.html:11
-msgid "User"
-msgstr "Usuário"
-
-#: templates/account_request_reset_password.html:13
-msgid "Send new password"
-msgstr "Enviar nova senha"
 
 #: templates/base.html:71 templates/login.html:44 templates/signup-form.html:6
 msgid "Sign up"
 msgstr "Cadastre-se"
 
-#: templates/base.html:74 templates/login.html:17
+#: templates/base.html:74
 msgid "Login"
 msgstr "Login"
 
@@ -122,27 +106,6 @@ msgstr "O conteúdo deste site está publicado sob a licença"
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
-#: templates/email_account-reset-password.html:3
-#, python-format
-msgid ""
-"\n"
-"  This email was sent to confirm the password change request \n"
-"  to the user's <b>%(username)s</b> of Interlegis Colab. If you have not \n"
-"  made ​​the request, please ignore this message.\n"
-msgstr ""
-"\n"
-"  Este email foi enviado para confirmar a solicitação de troca de senha \n"
-"  para o usuário <b>%(username)s</b> do Colab Interlegis. Caso você não \n"
-"  tenha realizado a solicitação por favor ignore esta mensagem.\n"
-
-#: templates/email_account-reset-password.html:12
-msgid ""
-"\n"
-"  To perform the password change visit the link below:\n"
-msgstr ""
-"\n"
-"  Para realizar a troca de senha acesse o link abaixo:\n"
-
 #: templates/email_signup-email-confirmation.html:3
 msgid "Welcome to the Colab!"
 msgstr "Bem-vindo ao Colab!"
@@ -201,23 +164,6 @@ msgstr "RSS - Últimas Discussões"
 #: templates/home.html:75
 msgid "View more discussions..."
 msgstr "Ver mais discussões..."
-
-#: templates/login.html:36
-msgid "Not already registered? Sign up!"
-msgstr "Não possui cadastro? Casdastre-se"
-
-#: templates/login.html:38
-msgid ""
-"To access some features of Colab you must be registered. \n"
-"        If you are not already registered systems in the community "
-"Interlegis \n"
-"        click on the link below and get to work!\n"
-"        "
-msgstr ""
-"Para acessar alguns dos recursos do Colab é necessário estar registrado. \n"
-"Caso você ainda não esteja cadastrado nos sistemas da comunidade "
-"Interlegis \n"
-"clique no link abaixo e comece a colaborar!"
 
 #: templates/open-data.html:6
 msgid "OpenData - Communities Interlegis"

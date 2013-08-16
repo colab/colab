@@ -13,6 +13,10 @@ from dateutil.parser import parse as parse_timestamp
 from django.conf import settings
 
 from super_archives.models import EmailAddress
+from . import socks
+
+
+DEFAULT_SOCKET = socket.socket
 
 
 def build_query(user_query, filters=None):
@@ -181,7 +185,6 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     #   if the solr server is behind a firewall. 
     socks_server = getattr(settings, "SOCKS_SERVER", None)
     if socks_server: 
-        import socks
         logging.debug('Socks enabled: %s:%s', settings.SOCKS_SERVER,
                                               settings.SOCKS_PORT)
 
@@ -196,6 +199,8 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     except socket.error as err: 
         solr_response = None
         logging.exception(err)
+    finally:
+        reset_defaultproxy()
 
     if solr_response and solr_response.status == 200:
         #TODO: Log error connecting to solr
@@ -266,4 +271,7 @@ def count_types(sample=100, filters=None):
 
     return type_count
     
-    
+
+def reset_defaultproxy():
+    socket.socket = DEFAULT_SOCKET
+    socks._defaultproxy = None

@@ -26,25 +26,19 @@
 
 <form id="signup" action="." method="post">
   {% csrf_token %}
-  
+
   <fieldset>
-    <legend>{% trans "Access Information" %}</legend>
+    <legend>{% trans "Personal Information" %}</legend>
+    {% render_form_field form.first_name %}
+    {% render_form_field form.last_name %}
+    {% render_form_field form.email %}
     {% render_form_field form.username %}
-    {% render_form_field form.password1 %}
-    {% render_form_field form.password2 %}
   </fieldset>
 
   <fieldset>
     <legend>{% trans "Professionals Information" %}</legend>
     {% render_form_field form.institution %}
     {% render_form_field form.role %}
-  </fieldset>
-  
-  <fieldset>
-    <legend>{% trans "Personal Information" %}</legend>    
-    {% render_form_field form.first_name %}
-    {% render_form_field form.last_name %}
-    {% render_form_field form.email %}
   </fieldset>
 
   <fieldset>

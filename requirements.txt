@@ -22,3 +22,7 @@ grab
 # Deps for sentry client (raven)
 raven
 tornado
+
+# Deps for Single SignOn (SSO)
+django-browserid
+git+https://github.com/TracyWebTech/django-revproxy/
