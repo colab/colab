@@ -148,3 +148,11 @@ fieldset>legend {
     width: 47px;
     height: 50px;
 }
+
+.blog-post-item .post-meta {
+    margin-bottom: 2em;
+}
+
+.blog-post-item .tags {
+    margin-top: 1em;
+}

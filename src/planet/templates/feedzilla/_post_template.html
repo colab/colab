@@ -8,14 +8,9 @@
 
     <div class="post-meta">{% trans "From" %} <a href="{{ post.feed.site_url }}">{{ post.feed.author_or_title }}</a> {% trans "on" %} {{ post.created }}</div>
 
+    {{ post.summary|safe }}
 
-    <div class="content">
-        {{ post.summary|safe }}
-    </div>
-
-    <div>
-        <b><a href="{{ post.get_absolute_url }}">{% trans "Read original" %}</a></b>
-    </div>
+    <b><a href="{{ post.get_absolute_url }}">{% trans "Read original" %}</a></b>
 
     {% if post.tags %}
     <div class="tags">
