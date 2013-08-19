@@ -11,14 +11,6 @@ django-cliauth==0.9
 gunicorn
 gevent
 
-# Feedzilla (planet) and deps
-https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
-django-common
-django-tagging
-feedparser
-lxml
-grab
-
 # Deps for sentry client (raven)
 raven
 tornado
@@ -26,3 +18,14 @@ tornado
 # Deps for Single SignOn (SSO)
 django-browserid
 git+https://github.com/TracyWebTech/django-revproxy/
+
+# Converse.js (XMPP client)
+git+https://github.com/TracyWebTech/django-conversejs
+
+# Feedzilla (planet) and deps
+https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
+django-common
+django-tagging
+feedparser
+lxml
+grab
