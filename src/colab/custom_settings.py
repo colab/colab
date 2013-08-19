@@ -30,6 +30,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'colab.deprecated',
     'planet',
     'accounts',
+    'conversejs',
 
     # Feedzilla and deps
     'feedzilla',
