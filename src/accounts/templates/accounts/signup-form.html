@@ -3,59 +3,73 @@
 {% load i18n %}
 {% block main-content %}
 
-<h2>{% trans "Sign up" %}</h2>
+<div class="container">
+  <h2>{% trans "Sign up" %}</h2>
 
-{% if form.errors %}
-<div><b>{% trans "Please correct the errors below and try again." %}</b></div>
-{% endif %}
-
-<div>
-  <label>{% trans "Avatar" %}</label >
+  {% if form.errors %}
   <div>
-    <img src="{{ STATIC_URL }}img/user.png" alt="user"/>
+    <b>{% trans "Please correct the errors below and try again." %}</b>
   </div>
-  <p>
-    {% trans "Add an avatar to your account using" %} <a href="http://gravatar.com/" target="_blank">Gravatar</a>.
+  {% endif %}
+
+  <div class="row">
+    <div class="col-lg-11 well">
+      <label>{% trans "Avatar" %}</label >
+        <div id="avatar">
+          <img src="{{ STATIC_URL }}img/user.png" alt="user"/>
+        </div>
+        <p>
+          {% trans "Add an avatar to your account using" %} <a href="http://gravatar.com/" target="_blank">Gravatar</a>
+        </p>
+    </div>
+  </div>
+
+
+  <p class="required">
+    <label>{% trans "Required fields" %}</label>
   </p>
+
+  <form action="." method="post">
+    {% csrf_token %}
+
+    <div class="row">
+      <div class="col-lg-5">
+        <fieldset class="well">
+          <legend>{% trans "Personal Information" %}</legend>
+          {% render_form_field form.first_name %}
+          {% render_form_field form.last_name %}
+          {% render_form_field form.email %}
+          {% render_form_field form.username %}
+        </fieldset>
+
+        <fieldset class="well">
+          <legend>{% trans "Others" %}</legend>
+          {% render_form_field form.twitter %}
+          {% render_form_field form.facebook %}
+          {% render_form_field form.google_talk %}
+          {% render_form_field form.webpage %}
+        </fieldset>
+      </div>
+
+      <div class="col-lg-5 col-lg-offset-1">
+        <fieldset class="well">
+          <legend>{% trans "Professionals Information" %}</legend>
+          {% render_form_field form.institution %}
+          {% render_form_field form.role %}
+        </fieldset>
+
+        <fieldset class="well">
+          <legend>{% trans "Subscribe to mail lists" %}</legend>
+          <div class="unstyled-list">
+            {% render_form_field form.lists %}
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="col-lg-2 pull-right">
+        <input type="submit" value="{% trans 'Register' %}"/>
+      </div>
+    </div>
+  </form>
 </div>
-
-
-<p>
-  <label>{% trans "Required fields" %}</label>  
-</p>
-
-<form id="signup" action="." method="post">
-  {% csrf_token %}
-
-  <fieldset>
-    <legend>{% trans "Personal Information" %}</legend>
-    {% render_form_field form.first_name %}
-    {% render_form_field form.last_name %}
-    {% render_form_field form.email %}
-    {% render_form_field form.username %}
-  </fieldset>
-
-  <fieldset>
-    <legend>{% trans "Professionals Information" %}</legend>
-    {% render_form_field form.institution %}
-    {% render_form_field form.role %}
-  </fieldset>
-
-  <fieldset>
-    <legend>{% trans "Others" %}</legend>
-    {% render_form_field form.twitter %}
-    {% render_form_field form.facebook %}
-    {% render_form_field form.google_talk %}
-    {% render_form_field form.webpage %}
-  </fieldset>
- 
-  <fieldset>
-    <legend>{% trans "Subscribe to mail lists" %}</legend>
-    {% render_form_field form.lists %}
-  </fieldset>
- 
-  <div>
-    <input type="submit" value="{% trans 'Register' %}"/>
-  </div>
-</form>
 {% endblock %}

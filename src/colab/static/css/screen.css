@@ -136,8 +136,15 @@ fieldset>legend {
     vertical-align: middle;
 }
 
-ul.none {
-    list-style-type:none;
-    padding:3px 0;
-    margin:10px 0;
+.unstyled-list ul, ul.none {
+    list-style-type: none;
+    padding: 3px 0;
+    margin: 10px 0;
+}
+
+#avatar {
+    background-color: #FFF;
+    padding: 9px 12px;
+    width: 47px;
+    height: 50px;
 }
