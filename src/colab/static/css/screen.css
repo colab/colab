@@ -156,3 +156,28 @@ fieldset>legend {
 .blog-post-item .tags {
     margin-top: 1em;
 }
+
+.plus {
+    border: 1px dotted #ddd;
+    margin: 0;
+}
+
+.plus span {
+    vertical-align: middle;
+    height: 40px;
+    line-height: 40px;
+    font-size: 150%;
+    font-weight: bold;
+    color: #0a0;
+}
+
+.plus img {
+    vertical-align: middle;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-right: 20px;
+}
+
+.plus img:hover {
+    opacity: 0.8;
+}

@@ -2,77 +2,83 @@
 {% load i18n %}
 {% load append_to_get %}
 {% block main-content %}
-  <div id="vote-notification" class="error hide"></div>
+<div class="row">
 
   <h2>{{ first_msg.subject_clean }}</h2>
-  <hr/>
-  <div class="span-17 border">
-    <ul>
-    {% for email in emails %}
-      <li>
-        <div id="msg-{{ email.id }}" class="email_message">
-          <div class="span-3 center">
-            <div>
-              <a href="{{ email.from_address.get_profile_link }}">
-                <img class="avatar" width="80px" heigth="80px"
-                     src="http://www.gravatar.com/avatar/{{ email.from_address.md5 }}?s=80&d=identicon" />
-                {% trans "Anonymous" as anonymous %}
-                <span>{% firstof email.from_address.get_full_name anonymous %}</span>
-              </a>
-            </div>
-            <p>{{ email.received_time|date:"SHORT_DATETIME_FORMAT" }}</p>
-            
-            <div class="plus">
-              <span>{{ email.votes_count }}</span>
-              <img title="{% trans 'Vote' %}" class="right" src="{{ STATIC_URL }}img/plus.png">
-            </div>
+  <hr />
 
-            <p class="minus {% if not user in email.vote_list %}hide{% endif %}">
-              <a href="#">{% trans "Remove votes" %}</a>
-            </p>
-          </div>
-        
-          <div class="span-13">
-            <pre>{{ email.body }}</pre>
-          </div>
+  <div class="col-lg-3 pull-right">
+    <h4><strong>{% trans "Order by" %}:</strong></h4>
+    <ul class="none">
+      <li><span class="glyphicon glyphicon-chevron-right">
+        <a href="{% append_to_get order='voted' %}">{% trans "Votes" %}</a>
+      </span></li>
+      <li><span class="glyphicon glyphicon-chevron-right">
+        <a href="{% append_to_get order='date' %}">{% trans "Date" %}</a>
+      </span></li>
+    </ul>
+
+    <div>&nbsp;</div>
+
+    <h4><strong>{% trans "Statistics:" %}</strong></h4>
+
+    <ul class="none">
+      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
+        {% trans "started at" %}
+      </span></li>
+        <h5>{{ first_msg.received_time|timesince }} {% trans "ago" %}</h5>
+      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
+        {% trans "viewed" %}
+      </span></li>
+        <h5>{{ pagehits }} {% trans "times" %}</h5>
+      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
+        {% trans "answered" %}
+      </span></li>
+        <h5>{{ emails|length }} {% trans "times" %}</h5>
+      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
+        {% trans "voted" %}
+      </span></li>
+        <h5>{{ total_votes }} {% trans "times" %}</h5>
+    </ul>
+  </div>
+
+  <ul class="none">
+  {% for email in emails %}
+    <li>
+      <div class="col-lg-2 text-center">
+        <a href="{{ email.from_address.get_profile_link }}">
+          <img width="80px" height="80px"
+               src="http://www.gravatar.com/avatar/{{ email.from_address.md5 }}?s=80&d=identicon" />
+          <div>&nbsp;</div>
+          {% trans "Anonymous" as anonymous %}
+          <span>{% firstof email.from_address.get_full_name anonymous %}</span>
+        </a>
+
+        <p>{{ email.received_time|date:"SHORT_DATETIME_FORMAT" }}</p>
+
+        <div class="plus">
+          <span>{{ email.votes_count }}</span>
+          <img title="{% trans 'Vote' %}" class="pull-right" src="{{ STATIC_URL }}img/plus.png">
         </div>
-        {% if not forloop.last %}
-        <hr/>
-        {% endif %}
-      </li>
-    {% endfor %}
-    </ul>
-  </div>
-  <div class="span-6 filters last">
-    <h4><b>{% trans "Order by" %}:</b></h4>
-    <ul>
-      <li><a href="{% append_to_get order='voted' %}">{% trans "Votes" %}</a></li>
-      <li><a href="{% append_to_get order='date' %}">{% trans "Date" %}</a></li>
-    </ul>
 
-    <hr class="space"/>
-    
-    <h4><b>{% trans "Statistics:" %}</b></h4>
-    
-    <ul>
-      <li class="quiet">{% trans "started at" %}
-        <h4>{{ first_msg.received_time|timesince }} {% trans "ago" %}</h4>
-      </li>
-      <li class="quiet">{% trans "viewed" %}
-        <h4>{{ pagehits }} {% trans "times" %}</h4>
-      </li>
-      <li class="quiet">{% trans "answered" %}
-        <h4>{{ emails|length }} {% trans "times" %}</h4>
-      </li>
-      <li class="quiet">{% trans "voted" %}
-        <h4>{{ total_votes }} {% trans "times" %}</h4>
-      </li>
-    </ul>
-    
-  </div>
-  
+        <p class="{% if not user in email.vote_list %}hide{% endif %}">
+          <a href="#">{% trans "Remove votes" %}</a>
+        </p>
+      </div>
+
+        <div class="col-lg-7">
+          <pre>{{ email.body }}</pre>
+        </div>
+      {% if not forloop.last %}
+      <div>&nbsp;</div>
+      {% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
   <script type="text/javascript" charset="utf-8">
     pagehit("{{ request.path_info }}");
   </script>
-  
-{% endblock %}  
+
+</div>
+{% endblock %}
