@@ -142,11 +142,21 @@ fieldset>legend {
     margin: 10px 0;
 }
 
+ul.indent{
+    padding-left: 1.5em;
+}
+
 #avatar {
     background-color: #FFF;
     padding: 9px 12px;
     width: 47px;
     height: 50px;
+}
+
+#profile-img{
+    border: 1px solid #DDDDDD;
+    width: 100px;
+    height: 100px;
 }
 
 .blog-post-item .post-meta {
@@ -257,3 +267,4 @@ form.sendXMPPMessage textarea {
 .chat-content, .chatroom .participants{
     border: none;
 }
+/* End of Converse JS*/

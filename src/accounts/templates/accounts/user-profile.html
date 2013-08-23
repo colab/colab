@@ -9,7 +9,7 @@
 {% block main-content %}
   {% if not user_profile %}
     <span>
-      <b>{% trans "User not registered." %}</b> {% trans "Is that you?" %}
+      <strong>{% trans "User not registered." %}</strong> {% trans "Is that you?" %}
       <a href="{% url 'signup' %}">{% trans "Click here and sign up." %}</a>
     </span>
 
@@ -24,68 +24,69 @@
 
   {% endif %}
 
-  <div>
-    <h2>{{ email_address.get_full_name }}</h2>
+  <div class="row">
+    <h3>{{ email_address.get_full_name }}</h3>
+  </div>
 
-    <div>
-      <img id="avatar" width="120px" height="120px"
-           src="http://www.gravatar.com/avatar/{{ email_address.md5 }}?s=120&d=identicon" />
+  <div>&nbsp;</div>
+
+  <div class="row">
+    <div class="col-lg-1">
+      <img id="profile-img" src="http://www.gravatar.com/avatar/{{ email_address.md5 }}?s=120&d=identicon" />
     </div>
 
     <div>
-      <div>
-        <form action="{% url 'user_profile_update' request.user %}" method='post'>
-          {% csrf_token %}
+      <form action="{% url 'user_profile_update' request.user %}" method='post'>
+        {% csrf_token %}
 
-          <h3>{% trans "Personal Information" %}</h3>
-          <ul>
-            
-            <li>
-              {% render_form_field form.institution user_profile.institution %}
-            </li>
-            <li>
-              {% render_form_field form.role user_profile.role %}
-            </li>
-          </ul>
-
-          <hr />
-
-          <h3>{% trans "Other informations" %}</h3>
-          <ul>
-            <li>
-              {% render_form_field form.twitter user_profile.twitter %}
-            </li>
-            <li>
-              {% render_form_field form.facebook user_profile.facebook %}
-            </li>
-            <li>
-              {% render_form_field form.google_talk user_profile.google_talk %}
-            </li>
-            <li>
-              {% render_form_field form.webpage user_profile.webpage %}
-            </li>
-          </ul>
-
-          <hr />
-          {% if editable %}
-            <span>
-              <input type="submit" value="{% trans 'Save' %}"/>
-            </span>
-          {% endif %}
-        </form>
+      <div class="col-lg-5 col-lg-offset-1">
+        <h4 class="no-margin">{% trans "Personal Information" %}</h4>
+        <ul class="none indent">
+          <li>
+            {% render_form_field form.institution user_profile.institution %}
+          </li>
+          <li>
+            {% render_form_field form.role user_profile.role %}
+          </li>
+        </ul>
       </div>
+
+      <div class="col-lg-5">
+        <h4 class="no-margin">{% trans "Other informations" %}</h4>
+        <ul class="none indent">
+          <li>
+            {% render_form_field form.twitter user_profile.twitter %}
+          </li>
+          <li>
+            {% render_form_field form.facebook user_profile.facebook %}
+          </li>
+          <li>
+            {% render_form_field form.google_talk user_profile.google_talk %}
+          </li>
+          <li>
+            {% render_form_field form.webpage user_profile.webpage %}
+          </li>
+        </ul>
+      </div>
+
+        {% if editable %}
+          <span>
+            <input type="submit" value="{% trans 'Save' %}"/>
+          </span>
+        {% endif %}
+      </form>
 
       {% if type_count %}
       <div>
-        <h3>{% trans "Collaborations by Area" %}</h3>
-        <div></div>
+        <h4 class="no-margin">{% trans "Collaborations by Area" %}</h4>
       </div>
       {% endif %}
     </div>
+  </div>
 
-    <hr />
 
-    <div>
+  <div class="row">
+    <div class="col-lg-6">
       <h3>{% trans "Latest posted" %} </h3>
       <ul>
       {% for doc in emails %}
@@ -96,9 +97,9 @@
       </ul>
     </div>
 
-    <div>
+    <div class="col-lg-6">
       <h3>{% trans "Community inside participations" %}</h3>
-      <ul>
+      <ul class="none indent">
       {% for doc in docs %}
         {% include "message-preview.html" %}
       {% empty %}
@@ -106,6 +107,5 @@
       {% endfor %}
       </ul>
     </div>
-
   </div>
 {% endblock %}
