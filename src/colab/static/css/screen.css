@@ -142,8 +142,12 @@ fieldset>legend {
     margin: 10px 0;
 }
 
-ul.indent{
+ul.indent {
     padding-left: 1.5em;
+}
+
+ul.indent-dois {
+    padding-left: 3.5em;
 }
 
 #avatar {

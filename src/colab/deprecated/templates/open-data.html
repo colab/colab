@@ -16,7 +16,7 @@
         <a href="/api/search/">http://colab.interlegis.leg.br/api/search/</a></p>
         
         <h3>{% trans "Parameters:" %}</h3>
-        <ul>
+        <ul class="none indent-dois">
             <li>
                 <h4><i>{% trans "Query" %}</i> - q</h4>
                 {% blocktrans %}The <i>query</i> is the "question" sent 
@@ -25,7 +25,7 @@
                 for example <b>collaborator</b> and represents the data stored 
                 by the system, for example <b>jeanferri</b>.{% endblocktrans %}
                 {% trans "The following is a list of available fields to search:" %}<br/>
-                <ul>
+                <ul class="none indent-dois">
                     <li><b>Type</b>: {% trans "wiki, thread, ticket, changeset." %}</li>
                     <li><b>Title</b>: {% trans "page name, title of the discussion or ticket, changeset description." %}</li>
                     <li><b>Description</b>: {% trans "excerpt from the page or the discussion, description of the ticket or changeset." %}</li>
