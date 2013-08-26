@@ -25,7 +25,9 @@ git+https://github.com/TracyWebTech/django-conversejs
 # Feedzilla (planet) and deps
 https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around
 django-common
-django-tagging
+django-taggit
+django-taggit-templatetags
 feedparser
 lxml
 grab
+transliterate
