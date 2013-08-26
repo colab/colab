@@ -1,4 +1,3 @@
-{% load tagging_tags %}
 {% load i18n %}
 
 <div class="blog-post-item">
@@ -12,11 +11,10 @@
 
     <b><a href="{{ post.get_absolute_url }}">{% trans "Read original" %}</a></b>
 
-    {% if post.tags %}
+    {% if post.tags.count %}
     <div class="tags">
       <span><b>Tags:</b>
-        {% tags_for_object post as tags %}
-        {% for tag in tags %}
+        {% for tag in post.tags.all %}
           <a href="{% url "feedzilla_tag" tag.name %}" class="tag">{{ tag }}</a>
         {% endfor %}
       </span>
