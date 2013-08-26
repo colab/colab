@@ -48,20 +48,22 @@
     {% browserid_info %}
     <div class="row">
         {% if not user.is_authenticated %}
-        <div class="col-lg-2 col-lg-offset-9 text-right">
+        <div class="col-sm-2 col-sm-offset-9 text-right">
           <a href="{% url 'signup' %}">{% trans "Register" %}</a>
         </div>
-        {% browserid_login text='Login' next=request.path %}
+        <div class="col-sm-1">
+          {% browserid_login text='Login' next=request.path %}
+        </div>
         {% else %}
-        <div class="col-lg-10 text-right">
+        <div class="col-sm-1 text-right">
           {% trans "authenticated as" %} <b>{{ user.email }}</b>
         </div>
-        <div class="col-lg-1 text-center">
+        <div class="col-sm-1 text-center">
           <a href="{% url 'user_profile' user.username %}">
             {% trans "My Profile" %}
           </a>
         </div>
-        <div class="col-lg-1 text-center">
+        <div class="col-sm-1 text-center">
           {% browserid_logout text='Logout '%}
         </div>
         {% endif %}
