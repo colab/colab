@@ -1,13 +1,12 @@
 {% extends 'base.html' %}
-{% load i18n %}
-{% load feedzilla_tags %}
+{% load i18n feedzilla_tags taggit_extras %}
 
 {% block main-content %}
     <h2>{% trans 'Planet' %}</h2>
     <hr/>
 
     <div class="row">
-        {% block feedzilla_content %}{% endblock %}
+      {% block feedzilla_content %}{% endblock %}
   
       <div class="col-lg-3">
         <div class="well">
@@ -15,7 +14,7 @@
         </div>
         <div class="well">
           <h3>{% trans 'Tags' %}</h3>
-          {% feedzilla_tag_cloud %}
+          {% include_tagcloud 'feedzilla.post' %}
         </div>
         <div class="well">
           <h3>{% trans 'Source Blogs' %}</h3>
