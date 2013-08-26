@@ -214,61 +214,61 @@ ul.indent-dois {
     margin-top: 10px;
 }
 
-a.configure-chatroom-button, a.close-chatbox-button {
+#chatpanel a.configure-chatroom-button, #chatpanel a.close-chatbox-button {
     background-color: #F6F6F6;
     margin-right: 0.6em;
     width: 22px;
 }
 
-.chat-head #controlbox-tabs li {
+#chatpanel .chat-head #controlbox-tabs li {
     width:32%;
 }
 
-.oc-chat-head {
+#chatpanel .oc-chat-head {
     height: 37px;
 }
 
-.chatbox dl.dropdown {
+#chatpanel .chatbox dl.dropdown {
     margin-top: 0;
 }
 
-#converse-roster {
+#chatpanel #converse-roster {
     height: 207px;
 }
 
 #chatpanel #toggle-controlbox {
-    font-size: 100%;
-    padding: 0 4px 23px;
+    font-size: 100% !important;
+    padding: 0 4px 23px !important;
 }
 
 #chatpanel {
-    height: 342px;
+    height: 342px !important;
 }
 
-div#controlbox-panes {
+#chatpanel div#controlbox-panes {
     width: auto;
 }
 
-.chat-head-chatbox, .chat-head-chatroom {
+#chatpanel .chat-head-chatbox, #chatpanel .chat-head-chatroom {
     height: 40.5px;
 }
 
-form.sendXMPPMessage {
+#chatpanel form.sendXMPPMessage {
     height: 76px;
     border: none;
 }
 
-form.sendXMPPMessage textarea {
+#chatpanel form.sendXMPPMessage textarea {
     width: 189px;
     max-width: 285px;
     max-height: 66px;
 }
 
-.chatbox form.sendXMPPMessage textarea {
+#chatpanel .chatbox form.sendXMPPMessage textarea {
     max-width: 189px;
 }
 
-.chat-content, .chatroom .participants{
+#chatpanel .chat-content, #chatpanel .chatroom .participants{
     border: none;
 }
 /* End of Converse JS*/

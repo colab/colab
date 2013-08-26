@@ -50,7 +50,7 @@
           {% browserid_login text='Login' next=request.path %}
         </div>
         {% else %}
-        <div class="col-sm-1 text-right">
+        <div class="col-sm-10 text-right">
           {% trans "authenticated as" %} <b>{{ user.email }}</b>
         </div>
         <div class="col-sm-1 text-center">
