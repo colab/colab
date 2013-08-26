@@ -23,7 +23,7 @@ git+https://github.com/TracyWebTech/django-revproxy/
 git+https://github.com/TracyWebTech/django-conversejs
 
 # Feedzilla (planet) and deps
-https://bitbucket.org/seocam/feedzilla/get/tip.tar.gz # Temporarily work around
+https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around
 django-common
 django-tagging
 feedparser
