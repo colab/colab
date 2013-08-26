@@ -22,6 +22,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'south',
     'cliauth',
     'django_browserid',
+    'conversejs',
 
     # Own apps
     'super_archives',
@@ -30,7 +31,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'colab.deprecated',
     'planet',
     'accounts',
-    'conversejs',
 
     # Feedzilla and deps
     'feedzilla',
@@ -97,7 +97,11 @@ LOGGING = {
         'django_browserid': {
             'handlers': ['sentry', 'console'],
             'level': 'DEBUG',
-        }
+        },
+        'boshclient': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
     }
 }
 
@@ -172,6 +176,8 @@ SOLR_BASE_QUERY = """
 """
 
 COLAB_TRAC_URL = 'http://colab-backend.interlegis.leg.br/'
+
+CONVERSEJS_BOSH_SERVICE_URL = 'https://bind.opkode.im'
 
 REVPROXY_ADD_REMOTE_USER = True
 
