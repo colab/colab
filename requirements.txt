@@ -20,7 +20,7 @@ django-browserid
 git+https://github.com/TracyWebTech/django-revproxy/
 
 # Converse.js (XMPP client)
-django-conversejs==0.2
+django-conversejs==0.2.1
 
 # Feedzilla (planet) and deps
 https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around
