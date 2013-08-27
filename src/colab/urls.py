@@ -34,5 +34,5 @@ urlpatterns = patterns('',
 
     # Trac URLs
     url(u'^(?P<path>(?:admin|wiki|changeset|newticket|ticket|chrome|timeline|roadmap|browser|report|tags|query|about|prefs|log|attachment|raw-attachment).*)$',
-        'revproxy.views.proxy', {'base_url': settings.COLAB_TRAC_URL})
+        'revproxy.views.proxy', {'base_url': settings.COLAB_TRAC_URL}),
 )
