@@ -44,6 +44,12 @@ class colab {
     user      => 'colab',
   }
 
+  supervisor::app { 'punjab':
+    command   => '/home/vagrant/.virtualenvs/colab/bin/twistd -n -y punjab.tac',
+    directory => '/home/colab/colab/',
+    user      => 'colab',
+  }
+
   nginx::config { 'nginx':
     content => template('colab/nginx/extra_conf.erb'),
   }
