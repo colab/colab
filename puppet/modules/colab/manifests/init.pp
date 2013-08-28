@@ -45,8 +45,8 @@ class colab {
   }
 
   supervisor::app { 'punjab':
-    command   => '/home/vagrant/.virtualenvs/colab/bin/twistd -n -y punjab.tac',
-    directory => '/home/colab/colab/',
+    command   => 'twistd --nodaemon punjab',
+    directory => '/home/colab/',
     user      => 'colab',
   }
 

@@ -17,6 +17,27 @@ class colab::requirements {
     provider => pip,
     require  => Package['python-pip'],
   }
+
+  # XMPP connection manager
+  package { 'git+https://github.com/twonds/punjab@c96ffe4':
+    ensure   => installed,
+    provider => pip,
+    require  => Package['python-pip'],
+  }
+
+  # Punjab dep
+  package { 'Twisted':
+    ensure   => installed,
+    provider => pip,
+    require  => Package['python-pip'],
+  }
+
+  # Punjab dep
+  package { 'pyOpenSSL':
+    ensure   => installed,
+    provider => pip,
+    require  => Package['python-pip'],
+  }
   
   # links virtualenvwrapper to load automaticaly
   file { '/etc/bash_completion.d/virtualenvwrapper.sh':

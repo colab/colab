@@ -31,8 +31,3 @@ feedparser
 lxml
 grab
 transliterate
-
-# Punjab (XMPP conection manager) and deps
-git+https://github.com/twonds/punjab@c96ffe4
-Twisted==13.1.0
-pyOpenSSL==0.13
