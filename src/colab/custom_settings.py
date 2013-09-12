@@ -98,7 +98,7 @@ LOGGING = {
             'handlers': ['sentry', 'console'],
             'level': 'DEBUG',
         },
-        'boshclient': {
+        'conversejs': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
@@ -181,6 +181,8 @@ REVPROXY_ADD_REMOTE_USER = True
 
 # This URL must use SSL in order to keep chat sessions secure
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
+
+CONVERSEJS_AUTO_REGISTER = 'mensageiro.interlegis.gov.br'
 
 try:
     from local_settings import *
