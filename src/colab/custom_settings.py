@@ -176,6 +176,7 @@ SOLR_BASE_QUERY = """
 """
 
 COLAB_TRAC_URL = 'http://colab-backend.interlegis.leg.br/'
+COLAB_CI_URL = 'http://jenkins.interlegis.leg.br:8080/ci/'
 
 REVPROXY_ADD_REMOTE_USER = True
 
