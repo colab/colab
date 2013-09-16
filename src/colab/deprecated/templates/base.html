@@ -50,17 +50,10 @@
           {% browserid_login text='Login' next=request.path %}
         </div>
         {% else %}
-<<<<<<< HEAD
         <div class="col-sm-1 text-right">
-          {% trans "authenticated as" %} <b>{{ user.email }}</b>
+          {% trans "authenticated as" %} <b>{{ user.username }}</b>
         </div>
         <div class="col-sm-1 text-center">
-=======
-        <span class="colborder">
-          {% trans "authenticated as" %} <b>{{ user.username }}</b>
-        </span>
-        <span class="colborder">
->>>>>>> master
           <a href="{% url 'user_profile' user.username %}">
             {% trans "My Profile" %}
           </a>
