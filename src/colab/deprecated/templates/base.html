@@ -43,22 +43,22 @@
     {% browserid_info %}
     <div class="row">
         {% if not user.is_authenticated %}
-        <div class="col-sm-2 col-sm-offset-9 text-right">
+        <div class="col-sm-9 col-lg-11 text-right">
           <a href="{% url 'signup' %}">{% trans "Register" %}</a>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-1 col-lg-1">
           {% browserid_login text='Login' next=request.path %}
         </div>
         {% else %}
-        <div class="col-sm-10 text-right">
+        <div class="col-sm-8 col-md-10 text-right">
           {% trans "authenticated as" %} <b>{{ user.email }}</b>
         </div>
-        <div class="col-sm-1 text-center">
+        <div class="col-sm-2 col-md-1 text-center">
           <a href="{% url 'user_profile' user.username %}">
             {% trans "My Profile" %}
           </a>
         </div>
-        <div class="col-sm-1 text-center">
+        <div class="col-sm-2 col-md-1 text-center">
           {% browserid_logout text='Logout '%}
         </div>
         {% endif %}
@@ -73,25 +73,25 @@
 
       <div id="header-menu" class="row">
 
-        <span class="col-lg-1 text-center">
+        <span class="col-sm-2 text-center">
           <a href="{% url 'thread_list' %}">{% trans "Discussions" %}</a>
         </span>
-        <span class="col-lg-1 text-center">
+        <span class="col-sm-2 col-lg-1 text-center">
           <a href="http://colab.interlegis.gov.br/wiki" target="_blank">{% trans "Wiki" %}</a>
         </span>
-        <span class="col-lg-1 text-center">
+        <span class="col-sm-2 col-lg-1 text-center">
           <a href="http://listas.interlegis.gov.br/mailman/listinfo/" 
              target="_blank">{% trans "Contribute" %}</a>
         </span>
-        <span class="col-lg-2 text-center">
+        <span class="col-sm-3 col-lg-2 text-center">
           <a href="http://colab.interlegis.leg.br/newticket"
              target="_blank">{% trans "Report a problem" %}</a>
         </span>
-        <span class="col-lg-1 text-center">
+        <span class="col-sm-2 col-lg-1 text-center">
           <a href="{% url "feedzilla_index" %}">{% trans "Planet" %}</a>
         </span>
 
-        <span class="col-lg-4 col-lg-offset-2 text-right">
+        <span class="col-sm-6 col-lg-5 text-center">
           <form action="/search/" method="GET">
             <input name="q" id="header-searchbox" value="{{ request.GET.q }}"
                    type="text" placeholder="{% trans 'Search here...' %}" />
