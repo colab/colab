@@ -51,7 +51,7 @@
         </div>
         {% else %}
         <div class="col-sm-8 col-md-10 text-right">
-          {% trans "authenticated as" %} <b>{{ user.email }}</b>
+          {% trans "authenticated as" %} <b>{{ user.username }}</b>
         </div>
         <div class="col-sm-2 col-md-1 text-center">
           <a href="{% url 'user_profile' user.username %}">
