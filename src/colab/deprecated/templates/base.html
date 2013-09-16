@@ -79,7 +79,7 @@
         {% browserid_login text='Login' next=request.path %}
         {% else %}
         <span class="colborder">
-          {% trans "authenticated as" %} <b>{{ user.email }}</b>
+          {% trans "authenticated as" %} <b>{{ user.username }}</b>
         </span>
         <span class="colborder">
           <a href="{% url 'user_profile' user.username %}">
