@@ -1,5 +1,5 @@
 #https://www.djangoproject.com/download/1.6b1/tarball/
-Django==1.5
+Django==1.5.2
 South==0.8.1
 psycopg2==2.5.1
 django-piston==0.2.3
@@ -20,7 +20,7 @@ django-browserid
 git+https://github.com/TracyWebTech/django-revproxy/
 
 # Converse.js (XMPP client)
-git+https://github.com/TracyWebTech/django-conversejs
+django-conversejs==0.2.2
 
 # Feedzilla (planet) and deps
 https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around

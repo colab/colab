@@ -7,3 +7,5 @@ local_settings.py
 *.sqlite3
 .DS_Store
 .vagrant
+
+ext/

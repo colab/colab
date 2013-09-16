@@ -44,6 +44,12 @@ class colab {
     user      => 'colab',
   }
 
+  supervisor::app { 'punjab':
+    command   => 'twistd --nodaemon punjab',
+    directory => '/home/colab/',
+    user      => 'colab',
+  }
+
   nginx::config { 'nginx':
     content => template('colab/nginx/extra_conf.erb'),
   }

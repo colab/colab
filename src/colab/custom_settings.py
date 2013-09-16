@@ -98,7 +98,7 @@ LOGGING = {
             'handlers': ['sentry', 'console'],
             'level': 'DEBUG',
         },
-        'boshclient': {
+        'conversejs': {
             'handlers': ['console'],
             'level': 'DEBUG',
         },
@@ -156,7 +156,7 @@ FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
 
 
 ### BrowserID / Persona
-SITE_URL = 'http://colab.interlegis.leg.br'
+SITE_URL = 'https://colab.interlegis.leg.br'
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
@@ -176,10 +176,14 @@ SOLR_BASE_QUERY = """
 """
 
 COLAB_TRAC_URL = 'http://colab-backend.interlegis.leg.br/'
-
-CONVERSEJS_BOSH_SERVICE_URL = 'https://bind.opkode.im'
+COLAB_CI_URL = 'http://jenkins.interlegis.leg.br:8080/ci/'
 
 REVPROXY_ADD_REMOTE_USER = True
+
+# This URL must use SSL in order to keep chat sessions secure
+CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
+
+CONVERSEJS_AUTO_REGISTER = 'mensageiro.interlegis.gov.br'
 
 try:
     from local_settings import *
