@@ -27,7 +27,7 @@
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-30841845-2']);
       _gaq.push(['_trackPageview']);
-    
+
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
@@ -80,7 +80,7 @@
           <a href="http://colab.interlegis.gov.br/wiki" target="_blank">{% trans "Wiki" %}</a>
         </span>
         <span class="col-sm-2 col-lg-1 text-center">
-          <a href="http://listas.interlegis.gov.br/mailman/listinfo/" 
+          <a href="http://listas.interlegis.gov.br/mailman/listinfo/"
              target="_blank">{% trans "Contribute" %}</a>
         </span>
         <span class="col-sm-3 col-lg-2 text-center">
@@ -92,10 +92,11 @@
         </span>
 
         <span class="col-sm-6 col-lg-5 text-center">
-          <form action="/search/" method="GET">
-            <input name="q" id="header-searchbox" value="{{ request.GET.q }}"
-                   type="text" placeholder="{% trans 'Search here...' %}" />
-            <input type="submit" value="{% trans 'Search' %}"></input>
+          <form action="/search/" method="GET" class="form-inline" role="form">
+            <input name="q" id="header-searchbox"
+                   class="form-control" value="{{ request.GET.q }}"
+                   type="search" placeholder="{% trans 'Search here...' %}" />
+            <input type="submit" value="{% trans 'Search' %}" class="btn btn-default"></input>
           </form>
         </span>
       </div>
