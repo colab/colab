@@ -21,3 +21,8 @@ SECRET_KEY = ')(jksdfhsjkadfhjkh234ns!8fqu-1186h$vuj'
 #SOCKS_PORT = 9050
 
 SITE_URL = 'http://localhost:8000'
+
+INTERNAL_IPS = ('127.0.0.1', )
+
+CONVERSEJS_BOSH_SERVICE_URL = 'http://localhost:5280/http-bind'
+

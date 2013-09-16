@@ -60,11 +60,14 @@ def update_requirements():
 
 
 def deploy(update=False):
+
+    with cd('~/colab/src/'), prefix(WORKON_COLAB):
+        run('git pull')
+
     if update:
         update_requirements()
 
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
-        run('git pull')
         run('python manage.py syncdb')
         run('python manage.py migrate')
         run('python manage.py collectstatic --noinput')
