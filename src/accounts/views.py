@@ -85,9 +85,8 @@ def signup(request):
     email_addr.save()
 
     template_data = {
-        'msg': _((u'Registration completed successfully. Please visit your '
-                u'email address to validate it.')),
-        'msg_css_class': 'success',
+        'msg': _(u'Registration completed successfully. Please visit your email address to validate it.'),
+        'msg_css_class': 'alert-success',
     }
 
     return render(request, 'accounts/account_message.html', template_data)
@@ -106,7 +105,7 @@ def verify_email(request, hash):
 
     template_data = {
         'msg': _(u'E-mail validated correctly.'),
-        'msg_css_class': 'success',
+        'msg_css_class': 'alert-success',
     }
 
     return render(request, 'accounts/account_message.html', template_data)
