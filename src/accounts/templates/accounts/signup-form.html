@@ -5,22 +5,20 @@
 
 <h2>{% trans "Sign up" %}</h2>
 
-{% if form.errors %}
-<div>
-  <b>{% trans "Please correct the errors below and try again." %}</b>
-</div>
-{% endif %}
-
 <div class="row">
-  <div class="col-lg-11 well">
-    <label>{% trans "Avatar" %}</label >
-      <div id="avatar">
-        <img src="{{ STATIC_URL }}img/user.png" alt="user"/>
-      </div>
-      <p>
-        {% trans "Add an avatar to your account using" %} <a href="http://gravatar.com/" target="_blank">Gravatar</a>
-      </p>
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    <b>{% trans "Please correct the errors below and try again" %}</b>
   </div>
+  {% endif %}
+
+    <div>
+      {% for field in form %}
+        {% if field.errors %}
+          {{ field.label }}
+        {% endif %}
+      {% endfor %}
+    </div>
 </div>
 
 
@@ -28,46 +26,51 @@
   <label>{% trans "Required fields" %}</label>
 </p>
 
-<form action="." method="post">
+<form action="." method="post" role="form" class="form-horizontal signup">
   {% csrf_token %}
 
   <div class="row">
-    <div class="col-lg-5">
-      <fieldset class="well">
-        <legend>{% trans "Personal Information" %}</legend>
-        {% render_form_field form.first_name %}
-        {% render_form_field form.last_name %}
-        {% render_form_field form.email %}
-        {% render_form_field form.username %}
-      </fieldset>
 
-      <fieldset class="well">
-        <legend>{% trans "Others" %}</legend>
-        {% render_form_field form.twitter %}
-        {% render_form_field form.facebook %}
-        {% render_form_field form.google_talk %}
-        {% render_form_field form.webpage %}
-      </fieldset>
-    </div>
+    <div>
+      {% for legend, fields in fieldsets %}
+      <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12" style="display: inline-block; vertical-align:top;">
+        <div class="well">
+          <fieldset>
+            <legend>{{ legend }}</legend>
+            {% for field in fields %}
+              <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
+                <label for="first_name" class="control-label">
+                  {{ field.label }}
+                </label>
+                {% if field.name == 'username' %}
+                  <input id="id_username" name="username" type="text" class="form-control">
+                {% elif field.name == 'lists' %}
+                  {% for choice in field %}
+                    <div class="checkbox">
+                      {{ choice }}
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  {{ field }}
+                {% endif %}
+                {{ field.errors }}
+              </div>
 
-    <div class="col-lg-5 col-lg-offset-1">
-      <fieldset class="well">
-        <legend>{% trans "Professionals Information" %}</legend>
-        {% render_form_field form.institution %}
-        {% render_form_field form.role %}
-      </fieldset>
-
-      <fieldset class="well">
-        <legend>{% trans "Subscribe to mail lists" %}</legend>
-        <div class="unstyled-list">
-          {% render_form_field form.lists %}
+            {% endfor %}
+          </fieldset>
         </div>
-      </fieldset>
-    </div>
+      </div>
+      {% endfor %}
 
-    <div class="col-lg-2 pull-right">
-      <input type="submit" value="{% trans 'Register' %}"/>
     </div>
   </div>
+
+  <div class="row">
+    <div class="submit">
+      <input type="submit" value="{% trans 'Register' %}" class="btn btn-primary btn-lg btn-block">
+    </div>
+  </div>
+
 </form>
+
 {% endblock %}

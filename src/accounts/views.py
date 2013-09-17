@@ -12,20 +12,39 @@ from django.shortcuts import render, get_object_or_404
 from .forms import UserCreationForm
 from super_archives.models import UserProfile, EmailAddress
 
+# helper
+def get_field_set(form):
+    fieldsets = (
+        (_('Personal Information'), (
+            form['first_name'],
+            form['last_name'],
+            form['email'],
+            form['username'],
+          )
+        ),
+        (_('Subscribe to mail lists'), (
+            form['lists'],
+          )
+        ),
+    )
+    return fieldsets
+
 
 def signup(request):
 
     # If the request method is GET just return the form
     if request.method == 'GET':
         form = UserCreationForm()
-        return render(request, 'accounts/signup-form.html', {'form': form})
+        return render(request, 'accounts/signup-form.html',
+                      {'form': form, 'fieldsets': get_field_set(form)})
 
     # If the request method is POST try to store data
     form = UserCreationForm(request.POST)
 
     # If there is validation errors give the form back to the user
     if not form.is_valid():
-        return render(request, 'accounts/signup-form.html', {'form': form})
+        return render(request, 'accounts/signup-form.html',
+                      {'form': form, 'fieldsets': get_field_set(form)})
 
     user = User(
         username=form.cleaned_data.get('username'),
