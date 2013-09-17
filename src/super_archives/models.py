@@ -58,7 +58,7 @@ class UserProfile(models.Model):
     twitter = models.CharField(max_length=128, null=True)
     facebook = models.CharField(max_length=128, null=True)
     google_talk = models.EmailField(null=True)
-    webpage = models.CharField(max_length=256)
+    webpage = models.CharField(max_length=256, null=True)
     verification_hash = models.CharField(max_length=32, null=True)
     
     class Meta:
