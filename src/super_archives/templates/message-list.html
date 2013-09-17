@@ -13,11 +13,10 @@
       <h4>{% trans "Sort by" %}</h4>
       <ul class="none">
         <li {% ifequal order_by "hottest" %} title="{% trans "Remove filter" %}" {% endifequal %}>
-         <span class="glyphicon glyphicon-chevron-right"><a href="{% ifequal order_by "hottest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hottest',p=1 %} {% endifequal %}">
-            {% trans "Relevance" %}</a></span></li>
+         <span class="glyphicon glyphicon-chevron-right"></span> <a href="{% ifequal order_by "hottest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hottest',p=1 %} {% endifequal %}">{% trans "Relevance" %}</a></li>
         <li {% ifequal order_by "latest" %} title="{% trans "Remove filter" %}" {% endifequal %}>
-          <span class="glyphicon glyphicon-chevron-right"><a href="{% ifequal order_by "latest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='latest',p=1 %} {% endifequal %}">
-            {% trans "Recent activity" %}</a></span></li>
+          <span class="glyphicon glyphicon-chevron-right"></span> <a href="{% ifequal order_by "latest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='latest',p=1 %} {% endifequal %}">
+            {% trans "Recent activity" %}</a></li>
       </ul>
 
       <div class="row">&nbsp;</div>
@@ -26,8 +25,8 @@
       <ul class="none">
         {% for list in lists %}
           <li {% ifequal list.name selected_list %} title="{% trans "Remove filter" %}" {% endifequal %}>
-            <span class="glyphicon glyphicon-chevron-right"><a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
-            {% endifnotequal %}">{{ list.name }}</a></span></li>
+            <span class="glyphicon glyphicon-chevron-right"></span> <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
+            {% endifnotequal %}">{{ list.name }}</a></li>
         {% endfor %}
       </ul>
     </div>
