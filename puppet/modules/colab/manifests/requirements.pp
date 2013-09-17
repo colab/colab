@@ -74,4 +74,9 @@ class colab::requirements {
   package { 'libxslt1-dev':
     ensure => installed,
   }
+
+  # req by Django L10N
+  package { 'gettext':
+    ensure => installed,
+  }
 }
