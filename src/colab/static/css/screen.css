@@ -184,6 +184,15 @@ ul.indent-dois {
     margin: 0;
 }
 
+.selected .glyphicon-remove {
+    color: #f00;
+}
+
+.selected a {
+    color: #000;
+    font-weight: bold;
+}
+
 /* Converse JS */
 
 #chatpanel form#converse-login {
