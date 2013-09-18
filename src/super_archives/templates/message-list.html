@@ -40,26 +40,23 @@
           </span>
         {% endfor %}
       </ul>
-      <div class="row">&nbsp;</div>
 
     </div>
 
-    <div class="row">
-      {% if n_results %}
-        <div class="col-xm-12 col-sm-12 col-md-10 col-lg-10 col-lg-offset-2 text-center">
-          {% if threads.has_previous %}
-            <a href="{% append_to_get p=threads.previous_page_number %}">{% trans "Previous" %}</a>
-          {% endif %}
-
-          <span>
-            {% trans "Page" %} {{ threads.number }} {% trans "of" %} {{ threads.paginator.num_pages }}
-          </span>
-
-          {% if threads.has_next %}
-            <a href="{% append_to_get p=threads.next_page_number %}">{% trans "Next" %}</a>
-          {% endif %}
+  {% if n_results %}
+    <div class="text-center">
+      {% if threads.has_previous %}
+        <a href="{% append_to_get p=threads.previous_page_number %}">{% trans "Previous" %}</a>
       {% endif %}
-    </div>
+
+      <span>
+        {% trans "Page" %} {{ threads.number }} {% trans "of" %} {{ threads.paginator.num_pages }}
+      </span>
+
+      {% if threads.has_next %}
+        <a href="{% append_to_get p=threads.next_page_number %}">{% trans "Next" %}</a>
+      {% endif %}
+  {% endif %}
 
   </div>
 </div>
