@@ -7,11 +7,11 @@
   <hr/>
 
   <div class="row">
-    <div class="col-lg-2">
+    <div id="filters" class="hidden-xs hidden-sm col-md-2 col-lg-2">
       <h3>{% trans "Filters" %}</h3>
 
       <h4>{% trans "Sort by" %}</h4>
-      <ul class="none">
+      <ul class="unstyled-list">
         <li {% ifequal order_by "hottest" %} title="{% trans "Remove filter" %}" {% endifequal %}>
          <span class="glyphicon glyphicon-chevron-right"></span> <a href="{% ifequal order_by "hottest" %} {% append_to_get order="",p=1 %} {% else %} {% append_to_get order='hottest',p=1 %} {% endifequal %}">{% trans "Relevance" %}</a></li>
         <li {% ifequal order_by "latest" %} title="{% trans "Remove filter" %}" {% endifequal %}>
@@ -19,10 +19,8 @@
             {% trans "Recent activity" %}</a></li>
       </ul>
 
-      <div class="row">&nbsp;</div>
-
       <h4>{% trans "Lists" %}</h4>
-      <ul class="none">
+      <ul class="unstyled-list">
         {% for list in lists %}
           <li {% if list.name == selected_list %} title="{% trans "Remove filter" %}" class="selected" {% endif %}>
             <span class="glyphicon {% if list.name == selected_list %}glyphicon-remove{% else %}glyphicon-chevron-right{% endif %}"></span> <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name,p=1 %} {% else %} {% append_to_get list="",p=1 %}
@@ -31,8 +29,8 @@
       </ul>
     </div>
 
-    <div class="col-lg-10 last">
-      <ul>
+    <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+      <ul class="unstyled-list">
         {% for thread in threads.object_list %}
           {% include "message-preview.html" with doc=thread.latest_message %}
         {% empty %}
@@ -48,7 +46,7 @@
 
     <div class="row">
       {% if n_results %}
-        <div class="col-lg-10 col-lg-offset-2 text-center">
+        <div class="col-xm-12 col-sm-12 col-md-10 col-lg-10 col-lg-offset-2 text-center">
           {% if threads.has_previous %}
             <a href="{% append_to_get p=threads.previous_page_number %}">{% trans "Previous" %}</a>
           {% endif %}

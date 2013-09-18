@@ -1,3 +1,9 @@
+
+
+body {
+    font-size: 15px;
+}
+
 /* Header */
 #header-searchbox {
     width: 280px;
@@ -39,9 +45,10 @@
     background-color: #2183b3;
     padding: 2px 4px;
     border-radius: 5px;
-    font-size: 90%;
+    font-size: 85%;
     color: #fff;
-    margin-right: 5px;
+    margin-right: 4px;
+    margin-left: 4px;
     line-height: 2;
     white-space: nowrap;
 }
@@ -120,10 +127,22 @@ form.signup div.submit {
     vertical-align: middle;
 }
 
-.unstyled-list ul, ul.none {
+#filters h4 {
+    margin-top: 25px;
+}
+
+ul.unstyled-list {
     list-style-type: none;
     padding: 3px 0;
     margin: 10px 0;
+}
+
+ul.unstyled-list li {
+    min-height: 30px;
+}
+
+ul.unstyled-list .glyphicon-chevron-right {
+    font-size: 85%;
 }
 
 ul.indent {
