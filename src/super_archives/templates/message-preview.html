@@ -32,7 +32,7 @@
   </span>
 
   <div class="quiet">
-    <span class="left">
+    <span class="pull-left">
       {% trans "by" %}
 																												      {% if doc.from_address.get_full_name %}
       <a href="{{ doc.from_address.get_profile_link }}">
@@ -43,7 +43,7 @@
       {% endif %}
     </span>
 
-    <span class="right">
+    <span class="pull-right">
       {{ doc.modified|timesince }}
       {% trans "ago" %}
     </span>
