@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load i18n browserid conversejs %}
+{% load i18n browserid conversejs gravatar %}
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,66 +43,79 @@
   <body class="container">
     {% browserid_info %}
     <div class="row">
-        {% if not user.is_authenticated %}
-        <div class="col-sm-9 col-lg-11 text-right">
-          <a href="{% url 'signup' %}">{% trans "Register" %}</a>
-        </div>
-        <div class="col-sm-1 col-lg-1">
-          {% browserid_login text='Login' next=request.path %}
-        </div>
-        {% else %}
-        <div class="col-sm-8 col-md-10 text-right">
-          {% trans "authenticated as" %} <b>{{ user.username }}</b>
-        </div>
-        <div class="col-sm-2 col-md-1 text-center">
-          <a href="{% url 'user_profile' user.username %}">
-            {% trans "My Profile" %}
-          </a>
-        </div>
-        <div class="col-sm-2 col-md-1 text-center">
-          {% browserid_logout text='Logout '%}
-        </div>
-        {% endif %}
     </div>
 
-      {% block header %}
-        <!--<h1><span>{% trans "COLAB" %}</span>-->
-          <a href="/">
-            <img src="{{ STATIC_URL }}img/logo_small.png" alt="{% trans 'Colab' %}" /></a>
-        </h1>
-      {% endblock %}
+    {% block header %}{% endblock %}
 
-      <div id="header-menu" class="row">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img alt="Colab" src="/static/img/logo_nav.png"</a>
+      </div>
 
-        <span class="col-sm-2 text-center">
-          <a href="{% url 'thread_list' %}">{% trans "Discussions" %}</a>
-        </span>
-        <span class="col-sm-2 col-lg-1 text-center">
-          <a href="http://colab.interlegis.gov.br/wiki" target="_blank">{% trans "Wiki" %}</a>
-        </span>
-        <span class="col-sm-2 col-lg-1 text-center">
-          <a href="http://listas.interlegis.gov.br/mailman/listinfo/"
-             target="_blank">{% trans "Contribute" %}</a>
-        </span>
-        <span class="col-sm-3 col-lg-2 text-center">
-          <a href="http://colab.interlegis.leg.br/newticket"
-             target="_blank">{% trans "Report a problem" %}</a>
-        </span>
-        <span class="col-sm-2 col-lg-1 text-center">
-          <a href="{% url "feedzilla_index" %}">{% trans "Planet" %}</a>
-        </span>
+      <div class="collapse navbar-collapse navbar-main">
+        <ul class="nav navbar-nav">
+          <li>
+            <a href="{% url 'thread_list' %}">{% trans "Discussions" %}</a>
+          </li>
+          <li>
+            <a href="http://colab.interlegis.gov.br/wiki" target="_blank">{% trans "Wiki" %}</a>
+          </li>
+          <li>
+            <a href="http://listas.interlegis.gov.br/mailman/listinfo/"
+               target="_blank">{% trans "Contribute" %}</a>
+          </li>
+          <li>
+            <a href="http://colab.interlegis.leg.br/newticket"
+               target="_blank">{% trans "Report a problem" %}</a>
+          </li>
+          <li>
+            <a href="{% url "feedzilla_index" %}">{% trans "Planet" %}</a>
+          </li>
+        </ul>
 
-        <span class="col-sm-6 col-lg-5 text-center">
-          <form action="/search/" method="GET" class="form-inline" role="form">
+        <ul class="nav navbar-nav navbar-right">
+          {% if not user.is_authenticated %}
+            <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
+            <li>{% browserid_login text='Login' next=request.path %}</li>
+          {% else %}
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <div class="user-menu">
+                    <div class="thumbnail">{% gravatar user.email 100 %}</div>
+                    <div class="user-menu-info">
+                      <span><b>{{ user.get_full_name }}</b></span>
+                      <span class="quiet">{{ user.email }}</span>
+                    </div>
+                    <div>
+                      <a class="btn btn-info pull-left" href="{% url 'user_profile' user.username %}">{% trans "My Profile" %}</a>
+                      {% browserid_logout text='Logout' link_class='btn btn-default pull-right' %}
+                    </div>
+                  <div>
+                </li>
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+
+        <form action="/search/" method="GET" id="search-form" class="navbar-form navbar-right" role="search">
+          <div class="form-group">
+            <label class="sr-only" for="header-searchbox">{% trans 'Search here...' %}</label>
             <input name="q" id="header-searchbox"
                    class="form-control" value="{{ request.GET.q }}"
                    type="search" placeholder="{% trans 'Search here...' %}" />
-            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> {% trans 'Search' %}</button>
-          </form>
-        </span>
+          </div>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> {% trans 'Search' %}</button>
+        </form>
       </div>
-
-    <hr id="header-hr"/>
+    </nav>
 
     <div>
       {% block main-content %} {% endblock %}

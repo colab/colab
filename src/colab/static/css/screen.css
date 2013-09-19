@@ -1,21 +1,51 @@
 
 
 body {
-    font-size: 15px;
+    padding-top: 70px;
 }
 
 /* Header */
-#header-searchbox {
-    width: 280px;
-}
 
-#header-menu {
-    line-height: 50px;
+
+#header-searchbox {
+    width: 200px;
 }
 
 #header-hr {
     margin-top: 0;
 }
+
+.navbar-default .navbar-brand,
+.navbar a.dropdown-toggle {
+    padding: 0;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.navbar .user-menu {
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.navbar .user-menu a {
+    margin: 5px 0;
+}
+
+.navbar .user-menu-info {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5px;
+}
+
+.navbar .user-menu-info span {
+    display: block;
+}
+
+.navbar .dropdown-menu .thumbnail {
+    width: 100px;
+    display: inline-block;
+}
+
 /* End of Header */
 
 
@@ -28,7 +58,7 @@ body {
 .preview-message {
     white-space: nowrap;
     overflow: hidden;
-    line-height: 28px;
+    line-height: 25px;
     border-bottom: solid 1px #ddd;
 }
 
@@ -138,7 +168,7 @@ ul.unstyled-list {
 }
 
 ul.unstyled-list li {
-    min-height: 30px;
+    min-height: 27px;
 }
 
 ul.unstyled-list .glyphicon-chevron-right {
