@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load append_to_get %}
+{% load gravatar %}
 {% block main-content %}
 <div class="row">
 
@@ -47,8 +48,7 @@
     <li>
       <div class="col-lg-2 text-center">
         <a href="{{ email.from_address.get_profile_link }}">
-          <img width="80px" height="80px"
-               src="http://www.gravatar.com/avatar/{{ email.from_address.md5 }}?s=80&d=identicon" />
+          {% gravatar email.from_address 80 %}
           <div>&nbsp;</div>
           {% trans "Anonymous" as anonymous %}
           <span>{% firstof email.from_address.get_full_name anonymous %}</span>
