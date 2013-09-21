@@ -55,7 +55,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/"><img alt="Colab" src="/static/img/logo_nav.png"</a>
+        <a class="navbar-brand" href="/"><img alt="Colab" src="/static/img/logo_nav.png"></a>
       </div>
 
       <div class="collapse navbar-collapse navbar-main">
@@ -98,21 +98,21 @@
                       <a class="btn btn-info pull-left" href="{% url 'user_profile' user.username %}">{% trans "My Profile" %}</a>
                       {% browserid_logout text='Logout' link_class='btn btn-default pull-right' %}
                     </div>
-                  <div>
+                  </div>
                 </li>
               </ul>
             </li>
           {% endif %}
         </ul>
 
-        <form action="/search/" method="GET" id="search-form" class="navbar-form navbar-right" role="search">
+        <form action="/search/" method="GET" id="search-form" class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
           <div class="form-group">
             <label class="sr-only" for="header-searchbox">{% trans 'Search here...' %}</label>
             <input name="q" id="header-searchbox"
                    class="form-control" value="{{ request.GET.q }}"
                    type="search" placeholder="{% trans 'Search here...' %}" />
           </div>
-          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span> {% trans 'Search' %}</button>
+          <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
         </form>
       </div>
     </nav>

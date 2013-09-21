@@ -8,7 +8,7 @@ body {
 
 
 #header-searchbox {
-    width: 200px;
+    width: 140px;
 }
 
 #header-hr {
@@ -124,7 +124,7 @@ body {
 
 .container {
     /* Overwritting max-width for better web responsive */
-    max-width: 95% !important;
+    /* max-width: 95% !important; */
 }
 
 /* Forms */
