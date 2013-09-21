@@ -84,13 +84,13 @@
             <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
             <li>{% browserid_login text='Login' next=request.path %}</li>
           {% else %}
-            <li class="dropdown">
+            <li id="user-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <div class="user-menu">
+                  <div class="wrapper">
                     <div class="thumbnail">{% gravatar user.email 100 %}</div>
-                    <div class="user-menu-info">
+                    <div class="user-info">
                       <span><b>{{ user.get_full_name }}</b></span>
                       <span class="quiet">{{ user.email }}</span>
                     </div>
