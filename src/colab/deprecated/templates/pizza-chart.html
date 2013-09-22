@@ -28,8 +28,8 @@
       ]);
 
       // Set chart options
-      var options = {'width': {{ chart_width }},
-                     'height': {{ chart_height }},
+      var options = {'width': '{{ chart_width }}',
+                     'height': '{{ chart_height }}',
                      'legend': 'bottom',
                      chartArea: {
                         top:10,
@@ -40,6 +40,10 @@
       // Instantiate and draw our chart, passing in some options.
       var chart = new google.visualization.PieChart(document.getElementById('{{ chart_div }}'));
       chart.draw(data, options);
+
+      $(window).on("debouncedresize", function( event ) {
+        chart.draw(data, options);
+      });
     }
     </script>
 {% endif %}

@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block head_js %}
-  {% include "pizza-chart.html" with chart_div="collabs" chart_width=410 chart_height=330 %}
+  {% include "pizza-chart.html" with chart_div="collabs" chart_width="100%" chart_height=330 %}
 {% endblock %}
 
 {% block header %}
@@ -40,19 +40,19 @@
 
 
     <div class="col-lg-6 col-md-6">
-      <h3 class="column-align">{% trans "Distribution of Collaborations" %}</h3>
-      <div>&nbsp;</div>
+      <h3 class="column-align">{% trans "Collaboration Graph" %}</h3>
+      <div id="collabs"></div>
     </div>
   </div>
 
   <div class="row">
     <div class="col-lg-6 col-md-6">
       <h3 class="column-align">
-        {% trans "Most Relevant Discussions" %}
+        {% trans "Most Relevant Threads" %}
       </h3>
       <a class="rss-icon" target="_blank"
          href="{% url 'rss_hottest_threads' %}"
-         title="{% trans "RSS - Discussions Most Relevance" %}">
+         title="{% trans "RSS - Most Relevant Threads" %}">
       </a>
       <ul class="message-list">
         {% for thread in hottest_threads %}
@@ -61,18 +61,18 @@
       </ul>
       <a class="column-align"
          href="{% url 'thread_list' %}?order=hottest">
-        {% trans "View more discussions relevance..." %}
+        {% trans "View more discussions..." %}
       </a>
       <div>&nbsp;</div>
     </div>
 
     <div class="col-lg-6 col-md-6">
       <h3 class="column-align">
-        {% trans "Latest Discussions" %}
+        {% trans "Latest Threads" %}
       </h3>
       <a class="rss-icon" target="_blank"
          href="{% url 'rss_latest_threads' %}"
-         title="{% trans "RSS - Latest Discussions" %}">
+         title="{% trans "RSS - Latest Threads" %}">
       </a>
       <ul class="message-list">
         {% for thread in latest_threads %}

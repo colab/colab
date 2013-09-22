@@ -4,13 +4,8 @@ body {
     padding-top: 70px;
 }
 
-/* better fit for xm and sm screens */
-h3 {
-    font-size: 160%;
-}
 
 /* Header */
-
 
 #header-searchbox {
     width: 140px;
