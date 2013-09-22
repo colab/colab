@@ -6,28 +6,27 @@
 {% endblock %}
 
 {% block header %}
-  <div class="row">
+  <div class="row hidden-xs hidden-sm">
     <div class="col-lg-2 col-lg-offset-5 text-center">
       <img src="{{ STATIC_URL }}img/logo.png" />
     </div>
   </div>
 
-  <h3 class="text-center">{% trans "INTERLEGIS COMMUNITIES" %}</h3>
+  <h3 class="text-center hidden-xs hidden-sm">{% trans "INTERLEGIS COMMUNITIES" %}</h3>
 {% endblock %}
 
 {% block main-content %}
 
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6">
       <h3 class="column-align">
-        {% trans "Latest collaborations" %}
+        {% trans "Latest Collaborations" %}
       </h3>
-      <a class="pull-right" target="_blank"
+      <a class="rss-icon" target="_blank"
          href="{% url 'rss_latest_colab' %}"
          title="{% trans 'RSS - Latest collaborations' %}">
-         <div class="rss-icon"></div>
       </a>
-      <ul>
+      <ul class="message-list">
         {% for doc in latest_docs %}
           {% include "message-preview.html" %}
         {% endfor %}
@@ -40,23 +39,22 @@
     </div>
 
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6">
       <h3 class="column-align">{% trans "Distribution of Collaborations" %}</h3>
       <div>&nbsp;</div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6">
       <h3 class="column-align">
-        {% trans "Discussions Most Relevance" %}
+        {% trans "Most Relevant Discussions" %}
       </h3>
-      <a class="pull-right" target="_blank"
+      <a class="rss-icon" target="_blank"
          href="{% url 'rss_hottest_threads' %}"
          title="{% trans "RSS - Discussions Most Relevance" %}">
-         <div class="rss-icon"></div>
       </a>
-      <ul>
+      <ul class="message-list">
         {% for thread in hottest_threads %}
           {% include "message-preview.html" with doc=thread.latest_message %}
         {% endfor %}
@@ -68,16 +66,15 @@
       <div>&nbsp;</div>
     </div>
 
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-md-6">
       <h3 class="column-align">
         {% trans "Latest Discussions" %}
       </h3>
-      <a class="pull-right" target="_blank"
+      <a class="rss-icon" target="_blank"
          href="{% url 'rss_latest_threads' %}"
          title="{% trans "RSS - Latest Discussions" %}">
-         <div class="rss-icon"></div>
       </a>
-      <ul>
+      <ul class="message-list">
         {% for thread in latest_threads %}
           {% include "message-preview.html" with doc=thread.latest_message %}
         {% endfor %}

@@ -4,6 +4,11 @@ body {
     padding-top: 70px;
 }
 
+/* better fit for xm and sm screens */
+h3 {
+    font-size: 160%;
+}
+
 /* Header */
 
 
@@ -120,12 +125,17 @@ body {
 .subject img {
     margin-right: 5px;
 }
+
+/* message-list (ul wrapping preview-message) */
+
+ul.message-list {
+   padding: 0;
+}
+
 /* End of message-preview.html */
 
-.container {
-    /* Overwritting max-width for better web responsive */
-    /* max-width: 95% !important; */
-}
+
+
 
 /* Forms */
 .required label:before {
@@ -151,14 +161,13 @@ form.signup div.submit {
     background-image: url(../img/rss.png);
     width: 16px;
     height: 16px;
+    display: inline-block;
+    margin-left: 3px;
 }
 
 .column-align {
     display: inline-block;
-    margin-left: 20px;
-    margin-top: 0;
-    margin-bottom: 10px;
-    vertical-align: middle;
+    margin-bottom: 20px;
 }
 
 #filters h4 {
