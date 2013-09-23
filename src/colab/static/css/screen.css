@@ -151,6 +151,15 @@ form.signup div.submit {
     width: 200px;
 }
 
+.checkbox ul {
+    list-style: none;
+    padding: 0;
+}
+
+.checkbox ul li {
+    line-height: 1.6;
+}
+
 /* End Forms */
 
 
