@@ -7,51 +7,44 @@
 {% endblock %}
 
 {% block main-content %}
-  {% if not user_profile %}
-    <div class="alert alert-info alert-dismissable">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <strong>{% trans "User not registered." %}</strong> {% trans "Is that you?" %}
-      <a href="{% url 'signup' %}">{% trans "Click here and sign up." %}</a>
-    </div>
-  {% endif %}
 
   <div id="user-profile" class="row">
     <div class="vcard col-lg-3 col-md-3 col-sm-4">
       <div class="thumbnail">
-        {% gravatar email_address.address 200 %}
+        {% gravatar user_.email 200 %}
       </div>
 
       <h1>
-        <span>{{ email_address.get_full_name }}</span>
-        <em>{{ email_address.user.username }}</em>
+        <span>{{ user_.get_full_name }}</span>
+        <em>{{ user_.username }}</em>
       </h1>
 
-      {% ifequal request.user user_profile.user %}
-        <a class="btn btn-info" href="{% url 'user_profile_update' request.user %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "update your profile"|title %}</a>
+      {% ifequal request.user user_ %}
+        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "update your profile"|title %}</a>
       {% endifequal %}
 
       <div class="divider"></div>
 
       <ul class="unstyled-list">
-        {% if user_profile.institution or user_profile.role %}
+        {% if user_.profile.institution or user_.profile.role %}
         <li>
           <span class="icon-briefcase icon-fixed-width"></span>
-          {{ user_profile.role }}
-          {% if user_profile.institution and user_profile.role %}-{% endif %}
-          {{ user_profile.institution }}
+          {{ user_.profile.role }}
+          {% if user_.profile.institution and user_.profile.role %}-{% endif %}
+          {{ user_.profile.institution }}
         </li>
         {% endif %}
-        {% if user_profile.twitter %}
-        <li><span class="icon-twitter icon-fixed-width"></span> {{ user_profile.twitter }}</li>
+        {% if user_.profile.twitter %}
+        <li><span class="icon-twitter icon-fixed-width"></span> {{ user_.profile.twitter }}</li>
         {% endif %}
-        {% if user_profile.facebook %}
-        <li><span class="icon-facebook icon-fixed-width"></span> {{ user_profile.facebook }}</li>
+        {% if user_.profile.facebook %}
+        <li><span class="icon-facebook icon-fixed-width"></span> {{ user_.profile.facebook }}</li>
         {% endif %}
-        {% if user_profile.google_talk %}
-        <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_profile.google_talk }}</li>
+        {% if user_.profile.google_talk %}
+        <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.profile.google_talk }}</li>
         {% endif %}
-        {% if user_profile.webpage %}
-        <li><span class="icon-link icon-fixed-width"></span> {{ user_profile.webpage }}</li>
+        {% if user_.profile.webpage %}
+        <li><span class="icon-link icon-fixed-width"></span> {{ user_.profile.webpage }}</li>
         {% endif %}
       </ul>
     </div>

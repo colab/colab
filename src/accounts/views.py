@@ -6,11 +6,15 @@ from colab.deprecated import signup as signup_
 
 from django.template import RequestContext
 from django.contrib.auth.models import User
+from django.views.generic import DetailView
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
 
+from colab.deprecated import solrutils
+
 from .forms import UserCreationForm
-from super_archives.models import UserProfile, EmailAddress
+from super_archives.models import UserProfile, EmailAddress, Message
+
 
 # helper
 def get_field_set(form):
@@ -109,3 +113,33 @@ def verify_email(request, hash):
     }
 
     return render(request, 'accounts/account_message.html', template_data)
+
+
+class UserProfileDetailView(DetailView):
+    model = User
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    context_object_name = 'user_'
+    template_name = 'accounts/user-profile.html'
+
+    def get_context_data(self, **kwargs):
+        user = self.object
+        context = {}
+
+        # TODO: Use haystack instead of solrutils
+        context['type_count'] = solrutils.count_types(
+            filters={'collaborator': user.username}
+        )
+
+        # TODO: Use haystack instead of solrutils
+        context['docs'] = solrutils.get_latest_collaborations(
+            username=user.username
+        )
+
+        email_pks = [addr.pk for addr in user.emails.iterator()]
+        query = Message.objects.filter(from_address__in=email_pks)
+        query = query.order_by('-received_time')
+        context['emails'] = query[:10]
+
+        return super(UserProfileDetailView, self).get_context_data(**context)
+
