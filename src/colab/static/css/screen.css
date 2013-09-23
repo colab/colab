@@ -127,9 +127,11 @@ ul.message-list {
    padding: 0;
 }
 
+ul.message-list li {
+    list-style: none;
+}
+
 /* End of message-preview.html */
-
-
 
 
 /* Forms */
@@ -150,6 +152,47 @@ form.signup div.submit {
 }
 
 /* End Forms */
+
+
+/* User profile */
+
+.vcard .thumbnail {
+    width: 200px;
+    height: 200px;
+}
+
+.vcard h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 26px;
+    line-height: 33px;
+    letter-spacing: -1px;
+}
+
+.vcard h1 span,
+.vcard h1 em {
+    display: inline-block;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    padding: 0;
+    vertical-align: bottom;
+}
+
+.vcard h1 em {
+    font-weight: 300;
+    font-size: 20px;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.vcard .divider {
+    border-bottom: 1px solid #EEE;
+    margin-top: 10px;
+}
+
+
+/* end of User profile */
 
 
 .rss-icon {
@@ -183,25 +226,11 @@ ul.unstyled-list .glyphicon-chevron-right {
     font-size: 85%;
 }
 
-ul.indent {
-    padding-left: 1.5em;
-}
-
-ul.indent-dois {
-    padding-left: 3.5em;
-}
-
 #avatar {
     background-color: #FFF;
     padding: 9px 12px;
     width: 47px;
     height: 50px;
-}
-
-#profile-img{
-    border: 1px solid #DDDDDD;
-    width: 100px;
-    height: 100px;
 }
 
 .blog-post-item .post-meta {

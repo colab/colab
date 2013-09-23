@@ -1,6 +1,5 @@
 {% load i18n %}
 
-{% if type_count %}
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     <script type="text/javascript">
@@ -21,20 +20,28 @@
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
+      {% if type_count %}
         ['{% trans "Emails"%}', {% firstof type_count.thread '0' %}],
         ['{% trans "Tickets"%}', {% firstof type_count.ticket '0' %}],
         ['{% trans "Wiki"%}', {% firstof type_count.wiki '0' %}],
         ['{% trans "Code"%}', {% firstof type_count.changeset '0' %}],
+      {% else %}
+        ['{% trans "Willing to help" %}', 100],
+      {% endif %}
       ]);
 
       // Set chart options
-      var options = {'width': '{{ chart_width }}',
-                     'height': '{{ chart_height }}',
-                     'legend': 'bottom',
-                     chartArea: {
-                        top:10,
-                        height:"85%",
-                      },
+      var options = {
+        height: '{{ chart_height }}',
+        legend: {
+          position: 'bottom',
+          alignment: 'center',
+        },
+        chartArea: {
+          height: "85%",
+          width: "95%",
+          top: 10,
+        },
       };
 
       // Instantiate and draw our chart, passing in some options.
@@ -46,4 +53,3 @@
       });
     }
     </script>
-{% endif %}
