@@ -142,6 +142,8 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
 
+AUTH_USER_MODEL = 'accounts.User'
+
 
 ### Proxy configuration
 SOCKS_SERVER = None
