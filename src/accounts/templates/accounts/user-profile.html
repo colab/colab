@@ -26,25 +26,25 @@
       <div class="divider"></div>
 
       <ul class="unstyled-list">
-        {% if user_.profile.institution or user_.profile.role %}
+        {% if user_.institution or user_.role %}
         <li>
           <span class="icon-briefcase icon-fixed-width"></span>
-          {{ user_.profile.role }}
-          {% if user_.profile.institution and user_.profile.role %}-{% endif %}
-          {{ user_.profile.institution }}
+          {{ user_.role }}
+          {% if user_.institution and user_.role %}-{% endif %}
+          {{ user_.institution }}
         </li>
         {% endif %}
-        {% if user_.profile.twitter %}
-        <li><span class="icon-twitter icon-fixed-width"></span> {{ user_.profile.twitter }}</li>
+        {% if user_.twitter %}
+        <li><span class="icon-twitter icon-fixed-width"></span> {{ user_.twitter }}</li>
         {% endif %}
-        {% if user_.profile.facebook %}
-        <li><span class="icon-facebook icon-fixed-width"></span> {{ user_.profile.facebook }}</li>
+        {% if user_.facebook %}
+        <li><span class="icon-facebook icon-fixed-width"></span> {{ user_.facebook }}</li>
         {% endif %}
-        {% if user_.profile.google_talk %}
-        <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.profile.google_talk }}</li>
+        {% if user_.google_talk %}
+        <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.google_talk }}</li>
         {% endif %}
-        {% if user_.profile.webpage %}
-        <li><span class="icon-link icon-fixed-width"></span> {{ user_.profile.webpage }}</li>
+        {% if user_.webpage %}
+        <li><span class="icon-link icon-fixed-width"></span> {{ user_.webpage }}</li>
         {% endif %}
       </ul>
     </div>

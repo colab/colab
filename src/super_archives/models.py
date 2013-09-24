@@ -40,14 +40,6 @@ class EmailAddress(models.Model):
             return self.user.get_full_name()
         elif self.real_name:
             return self.real_name
-            
-    def get_profile_link(self):
-        if self.user:
-            # TODO: stop using username in url
-            return reverse('user_profile', args=[self.user.username])
-        else:
-            return reverse('colab.deprecated.views.userprofile.by_emailhash',
-                           args=[self.md5])
 
     def __unicode__(self):
         return '"%s" <%s>' % (self.get_full_name(), self.address)

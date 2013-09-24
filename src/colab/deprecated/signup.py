@@ -15,7 +15,7 @@ def send_verification_email(request, user):
     to = user.email
     
     email_data = {
-        'hash': user.profile.verification_hash,
+        'hash': user.verification_hash,
         'server_name': request.get_host(),
     }
 
