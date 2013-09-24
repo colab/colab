@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Message, Thread, UserProfile
+from .models import Message, Thread
 
 class MessageAdmin(admin.ModelAdmin):
     list_filter = ('spam', 'thread__mailinglist', 'received_time', )
@@ -48,7 +48,6 @@ class ThreadAdmin(admin.ModelAdmin):
     )
     
 
-admin.site.register(UserProfile)
 admin.site.register(Thread, ThreadAdmin)
 admin.site.register(Message, MessageAdmin)
 

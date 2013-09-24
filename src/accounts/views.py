@@ -5,7 +5,7 @@ import uuid
 from colab.deprecated import signup as signup_
 
 from django.template import RequestContext
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.views.generic import DetailView
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, get_object_or_404
@@ -13,7 +13,7 @@ from django.shortcuts import render, get_object_or_404
 from colab.deprecated import solrutils
 
 from .forms import UserCreationForm
-from super_archives.models import UserProfile, EmailAddress, Message
+from super_archives.models import EmailAddress, Message
 
 
 # helper
@@ -116,7 +116,7 @@ def verify_email(request, hash):
 
 
 class UserProfileDetailView(DetailView):
-    model = User
+    model = get_user_model()
     slug_field = 'username'
     slug_url_kwarg = 'username'
     context_object_name = 'user_'
