@@ -23,6 +23,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'cliauth',
     'django_browserid',
     'conversejs',
+    'registration',
 
     # Own apps
     'super_archives',
