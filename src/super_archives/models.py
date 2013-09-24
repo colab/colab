@@ -5,9 +5,12 @@ from hashlib import md5
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
+
+
+User = get_user_model()
 
 
 class NotSpamManager(models.Manager):
@@ -48,29 +51,6 @@ class EmailAddress(models.Model):
 
     def __unicode__(self):
         return '"%s" <%s>' % (self.get_full_name(), self.address)
-
-
-class UserProfile(models.Model):
-    
-    user = models.OneToOneField(User, unique=True)
-    institution = models.CharField(max_length=128, null=True)
-    role = models.CharField(max_length=128, null=True)
-    twitter = models.CharField(max_length=128, null=True)
-    facebook = models.CharField(max_length=128, null=True)
-    google_talk = models.EmailField(null=True)
-    webpage = models.CharField(max_length=256, null=True)
-    verification_hash = models.CharField(max_length=32, null=True)
-    
-    class Meta:
-        verbose_name = _(u"User Profile")
-        verbose_name_plural = _(u"Users Profiles")
-    
-    def __unicode__(self):
-        return '"%s" <%s>' % (self.user.get_full_name(), self.user.email)
-
-# This does the same the same than related_name argument but it also creates
-#   a profile in the case it doesn't exist yet. 
-User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
 
 
 class MailingList(models.Model):
