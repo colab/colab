@@ -7,12 +7,13 @@ from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, UpdateView
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect
+from django.core.urlresolvers import reverse
 
 from colab.deprecated import solrutils
 from colab.deprecated import signup as signup_
 
 from super_archives.models import EmailAddress, Message
-from .forms import NewUserForm, ListsForm
+from .forms import UserCreationForm, ListsForm, UserUpdateForm
 
 
 class UserProfileBaseMixin(object):
@@ -24,23 +25,11 @@ class UserProfileBaseMixin(object):
 
 class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     template_name = 'accounts/user_form.html'
-    #form_class = UserUpdateForm
+    form_class = UserUpdateForm
 
     def get_success_url(self):
         return reverse('user_profile', kwargs={'username': self.object.username})
 
-    def get_initial(self):
-        return {
-            'first_name': self.object.first_name,
-            'last_name': self.object.last_name,
-            'email': self.object.email,
-            'institution': self.object.profile.institution,
-            'role': self.object.profile.role,
-            'twitter': self.object.profile.twitter,
-            'facebook': self.object.profile.facebook,
-            'google_talk': self.object.profile.google_talk,
-            'webpage': self.object.profile.webpage,
-        }
 
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
@@ -72,7 +61,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 def signup(request):
     # If the request method is GET just return the form
     if request.method == 'GET':
-        user_form = NewUserForm()
+        user_form = UserCreationForm()
         lists_form = ListsForm()
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})

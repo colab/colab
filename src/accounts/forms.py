@@ -10,16 +10,35 @@ from super_archives.models import MailingList
 User = get_user_model()
 
 
-class NewUserForm(forms.ModelForm):
+class UserForm(forms.ModelForm):
+    required = ('first_name', 'last_name', 'email', 'username')
+
+    class Meta:
+        model = User
+
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            # Adds form-control class to all form fields
+            field.widget.attrs.update({'class': 'form-control'})
+
+            # Set UserForm.required fields as required
+            if field_name in UserForm.required:
+                field.required = True
+
+
+class UserCreationForm(UserForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email', 'username')
 
-    def __init__(self, *args, **kwargs):
-        super(NewUserForm, self).__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs.update({'class': 'form-control'})
-            field.required = True
+
+class UserUpdateForm(UserForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'username',
+                  'institution', 'role', 'twitter', 'facebook',
+                  'google_talk', 'webpage')
 
 
 class ListsForm(forms.Form):

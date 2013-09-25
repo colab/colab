@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% load i18n gravatar %}
+
+{% block main-content %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+    
+      <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
+    </form>
+{% endblock %}
