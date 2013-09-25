@@ -5,8 +5,6 @@ from .views import UserProfileDetailView, UserProfileUpdateView
 
 
 urlpatterns = patterns('',
-    #url(r'^$', 'accounts.views.signup', name='signup'),
-
     url(r'^register/$', 'accounts.views.signup', name='signup'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
