@@ -5,10 +5,9 @@ from .views import UserProfileDetailView
 
 
 urlpatterns = patterns('',
-    url(r'^$', 'accounts.views.signup', name='signup'),
+    #url(r'^$', 'accounts.views.signup', name='signup'),
 
-    url(r'^verify/(?P<hash>[\w]{32})/$',
-        'accounts.views.verify_email', name='email_verification'),
+    url(r'^register/$', 'accounts.views.signup', name='signup'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),

@@ -23,7 +23,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'cliauth',
     'django_browserid',
     'conversejs',
-    'registration',
 
     # Own apps
     'super_archives',
@@ -144,6 +143,14 @@ STATICFILES_DIRS = (
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
 
 AUTH_USER_MODEL = 'accounts.User'
+
+from django.contrib.messages import constants as messages
+MESSAGE_TAGS = {
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
+}
 
 
 ### Proxy configuration
