@@ -145,7 +145,7 @@ form.signup .form-group {
     margin-left: 0.5em;
 }
 
-form.signup div.submit {
+div.submit {
     margin: auto;
     margin-bottom: 5em;
     width: 200px;

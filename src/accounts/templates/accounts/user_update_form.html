@@ -2,10 +2,35 @@
 {% load i18n gravatar %}
 
 {% block main-content %}
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-    
-      <button type="submit" class="btn btn-primary">{% trans "Update" %}</button>
-    </form>
+  <form method="post">
+    {% csrf_token %}
+
+    <div class="col-lg-12">
+      <a href="https://gravatar.com" target="_blank">
+        {% gravatar request.user.email 50 %}
+        {% trans "Change your avatar at Gravatar.com" %}
+      </a>
+    </div>
+    <br>
+
+    <div class="row">
+      {% for field in form %}
+      <div class="col-lg-4 col-md-6 col-sm-12 col-xm-12">
+        <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
+          <label for="{{ field.name }}" class="control-label">
+            {{ field.label }}
+          </label>
+          {{ field }}
+          {{ field.errors }}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="row">
+      <div class="submit">
+        <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Update" %}</button>
+      </div>
+    </div>
+  </form>
 {% endblock %}

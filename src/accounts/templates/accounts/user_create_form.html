@@ -30,7 +30,7 @@
             <legend>{% trans 'Personal Information' %}</legend>
             {% for field in user_form %}
               <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
-                <label for="first_name" class="control-label">
+                <label for="{{ field.name }}" class="control-label">
                   {{ field.label }}
                 </label>
                 {{ field }}
