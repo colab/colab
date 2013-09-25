@@ -24,7 +24,7 @@ class UserProfileBaseMixin(object):
 
 
 class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
-    template_name = 'accounts/user_form.html'
+    template_name = 'accounts/user_update_form.html'
     form_class = UserUpdateForm
 
     def get_success_url(self):
