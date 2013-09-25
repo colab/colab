@@ -4,7 +4,7 @@
 from django.contrib import messages
 
 from django.contrib.auth import get_user_model
-from django.views.generic import DetailView
+from django.views.generic import DetailView, UpdateView
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect
 
@@ -15,12 +15,36 @@ from super_archives.models import EmailAddress, Message
 from .forms import NewUserForm, ListsForm
 
 
-class UserProfileDetailView(DetailView):
+class UserProfileBaseMixin(object):
     model = get_user_model()
     slug_field = 'username'
     slug_url_kwarg = 'username'
     context_object_name = 'user_'
-    template_name = 'accounts/user-profile.html'
+
+
+class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
+    template_name = 'accounts/user_form.html'
+    #form_class = UserUpdateForm
+
+    def get_success_url(self):
+        return reverse('user_profile', kwargs={'username': self.object.username})
+
+    def get_initial(self):
+        return {
+            'first_name': self.object.first_name,
+            'last_name': self.object.last_name,
+            'email': self.object.email,
+            'institution': self.object.profile.institution,
+            'role': self.object.profile.role,
+            'twitter': self.object.profile.twitter,
+            'facebook': self.object.profile.facebook,
+            'google_talk': self.object.profile.google_talk,
+            'webpage': self.object.profile.webpage,
+        }
+
+
+class UserProfileDetailView(UserProfileBaseMixin, DetailView):
+    template_name = 'accounts/user_detail.html'
 
     def get_context_data(self, **kwargs):
         user = self.object
@@ -50,14 +74,14 @@ def signup(request):
     if request.method == 'GET':
         user_form = NewUserForm()
         lists_form = ListsForm()
-        return render(request, 'registration/registration_form.html',
+        return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
     user_form = NewUserForm(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
-        return render(request, 'registration/registration_form.html',
+        return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
     user = user_form.save()
@@ -80,4 +104,3 @@ def signup(request):
                                 'Profiles not validated are deleted in 24h.'))
 
     return redirect('user_profile', username=user.username)
-

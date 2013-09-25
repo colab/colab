@@ -11,14 +11,6 @@
     <b>{% trans "Please correct the errors below and try again" %}</b>
   </div>
   {% endif %}
-
-    <div>
-      {% for field in form %}
-        {% if field.errors %}
-          {{ field.label }}
-        {% endif %}
-      {% endfor %}
-    </div>
 </div>
 
 
@@ -32,35 +24,34 @@
   <div class="row">
 
     <div>
-      {% for legend, fields in fieldsets %}
       <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12" style="display: inline-block; vertical-align:top;">
         <div class="well">
           <fieldset>
-            <legend>{{ legend }}</legend>
-            {% for field in fields %}
+            <legend>{% trans 'Personal Information' %}</legend>
+            {% for field in user_form %}
               <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
                 <label for="first_name" class="control-label">
                   {{ field.label }}
                 </label>
-                {% if field.name == 'username' %}
-                  <input id="id_username" name="username" type="text" class="form-control">
-                {% elif field.name == 'lists' %}
-                  {% for choice in field %}
-                    <div class="checkbox">
-                      {{ choice }}
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {{ field }}
-                {% endif %}
+                {{ field }}
                 {{ field.errors }}
               </div>
-
             {% endfor %}
           </fieldset>
         </div>
       </div>
-      {% endfor %}
+
+      <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12" style="display: inline-block; vertical-align:top;">
+        <div class="well">
+          <fieldset>
+            <legend>{% trans 'Subscribe to mail lists' %}</legend>
+            {% for choice in lists_form.lists %}
+              <div class="checkbox">{{ choice }}</div>
+            {% endfor %}
+            {{ lists_form.errors }}
+          </fieldset>
+        </div>
+      </div>
 
     </div>
   </div>

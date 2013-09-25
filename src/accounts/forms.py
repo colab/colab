@@ -2,7 +2,6 @@
 
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm as UserCreationForm_
 from django.utils.translation import ugettext_lazy as _
 
 from super_archives.models import MailingList

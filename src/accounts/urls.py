@@ -1,7 +1,7 @@
 
 from django.conf.urls import patterns, include, url
 
-from .views import UserProfileDetailView
+from .views import UserProfileDetailView, UserProfileUpdateView
 
 
 urlpatterns = patterns('',
@@ -12,6 +12,6 @@ urlpatterns = patterns('',
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),
 
-    #url(r'^user/(?P<username>[\w@+.-]+)/edit/?$',
-    #    'colab.deprecated.views.userprofile.update', name='user_profile_update'),
+    url(r'^(?P<username>[\w@+.-]+)/edit/?$',
+        UserProfileUpdateView.as_view(), name='user_profile_update'),
 )
