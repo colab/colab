@@ -33,13 +33,18 @@
 
   <div class="quiet">
     <span class="pull-left">
-      {% trans "by" %}
-																												      {% if doc.from_address.get_full_name %}
-      <a href="{{ doc.from_address.get_profile_link }}">
-        {{ doc.from_address.get_full_name }}
+      {% if doc.from_address.user.get_absolute_url or doc.from_address.get_full_name or doc.last_author or doc.Creator %}
+        {% trans "by" %}
+      {% endif %}
+
+      {% if doc.from_address.user.get_absolute_url %}
+      <a href="{{ doc.from_address.user.get_absolute_url }}">
+        {{ doc.from_address.user.get_full_name }}
       </a>
+      {% elif doc.from_address.get_full_name %}
+        <span>{{ doc.from_address.get_full_name }}</span>
       {% else %}
-        {% firstof doc.last_author doc.Creator _("anonymous") %}
+        {% firstof doc.last_author doc.Creator "" %}
       {% endif %}
     </span>
 

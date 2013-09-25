@@ -2,6 +2,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from django.core.urlresolvers import reverse
+
 
 class User(AbstractUser):
     institution = models.CharField(max_length=128, null=True, blank=True)
@@ -11,6 +13,9 @@ class User(AbstractUser):
     google_talk = models.EmailField(null=True, blank=True)
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
+
+    def get_absolute_url(self):
+        return reverse('user_profile', kwargs={'username': self.username})
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
