@@ -29,6 +29,7 @@
     }
     $btn.toggleClass('btn-success');
     $btn.toggleClass('btn-default');
+    $btn.button('reset')
   }
 
   function vote_fail_callback(jqXHR, textStatus, errorThrown) {
@@ -46,6 +47,7 @@
 
   function get_vote_ajax_dict(msg_id, method) {
     var csrftoken = $.cookie('csrftoken');
+    $('#msg-' + msg_id + ' .vote.btn-success').button('loading');
 
     return {
       url: "/api/message/" + msg_id + "/vote",
@@ -76,9 +78,9 @@
 
   // Binding functions
   $(function() {
+    console.debug('binding vote function to btns');
     $('.email-message').each(function() {
       var msg_id = this.getAttribute('id').split('-')[1];
-      console.debug('binding vote calls to ' + msg_id);
 
       $('.vote.btn-default', this).bind('click', function() {
         vote(msg_id);
@@ -157,9 +159,9 @@
                       {{ email.votes_count }}
                     </button>
                     {% if user in email.vote_list %}
-                    <button class="btn btn-success vote">
+                    <button class="btn btn-success vote" data-loading-text="...">
                     {% else %}
-                    <button class="btn btn-default vote">
+                    <button class="btn btn-default vote" data-loading-text="...">
                     {% endif %}
                       <span class="glyphicon glyphicon-thumbs-up"></span>
                     </button>
