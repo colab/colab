@@ -2,7 +2,7 @@
 {% load i18n browserid conversejs gravatar %}
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap/css/bootstrap.css" type="text/css" media="screen, projection" />
 
@@ -14,6 +14,7 @@
 
     <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery.debouncedresize.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery.cookie.js"></script>
     <script src="{{ STATIC_URL }}third-party/bootstrap/js/bootstrap.js"></script>
 
     <script type="text/javascript" src="{{ STATIC_URL }}js/base.js"></script>

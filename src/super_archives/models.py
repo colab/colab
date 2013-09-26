@@ -26,20 +26,23 @@ class PageHit(models.Model):
 
 
 class EmailAddress(models.Model):
-    user = models.ForeignKey(User, null=True, related_name='emails') 
+    user = models.ForeignKey(User, null=True, related_name='emails')
     address = models.EmailField(unique=True)
     real_name = models.CharField(max_length=64, blank=True, db_index=True)
     md5 = models.CharField(max_length=32, null=True)
-        
+
     def save(self, *args, **kwargs):
         self.md5 = md5(self.address).hexdigest()
         super(EmailAddress, self).save(*args, **kwargs)
-        
+
     def get_full_name(self):
         if self.user and self.user.get_full_name():
             return self.user.get_full_name()
         elif self.real_name:
             return self.real_name
+
+    def get_full_name_or_anonymous(self):
+        return self.get_full_name() or _('Anonymous')
 
     def __unicode__(self):
         return '"%s" <%s>' % (self.get_full_name(), self.address)
@@ -65,21 +68,21 @@ class MailingListMembership(models.Model):
 
 
 class Thread(models.Model):
-    
+
     subject_token = models.CharField(max_length=512)
-    mailinglist = models.ForeignKey(MailingList, 
-                                    verbose_name=_(u"Mailing List"), 
+    mailinglist = models.ForeignKey(MailingList,
+                                    verbose_name=_(u"Mailing List"),
                                     help_text=_(u"The Mailing List where is the thread"))
-    latest_message = models.OneToOneField('Message', null=True, 
-                                                     related_name='+', 
-                                                     verbose_name=_(u"Latest message"), 
+    latest_message = models.OneToOneField('Message', null=True,
+                                                     related_name='+',
+                                                     verbose_name=_(u"Latest message"),
                                                      help_text=_(u"Latest message posted"))
     score = models.IntegerField(default=0, verbose_name=_(u"Score"), help_text=_(u"Thread score"))
     spam = models.BooleanField(default=False)
-    
+
     all_objects = models.Manager()
     objects = NotSpamManager()
-    
+
     class Meta:
         verbose_name = _(u"Thread")
         verbose_name_plural = _(u"Threads")
@@ -87,17 +90,17 @@ class Thread(models.Model):
 
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,
-                                 self.subject_token, 
+                                 self.subject_token,
                                  self.message_set.count())
 
     def update_score(self):
         """Update the relevance score for this thread.
-        
+
         The score is calculated with the following variables:
 
-        * vote_weight: 100 - (minus) 1 for each 3 days since 
+        * vote_weight: 100 - (minus) 1 for each 3 days since
           voted with minimum of 5.
-        * replies_weight: 300 - (minus) 1 for each 3 days since 
+        * replies_weight: 300 - (minus) 1 for each 3 days since
           replied with minimum of 5.
         * page_view_weight: 10.
 
@@ -111,8 +114,8 @@ class Thread(models.Model):
         """
 
         if not self.subject_token:
-            return    
- 
+            return
+
         # Save this pseudo now to avoid calling the
         #   function N times in the loops below
         now = timezone.now()
@@ -130,8 +133,8 @@ class Thread(models.Model):
             for vote in msg.vote_set.all():
                 vote_score += get_score(100, vote.created)
 
-        # Calculate page_view_score       
-        try: 
+        # Calculate page_view_score
+        try:
             url = reverse('thread_view', args=[self.mailinglist.name,
                                                self.subject_token])
             pagehit = PageHit.objects.get(url_path=url)
@@ -157,18 +160,18 @@ class Vote(models.Model):
 
 
 class Message(models.Model):
-    
+
     from_address = models.ForeignKey(EmailAddress, db_index=True)
     thread = models.ForeignKey(Thread, null=True, db_index=True)
     # RFC 2822 recommends to use 78 chars + CRLF (so 80 chars) for
     #   the max_length of a subject but most of implementations
     #   goes for 256. We use 512 just in case.
-    subject = models.CharField(max_length=512, db_index=True, 
-                               verbose_name=_(u"Subject"), 
+    subject = models.CharField(max_length=512, db_index=True,
+                               verbose_name=_(u"Subject"),
                                help_text=_(u"Please enter a message subject"))
     subject_clean = models.CharField(max_length=512, db_index=True)
-    body = models.TextField(default='', 
-                            verbose_name=_(u"Message body"), 
+    body = models.TextField(default='',
+                            verbose_name=_(u"Message body"),
                             help_text=_(u"Please enter a message body"))
     received_time = models.DateTimeField()
     message_id = models.CharField(max_length=512)
@@ -176,39 +179,37 @@ class Message(models.Model):
 
     all_objects = models.Manager()
     objects = NotSpamManager()
-    
+
     class Meta:
         verbose_name = _(u"Message")
         verbose_name_plural = _(u"Messages")
         unique_together = ('thread', 'message_id')
-    
+
     def __unicode__(self):
-        return '(%s) %s: %s' % (self.id, 
-                                self.from_address.get_full_name(), 
+        return '(%s) %s: %s' % (self.id,
+                                self.from_address.get_full_name(),
                                 self.subject_clean)
-    
+
     @property
     def mailinglist(self):
         if not self.thread or not self.thread.mailinglist:
             return None
-        
+
         return self.thread.mailinglist
 
-        
     def vote_list(self):
         """Return a list of user that voted in this message."""
-        
-        return [vote.user for vote in self.vote_set.all()]        
- 
+        return [vote.user for vote in self.vote_set.iterator()]
+
     def votes_count(self):
         return len(self.vote_list())
-        
+
     def vote(self, user):
         Vote.objects.create(
             message=self,
             user=user
         )
-        
+
     def unvote(self, user):
         Vote.objects.get(
             message=self,
@@ -220,7 +221,7 @@ class Message(models.Model):
         """Shortcut to get thread url"""
         return reverse('thread_view', args=[self.mailinglist.name,
                                             self.thread.subject_token])
-    
+
     @property
     def Description(self):
         """Alias to self.body"""
@@ -247,4 +248,4 @@ class MessageMetadata(models.Model):
     def __unicode__(self):
         return 'Email Message Id: %s - %s: %s' % (self.Message.id,
                                                   self.name, self.value)
-    
+

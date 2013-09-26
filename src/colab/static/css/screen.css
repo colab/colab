@@ -250,33 +250,26 @@ ul.unstyled-list .glyphicon-chevron-right {
     margin-top: 1em;
 }
 
-.plus {
-    border: 1px dotted #ddd;
-    margin: 0;
+.email-message pre {
+    border: 0;
+    background-color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
-.plus span {
+.email-message .user-fullname {
     vertical-align: middle;
-    height: 40px;
-    line-height: 40px;
-    font-size: 150%;
-    font-weight: bold;
-    color: #0a0;
 }
 
-.plus img {
-    vertical-align: middle;
-    cursor: pointer;
-    margin-top: 8px;
-    margin-right: 20px;
+.email-message .panel-heading img {
+    margin-right: 10px;
 }
 
-.plus img:hover {
-    opacity: 0.8;
+.email-message .panel-heading .date {
+    margin-right: 10px;
 }
 
-.no-margin {
-    margin: 0;
+.email-message .panel-heading {
+    padding: 10px 0;
 }
 
 .selected .glyphicon-remove {

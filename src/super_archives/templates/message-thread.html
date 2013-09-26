@@ -1,80 +1,232 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load append_to_get %}
-{% load gravatar %}
+{% load i18n append_to_get gravatar %}
+
+{% trans "Anonymous" as anonymous %}
+
+{% block head_js %}
+
+<script>
+  function vote_done_callback(msg_id, step) {
+    console.debug('(un)vote successfuly (step ' + step + ')');
+    var $msg = $('#msg-' + msg_id)
+
+    $('.vote-count', $msg).text(function(self, count) {
+        return parseInt(count) + step;
+    });
+
+    if (step == -1) {
+      var $btn = $('.vote.btn-success', $msg);
+      $btn.unbind('click');
+      $btn.bind('click', function() {
+        vote(msg_id);
+      });
+      $('.text', $btn).text("{% trans 'Vote' %}");
+    } else {
+      var $btn = $('.vote.btn-default', $msg);
+      $btn.unbind('click');
+      $btn.bind('click', function() {
+        unvote(msg_id);
+      });
+      $('.text', $btn).text("{% trans 'Voted' %}");
+    }
+    $btn.toggleClass('btn-success');
+    $btn.toggleClass('btn-default');
+  }
+
+  function vote_fail_callback(jqXHR, textStatus, errorThrown) {
+    alert('error');
+    //error_msg = '<b>Seu voto não foi computado.</b>'
+    //if (jqXHR.status === 401) {
+    //  error_msg += ' Você deve estar autenticado para votar.';
+    //} else {
+    //  error_msg += ' Erro desconhecido ao tentando votar.';
+    //}
+
+    //jQuery('#vote-notification').html(error_msg).removeClass('hide');
+    //scroll(0, 0);
+  }
+
+  function get_vote_ajax_dict(msg_id, method) {
+    var csrftoken = $.cookie('csrftoken');
+
+    return {
+      url: "/api/message/" + msg_id + "/vote",
+      type: method,
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    }
+  }
+
+  function vote(msg_id) {
+    console.debug('trying to vote');
+    $.ajax(get_vote_ajax_dict(msg_id, 'PUT'))
+      .done(function(){
+        vote_done_callback(msg_id, 1);
+      })
+      .fail(vote_fail_callback);
+  }
+
+  function unvote(msg_id) {
+    console.debug('trying to remove vote');
+    $.ajax(get_vote_ajax_dict(msg_id, 'DELETE'))
+      .done(function(){
+        vote_done_callback(msg_id, -1);
+      })
+      .fail(vote_fail_callback);
+  }
+
+  // Binding functions
+  $(function() {
+    $('.email-message').each(function() {
+      var msg_id = this.getAttribute('id').split('-')[1];
+      console.debug('binding vote calls to ' + msg_id);
+
+      $('.vote.btn-default', this).bind('click', function() {
+        vote(msg_id);
+      });
+
+      $('.vote.btn-success', this).bind('click', function() {
+        unvote(msg_id);
+      });
+
+    });
+  });
+
+</script>
+
+{% endblock %}
+
 {% block main-content %}
 <div class="row">
 
-  <h2>{{ first_msg.subject_clean }}</h2>
-  <hr />
+  <div class="col-lg-12">
+    <h2>{{ first_msg.subject_clean }}</h2>
+    <hr />
+  </div>
 
-  <div class="col-lg-3 pull-right">
-    <h4><strong>{% trans "Order by" %}:</strong></h4>
-    <ul class="none">
-      <li><span class="glyphicon glyphicon-chevron-right">
-        <a href="{% append_to_get order='voted' %}">{% trans "Votes" %}</a>
-      </span></li>
-      <li><span class="glyphicon glyphicon-chevron-right">
-        <a href="{% append_to_get order='date' %}">{% trans "Date" %}</a>
-      </span></li>
-    </ul>
+  <div class="col-lg-10 col-md-10 col-sm-12">
+    <ul class="unstyled-list">
+    {% for email in emails %}
+      {% with email.from_address.get_absolute_url as profile_link %}
+      <li>
+        <!--
+        <div class="col-lg-2 col-md-3 hidden-sm hidden-xm text-center">
+          {% if profile_link %}
+          <a href="{{ profile_link }}">
+          {% endif %}
+            <div>{% gravatar email.from_address 80 %}</div>
+            <span>{{ email.from_address.get_full_name_or_anonymous }}</span>
+          {% if profile_link %}
+          </a>
+          {% endif %}
 
-    <div>&nbsp;</div>
+          <p>{{ email.received_time|date:"SHORT_DATETIME_FORMAT" }}</p>
 
-    <h4><strong>{% trans "Statistics:" %}</strong></h4>
+          <div class="plus">
+            <span>{{ email.votes_count }}</span>
+            <img title="{% trans 'Vote' %}" class="pull-right" src="{{ STATIC_URL }}img/plus.png">
+          </div>
 
-    <ul class="none">
-      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
-        {% trans "started at" %}
-      </span></li>
-        <h5>{{ first_msg.received_time|timesince }} {% trans "ago" %}</h5>
-      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
-        {% trans "viewed" %}
-      </span></li>
-        <h5>{{ pagehits }} {% trans "times" %}</h5>
-      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
-        {% trans "answered" %}
-      </span></li>
-        <h5>{{ emails|length }} {% trans "times" %}</h5>
-      <li class="quiet"><span class="glyphicon glyphicon-chevron-right">
-        {% trans "voted" %}
-      </span></li>
-        <h5>{{ total_votes }} {% trans "times" %}</h5>
+          <p class="{% if not user in email.vote_list %}hide{% endif %}">
+            <a href="#">{% trans "Remove votes" %}</a>
+          </p>
+        </div>
+        -->
+
+        <div class="email-message" id="msg-{{ email.id }}">
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                {% if profile_link %}
+                <a href="{{ profile_link }}">
+                {% endif %}
+                {% gravatar email.from_address 34 %}
+                <strong class="user-fullname">{{ email.from_address.get_full_name_or_anonymous }}</strong>
+                {% if profile_link %}
+                </a>
+                {% endif %}
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="pull-right text-right">
+                  <span class="date">
+                    {{ email.received_time|date:'DATETIME_FORMAT' }}
+                  </span>
+
+                  <div class="btn-group">
+                    <button class="btn btn-default vote-count disabled">
+                      {{ email.votes_count }}
+                    </button>
+                    {% if user in email.vote_list %}
+                    <button class="btn btn-success vote">
+                    {% else %}
+                    <button class="btn btn-default vote">
+                    {% endif %}
+                      <span class="glyphicon glyphicon-thumbs-up"></span>
+                      <span class="text">
+                      {% if user in email.vote_list %}
+                        {% trans "Voted" %}
+                      {% else %}
+                        {% trans "Vote" %}
+                      {% endif %}
+                      </span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div class="panel-body">
+              <pre>{{ email.body }}</pre>
+            </div>
+          </div>
+        </div>
+      </li>
+      {% endwith %}
+    {% endfor %}
     </ul>
   </div>
 
-  <ul class="none">
-  {% for email in emails %}
-    <li>
-      <div class="col-lg-2 text-center">
-        <a href="{{ email.from_address.get_profile_link }}">
-          {% gravatar email.from_address 80 %}
-          <div>&nbsp;</div>
-          {% trans "Anonymous" as anonymous %}
-          <span>{% firstof email.from_address.get_full_name anonymous %}</span>
-        </a>
+  <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+    <h4><strong>{% trans "Order by" %}:</strong></h4>
+    <ul class="unstyled-list">
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{% append_to_get order='voted' %}">{% trans "Votes" %}</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        <a href="{% append_to_get order='date' %}">{% trans "Date" %}</a>
+      </li>
+    </ul>
 
-        <p>{{ email.received_time|date:"SHORT_DATETIME_FORMAT" }}</p>
+    <h4><strong>{% trans "Statistics:" %}</strong></h4>
 
-        <div class="plus">
-          <span>{{ email.votes_count }}</span>
-          <img title="{% trans 'Vote' %}" class="pull-right" src="{{ STATIC_URL }}img/plus.png">
-        </div>
+    <ul class="unstyled-list">
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        {% trans "started at" %}
+        <h5>{{ first_msg.received_time|timesince }} {% trans "ago" %}</h5>
+      </li>
 
-        <p class="{% if not user in email.vote_list %}hide{% endif %}">
-          <a href="#">{% trans "Remove votes" %}</a>
-        </p>
-      </div>
-
-        <div class="col-lg-7">
-          <pre>{{ email.body }}</pre>
-        </div>
-      {% if not forloop.last %}
-      <div>&nbsp;</div>
-      {% endif %}
-    </li>
-  {% endfor %}
-  </ul>
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        {% trans "viewed" %}
+        <h5>{{ pagehits }} {% trans "times" %}</h5>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        {% trans "answered" %}
+        <h5>{{ emails|length }} {% trans "times" %}</h5>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        {% trans "voted" %}
+        <h5>{{ total_votes }} {% trans "times" %}</h5>
+      </li>
+    </ul>
+  </div>
 
   <script type="text/javascript" charset="utf-8">
     pagehit("{{ request.path_info }}");
