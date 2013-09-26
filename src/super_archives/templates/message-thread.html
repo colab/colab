@@ -33,16 +33,17 @@
   }
 
   function vote_fail_callback(jqXHR, textStatus, errorThrown) {
-    alert('error');
-    //error_msg = '<b>Seu voto não foi computado.</b>'
-    //if (jqXHR.status === 401) {
-    //  error_msg += ' Você deve estar autenticado para votar.';
-    //} else {
-    //  error_msg += ' Erro desconhecido ao tentando votar.';
-    //}
+    var msg;
 
-    //jQuery('#vote-notification').html(error_msg).removeClass('hide');
-    //scroll(0, 0);
+    if (jqXHR.status === 403) {
+      msg = " {% trans 'You must login before voting.' %}"
+    } else {
+        return;
+    }
+
+    $('#alert-js #alert-message').html(msg);
+    $('#alert-js').show();
+    scroll(0, 0);
   }
 
   function get_vote_ajax_dict(msg_id, method) {
