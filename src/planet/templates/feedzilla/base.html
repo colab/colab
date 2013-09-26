@@ -5,21 +5,24 @@
     <h2>{% trans 'Planet' %}</h2>
     <hr/>
 
-    <div class="row">
-      {% block feedzilla_content %}{% endblock %}
+    <div id="planet" class="row">
+      <div class="col-lg-9">
+        {% block feedzilla_content %}{% endblock %}
+      </div>
   
       <div class="col-lg-3">
         <div class="well">
-          <a href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
-        </div>
-        <div class="well">
           <h3>{% trans 'Tags' %}</h3>
-          {% include_tagcloud 'feedzilla.post' %}
+          {% feedzilla_tag_cloud %}
         </div>
         <div class="well">
           <h3>{% trans 'Source Blogs' %}</h3>
           {% feedzilla_donor_list %}
+          <div class="text-center">
+            <a class="btn btn-primary" href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
+          </div>
         </div>
       </div>
     </div>
+
 {% endblock %}

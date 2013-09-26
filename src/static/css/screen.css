@@ -70,38 +70,6 @@ body {
     margin-right: 5px;
 }
 
-.tag {
-    text-decoration: none;
-    background-color: #2183b3;
-    padding: 2px 4px;
-    border-radius: 5px;
-    font-size: 85%;
-    color: #fff;
-    margin-right: 4px;
-    margin-left: 4px;
-    line-height: 2;
-    white-space: nowrap;
-}
-
-.tag:hover,
-.tag:focus {
-    background-color: #21b6e6;
-    color: #fff;
-}
-
-.tag-cloud .size-1 {
-    font-size: 90%;
-}
-.tag-cloud .size-2 {
-    font-size: 100%;
-}
-.tag-cloud .size-3 {
-    font-size: 130%;
-}
-.tag-cloud .size-4 {
-    font-size: 150%;
-}
-
 .subject,
 .subject a {
     color: #000;
@@ -349,3 +317,28 @@ ul.unstyled-list .glyphicon-chevron-right {
     border: none;
 }
 /* End of Converse JS*/
+
+
+/* Feedzilla */
+
+#planet .well h3 {
+    margin-top: 0;
+}
+
+.tag-cloud .size-1 {
+    font-size: 0.9em;
+}
+
+.tag-cloud .size-2 {
+    font-size: 1.2em;
+}
+
+.tag-cloud .size-3 {
+    font-size: 1.4em;
+}
+
+.tag-cloud .size-4 {
+    font-size: 1.6em;
+}
+
+/* end Feedzilla */

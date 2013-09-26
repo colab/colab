@@ -3,17 +3,16 @@
 
 {% block feedzilla_content %}
 
-<div class="col-lg-9">
-  {% for post in page.object_list %}
-    {% include 'feedzilla/_post_template.html' %}
-    <hr>
-    {% empty %}
-      <h2>{% trans 'There&#39;s no RSS registered' %}</h2>
-      <h3>{% trans 'Please' %}
-<a href="{% url "feedzilla_submit_blog" %}">{% trans 'click here' %}</a>
-      {% trans 'to submit a blog' %}</h3>
-  {% endfor %}
-  
-  {% include "pagination.html" %}
-</div>
+{% for post in page.object_list %}
+  {% include 'feedzilla/_post_template.html' %}
+  <hr>
+  {% empty %}
+    <h2>{% trans 'There is no RSS registered' %}</h2>
+    <h3>{% trans 'Please' %}
+ href="{% url "feedzilla_submit_blog" %}">{% trans 'click here' %}</a>
+    {% trans 'to submit a blog' %}</h3>
+{% endfor %}
+
+{% include "common/pagination.html" %}
+
 {% endblock %}
