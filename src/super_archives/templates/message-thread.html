@@ -109,32 +109,9 @@
   <div class="col-lg-10 col-md-10 col-sm-12">
     <ul class="unstyled-list">
     {% for email in emails %}
-      {% with email.from_address.get_absolute_url as profile_link %}
+      {% with email.from_address.user.get_absolute_url as profile_link %}
       <li>
-        <!--
-        <div class="col-lg-2 col-md-3 hidden-sm hidden-xm text-center">
-          {% if profile_link %}
-          <a href="{{ profile_link }}">
-          {% endif %}
-            <div>{% gravatar email.from_address 80 %}</div>
-            <span>{{ email.from_address.get_full_name_or_anonymous }}</span>
-          {% if profile_link %}
-          </a>
-          {% endif %}
-
-          <p>{{ email.received_time|date:"SHORT_DATETIME_FORMAT" }}</p>
-
-          <div class="plus">
-            <span>{{ email.votes_count }}</span>
-            <img title="{% trans 'Vote' %}" class="pull-right" src="{{ STATIC_URL }}img/plus.png">
-          </div>
-
-          <p class="{% if not user in email.vote_list %}hide{% endif %}">
-            <a href="#">{% trans "Remove votes" %}</a>
-          </p>
-        </div>
-        -->
-
+        {% spaceless %}
         <div class="email-message" id="msg-{{ email.id }}">
           <div class="panel panel-default">
             <div class="panel-heading clearfix">
@@ -176,6 +153,7 @@
             </div>
           </div>
         </div>
+      {% endspaceless %}
       </li>
       {% endwith %}
     {% endfor %}
