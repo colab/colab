@@ -2,31 +2,34 @@
 {% load i18n %}
 
 {% block feedzilla_content %}
+<h1>{% trans "Submit a blog" %}</h1>
 
-<div class="col-lg-6">  
-  <h1>{% trans "Submit a blog" %}</h1>
+{% if success %}
+<p>{% trans "Thank you. Your application has been accepted and will be reviewed by admin in the near time." %}</p>
+{% else %}
+<form method="post" class="common-form">
+  {% csrf_token %}
 
-  {% if success %}
+  {% for field in form %}
+  <div class="col-lg-6 col-md-6 col-sm-12 col-xm-12">
+    <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
+      <label for="{{ field.name }}" class="control-label">
+        {{ field.label }}
+      </label>
+      <input id="id_{{ field.name }}" name="{{ field.name }}" type="text" class="form-control" />
+      {{ field.errors }}
+    </div>
+  </div>
+  {% endfor %}
 
-  <p>{% trans "Thank you. Your application has been accepted and will be reviewed by admin in the near time." %}</p>
-  {% else %}
-  <p class="required"><label>{% trans "Required fields" %}</label></p>
-  <form method="post">
-    {% csrf_token %}
-    <fieldset class="well">
-      <legend>{% trans "Blog Information" %}</legend>
-      <p class="required"><label for="id_url">{% trans "Blog URL" %}:</label><br /><input id="id_url" maxlength="255" name="url" type="text" /></p>
-      <p class="required"><label for="id_title">{% trans "Blog name" %}:</label><br /><input id="id_title" maxlength="255" name="title" type="text" /></p>
-      <p><label for="id_author">{% trans "Name of author of the blog" %}:</label><br /><input id="id_author" maxlength="50" name="author" type="text" /></p>
-      <p><label for="id_feed_url">{% trans "Feed URL" %}:</label><br /><input id="id_feed_url" maxlength="255" name="feed_url" type="text" /><br /><span class="helptext">{% trans "You can specify what exactly feed you want submit" %}</span></p>
-      <p><input type="submit" value="{% trans "Submit" %}"></p>
-    </fieldset>
-  </form>
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <button class="btn btn-primary btn-lg">{% trans "Submit" %}</button>
+    </div>
+  </div>
 
-  {% endif %}
+  <br>
 
-</div>
-
-<div class="col-lg-3"></div>
-
+</form>
+{% endif %}
 {% endblock %}
