@@ -137,10 +137,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'colab', 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
 
 AUTH_USER_MODEL = 'accounts.User'
 
