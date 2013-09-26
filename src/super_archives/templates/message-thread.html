@@ -20,14 +20,12 @@
       $btn.bind('click', function() {
         vote(msg_id);
       });
-      $('.text', $btn).text("{% trans 'Vote' %}");
     } else {
       var $btn = $('.vote.btn-default', $msg);
       $btn.unbind('click');
       $btn.bind('click', function() {
         unvote(msg_id);
       });
-      $('.text', $btn).text("{% trans 'Voted' %}");
     }
     $btn.toggleClass('btn-success');
     $btn.toggleClass('btn-default');
@@ -164,13 +162,6 @@
                     <button class="btn btn-default vote">
                     {% endif %}
                       <span class="glyphicon glyphicon-thumbs-up"></span>
-                      <span class="text">
-                      {% if user in email.vote_list %}
-                        {% trans "Voted" %}
-                      {% else %}
-                        {% trans "Vote" %}
-                      {% endif %}
-                      </span>
                     </button>
                   </div>
                 </div>
