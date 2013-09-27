@@ -6,6 +6,11 @@ Planet
 
 * Paginator esta quebrado em telas xs
 
+Chat
+====
+
+* Allow user to change passwords
+
 
 Outros
 =======
