@@ -9,8 +9,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import render, get_list_or_404
 
 from .models import MailingList, Thread
+from .decorators import count_hit
 
 
+@count_hit
 def thread(request, mailinglist, thread_token):
 
     try:
