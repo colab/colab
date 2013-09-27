@@ -21,6 +21,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'raven.contrib.django.raven_compat',
     'south',
     'cliauth',
+    'django_mobile',
     'django_browserid',
     'conversejs',
 
@@ -118,6 +119,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
     'django_browserid.context_processors.browserid',
+    'django_mobile.context_processors.is_mobile',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -128,6 +130,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_mobile.middleware.MobileDetectionMiddleware',
+    'django_mobile.middleware.SetFlavourMiddleware',
 )
 
 # Add the django_browserid authentication backend.
