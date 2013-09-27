@@ -66,7 +66,7 @@ def signup(request):
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user_form = NewUserForm(request.POST)
+    user_form = UserCreationForm(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
