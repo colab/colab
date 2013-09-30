@@ -7,7 +7,10 @@ from django.db import models
 class Migration(DataMigration):
 
     def forwards(self, orm):
-        sussumu = orm['accounts.User'].objects.get(username='Sussumu')
+        try:
+            sussumu = orm['accounts.User'].objects.get(username='Sussumu')
+        except orm['accounts.User'].DoesNotExist:
+            return
         profile = orm['super_archives.UserProfile'].objects.get(user_id=sussumu.pk)
         sussumu.delete()
         profile.delete()
