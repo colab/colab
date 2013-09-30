@@ -36,7 +36,7 @@ class colab::requirements {
   package { 'pyOpenSSL':
     ensure   => installed,
     provider => pip,
-    require  => Package['python-pip'],
+    require  => [Package['python-pip'], Package['python-dev'], Package['build-essential']],
   }
   
   # links virtualenvwrapper to load automaticaly
