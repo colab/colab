@@ -2,7 +2,7 @@
 {% load i18n browserid conversejs gravatar %}
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap/css/bootstrap.css" type="text/css" media="screen, projection" />
 
@@ -135,7 +135,7 @@
 
     {% block header %}{% endblock %}
 
-    <div>
+    <div id="main-content">
       {% block main-content %} {% endblock %}
     </div>
 
