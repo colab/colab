@@ -32,3 +32,7 @@ feedparser
 lxml
 grab
 transliterate
+
+# Diazo
+diazo
+#lxml
