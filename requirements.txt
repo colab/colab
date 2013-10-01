@@ -24,10 +24,9 @@ git+https://github.com/TracyWebTech/django-revproxy/
 django-conversejs
 
 # Feedzilla (planet) and deps
-https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around
+feedzilla==0.22
 django-common
 django-taggit
-django-taggit-templatetags
 feedparser
 lxml
 grab

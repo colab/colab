@@ -36,7 +36,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     # Feedzilla and deps
     'feedzilla',
     'taggit',
-    'taggit_templatetags',
     'common',
 )
 
