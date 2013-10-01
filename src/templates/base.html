@@ -2,6 +2,7 @@
 {% load i18n browserid conversejs gravatar %}
 <html>
   <head>
+    {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap/css/bootstrap.css" type="text/css" media="screen, projection" />
@@ -41,13 +42,14 @@
     </script>
     {% endblock %}
 
+  {% endblock %}
   </head>
 
   <body class="container">
     {% browserid_info %}
-    <div class="row">
-    </div>
 
+
+    {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -111,6 +113,7 @@
         </div>
       </div>
     </nav>
+    {% endblock %}
 
       {% block messages %}
         {% for message in messages %}
@@ -128,7 +131,7 @@
     {% block header %}{% endblock %}
 
     <div id="main-content">
-      {% block main-content %} {% endblock %}
+      {% block main-content %}{% endblock %}
     </div>
 
     <div class="row">&nbsp;</div>

@@ -2,16 +2,21 @@
     xmlns="http://namespaces.plone.org/diazo"
     xmlns:css="http://namespaces.plone.org/diazo/css"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    
-    <replace css:theme-children="#main-content" css:content-children="#main" />
-    <before theme-children="/html/head">
-	<link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/wiki.css" type="text/css" /><link rel="stylesheet" href="/chrome/tags/css/tractags.css" type="text/css" />
-    </before>
+
+    <replace css:theme="#trac-css" content="//head/link" />
+    <replace css:theme="#trac-js" content="//head/script" />
+
+    <after css:theme-children="#trac-navbar" css:content-children="#mainnav ul" />
+    <before css:theme-children="#main-content" css:content="#main" />
+
     <after theme-children="/html/head">
         <style>
-          .nav ul { font-size: 14px; text-align: left; }	
-          .nav li { border: 0; padding: 0; }
-  	      :link, :visited { border: 0; color: rgb(66, 139, 202); }
+          body { padding-bottom: 70px; }
+          .navbar .nav ul { font-size: 14px; text-align: left; }
+          .navbar .nav li { border: 0; padding: 0; }
+          :link:not(.btn),
+          :visited:not(.btn) { border: 0; color: rgb(66, 139, 202); }
+          :link, :visited { border: 0; }
         </style>
     </after>
 
