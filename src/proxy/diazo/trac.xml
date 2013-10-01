@@ -1,0 +1,18 @@
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    
+    <replace css:theme-children="#main-content" css:content-children="#main" />
+    <before theme-children="/html/head">
+	<link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/wiki.css" type="text/css" /><link rel="stylesheet" href="/chrome/tags/css/tractags.css" type="text/css" />
+    </before>
+    <after theme-children="/html/head">
+        <style>
+          .nav ul { font-size: 14px; text-align: left; }	
+          .nav li { border: 0; padding: 0; }
+  	      :link, :visited { border: 0; color: rgb(66, 139, 202); }
+        </style>
+    </after>
+
+</rules>
