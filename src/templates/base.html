@@ -74,11 +74,14 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contribute" %} <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><a href="/wiki">Wiki</a></li>
-                <li><a href="/timeline">Timeline</a></li>
-                <li><a href="/roadmap">Roadmap</a></li>
-                <li><a href="/browser">Browse Source</a></li>
-                <li><a href="/report">View Tickets</a></li>
-                <li><a href="/tags">Tags</a></li>
+                {% if user.is_active %}
+                <li><a href="/newticket">{% trans "New Ticket" %}</a></li>
+                {% endif %}
+                <li><a href="/timeline">{% trans "Timeline" %}</a></li>
+                <li><a href="/roadmap">{% trans "Roadmap" %}</a></li>
+                <li><a href="/browser">{% trans "Browse Source" %}</a></li>
+                <li><a href="/report">{% trans "View Tickets" %}</a></li>
+                <li><a href="/tags">{% trans "Tags" %}</a></li>
               </ul>
             </li>
           </ul>
