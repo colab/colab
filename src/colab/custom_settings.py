@@ -150,6 +150,10 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
 )
 
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
+)
+
 AUTH_USER_MODEL = 'accounts.User'
 
 from django.contrib.messages import constants as messages
