@@ -120,6 +120,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_browserid.context_processors.browserid',
     'django_mobile.context_processors.is_mobile',
+    'super_archives.context_processors.mailarchive',
 )
 
 MIDDLEWARE_CLASSES = (
