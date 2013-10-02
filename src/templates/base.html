@@ -70,8 +70,16 @@
             <li>
               <a href="{% url "feedzilla_index" %}">{% trans "Planet" %}</a>
             </li>
-            <li>
-              <a href="/wiki">{% trans "Contribute" %}</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contribute" %} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/wiki">Wiki</a></li>
+                <li><a href="/timeline">Timeline</a></li>
+                <li><a href="/roadmap">Roadmap</a></li>
+                <li><a href="/browser">Browse Source</a></li>
+                <li><a href="/report">View Tickets</a></li>
+                <li><a href="/tags">Tags</a></li>
+              </ul>
             </li>
           </ul>
 
@@ -81,7 +89,7 @@
               <li>{% browserid_login text='Login' next=request.path %}</li>
             {% else %}
               <li id="user-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
+                <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <div class="wrapper">

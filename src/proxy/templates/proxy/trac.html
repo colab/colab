@@ -5,26 +5,3 @@
     <placeholder id="trac-js"/>
     {{ block.super }}
 {% endblock %}
-
-{% block navbar %}
-    {{ block.super }}
-
-    <nav class="navbar navbar-inverse navbar-fixed-bottom trac" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-trac">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/wiki">Trac</a>
-        </div>
-
-        <div class="collapse navbar-collapse navbar-trac">
-          <ul id="trac-navbar" class="nav navbar-nav">
-          </ul>
-        </div>
-      </div>
-    </nav>
-{% endblock %}

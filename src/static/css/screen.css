@@ -1,9 +1,7 @@
 
-
 body {
-    padding-top: 70px;
+    padding-top: 57px;
 }
-
 
 /* Header */
 
@@ -16,7 +14,7 @@ body {
 }
 
 .navbar-default .navbar-brand,
-.navbar a.dropdown-toggle {
+.navbar a.dropdown-toggle.user {
     padding: 0;
     margin-top: 5px;
     margin-left: 10px;

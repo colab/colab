@@ -6,12 +6,10 @@
     <replace css:theme="#trac-css" content="//head/link" />
     <replace css:theme="#trac-js" content="//head/script" />
 
-    <after css:theme-children="#trac-navbar" css:content-children="#mainnav ul" />
     <before css:theme-children="#main-content" css:content="#main" />
 
     <after theme-children="/html/head">
         <style>
-          body { padding-bottom: 70px; }
           .navbar .nav ul { font-size: 14px; text-align: left; }
           .navbar .nav li { border: 0; padding: 0; }
           :link:not(.btn),
