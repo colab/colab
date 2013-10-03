@@ -1,0 +1,5 @@
+{% for message, class in messages %}
+  {% if class == 'reply' %}
+    <button class="btn btn-info btn-xs" onclick="$(this).next().toggle();">...</button>
+    <pre style="display: none; color: #707";>{% else %}<pre>{% endif %}{{ message }}</pre>
+{% endfor %}

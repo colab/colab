@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n append_to_get gravatar %}
+{% load i18n append_to_get gravatar superarchives %}
 
 {% trans "Anonymous" as anonymous %}
 
@@ -149,7 +149,7 @@
 
             </div>
             <div class="panel-body">
-              <pre>{{ email.body }}</pre>
+              {% display_message email emails %}
             </div>
           </div>
         </div>

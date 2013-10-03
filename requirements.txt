@@ -1,5 +1,5 @@
-#https://www.djangoproject.com/download/1.6b4/tarball/
-Django==1.5.2
+https://www.djangoproject.com/download/1.6b4/tarball/
+#Django==1.5.2
 South==0.8.1
 psycopg2==2.5.1
 django-piston==0.2.3
@@ -8,6 +8,7 @@ chardet==1.0.1
 python-dateutil==1.5
 django-cliauth==0.9
 django-mobile==0.3.0
+html2text
 
 gunicorn
 gevent
