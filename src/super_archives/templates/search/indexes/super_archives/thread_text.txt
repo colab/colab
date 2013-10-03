@@ -1,0 +1,11 @@
+{{ object.subject_token }}
+{{ object.mailinglist.name }}
+{{ object.mailinglist.email }}
+{{ object.mailinglist.description }}
+{{ object.spam }}
+{% for message in object.message_set.all %}
+  {{ message.Title }}
+  {{ message.Description }}
+  {{ message.url }}
+  {{ message.modified }}
+{% endfor %}

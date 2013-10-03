@@ -1,0 +1,9 @@
+{{ object.username }}
+{{ object.get_full_name }}
+{{ object.email }}
+{{ object.institution }}
+{{ object.role }}
+{{ object.twitter }}
+{{ object.facebook }}
+{{ object.google_talk }}
+{{ object.webpage }}
