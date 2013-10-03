@@ -15,6 +15,13 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'pt-br'
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    }
+}
+
 INSTALLED_APPS = INSTALLED_APPS + (
 
     # Not standard apps
@@ -24,6 +31,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'django_mobile',
     'django_browserid',
     'conversejs',
+    'haystack',
 
     # Own apps
     'super_archives',
