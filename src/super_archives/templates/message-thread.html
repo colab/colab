@@ -6,27 +6,21 @@
 {% block head_js %}
 
 <script>
-  function vote_done_callback(msg_id, step) {
+  function vote_done_callback(step) {
     console.debug('(un)vote successfuly (step ' + step + ')');
-    var $msg = $('#msg-' + msg_id)
+    var $btn = $(this);
+    var step;
 
-    $('.vote-count', $msg).text(function(self, count) {
+    if ($btn.hasClass('btn-default')) {
+      step = 1;
+    } else {
+      step = -1;
+    }
+
+    $btn.prev('.vote-count').text(function(self, count) {
         return parseInt(count) + step;
     });
 
-    if (step == -1) {
-      var $btn = $('.vote.btn-success', $msg);
-      $btn.unbind('click');
-      $btn.bind('click', function() {
-        vote(msg_id);
-      });
-    } else {
-      var $btn = $('.vote.btn-default', $msg);
-      $btn.unbind('click');
-      $btn.bind('click', function() {
-        unvote(msg_id);
-      });
-    }
     $btn.toggleClass('btn-success');
     $btn.toggleClass('btn-default');
     $btn.button('reset')
@@ -46,35 +40,35 @@
     scroll(0, 0);
   }
 
-  function get_vote_ajax_dict(msg_id, method) {
+  function get_vote_ajax_dict(msg_id, method, context) {
     var csrftoken = $.cookie('csrftoken');
-    $('#msg-' + msg_id + ' .vote.btn-success').button('loading');
 
     return {
       url: "/api/message/" + msg_id + "/vote",
       type: method,
+      context: context,
       beforeSend: function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", csrftoken);
       }
     }
   }
 
-  function vote(msg_id) {
-    console.debug('trying to vote');
-    $.ajax(get_vote_ajax_dict(msg_id, 'PUT'))
-      .done(function(){
-        vote_done_callback(msg_id, 1);
-      })
-      .fail(vote_fail_callback);
-  }
+  function vote() {
+    var $ajax;
+    var $btn = $(this);
+    var $msg = $(this).parents('.email-message');
 
-  function unvote(msg_id) {
-    console.debug('trying to remove vote');
-    $.ajax(get_vote_ajax_dict(msg_id, 'DELETE'))
-      .done(function(){
-        vote_done_callback(msg_id, -1);
-      })
-      .fail(vote_fail_callback);
+    var msg_id = $msg.attr('id').split('-')[1];
+
+    $btn.button('loading');
+    if($btn.hasClass('btn-default')) {
+        $ajax = $.ajax(get_vote_ajax_dict(msg_id, 'PUT', $btn[0]));
+    } else {
+        $ajax = $.ajax(get_vote_ajax_dict(msg_id, 'DELETE', $btn[0]));
+    }
+    console.debug('trying to vote');
+    $ajax.done(vote_done_callback);
+    $ajax.fail(vote_fail_callback);
   }
 
   // Binding functions
@@ -83,18 +77,7 @@
         $(this).next('.panel-collapse').collapse('toggle');
     });
 
-    $('.email-message').each(function() {
-      var msg_id = this.getAttribute('id').split('-')[1];
-
-      $('.vote.btn-default', this).bind('click', function() {
-        vote(msg_id);
-      });
-
-      $('.vote.btn-success', this).bind('click', function() {
-        unvote(msg_id);
-      });
-
-    });
+    $('.vote.btn', this).bind('click', vote);
   });
 
 </script>
