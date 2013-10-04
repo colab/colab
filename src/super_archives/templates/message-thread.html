@@ -31,53 +31,57 @@
 
     if (jqXHR.status === 403) {
       msg = " {% trans 'You must login before voting.' %}"
-    } else {
-        return;
+
+      $('#alert-js #alert-message').html(msg);
+      $('#alert-js').show();
+      scroll(0, 0);
     }
 
-    $('#alert-js #alert-message').html(msg);
-    $('#alert-js').show();
-    scroll(0, 0);
   }
 
-  function get_vote_ajax_dict(msg_id, method, context) {
-    var csrftoken = $.cookie('csrftoken');
-
-    return {
-      url: "/api/message/" + msg_id + "/vote",
-      type: method,
-      context: context,
-      beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-      }
-    }
-  }
-
-  function vote() {
+  function vote(event) {
     var $ajax;
     var $btn = $(this);
     var $msg = $(this).parents('.email-message');
 
+    var method;
+    var csrftoken = $.cookie('csrftoken');
     var msg_id = $msg.attr('id').split('-')[1];
 
-    $btn.button('loading');
     if($btn.hasClass('btn-default')) {
-        $ajax = $.ajax(get_vote_ajax_dict(msg_id, 'PUT', $btn[0]));
+        method = 'PUT';
     } else {
-        $ajax = $.ajax(get_vote_ajax_dict(msg_id, 'DELETE', $btn[0]));
+        method = 'DELETE';
     }
+
     console.debug('trying to vote');
+    $btn.button('loading');
+    $ajax = $.ajax({
+      url: "/api/message/" + msg_id + "/vote",
+      type: method,
+      context: $btn.get(0),
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      }
+    });
     $ajax.done(vote_done_callback);
     $ajax.fail(vote_fail_callback);
   }
 
   // Binding functions
   $(function() {
-    $(".panel-heading").bind('click', function() {
+    $(".panel-heading").on('click', function(event) {
+        var $target = $(event.target);
+        // Do not collapse the the message if the clicked element (target)
+        //  is a button or a link
+        if($target.hasClass('btn') || $target.is('a') || $target.parent().is('a')) {
+            return;
+        }
+
         $(this).next('.panel-collapse').collapse('toggle');
     });
 
-    $('.vote.btn', this).bind('click', vote);
+    $('.vote.btn', this).on('click', vote);
   });
 
 </script>
@@ -100,7 +104,7 @@
         {% spaceless %}
         <div class="email-message" id="msg-{{ email.id }}">
           <div class="panel panel-default">
-            <div class="panel-heading clearfix" data-toggle="collapse">
+            <div class="panel-heading clearfix">
               <div class="col-lg-6 col-md-6 col-sm-6">
                 {% if profile_link %}
                 <a href="{{ profile_link }}">
