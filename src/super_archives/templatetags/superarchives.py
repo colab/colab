@@ -2,6 +2,7 @@
 import re
 
 from django import template
+from django.core.cache import cache
 
 from html2text import html2text
 
@@ -68,4 +69,6 @@ def display_message(email, thread):
     else:
         messages.append((join(block), 'normal'))
 
-    return {'messages': messages}
+    return {'messages': messages,
+            'cache_key': email.pk,
+            'cache_timeout': cache.default_timeout}
