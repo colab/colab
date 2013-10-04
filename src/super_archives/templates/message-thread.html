@@ -79,7 +79,10 @@
 
   // Binding functions
   $(function() {
-    console.debug('binding vote function to btns');
+    $(".panel-heading").bind('click', function() {
+        $(this).next('.panel-collapse').collapse('toggle');
+    });
+
     $('.email-message').each(function() {
       var msg_id = this.getAttribute('id').split('-')[1];
 
@@ -114,7 +117,7 @@
         {% spaceless %}
         <div class="email-message" id="msg-{{ email.id }}">
           <div class="panel panel-default">
-            <div class="panel-heading clearfix">
+            <div class="panel-heading clearfix" data-toggle="collapse">
               <div class="col-lg-6 col-md-6 col-sm-6">
                 {% if profile_link %}
                 <a href="{{ profile_link }}">
@@ -148,8 +151,10 @@
               </div>
 
             </div>
-            <div class="panel-body">
-              {% display_message email emails %}
+            <div class="panel-collapse in">
+              <div class="panel-body">
+                {% display_message email emails %}
+              </div>
             </div>
           </div>
         </div>
