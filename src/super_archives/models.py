@@ -30,7 +30,7 @@ class EmailAddressValidation(models.Model):
     address = models.EmailField(unique=True)
     user = models.ForeignKey(User, null=True,
                              related_name='emails_not_validated')
-    validation_key = models.CharField(max_length=32,
+    validation_key = models.CharField(max_length=32, null=True,
                                       default=lambda: uuid4().hex)
     created = models.DateTimeField(auto_now_add=True)
 
