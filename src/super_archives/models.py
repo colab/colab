@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from uuid import uuid4
 from hashlib import md5
 
 from django.db import models
@@ -23,6 +24,15 @@ class NotSpamManager(models.Manager):
 class PageHit(models.Model):
     url_path = models.CharField(max_length=2048, unique=True, db_index=True)
     hit_count = models.IntegerField(default=0)
+
+
+class EmailAddressValidation(models.Model):
+    address = models.EmailField(unique=True)
+    user = models.ForeignKey(User, null=True,
+                             related_name='emails_not_validated')
+    validation_key = models.CharField(max_length=32,
+                                      default=lambda: uuid4().hex)
+    created = models.DateTimeField(auto_now_add=True)
 
 
 class EmailAddress(models.Model):
