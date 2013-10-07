@@ -1,0 +1,700 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-02 14:19-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/admin.py:40
+msgid "Personal info"
+msgstr ""
+
+#: accounts/admin.py:43
+msgid "Permissions"
+msgstr ""
+
+#: accounts/admin.py:45
+msgid "Important dates"
+msgstr ""
+
+#: accounts/forms.py:46
+msgid "Mailing lists"
+msgstr ""
+
+#: accounts/views.py:91
+msgid "Your profile has been created!"
+msgstr ""
+
+#: accounts/views.py:92
+msgid ""
+"You must login to validated your profile. Profiles not validated are deleted "
+"in 24h."
+msgstr ""
+
+#: accounts/templates/accounts/user_create_form.html:6
+msgid "Sign up"
+msgstr ""
+
+#: accounts/templates/accounts/user_create_form.html:11
+msgid "Please correct the errors below and try again"
+msgstr ""
+
+#: accounts/templates/accounts/user_create_form.html:18
+msgid "Required fields"
+msgstr ""
+
+#: accounts/templates/accounts/user_create_form.html:30
+msgid "Personal Information"
+msgstr ""
+
+#: accounts/templates/accounts/user_create_form.html:47
+msgid "Subscribe to mail lists"
+msgstr ""
+
+#: accounts/templates/accounts/user_create_form.html:61 templates/base.html:91
+msgid "Register"
+msgstr "Cadastre-se"
+
+#: accounts/templates/accounts/user_detail.html:23
+msgid "update your profile"
+msgstr ""
+
+#: accounts/templates/accounts/user_detail.html:55
+msgid "Contributions by Area"
+msgstr ""
+
+#: accounts/templates/accounts/user_detail.html:67
+msgid "Mailing list Participation"
+msgstr ""
+
+#: accounts/templates/accounts/user_detail.html:78
+msgid "Latest posted"
+msgstr ""
+
+#: accounts/templates/accounts/user_detail.html:83
+msgid "There are no posts by this user so far."
+msgstr ""
+
+#: accounts/templates/accounts/user_detail.html:89
+msgid "Community inside participations"
+msgstr ""
+
+#: accounts/templates/accounts/user_detail.html:94
+msgid "No contributions of this user so far."
+msgstr ""
+
+#: accounts/templates/accounts/user_update_form.html:11
+msgid "Change your avatar at Gravatar.com"
+msgstr ""
+
+#: accounts/templates/accounts/user_update_form.html:32
+msgid "Update"
+msgstr ""
+
+#: colab/custom_settings.py:11
+msgid "English"
+msgstr ""
+
+#: colab/custom_settings.py:12
+msgid "Spanish"
+msgstr ""
+
+#: colab/custom_settings.py:13
+msgid "Portuguese"
+msgstr ""
+
+#: colab/custom_settings.py:172
+msgid "Planet Colab"
+msgstr ""
+
+#: colab/custom_settings.py:173
+msgid "Colab blog aggregator"
+msgstr ""
+
+#: colab/deprecated/signup.py:13
+msgid "Colab: Checking e-mail"
+msgstr ""
+
+#: colab/deprecated/signup.py:31
+msgid "Registration on the mailing list"
+msgstr ""
+
+#: colab/deprecated/views/other.py:65
+msgid "anônimo"
+msgstr ""
+
+#: planet/templates/feedzilla/_post_template.html:8
+msgid "From"
+msgstr ""
+
+#: planet/templates/feedzilla/_post_template.html:8
+msgid "on"
+msgstr ""
+
+#: planet/templates/feedzilla/_post_template.html:12
+msgid "Read original"
+msgstr ""
+
+#: planet/templates/feedzilla/base.html:5 templates/base.html:71
+msgid "Planet"
+msgstr ""
+
+#: planet/templates/feedzilla/base.html:15 templates/base.html:84
+msgid "Tags"
+msgstr ""
+
+#: planet/templates/feedzilla/base.html:19
+msgid "Source Blogs"
+msgstr ""
+
+#: planet/templates/feedzilla/base.html:22
+#: planet/templates/feedzilla/submit_blog.html:5
+msgid "Submit a blog"
+msgstr ""
+
+#: planet/templates/feedzilla/index.html:10
+msgid "There is no RSS registered"
+msgstr ""
+
+#: planet/templates/feedzilla/index.html:11
+msgid "Please"
+msgstr ""
+
+#: planet/templates/feedzilla/index.html:12
+msgid "click here"
+msgstr ""
+
+#: planet/templates/feedzilla/index.html:13
+msgid "to submit a blog"
+msgstr ""
+
+#: planet/templates/feedzilla/submit_blog.html:8
+msgid ""
+"Thank you. Your application has been accepted and will be reviewed by admin "
+"in the near time."
+msgstr ""
+
+#: planet/templates/feedzilla/submit_blog.html:27
+msgid "Submit"
+msgstr ""
+
+#: planet/templates/feedzilla/tag.html:7
+#, python-format
+msgid "Posts with &laquo;%(tag)s&raquo; label"
+msgstr ""
+
+#: planet/templates/feedzilla/tag.html:16
+msgid "No posts with such label"
+msgstr ""
+
+#: rss/feeds.py:13
+msgid "Latest Discussions"
+msgstr ""
+
+#: rss/feeds.py:32
+msgid "Discussions Most Relevance"
+msgstr ""
+
+#: rss/feeds.py:51
+msgid "Latest collaborations"
+msgstr ""
+
+#: super_archives/models.py:45 super_archives/templates/message-thread.html:4
+msgid "Anonymous"
+msgstr ""
+
+#: super_archives/models.py:74
+msgid "Mailing List"
+msgstr ""
+
+#: super_archives/models.py:75
+msgid "The Mailing List where is the thread"
+msgstr ""
+
+#: super_archives/models.py:78
+msgid "Latest message"
+msgstr ""
+
+#: super_archives/models.py:79
+msgid "Latest message posted"
+msgstr ""
+
+#: super_archives/models.py:80
+msgid "Score"
+msgstr ""
+
+#: super_archives/models.py:80
+msgid "Thread score"
+msgstr ""
+
+#: super_archives/models.py:87
+msgid "Thread"
+msgstr ""
+
+#: super_archives/models.py:88
+msgid "Threads"
+msgstr ""
+
+#: super_archives/models.py:170
+msgid "Subject"
+msgstr ""
+
+#: super_archives/models.py:171
+msgid "Please enter a message subject"
+msgstr ""
+
+#: super_archives/models.py:174
+msgid "Message body"
+msgstr ""
+
+#: super_archives/models.py:175
+msgid "Please enter a message body"
+msgstr ""
+
+#: super_archives/models.py:184
+msgid "Message"
+msgstr ""
+
+#: super_archives/models.py:185
+msgid "Messages"
+msgstr ""
+
+#: super_archives/templates/message-list.html:6 templates/base.html:68
+msgid "Discussions"
+msgstr ""
+
+#: super_archives/templates/message-list.html:11 templates/search.html:18
+msgid "Filters"
+msgstr ""
+
+#: super_archives/templates/message-list.html:13
+msgid "Sort by"
+msgstr ""
+
+#: super_archives/templates/message-list.html:15
+#: super_archives/templates/message-list.html:17
+#: super_archives/templates/message-list.html:25 templates/search.html:23
+#: templates/search.html.py:27 templates/search.html:31
+#: templates/search.html.py:35
+msgid "Remove filter"
+msgstr "Remover filtro"
+
+#: super_archives/templates/message-list.html:16
+msgid "Relevance"
+msgstr ""
+
+#: super_archives/templates/message-list.html:19
+msgid "Recent activity"
+msgstr ""
+
+#: super_archives/templates/message-list.html:22
+msgid "Lists"
+msgstr ""
+
+#: super_archives/templates/message-list.html:39
+msgid "No discussion found"
+msgstr ""
+
+#: super_archives/templates/message-list.html:49 templates/search.html:57
+msgid "Previous"
+msgstr ""
+
+#: super_archives/templates/message-list.html:53 templates/search.html:61
+msgid "Page"
+msgstr ""
+
+#: super_archives/templates/message-list.html:53 templates/search.html:61
+msgid "of"
+msgstr ""
+
+#: super_archives/templates/message-list.html:57 templates/search.html:65
+msgid "Next"
+msgstr ""
+
+#: super_archives/templates/message-preview.html:35
+msgid "by"
+msgstr ""
+
+#: super_archives/templates/message-preview.html:51
+#: super_archives/templates/message-thread.html:182
+msgid "ago"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:39
+msgid "You must login before voting."
+msgstr ""
+
+#: super_archives/templates/message-thread.html:164
+msgid "Order by"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:168
+msgid "Votes"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:172
+msgid "Date"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:176
+msgid "Statistics:"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:181
+msgid "started at"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:187
+msgid "viewed"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:188
+#: super_archives/templates/message-thread.html:193
+#: super_archives/templates/message-thread.html:198
+msgid "times"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:192
+msgid "answered"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:197
+msgid "voted"
+msgstr ""
+
+#: templates/404.html:3
+msgid "Not found. Keep searching! :)"
+msgstr "Não encontrado. Continue procurando! :)"
+
+#: templates/500.html:3
+msgid "Ooopz... something went wrong!"
+msgstr "Opa... algo saiu errado!"
+
+#: templates/base.html:74
+msgid "Contribute"
+msgstr "Contribua"
+
+#: templates/base.html:78
+msgid "New Ticket"
+msgstr "Novo Tiquete"
+
+#: templates/base.html:80
+msgid "Timeline"
+msgstr "Histórico"
+
+#: templates/base.html:81
+msgid "Roadmap"
+msgstr "Planejamento"
+
+#: templates/base.html:82
+msgid "Browse Source"
+msgstr "Ver Código"
+
+#: templates/base.html:83
+msgid "View Tickets"
+msgstr "Visualizar Tiquetes"
+
+#: templates/base.html:105
+msgid "My Profile"
+msgstr "Meu Perfil"
+
+#: templates/base.html:117 templates/base.html.py:120
+msgid "Search here..."
+msgstr "Pesquise aqui..."
+
+#: templates/base.html:156
+msgid "The contents of this site is published under license"
+msgstr "O conteúdo deste site está publicado sob a licença"
+
+#: templates/base.html:158
+msgid "Creative Commons - attribution, non-commercial"
+msgstr "Creative Commons - atribuição e não-comercial"
+
+#: templates/home.html:15
+msgid "INTERLEGIS COMMUNITIES"
+msgstr "COMUNIDADES INTERLEGIS"
+
+#: templates/home.html:23
+msgid "Latest Collaborations"
+msgstr "Últimas Colaborações"
+
+#: templates/home.html:27
+msgid "RSS - Latest collaborations"
+msgstr "RSS - Últimas Colaborações"
+
+#: templates/home.html:36
+msgid "View more collaborations..."
+msgstr "Ver mais colaborações..."
+
+#: templates/home.html:43
+msgid "Collaboration Graph"
+msgstr "Gráfico de Colaborações"
+
+#: templates/home.html:51
+msgid "Most Relevant Threads"
+msgstr "Discussões Mais Relevantes"
+
+#: templates/home.html:55
+msgid "RSS - Most Relevant Threads"
+msgstr "RSS - Discussões Mais Relevantes"
+
+#: templates/home.html:64 templates/home.html.py:83
+msgid "View more discussions..."
+msgstr "Ver mais discussões..."
+
+#: templates/home.html:71
+msgid "Latest Threads"
+msgstr "Últimas Discussões"
+
+#: templates/home.html:75
+msgid "RSS - Latest Threads"
+msgstr "RSS - Últimas Discussões"
+
+#: templates/open-data.html:6
+msgid "OpenData - Communities Interlegis"
+msgstr "OpenData - Comunidades Interlegis"
+
+#: templates/open-data.html:7
+msgid ""
+"At this point the system Colab provides much of its data \n"
+"        through its search engine."
+msgstr ""
+
+#: templates/open-data.html:9
+msgid ""
+"If you are interested in integrating your system with the environment "
+"Colab \n"
+"        and requires no other data provided by this API, please contact us "
+"via the ticketing \n"
+"        system (you must be registered in order to create a ticket)."
+msgstr ""
+
+#: templates/open-data.html:13
+msgid "Performing searches via the API"
+msgstr ""
+
+#: templates/open-data.html:14
+msgid ""
+"The Colab API searches works through an HTTP/REST always returning JSON "
+"objects with result."
+msgstr ""
+
+#: templates/open-data.html:15
+msgid "The base URL used for the search is:"
+msgstr ""
+
+#: templates/open-data.html:18
+msgid "Parameters:"
+msgstr ""
+
+#: templates/open-data.html:21
+msgid "Query"
+msgstr ""
+
+#: templates/open-data.html:22
+msgid ""
+"The <i>query</i> is the \"question\" sent \n"
+"                to the search server. A <i>query</i> consists of \n"
+"                <b>field:value</b>, where the field represents a kind of "
+"system data,\n"
+"                for example <b>collaborator</b> and represents the data "
+"stored \n"
+"                by the system, for example <b>jeanferri</b>."
+msgstr ""
+
+#: templates/open-data.html:27
+msgid "The following is a list of available fields to search:"
+msgstr ""
+
+#: templates/open-data.html:29
+msgid "wiki, thread, ticket, changeset."
+msgstr ""
+
+#: templates/open-data.html:30
+msgid "page name, title of the discussion or ticket, changeset description."
+msgstr ""
+
+#: templates/open-data.html:31
+msgid ""
+"excerpt from the page or the discussion, description of the ticket or "
+"changeset."
+msgstr ""
+
+#: templates/open-data.html:32
+msgid "name of user who created the document."
+msgstr ""
+
+#: templates/open-data.html:33
+msgid "real name who created the document."
+msgstr ""
+
+#: templates/open-data.html:34
+msgid "creation date."
+msgstr ""
+
+#: templates/open-data.html:35
+msgid "modification date."
+msgstr ""
+
+#: templates/open-data.html:36
+msgid "mailing list (only for type thread)."
+msgstr ""
+
+#: templates/open-data.html:37
+msgid "name of the wiki page."
+msgstr ""
+
+#: templates/open-data.html:38
+msgid "comments of tickets (all concatenated)."
+msgstr ""
+
+#: templates/open-data.html:39
+msgid ""
+"contents of wiki page or messages of the discussions (all concatenated)."
+msgstr ""
+
+#: templates/open-data.html:40
+msgid "keywords (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:41
+msgid "milestone (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:42
+msgid "priority (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:43
+msgid "component (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:44
+msgid "version (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:45
+msgid "severity (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:46
+msgid "responsible (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:47
+msgid "status (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:48
+msgid "review (ticket only)."
+msgstr ""
+
+#: templates/open-data.html:49
+msgid "synonym for the title (for discussion)."
+msgstr ""
+
+#: templates/open-data.html:55
+msgid "Results per page - n"
+msgstr ""
+
+#: templates/open-data.html:56
+msgid ""
+"Number of results to be displayed per page. \n"
+"                Its value must be an integer between 1 and 500."
+msgstr ""
+
+#: templates/open-data.html:58
+msgid "Default: 50"
+msgstr ""
+
+#: templates/open-data.html:63
+msgid "Page - p"
+msgstr ""
+
+#: templates/open-data.html:64
+msgid ""
+"Page number that appears. Its value must be an \n"
+"                integer equal to or greater than 1."
+msgstr ""
+
+#: templates/open-data.html:65
+msgid "Default: 1"
+msgstr ""
+
+#: templates/open-data.html:70
+msgid "Order - o"
+msgstr ""
+
+#: templates/open-data.html:71
+msgid ""
+"Order in which the results will be displayed. Its value must be \n"
+"                a string in the <b>field direction</b> where the same field "
+"are \n"
+"                presented in the <i>query</i> parameter and direction can "
+"be \n"
+"                <b>asc</b> for ascending or <b>desc</b> for descending."
+msgstr ""
+
+#: templates/pizza-chart.html:24
+msgid "Emails"
+msgstr "Emails"
+
+#: templates/pizza-chart.html:25
+msgid "Tickets"
+msgstr "Tiquetes"
+
+#: templates/pizza-chart.html:26 templates/search.html:25
+msgid "Wiki"
+msgstr "Wiki"
+
+#: templates/pizza-chart.html:27
+msgid "Code"
+msgstr "Código"
+
+#: templates/pizza-chart.html:29
+msgid "Willing to help"
+msgstr "Vontade de ajudar"
+
+#: templates/search.html:7
+msgid "Search"
+msgstr "Busca"
+
+#: templates/search.html:10
+msgid "documents found in"
+msgstr "documentos encontrados em"
+
+#: templates/search.html:11
+msgid "seconds"
+msgstr "segundos"
+
+#: templates/search.html:20
+msgid "Types"
+msgstr "Tipos"
+
+#: templates/search.html:29
+msgid "Discussion"
+msgstr "Discussões"
+
+#: templates/search.html:33
+msgid "Ticket"
+msgstr "Tiquetes"
+
+#: templates/search.html:37
+msgid "Changeset"
+msgstr "Conjunto de Mudanças"
+
+#: templates/search.html:48
+msgid "No results for your search."
+msgstr ""

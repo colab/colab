@@ -17,4 +17,4 @@ def gravatar(email, size=80):
 
     email_md5 = getattr(email, 'md5', 'anonymous')
 
-    return u'<img src="http://www.gravatar.com/avatar/{}?s={}&d=mm" height="{}px" width="{}px">'.format(email_md5, size, size, size)
+    return u'<img src="http://www.gravatar.com/avatar/{}?s={}&d=mm" height="{}px" width="{}px" />'.format(email_md5, size, size, size)

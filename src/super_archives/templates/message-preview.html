@@ -16,7 +16,7 @@
   {% endif %}
 
   <span class="subject">
-    <a href="{{ doc.url }}"
+    <a href="{{ doc.url }}#msg-{{ doc.id }}"
        {% if
        title="{% filter striptags|truncatewords:50 %}
                 {{ doc.Description|escape }}

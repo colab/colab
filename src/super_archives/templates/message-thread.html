@@ -1,32 +1,26 @@
 {% extends "base.html" %}
-{% load i18n append_to_get gravatar %}
+{% load i18n append_to_get gravatar superarchives %}
 
 {% trans "Anonymous" as anonymous %}
 
 {% block head_js %}
 
 <script>
-  function vote_done_callback(msg_id, step) {
+  function vote_done_callback(step) {
     console.debug('(un)vote successfuly (step ' + step + ')');
-    var $msg = $('#msg-' + msg_id)
+    var $btn = $(this);
+    var step;
 
-    $('.vote-count', $msg).text(function(self, count) {
+    if ($btn.hasClass('btn-default')) {
+      step = 1;
+    } else {
+      step = -1;
+    }
+
+    $btn.prev('.vote-count').text(function(self, count) {
         return parseInt(count) + step;
     });
 
-    if (step == -1) {
-      var $btn = $('.vote.btn-success', $msg);
-      $btn.unbind('click');
-      $btn.bind('click', function() {
-        vote(msg_id);
-      });
-    } else {
-      var $btn = $('.vote.btn-default', $msg);
-      $btn.unbind('click');
-      $btn.bind('click', function() {
-        unvote(msg_id);
-      });
-    }
     $btn.toggleClass('btn-success');
     $btn.toggleClass('btn-default');
     $btn.button('reset')
@@ -37,61 +31,57 @@
 
     if (jqXHR.status === 403) {
       msg = " {% trans 'You must login before voting.' %}"
-    } else {
-        return;
+
+      $('#alert-js #alert-message').html(msg);
+      $('#alert-js').show();
+      scroll(0, 0);
     }
 
-    $('#alert-js #alert-message').html(msg);
-    $('#alert-js').show();
-    scroll(0, 0);
   }
 
-  function get_vote_ajax_dict(msg_id, method) {
-    var csrftoken = $.cookie('csrftoken');
-    $('#msg-' + msg_id + ' .vote.btn-success').button('loading');
+  function vote(event) {
+    var $ajax;
+    var $btn = $(this);
+    var $msg = $(this).parents('.email-message');
 
-    return {
+    var method;
+    var csrftoken = $.cookie('csrftoken');
+    var msg_id = $msg.attr('id').split('-')[1];
+
+    if($btn.hasClass('btn-default')) {
+        method = 'PUT';
+    } else {
+        method = 'DELETE';
+    }
+
+    console.debug('trying to vote');
+    $btn.button('loading');
+    $ajax = $.ajax({
       url: "/api/message/" + msg_id + "/vote",
       type: method,
+      context: $btn.get(0),
       beforeSend: function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", csrftoken);
       }
-    }
-  }
-
-  function vote(msg_id) {
-    console.debug('trying to vote');
-    $.ajax(get_vote_ajax_dict(msg_id, 'PUT'))
-      .done(function(){
-        vote_done_callback(msg_id, 1);
-      })
-      .fail(vote_fail_callback);
-  }
-
-  function unvote(msg_id) {
-    console.debug('trying to remove vote');
-    $.ajax(get_vote_ajax_dict(msg_id, 'DELETE'))
-      .done(function(){
-        vote_done_callback(msg_id, -1);
-      })
-      .fail(vote_fail_callback);
+    });
+    $ajax.done(vote_done_callback);
+    $ajax.fail(vote_fail_callback);
   }
 
   // Binding functions
   $(function() {
-    console.debug('binding vote function to btns');
-    $('.email-message').each(function() {
-      var msg_id = this.getAttribute('id').split('-')[1];
+    $(".panel-heading").on('click', function(event) {
+        var $target = $(event.target);
+        // Do not collapse the the message if the clicked element (target)
+        //  is a button or a link
+        if($target.hasClass('btn') || $target.is('a') || $target.parent().is('a')) {
+            return;
+        }
 
-      $('.vote.btn-default', this).bind('click', function() {
-        vote(msg_id);
-      });
-
-      $('.vote.btn-success', this).bind('click', function() {
-        unvote(msg_id);
-      });
-
+        $(this).next('.panel-collapse').collapse('toggle');
     });
+
+    $('.vote.btn', this).on('click', vote);
   });
 
 </script>
@@ -148,8 +138,10 @@
               </div>
 
             </div>
-            <div class="panel-body">
-              <pre>{{ email.body }}</pre>
+            <div class="panel-collapse in">
+              <div class="panel-body">
+                {% display_message email emails %}
+              </div>
             </div>
           </div>
         </div>

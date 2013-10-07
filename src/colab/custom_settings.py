@@ -128,6 +128,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_browserid.context_processors.browserid',
     'django_mobile.context_processors.is_mobile',
+    'super_archives.context_processors.mailarchive',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -156,6 +157,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(BASE_DIR, 'locale'),
 )
 
 AUTH_USER_MODEL = 'accounts.User'

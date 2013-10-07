@@ -34,6 +34,7 @@
           {{ user_.institution }}
         </li>
         {% endif %}
+      {% if request.user.is_active %}
         {% if user_.twitter %}
         <li><span class="icon-twitter icon-fixed-width"></span> {{ user_.twitter }}</li>
         {% endif %}
@@ -46,6 +47,7 @@
         {% if user_.webpage %}
         <li><span class="icon-link icon-fixed-width"></span> {{ user_.webpage }}</li>
         {% endif %}
+      {% endif %}
       </ul>
     </div>
 
