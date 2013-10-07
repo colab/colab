@@ -7,8 +7,7 @@
       <h2>{% trans "Search" %}</h2>
     </div>
     <span class="pull-right quiet">
-      {{ docs.numFound }} {% trans "documents found in" %} 
-      {{ docs.QTime|floatformat:3 }} {% trans "seconds" %}
+      {{ page.object_list|length }} {% trans "documents found" %}
     </span>
   </div>
   <hr/>
@@ -19,7 +18,7 @@
 
       <h4>{% trans "Types" %}</h4>
 
-      <ul class="none indent">
+      <ul class="none indent unstyled-list">
         <li {% ifequal type "wiki" %} title="{% trans "Remove filter" %}" {% endifequal %}>
           <span class="glyphicon glyphicon-file"></span>
           <a href="{% ifnotequal type "wiki" %} {% append_to_get type='wiki' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Wiki" %}</a>
@@ -36,14 +35,22 @@
           <span class="glyphicon glyphicon-align-right"></span>
           <a href="{% ifnotequal type "changeset" %} {% append_to_get type='changeset' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Changeset" %}</a>
         </li>
+        <li {% ifequal type "user" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+          <span class="glyphicon glyphicon-user"></span>
+          <a href="{% ifnotequal type "user" %} {% append_to_get type='user' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "User" %}</a>
+        </li>
       </ul>
     </div>
   
     <div class="col-lg-10">
-      <ul class="none indent">
-      {% for doc in page.object_list  %}
+      <ul class="none indent list-unstyled">
+      {% for result in page.object_list  %}
         <br />
-        {% include "message-preview.html" %}
+        {% if result.model_name == 'message' %}
+          {% include "search/search-message-preview.html" %}
+        {% else %}
+          {% include "search/search-user-preview.html" %}
+        {% endif %}
       {% empty %}
         <li class="text-center">
           {% trans "No results for your search." %}

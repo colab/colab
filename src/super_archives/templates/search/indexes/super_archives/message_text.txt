@@ -1,0 +1,6 @@
+{{ object.thread.mailinglist.name }}
+{{ object.thread.subject_token }}
+{{ object.body }}
+{{ object.subject_clean }}
+{{ object.url }}
+{{ object.received_time }}

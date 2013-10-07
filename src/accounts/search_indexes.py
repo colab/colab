@@ -10,12 +10,12 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     username = indexes.CharField(model_attr='username')
     name = indexes.CharField(model_attr='get_full_name')
     email = indexes.CharField(model_attr='email')
-    institution = indexes.CharField(model_attr='institution')
-    role = indexes.CharField(model_attr='role')
-    twitter = indexes.CharField(model_attr='twitter')
-    facebook = indexes.CharField(model_attr='facebook')
-    google_talk = indexes.CharField(model_attr='google_talk')
-    webpage = indexes.CharField(model_attr='webpage')
+    institution = indexes.CharField(model_attr='institution', null=True)
+    role = indexes.CharField(model_attr='role', null=True)
+    twitter = indexes.CharField(model_attr='twitter', null=True)
+    facebook = indexes.CharField(model_attr='facebook', null=True)
+    google_talk = indexes.CharField(model_attr='google_talk', null=True)
+    webpage = indexes.CharField(model_attr='webpage', null=True)
 
     def get_model(self):
         return User
