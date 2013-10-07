@@ -13,10 +13,12 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
     Description = indexes.CharField(use_template=True)
     Title = indexes.CharField(use_template=True)
     url = indexes.CharField(use_template=True, null=True)
-    modified = indexes.DateTimeField(use_template=True)
+    modified = indexes.CharField(use_template=True)
 
     def get_model(self):
         return Thread
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(spam=False)
+        return self.get_model().objects.filter(
+            spam=False
+        ).exclude(subject_token='')
