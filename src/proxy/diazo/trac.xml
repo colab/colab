@@ -1,0 +1,45 @@
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <replace css:theme="#trac-css" content="//head/link" />
+    <replace css:theme="#trac-js" content="//head/script" />
+
+    <before css:theme-children="#main-content" css:content="#main" />
+
+    <after theme-children="/html/head">
+        <style>
+          .navbar .nav ul { font-size: 14px; text-align: left; padding: 5px 0; }
+          .navbar .nav li { border: 0; padding: 0; white-space: normal; display: list-item;}
+          :link:not(.btn),
+          :visited:not(.btn) { border: 0; color: rgb(66, 139, 202); }
+          :link, :visited { border: 0; }
+          h1 { font-size: 24px; margin: 0.15em 1em 0.5em 0px; }
+          h2 { font-size: 20px }
+          h3 { font-size: 16px }
+          h4 { font-size: 14px }
+          input[type="checkbox"], input[type="radio"] { margin: 0 4px; }
+          fieldset { padding: 1em; margin: 1em 0; border: 1px solid rgb(215, 215, 215); }
+          label { font-weight: 400; }
+          legend { margin-bottom: 0; width: auto; }
+          input, textarea, select { margin: 2px; }
+
+          .wikitoolbar,
+          .wikitoolbar:before,
+          .wikitoolbar:after {
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+          }
+          .wikitoolbar :link,
+          .wikitoolbar :visited {
+            border-width: 1px;
+            border-style: solid;
+            border-color: #fff #fff #fff #ccc;
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+          }
+        </style>
+    </after>
+
+</rules>

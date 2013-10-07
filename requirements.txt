@@ -1,4 +1,4 @@
-#https://www.djangoproject.com/download/1.6b1/tarball/
+#https://www.djangoproject.com/download/1.6b4/tarball/
 Django==1.5.2
 South==0.8.1
 psycopg2==2.5.1
@@ -25,11 +25,14 @@ git+https://github.com/TracyWebTech/django-revproxy/
 django-conversejs
 
 # Feedzilla (planet) and deps
-https://bitbucket.org/lorien/feedzilla/get/tip.tar.gz # Temporarily work around
+feedzilla==0.22
 django-common
 django-taggit
-django-taggit-templatetags
 feedparser
 lxml
 grab
 transliterate
+
+# Diazo
+diazo
+#lxml

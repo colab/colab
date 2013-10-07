@@ -40,11 +40,11 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'colab.deprecated',
     'planet',
     'accounts',
+    'proxy',
 
     # Feedzilla and deps
     'feedzilla',
     'taggit',
-    'taggit_templatetags',
     'common',
 )
 

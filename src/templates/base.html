@@ -2,7 +2,8 @@
 {% load i18n browserid conversejs gravatar %}
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    {% block head %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap/css/bootstrap.css" type="text/css" media="screen, projection" />
 
@@ -41,13 +42,14 @@
     </script>
     {% endblock %}
 
+  {% endblock %}
   </head>
 
   <body class="container">
     {% browserid_info %}
-    <div class="row">
-    </div>
 
+
+    {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -66,18 +68,21 @@
               <a href="{% url 'thread_list' %}">{% trans "Discussions" %}</a>
             </li>
             <li>
-              <a href="http://colab.interlegis.gov.br/wiki" target="_blank">{% trans "Wiki" %}</a>
-            </li>
-            <li>
-              <a href="http://listas.interlegis.gov.br/mailman/listinfo/"
-                 target="_blank">{% trans "Contribute" %}</a>
-            </li>
-            <li>
-              <a href="http://colab.interlegis.leg.br/newticket"
-                 target="_blank">{% trans "Report a problem" %}</a>
-            </li>
-            <li>
               <a href="{% url "feedzilla_index" %}">{% trans "Planet" %}</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contribute" %} <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="/wiki">Wiki</a></li>
+                {% if user.is_active %}
+                <li><a href="/newticket">{% trans "New Ticket" %}</a></li>
+                {% endif %}
+                <li><a href="/timeline">{% trans "Timeline" %}</a></li>
+                <li><a href="/roadmap">{% trans "Roadmap" %}</a></li>
+                <li><a href="/browser">{% trans "Browse Source" %}</a></li>
+                <li><a href="/report">{% trans "View Tickets" %}</a></li>
+                <li><a href="/tags">{% trans "Tags" %}</a></li>
+              </ul>
             </li>
           </ul>
 
@@ -87,7 +92,7 @@
               <li>{% browserid_login text='Login' next=request.path %}</li>
             {% else %}
               <li id="user-menu" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
+                <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
                 <ul class="dropdown-menu" role="menu">
                   <li>
                     <div class="wrapper">
@@ -119,6 +124,7 @@
         </div>
       </div>
     </nav>
+    {% endblock %}
 
       {% block messages %}
         {% for message in messages %}
@@ -135,8 +141,8 @@
 
     {% block header %}{% endblock %}
 
-    <div>
-      {% block main-content %} {% endblock %}
+    <div id="main-content">
+      {% block main-content %}{% endblock %}
     </div>
 
     <div class="row">&nbsp;</div>
