@@ -22,6 +22,25 @@ HAYSTACK_CONNECTIONS = {
     }
 }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'colab',
+        'USER': 'colab',
+        'PASSWORD': os.environ.get('COLAB_DEFAULT_DB_PWD'),
+        'HOST': os.environ.get('COLAB_DEFAULT_DB_HOST'),
+    },
+    'trac': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'trac',
+        'USER': 'trac',
+        'PASSWORD': os.environ.get('COLAB_TRAC_DB_PWD'),
+        'HOST': os.environ.get('COLAB_TRAC_DB_HOST'),
+    }
+}
+
+DATABASE_ROUTERS = ['colab.routers.TracRouter',]
+
 INSTALLED_APPS = INSTALLED_APPS + (
 
     # Not standard apps
