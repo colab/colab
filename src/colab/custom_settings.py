@@ -41,6 +41,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'planet',
     'accounts',
     'proxy',
+    'search',
 
     # Feedzilla and deps
     'feedzilla',

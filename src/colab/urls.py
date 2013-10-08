@@ -8,6 +8,7 @@ from haystack.query import SearchQuerySet
 from haystack.views import SearchView
 
 from accounts.models import User
+from search.forms import ColabSearchForm
 from super_archives.models import Message
 
 
@@ -16,11 +17,12 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'colab.deprecated.views.other.home', name='home'),
 
+    # TODO change search to full_search with haystack
     url(r'^search/$', 'colab.deprecated.views.other.search', name='search'),
     url(r'^full_search/', SearchView(
         template='search/search.html',
-        searchqueryset=SearchQuerySet().models(User, Message),
-        form_class=ModelSearchForm,
+        searchqueryset=SearchQuerySet(),
+        form_class=ColabSearchForm,
     ), name='haystack_search'),
 
     url(r'open-data/$', TemplateView.as_view(template_name='open-data.html'),

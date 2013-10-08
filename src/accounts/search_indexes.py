@@ -17,8 +17,13 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     google_talk = indexes.CharField(model_attr='google_talk', null=True)
     webpage = indexes.CharField(model_attr='webpage', null=True)
 
+    type = indexes.CharField()
+
     def get_model(self):
         return User
+
+    def prepare_type(self, obj):
+        return u'user'
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(is_active=True)

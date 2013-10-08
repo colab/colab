@@ -25,11 +25,16 @@ class MessageIndex(indexes.SearchIndex, indexes.Indexable):
     )
     url = indexes.CharField(model_attr='url', null=True)
 
+    type = indexes.CharField()
+
     def get_model(self):
         return Message
 
     def get_updated_field(self):
         return 'received_time'
+
+    def prepare_type(self, obj):
+        return u'thread'
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(
