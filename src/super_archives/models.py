@@ -45,6 +45,12 @@ class EmailAddress(models.Model):
         self.md5 = md5(self.address).hexdigest()
         super(EmailAddress, self).save(*args, **kwargs)
 
+    def get_full_name(self):
+        if self.user and self.user.get_full_name():
+            return self.user.get_full_name()
+        else:
+            return self.real_name
+
     def get_full_name_or_anonymous(self):
         return self.get_full_name() or _('Anonymous')
 

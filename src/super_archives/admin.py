@@ -1,6 +1,15 @@
 
 from django.contrib import admin
-from .models import Message, Thread
+from .models import Message, Thread, EmailAddress
+
+
+class EmailAddressAdmin(admin.ModelAdmin):
+    search_fields = (
+        'address',
+        'user__username',
+        'user__first_name',
+        'user__last_name',
+    )
 
 class MessageAdmin(admin.ModelAdmin):
     list_filter = ('spam', 'thread__mailinglist', 'received_time', )
@@ -50,4 +59,5 @@ class ThreadAdmin(admin.ModelAdmin):
 
 admin.site.register(Thread, ThreadAdmin)
 admin.site.register(Message, MessageAdmin)
+admin.site.register(EmailAddress, EmailAddressAdmin)
 
