@@ -19,9 +19,9 @@
         <em>{{ user_.username }}</em>
       </h1>
 
-      {% ifequal request.user user_ %}
-        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "update your profile"|title %}</a>
-      {% endifequal %}
+      {% if request.user == user_ or request.user.is_superuser %}
+        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "edit profile"|title %}</a>
+      {% endif %}
 
       <div class="divider"></div>
       {% if request.user.is_active %}

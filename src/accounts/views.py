@@ -33,7 +33,7 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
 
     def get_object(self, *args, **kwargs):
         obj = super(UserProfileUpdateView, self).get_object(*args, **kwargs)
-        if self.request.user != obj:
+        if self.request.user != obj and not self.request.user.is_superuser:
             raise PermissionDenied
 
         return obj
