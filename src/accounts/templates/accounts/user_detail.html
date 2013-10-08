@@ -24,6 +24,14 @@
       {% endifequal %}
 
       <div class="divider"></div>
+      {% if request.user.is_active %}
+        <ul class="unstyled-list">
+        {% for email in request.user.emails.iterator %}
+          <li><span class="icon-envelope icon-fixed-width"></span> {{ email.address }}</li>
+        {% endfor %}
+        </ul>
+        <div class="divider"></div>
+      {% endif %}
 
       <ul class="unstyled-list">
         {% if user_.institution or user_.role %}

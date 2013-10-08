@@ -41,6 +41,9 @@ class EmailAddress(models.Model):
     real_name = models.CharField(max_length=64, blank=True, db_index=True)
     md5 = models.CharField(max_length=32, null=True)
 
+    class Meta:
+        ordering = ('id', )
+
     def save(self, *args, **kwargs):
         self.md5 = md5(self.address).hexdigest()
         super(EmailAddress, self).save(*args, **kwargs)
