@@ -8,6 +8,7 @@ from django.views.generic import DetailView, UpdateView
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
+from django.core.exceptions import PermissionDenied
 
 from colab.deprecated import solrutils
 from colab.deprecated import signup as signup_
@@ -30,7 +31,12 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     def get_success_url(self):
         return reverse('user_profile', kwargs={'username': self.object.username})
 
+    def get_object(self, *args, **kwargs):
+        obj = super(UserProfileUpdateView, self).get_object(*args, **kwargs)
+        if self.request.user != obj:
+            raise PermissionDenied
 
+        return obj
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
     template_name = 'accounts/user_detail.html'

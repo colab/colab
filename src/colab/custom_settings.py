@@ -181,6 +181,7 @@ FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
 ### BrowserID / Persona
 SITE_URL = 'https://colab.interlegis.leg.br'
 
+LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
 LOGOUT_REDIRECT_URL = '/'
