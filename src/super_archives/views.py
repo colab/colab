@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import smtplib
+
 from django import http
 from django.contrib import messages
 from django.db import IntegrityError
@@ -12,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from . import queries
+from .utils import send_verification_email
 from .decorators import count_hit
 from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
 
@@ -95,7 +98,7 @@ class EmailView(View):
 
         try:
             email_val = EmailAddressValidation.objects.get(validation_key=key,
-                                                           user=request.user)
+                                                           user__pk=request.user.pk)
         except EmailAddressValidation.DoesNotExist:
             messages.error(request, _('The email address you are trying to '
                                       'verify either has already been verified '
@@ -188,4 +191,25 @@ class EmailView(View):
 
         request.user.email = email_addr
         request.user.save()
+        return http.HttpResponse(status=204)
+
+
+class EmailValidationView(View):
+
+    http_method_names = [u'post']
+
+    def post(self, request):
+        email_addr = request.POST.get('email')
+        try:
+            email = EmailAddressValidation.objects.get(address=email_addr,
+                                                       user=request.user)
+        except http.DoesNotExist:
+            raise http.Http404
+
+        try:
+            send_verification_email(email_addr, request.user,
+                                    email.validation_key)
+        except smtplib.SMTPException:
+            return http.HttpResponseServerError()
+
         return http.HttpResponse(status=204)

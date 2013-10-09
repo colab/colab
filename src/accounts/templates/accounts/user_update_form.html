@@ -43,6 +43,29 @@ $(function() {
     event.preventDefault();
   });
 
+  $('.verify-email').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'archive_email_validation_view' %}",
+      type: 'post',
+      data: { email: $('.email-address', $email_block).text() },
+      context: $email_block[0],
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      }
+    }).done(function() {
+      var email = $('.email-address', $(this)).text();
+      var msg = '{% trans "We sent a verification email to " %}' + email + '. ' +
+                '{% trans "Please follow the instructions in it." %}';
+      $('#alert-message').text(msg);
+      $('#alert-js').removeClass('alert-warning').addClass('alert-success');
+      $('#alert-js').show();
+      window.scroll(0, 0);
+    });
+
+    event.preventDefault();
+  });
+
   $('.set-primary').on('click', function(event) {
     var $email_block = $(event.target).parent().parent();
     $.ajax({
