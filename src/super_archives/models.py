@@ -36,7 +36,8 @@ class EmailAddressValidation(models.Model):
 
 
 class EmailAddress(models.Model):
-    user = models.ForeignKey(User, null=True, related_name='emails')
+    user = models.ForeignKey(User, null=True, related_name='emails',
+                             on_delete=models.SET_NULL)
     address = models.EmailField(unique=True)
     real_name = models.CharField(max_length=64, blank=True, db_index=True)
     md5 = models.CharField(max_length=32, null=True)
