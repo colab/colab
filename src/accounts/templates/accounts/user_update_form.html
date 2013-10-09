@@ -97,9 +97,10 @@ $(function() {
             <h3 class="panel-title">{% trans "Emails" %}</h3>
           </div>
           <div class="panel-body">
-            <ul class="unstyled-list email">
+            <ul class="unstyled-list emails">
             {% for email in user_.emails.iterator %}
               <li>
+                {% gravatar user_.email 30 %}
                 <span class="email-address">{{ email.address }}</span>
                 {% if email.address == user_.email %}
                   <span class="label label-success">{% trans "Primary" %}</span>
@@ -114,9 +115,10 @@ $(function() {
             {% endfor %}
             {% for email in user_.emails_not_validated.iterator %}
               <li>
+                {% gravatar user_.email 30 %}
                 <span class="email-address">{{ email.address }}</span>
-                <span class="label label-warning">{% trans "Not verified" %}</span>
                 <div class="text-right">
+                  <button class="btn btn-default verify-email"><span class="icon-warning-sign"></span> {% trans "Verify" %}</button>
                   <button class="btn btn-danger delete-email">{% trans "Delete" %}</button>
                 </div>
                 <hr />

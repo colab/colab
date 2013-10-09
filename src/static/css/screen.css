@@ -3,6 +3,10 @@ body {
     padding-top: 57px;
 }
 
+li hr {
+    margin: 10px 0;
+}
+
 /* Header */
 
 #header-searchbox {
@@ -348,3 +352,20 @@ ul.unstyled-list .glyphicon-chevron-right {
 }
 
 /* end Feedzilla */
+
+/* user profile update */
+
+.btn.delete-email:not(:hover) {
+    background-color: #fff;
+    color: #D9534F;
+}
+
+.btn .icon-warning-sign {
+    color: #F0AD4E;
+}
+
+ul.emails {
+    margin: 0;
+}
+
+/* end user profile update */
