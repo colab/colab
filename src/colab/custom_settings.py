@@ -106,8 +106,8 @@ LOGGING = {
     }
 }
 
-SERVER_EMAIL = '"Colab Interlegis" <noreply@interlegis.leg.br>'
-EMAIL_HOST_USER = SERVER_EMAIL
+COLAB_FROM_ADDRESS = '"Colab Interlegis" <noreply@interlegis.leg.br>'
+SERVER_EMAIL = EMAIL_HOST_USER = COLAB_FROM_ADDRESS
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
