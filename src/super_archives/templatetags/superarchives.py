@@ -14,15 +14,27 @@ TEMPLATE_PATH = 'superarchives/tags/'
 EXTENDED_PUNCTUATION = '!"#$%&\'()*+,-./:;=?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
 RE_WRAPPED_BY_HTML = re.compile(r'^<[a-z]+[^>]*>.*</[a-z]+[^>]*>$',
                                 re.MULTILINE|re.IGNORECASE|re.DOTALL)
+RE_LINKS = re.compile(r'(?P<link>https?://[^ \t\r\n\<]+)')
+
+
+def find_links(block):
+    links = RE_LINKS.finditer(block)
+
+    block, n = RE_LINKS.subn(r'<a target="_blank" href="\g<link>">\g<link></a>',
+                             block)
+
+    return block
 
 
 def join(block):
     block_txt = u''.join(block)
 
     if RE_WRAPPED_BY_HTML.match(block_txt.strip()):
-        return html2text(block_txt)
+        block = html2text(block_txt)
+    else:
+        block = block_txt
 
-    return block_txt
+    return find_links(block)
 
 def is_reply(line, message, thread):
     clean_line = line.strip()
@@ -41,8 +53,7 @@ def is_reply(line, message, thread):
     return False
 
 
-@register.inclusion_tag(TEMPLATE_PATH + 'display_message.html',
-                        takes_context=False)
+@register.inclusion_tag(TEMPLATE_PATH + 'display_message.html')
 def display_message(email, thread):
     message = email.body
     messages = []
