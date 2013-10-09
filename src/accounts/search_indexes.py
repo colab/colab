@@ -22,6 +22,9 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return User
 
+    def get_updated_field(self):
+        return 'date_joined'
+
     def prepare_type(self, obj):
         return u'user'
 
