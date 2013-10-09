@@ -48,8 +48,10 @@
         <br />
         {% if result.model_name == 'message' %}
           {% include "search/search-message-preview.html" %}
-        {% else %}
+        {% elif result.model_name == 'user' %}
           {% include "search/search-user-preview.html" %}
+        {% elif result.model_name == 'wiki' %}
+          {% include "search/search-wiki-preview.html" %}
         {% endif %}
       {% empty %}
         <li class="text-center">

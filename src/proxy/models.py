@@ -39,6 +39,7 @@ class Revision(models.Model):
 
 
 class Ticket(models.Model):
+    id = models.IntegerField(primary_key=True)
     type = models.TextField(blank=True)
     time = models.BigIntegerField(blank=True, null=True)
     changetime = models.BigIntegerField(blank=True, null=True)
@@ -85,7 +86,7 @@ class TicketCustom(models.Model):
 
 
 class Wiki(models.Model):
-    name = models.TextField()
+    name = models.TextField(primary_key=True)
     version = models.IntegerField()
     time = models.BigIntegerField(blank=True, null=True)
     author = models.TextField(blank=True)
@@ -97,3 +98,11 @@ class Wiki(models.Model):
     class Meta:
         managed = False
         db_table = 'wiki'
+
+    def get_collaborators(self):
+        return Wiki.objects.filter(
+            name=self.name,
+        ).values_list('author', flat=True)
+
+    def get_author(self):
+        return Wiki.objects.get(name=self.name, version=1).author

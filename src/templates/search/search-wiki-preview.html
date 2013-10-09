@@ -1,0 +1,25 @@
+{% load i18n %}
+
+<li class="preview-message">
+  <span class="glyphicon glyphicon-file"></span>
+
+  <span class="subject">
+    <a href="{{ result.url }}">{{ result.name }}</a>
+  </span>
+
+  <span class="quiet">{% if result.text %}- {{ result.text|truncatechars:150 }} {% endif %}{% if result.comment|truncatechars:150 %}- {{ result.comment }}{% endif %}</span>
+
+  <div class="quiet">
+    <span class="pull-left">
+      {% if result.author %}
+        {% trans "by" %}
+      {% endif %}
+
+      {% if result.author %}
+        <a href="{{ result.author_username }}">{{ result.author }}</a>
+      {% endif %}
+    </span>
+
+    <span class="pull-right">{{ result.time }} {% trans "ago" %}</span>
+  </div>
+</li>

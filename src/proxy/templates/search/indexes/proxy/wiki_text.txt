@@ -1,0 +1,5 @@
+{{ object.name }}
+{{ object.author }}
+{{ object.text }}
+{{ object.comment }}
+{{ object.ipnr }}
