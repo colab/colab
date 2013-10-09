@@ -34,6 +34,9 @@ class EmailAddressValidation(models.Model):
                                       default=lambda: uuid4().hex)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('user', 'address')
+
 
 class EmailAddress(models.Model):
     user = models.ForeignKey(User, null=True, related_name='emails',
