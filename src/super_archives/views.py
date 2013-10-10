@@ -1,25 +1,32 @@
 # -*- coding: utf-8 -*-
 
-import queries
+import smtplib
 
-from django.http import Http404
-from django.template import RequestContext
+from django import http
+from django.contrib import messages
+from django.db import IntegrityError
+from django.views.generic import View
 from django.core.paginator import Paginator
+from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import render, get_list_or_404
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
-from .models import MailingList, Thread
+from . import queries
+from .utils import send_verification_email
 from .decorators import count_hit
+from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
 
 
 @count_hit
 def thread(request, mailinglist, thread_token):
 
     try:
-        first_message = queries.get_first_message_in_thread(mailinglist, 
+        first_message = queries.get_first_message_in_thread(mailinglist,
                                                             thread_token)
     except ObjectDoesNotExist:
-        raise Http404
+        raise http.Http404
     order_by = request.GET.get('order')
     if order_by == 'voted':
         msgs_query = queries.get_messages_by_voted()
@@ -80,3 +87,129 @@ def list_messages(request):
         'order_by': order_by,
     }
     return render(request, 'message-list.html', template_data)
+
+
+class EmailView(View):
+
+    http_method_names = [u'head', u'get', u'post', u'delete', u'update']
+
+    def get(self, request, key):
+        """Validate an email with the given key"""
+
+        try:
+            email_val = EmailAddressValidation.objects.get(validation_key=key,
+                                                           user__pk=request.user.pk)
+        except EmailAddressValidation.DoesNotExist:
+            messages.error(request, _('The email address you are trying to '
+                                      'verify either has already been verified '
+                                      'or does not exist.'))
+            return redirect('/')
+
+        try:
+            email = EmailAddress.objects.get(address=email_val.address)
+        except EmailAddress.DoesNotExist:
+            email = EmailAddress(address=email_val.address)
+
+        if email.user:
+            messages.error(request, _('The email address you are trying to '
+                                      'verify is already an active email '
+                                      'address.'))
+            email_val.delete()
+            return redirect('/')
+
+        email.user = email_val.user
+        email.save()
+        email_val.delete()
+
+        messages.success(request, _('Email address verified!'))
+        return redirect('user_profile', username=email_val.user.username)
+
+
+    @method_decorator(login_required)
+    def post(self, request, key):
+        """Create new email address that will wait for validation"""
+
+        email = request.POST.get('email')
+        if not email:
+            return http.HttpResponseBadRequest()
+
+        try:
+            EmailAddressValidation.objects.create(address=email,
+                                                  user=request.user)
+        except IntegrityError:
+            # 409 Conflict
+            #   duplicated entries
+            #   email exist and it's waiting for validation
+            return http.HttpResponse(status=409)
+
+        return http.HttpResponse(status=201)
+
+    @method_decorator(login_required)
+    def delete(self, request, key):
+        """Remove an email address, validated or not."""
+
+        request.DELETE = http.QueryDict(request.body)
+        email_addr = request.DELETE.get('email')
+
+        if not email_addr:
+            return http.HttpResponseBadRequest()
+
+        try:
+            email = EmailAddressValidation.objects.get(address=email_addr,
+                                                       user=request.user)
+        except EmailAddressValidation.DoesNotExist:
+            pass
+        else:
+            email.delete()
+            return http.HttpResponse(status=204)
+
+        try:
+            email = EmailAddress.objects.get(address=email_addr,
+                                             user=request.user)
+        except EmailAddress.DoesNotExist:
+            raise http.Http404
+
+        email.user = None
+        email.save()
+        return http.HttpResponse(status=204)
+
+    @method_decorator(login_required)
+    def update(self, request, key):
+        """Set an email address as primary address."""
+
+        request.UPDATE = http.QueryDict(request.body)
+
+        email_addr = request.UPDATE.get('email')
+        if not email_addr:
+            return http.HttpResponseBadRequest()
+
+        try:
+            email = EmailAddress.objects.get(address=email_addr,
+                                             user=request.user)
+        except EmailAddress.DoesNotExist:
+            raise http.Http404
+
+        request.user.email = email_addr
+        request.user.save()
+        return http.HttpResponse(status=204)
+
+
+class EmailValidationView(View):
+
+    http_method_names = [u'post']
+
+    def post(self, request):
+        email_addr = request.POST.get('email')
+        try:
+            email = EmailAddressValidation.objects.get(address=email_addr,
+                                                       user=request.user)
+        except http.DoesNotExist:
+            raise http.Http404
+
+        try:
+            send_verification_email(email_addr, request.user,
+                                    email.validation_key)
+        except smtplib.SMTPException:
+            return http.HttpResponseServerError()
+
+        return http.HttpResponse(status=204)

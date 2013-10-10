@@ -30,16 +30,23 @@ class EmailAddressValidation(models.Model):
     address = models.EmailField(unique=True)
     user = models.ForeignKey(User, null=True,
                              related_name='emails_not_validated')
-    validation_key = models.CharField(max_length=32,
+    validation_key = models.CharField(max_length=32, null=True,
                                       default=lambda: uuid4().hex)
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        unique_together = ('user', 'address')
+
 
 class EmailAddress(models.Model):
-    user = models.ForeignKey(User, null=True, related_name='emails')
+    user = models.ForeignKey(User, null=True, related_name='emails',
+                             on_delete=models.SET_NULL)
     address = models.EmailField(unique=True)
     real_name = models.CharField(max_length=64, blank=True, db_index=True)
     md5 = models.CharField(max_length=32, null=True)
+
+    class Meta:
+        ordering = ('id', )
 
     def save(self, *args, **kwargs):
         self.md5 = md5(self.address).hexdigest()
@@ -48,7 +55,7 @@ class EmailAddress(models.Model):
     def get_full_name(self):
         if self.user and self.user.get_full_name():
             return self.user.get_full_name()
-        elif self.real_name:
+        else:
             return self.real_name
 
     def get_full_name_or_anonymous(self):

@@ -36,7 +36,7 @@ class UserCreationForm(UserForm):
 class UserUpdateForm(UserForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email',
+        fields = ('username', 'first_name', 'last_name',
                   'institution', 'role', 'twitter', 'facebook',
                   'google_talk', 'webpage')
 

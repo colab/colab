@@ -19,11 +19,19 @@
         <em>{{ user_.username }}</em>
       </h1>
 
-      {% ifequal request.user user_ %}
-        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "update your profile"|title %}</a>
-      {% endifequal %}
+      {% if request.user == user_ or request.user.is_superuser %}
+        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "edit profile"|title %}</a>
+      {% endif %}
 
       <div class="divider"></div>
+      {% if request.user.is_active %}
+        <ul class="unstyled-list">
+        {% for email in user_.emails.iterator %}
+          <li><span class="icon-envelope icon-fixed-width"></span> {{ email.address }}</li>
+        {% endfor %}
+        </ul>
+        <div class="divider"></div>
+      {% endif %}
 
       <ul class="unstyled-list">
         {% if user_.institution or user_.role %}

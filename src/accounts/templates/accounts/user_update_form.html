@@ -1,32 +1,162 @@
 {% extends "base.html" %}
 {% load i18n gravatar %}
 
+{% block head_js %}
+<script>
+$(function() {
+  $('#add-email').on('click', function(event) {
+    $.ajax({
+      url: "{% url 'archive_email_view' %}",
+      type: 'post',
+      data: { email: $('#new_email').val() },
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      }
+    }).done(function() {
+      location.reload();
+    });
+
+    event.preventDefault();
+  });
+
+  $('#new_email').on('keypress', function(event) {
+    if (event.which == 13) {
+      event.preventDefault();
+      $('#add-email').trigger('click');
+    }
+  });
+
+  $('.delete-email').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'archive_email_view' %}",
+      type: 'delete',
+      data: { email: $('.email-address', $email_block).text() },
+      context: $email_block[0],
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      }
+    }).done(function() {
+        $(this).remove();
+    });
+
+    event.preventDefault();
+  });
+
+  $('.verify-email').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'archive_email_validation_view' %}",
+      type: 'post',
+      data: { email: $('.email-address', $email_block).text() },
+      context: $email_block[0],
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      }
+    }).done(function() {
+      var email = $('.email-address', $(this)).text();
+      var msg = '{% trans "We sent a verification email to " %}' + email + '. ' +
+                '{% trans "Please follow the instructions in it." %}';
+      $('#alert-message').text(msg);
+      $('#alert-js').removeClass('alert-warning').addClass('alert-success');
+      $('#alert-js').show();
+      window.scroll(0, 0);
+    });
+
+    event.preventDefault();
+  });
+
+  $('.set-primary').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'archive_email_view' %}",
+      type: 'update',
+      data: { email: $('.email-address', $email_block).text() },
+      beforeSend: function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      }
+    }).done(function() {
+      location.reload();
+    });
+
+    event.preventDefault();
+  });
+
+});
+</script>
+{% endblock %}
+
+
 {% block main-content %}
   <form method="post">
     {% csrf_token %}
 
     <div class="col-lg-12">
       <a href="https://gravatar.com" target="_blank">
-        {% gravatar request.user.email 50 %}
+        {% gravatar user_.email 50 %}
         {% trans "Change your avatar at Gravatar.com" %}
       </a>
     </div>
     <br>
 
     <div class="row">
-      {% for field in form %}
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xm-12">
-        <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
-          <label for="{{ field.name }}" class="control-label">
-            {{ field.label }}
-          </label>
-          {{ field }}
-          {{ field.errors }}
+      <div class="col-lg-8 col-md-7 col-sm-12 col-xm-12">
+        {% for field in form %}
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xm-12">
+          <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
+            <label for="{{ field.name }}" class="control-label">
+              {{ field.label }}
+            </label>
+            {{ field }}
+            {{ field.errors }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Emails" %}</h3>
+          </div>
+          <div class="panel-body">
+            <ul class="unstyled-list emails">
+            {% for email in user_.emails.iterator %}
+              <li>
+                {% gravatar user_.email 30 %}
+                <span class="email-address">{{ email.address }}</span>
+                {% if email.address == user_.email %}
+                  <span class="label label-success">{% trans "Primary" %}</span>
+                {% else %}
+                  <div class="text-right">
+                    <button class="btn btn-default set-primary">{% trans "Set as Primary" %}</button>
+                    <button class="btn btn-danger delete-email">{% trans "Delete" %}</button>
+                  </div>
+                {% endif %}
+                <hr />
+              </li>
+            {% endfor %}
+            {% for email in user_.emails_not_validated.iterator %}
+              <li>
+                {% gravatar user_.email 30 %}
+                <span class="email-address">{{ email.address }}</span>
+                <div class="text-right">
+                  <button class="btn btn-default verify-email"><span class="icon-warning-sign"></span> {% trans "Verify" %}</button>
+                  <button class="btn btn-danger delete-email">{% trans "Delete" %}</button>
+                </div>
+                <hr />
+              </li>
+            {% endfor %}
+            </ul>
+            <div class="form-group">
+              <label for="new_email">{% trans "Add another email address:" %}</label>
+              <input id="new_email" name="new_email" class="form-control" autocomplete="off" />
+            </div>
+            <button class="btn btn-primary pull-right" id="add-email">{% trans "Add" %}</button>
+          </div>
         </div>
       </div>
-      {% endfor %}
     </div>
-
     <div class="row">
       <div class="submit">
         <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Update" %}</button>
