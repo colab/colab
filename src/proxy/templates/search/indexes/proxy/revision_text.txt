@@ -1,0 +1,4 @@
+{{ object.repository_name }}
+{{ object.revision }}
+{% firstof object.get_author.get_full_name object.author %}
+{{ object.message }}

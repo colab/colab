@@ -1,0 +1,11 @@
+{{ object.summary }}
+{{ object.description }}
+{{ object.milestone }}
+{{ object.component }}
+{{ object.version }}
+{{ object.severity }}
+{{ object.reporter }}
+{% firstof object.get_author.get_fullname or object.author %}
+{{ object.status }}
+{{ object.keywords }}
+{{ object.collaborators }}

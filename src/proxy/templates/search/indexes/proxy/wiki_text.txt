@@ -1,5 +1,3 @@
 {{ object.name }}
 {{ object.get_collaborators }}
 {{ object.text }}
-{{ object.comment }}
-{{ object.ipnr }}

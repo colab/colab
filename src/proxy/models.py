@@ -2,107 +2,81 @@
 
 from django.db import models
 
-
-class Attachment(models.Model):
-    type = models.TextField()
-    filename = models.TextField()
-    size = models.IntegerField(blank=True, null=True)
-    time = models.BigIntegerField(blank=True, null=True)
-    description = models.TextField(blank=True)
-    author = models.TextField(blank=True)
-    ipnr = models.TextField(blank=True)
-
-    class Meta:
-        managed = False
-        db_table = 'attachment'
+from accounts.models import User
 
 
-class Repository(models.Model):
-    name = models.TextField()
-    value = models.TextField(blank=True)
-
-    class Meta:
-        managed = False
-        db_table = 'repository'
+# get_absolute_url em todos
+# get_author_url em todos
 
 
 class Revision(models.Model):
-    repos = models.IntegerField()
-    rev = models.TextField()
-    time = models.BigIntegerField(blank=True, null=True)
+    rev = models.TextField(blank=True, primary_key=True)
     author = models.TextField(blank=True)
     message = models.TextField(blank=True)
+    repository_name = models.TextField(blank=True)
+    created = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'revision'
+        db_table = 'revision_view'
 
+    def get_absolute_url(self):
+        return u'/changeset/{}/{}'.format(self.rev, self.repository_name)
+
+    def get_author(self):
+        try:
+            return User.objects.get(username=self.author)
+        except User.DoesNotExist:
+            return None
 
 class Ticket(models.Model):
     id = models.IntegerField(primary_key=True)
-    type = models.TextField(blank=True)
-    time = models.BigIntegerField(blank=True, null=True)
-    changetime = models.BigIntegerField(blank=True, null=True)
-    component = models.TextField(blank=True)
-    severity = models.TextField(blank=True)
-    priority = models.TextField(blank=True)
-    owner = models.TextField(blank=True)
-    reporter = models.TextField(blank=True)
-    cc = models.TextField(blank=True)
-    version = models.TextField(blank=True)
-    milestone = models.TextField(blank=True)
-    status = models.TextField(blank=True)
-    resolution = models.TextField(blank=True)
     summary = models.TextField(blank=True)
     description = models.TextField(blank=True)
-    keywords = models.TextField(blank=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ticket'
-
-
-class TicketChange(models.Model):
-    ticket = models.IntegerField()
-    time = models.BigIntegerField()
+    milestone = models.TextField(blank=True)
+    priority = models.TextField(blank=True)
+    component = models.TextField(blank=True)
+    version = models.TextField(blank=True)
+    severity = models.TextField(blank=True)
+    reporter = models.TextField(blank=True)
     author = models.TextField(blank=True)
-    field = models.TextField()
-    oldvalue = models.TextField(blank=True)
-    newvalue = models.TextField(blank=True)
+    status = models.TextField(blank=True)
+    keywords = models.TextField(blank=True)
+    collaborators = models.TextField(blank=True)
+    created = models.DateTimeField(blank=True, null=True)
+    modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'ticket_change'
+        db_table = 'ticket_view'
 
+    def get_absolute_url(self):
+        return u'/ticket/{}'.format(self.id)
 
-class TicketCustom(models.Model):
-    ticket = models.IntegerField()
-    name = models.TextField()
-    value = models.TextField(blank=True)
-
-    class Meta:
-        managed = False
-        db_table = 'ticket_custom'
+    def get_author(self):
+        try:
+            return User.objects.get(username=self.author)
+        except User.DoesNotExist:
+            return None
 
 
 class Wiki(models.Model):
     name = models.TextField(primary_key=True)
-    version = models.IntegerField()
-    time = models.BigIntegerField(blank=True, null=True)
+    wiki_text = models.TextField(blank=True)
     author = models.TextField(blank=True)
-    ipnr = models.TextField(blank=True)
-    text = models.TextField(blank=True)
-    comment = models.TextField(blank=True)
-    readonly = models.IntegerField(blank=True, null=True)
+    collaborators = models.TextField(blank=True)
+    created = models.DateTimeField(blank=True, null=True)
+    modified = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'wiki'
+        db_table = 'wiki_view'
 
-    def get_collaborators(self):
-        return Wiki.objects.filter(
-            name=self.name,
-        ).values_list('author', flat=True)
+    def get_absolute_url(self):
+        return u'/ticket/{}'.format(self.name)
 
     def get_author(self):
-        return Wiki.objects.get(name=self.name, version=1).author
+        try:
+            return User.objects.get(username=self.author)
+        except User.DoesNotExist:
+            return None

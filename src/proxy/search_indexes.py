@@ -1,68 +1,119 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+
 from django.db.models import Q
 from haystack import indexes
 
-from .models import Wiki
+from .models import Ticket, Wiki, Revision
 
 
 class WikiIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
-    wiki_text = indexes.CharField(model_attr='text')
-    name = indexes.CharField(model_attr='name')
-    author = indexes.CharField(model_attr='get_author', null=True)
-    collaborators = indexes.CharField(
-        model_attr='get_collaborators', null=True
-    )
-    comment = indexes.CharField(model_attr='comment', null=True)
-    time = indexes.DateTimeField(model_attr='time', null=True)
+    wiki_text = indexes.CharField(model_attr='wiki_text')
+    author = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True)
+    collaborators = indexes.CharField(model_attr='collaborators', null=True)
+    created = indexes.DateTimeField(model_attr='created', null=True)
+    modified = indexes.DateTimeField(model_attr='modified', null=True)
 
-    url = indexes.CharField()
+    url = indexes.CharField(model_attr='get_absolute_url')
     type = indexes.CharField()
 
     def get_model(self):
         return Wiki
 
-    def prepare_time(self, obj):
-        return datetime.fromtimestamp(self.prepared_data['time']/1000000)
+    def get_updated_field(self):
+        return 'modified'
+
+    def prepare_author(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_full_name()
+        return obj.author
+
+    def prepare_author_url(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_absolute_url()
+        return None
 
     def prepare_type(self, obj):
         return u'wiki'
 
-    def prepare_url(self, obj):
-        return u'/wiki/{}'.format(obj.name)
 
-    def index_queryset(self, using=None):
-        wiki = self.get_model().objects.raw(
-            '''
-            SELECT "wiki"."name", MAX("wiki"."version") AS version
-            FROM "wiki"
-            GROUP BY "wiki"."name"
-            '''
-        )
+class TicketIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    summary = indexes.CharField(model_attr='summary', null=True)
+    description = indexes.CharField(model_attr='description', null=True)
+    milestone = indexes.CharField(model_attr='milestone', null=True)
+    component = indexes.CharField(model_attr='component', null=True)
+    version = indexes.CharField(model_attr='version', null=True)
+    severity = indexes.CharField(model_attr='severity', null=True)
+    reporter = indexes.CharField(model_attr='reporter', null=True)
+    author = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True)
+    status = indexes.CharField(model_attr='status', null=True)
+    keywords = indexes.CharField(model_attr='keywords', null=True)
+    collaborators = indexes.CharField(model_attr='collaborators', null=True)
+    created = indexes.DateTimeField(model_attr='created', null=True)
+    modified = indexes.DateTimeField(model_attr='modified', null=True)
 
-        q = Q()
-        for obj in wiki:
-            q |= Q(name=obj.name, version=obj.version)
+    url = indexes.CharField(model_attr='get_absolute_url')
+    type = indexes.CharField()
 
-        return self.get_model().objects.filter(q)
+    def get_model(self):
+        return Ticket
+
+    def get_updated_field(self):
+        return 'modified'
+
+    def prepare_author(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_full_name()
+        return obj.author
+
+    def prepare_author_url(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_absolute_url()
+        return None
+
+    def prepare_type(self, obj):
+        return 'ticket'
 
 
-# def TicketIndex(indexes.SearchIndex, indexes.Indexable):
-#     text =  = indexes.CharField(document=True, use_template=True)
-#     time = indexes.CharField(
-#     changetime = indexes.CharField(
-#     component = indexes.CharField(
-#     severity = indexes.CharField(
-#     priority = indexes.CharField(
-#     owner = indexes.CharField(
-#     reporter = indexes.CharField(
-#     cc = indexes.CharField(
-#     version = indexes.CharField(
-#     milestone = indexes.CharField(
-#     status = indexes.CharField(
-#     resolution = indexes.CharField(
-#     summary = indexes.CharField(
-#     description = indexes.CharField(
-#     keywords = indexes.CharField(
+class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, use_template=True)
+    repository_name = indexes.CharField(model_attr='repository_name')
+    revision = indexes.CharField(model_attr='rev')
+    created = indexes.DateTimeField(model_attr='created', null=True)
+    modified = indexes.DateTimeField(model_attr='created', null=True)
+    author = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True)
+    message = indexes.CharField(model_attr='message', null=True)
+
+    url = indexes.CharField(model_attr='get_absolute_url')
+    type = indexes.CharField()
+
+    def get_model(self):
+        return Revision
+
+    def get_updated_field(self):
+        return 'created'
+
+    def prepare_author(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_full_name()
+        return obj.author
+
+    def prepare_author_url(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_absolute_url()
+        return None
+
+    def prepare_type(self, obj):
+        return 'changeset'
