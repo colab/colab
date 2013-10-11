@@ -11,18 +11,8 @@ class MessageIndex(indexes.SearchIndex, indexes.Indexable):
     description = indexes.CharField(model_attr='body')
     title = indexes.CharField(model_attr='subject_clean')
     modified = indexes.DateTimeField(model_attr='received_time')
-    from_address_user_full_name = indexes.CharField(
-        model_attr='from_address__user__get_full_name',
-        null=True,
-    )
-    from_address_full_name = indexes.CharField(
-        model_attr='from_address__get_full_name',
-        null=True,
-    )
-    from_address_user_url = indexes.CharField(
-        model_attr='from_address__user__get_absolute_url',
-        null=True,
-    )
+    author = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True)
     url = indexes.CharField(model_attr='url', null=True)
 
     type = indexes.CharField()
@@ -32,6 +22,18 @@ class MessageIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'received_time'
+
+    def prepare_author(self, obj):
+        if obj.from_address.user:
+            return obj.from_address.user.get_full_name()
+        elif obj.from_address.get_full_name():
+            return obj.from_address.get_full_name()
+        return obj.from_address.real_name
+
+    def prepare_author_url(self, obj):
+        if obj.from_address.user:
+            return obj.from_address.user.get_absolute_url()
+        return None
 
     def prepare_type(self, obj):
         return u'thread'

@@ -10,6 +10,7 @@ from .models import Ticket, Wiki, Revision
 
 class WikiIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
+    name = indexes.CharField(model_attr='name')
     wiki_text = indexes.CharField(model_attr='wiki_text')
     author = indexes.CharField(null=True)
     author_url = indexes.CharField(null=True)
