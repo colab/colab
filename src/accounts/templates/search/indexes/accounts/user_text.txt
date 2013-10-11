@@ -1,9 +1,7 @@
 {{ object.username }}
 {{ object.get_full_name }}
-{{ object.email }}
+{{ object.get_full_name|slugify }}
 {{ object.institution }}
+{{ object.institution|slugify }}
 {{ object.role }}
-{{ object.twitter }}
-{{ object.facebook }}
-{{ object.google_talk }}
-{{ object.webpage }}
+{{ object.role|slugify }}

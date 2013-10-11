@@ -1,3 +1,8 @@
+{{ object.author }}
+{{ object.author|slugify }}
 {{ object.name }}
-{{ object.get_collaborators }}
-{{ object.text }}
+{{ object.name|slugify }}
+{{ object.collaborators }}
+{{ object.collaborators|slugify }}
+{{ object.wiki_text }}
+{{ object.wiki_text|slugify }}

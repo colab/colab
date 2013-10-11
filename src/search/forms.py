@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import unicodedata
+
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
@@ -17,7 +19,10 @@ class ColabSearchForm(SearchForm):
             return self.no_query_found()
 
         if self.cleaned_data.get('q'):
-            sqs = self.searchqueryset.auto_query(self.cleaned_data['q'])
+            q = unicodedata.normalize(
+                'NFKD', unicode(self.cleaned_data.get('q'))
+            ).encode('ascii', 'ignore')
+            sqs = self.searchqueryset.auto_query(q)
         else:
             sqs = self.searchqueryset.all()
 
@@ -35,8 +40,6 @@ class ColabSearchForm(SearchForm):
            #     sqs = self.searchqueryset.models(Ticket)
            # else:
            #     sqs = self.searchqueryset.all()
-        else:
-            sqs = self.searchqueryset.models(User, Message)
 
 
         if self.load_all:
