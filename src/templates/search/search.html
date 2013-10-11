@@ -10,6 +10,7 @@
       {{ page.paginator.count }} {% trans "documents found" %}
     </span>
   </div>
+
   <hr/>
 
   <div class="row">
@@ -45,14 +46,32 @@
     <div class="col-lg-10">
       <ul class="none indent list-unstyled">
       {% for result in page.object_list  %}
-        <br />
-        {% if result.model_name == 'message' %}
-          {% include "search/search-message-preview.html" %}
-        {% elif result.model_name == 'user' %}
-          {% include "search/search-user-preview.html" %}
-        {% elif result.model_name == 'wiki' %}
-          {% include "search/search-wiki-preview.html" %}
-        {% endif %}
+        <li class="preview-message">
+          {% if result.model_name == 'message' %}
+            {% include "search/search-message-preview.html" %}
+          {% elif result.model_name == 'user' %}
+            {% include "search/search-user-preview.html" %}
+          {% elif result.model_name == 'wiki' %}
+            {% include "search/search-wiki-preview.html" %}
+          {% elif result.model_name == 'revision' %}
+            {% include "search/search-revision-preview.html" %}
+          {% elif result.model_name == 'ticket' %}
+            {% include "search/search-ticket-preview.html" %}
+          {% endif %}
+
+          {% if result.author %}
+            <div class="quiet">
+              <span class="pull-left">{% trans "by" %}
+                {% if result.author and result.author_url %}
+                  <a href="{{ result.author_url }}">{{ result.author }}</a>
+                {% else %}
+                  <span>{{ result.author }}</span>
+                {% endif %}
+              </span>
+              <span class="pull-right">{{ result.modified|timesince }} {% trans "ago" %}</span>
+            </div>
+          {% endif %}
+        </li>
       {% empty %}
         <li class="text-center">
           {% trans "No results for your search." %}
@@ -60,24 +79,25 @@
       {% endfor %}
       </ul>
 
-      {% if docs.numFound %}
-      <div>
-        <span>
-          {% if docs.has_previous %}
-            <a href="{% append_to_get p=docs.previous_page_number %}">{% trans "Previous" %}</a>
-          {% endif %}
-
+      {% if query and page.has_other_pages %}
+        <div class="text-center">
           <span>
-            {% trans "Page" %} {{ docs.page_num }} {% trans "of" %} {{ docs.num_of_pages }}
-          </span>
+            {% if page.has_previous %}
+              <a href="{% append_to_get page=page.previous_page_number %}">{% trans "Previous" %}</a>
+            {% endif %}
+            <span>
+              {% trans "Page" %} {{ page.number }} {% trans "of" %}
+              {{ page.paginator.num_pages }}
+            </span>
 
-          {% if docs.has_next %}
-            <a href="{% append_to_get p=docs.next_page_number %}">{% trans "Next" %}</a>
-          {% endif %}
-        </span>
-      </div>
+            {% if page.has_next %}
+              <a href="{% append_to_get page=page.next_page_number %}">{% trans "Next" %}</a>
+            {% endif %}
+          </span>
+        </div>
+      {% endif %}
+
     </div>
-    {% endif %}
   </div>
 
 {% endblock %}
