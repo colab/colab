@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<span class="glyphicon glyphicon-align-right" title="{{ result.type }}"></span>
+
+<span class="subject">
+  <a href="{{ result.url }}">{{ result.repository_name }} [{{ result.revision }}]</a>
+</span>
+
+<span class="quiet">{% if result.message %}- {{ result.message }}{% endif %}</span>

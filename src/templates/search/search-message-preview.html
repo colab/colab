@@ -1,43 +1,18 @@
 {% load i18n %}
 
-<li class="preview-message">
-  {% if result.Type %}
-    <img alt="{{ result.Type }}" title="{{ result.Type }}"
-      src="{{ STATIC_URL }}img/{{ result.Type }}.png" />
-  {% else %}
-    <span class="glyphicon glyphicon-envelope"></span>
-  {% endif %}
+<span class="glyphicon glyphicon-envelope" title="{{ result.type }}"></span>
 
-  {% if result.mailinglist %}
-    <a href="{% url 'super_archives.views.list_messages' %}?list={{ result.mailinglist }}">
-      <span class="label label-primary">{{ result.mailinglist }}</span>
-    </a>
-  {% endif %}
+{% if result.mailinglist %}
+  <a href="{% url 'super_archives.views.list_messages' %}?list={{ result.mailinglist }}">
+    <span class="label label-primary">{{ result.mailinglist }}</span>
+  </a>
+{% endif %}
 
-  <span class="subject">
-    <a href="{{ result.url }}#msg-{{ result.pk }}"
-      title="{% filter striptags|truncatewords:50 %}{{ result.description|escape }}{% endfilter %}">
-      {{ result.title }}
-    </a>
-  </span>
+<span class="subject">
+  <a href="{{ result.url }}#msg-{{ result.pk }}"
+    title="{% filter striptags|truncatewords:50 %}{{ result.description|escape }}{% endfilter %}">
+    {{ result.title }}
+  </a>
+</span>
 
-  <span class="quiet">- {{ result.description|striptags }}</span>
-
-  <div class="quiet">
-    <span class="pull-left">
-      {% if result.from_address_user_url or result.from_address_full_name or result.last_author or result.Creator %}
-        {% trans "by" %}
-      {% endif %}
-
-      {% if result.from_address_user_url %}
-        <a href="{{ result.from_address_user_url }}">{{ result.from_address_user_full_name }}</a>
-      {% elif result.from_address_full_name %}
-        <span>{{ result.from_address_full_name }}</span>
-      {% else %}
-        {% firstof result.last_author result.Creator "" %}
-      {% endif %}
-    </span>
-
-    <span class="pull-right">{{ result.modified|timesince }} {% trans "ago" %}</span>
-  </div>
-</li>
+<span class="quiet">- {{ result.description|striptags }}</span>
