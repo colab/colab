@@ -72,6 +72,9 @@ class MailingList(models.Model):
     logo = models.FileField(upload_to='list_logo') #TODO
     last_imported_index = models.IntegerField(default=0)
 
+    def get_absolute_url(self):
+	return u'{}?list={}'.format(reverse('list_messages'), self.name)
+
     def __unicode__(self):
         return self.name
 
