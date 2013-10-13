@@ -6,24 +6,36 @@ from .models import User
 
 
 class UserIndex(indexes.SearchIndex, indexes.Indexable):
+    # common fields
     text = indexes.CharField(document=True, use_template=True)
+    url = indexes.CharField(model_attr='get_absolute_url')
+    title = indexes.CharField(model_attr='get_full_name')
+    description = indexes.CharField(null=True)
+    type = indexes.CharField()
+    icon_name = indexes.CharField()
+
+    # extra fields
     username = indexes.CharField(model_attr='username')
     name = indexes.CharField(model_attr='get_full_name')
     email = indexes.CharField(model_attr='email')
     institution = indexes.CharField(model_attr='institution', null=True)
     role = indexes.CharField(model_attr='role', null=True)
-    twitter = indexes.CharField(model_attr='twitter', null=True)
-    facebook = indexes.CharField(model_attr='facebook', null=True)
     google_talk = indexes.CharField(model_attr='google_talk', null=True)
     webpage = indexes.CharField(model_attr='webpage', null=True)
-
-    type = indexes.CharField()
 
     def get_model(self):
         return User
 
     def get_updated_field(self):
         return 'date_joined'
+
+    def prepare_description(self, obj):
+        if obj.institution and obj.role:
+            return u'{} ({})'.format(obj.institution, obj.role)
+        return obj.institution if obj.institution else obj.role
+
+    def prepare_icon_name(self, obj):
+        return u'user'
 
     def prepare_type(self, obj):
         return u'user'
