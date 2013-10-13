@@ -15,6 +15,8 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'pt-br'
 
+HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
+
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
