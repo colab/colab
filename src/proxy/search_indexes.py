@@ -13,7 +13,7 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     url = indexes.CharField(model_attr='get_absolute_url')
     title = indexes.CharField(model_attr='name')
-    description = indexes.CharField(model_attr='wiki_text', null=True)
+    description = indexes.CharField(null=True)
     author = indexes.CharField(null=True)
     author_url = indexes.CharField(null=True)
     created = indexes.DateTimeField(model_attr='created', null=True)
@@ -42,6 +42,9 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
             return author.get_absolute_url()
         return None
 
+    def prepare_description(self, obj):
+        return u'{}\n{}'.format(obj.wiki_text, obj.collaborators)
+
     def prepare_icon_name(self, obj):
         return u'file'
 
@@ -54,7 +57,7 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, use_template=True)
     url = indexes.CharField(model_attr='get_absolute_url')
     title = indexes.CharField()
-    description = indexes.CharField(model_attr='description', null=True)
+    description = indexes.CharField(null=True)
     author = indexes.CharField(null=True)
     author_url = indexes.CharField(null=True)
     created = indexes.DateTimeField(model_attr='created', null=True)
@@ -64,10 +67,8 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     tag = indexes.CharField(model_attr='status', null=True)
 
     # trac extra fields
-    summary = indexes.CharField(model_attr='summary', null=True)
     milestone = indexes.CharField(model_attr='milestone', null=True)
     component = indexes.CharField(model_attr='component', null=True)
-    version = indexes.CharField(model_attr='version', null=True)
     severity = indexes.CharField(model_attr='severity', null=True)
     reporter = indexes.CharField(model_attr='reporter', null=True)
     keywords = indexes.CharField(model_attr='keywords', null=True)
@@ -90,6 +91,12 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
         if author:
             return author.get_absolute_url()
         return None
+
+    def prepare_description(self, obj):
+        return u'{}\n{}\n{}\n{}\n{}\n{}\n{}'.format(
+            obj.description, obj.milestone, obj.component, obj.severity,
+            obj.reporter, obj.keywords, obj.collaborators
+        )
 
     def prepare_icon_name(self, obj):
         return u'tag'
