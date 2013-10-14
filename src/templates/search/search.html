@@ -48,22 +48,7 @@
     <div class="col-lg-10">
       <ul class="none indent list-unstyled">
       {% for result in page.object_list  %}
-        <li class="preview-message">
-          {% include "search/preview-search.html" %}
-
-          {% if result.author %}
-            <div class="quiet">
-              <span class="pull-left">{% trans "by" %}
-                {% if result.author and result.author_url %}
-                  <a href="{{ result.author_url }}">{% highlight result.author with query %}</a>
-                {% else %}
-                  <span>{{ result.author }}</span>
-                {% endif %}
-              </span>
-              <span class="pull-right">{{ result.modified|timesince }} {% trans "ago" %}</span>
-            </div>
-          {% endif %}
-        </li>
+        {% include "search/preview-search.html" %}
       {% empty %}
         <li class="text-center">
           {% trans "No results for your search." %}
