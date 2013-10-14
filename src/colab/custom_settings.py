@@ -15,6 +15,10 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'pt-br'
 
+
+# the following variable define how many characters should be shown before
+# a highlighted word, to make sure that the highlighted word will appear
+HIGHLIGHT_NUM_CHARS_BEFORE_MATCH = 30
 HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
 
 HAYSTACK_CONNECTIONS = {

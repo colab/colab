@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load highlight %}
 
 <span class="glyphicon glyphicon-tag" title="{{ result.type }}"></span>
 
@@ -12,4 +13,4 @@
   </a>
 </span>
 
-<span class="quiet">- {{ result.description|striptags|truncatechars:150 }}</span>
+<span class="quiet">- {% highlight result.description with query max_length "150" %}</span>

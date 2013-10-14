@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load append_to_get %}
+{% load highlight %}
+
 {% block main-content %}
   <div class="row">
     <div class="col-lg-2">
@@ -47,23 +49,13 @@
       <ul class="none indent list-unstyled">
       {% for result in page.object_list  %}
         <li class="preview-message">
-          {% if result.model_name == 'message' %}
-            {% include "search/search-message-preview.html" %}
-          {% elif result.model_name == 'user' %}
-            {% include "search/search-user-preview.html" %}
-          {% elif result.model_name == 'wiki' %}
-            {% include "search/search-wiki-preview.html" %}
-          {% elif result.model_name == 'revision' %}
-            {% include "search/search-revision-preview.html" %}
-          {% elif result.model_name == 'ticket' %}
-            {% include "search/search-ticket-preview.html" %}
-          {% endif %}
+          {% include "search/preview-search.html" %}
 
           {% if result.author %}
             <div class="quiet">
               <span class="pull-left">{% trans "by" %}
                 {% if result.author and result.author_url %}
-                  <a href="{{ result.author_url }}">{{ result.author }}</a>
+                  <a href="{{ result.author_url }}">{% highlight result.author with query %}</a>
                 {% else %}
                   <span>{{ result.author }}</span>
                 {% endif %}

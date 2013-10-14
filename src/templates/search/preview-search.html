@@ -1,0 +1,31 @@
+{% load i18n %}
+{% load highlight %}
+
+<span class="glyphicon glyphicon-{{ result.icon_name }}" title="{{ result.type }}"></span>
+
+{% if result.mailinglist_url %}
+  <a href="{{ result.mailinglist_url }}">
+{% else %}
+  <a href="{{ result.url }}" {% if result.description %}title="{{ result.description|escape }}"{% endif %}>
+{% endif %}
+  {% if result.tag %}
+    <span class="label label-primary">{{ result.tag }}</span>
+  {% endif %}
+{% if result.mailinglist_url %}
+  </a>
+{% endif %}
+
+  {% if result.title %}
+    <span class="subject">
+      <!-- a striptags filter was raising an error here because using with highlight -->
+      {% highlight result.title with query max_length "1000" %}
+    </span>
+  {% endif %}
+{% if not result.mailinglist_url %}
+  </a>
+{% endif %}
+
+{% if result.description %}
+      <!-- a striptags filter was raising an error here because using with highlight -->
+  <span class="quiet">- {% highlight result.description with query max_length "150" %}</span>
+{% endif %}
