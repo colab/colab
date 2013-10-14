@@ -34,5 +34,6 @@ grab
 transliterate
 
 # Diazo
-diazo
+#diazo
+git+https://github.com/TracyWebTech/diazo@escape_curly_brackets
 #lxml
