@@ -36,7 +36,7 @@ class Migration(DataMigration):
                 ticket.version as version,
                 ticket.severity as severity,
                 ticket.reporter as reporter,
-                ticket.owner as author,
+                ticket.reporter as author,
                 ticket.status as status,
                 ticket.keywords as keywords,
                 (SELECT
