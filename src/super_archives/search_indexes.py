@@ -12,7 +12,9 @@ class MessageIndex(indexes.SearchIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='subject_clean')
     description = indexes.CharField(model_attr='body')
     modified = indexes.DateTimeField(model_attr='received_time')
-    author = indexes.CharField(null=True)
+    author = indexes.CharField(
+        model_attr='from_address__get_full_name', null=True
+    )
     author_url = indexes.CharField(null=True)
     type = indexes.CharField()
     icon_name = indexes.CharField()
@@ -27,13 +29,6 @@ class MessageIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'received_time'
-
-    def prepare_author(self, obj):
-        if obj.from_address.user:
-            return obj.from_address.user.get_full_name()
-        elif obj.from_address.get_full_name():
-            return obj.from_address.get_full_name()
-        return obj.from_address.real_name
 
     def prepare_author_url(self, obj):
         if obj.from_address.user:
