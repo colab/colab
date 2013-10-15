@@ -4,25 +4,18 @@
 <li class="preview-message">
 <span class="glyphicon glyphicon-{{ result.icon_name }}" title="{{ result.type }}"></span>
 
-{% if result.mailinglist_url %}
-  <a href="{{ result.mailinglist_url }}">
-{% else %}
-  <a href="{{ result.url }}" {% if result.description %}title="{{ result.description|escape }}"{% endif %}>
-{% endif %}
-  {% if result.tag %}
-    <span class="label label-primary">{{ result.tag }}</span>
-  {% endif %}
-{% if result.mailinglist_url %}
-  </a>
+{% if result.tag %}
+<a href="{% firstof result.mailinglist_url result.url %}">
+  <span class="label label-primary">{{ result.tag }}</span>
+</a>
 {% endif %}
 
-  {% if result.title %}
+{% if result.title %}
+  <a href="{{ result.url }}" {% if result.description %}title="{{ result.description|escape|truncatechars:200 }}"{% endif %}>
     <span class="subject">
       <!-- a striptags filter was raising an error here because using with highlight -->
       {% highlight result.title with query max_length "1000" %}
     </span>
-  {% endif %}
-{% if not result.mailinglist_url %}
   </a>
 {% endif %}
 
