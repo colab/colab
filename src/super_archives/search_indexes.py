@@ -2,38 +2,46 @@
 
 from haystack import indexes
 
-from .models import Message
+from .models import Thread
 
 
-class MessageIndex(indexes.SearchIndex, indexes.Indexable):
+class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
     # common fields
     text = indexes.CharField(document=True, use_template=True)
-    url = indexes.CharField(null=True)
-    title = indexes.CharField(model_attr='subject_clean')
-    description = indexes.CharField(model_attr='body')
-    modified = indexes.DateTimeField(model_attr='received_time')
-    author = indexes.CharField(
-        model_attr='from_address__get_full_name', null=True
+    url = indexes.CharField(model_attr='get_absolute_url', null=True)
+    title = indexes.CharField(model_attr='latest_message__subject_clean')
+    description = indexes.CharField(use_template=True)
+    created = indexes.DateTimeField()
+    modified = indexes.DateTimeField(
+        model_attr='latest_message__received_time'
     )
+    author = indexes.CharField(null=True)
     author_url = indexes.CharField(null=True)
     type = indexes.CharField()
     icon_name = indexes.CharField()
-    tag = indexes.CharField(model_attr='thread__mailinglist__name')
+    tag = indexes.CharField(model_attr='mailinglist__name')
 
     mailinglist_url = indexes.CharField(
-        model_attr='thread__mailinglist__get_absolute_url'
+        model_attr='mailinglist__get_absolute_url'
     )
 
     def get_model(self):
-        return Message
+        return Thread
 
     def get_updated_field(self):
         return 'received_time'
 
+    def prepare_author(self, obj):
+        return obj.message_set.first().from_address.get_full_name()
+
     def prepare_author_url(self, obj):
-        if obj.from_address.user:
-            return obj.from_address.user.get_absolute_url()
+        first_message = obj.message_set.first()
+        if first_message.from_address.user:
+            return first_message.from_address.user.get_absolute_url()
         return None
+
+    def prepare_created(self, obj):
+        return obj.message_set.first().received_time
 
     def prepare_icon_name(self, obj):
         return u'envelope'
@@ -41,10 +49,7 @@ class MessageIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_type(self, obj):
         return u'thread'
 
-    def prepare_url(self, obj):
-        return u'{}#msg-{}'.format(obj.url, obj.pk)
-
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(
-            thread__spam=False, spam=False
-        ).exclude(thread__subject_token='')
+            spam=False
+        ).exclude(subject_token='')
