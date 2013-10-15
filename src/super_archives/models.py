@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
 from html2text import html2text
+from taggit.managers import TaggableManager
 
 from .utils import blocks
 from .utils.etiquetador import etiquetador
@@ -117,6 +118,7 @@ class Thread(models.Model):
 
     all_objects = models.Manager()
     objects = NotSpamManager()
+    tags = TaggableManager()
 
     class Meta:
         verbose_name = _(u"Thread")
@@ -126,6 +128,8 @@ class Thread(models.Model):
     def update_keywords(self):
         blocks = MessageBlock.objects.filter(message__thread__pk=self.pk,
                                              is_reply=False)
+
+        self.tags.clear()
 
         text = u'\n'.join(map(unicode, blocks))
         tags = etiquetador(html2text(text))
@@ -137,10 +141,18 @@ class Thread(models.Model):
                 keyword.weight = weight
                 keyword.save()
 
-        # removing old tags
-        qs = Keyword.objects.filter(thread=self)
-        qs = qs.exclude(keyword__in=zip(*tags)[0])
-        qs.delete()
+            if weight >= 3:
+                self.tags.add(tag)
+
+        # removing old tags not used anylonger
+        if tags:
+            qs = Keyword.objects.filter(thread=self)
+            qs = qs.exclude(keyword__in=zip(*tags)[0])
+            qs.delete()
+
+    def save(self, *args, **kwargs):
+        super(Thread, self).save(*args, **kwargs)
+        self.update_keywords()
 
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,

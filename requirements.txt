@@ -10,6 +10,7 @@ django-cliauth==0.9
 django-mobile==0.3.0
 etiquetando==0.1
 html2text
+django-taggit
 
 gunicorn
 gevent
@@ -28,7 +29,6 @@ django-conversejs
 # Feedzilla (planet) and deps
 feedzilla==0.22
 django-common
-django-taggit
 feedparser
 lxml
 grab
@@ -37,4 +37,3 @@ transliterate
 # Diazo
 #diazo
 git+https://github.com/TracyWebTech/diazo@escape_curly_brackets
-#lxml
