@@ -6,9 +6,15 @@ from hashlib import md5
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.core.cache import cache
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
+
+from html2text import html2text
+
+from .utils import blocks
+from .utils.etiquetador import etiquetador
 
 
 User = get_user_model()
@@ -84,6 +90,18 @@ class MailingListMembership(models.Model):
         return '%s on %s' % (self.user.email, self.mailinglist.name)
 
 
+class Keyword(models.Model):
+    keyword = models.CharField(max_length='128')
+    weight = models.IntegerField(default=0)
+    thread = models.ForeignKey('Thread')
+
+    class Meta:
+        ordering = ('?', ) # random order
+
+    def __unicode__(self):
+        return self.keyword
+
+
 class Thread(models.Model):
 
     subject_token = models.CharField(max_length=512)
@@ -104,6 +122,31 @@ class Thread(models.Model):
         verbose_name = _(u"Thread")
         verbose_name_plural = _(u"Threads")
         unique_together = ('subject_token', 'mailinglist')
+
+    def gen_tags(self):
+        blocks = []
+        for message in self.message_set.iterator():
+            blocks.extend([block for block in message.blocks()
+                                 if not block.is_reply])
+        text = u'\n'.join(map(unicode, blocks))
+        tags = etiquetador(html2text(text))
+        return tags
+
+    def save(self, *args, **kwargs):
+        super(Thread, self).save(*args, **kwargs)
+        tags = self.gen_tags()
+
+        for tag, weight in tags:
+            keyword, created = Keyword.objects.get_or_create(thread=self,
+                                                             keyword=tag)
+            if created or keyword.weight != weight:
+                keyword.weight = weight
+                keyword.save()
+
+        # removing old tags
+        qs = Keyword.objects.filter(thread=self)
+        qs = qs.exclude(keyword__in=zip(*tags)[0])
+        qs.delete()
 
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,
@@ -190,7 +233,7 @@ class Message(models.Model):
     body = models.TextField(default='',
                             verbose_name=_(u"Message body"),
                             help_text=_(u"Please enter a message body"))
-    received_time = models.DateTimeField()
+    received_time = models.DateTimeField(db_index=True)
     message_id = models.CharField(max_length=512)
     spam = models.BooleanField(default=False)
 
@@ -201,11 +244,20 @@ class Message(models.Model):
         verbose_name = _(u"Message")
         verbose_name_plural = _(u"Messages")
         unique_together = ('thread', 'message_id')
+        ordering = ('received_time', )
 
     def __unicode__(self):
         return '(%s) %s: %s' % (self.id,
                                 self.from_address.get_full_name(),
                                 self.subject_clean)
+
+    def blocks(self):
+        cache_key = 'email-blocks-{}'.format(self.pk)
+        blks = cache.get(cache_key)
+        if not blks:
+            blks = blocks.EmailBlockParser(self)
+            cache.set(cache_key, blks)
+        return blks
 
     @property
     def mailinglist(self):

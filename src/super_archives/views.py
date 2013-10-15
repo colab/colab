@@ -14,8 +14,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from . import queries
-from .utils import send_verification_email
 from .decorators import count_hit
+from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
 
 
@@ -42,18 +42,19 @@ def thread(request, mailinglist, thread_token):
         total_votes += email.votes_count()
 
     # Update relevance score
-    query = Thread.objects.filter(mailinglist__name=mailinglist)
-    thread = query.get(subject_token=thread_token)
+    thread = Thread.objects.get(subject_token=thread_token,
+                                mailinglist__name=mailinglist)
     thread.update_score()
 
-    template_data = {
+    context = {
         'first_msg': first_message,
         'emails': [first_message] + list(emails),
         'pagehits': queries.get_page_hits(request.path_info),
         'total_votes': total_votes,
+        'thread': thread,
     }
 
-    return render(request, 'message-thread.html', template_data)
+    return render(request, 'message-thread.html', context)
 
 
 def list_messages(request):

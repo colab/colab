@@ -140,7 +140,7 @@
             </div>
             <div class="panel-collapse in">
               <div class="panel-body">
-                {% display_message email emails %}
+                {% display_message email %}
               </div>
             </div>
           </div>
@@ -188,6 +188,15 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
         {% trans "voted" %}
         <h5>{{ total_votes }} {% trans "times" %}</h5>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+        {% trans "tags" %}
+	<div class="tag-cloud">
+          {% for keyword in thread.keyword_set.iterator %}
+            <a class="tag size-{{ keyword.weight }}" href="#">{{ keyword|escape }}</a>
+          {% endfor %}
+        </div>
       </li>
     </ul>
   </div>
