@@ -39,8 +39,8 @@ class colab {
   }
 
   supervisor::app { 'colab':
-    command   => '/home/colab/.virtualenvs/colab/bin/gunicorn_django colab/src/colab',
-    directory => '/home/colab/',
+    command   => '/home/colab/.virtualenvs/colab/bin/gunicorn colab.wsgi:application -t 300',
+    directory => '/home/colab/colab/src/',
     user      => 'colab',
   }
 
