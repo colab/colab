@@ -108,6 +108,10 @@ class Thread(models.Model):
         verbose_name_plural = _(u"Threads")
         unique_together = ('subject_token', 'mailinglist')
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('thread_view', [self.mailinglist, self.subject_token])
+
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,
                                  self.subject_token,
