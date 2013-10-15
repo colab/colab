@@ -16,6 +16,7 @@ RE_REPLY_LINE = re.compile(r'^[\s\t>]*>[\s\t]*')
 
 RE_BR_TO_LINEBREAK = re.compile(r'<\s*/?\s*br\s*/?\s*>')
 
+
 class EmailBlock(list):
     def __init__(self, is_reply=False, mark_links=True, html2text=True):
         self.mark_links = mark_links

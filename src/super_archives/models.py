@@ -123,18 +123,12 @@ class Thread(models.Model):
         verbose_name_plural = _(u"Threads")
         unique_together = ('subject_token', 'mailinglist')
 
-    def gen_tags(self):
-        blocks = []
-        for message in self.message_set.iterator():
-            blocks.extend([block for block in message.blocks()
-                                 if not block.is_reply])
+    def update_keywords(self):
+        blocks = MessageBlock.objects.filter(message__thread__pk=self.pk,
+                                             is_reply=False)
+
         text = u'\n'.join(map(unicode, blocks))
         tags = etiquetador(html2text(text))
-        return tags
-
-    def save(self, *args, **kwargs):
-        super(Thread, self).save(*args, **kwargs)
-        tags = self.gen_tags()
 
         for tag, weight in tags:
             keyword, created = Keyword.objects.get_or_create(thread=self,
@@ -251,13 +245,12 @@ class Message(models.Model):
                                 self.from_address.get_full_name(),
                                 self.subject_clean)
 
-    def blocks(self):
-        cache_key = 'email-blocks-{}'.format(self.pk)
-        blks = cache.get(cache_key)
-        if not blks:
-            blks = blocks.EmailBlockParser(self)
-            cache.set(cache_key, blks)
-        return blks
+    def update_blocks(self):
+        # delete all blocks for that message
+        self.blocks.all().delete()
+
+        for i, block in enumerate(blocks.EmailBlockParser(self)):
+            MessageBlock.from_emailblock(block, self, i)
 
     @property
     def mailinglist(self):
@@ -305,6 +298,28 @@ class Message(models.Model):
     def modified(self):
         """Alias to self.modified"""
         return self.received_time
+
+
+class MessageBlock(models.Model):
+    message = models.ForeignKey(Message, related_name='blocks')
+    text = models.TextField()
+    is_reply = models.BooleanField()
+    order = models.IntegerField()
+
+    def __unicode__(self):
+        return self.text
+
+    class Meta:
+        ordering = ('order', )
+
+    @classmethod
+    def from_emailblock(klass, emailblock, message, order):
+        obj = klass.objects.create(text=emailblock.text,
+                                   is_reply=emailblock.is_reply,
+                                   message=message,
+                                   order=order)
+        return obj
+
 
 
 class MessageMetadata(models.Model):
