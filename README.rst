@@ -8,6 +8,37 @@
 Colab, a Software for Communities
 =================================
 
+What is Colab?
+==============
+
+Application that integrates existing systems to represent the contributions of the members through:
+
+* The amendments to the Wiki trac system.
+
+* Changes to the trac system code.
+
+* Discussions at the mailman list.
+
+* And other systems in the community.
+
+Features
+========
+
+* Developerd by Interlegis Communities http://colab.interlegis.leg.br/
+
+* Writed with Python http://python.org/
+
+* Build in Django Web Framework https://www.djangoproject.com/
+
+* Search engine with Solr https://lucene.apache.org/solr/
+
+Colab and Solr
+==============
+
+This software uses Apache Solr as search platform based on Apache Lucene.
+
+With Solr generates the REST style API with which you can make HTTP requests 
+to get results: natively in XML or JSON, PHP, Ruby and Python and then treatment.
 
 Installation
 ============
@@ -89,7 +120,7 @@ Cron job to import emails
   
 * Link cron script into /etc/cron.d/ folder:
 
-  * ln -s /usr/local/django/colab/cron.d/colab_import_emails /etc/cron.d/ 
+  * ln -s /usr/local/django/colab/etc/cron.d/colab_import_emails /etc/cron.d/ 
   
 * From now on the emails should be imported every minute
 
@@ -103,7 +134,7 @@ Cron job to reindex Solr
   
 * Link cron script into /etc/cron.d/ folder:
   
-  * ln -s /usr/local/django/colab/cron.d/colab_solr_reindex /etc/cron.d/
+  * ln -s /usr/local/django/colab/etc/cron.d/colab_solr_reindex /etc/cron.d/
   
 * From now on delta reindex should run every 10 minutes and full reindex once a day. 
 
