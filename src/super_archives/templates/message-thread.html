@@ -96,7 +96,7 @@
     <hr />
   </div>
 
-  <div class="col-lg-10 col-md-10 col-sm-12">
+  <div class="col-lg-9 col-md-9 col-sm-12">
     <ul class="unstyled-list">
     {% for email in emails %}
       {% with email.from_address.user.get_absolute_url as profile_link %}
@@ -140,7 +140,7 @@
             </div>
             <div class="panel-collapse in">
               <div class="panel-body">
-                {% display_message email emails %}
+                {% display_message email %}
               </div>
             </div>
           </div>
@@ -152,7 +152,7 @@
     </ul>
   </div>
 
-  <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
+  <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
     <h4><strong>{% trans "Order by" %}:</strong></h4>
     <ul class="unstyled-list">
       <li>
@@ -165,8 +165,21 @@
       </li>
     </ul>
 
-    <h4><strong>{% trans "Statistics:" %}</strong></h4>
+    {% if thread.tags.similar_objects %}
+    <h4><strong>{% trans "Releated:" %}</strong></h4>
+    <ul class="unstyled-list">
+      {% for similar in thread.tags.similar_objects|slice:":10" %}
+      {% with similar.message_set.first as message %}
+      <li>
+        <span class="label label-primary label-small">{{ similar.mailinglist.name }}</span>
+        <a href="{% url 'thread_view' similar.mailinglist.name similar.subject_token %}">{{ message.subject_clean|truncatechars:50 }}</a>
+      </li>
+      {% endwith %}
+      {% endfor %}
+    </ul>
+    {% endif %}
 
+    <h4><strong>{% trans "Statistics:" %}</strong></h4>
     <ul class="unstyled-list">
       <li>
         <span class="glyphicon glyphicon-chevron-right"></span>
@@ -190,6 +203,16 @@
         <h5>{{ total_votes }} {% trans "times" %}</h5>
       </li>
     </ul>
+
+    {% if thread.keyword_set.count %}
+    <h4><strong>{% trans "Tags:" %}</strong></h4>
+    <div class="tag-cloud">
+      {% for keyword in thread.keyword_set.all %}
+        <a class="tag size-{{ keyword.weight }}" href="#">{{ keyword|escape }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
   </div>
 
 </div>

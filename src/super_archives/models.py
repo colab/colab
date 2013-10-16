@@ -6,9 +6,16 @@ from hashlib import md5
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.core.cache import cache
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
+
+from html2text import html2text
+from taggit.managers import TaggableManager
+
+from .utils import blocks
+from .utils.etiquetador import etiquetador
 
 
 User = get_user_model()
@@ -87,6 +94,18 @@ class MailingListMembership(models.Model):
         return '%s on %s' % (self.user.email, self.mailinglist.name)
 
 
+class Keyword(models.Model):
+    keyword = models.CharField(max_length='128')
+    weight = models.IntegerField(default=0)
+    thread = models.ForeignKey('Thread')
+
+    class Meta:
+        ordering = ('?', ) # random order
+
+    def __unicode__(self):
+        return self.keyword
+
+
 class Thread(models.Model):
 
     subject_token = models.CharField(max_length=512)
@@ -102,6 +121,7 @@ class Thread(models.Model):
 
     all_objects = models.Manager()
     objects = NotSpamManager()
+    tags = TaggableManager()
 
     class Meta:
         verbose_name = _(u"Thread")
@@ -111,6 +131,35 @@ class Thread(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('thread_view', [self.mailinglist, self.subject_token])
+
+    def update_keywords(self):
+        blocks = MessageBlock.objects.filter(message__thread__pk=self.pk,
+                                             is_reply=False)
+
+        self.tags.clear()
+
+        text = u'\n'.join(map(unicode, blocks))
+        tags = etiquetador(html2text(text))
+
+        for tag, weight in tags:
+            keyword, created = Keyword.objects.get_or_create(thread=self,
+                                                             keyword=tag)
+            if created or keyword.weight != weight:
+                keyword.weight = weight
+                keyword.save()
+
+            if weight >= 3:
+                self.tags.add(tag)
+
+        # removing old tags not used anylonger
+        if tags:
+            qs = Keyword.objects.filter(thread=self)
+            qs = qs.exclude(keyword__in=zip(*tags)[0])
+            qs.delete()
+
+    def save(self, *args, **kwargs):
+        super(Thread, self).save(*args, **kwargs)
+        self.update_keywords()
 
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,
@@ -197,7 +246,7 @@ class Message(models.Model):
     body = models.TextField(default='',
                             verbose_name=_(u"Message body"),
                             help_text=_(u"Please enter a message body"))
-    received_time = models.DateTimeField()
+    received_time = models.DateTimeField(db_index=True)
     message_id = models.CharField(max_length=512)
     spam = models.BooleanField(default=False)
 
@@ -208,11 +257,19 @@ class Message(models.Model):
         verbose_name = _(u"Message")
         verbose_name_plural = _(u"Messages")
         unique_together = ('thread', 'message_id')
+        ordering = ('received_time', )
 
     def __unicode__(self):
         return '(%s) %s: %s' % (self.id,
                                 self.from_address.get_full_name(),
                                 self.subject_clean)
+
+    def update_blocks(self):
+        # delete all blocks for that message
+        self.blocks.all().delete()
+
+        for i, block in enumerate(blocks.EmailBlockParser(self)):
+            MessageBlock.from_emailblock(block, self, i)
 
     @property
     def mailinglist(self):
@@ -260,6 +317,28 @@ class Message(models.Model):
     def modified(self):
         """Alias to self.modified"""
         return self.received_time
+
+
+class MessageBlock(models.Model):
+    message = models.ForeignKey(Message, related_name='blocks')
+    text = models.TextField()
+    is_reply = models.BooleanField()
+    order = models.IntegerField()
+
+    def __unicode__(self):
+        return self.text
+
+    class Meta:
+        ordering = ('order', )
+
+    @classmethod
+    def from_emailblock(klass, emailblock, message, order):
+        obj = klass.objects.create(text=emailblock.text,
+                                   is_reply=emailblock.is_reply,
+                                   message=message,
+                                   order=order)
+        return obj
+
 
 
 class MessageMetadata(models.Model):

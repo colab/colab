@@ -335,6 +335,11 @@ ul.unstyled-list .glyphicon-chevron-right {
     margin-top: 0;
 }
 
+.tag-cloud {
+    text-align: justify;
+    margin-top: 6px;
+}
+
 .tag-cloud .size-1 {
     font-size: 0.9em;
 }

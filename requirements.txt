@@ -9,7 +9,9 @@ python-dateutil==1.5
 django-cliauth==0.9
 django-mobile==0.3.0
 django-haystack==2.1
+etiquetando==0.1
 html2text
+django-taggit
 
 gunicorn
 gevent
@@ -26,9 +28,9 @@ git+https://github.com/TracyWebTech/django-revproxy/
 django-conversejs
 
 # Feedzilla (planet) and deps
-feedzilla==0.22
+#feedzilla==0.22
+hg+https://bitbucket.org/lorien/feedzilla
 django-common
-django-taggit
 feedparser
 lxml
 grab
@@ -37,4 +39,3 @@ transliterate
 # Diazo
 #diazo
 git+https://github.com/TracyWebTech/diazo@escape_curly_brackets
-#lxml

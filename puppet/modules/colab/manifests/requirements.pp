@@ -6,6 +6,10 @@ class colab::requirements {
     ensure => installed,
   }
 
+  package { 'mercurial':
+    ensure => installed,
+  }
+
   # req to install python pkgs
   package { 'python-pip':
     ensure => installed,
