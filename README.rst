@@ -46,81 +46,80 @@ Installation
 Installation instructions for Ubuntu 10.04
 -------------------------------------------
 
-* Install Apache2 with WSGI support:
+* Install Apache2 with WSGI support: ::
 
-  * apt-get install apache2 libapache2-mod-wsgi
+    sudo apt-get install apache2 libapache2-mod-wsgi
 
-* Install dependencies to compile psycopg2:
+* Install dependencies to compile psycopg2: ::
 
-  * apt-get build-dep python-psycopg2
+    sudo apt-get build-dep python-psycopg2
 
-* Install Python PIP and update it:
-  
-  * apt-get install python-pip
-  * pip install -U pip
+* Install Python PIP and update it: ::
 
-* Install python virtualenv:
-  
-  * pip install virtualenv 
+    sudo apt-get install python-pip
+    sudo pip install -U pip
 
-* Create a virtualenv for the deploy
+* Install python virtualenv: ::
+
+    sudo pip install virtualenv 
+
+* Create a virtualenv for the deploy ::
  
-  * mkdir /usr/local/django/
-  * virtualenv /usr/local/django/colab/
+    sudo mkdir /usr/local/django/
+    sudo virtualenv /usr/local/django/colab/
 
-* Download the colab src code:
+* Download the colab ``src`` code: ::
 
-  * hg clone https://bitbucket.org/seocam/atu-colab /usr/local/src/colab/
+    sudo hg clone https://bitbucket.org/seocam/atu-colab /usr/local/src/colab/
 
-* Install the django site:
+* Install the django site: ::
 
-  * pip install /usr/local/src/colab -E /usr/local/django/colab/
+    sudo pip install /usr/local/src/colab -E /usr/local/django/colab/
 
-* Configure your database settings in /usr/local/django/colab/lib/python2.6/site-packages/settings_local.py
+* Configure your database settings in ``/usr/local/django/colab/lib/python2.6/site-packages/settings_local.py``
   
-* Enable the colab site on apache and reload it:
+* Enable the colab site on apache and reload it: ::
 
-  * ln -s /usr/local/django/colab/apache-site/colab /etc/apache2/sites-available
-  * a2ensite colab
-  * service apache2 restart
-  
+    sudo ln -s /usr/local/django/colab/apache-site/colab /etc/apache2/sites-available
+    sudo a2ensite colab
+    sudo service apache2 restart
 
 Configuring server to send emails
 ----------------------------------
 
-* Install postfix and mailutils:
- 
-  * apt-get install mailutils postfix
+* Install postfix and mailutils: ::
 
-* Update the file /etc/aliases adding users that should receive root's messages and run the update command:
+    sudo apt-get install mailutils postfix
 
-  * newaliases
+* Update the file ``/etc/aliases`` adding users that should receive root's messages and run the update command: ::
+
+    sudo newaliases
 
 
 Cron job to import emails
 ---------------------------
 
-* Install sshfs:
+* Install sshfs: ::
+
+    sudo apt-get install sshfs autofs
+
+* Create SSH keys. You should use a password but this tutorial won't cover it (if you use you will need to install and configure keychain process to be able to proceed): ::
+
+    sudo ssh-keygen
+
+* Copy the content of your key (``/root/.ssh/id_rsa.pub``) to the file ``/root/.ssh/authorized_keys`` on the mailinglist server.
+
+* Append the following content to /etc/auto.master file: ::
+
+    sudo /usr/local/django/colab/mnt /usr/local/django/colab/autofs/listas --timeout=600,--ghost
+
+* Restart autofs: ::
+
+    service autofs restart
   
-  * apt-get install sshfs autofs
-  
-* Create SSH keys. You should use a password but this tutorial won't cover it (if you use you will need to install and configure keychain process to be able to proceed):
+* Link cron script into ``/etc/cron.d/`` folder: ::
 
-  * ssh-keygen
-  
-* Copy the content of your key (/root/.ssh/id_rsa.pub) to the file /root/.ssh/authorized_keys on the mailinglist server.
-
-* Append the following content to /etc/auto.master file:
-
-  * /usr/local/django/colab/mnt /usr/local/django/colab/autofs/listas --timeout=600,--ghost
-
-* Restart autofs:
-
-  * service autofs restart
-  
-* Link cron script into /etc/cron.d/ folder:
-
-  * ln -s /usr/local/django/colab/etc/cron.d/colab_import_emails /etc/cron.d/ 
+    ln -s /usr/local/django/colab/etc/cron.d/colab_import_emails /etc/cron.d/ 
   
 * From now on the emails should be imported every minute
 
@@ -128,24 +127,24 @@ Cron job to import emails
 Cron job to reindex Solr
 -------------------------
 
-* Install wget:
-  
-  * apt-get install wget
-  
-* Link cron script into /etc/cron.d/ folder:
-  
-  * ln -s /usr/local/django/colab/etc/cron.d/colab_solr_reindex /etc/cron.d/
-  
+* Install wget: ::
+
+    sudo apt-get install wget
+
+* Link cron script into ``/etc/cron.d/`` folder: ::
+
+    sudo ln -s /usr/local/django/colab/etc/cron.d/colab_solr_reindex /etc/cron.d/
+
 * From now on delta reindex should run every 10 minutes and full reindex once a day. 
 
 
 Updating an installed version
 ------------------------------
 
-* Update the source code:
-  
-  * cd /usr/local/src/colab/
-  * hg pull
-  * hg up
-  * pip install /usr/local/src/colab/ -E /usr/local/django/colab/ -U
-  * service apache2 restart
+* Update the source code: ::
+
+    sudo cd /usr/local/src/colab/
+    sudo hg pull
+    sudo hg up
+    sudo pip install /usr/local/src/colab/ -E /usr/local/django/colab/ -U
+    sudo service apache2 restart
