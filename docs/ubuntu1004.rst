@@ -143,7 +143,7 @@ Cron job to import emails
   
 * Link cron script into ``/etc/cron.d/`` folder: ::
 
-    ln -s /usr/local/django/colab/cron.d/colab_import_emails /etc/cron.d/ 
+    ln -s /usr/local/django/colab/etc/cron.d/colab_import_emails /etc/cron.d/ 
   
 * From now on the emails should be imported every minute
 
@@ -157,7 +157,7 @@ Cron job to reindex Solr
 
 * Link cron script into ``/etc/cron.d/`` folder: ::
 
-    sudo ln -s /usr/local/django/colab/cron.d/colab_solr_reindex /etc/cron.d/
+    sudo ln -s /usr/local/django/colab/etc/cron.d/colab_solr_reindex /etc/cron.d/
 
 * From now on delta reindex should run every 10 minutes and full reindex once a day. 
 
