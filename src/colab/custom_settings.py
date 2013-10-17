@@ -56,8 +56,8 @@ DATABASES = {
     },
     'trac': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trac',
-        'USER': 'trac',
+        'NAME': 'trac_colab',
+        'USER': 'colab',
         'PASSWORD': os.environ.get('COLAB_TRAC_DB_PWD'),
         'HOST': os.environ.get('COLAB_TRAC_DB_HOST'),
     }
