@@ -1,56 +1,67 @@
+# -*- coding: utf-8 -*-
 
 import urllib
 from django import template
 
 register = template.Library()
 
-"""
-Decorator to facilitate template tag creation
-"""
-def easy_tag(func):
-    """deal with the repetitive parts of parsing template tags"""
-    def inner(parser, token):
-        #print token
-        try:
-            return func(*token.split_contents())
-        except TypeError:
-            raise template.TemplateSyntaxError('Bad arguments for tag "%s"' %
-                                                token.split_contents()[0])
-    inner.__name__ = func.__name__
-    inner.__doc__ = inner.__doc__
-    return inner
 
+@register.simple_tag(takes_context=True)
+def append_to_get(context, **kwargs):
+    # Getting the path with the query
+    current_url = u'{}?{}'.format(
+        context['request'].META['PATH_INFO'],
+        context['request'].META['QUERY_STRING'],
+    )
 
-class AppendGetNode(template.Node):
-    def __init__(self, dict):
-        self.dict_pairs = {}
-        for pair in dict.split(','):
-            pair = pair.split('=')
-            self.dict_pairs[pair[0]] = template.Variable(pair[1])
-            
-    def render(self, context):
-        get = context['request'].GET.copy()
+    if kwargs and context['request'].META['QUERY_STRING']:
+        current_url += '&'
 
-        for key in self.dict_pairs:
-            get[key] = self.dict_pairs[key].resolve(context)
-        
-        path = context['request'].META['PATH_INFO']
-                
-        if len(get):
-            # Convert all unicode objects in the get dict to 
-            #   str (utf-8 encoded)
-            get_utf_encoded = {}
-            for (key, value) in get.items():
-                if isinstance(value, unicode):
-                    value = value.encode('utf-8')
-                get_utf_encoded.update({key: value})
-            get_utf_encoded = dict(get_utf_encoded)
+    for key, value in kwargs.items():
+        # get the key, value to check if the pair exists in the query
+        new = u'{}={}'.format(key, value)
 
-            path = '?' + urllib.urlencode(get_utf_encoded)
+        if new in current_url:
+            continue
 
-        return path
+        if key not in current_url:
+            current_url += u'{}={}&'.format(key, value)
+            continue
 
-@register.tag()
-@easy_tag
-def append_to_get(_tag_name, dict):
-    return AppendGetNode(dict)
+        parse_url = current_url.split(key)
+
+        if len(parse_url) > 2:
+            continue
+
+        if unicode(value) in parse_url[1][1:]:
+            continue
+
+        check_kwargs_values = [
+            False for value in kwargs.values()
+            if unicode(value) not in parse_url[1]
+        ]
+
+        if not all(check_kwargs_values):
+            list_remaining = parse_url[1][1:].split('&')
+            real_remaining = u''
+
+            if len(list_remaining) >= 2:
+                real_remaining = u'&'.join(list_remaining[1:])
+
+            current_url = u'{url}{key}={value}&{remaining}'.format(
+                url=parse_url[0],
+                key=key,
+                value=value,
+                remaining=real_remaining,
+            )
+            continue
+
+        current_url = u'{url}{key}={value}+{remaining_get}'.format(
+            url=parse_url[0],
+            key=key,
+            value=value,
+            remaining_get=parse_url[1][1:],
+        )
+    if current_url[-1] == '&':
+        return current_url[:-1]
+    return current_url
