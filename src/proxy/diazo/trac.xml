@@ -14,7 +14,6 @@
           .navbar .nav li { border: 0; padding: 0; white-space: normal; display: list-item;}
           :link:not(.btn),
           :visited:not(.btn) { border: 0; color: rgb(66, 139, 202); }
-          :link, :visited { border: 0; }
           h1 { font-size: 24px; margin: 0.15em 1em 0.5em 0px; }
           h2 { font-size: 20px }
           h3 { font-size: 16px }
