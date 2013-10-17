@@ -13,10 +13,6 @@ from dateutil.parser import parse as parse_timestamp
 from django.conf import settings
 
 from super_archives.models import EmailAddress
-from . import socks
-
-
-DEFAULT_SOCKET = socket.socket
 
 
 def build_query(user_query, filters=None):
@@ -141,7 +137,7 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     
     """
 
-    if not settings.SOLR_HOSTNAME and not settings.SOCKS_PORT:
+    if not settings.SOLR_HOSTNAME:
         return {}
     
     data = {
@@ -180,18 +176,6 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
                                        settings.SOLR_PORT)
     query_params = urllib.urlencode(data)
     solr_select_uri = settings.SOLR_SELECT_PATH + '?' + query_params
-   
-    # Socks proxy configuration. Only required for development
-    #   if the solr server is behind a firewall. 
-    socks_server = getattr(settings, "SOCKS_SERVER", None)
-    if socks_server: 
-        logging.debug('Socks enabled: %s:%s', settings.SOCKS_SERVER,
-                                              settings.SOCKS_PORT)
-
-        socks.setdefaultproxy(settings.SOCKS_TYPE, 
-                              settings.SOCKS_SERVER,
-                              settings.SOCKS_PORT)
-        socket.socket = socks.socksocket
 
     try:
         solr_conn.request('GET', solr_select_uri)
@@ -199,8 +183,6 @@ def select(query, results_per_page=None, page_number=None, sort=None, fields=Non
     except socket.error as err: 
         solr_response = None
         logging.exception(err)
-    finally:
-        reset_defaultproxy()
 
     if solr_response and solr_response.status == 200:
         #TODO: Log error connecting to solr
@@ -270,8 +252,3 @@ def count_types(sample=100, filters=None):
         type_count.update({doc_type: count})
 
     return type_count
-    
-
-def reset_defaultproxy():
-    socket.socket = DEFAULT_SOCKET
-    socks._defaultproxy = None

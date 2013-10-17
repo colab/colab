@@ -218,11 +218,6 @@ MESSAGE_TAGS = {
 }
 
 
-### Proxy configuration
-SOCKS_SERVER = None
-SOCKS_PORT = None
-
-
 ### Feedzilla  (planet)
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
