@@ -12,7 +12,7 @@ from super_archives.models import Message
 
 
 class ColabSearchForm(SearchForm):
-    q = forms.CharField(label=_('Search'))
+    q = forms.CharField(label=_('Search'), required=False)
     order = forms.CharField(widget=forms.HiddenInput(), required=False)
     type = forms.CharField(required=False, label=_(u'Type'))
 

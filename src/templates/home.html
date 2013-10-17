@@ -27,12 +27,12 @@
          title="{% trans 'RSS - Latest collaborations' %}">
       </a>
       <ul class="message-list">
-        {% for doc in latest_docs %}
-          {% include "message-preview.html" %}
+        {% for result in latest_results %}
+          {% include "search/preview-search.html" %}
         {% endfor %}
       </ul>
       <a class="column-align"
-         href="{% url 'search' %}?o=modified+desc">
+         href="{% url 'haystack_search' %}?order=latest">
         {% trans "View more collaborations..." %}
       </a>
       <div>&nbsp;</div>

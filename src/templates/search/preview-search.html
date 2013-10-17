@@ -14,14 +14,18 @@
   <a href="{{ result.url }}" {% if result.description %}title="{{ result.description|escape|truncatechars:200 }}"{% endif %}>
     <span class="subject">
       <!-- a striptags filter was raising an error here because using with highlight -->
-      {% highlight result.title with query max_length "1000" %}
+      {% if query %}
+        {% highlight result.title with query max_length "1000" %}
+      {% else %}
+        {{ result.title }}
+      {% endif %}
     </span>
   </a>
 {% endif %}
 
 {% if result.description %}
       <!-- a striptags filter was raising an error here because using with highlight -->
-  <span class="quiet">- {% highlight result.description with query max_length "150" %}</span>
+  <span class="quiet">- {% if query %}{% highlight result.description with query max_length "150" %}{% else %}{{ result.description }}{% endif %}</span>
 {% endif %}
 
 {% if result.author or result.modified %}
@@ -29,7 +33,13 @@
     {% if result.author %}
       <span class="pull-left">{% trans "by" %}
         {% if result.author and result.author_url %}
-          <a href="{{ result.author_url }}">{% highlight result.author with query %}</a>
+          <a href="{{ result.author_url }}">
+            {% if query %}
+              {% highlight result.author with query %}
+            {% else %}
+              {{ result.author }}
+            {% endif %}
+          </a>
         {% else %}
           <span>{{ result.author }}</span>
         {% endif %}
