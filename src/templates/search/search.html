@@ -21,32 +21,32 @@
 
       <h4>{% trans "Types" %}</h4>
 
-      <ul class="none indent unstyled-list">
-        <li {% ifequal type "wiki" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+      <ul class="unstyled-list">
+        <li>
           <span class="glyphicon glyphicon-file"></span>
-          <a href="{% ifnotequal type "wiki" %} {% append_to_get type='wiki' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Wiki" %}</a>
+          <a href="{% append_to_get type='wiki' %}">{% trans "Wiki" %}</a>
         </li>
-        <li {% ifequal type "thread" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+        <li>
           <span class="glyphicon glyphicon-envelope"></span>
-          <a href="{% ifnotequal type "thread" %} {% append_to_get type='thread' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Discussion" %}</a>
+          <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
         </li>
-        <li {% ifequal type "ticket" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+        <li>
           <span class="glyphicon glyphicon-tag"></span>
-          <a href="{% ifnotequal type "ticket" %} {% append_to_get type='ticket' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Ticket" %}</a>
+          <a href="{% append_to_get type='ticket' %}">{% trans "Ticket" %}</a>
         </li>
-        <li {% ifequal type "changeset" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+        <li>
           <span class="glyphicon glyphicon-align-right"></span>
-          <a href="{% ifnotequal type "changeset" %} {% append_to_get type='changeset' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Changeset" %}</a>
+          <a href="{% append_to_get type='changeset' %}">{% trans "Changeset" %}</a>
         </li>
-        <li {% ifequal type "user" %} title="{% trans "Remove filter" %}" {% endifequal %}>
+        <li>
           <span class="glyphicon glyphicon-user"></span>
-          <a href="{% ifnotequal type "user" %} {% append_to_get type='user' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "User" %}</a>
+          <a href="{% append_to_get type='user' %}">{% trans "User" %}</a>
         </li>
       </ul>
     </div>
   
     <div class="col-lg-10">
-      <ul class="none indent list-unstyled">
+      <ul class="list-unstyled">
       {% for result in page.object_list  %}
         {% include "search/preview-search.html" %}
       {% empty %}
