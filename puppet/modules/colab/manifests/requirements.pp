@@ -42,7 +42,7 @@ class colab::requirements {
     provider => pip,
     require  => [Package['python-pip'], Package['python-dev'], Package['build-essential']],
   }
-  
+
   # links virtualenvwrapper to load automaticaly
   file { '/etc/bash_completion.d/virtualenvwrapper.sh':
     ensure => link,
@@ -58,7 +58,7 @@ class colab::requirements {
   package { 'python-dev':
     ensure => installed,
   }
-  
+
   # req by gvent
   package { 'libevent-dev':
     ensure => installed,
@@ -81,6 +81,11 @@ class colab::requirements {
 
   # req by Django L10N
   package { 'gettext':
+    ensure => installed,
+  }
+
+  # req by solr
+  package { 'openjdk-7-jre':
     ensure => installed,
   }
 }
