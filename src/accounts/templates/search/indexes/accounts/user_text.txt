@@ -1,0 +1,7 @@
+{{ object.username }}
+{{ object.get_full_name }}
+{{ object.get_full_name|slugify }}
+{{ object.institution }}
+{{ object.institution|slugify }}
+{{ object.role }}
+{{ object.role|slugify }}

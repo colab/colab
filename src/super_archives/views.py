@@ -3,6 +3,7 @@
 import smtplib
 
 from django import http
+from django.conf import settings
 from django.contrib import messages
 from django.db import IntegrityError
 from django.views.generic import View
@@ -85,7 +86,7 @@ def list_messages(request):
         'n_results': paginator.count,
         'threads': threads,
         'selected_list': selected_list,
-        'order_by': order_by,
+        'order_data': settings.ORDERING_DATA,
     }
     return render(request, 'message-list.html', template_data)
 

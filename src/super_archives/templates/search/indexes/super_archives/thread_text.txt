@@ -1,0 +1,21 @@
+{{ object.thread.mailinglist.name }}
+{{ object.thread.mailinglist.name|slugify }}
+{{ object.thread.subject_token }}
+
+{{ object.body }}
+{{ object.body|slugify }}
+{{ object.subject_clean }}
+{{ object.subject_clean|slugify }}
+
+{{ object.from_address.get_full_name }}
+
+{% for message in object.message_set.iterator %}
+  {% if not spam %}
+    {{ message.subject_clean }}
+    {{ message.subject_clean|slugify }}
+    {{ message.body }}
+    {{ message.body|slugify }}
+    {{ message.from_address.get_full_name }}
+    {{ message.from_address.get_full_name|slugify }}
+  {% endif %}
+{% endfor %}

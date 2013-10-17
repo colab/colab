@@ -111,7 +111,7 @@
             {% endif %}
           </ul>
 
-          <form action="/search/" method="GET" id="search-form" class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
+          <form action="{% url 'haystack_search' %}" method="GET" id="search-form" class="navbar-form navbar-right hidden-xs hidden-sm" role="search">
             <div class="form-group">
               <label class="sr-only" for="header-searchbox">{% trans 'Search here...' %}</label>
               <input name="q" id="header-searchbox"

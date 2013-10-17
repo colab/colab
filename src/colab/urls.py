@@ -1,8 +1,11 @@
-
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.contrib import admin
+
+from accounts.models import User
+from search.forms import ColabSearchForm
+from super_archives.models import Message
 
 
 admin.autodiscover()
@@ -10,8 +13,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^$', 'colab.deprecated.views.other.home', name='home'),
 
-    url(r'^search/$', 'colab.deprecated.views.other.search', name='search'),
-
+    url(r'^search/', include('search.urls')),
     url(r'open-data/$', TemplateView.as_view(template_name='open-data.html'),
         name='opendata'),
 

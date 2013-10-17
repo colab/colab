@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<span class="glyphicon glyphicon-user" title="{{ result.type }}"></span>
+
+<span class="subject">
+  <a href="{% url 'user_profile' result.username %}">{{ result.name }}</a>
+</span>
+
+<span class="quiet">{% if result.institution %}- {{ result.institution }}{% endif %}{% if result.role %} - {{ result.role }}{% endif %}</span>

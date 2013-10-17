@@ -374,3 +374,8 @@ ul.emails {
 }
 
 /* end user profile update */
+
+/* search highlighting */
+span.highlighted {
+    background-color: yellow;
+}

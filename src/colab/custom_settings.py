@@ -15,6 +15,56 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'pt-br'
 
+# ORDERING_DATA receives the options to order for as it's keys and a dict as
+# value, if you want to order for the last name, you can use something like:
+# 'last_name': {'name': 'Last Name', 'fields': 'last_name'} inside the dict,
+# you pass two major keys (name, fields)
+# The major key name is the name to appear on the template
+# the major key fields it show receive the name of the fields to order for in
+# the indexes
+
+ORDERING_DATA = {
+    'latest':  {
+        'name': gettext(u'Recent activity'),
+        'fields': ('-modified', '-created'),
+    },
+    'hottest': {
+        'name': gettext(u'Relevance'),
+        'fields': None,
+    },
+}
+
+# the following variable define how many characters should be shown before
+# a highlighted word, to make sure that the highlighted word will appear
+HIGHLIGHT_NUM_CHARS_BEFORE_MATCH = 30
+HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': os.environ.get('COLAB_SOLR_URL'),
+    }
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'colab',
+        'USER': 'colab',
+        'PASSWORD': os.environ.get('COLAB_DEFAULT_DB_PWD'),
+        'HOST': os.environ.get('COLAB_DEFAULT_DB_HOST'),
+    },
+    'trac': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'trac',
+        'USER': 'trac',
+        'PASSWORD': os.environ.get('COLAB_TRAC_DB_PWD'),
+        'HOST': os.environ.get('COLAB_TRAC_DB_HOST'),
+    }
+}
+
+DATABASE_ROUTERS = ['colab.routers.TracRouter',]
+
 INSTALLED_APPS = INSTALLED_APPS + (
 
     # Not standard apps
@@ -24,6 +74,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'django_mobile',
     'django_browserid',
     'conversejs',
+    'haystack',
 
     # Own apps
     'super_archives',
@@ -33,6 +84,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'planet',
     'accounts',
     'proxy',
+    'search',
 
     # Feedzilla and deps
     'feedzilla',

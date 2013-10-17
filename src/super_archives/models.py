@@ -79,6 +79,9 @@ class MailingList(models.Model):
     logo = models.FileField(upload_to='list_logo') #TODO
     last_imported_index = models.IntegerField(default=0)
 
+    def get_absolute_url(self):
+	return u'{}?list={}'.format(reverse('thread_list'), self.name)
+
     def __unicode__(self):
         return self.name
 
@@ -124,6 +127,10 @@ class Thread(models.Model):
         verbose_name = _(u"Thread")
         verbose_name_plural = _(u"Threads")
         unique_together = ('subject_token', 'mailinglist')
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('thread_view', [self.mailinglist, self.subject_token])
 
     def update_keywords(self):
         blocks = MessageBlock.objects.filter(message__thread__pk=self.pk,

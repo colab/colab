@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load urlutils %}
+{% load highlight %}
+
+{% block main-content %}
+  <div class="row">
+    <div class="col-lg-2">
+      <h2>{% trans "Search" %}</h2>
+    </div>
+    <span class="pull-right quiet">
+      {{ page.paginator.count }} {% trans "documents found" %}
+    </span>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div id="filters" class="hidden-xs hidden-sm col-md-2 col-lg-2">
+      <h3>{% trans "Filters" %}</h3>
+
+      <h4>{% trans "Sort by" %}</h4>
+      <ul class="unstyled-list">
+        {% for option, dict_order in order_data.items %}
+          <li>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <a href="{% append_to_get order=option p=1 %}">
+              {% ifequal request.GET.order option %}
+                {% blocktrans with name=dict_order.name %}<strong>{{ name }}</strong>{% endblocktrans %}
+              {% else %}
+                {% blocktrans with name=dict_order.name %}{{ name }}{% endblocktrans %}
+              {% endifequal %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <h4>{% trans "Types" %}</h4>
+
+      <ul class="unstyled-list">
+        <li>
+          <span class="glyphicon glyphicon-file"></span>
+          <a href="{% append_to_get type='wiki' %}">{% trans "Wiki" %}</a>
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-envelope"></span>
+          <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-tag"></span>
+          <a href="{% append_to_get type='ticket' %}">{% trans "Ticket" %}</a>
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-align-right"></span>
+          <a href="{% append_to_get type='changeset' %}">{% trans "Changeset" %}</a>
+        </li>
+        <li>
+          <span class="glyphicon glyphicon-user"></span>
+          <a href="{% append_to_get type='user' %}">{% trans "User" %}</a>
+        </li>
+      </ul>
+    </div>
+  
+    <div class="col-lg-10">
+      <ul class="list-unstyled">
+      {% for result in page.object_list  %}
+        {% include "search/preview-search.html" %}
+      {% empty %}
+        <li class="text-center">
+          {% trans "No results for your search." %}
+        </li>
+      {% endfor %}
+      </ul>
+
+      {% if query and page.has_other_pages %}
+        <div class="text-center">
+          <span>
+            {% if page.has_previous %}
+              <a href="{% append_to_get page=page.previous_page_number %}">{% trans "Previous" %}</a>
+            {% endif %}
+            <span>
+              {% trans "Page" %} {{ page.number }} {% trans "of" %}
+              {{ page.paginator.num_pages }}
+            </span>
+
+            {% if page.has_next %}
+              <a href="{% append_to_get page=page.next_page_number %}">{% trans "Next" %}</a>
+            {% endif %}
+          </span>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}

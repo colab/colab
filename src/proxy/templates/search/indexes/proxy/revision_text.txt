@@ -1,0 +1,8 @@
+{{ object.repository_name }}
+{{ object.repository_name|slugify }}
+{{ object.rev }}
+{{ object.rev|slugify }}
+{% firstof object.get_author.get_full_name object.author %}
+{% firstof object.get_author.get_full_name|slugify object.author|slugify %}
+{{ object.message }}
+{{ object.message|slugify }}

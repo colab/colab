@@ -1,0 +1,18 @@
+{% load i18n %}
+
+<span class="glyphicon glyphicon-envelope" title="{{ result.type }}"></span>
+
+{% if result.mailinglist %}
+  <a href="{% url 'super_archives.views.list_messages' %}?list={{ result.mailinglist }}">
+    <span class="label label-primary">{{ result.mailinglist }}</span>
+  </a>
+{% endif %}
+
+<span class="subject">
+  <a href="{{ result.url }}#msg-{{ result.pk }}"
+    title="{% filter striptags|truncatewords:50 %}{{ result.description|escape }}{% endfilter %}">
+    {{ result.title }}
+  </a>
+</span>
+
+<span class="quiet">- {{ result.description|striptags }}</span>

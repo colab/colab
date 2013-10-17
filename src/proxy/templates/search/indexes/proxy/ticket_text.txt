@@ -1,0 +1,20 @@
+{{ object.summary }}
+{{ object.summary|slugify }}
+{{ object.description }}
+{{ object.description|slugify }}
+{{ object.milestone }}
+{{ object.milestone|slugify }}
+{{ object.component|slugify }}
+{{ object.version }}
+{{ object.severity }}
+{{ object.severity|slugify }}
+{{ object.reporter }}
+{{ object.reporter|slugify }}
+{% firstof object.get_author.get_fullname or object.author %}
+{% firstof object.get_author.get_fullname|slugify or object.author|slugify %}
+{{ object.status }}
+{{ object.status|slugify }}
+{{ object.keywords }}
+{{ object.keywords|slugify }}
+{{ object.collaborators }}
+{{ object.collaborators|slugify }}

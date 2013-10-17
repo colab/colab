@@ -1,0 +1,16 @@
+{% load i18n %}
+{% load highlight %}
+
+<span class="glyphicon glyphicon-tag" title="{{ result.type }}"></span>
+
+<a href="{{ result.url }}" title="{{ result.description|escape }}">
+{% if result.status %}
+    <span class="label label-primary">{{ result.status }}</span>
+{% endif %}
+
+<span class="subject">
+    #{{ result.pk }} - {% filter striptags|truncatewords:50 %}{{ result.summary|escape }}{% endfilter %}
+  </a>
+</span>
+
+<span class="quiet">- {% highlight result.description with query max_length "150" %}</span>
