@@ -3,6 +3,7 @@
 import unicodedata
 
 from django import forms
+from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
 
@@ -12,6 +13,7 @@ from super_archives.models import Message
 
 class ColabSearchForm(SearchForm):
     q = forms.CharField(label=_('Search'))
+    order = forms.CharField(widget=forms.HiddenInput(), required=False)
     type = forms.CharField(required=False, label=_(u'Type'))
 
     def search(self):
@@ -27,7 +29,16 @@ class ColabSearchForm(SearchForm):
             sqs = self.searchqueryset.all()
 
         if self.cleaned_data['type']:
-            sqs = sqs.filter(type=self.cleaned_data['type'])
+            "It will consider other types with a whitespace"
+            types = self.cleaned_data['type']
+            sqs = sqs.filter(type__in=types.split())
+
+
+        if self.cleaned_data['order']:
+            for option, dict_order in settings.ORDERING_DATA.items():
+                if self.cleaned_data['order'] == option:
+                    if dict_order['fields']:
+                        sqs = sqs.order_by(*dict_order['fields'])
            # if self.cleaned_data['type'] == 'user':
            #     sqs = self.searchqueryset.models(User)
            # elif self.cleaned_data['type'] in ['message', 'thread']:

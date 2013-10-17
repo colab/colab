@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
-{% load append_to_get %}
+{% load urlutils %}
 {% load highlight %}
 
 {% block main-content %}
@@ -16,8 +16,24 @@
   <hr/>
 
   <div class="row">
-    <div class="col-lg-2">
+    <div id="filters" class="hidden-xs hidden-sm col-md-2 col-lg-2">
       <h3>{% trans "Filters" %}</h3>
+
+      <h4>{% trans "Sort by" %}</h4>
+      <ul class="unstyled-list">
+        {% for option, dict_order in order_data.items %}
+          <li>
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <a href="{% append_to_get order=option p=1 %}">
+              {% ifequal request.GET.order option %}
+                {% blocktrans with name=dict_order.name %}<strong>{{ name }}</strong>{% endblocktrans %}
+              {% else %}
+                {% blocktrans with name=dict_order.name %}{{ name }}{% endblocktrans %}
+              {% endifequal %}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
 
       <h4>{% trans "Types" %}</h4>
 

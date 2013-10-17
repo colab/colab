@@ -15,6 +15,24 @@ LANGUAGES = (
 
 LANGUAGE_CODE = 'pt-br'
 
+# ORDERING_DATA receives the options to order for as it's keys and a dict as
+# value, if you want to order for the last name, you can use something like:
+# 'last_name': {'name': 'Last Name', 'fields': 'last_name'} inside the dict,
+# you pass two major keys (name, fields)
+# The major key name is the name to appear on the template
+# the major key fields it show receive the name of the fields to order for in
+# the indexes
+
+ORDERING_DATA = {
+    'latest':  {
+        'name': gettext(u'Recent activity'),
+        'fields': ('-modified', '-created'),
+    },
+    'hottest': {
+        'name': gettext(u'Relevance'),
+        'fields': None,
+    },
+}
 
 # the following variable define how many characters should be shown before
 # a highlighted word, to make sure that the highlighted word will appear
