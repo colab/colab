@@ -1,6 +1,7 @@
 
 class colab {
   # Common
+  include apt
   include ps1
   include vim
   include ntp
@@ -8,9 +9,14 @@ class colab {
   include timezone
   include postfix
 
-  include nginx
   include supervisor
   include colab::requirements
+
+  apt::ppa { 'ppa:nginx/stable': }
+
+  class { 'nginx':
+    require => Apt::Ppa['ppa:nginx/stable'],
+  }
 
   group { 'colab':
     ensure => present,

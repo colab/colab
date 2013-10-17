@@ -43,7 +43,7 @@ class nginx (
   }
   if ! defined(Package[$nginx_packages]) { 
     package { $nginx_packages: 
-      ensure => installed 
+      ensure => latest
     }
   }
 
