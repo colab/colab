@@ -24,7 +24,7 @@ django-browserid
 git+https://github.com/TracyWebTech/django-revproxy/
 
 # Converse.js (XMPP client)
-django-conversejs
+django-conversejs==0.2.7
 
 # Feedzilla (planet) and deps
 #feedzilla==0.22
