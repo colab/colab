@@ -5,7 +5,7 @@ Installation instructions for Ubuntu 10.04
 sudo apt-get install sun-java6-bin tomcat6 libpg-java
 
 * Download Solr 3.3 and extract it:
-wget http://ftp.unicamp.br/pub/apache/lucene/solr/3.3.0/apache-solr-3.3.0.tgz
+wget http://archive.apache.org/dist/lucene/solr/3.3.0/apache-solr-3.3.0.tgz
 tar xzf apache-solr-3.3.0.tgz 
 
 * Create the directory /var/local/lib/solr/ and give the right permissions:

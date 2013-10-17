@@ -2,49 +2,73 @@
 
 .. highlight:: rest
 
-.. _colab_software:
-
-=================================
-Colab, a Software for Communities
-=================================
-
-What is Colab?
-==============
-
-Application that integrates existing systems to represent the contributions of the members through:
-
-* The amendments to the Wiki trac system.
-
-* Changes to the trac system code.
-
-* Discussions at the mailman list.
-
-* And other systems in the community.
-
-Features
-========
-
-* Developerd by Interlegis Communities http://colab.interlegis.leg.br/
-
-* Writed with Python http://python.org/
-
-* Build in Django Web Framework https://www.djangoproject.com/
-
-* Search engine with Solr https://lucene.apache.org/solr/
-
-Colab and Solr
-==============
-
-This software uses Apache Solr as search platform based on Apache Lucene.
-
-With Solr generates the REST style API with which you can make HTTP requests 
-to get results: natively in XML or JSON, PHP, Ruby and Python and then treatment.
-
-Installation
-============
+.. _ubuntu1004_install:
 
 Installation instructions for Ubuntu 10.04
--------------------------------------------
+==========================================
+
+.. contents :: :local:
+
+Install Solr and dependencies
+-----------------------------
+
+* Install Java, tomcat, JDBC Postgres drivers (Ubuntu partner repositories must be enabled): ::
+
+    sudo apt-get install sun-java6-bin tomcat6 libpg-java
+
+* Download Solr 3.3 and extract it: ::
+
+    wget http://archive.apache.org/dist/lucene/solr/3.3.0/apache-solr-3.3.0.tgz
+    tar xzf apache-solr-3.3.0.tgz 
+
+* Create the directory ``/var/local/lib/solr/`` and give the right permissions: ::
+
+    sudo mkdir -p /var/local/lib/solr/
+    sudo chown tomcat6:tomcat6 /var/local/lib/solr/
+
+* Copy the solr home example to ``/usr/local/share/``: ::
+
+    sudo cp -R apache-solr-3.3.0/example/solr /usr/local/share/
+
+* Create a folder for libs in the solr home: ::
+
+    sudo mkdir /usr/local/share/solr/lib/
+
+* Copy Solr libs to libs folder: ::
+
+    sudo cp apache-solr-3.3.0/dist/*.jar /usr/local/share/solr/lib/
+
+* Copy Solr distribution to solr home: ::
+
+    sudo cp apache-solr-3.3.0/dist/apache-solr-3.3.0.war /usr/local/share/solr/
+
+* Link the JDBC Postgres drivers into the Solr installation: ::
+
+    sudo ln -s /usr/share/java/postgresql-jdbc3-8.4.jar /usr/local/share/solr/lib/
+
+* Link configurations to ``/etc`` ::
+
+    sudo ln -s /usr/local/share/solr/conf/ /etc/solr
+
+* Copy the configuration files from this folder into ``/etc/solr/``
+
+* Link the ``solr-tomcat.xml`` file in the Tomcat configuration: ::
+
+    sudo ln -s /etc/solr/solr-tomcat.xml /etc/tomcat6/Catalina/localhost/solr.xml 
+
+* Check ``data-config.xml`` to make sure all information to connect to the databases are right
+
+* Create a ``dataimport.properties`` on ``/etc/solr`` and give write access to ``tomcat6``: ::
+
+    sudo touch /etc/solr/dataimport.properties
+    sudo chown tomcat6:tomcat6 /etc/solr/dataimport.properties
+ 
+* Restart tomcat: ::
+
+    sudo /etc/init.d/tomcat6 restart
+
+Install Colab and dependencies
+------------------------------
 
 * Install Apache2 with WSGI support: ::
 
