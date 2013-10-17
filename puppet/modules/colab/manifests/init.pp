@@ -56,6 +56,12 @@ class colab {
     user      => 'colab',
   }
 
+  supervisor::app { 'solr':
+    command   => 'java -jar start.jar',
+    directory => '/home/colab/apache-solr-3.6.2/example',
+    user      => 'colab',
+  }
+
   nginx::config { 'nginx':
     content => template('colab/nginx/extra_conf.erb'),
   }
