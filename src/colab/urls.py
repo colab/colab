@@ -11,7 +11,7 @@ from super_archives.models import Message
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'colab.deprecated.views.other.home', name='home'),
+    url(r'^$', 'home.views.index', name='home'),
 
     url(r'^search/', include('search.urls')),
     url(r'open-data/$', TemplateView.as_view(template_name='open-data.html'),
