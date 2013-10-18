@@ -15,10 +15,8 @@ from django.core.exceptions import PermissionDenied
 
 from haystack.query import SearchQuerySet
 
-from colab.deprecated import solrutils
-from colab.deprecated import signup as signup_
-
 from super_archives.models import EmailAddress, Message
+from super_archives.utils.email import send_email_lists
 from .forms import UserCreationForm, ListsForm, UserUpdateForm
 
 
@@ -105,7 +103,7 @@ def signup(request):
 
     mailing_lists = lists_form.cleaned_data.get('lists')
     if mailing_lists:
-        signup_.send_email_lists(user, mailing_lists)
+        send_email_lists(user, mailing_lists)
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
