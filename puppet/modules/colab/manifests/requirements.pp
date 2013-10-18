@@ -88,4 +88,9 @@ class colab::requirements {
   package { 'openjdk-7-jre':
     ensure => installed,
   }
+
+  package { 'memcached':
+    ensure => installed,
+  }
+
 }

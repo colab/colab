@@ -13,6 +13,7 @@ pysolr==2.1
 etiquetando==0.1
 html2text
 django-taggit
+python-memcached
 
 gunicorn
 gevent

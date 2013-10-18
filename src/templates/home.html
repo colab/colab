@@ -6,13 +6,7 @@
 {% endblock %}
 
 {% block header %}
-  <div class="row hidden-xs hidden-sm">
-    <div class="col-lg-2 col-lg-offset-5 text-center">
-      <img src="{{ STATIC_URL }}img/logo.png" />
-    </div>
-  </div>
-
-  <h3 class="text-center hidden-xs hidden-sm">{% trans "INTERLEGIS COMMUNITIES" %}</h3>
+  {% include "includes/big_header.html" %}
 {% endblock %}
 
 {% block main-content %}

@@ -63,6 +63,13 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 DATABASE_ROUTERS = ['colab.routers.TracRouter',]
 
 INSTALLED_APPS = INSTALLED_APPS + (
