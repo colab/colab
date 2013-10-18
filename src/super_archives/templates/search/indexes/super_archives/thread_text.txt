@@ -11,8 +11,6 @@
 
 {% for message in object.message_set.iterator %}
   {% if not spam %}
-    {{ message.subject_clean }}
-    {{ message.subject_clean|slugify }}
     {{ message.body }}
     {{ message.body|slugify }}
     {{ message.from_address.get_full_name }}

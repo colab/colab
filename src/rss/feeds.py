@@ -4,9 +4,10 @@
 from django.contrib.syndication.views import Feed
 from django.utils.translation import ugettext as _
 
+from haystack.query import SearchQuerySet
+
 from super_archives.models import Thread
 from super_archives import queries
-from colab.deprecated import solrutils
 
 
 class LatestThreadsFeeds(Feed):
@@ -21,7 +22,7 @@ class LatestThreadsFeeds(Feed):
 
     def item_title(self, item):
         title = '[' + item.mailinglist.name + '] '
-        title += item.latest_message.subject_clean  
+        title += item.latest_message.subject_clean
         return title
 
     def item_description(self, item):
@@ -40,8 +41,8 @@ class HottestThreadsFeeds(Feed):
 
     def item_title(self, item):
         title = '[' + item.mailinglist.name + '] '
-        title += item.latest_message.subject_clean  
-        return title  
+        title += item.latest_message.subject_clean
+        return title
 
     def item_description(self, item):
         return item.latest_message.body
@@ -52,28 +53,22 @@ class LatestColabFeeds(Feed):
     link = '/rss/colab/latest/'
 
     def items(self):
-        items = solrutils.get_latest_collaborations(20)
+        items = SearchQuerySet().order_by('-modified', '-created')[:20]
         return items
 
     def item_title(self, item):
-        type_ = item.get('Type') + ': '
-        mailinglist = item.get('mailinglist')
+        type_ = item.type + ': '
+        mailinglist = item.tag
 
         if mailinglist:
             prefix = type_ + mailinglist + ' - '
         else:
             prefix = type_
 
-        return prefix + item.get('Title') 
+        return prefix + item.title
 
     def item_description(self, item):
-        return item.get('Description')
+        return item.latest_description
 
     def item_link(self, item):
-        if item.get('Type') != 'thread':
-            url = item.get('url')
-        else:
-            url = 'http://colab.interlegis.leg.br'
-            url += item.get('url')
-        return url
-
+        return item.url
