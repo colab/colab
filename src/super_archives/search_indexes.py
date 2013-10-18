@@ -11,6 +11,7 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
     url = indexes.CharField(model_attr='get_absolute_url', null=True)
     title = indexes.CharField(model_attr='latest_message__subject_clean')
     description = indexes.CharField(use_template=True)
+    latest_description = indexes.CharField(model_attr='latest_message__body')
     created = indexes.DateTimeField()
     modified = indexes.DateTimeField(
         model_attr='latest_message__received_time'
