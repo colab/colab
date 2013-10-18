@@ -32,7 +32,6 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_description(self, obj):
         return u'{}\n{}\n{}\n{}\n{}\n{}'.format(
             obj.institution, obj.role, obj.username, obj.get_full_name(),
-            obj.google_talk, obj.webpage
         )
 
     def prepare_icon_name(self, obj):
