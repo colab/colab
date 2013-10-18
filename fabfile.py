@@ -70,7 +70,7 @@ def install(local_settings=None):
 
 def update_requirements():
     with cd('~/colab'), prefix(WORKON_COLAB):
-        run('pip install -r requirements.txt')
+        run('pip install -U -r requirements.txt')
 
 
 def deploy(update=False):

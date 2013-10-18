@@ -19,6 +19,8 @@ SECRET_KEY = ')(jksdfhsjkadfhjkh234ns!8fqu-1186h$vuj'
 
 SITE_URL = 'http://localhost:8000'
 
+ALLOWED_HOSTS = ['*']
+
 INTERNAL_IPS = ('127.0.0.1', )
 
 CONVERSEJS_BOSH_SERVICE_URL = 'http://localhost:5280/http-bind'
