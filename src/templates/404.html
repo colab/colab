@@ -1,3 +1,10 @@
+{% extends "base.html" %}
 {% load i18n %}
 
-<h1>{% trans "Not found. Keep searching! :)" %}</h1>
+{% block header %}
+  {% include "includes/big_header.html" %}
+{% endblock %}
+
+{% block main-content %}
+  <h1>{% trans "Not found. Keep searching! :)" %}</h1>
+{% endblock %}
