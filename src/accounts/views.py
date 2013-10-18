@@ -6,7 +6,7 @@ import datetime
 from collections import OrderedDict
 
 from django.contrib import messages
-
+from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, UpdateView
 from django.utils import timezone
@@ -82,6 +82,12 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         query = Message.objects.filter(from_address__in=email_pks)
         query = query.order_by('-received_time')
         context['emails'] = query[:10]
+
+        count_by = 'thread__mailinglist__name'
+        messages = Message.objects.filter(from_address__user__pk=user.pk)
+        context['list_activity'] = dict(messages.values_list(count_by)\
+                                           .annotate(Count(count_by))\
+                                           .order_by(count_by))
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
