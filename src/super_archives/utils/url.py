@@ -17,7 +17,7 @@ def append_to_get(path, query=None, **kwargs):
         if new in current_url:
             continue
 
-        if key not in current_url:
+        if u'&{}='.format(key) not in current_url:
             current_url += u'{}={}&'.format(key, value)
             continue
 
