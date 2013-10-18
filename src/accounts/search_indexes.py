@@ -30,8 +30,8 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
         return 'date_joined'
 
     def prepare_description(self, obj):
-        return u'{}\n{}\n{}\n{}\n{}\n{}'.format(
-            obj.institution, obj.role, obj.username, obj.get_full_name(),
+        return u'{}\n{}\n{}\n{}'.format(
+            obj.institution, obj.role, obj.username, obj.get_full_name()
         )
 
     def prepare_icon_name(self, obj):
