@@ -53,7 +53,7 @@ class LatestColabFeeds(Feed):
     link = '/rss/colab/latest/'
 
     def items(self):
-        items = SearchQuerySet().all()[:20]
+        items = SearchQuerySet().order_by('-modified', '-created')[:20]
         return items
 
     def item_title(self, item):
