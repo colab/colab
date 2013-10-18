@@ -56,8 +56,8 @@ DATABASES = {
     },
     'trac': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trac',
-        'USER': 'trac',
+        'NAME': 'trac_colab',
+        'USER': 'colab',
         'PASSWORD': os.environ.get('COLAB_TRAC_DB_PWD'),
         'HOST': os.environ.get('COLAB_TRAC_DB_HOST'),
     }
@@ -97,7 +97,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'root': {
         'level': 'WARNING',
-        'handlers': ['sentry'],
+        'handlers': ['sentry', 'console'],
     },
     'formatters': {
         'verbose': {
@@ -209,6 +209,8 @@ LOCALE_PATHS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
+ALLOWED_HOSTS = ['colab.interlegis.leg.br']
+
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.INFO: 'alert-info',
@@ -227,6 +229,8 @@ FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
 
 ### BrowserID / Persona
 SITE_URL = 'https://colab.interlegis.leg.br'
+BROWSERID_AUDIENCES = [SITE_URL]
+
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = '/'
@@ -235,26 +239,19 @@ LOGOUT_REDIRECT_URL = '/'
 BROWSERID_CREATE_USER = False
 
 
-### Apache Solr
-#SOLR_HOSTNAME = 'solr.interlegis.leg.br'
-SOLR_HOSTNAME = '10.1.2.154'
-SOLR_PORT = '8080'
-SOLR_SELECT_PATH = '/solr/select'
-
-SOLR_COLAB_URI = 'http://colab.interlegis.leg.br'
-SOLR_BASE_QUERY = """
-    ((Type:changeset OR Type:ticket OR Type:wiki OR Type:thread) AND Title:["" TO *])
-"""
-
+## Proxy settings
 COLAB_TRAC_URL = 'http://colab-backend.interlegis.leg.br/'
 COLAB_CI_URL = 'http://jenkins.interlegis.leg.br:8080/ci/'
 
 REVPROXY_ADD_REMOTE_USER = True
 
+
+## Converse.js settings
 # This URL must use SSL in order to keep chat sessions secure
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
 CONVERSEJS_AUTO_REGISTER = 'mensageiro.interlegis.gov.br'
+
 
 try:
     from local_settings import *

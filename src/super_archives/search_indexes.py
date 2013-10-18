@@ -29,7 +29,7 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
         return Thread
 
     def get_updated_field(self):
-        return 'received_time'
+        return 'latest_message__received_time'
 
     def prepare_author(self, obj):
         return obj.message_set.first().from_address.get_full_name()

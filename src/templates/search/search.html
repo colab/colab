@@ -1,7 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load urlutils %}
-{% load highlight %}
+{% load i18n highlight superarchives %}
 
 {% block main-content %}
   <div class="row">
@@ -72,7 +70,7 @@
       {% endfor %}
       </ul>
 
-      {% if query and page.has_other_pages %}
+      {% if page.has_other_pages %}
         <div class="text-center">
           <span>
             {% if page.has_previous %}

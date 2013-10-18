@@ -19,6 +19,11 @@ environments = {
         'hosts': [], #TODO
         'key_filename': '~/.ssh/id_rsa',
     },
+    'demo': {
+        'hosts': ['colab-demo.tracy.com.br'],
+        'key_filename': '~/.ssh/id_rsa',
+        'port': 22,
+    },
 }
 
 
@@ -27,8 +32,8 @@ WORKON_COLAB = '{} && workon colab'.format(SOURCE_VENV)
 
 
 def environment(name):
-     env.update(environments[name])
-     env.environment = name
+    env.update(environments[name])
+    env.environment = name
 environment('dev')
 
 
@@ -48,6 +53,15 @@ def install(local_settings=None):
     if local_settings:
         put(local_settings, '~/colab/src/colab/local_settings.py')
 
+    if not exists('~/apache-solr-3.6.2/'):
+        run('wget http://archive.apache.org/dist/lucene/solr/3.6.2/apache-solr-3.6.2.tgz')
+        run('tar xzf apache-solr-3.6.2.tgz')
+        run('rm apache-solr-3.6.2.tgz')
+
+    with cd('~/apache-solr-3.6.2/example/solr/conf/'):
+        if not exists('stopwords_en.txt'):
+            run('cp stopwords.txt stopwords_en.txt')
+
     if env_created:
         update_requirements()
 
@@ -56,7 +70,7 @@ def install(local_settings=None):
 
 def update_requirements():
     with cd('~/colab'), prefix(WORKON_COLAB):
-        run('pip install -r requirements.txt')
+        run('pip install -U -r requirements.txt')
 
 
 def deploy(update=False):
@@ -71,8 +85,18 @@ def deploy(update=False):
         run('python manage.py syncdb')
         run('python manage.py migrate')
         run('python manage.py collectstatic --noinput')
+        run('python manage.py build_solr_schema -f ~/apache-solr-3.6.2/example/solr/conf/schema.xml')
 
     sudo('supervisorctl restart all')
+
+
+def rebuild_index(age=None):
+    with cd('~/colab/src/'), prefix(WORKON_COLAB):
+        age_arg = ''
+        if age:
+            age_arg = '--age={}'.format(age)
+
+        run('python manage.py rebuild_index {}'.format(age_arg))
 
 
 @with_settings(user='vagrant')

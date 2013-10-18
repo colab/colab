@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import smtplib
+import logging
 
 from django import http
 from django.conf import settings
@@ -212,6 +213,7 @@ class EmailValidationView(View):
             send_verification_email(email_addr, request.user,
                                     email.validation_key)
         except smtplib.SMTPException:
+            logging.exception('Error sending validation email')
             return http.HttpResponseServerError()
 
         return http.HttpResponse(status=204)
