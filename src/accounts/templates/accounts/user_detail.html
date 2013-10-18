@@ -2,7 +2,7 @@
 {% load i18n gravatar %}
 
 {% block head_js %}
-  {% include "pizza-chart.html" with chart_div="collabs" chart_height=300 %}
+  {% include "pizza-chart.html" with chart_data=count_types chart_div="collabs" chart_height=300 %}
   {% include "pizza-chart.html" with chart_div="collabs2" chart_height=300 %}
 {% endblock %}
 

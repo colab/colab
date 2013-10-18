@@ -3,6 +3,8 @@
 
 import datetime
 
+from collections import OrderedDict
+
 from django.contrib import messages
 
 from django.contrib.auth import get_user_model
@@ -17,6 +19,7 @@ from haystack.query import SearchQuerySet
 
 from super_archives.models import EmailAddress, Message
 from super_archives.utils.email import send_email_lists
+from search.utils import trans
 from .forms import UserCreationForm, ListsForm, UserUpdateForm
 
 
@@ -48,7 +51,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         user = self.object
         context = {}
 
-        count_types = {}
+        count_types = OrderedDict()
         six_months = timezone.now() - datetime.timedelta(days=180)
 
         fields_or_lookup = (
@@ -58,14 +61,14 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         )
 
 
-        for type in ['wiki', 'thread', 'changeset', 'ticket']:
+        for type in ['thread', 'ticket', 'wiki', 'changeset']:
             sqs = SearchQuerySet().filter(
                 type=type,
                 modified__gte=six_months,
             )
             for filter_or in fields_or_lookup:
                 sqs = sqs.filter_or(**filter_or)
-            count_types[type] = sqs.count()
+            count_types[trans(type)] = sqs.count()
 
         context['type_count'] = count_types
 

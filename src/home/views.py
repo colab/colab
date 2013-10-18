@@ -1,9 +1,12 @@
-from django.shortcuts import render
 
+from collections import OrderedDict
+
+from django.shortcuts import render
 from django.utils import timezone
 
 from haystack.query import SearchQuerySet
 from super_archives import queries
+from search.utils import trans
 
 
 def index(request):
@@ -12,10 +15,10 @@ def index(request):
     latest_threads = queries.get_latest_threads()
     hottest_threads = queries.get_hottest_threads()
 
-    count_types = {}
+    count_types = OrderedDict()
     six_months = timezone.now() - timezone.timedelta(days=180)
-    for type in ['wiki', 'thread', 'changeset', 'ticket']:
-        count_types[type] = SearchQuerySet().filter(
+    for type in ['thread', 'ticket', 'wiki', 'changeset']:
+        count_types[trans(type)] = SearchQuerySet().filter(
             type=type,
             modified__gte=six_months,
         ).count()

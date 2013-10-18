@@ -20,14 +20,11 @@
       data.addColumn('string', 'Topping');
       data.addColumn('number', 'Slices');
       data.addRows([
-      {% if type_count %}
-        ['{% trans "Emails"%}', {% firstof type_count.thread '0' %}],
-        ['{% trans "Tickets"%}', {% firstof type_count.ticket '0' %}],
-        ['{% trans "Wiki"%}', {% firstof type_count.wiki '0' %}],
-        ['{% trans "Code"%}', {% firstof type_count.changeset '0' %}],
-      {% else %}
-        ['{% trans "Willing to help" %}', 100],
-      {% endif %}
+        {% for key, value in chart_data.items %}
+          ['{{ key }}', {{ value }} ],
+        {% empty %}
+          ['{% trans "Willing to help" %}', 100],
+        {% endfor %}
       ]);
 
       // Set chart options
