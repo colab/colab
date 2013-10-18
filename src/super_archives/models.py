@@ -160,7 +160,8 @@ class Thread(models.Model):
 
     def get_related(self):
         query_string = u' '.join(self.tags.names())
-        query_set = SearchQuerySet().filter(content=query_string)
+        query_set = SearchQuerySet().filter(content=query_string,
+                                            type='thread')
         return query_set.exclude(django_id=self.pk)
 
     def save(self, *args, **kwargs):
