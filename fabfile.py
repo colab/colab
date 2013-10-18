@@ -90,6 +90,15 @@ def deploy(update=False):
     sudo('supervisorctl restart all')
 
 
+def rebuild_index(age=None):
+    with cd('~/colab/src/'), prefix(WORKON_COLAB):
+        age_arg = ''
+        if age:
+            age_arg = '--age={}'.format(age)
+
+        run('python manage.py rebuild_index {}'.format(age_arg))
+
+
 @with_settings(user='vagrant')
 def runserver(update_requirements=False):
     env_created = mkvirtualenv()
