@@ -8,9 +8,11 @@
   <hr>
   {% empty %}
     <h2>{% trans 'There is no RSS registered' %}</h2>
-    <h3>{% trans 'Please' %}
- href="{% url "feedzilla_submit_blog" %}">{% trans 'click here' %}</a>
+    <h3>
+      {% trans 'Please' %}
+      <a href="{% url "feedzilla_submit_blog" %}">{% trans 'click here' %}</a>
     {% trans 'to submit a blog' %}</h3>
+    </h3>
 {% endfor %}
 
 {% include "common/pagination.html" %}
