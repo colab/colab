@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import datetime
+
 from django.contrib import messages
 
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, UpdateView
+from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
+
+from haystack.query import SearchQuerySet
 
 from colab.deprecated import solrutils
 from colab.deprecated import signup as signup_
@@ -45,15 +50,32 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         user = self.object
         context = {}
 
-        # TODO: Use haystack instead of solrutils
-        context['type_count'] = solrutils.count_types(
-            filters={'collaborator': user.username}
+        count_types = {}
+        six_months = timezone.now() - datetime.timedelta(days=180)
+
+        fields_or_lookup = (
+            {'collaborators__contains': user.username},
+            {'description__contains': user.username},
+            {'author': user.username},
         )
 
-        # TODO: Use haystack instead of solrutils
-        context['docs'] = solrutils.get_latest_collaborations(
-            username=user.username
-        )
+
+        for type in ['wiki', 'thread', 'changeset', 'ticket']:
+            sqs = SearchQuerySet().filter(
+                type=type,
+                modified__gte=six_months,
+            )
+            for filter_or in fields_or_lookup:
+                sqs = sqs.filter_or(**filter_or)
+            count_types[type] = sqs.count()
+
+        context['type_count'] = count_types
+
+        sqs = SearchQuerySet().exclude(type='thread')
+        for filter_or in fields_or_lookup:
+            sqs = sqs.filter_or(**filter_or)
+
+        context['results'] = sqs.order_by('-modified', '-created')[:10]
 
         email_pks = [addr.pk for addr in user.emails.iterator()]
         query = Message.objects.filter(from_address__in=email_pks)

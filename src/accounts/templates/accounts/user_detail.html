@@ -98,8 +98,8 @@
       <div class="col-lg-6 col-md-6 col-sm-12">
         <h3>{% trans "Community inside participations" %}</h3>
         <ul class="message-list">
-        {% for doc in docs %}
-          {% include "message-preview.html" %}
+        {% for result in results %}
+          {% include "search/preview-search.html" %}
         {% empty %}
           <li>{% trans "No contributions of this user so far." %}</li>
         {% endfor %}
