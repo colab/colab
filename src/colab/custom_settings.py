@@ -80,7 +80,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'super_archives',
     'api',
     'rss',
-    'colab.deprecated',
     'planet',
     'accounts',
     'proxy',
