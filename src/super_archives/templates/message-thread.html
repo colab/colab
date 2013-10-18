@@ -208,7 +208,7 @@
     <h4><strong>{% trans "Tags:" %}</strong></h4>
     <div class="tag-cloud">
       {% for keyword in thread.keyword_set.all %}
-        <a class="tag size-{{ keyword.weight }}" href="#">{{ keyword|escape }}</a>
+        <a class="tag size-{{ keyword.weight }}" href="{% url 'haystack_search' %}?q={{ keyword }}">{{ keyword|escape }}</a>
       {% endfor %}
     </div>
     {% endif %}
