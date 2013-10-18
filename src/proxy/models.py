@@ -73,7 +73,7 @@ class Wiki(models.Model):
         db_table = 'wiki_view'
 
     def get_absolute_url(self):
-        return u'/ticket/{}'.format(self.name)
+        return u'/wiki/{}'.format(self.name)
 
     def get_author(self):
         try:
