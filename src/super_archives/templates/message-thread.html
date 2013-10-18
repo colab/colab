@@ -165,16 +165,14 @@
       </li>
     </ul>
 
-    {% if thread.tags.similar_objects %}
+    {% if thread.get_related %}
     <h4><strong>{% trans "Releated:" %}</strong></h4>
     <ul class="unstyled-list">
-      {% for similar in thread.tags.similar_objects|slice:":10" %}
-      {% with similar.message_set.first as message %}
+      {% for similar in thread.get_related|slice:":10" %}
       <li>
-        <span class="label label-primary label-small">{{ similar.mailinglist.name }}</span>
-        <a href="{% url 'thread_view' similar.mailinglist.name similar.subject_token %}">{{ message.subject_clean|truncatechars:50 }}</a>
+        <span class="label label-primary label-small">{{ similar.tag }}</span>
+        <a href="{{ similar.url }}">{{ similar.title|truncatechars:50 }}</a>
       </li>
-      {% endwith %}
       {% endfor %}
     </ul>
     {% endif %}

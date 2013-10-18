@@ -12,6 +12,7 @@ from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
 from html2text import html2text
+from haystack.query import SearchQuerySet
 from taggit.managers import TaggableManager
 
 from .utils import blocks
@@ -156,6 +157,10 @@ class Thread(models.Model):
             qs = Keyword.objects.filter(thread=self)
             qs = qs.exclude(keyword__in=zip(*tags)[0])
             qs.delete()
+
+    def get_related(self):
+        query_string = u' '.join(self.tags.names())
+        return SearchQuerySet().filter(text=query_string)
 
     def save(self, *args, **kwargs):
         super(Thread, self).save(*args, **kwargs)
