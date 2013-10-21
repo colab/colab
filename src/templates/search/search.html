@@ -32,18 +32,18 @@
           <input type="hidden" name="q" value="{{ request.GET.q }}" />
           <input type="hidden" name="type" value="{{ type_chosen }}" />
 
-          {% for field_lookup, field_display in filters.fields.items %}
+          {% for field_lookup, field_display, field_value in filters.fields %}
             <div class="form-group">
               <label for="{{ field_lookup }}">{{ field_display }}</label>
               {% ifequal field_lookup "list" %}
                 <select name="{{ field_lookup }}" class="form-control" multiple>
                   {% for value, option in form.fields.list.choices %}
-                    <option value="{{ value }}">{{ option }}</option>
+                    <option value="{{ value }}" {% if value in field_value %}selected{% endif %}>{{ option }}</option>
                   {% endfor %}
                 </select>
               {% else %}
               <div class="input-group">
-                <input type="text" class="form-control" placeholder="{{ field_display }}" name="{{ field_lookup }}" value="">
+                <input type="text" class="form-control" placeholder="{{ field_display }}" name="{{ field_lookup }}" {% if field_value %}value="{{ field_value }}"{% endif %}>
               </div>
               {% endifequal %}
             </div>
