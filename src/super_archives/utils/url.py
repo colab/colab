@@ -19,6 +19,7 @@ def pop_from_get(path, query=None, **kwargs):
         if query_dict[key] == value:
             del query_dict[key]
             continue
-    if not query_dict:
-        return u'{}?q='.format(path)
+        if value in query_dict[key]:
+            aux = query_dict[key].split(value)
+            query_dict[key] = u''.join(aux).strip()
     return u'{}?{}'.format(path, urllib.urlencode(query_dict))

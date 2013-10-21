@@ -27,9 +27,12 @@
       <h4>{% trans "Lists" %}</h4>
       <ul class="unstyled-list">
         {% for list in lists %}
-          <li {% if list.name == selected_list %} title="{% trans "Remove filter" %}" class="selected" {% endif %}>
-            <span class="glyphicon {% if list.name == selected_list %}glyphicon-remove{% else %}glyphicon-chevron-right{% endif %}"></span> <a href="{% ifnotequal list.name selected_list %} {% append_to_get list=list.name p=1 %} {% else %} {% append_to_get list="" p=1 %}
-            {% endifnotequal %}">{{ list.name }}</a></li>
+          {% with list.name|add:" "|add:selected_lists as list_name %}
+            <li {% if list.name in selected_lists %} title="{% trans "Remove filter" %}" class="selected" {% endif %}>
+              <span class="glyphicon {% if list.name in selected_lists %}glyphicon-remove{% else %}glyphicon-chevron-right{% endif %}"></span>
+              <a href="{% if not list.name in selected_lists %}{% append_to_get list=list_name p=1 %}{% else %}{% pop_from_get list=list.name %}{% endif %}">{{ list.name }}</a>
+            </li>
+          {% endwith %}
         {% endfor %}
       </ul>
     </div>

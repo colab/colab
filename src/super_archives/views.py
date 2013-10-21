@@ -60,8 +60,9 @@ def thread(request, mailinglist, thread_token):
 
 
 def list_messages(request):
-
-    selected_list = request.GET.get('list')
+    selected_lists = request.GET.get('list', [])
+    if selected_lists:
+        selected_lists = selected_lists.split()
 
     order_by = request.GET.get('order')
     if order_by == 'hottest':
@@ -69,9 +70,9 @@ def list_messages(request):
     else:
         threads = queries.get_latest_threads()
 
-    mail_list = request.GET.get('list')
+    mail_list = selected_lists
     if mail_list:
-        threads = threads.filter(mailinglist__name=mail_list)
+        threads = threads.filter(mailinglist__name__in=mail_list)
 
     paginator = Paginator(threads, 16)
     try:
@@ -86,7 +87,7 @@ def list_messages(request):
         'lists': lists,
         'n_results': paginator.count,
         'threads': threads,
-        'selected_list': selected_list,
+        'selected_lists': ' '.join(selected_lists) if selected_lists else '',
         'order_data': settings.ORDERING_DATA,
     }
     return render(request, 'message-list.html', template_data)
