@@ -17,6 +17,45 @@
     <div id="filters" class="hidden-xs hidden-sm col-md-2 col-lg-2">
       <h3>{% trans "Filters" %}</h3>
 
+      {% if filters %}
+        <ul class="unstyled-list">
+          <li class="selected" title="{% trans "Remove filter" %}">
+            <span class="glyphicon glyphicon-remove"></span>
+              <a href="{% pop_from_get type=type_chosen %}">
+                  <span class="glyphicon glyphicon-{{ filters.icon }}"></span>
+                  {{ filters.name }}
+              </a>
+          </li>
+        </ul>
+        <hr />
+        <form role="form">
+          <input type="hidden" name="q" value="{{ request.GET.q }}" />
+          <input type="hidden" name="type" value="{{ type_chosen }}" />
+
+          {% for field_lookup, field_display in filters.fields.items %}
+            <div class="form-group">
+              <label for="{{ field_lookup }}">{{ field_display }}</label>
+              {% ifequal field_lookup "list" %}
+                <select name="{{ field_lookup }}" class="form-control" multiple>
+                  {% for value, option in form.fields.list.choices %}
+                    <option value="{{ value }}">{{ option }}</option>
+                  {% endfor %}
+                </select>
+              {% else %}
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <input type="checkbox" name="{{ field_lookup }}_check">
+                </span>
+                <input type="text" class="form-control" placeholder="{{ field_display }}" name="{{ field_lookup }}" value="">
+              </div>
+              {% endifequal %}
+            </div>
+          {% endfor %}
+          <input type="submit" class="btn btn-default pull-right" value="{% trans 'Filter' %}" />
+        </form>
+      <br /><hr />
+      {% endif %}
+
       <h4>{% trans "Sort by" %}</h4>
       <ul class="unstyled-list">
         {% for option, dict_order in order_data.items %}
@@ -33,30 +72,32 @@
         {% endfor %}
       </ul>
 
-      <h4>{% trans "Types" %}</h4>
+      {% if not request.GET.type %}
+        <h4>{% trans "Types" %}</h4>
 
-      <ul class="unstyled-list">
-        <li>
-          <span class="glyphicon glyphicon-file"></span>
-          <a href="{% append_to_get type='wiki' %}">{% trans "Wiki" %}</a>
-        </li>
-        <li>
-          <span class="glyphicon glyphicon-envelope"></span>
-          <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
-        </li>
-        <li>
-          <span class="glyphicon glyphicon-tag"></span>
-          <a href="{% append_to_get type='ticket' %}">{% trans "Ticket" %}</a>
-        </li>
-        <li>
-          <span class="glyphicon glyphicon-align-right"></span>
-          <a href="{% append_to_get type='changeset' %}">{% trans "Changeset" %}</a>
-        </li>
-        <li>
-          <span class="glyphicon glyphicon-user"></span>
-          <a href="{% append_to_get type='user' %}">{% trans "User" %}</a>
-        </li>
-      </ul>
+        <ul class="unstyled-list">
+          <li>
+            <span class="glyphicon glyphicon-file"></span>
+            <a href="{% append_to_get type='wiki' %}">{% trans "Wiki" %}</a>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-envelope"></span>
+            <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-tag"></span>
+            <a href="{% append_to_get type='ticket' %}">{% trans "Ticket" %}</a>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-align-right"></span>
+            <a href="{% append_to_get type='changeset' %}">{% trans "Changeset" %}</a>
+          </li>
+          <li>
+            <span class="glyphicon glyphicon-user"></span>
+            <a href="{% append_to_get type='user' %}">{% trans "User" %}</a>
+          </li>
+        </ul>
+      {% endif %}
     </div>
   
     <div class="col-lg-10">

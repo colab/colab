@@ -1,58 +1,54 @@
 # -*- coding:utf-8 -*-
 
 from django.conf import settings
+from django.utils.translation import ugettext as _
+
 from haystack.views import SearchView
 
 
 class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
-        # Retornar todos os campos de cada tipo a serem filtrados
-        # retornar os nomes dos campos
-        # retornar os ícones dos tipos
-
-        # a critical point on the system
         types = {
             'wiki': {
                 'icon': 'file',
-                'fields': [
-                    'title', 'description', 'author', 'collaborators',
-                    'created', 'modified',
-                ],
+                'name': _(u'Wiki'),
+                'fields': {'author': _(u'Author')},
             },
-            'discussion': {
+            'thread': {
                 'icon': 'thread',
-                'fields': [
-                    'title', 'description', 'created', 'modified', 'author',
-                    'tag',
-                ],
+                'name': _(u'Discussion'),
+                'fields': {'author': _(u'Author'), 'list': _(u'Mailinglist')},
             },
             'ticket': {
                 'icon': 'ticket',
-                'fields': [
-                    'title', 'description', 'milestone', 'priority',
-                    'component', 'version', 'severity', 'reporter', 'author',
-                    'status', 'keywords', 'collaborators', 'created',
-                    'modified',
-                ],
+                'name': _(u'Ticket'),
+                'fields': {
+                    'milestone': _(u'Milestone'), 'priority': _(u'Priority'),
+                    'component': _(u'Component'), 'severity': _(u'Severity'),
+                    'reporter': _(u'Reporter'), 'author': _(u'Author'),
+                    'tag': _(u'Status'), 'keywords': _(u'Keywords'),
+                    'collaborators': _(u'Collaborators'),
+                },
             },
             'changeset': {
                 'icon': 'changeset',
-                'fields': [
-                    'title', 'author', 'description', 'repository_name',
-                    'created', 'modified',
-                ],
+                'name': _(u'Changeset'),
+                'fields': {'author': _(u'Author'), 'repository_name': _(u'Repository')},
             },
             'user': {
                 'icon': 'user',
-                'fields': [
-                    'title', 'description', 'username', 'name',
-                    'email', 'institution', 'role', 'google_talk', 'webpage',
-                ],
+                'name': _(u'User'),
+                'fields': {'username': _(u'Username'), 'name': _(u'Name'), 'institution': _(u'Institution'), 'role': _(u'Role')},
             },
         }
-        types = self.form.cleaned_data['type']
+
+        try:
+            type_chosen = self.form.cleaned_data.get('type')
+        except AttributeError:
+            type_chosen = ''
+
         return dict(
-            types=types.split(),
-            types_str=types,
+            filters=types.get(type_chosen),
+            type_chosen=type_chosen,
             order_data=settings.ORDERING_DATA
         )
