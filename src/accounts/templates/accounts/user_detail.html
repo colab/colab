@@ -9,7 +9,7 @@
 {% block main-content %}
 
   <div id="user-profile" class="row">
-    <div class="vcard col-lg-3 col-md-3 col-sm-4">
+    <div class="vcard col-lg-4 col-md-4 col-sm-4">
       <div class="thumbnail">
         {% gravatar user_.email 200 %}
       </div>
@@ -43,23 +43,26 @@
         </li>
         {% endif %}
       {% if request.user.is_active %}
+        <li>
         {% if user_.twitter %}
-        <li><span class="icon-twitter icon-fixed-width"></span> {{ user_.twitter }}</li>
+        <span class="icon-twitter icon-fixed-width"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
         {% endif %}
         {% if user_.facebook %}
-        <li><span class="icon-facebook icon-fixed-width"></span> {{ user_.facebook }}</li>
+        <span class="icon-facebook icon-fixed-width"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
         {% endif %}
+        </li>
+
         {% if user_.google_talk %}
         <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.google_talk }}</li>
         {% endif %}
         {% if user_.webpage %}
-        <li><span class="icon-link icon-fixed-width"></span> {{ user_.webpage }}</li>
+        <li><span class="icon-link icon-fixed-width"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
         {% endif %}
       {% endif %}
       </ul>
     </div>
 
-    <div class="col-lg-5 col-md-5 col-sm-8">
+    <div class="col-lg-4 col-md-4 col-sm-8">
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3 class="panel-title">{% trans "Contributions by Area" %}</h3>
