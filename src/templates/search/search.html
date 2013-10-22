@@ -3,12 +3,12 @@
 
 {% block main-content %}
   <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-12">
       <h2>{% trans "Search" %}</h2>
-    </div>
-    <span class="pull-right quiet">
+    <p class="text-right quiet">
       {{ page.paginator.count }} {% trans "documents found" %}
-    </span>
+    </p>
+    </div>
   </div>
 
   <hr/>
@@ -20,11 +20,9 @@
       {% if filters %}
         <ul class="unstyled-list">
           <li class="selected" title="{% trans "Remove filter" %}">
-            <span class="glyphicon glyphicon-remove"></span>
-              <a href="{% url 'haystack_search' %}?q={{ request.GET.q }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}">
-                  <span class="glyphicon glyphicon-{{ filters.icon }}"></span>
-                  {{ filters.name }}
-              </a>
+            <a href="{% url 'haystack_search' %}?q={{ request.GET.q }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}">
+              <span class="glyphicon glyphicon-remove"></span> {{ filters.name }}
+            </a>
           </li>
         </ul>
         <hr />

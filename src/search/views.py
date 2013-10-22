@@ -10,14 +10,17 @@ class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
         types = {
             'wiki': {
-                'icon': 'file',
                 'name': _(u'Wiki'),
                 'fields': (
                     ('author', _(u'Author'), self.request.GET.get('author')),
+                    (
+                        'collaborators',
+                        _(u'Collaborators'),
+                        self.request.GET.get('collaborators'),
+                    ),
                 ),
             },
             'thread': {
-                'icon': 'thread',
                 'name': _(u'Discussion'),
                 'fields': (
                     ('author', _(u'Author'), self.request.GET.get('author')),
@@ -29,7 +32,6 @@ class ColabSearchView(SearchView):
                 ),
             },
             'ticket': {
-                'icon': 'ticket',
                 'name': _(u'Ticket'),
                 'fields': (
                     (
@@ -72,7 +74,6 @@ class ColabSearchView(SearchView):
                 ),
             },
             'changeset': {
-                'icon': 'changeset',
                 'name': _(u'Changeset'),
                 'fields': (
                     ('author', _(u'Author'), self.request.GET.get('author')),
@@ -84,7 +85,6 @@ class ColabSearchView(SearchView):
                 )
             },
             'user': {
-                'icon': 'user',
                 'name': _(u'User'),
                 'fields': (
                     (
