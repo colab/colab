@@ -22,8 +22,7 @@
           <li class="selected" title="{% trans "Remove filter" %}">
             <span class="glyphicon glyphicon-remove"></span>
               <a href="{% url 'haystack_search' %}?q={{ request.GET.q }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}">
-                  <span class="glyphicon glyphicon-{{ filters.icon }}"></span>
-                  {{ filters.name }}
+                {{ filters.name }}
               </a>
           </li>
         </ul>
