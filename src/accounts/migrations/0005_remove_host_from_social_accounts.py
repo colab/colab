@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import datetime
+import urlparse
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
@@ -11,7 +12,13 @@ class Migration(DataMigration):
             if user.twitter:
                 user.twitter = user.twitter.split('/')[-1]
             if user.facebook:
-                user.facebook = user.facebook.split('/')[-1]
+                if '?' in user.facebook:
+                    query_string = user.facebook.split('?')[-1]
+                    query_dict = dict(urlparse.parse_qsl(query_string))
+                    user.facebook = query_dict.get('id')
+                else:
+                    user.facebook = user.facebook.split('/')[-1]
+
             user.save()
 
     def backwards(self, orm):
