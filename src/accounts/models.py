@@ -1,7 +1,8 @@
 
+import urlparse
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
 from django.core.urlresolvers import reverse
 
 
@@ -16,6 +17,12 @@ class User(AbstractUser):
 
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})
+
+    def twitter_link(self):
+        return urlparse.urljoin('https://twitter.com', self.twitter)
+
+    def facebook_link(self):
+        return urlparse.urljoin('https://www.facebook.com', self.facebook)
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).

@@ -5,9 +5,22 @@ from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
 from super_archives.models import MailingList
-
+from .utils.validators import validate_social_account
 
 User = get_user_model()
+
+
+class SocialAccountField(forms.Field):
+    def __init__(self, *args, **kwargs):
+        self.url = kwargs.pop('url', None)
+        super(SocialAccountField, self).__init__(*args, **kwargs)
+
+    def validate(self, value):
+        super(SocialAccountField, self).validate(value)
+
+        if value and not validate_social_account(value, self.url):
+            raise forms.ValidationError(_('Social account does not exist'),
+                                        code='social-account-doesnot-exist')
 
 
 class UserForm(forms.ModelForm):
@@ -34,11 +47,15 @@ class UserCreationForm(UserForm):
 
 
 class UserUpdateForm(UserForm):
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name',
                   'institution', 'role', 'twitter', 'facebook',
                   'google_talk', 'webpage')
+
+    twitter = SocialAccountField(url='https://twitter.com/', required=False)
+    facebook = SocialAccountField(url='https://graph.facebook.com/', required=False)
 
 
 class ListsForm(forms.Form):
