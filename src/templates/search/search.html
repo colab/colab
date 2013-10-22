@@ -3,12 +3,12 @@
 
 {% block main-content %}
   <div class="row">
-    <div class="col-lg-2">
+    <div class="col-lg-12">
       <h2>{% trans "Search" %}</h2>
-    </div>
-    <span class="pull-right quiet">
+    <p class="text-right quiet">
       {{ page.paginator.count }} {% trans "documents found" %}
-    </span>
+    </p>
+    </div>
   </div>
 
   <hr/>
