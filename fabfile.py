@@ -1,10 +1,9 @@
 
-
 from fabric.operations import put
 from fabric.api import run, sudo, env
 from fabric.contrib.files import exists
 from fabric.decorators import with_settings
-from fabric.context_managers import prefix, cd
+from fabric.context_managers import prefix, cd, settings
 
 env.user = 'colab' # key depends on env
 env.use_shell = False
@@ -97,6 +96,17 @@ def rebuild_index(age=None):
             age_arg = '--age={}'.format(age)
 
         run('python manage.py rebuild_index {}'.format(age_arg))
+
+
+@with_settings(user='vagrant')
+def build_solr_schema():
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        run('python manage.py build_solr_schema -f /tmp/schema.xml')
+
+    with settings(user='colab'):
+        run('cp /tmp/schema.xml ~/apache-solr-3.6.2/example/solr/conf/schema.xml')
+
+    sudo('supervisorctl restart solr')
 
 
 @with_settings(user='vagrant')
