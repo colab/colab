@@ -21,7 +21,7 @@
         <ul class="unstyled-list">
           <li class="selected" title="{% trans "Remove filter" %}">
             <span class="glyphicon glyphicon-remove"></span>
-              <a href="{% pop_from_get type=type_chosen %}">
+              <a href="{% url 'haystack_search' %}?q={{ request.GET.q }}">
                   <span class="glyphicon glyphicon-{{ filters.icon }}"></span>
                   {{ filters.name }}
               </a>
