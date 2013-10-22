@@ -30,6 +30,7 @@
         <hr />
         <form role="form">
           <input type="hidden" name="q" value="{{ request.GET.q }}" />
+          <input type="hidden" name="order" value="{{ request.GET.order }}" />
           <input type="hidden" name="type" value="{{ type_chosen }}" />
 
           {% for field_lookup, field_display, field_value in filters.fields %}
