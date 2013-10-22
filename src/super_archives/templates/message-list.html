@@ -28,10 +28,20 @@
       <ul class="unstyled-list">
         {% for list in lists %}
           {% with list.name|add:" "|add:selected_lists as list_name %}
-            <li {% if list.name in selected_lists %} title="{% trans "Remove filter" %}" class="selected" {% endif %}>
-              <span class="glyphicon {% if list.name in selected_lists %}glyphicon-remove{% else %}glyphicon-chevron-right{% endif %}"></span>
-              <a href="{% if not list.name in selected_lists %}{% append_to_get list=list_name p=1 %}{% else %}{% pop_from_get list=list.name %}{% endif %}">{{ list.name }}</a>
-            </li>
+            {% if list.name in selected_lists %}
+              <li title="{% trans "Remove filter" %}" class="selected">
+                <a href="{% pop_from_get list=list.name %}">
+                  <span class="glyphicon glyphicon-remove"></span> {{ list.name }}
+                </a>
+              </li>
+            {% else %}
+              <li>
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <a href="{% append_to_get list=list_name p=1 %}">
+                  {{ list.name }}
+                </a>
+              </li>
+            {% endif %}
           {% endwith %}
         {% endfor %}
       </ul>
