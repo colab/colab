@@ -45,7 +45,7 @@ class colab {
   }
 
   supervisor::app { 'colab':
-    command   => '/home/colab/.virtualenvs/colab/bin/gunicorn colab.wsgi:application --timeout=300 --worker-class=gevent --workers=5',
+    command   => '/home/colab/.virtualenvs/colab/bin/gunicorn colab.wsgi:application -c colab/gunicorn.conf.py',
     directory => '/home/colab/colab/src/',
     user      => 'colab',
   }
