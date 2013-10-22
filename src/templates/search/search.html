@@ -1,13 +1,29 @@
 {% extends "base.html" %}
 {% load i18n highlight superarchives %}
 
+{% block head_js %}
+<script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+<script type="text/javascript">
+  $(function () {
+    $('#datepicker_since, #datepicker_until').datetimepicker({
+      pickTime: false
+    });
+  });
+</script>
+{% endblock %}
+
+{% block head_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+{% endblock %}
+
 {% block main-content %}
   <div class="row">
     <div class="col-lg-12">
       <h2>{% trans "Search" %}</h2>
-    <p class="text-right quiet">
-      {{ page.paginator.count }} {% trans "documents found" %}
-    </p>
+      <p class="text-right quiet">
+        {{ page.paginator.count }} {% trans "documents found" %}
+      </p>
     </div>
   </div>
 
@@ -45,9 +61,11 @@
               {% endifequal %}
             </div>
           {% endfor %}
-          <button type="submit" class="btn btn-default pull-right"><span class="glyphicon glyphicon-filter"></span> {% trans 'Filter' %}</button>
+          <button type="submit" class="btn btn-default pull-right">
+            <span class="glyphicon glyphicon-filter"></span> {% trans 'Filter' %}
+          </button>
         </form>
-      <br /><hr />
+        <br /><br /><hr />
       {% endif %}
 
       <h4>{% trans "Sort by" %}</h4>
@@ -92,6 +110,35 @@
           </li>
         </ul>
       {% endif %}
+      <hr />
+      <form role="form">
+        {% for name, value in request.GET.items %}
+          {% if value and not name == "since" and not name == "until" %}
+            <input type="hidden" name="{{ name }}" value="{{ value }}" />
+          {% endif %}
+        {% endfor %}
+        <div class="form-group">
+          <label for="since">{% trans "Since" %}</label>
+            <div class="input-group date" id="datepicker_since">
+              <input type="text" class="form-control" placeholder="{% trans "Since" %}" name="since" value="{{ request.GET.since }}" data-format="MM/dd/yyyy" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="until">{% trans "Until" %}</label>
+            <div class="input-group date" id="datepicker_until">
+              <input type="text" class="form-control" placeholder="{% trans "Until" %}" name="until" value="{{ request.GET.until }}" data-format="MM/dd/yyyy" />
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+        </div>
+      <button type="submit" class="btn btn-default pull-right">
+        <span class="glyphicon glyphicon-filter"></span> {% trans "Filter" %}
+      </button>
+      </form>
     </div>
   
     <div class="col-lg-10">
