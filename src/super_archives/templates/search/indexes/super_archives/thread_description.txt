@@ -1,5 +1,3 @@
 {% for message in object.message_set.iterator %}
-  {% if not spam %}
-    {{ message.body }}
-  {% endif %}
+  {{ message.body }}
 {% endfor %}

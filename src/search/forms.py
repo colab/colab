@@ -63,7 +63,7 @@ class ColabSearchForm(SearchForm):
 
         if self.cleaned_data['author']:
             sqs = sqs.filter(
-                author_username__contains=self.cleaned_data['author']
+                author_and_username__contains=self.cleaned_data['author']
             )
 
         if self.cleaned_data['milestone']:

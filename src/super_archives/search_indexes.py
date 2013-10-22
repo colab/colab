@@ -7,25 +7,33 @@ from .models import Thread
 
 class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
     # common fields
-    text = indexes.CharField(document=True, use_template=True)
-    url = indexes.CharField(model_attr='get_absolute_url', null=True)
+    text = indexes.CharField(document=True, use_template=True, stored=False)
+    url = indexes.CharField(
+        model_attr='get_absolute_url',
+        null=True,
+        indexed=False
+    )
     title = indexes.CharField(model_attr='latest_message__subject_clean')
     description = indexes.CharField(use_template=True)
-    latest_description = indexes.CharField(model_attr='latest_message__body')
+    latest_description = indexes.CharField(
+        model_attr='latest_message__body',
+        indexed=False,
+    )
     created = indexes.DateTimeField()
     modified = indexes.DateTimeField(
         model_attr='latest_message__received_time'
     )
     author = indexes.CharField(null=True)
-    author_url = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True, indexed=False)
     type = indexes.CharField()
-    icon_name = indexes.CharField()
+    icon_name = indexes.CharField(indexed=False)
     tag = indexes.CharField(model_attr='mailinglist__name')
-    collaborators = indexes.CharField(use_template=True)
+    collaborators = indexes.CharField(use_template=True, stored=False)
 
-    author_username = indexes.CharField(null=True)
+    author_and_username = indexes.CharField(null=True, stored=False)
     mailinglist_url = indexes.CharField(
-        model_attr='mailinglist__get_absolute_url'
+        model_attr='mailinglist__get_absolute_url',
+        indexed=False,
     )
 
     def get_model(self):
@@ -37,7 +45,7 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare_author(self, obj):
         return obj.message_set.first().from_address.get_full_name()
 
-    def prepare_author_username(self, obj):
+    def prepare_author_and_username(self, obj):
         from_address = obj.message_set.first().from_address
         if not from_address.user:
             return from_address.get_full_name()
