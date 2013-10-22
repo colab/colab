@@ -1,58 +1,115 @@
 # -*- coding:utf-8 -*-
 
 from django.conf import settings
+from django.utils.translation import ugettext as _
+
 from haystack.views import SearchView
 
 
 class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
-        # Retornar todos os campos de cada tipo a serem filtrados
-        # retornar os nomes dos campos
-        # retornar os ícones dos tipos
-
-        # a critical point on the system
         types = {
             'wiki': {
                 'icon': 'file',
-                'fields': [
-                    'title', 'description', 'author', 'collaborators',
-                    'created', 'modified',
-                ],
+                'name': _(u'Wiki'),
+                'fields': (
+                    ('author', _(u'Author'), self.request.GET.get('author')),
+                ),
             },
-            'discussion': {
+            'thread': {
                 'icon': 'thread',
-                'fields': [
-                    'title', 'description', 'created', 'modified', 'author',
-                    'tag',
-                ],
+                'name': _(u'Discussion'),
+                'fields': (
+                    ('author', _(u'Author'), self.request.GET.get('author')),
+                    (
+                        'list',
+                        _(u'Mailinglist'),
+                        self.request.GET.getlist('list')
+                    ),
+                ),
             },
             'ticket': {
                 'icon': 'ticket',
-                'fields': [
-                    'title', 'description', 'milestone', 'priority',
-                    'component', 'version', 'severity', 'reporter', 'author',
-                    'status', 'keywords', 'collaborators', 'created',
-                    'modified',
-                ],
+                'name': _(u'Ticket'),
+                'fields': (
+                    (
+                        'milestone',
+                        _(u'Milestone'),
+                        self.request.GET.get('milestone')
+                    ),
+                    (
+                        'priority',
+                        _(u'Priority'),
+                        self.request.GET.get('priority')
+                    ),
+                    (
+                        'component',
+                        _(u'Component'),
+                        self.request.GET.get('component')
+                    ),
+                    (
+                        'severity',
+                        _(u'Severity'),
+                        self.request.GET.get('severity')
+                    ),
+                    (
+                        'reporter',
+                        _(u'Reporter'),
+                        self.request.GET.get('reporter')
+                    ),
+                    ('author', _(u'Author'), self.request.GET.get('author')),
+                    ('tag', _(u'Status'), self.request.GET.get('tag')),
+                    (
+                        'keywords',
+                        _(u'Keywords'),
+                        self.request.GET.get('keywords'),
+                    ),
+                    (
+                        'collaborators',
+                        _(u'Collaborators'),
+                        self.request.GET.get('collaborators')
+                    ),
+                ),
             },
             'changeset': {
                 'icon': 'changeset',
-                'fields': [
-                    'title', 'author', 'description', 'repository_name',
-                    'created', 'modified',
-                ],
+                'name': _(u'Changeset'),
+                'fields': (
+                    ('author', _(u'Author'), self.request.GET.get('author')),
+                    (
+                        'repository_name',
+                        _(u'Repository'),
+                        self.request.GET.get('repository_name'),
+                    ),
+                )
             },
             'user': {
                 'icon': 'user',
-                'fields': [
-                    'title', 'description', 'username', 'name',
-                    'email', 'institution', 'role', 'google_talk', 'webpage',
-                ],
+                'name': _(u'User'),
+                'fields': (
+                    (
+                        'username',
+                        _(u'Username'),
+                        self.request.GET.get('username'),
+                    ),
+                    ('name', _(u'Name'), self.request.GET.get('name')),
+                    (
+                        'institution',
+                        _(u'Institution'),
+                        self.request.GET.get('institution'),
+                    ),
+                    ('role', _(u'Role'), self.request.GET.get('role'))
+                ),
             },
         }
-        types = self.form.cleaned_data['type']
+
+        try:
+            type_chosen = self.form.cleaned_data.get('type')
+        except AttributeError:
+            type_chosen = ''
+
         return dict(
-            types=types.split(),
-            types_str=types,
+            filters=types.get(type_chosen),
+            type_chosen=type_chosen,
             order_data=settings.ORDERING_DATA
         )
