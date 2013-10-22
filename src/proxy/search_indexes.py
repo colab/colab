@@ -10,20 +10,24 @@ from .models import Ticket, Wiki, Revision
 
 class WikiIndex(indexes.SearchIndex, indexes.Indexable):
     # common fields
-    text = indexes.CharField(document=True, use_template=True)
-    url = indexes.CharField(model_attr='get_absolute_url')
+    text = indexes.CharField(document=True, use_template=True, stored=False)
+    url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
     title = indexes.CharField(model_attr='name')
     description = indexes.CharField(null=True)
     author = indexes.CharField(null=True)
-    author_url = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True, indexed=False)
     created = indexes.DateTimeField(model_attr='created', null=True)
     modified = indexes.DateTimeField(model_attr='modified', null=True)
     type = indexes.CharField()
-    icon_name = indexes.CharField()
-    author_username = indexes.CharField(null=True)
+    icon_name = indexes.CharField(indexed=False)
+    author_and_username = indexes.CharField(null=True, stored=False)
 
     # trac extra fields
-    collaborators = indexes.CharField(model_attr='collaborators', null=True)
+    collaborators = indexes.CharField(
+        model_attr='collaborators',
+        null=True,
+        stored=False,
+    )
 
     def get_model(self):
         return Wiki
@@ -37,7 +41,7 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
             return author.get_full_name()
         return obj.author
 
-    def prepare_author_username(self, obj):
+    def prepare_author_and_username(self, obj):
         author = obj.get_author()
         if not author:
             return obj.author
@@ -64,18 +68,18 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
 
 class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     # common fields
-    text = indexes.CharField(document=True, use_template=True)
-    url = indexes.CharField(model_attr='get_absolute_url')
+    text = indexes.CharField(document=True, use_template=True, stored=False)
+    url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
     title = indexes.CharField()
     description = indexes.CharField(null=True)
     author = indexes.CharField(null=True)
-    author_url = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True, indexed=False)
     created = indexes.DateTimeField(model_attr='created', null=True)
     modified = indexes.DateTimeField(model_attr='modified', null=True)
     type = indexes.CharField()
-    icon_name = indexes.CharField()
+    icon_name = indexes.CharField(indexed=False)
     tag = indexes.CharField(model_attr='status', null=True)
-    author_username = indexes.CharField(null=True)
+    author_and_username = indexes.CharField(null=True, stored=False)
 
     # trac extra fields
     milestone = indexes.CharField(model_attr='milestone', null=True)
@@ -83,7 +87,11 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     severity = indexes.CharField(model_attr='severity', null=True)
     reporter = indexes.CharField(model_attr='reporter', null=True)
     keywords = indexes.CharField(model_attr='keywords', null=True)
-    collaborators = indexes.CharField(model_attr='collaborators', null=True)
+    collaborators = indexes.CharField(
+        model_attr='collaborators',
+        null=True,
+        stored=False,
+    )
 
     def get_model(self):
         return Ticket
@@ -97,7 +105,7 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
             return author.get_full_name()
         return obj.author
 
-    def prepare_author_username(self, obj):
+    def prepare_author_and_username(self, obj):
         author = obj.get_author()
         if not author:
             return obj.author
@@ -130,21 +138,23 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
 
 class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
     # common fields
-    text = indexes.CharField(document=True, use_template=True)
-    url = indexes.CharField(model_attr='get_absolute_url')
+    text = indexes.CharField(document=True, use_template=True, stored=False)
+    url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
     title = indexes.CharField()
     description = indexes.CharField(model_attr='message', null=True)
     author = indexes.CharField(null=True)
-    author_url = indexes.CharField(null=True)
+    author_url = indexes.CharField(null=True, indexed=False)
     created = indexes.DateTimeField(model_attr='created', null=True)
     modified = indexes.DateTimeField(model_attr='created', null=True)
     type = indexes.CharField()
-    icon_name = indexes.CharField()
-    author_username = indexes.CharField(null=True)
+    icon_name = indexes.CharField(indexed=False)
+    author_and_username = indexes.CharField(null=True, stored=False)
 
     # trac extra fields
-    repository_name = indexes.CharField(model_attr='repository_name')
-    revision = indexes.CharField(model_attr='rev')
+    repository_name = indexes.CharField(
+        model_attr='repository_name',
+        stored=False
+    )
 
     def get_model(self):
         return Revision
@@ -158,7 +168,7 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
             return author.get_full_name()
         return obj.author
 
-    def prepare_author_username(self, obj):
+    def prepare_author_and_username(self, obj):
         author = obj.get_author()
         if not author:
             return obj.author
