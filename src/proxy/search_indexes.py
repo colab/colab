@@ -20,6 +20,7 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
     modified = indexes.DateTimeField(model_attr='modified', null=True)
     type = indexes.CharField()
     icon_name = indexes.CharField()
+    author_username = indexes.CharField(null=True)
 
     # trac extra fields
     collaborators = indexes.CharField(model_attr='collaborators', null=True)
@@ -35,6 +36,15 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
         if author:
             return author.get_full_name()
         return obj.author
+
+    def prepare_author_username(self, obj):
+        author = obj.get_author()
+        if not author:
+            return obj.author
+        return u'{}\n{}'.format(
+            author.get_full_name(),
+            author.username,
+        )
 
     def prepare_author_url(self, obj):
         author = obj.get_author()
@@ -65,6 +75,7 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     type = indexes.CharField()
     icon_name = indexes.CharField()
     tag = indexes.CharField(model_attr='status', null=True)
+    author_username = indexes.CharField(null=True)
 
     # trac extra fields
     milestone = indexes.CharField(model_attr='milestone', null=True)
@@ -85,6 +96,15 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
         if author:
             return author.get_full_name()
         return obj.author
+
+    def prepare_author_username(self, obj):
+        author = obj.get_author()
+        if not author:
+            return obj.author
+        return u'{}\n{}'.format(
+            author.get_full_name(),
+            author.username,
+        )
 
     def prepare_author_url(self, obj):
         author = obj.get_author()
@@ -120,6 +140,7 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
     modified = indexes.DateTimeField(model_attr='created', null=True)
     type = indexes.CharField()
     icon_name = indexes.CharField()
+    author_username = indexes.CharField(null=True)
 
     # trac extra fields
     repository_name = indexes.CharField(model_attr='repository_name')
@@ -136,6 +157,15 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
         if author:
             return author.get_full_name()
         return obj.author
+
+    def prepare_author_username(self, obj):
+        author = obj.get_author()
+        if not author:
+            return obj.author
+        return u'{}\n{}'.format(
+            author.get_full_name(),
+            author.username,
+        )
 
     def prepare_author_url(self, obj):
         author = obj.get_author()

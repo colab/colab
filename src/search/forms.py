@@ -62,7 +62,9 @@ class ColabSearchForm(SearchForm):
                         sqs = sqs.order_by(*dict_order['fields'])
 
         if self.cleaned_data['author']:
-            sqs = sqs.filter(author=self.cleaned_data['author'])
+            sqs = sqs.filter(
+                author_username__contains=self.cleaned_data['author']
+            )
 
         if self.cleaned_data['milestone']:
             sqs = sqs.filter(milestone=self.cleaned_data['milestone'])
