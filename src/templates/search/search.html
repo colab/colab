@@ -3,11 +3,15 @@
 
 {% block head_js %}
 <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+{% if LANGUAGE_CODE == "pt-br" %}
+  <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js"></script>
+{% endif %}
 
 <script type="text/javascript">
   $(function () {
     $('#datepicker_since, #datepicker_until').datetimepicker({
-      pickTime: false
+      pickTime: false,
+      {% if LANGUAGE_CODE == "pt-br" %}language: 'pt-BR'{% endif %}
     });
   });
 </script>
@@ -120,7 +124,7 @@
         <div class="form-group">
           <label for="since">{% trans "Since" %}</label>
             <div class="input-group date" id="datepicker_since">
-              <input type="text" class="form-control" placeholder="{% trans "Since" %}" name="since" value="{{ request.GET.since }}" />
+              <input type="text" class="form-control" placeholder="{% trans "Since" %}" name="since" value="{{ request.GET.since }}" {% if LANGUAGE_CODE == 'pt-br' %}data-format="dd/MM/yyyy"{% endif %} />
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -129,7 +133,7 @@
         <div class="form-group">
           <label for="until">{% trans "Until" %}</label>
             <div class="input-group date" id="datepicker_until">
-              <input type="text" class="form-control" placeholder="{% trans "Until" %}" name="until" value="{{ request.GET.until }}" />
+              <input type="text" class="form-control" placeholder="{% trans "Until" %}" name="until" value="{{ request.GET.until }}" {% if LANGUAGE_CODE == 'pt-br' %}data-format="dd/MM/yyyy"{% endif %} />
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
