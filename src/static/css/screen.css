@@ -247,6 +247,21 @@ ul.unstyled-list .glyphicon-chevron-right {
     font-weight: bold;
 }
 
+.toggle-reply {
+    height: 10px;
+    line-height: 3px;
+    padding: 0px 5px 14px;
+    vertical-align: middle;
+    font-size: 20px;
+    background-color: #bbb;
+    border-color: #aaa;
+}
+
+.toggle-reply:hover,
+.toggle-reply:focus {
+    background-color: #aaa;
+    border-color: #999;
+
 /* Converse JS */
 
 #chatpanel form#converse-login {
