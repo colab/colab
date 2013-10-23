@@ -98,15 +98,10 @@ class ColabSearchForm(SearchForm):
         if self.cleaned_data['list']:
             sqs = sqs.filter(tag__in=self.cleaned_data['list'])
 
-        since = self.cleaned_data['since']
-        until = self.cleaned_data['until']
-
-        if since and until:
-            sqs = sqs.filter(modified__gte=since, modified__lte=until)
-        elif since and not until:
-            sqs = sqs.filter(modified__gte=since)
-        elif until and not since:
-            sqs = sqs.filter(modified__lte=until)
+        if self.cleaned_data['since']:
+            sqs = sqs.filter(modified__gte=self.cleaned_data['since'])
+        if self.cleaned_data['until']:
+            sqs = sqs.filter(modified__lte=self.cleaned_data['until'])
 
         if self.load_all:
             sqs = sqs.load_all()
