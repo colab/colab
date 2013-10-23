@@ -13,6 +13,11 @@ LANGUAGES = (
     ('pt-br', gettext('Portuguese')),
 )
 
+DJANGO_DATE_FORMAT_TO_JS = {
+    'pt-br': ('pt-BR', 'dd/MM/yyyy'),
+    'en': ('en', 'MM/dd/yyyy'),
+}
+
 LANGUAGE_CODE = 'pt-br'
 
 # ORDERING_DATA receives the options to order for as it's keys and a dict as
