@@ -36,7 +36,7 @@
       {% if filters %}
         <ul class="unstyled-list">
           <li class="selected" title="{% trans "Remove filter" %}">
-            <a href="{% url 'haystack_search' %}?q={{ request.GET.q }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}">
+            <a href="{% url 'haystack_search' %}?q={{ request.GET.q }}{% if request.GET.order %}&order={{ request.GET.order }}{% endif %}{% if request.GET.since %}&since={{ request.GET.since }}{% endif %}{% if request.GET.until %}&until={{ request.GET.until }}{% endif %}">
               <span class="glyphicon glyphicon-remove"></span> {{ filters.name }}
             </a>
           </li>
