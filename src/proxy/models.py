@@ -7,7 +7,8 @@ from hitcount.models import HitCountModelMixin
 
 
 class Revision(models.Model, HitCountModelMixin):
-    rev = models.TextField(blank=True, primary_key=True)
+    key = models.TextField(blank=True, primary_key=True)
+    rev = models.TextField(blank=True)
     author = models.TextField(blank=True)
     message = models.TextField(blank=True)
     repository_name = models.TextField(blank=True)
