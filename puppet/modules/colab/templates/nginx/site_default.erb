@@ -4,9 +4,15 @@ upstream django {
 
 server {
     listen 80 default_server;
+    server_name _;
+    return 444;
+}
+
+server {
+    listen 80 default_server;
 
     root /;
-    server_name localhost colab.interlegis.leg.br colab.interlegis.gov.br;
+    server_name colab.interlegis.leg.br colab.interlegis.gov.br colab-demo.tracy.com.br;
     
     location @django {
         proxy_hide_header Vary;
