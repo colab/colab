@@ -1,8 +1,11 @@
 from django.shortcuts import render
 
 class HitCountViewMixin(object):
-    def get_object(self):
-        raise NotImplementedError
+    def get_object(self, *args, **kwargs):
+        try:
+            super(HitCountViewMixin, self).get_object(*args, **kwargs)
+        except AttributeError:
+            raise NotImplementedError
 
     def dispatch(self, request, *args, **kwargs):
         response = super(HitCountViewMixin, self).dispatch(request,
