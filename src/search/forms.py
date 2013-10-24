@@ -37,6 +37,8 @@ class ColabSearchForm(SearchForm):
     name = forms.CharField(required=False, label=_(u'Name'))
     institution = forms.CharField(required=False, label=_(u'Institution'))
     role = forms.CharField(required=False, label=_(u'Role'))
+    since = forms.DateField(required=False, label=_(u'Since'))
+    until = forms.DateField(required=False, label=_(u'Until'))
 
     def search(self):
         if not self.is_valid():
@@ -95,6 +97,11 @@ class ColabSearchForm(SearchForm):
 
         if self.cleaned_data['list']:
             sqs = sqs.filter(tag__in=self.cleaned_data['list'])
+
+        if self.cleaned_data['since']:
+            sqs = sqs.filter(modified__gte=self.cleaned_data['since'])
+        if self.cleaned_data['until']:
+            sqs = sqs.filter(modified__lte=self.cleaned_data['until'])
 
         if self.load_all:
             sqs = sqs.load_all()

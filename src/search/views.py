@@ -8,6 +8,11 @@ from haystack.views import SearchView
 
 class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
+
+        use_language, date_format = settings.DJANGO_DATE_FORMAT_TO_JS.get(
+            self.request.LANGUAGE_CODE, (None, None)
+        )
+
         types = {
             'wiki': {
                 'name': _(u'Wiki'),
@@ -111,5 +116,7 @@ class ColabSearchView(SearchView):
         return dict(
             filters=types.get(type_chosen),
             type_chosen=type_chosen,
-            order_data=settings.ORDERING_DATA
+            order_data=settings.ORDERING_DATA,
+            date_format=date_format,
+            use_language=use_language,
         )
