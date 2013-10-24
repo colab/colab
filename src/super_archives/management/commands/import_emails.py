@@ -13,8 +13,10 @@ from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.core.management.base import BaseCommand, CommandError
 
-from super_archives.models import MailingList, Message, Thread, EmailAddress
-from super_archives.management.commands.message import Message as CustomMessage
+from colab.super_archives.models import MailingList, Message, \
+                                        Thread, EmailAddress
+from colab.super_archives.management.commands.message import Message as \
+                                                             CustomMessage
 
 
 class Command(BaseCommand, object):
@@ -149,6 +151,10 @@ class Command(BaseCommand, object):
     def save_email(self, list_name, email_msg, index):
         """Save email message into the database."""
 
+        msg_id = email_msg.get('Message-ID')
+        if not msg_id:
+            return
+
         # Update last imported message into the DB
         mailinglist, created = MailingList.objects.get_or_create(name=list_name)
         mailinglist.last_imported_index = index
@@ -162,7 +168,7 @@ class Command(BaseCommand, object):
             # If the message is already at the database don't do anything
             try:
                 messages = Message.objects.get(
-                    message_id=email_msg.get('Message-ID'),
+                    message_id=msg_id,
                     thread__mailinglist=mailinglist
                 )
 
@@ -172,6 +178,9 @@ class Command(BaseCommand, object):
         mailinglist.save()
 
     def create_email(self, mailinglist, email_msg):
+        received_time = email_msg.get_received_datetime()
+        if not received_time:
+            return
 
         real_name, from_ = email_msg.get_from_addr()
 

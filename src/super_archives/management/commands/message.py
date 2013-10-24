@@ -13,35 +13,35 @@ import chardet
 def get_charset(message, default='ASCII'):
     """Get the message charset"""
 
-    charset = message.get_content_charset() 
-    
+    charset = message.get_content_charset()
+
     if not charset:
         charset = message.get_charset()
-    
+
     if not charset:
         charset = default
-        
+
     try:
         codecs.lookup(charset)
     except LookupError:
         charset = default
-        
+
     return charset
-    
+
 
 class Message(mailbox.mboxMessage):
-    
+
     RECEIVED_DELIMITER = re.compile('\n|;')
-    
+
     def get_subject(self):
         subject = email.header.decode_header(self['Subject'])
-                
+
         if isinstance(subject, list):
             new_subject = u''
             for text_part, encoding in subject:
                 if not encoding:
                     encoding = get_charset(self)
-                
+
                 try:
                     new_subject += unicode(text_part, encoding)
                 except (UnicodeDecodeError, LookupError):
@@ -50,7 +50,7 @@ class Message(mailbox.mboxMessage):
                     except (UnicodeDecodeError, LookupError):
                         encoding = chardet.detect(text_part)['encoding']
                         new_subject += unicode(text_part, encoding)
-        
+
         return ''.join(new_subject)
 
     def get_body(self):
@@ -77,25 +77,27 @@ class Message(mailbox.mboxMessage):
                            get_charset(self),
                            "replace")
             return body.strip()
-        
+
     def get_received_datetime(self):
+        if not self.has_key('Received'):
+            return None
         # The time received should always be the last element
-        #   in the `Received` attribute from the message headers   
+        #   in the `Received` attribute from the message headers
         received_header = self.RECEIVED_DELIMITER.split(self['Received'])
         received_time_header = received_header[-1].strip()
-        
+
         date_tuple = email.utils.parsedate_tz(received_time_header)
         utc_timestamp = email.utils.mktime_tz(date_tuple)
         utc_datetime = datetime.datetime.fromtimestamp(utc_timestamp,
                                                        pytz.utc)
 
         return utc_datetime
-        
+
     def get_from_addr(self):
         real_name_raw, from_ = email.utils.parseaddr(self['From'])
         real_name_str, encoding = email.header.decode_header(real_name_raw)[0]
         if not encoding:
             encoding = 'ascii'
-        
+
         real_name = unicode(real_name_str, encoding, errors='replace')
         return real_name, from_
