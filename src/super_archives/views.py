@@ -16,12 +16,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from . import queries
-from .decorators import count_hit
 from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
 
 
-@count_hit
 def thread(request, mailinglist, thread_token):
 
     try:
@@ -29,6 +27,12 @@ def thread(request, mailinglist, thread_token):
                                                             thread_token)
     except ObjectDoesNotExist:
         raise http.Http404
+
+    thread = Thread.objects.get(subject_token=thread_token,
+                                mailinglist__name=mailinglist)
+
+    thread.hit()
+
     order_by = request.GET.get('order')
     if order_by == 'voted':
         msgs_query = queries.get_messages_by_voted()
@@ -44,8 +48,6 @@ def thread(request, mailinglist, thread_token):
         total_votes += email.votes_count()
 
     # Update relevance score
-    thread = Thread.objects.get(subject_token=thread_token,
-                                mailinglist__name=mailinglist)
     thread.update_score()
 
     context = {

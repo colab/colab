@@ -24,7 +24,7 @@ tornado
 
 # Deps for Single SignOn (SSO)
 django-browserid
-git+https://github.com/TracyWebTech/django-revproxy/
+django-revproxy
 
 # Converse.js (XMPP client)
 django-conversejs==0.2.8

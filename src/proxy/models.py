@@ -3,13 +3,10 @@
 from django.db import models
 
 from accounts.models import User
+from hitcount.models import HitCountModelMixin
 
 
-# get_absolute_url em todos
-# get_author_url em todos
-
-
-class Revision(models.Model):
+class Revision(models.Model, HitCountModelMixin):
     rev = models.TextField(blank=True, primary_key=True)
     author = models.TextField(blank=True)
     message = models.TextField(blank=True)
@@ -29,7 +26,7 @@ class Revision(models.Model):
         except User.DoesNotExist:
             return None
 
-class Ticket(models.Model):
+class Ticket(models.Model, HitCountModelMixin):
     id = models.IntegerField(primary_key=True)
     summary = models.TextField(blank=True)
     description = models.TextField(blank=True)
@@ -60,7 +57,7 @@ class Ticket(models.Model):
             return None
 
 
-class Wiki(models.Model):
+class Wiki(models.Model, HitCountModelMixin):
     name = models.TextField(primary_key=True)
     wiki_text = models.TextField(blank=True)
     author = models.TextField(blank=True)
