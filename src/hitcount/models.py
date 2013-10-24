@@ -45,7 +45,11 @@ class HitCountModelMixin(object):
             cache.set(cache_key, True)
 
         # Everything ok, so just increment the page count
-        hit_ = Hit.objects.get_or_create(content_type=content_type,
-                                         object_pk=self.pk)[0]
-        hit_.hits += 1
-        hit_.save()
+        hit_pk = Hit.objects.get_or_create(content_type=content_type,
+                                           object_pk=self.pk)[0].pk
+
+        # Using this way instead of hits += 1 forces django to
+        #   call the UPDATE directly in the database avoiding
+        #   cuncurrency problems
+        Hit.objects.filter(pk=hit_pk).update(hits=models.F("hits") + 1)
+
