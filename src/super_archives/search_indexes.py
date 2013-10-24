@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import math
+
 from haystack import indexes
 
+from search.base_indexes import BaseIndex
 from .models import Thread
 
 
-class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
-    # common fields
-    text = indexes.CharField(document=True, use_template=True, stored=False)
-    url = indexes.CharField(
-        model_attr='get_absolute_url',
-        null=True,
-        indexed=False
-    )
+class ThreadIndex(BaseIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='latest_message__subject_clean')
     description = indexes.CharField(use_template=True)
     latest_description = indexes.CharField(
@@ -23,28 +19,18 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
     modified = indexes.DateTimeField(
         model_attr='latest_message__received_time'
     )
-    author = indexes.CharField(null=True)
-    author_url = indexes.CharField(null=True, indexed=False)
-    type = indexes.CharField()
-    icon_name = indexes.CharField(indexed=False)
     tag = indexes.CharField(model_attr='mailinglist__name')
     collaborators = indexes.CharField(use_template=True, stored=False)
-
-    author_and_username = indexes.CharField(null=True, stored=False)
     mailinglist_url = indexes.CharField(
         model_attr='mailinglist__get_absolute_url',
         indexed=False,
     )
-    hits = indexes.IntegerField()
 
     def get_model(self):
         return Thread
 
     def get_updated_field(self):
         return 'latest_message__received_time'
-
-    def prepare_hits(self, obj):
-        return obj.hits
 
     def prepare_author(self, obj):
         return obj.message_set.first().from_address.get_full_name()

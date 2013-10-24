@@ -6,6 +6,7 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
+from haystack.inputs import AltParser
 
 from accounts.models import User
 from super_archives.models import Message, MailingList
@@ -49,8 +50,15 @@ class ColabSearchForm(SearchForm):
                 'NFKD', unicode(self.cleaned_data.get('q'))
             ).encode('ascii', 'ignore')
             sqs = self.searchqueryset.auto_query(q)
+            sqs = sqs.filter(content=AltParser(
+                'dismax',
+                q,
+                pf='title^2.1 author^1.9 description^1.7',
+                mm='2<70%'
+            ))
         else:
             sqs = self.searchqueryset.all()
+
 
         if self.cleaned_data['type']:
             "It will consider other types with a whitespace"
