@@ -261,6 +261,7 @@ ul.unstyled-list .glyphicon-chevron-right {
 .toggle-reply:focus {
     background-color: #aaa;
     border-color: #999;
+}
 
 /* Converse JS */
 
