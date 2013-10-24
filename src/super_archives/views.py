@@ -30,8 +30,7 @@ def thread(request, mailinglist, thread_token):
 
     thread = Thread.objects.get(subject_token=thread_token,
                                 mailinglist__name=mailinglist)
-
-    thread.hit()
+    thread.hit(request)
 
     order_by = request.GET.get('order')
     if order_by == 'voted':
