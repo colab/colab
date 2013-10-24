@@ -40,10 +40,10 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare(self, obj):
         data = super(WikiIndex, self).prepare(obj)
-        if obj.hits in [0, 1]:
+        if obj.hits <= 10:
             data['boost'] = 1
         else:
-            data['boost'] = math.log(obj.hits, 2)
+            data['boost'] = math.log(obj.hits)
         return data
 
     def prepare_hits(self, obj):
@@ -116,10 +116,10 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare(self, obj):
         data = super(TicketIndex, self).prepare(obj)
-        if obj.hits in [0, 1]:
+        if obj.hits <= 10:
             data['boost'] = 1
         else:
-            data['boost'] = math.log(obj.hits, 2)
+            data['boost'] = math.log(obj.hits)
         return data
 
     def prepare_hits(self, obj):
@@ -191,10 +191,10 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare(self, obj):
         data = super(RevisionIndex, self).prepare(obj)
-        if obj.hits in [0, 1]:
-            data['boost'] = 1
+        if obj.hits <= 10:
+            data['boost'] = 0.8
         else:
-            data['boost'] = math.log(obj.hits, 2)
+            data['boost'] = math.log(obj.hits) * 0.8
         return data
 
     def prepare_hits(self, obj):
