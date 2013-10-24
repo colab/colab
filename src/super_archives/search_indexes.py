@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import math
+
 from haystack import indexes
 
 from .models import Thread
@@ -42,6 +44,14 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'latest_message__received_time'
+
+    def prepare(self, obj):
+        data = super(ThreadIndex, self).prepare(obj)
+        if obj.hits in [0, 1]:
+            data['boost'] = 1
+        else:
+            data['boost'] = math.log(obj.hits, 2)
+        return data
 
     def prepare_hits(self, obj):
         return obj.hits

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import math
+
 from datetime import datetime
 
 from django.db.models import Q
@@ -35,6 +37,14 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'modified'
+
+    def prepare(self, obj):
+        data = super(WikiIndex, self).prepare(obj)
+        if obj.hits in [0, 1]:
+            data['boost'] = 1
+        else:
+            data['boost'] = math.log(obj.hits, 2)
+        return data
 
     def prepare_hits(self, obj):
         return obj.hits
@@ -104,6 +114,14 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     def get_updated_field(self):
         return 'modified'
 
+    def prepare(self, obj):
+        data = super(TicketIndex, self).prepare(obj)
+        if obj.hits in [0, 1]:
+            data['boost'] = 1
+        else:
+            data['boost'] = math.log(obj.hits, 2)
+        return data
+
     def prepare_hits(self, obj):
         return obj.hits
 
@@ -170,6 +188,14 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'created'
+
+    def prepare(self, obj):
+        data = super(RevisionIndex, self).prepare(obj)
+        if obj.hits in [0, 1]:
+            data['boost'] = 1
+        else:
+            data['boost'] = math.log(obj.hits, 2)
+        return data
 
     def prepare_hits(self, obj):
         return obj.hits
