@@ -3,14 +3,18 @@
 
 {% block head_js %}
 <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js"></script>
+{% if use_language %}
+  <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js"></script>
+{% endif %}
 
 <script type="text/javascript">
   $(function () {
     $('#datepicker_since, #datepicker_until').datetimepicker({
       pickTime: false,
-      language: '{{ use_language }}',
-      format: '{{ date_format }}',
+      {% if use_language and date_format %}
+        language: '{{ use_language }}',
+        format: '{{ date_format }}',
+      {% endif %}
     });
   });
 </script>

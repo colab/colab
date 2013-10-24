@@ -15,7 +15,7 @@ LANGUAGES = (
 
 DJANGO_DATE_FORMAT_TO_JS = {
     'pt-br': ('pt-BR', 'dd/MM/yyyy'),
-    'en': ('en', 'MM/dd/yyyy'),
+    'es': ('es', 'dd/MM/yyyy'),
 }
 
 LANGUAGE_CODE = 'pt-br'

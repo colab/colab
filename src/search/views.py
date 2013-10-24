@@ -10,7 +10,7 @@ class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
 
         use_language, date_format = settings.DJANGO_DATE_FORMAT_TO_JS.get(
-            self.request.LANGUAGE_CODE
+            self.request.LANGUAGE_CODE, (None, None)
         )
 
         types = {
