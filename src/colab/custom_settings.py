@@ -160,7 +160,7 @@ LOGGING = {
             'propagate': False,
         },
         'django_browserid': {
-            'handlers': ['sentry', 'console'],
+            'handlers': ['sentry'],
             'level': 'DEBUG',
         },
         'conversejs': {
