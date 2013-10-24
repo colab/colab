@@ -21,6 +21,7 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
     type = indexes.CharField()
     icon_name = indexes.CharField(indexed=False)
     author_and_username = indexes.CharField(null=True, stored=False)
+    hits = indexes.IntegerField()
 
     # trac extra fields
     collaborators = indexes.CharField(
@@ -34,6 +35,9 @@ class WikiIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'modified'
+
+    def prepare_hits(self, obj):
+        return obj.hits
 
     def prepare_author(self, obj):
         author = obj.get_author()
@@ -80,6 +84,7 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
     icon_name = indexes.CharField(indexed=False)
     tag = indexes.CharField(model_attr='status', null=True)
     author_and_username = indexes.CharField(null=True, stored=False)
+    hits = indexes.IntegerField()
 
     # trac extra fields
     milestone = indexes.CharField(model_attr='milestone', null=True)
@@ -98,6 +103,9 @@ class TicketIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'modified'
+
+    def prepare_hits(self, obj):
+        return obj.hits
 
     def prepare_author(self, obj):
         author = obj.get_author()
@@ -149,6 +157,7 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
     type = indexes.CharField()
     icon_name = indexes.CharField(indexed=False)
     author_and_username = indexes.CharField(null=True, stored=False)
+    hits = indexes.IntegerField()
 
     # trac extra fields
     repository_name = indexes.CharField(
@@ -161,6 +170,9 @@ class RevisionIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_updated_field(self):
         return 'created'
+
+    def prepare_hits(self, obj):
+        return obj.hits
 
     def prepare_author(self, obj):
         author = obj.get_author()

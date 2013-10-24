@@ -35,12 +35,16 @@ class ThreadIndex(indexes.SearchIndex, indexes.Indexable):
         model_attr='mailinglist__get_absolute_url',
         indexed=False,
     )
+    hits = indexes.IntegerField()
 
     def get_model(self):
         return Thread
 
     def get_updated_field(self):
         return 'latest_message__received_time'
+
+    def prepare_hits(self, obj):
+        return obj.hits
 
     def prepare_author(self, obj):
         return obj.message_set.first().from_address.get_full_name()
