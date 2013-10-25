@@ -16,10 +16,11 @@ class Migration(DataMigration):
             CREATE OR REPLACE VIEW attachment_view AS SELECT
                 CONCAT(attachment.type, '/' , attachment.id, '/', attachment.filename) AS url,
                 attachment.type AS used_by,
-                attachment.filename as filename,
+                attachment.filename AS filename,
                 (SELECT LOWER(SUBSTRING(attachment.filename FROM '\w{2,3}$'))) AS mimetype,
-                attachment.author as author,
-                attachment.description as description,
+                attachment.author AS author,
+                attachment.description AS description,
+                attachment.size AS size,
                 TIMESTAMP WITH TIME ZONE 'epoch' + (attachment.time/1000000)* INTERVAL '1s' AS created
             FROM attachment;
         ''')
