@@ -6,6 +6,29 @@ from accounts.models import User
 from hitcount.models import HitCountModelMixin
 
 
+class Attachment(models.Model, HitCountModelMixin):
+    url = models.TextField(primary_key=True)
+    type = models.TextField()
+    filename = models.TextField()
+    author = models.TextField(blank=True)
+    description = models.TextField(blank=True)
+    created = models.DateTimeField(blank=True)
+    mimetype = models.TextField(blank=True)
+
+    class Meta:
+        managed = False
+        db_table = 'attachment_view'
+
+    def get_absolute_url(self):
+        return u'/raw-attachment/{}'.format(self.url)
+
+    def get_author(self):
+        try:
+            return User.objects.get(username=self.author)
+        except User.DoesNotExist:
+            return None
+
+
 class Revision(models.Model, HitCountModelMixin):
     key = models.TextField(blank=True, primary_key=True)
     rev = models.TextField(blank=True)
