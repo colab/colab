@@ -8,7 +8,7 @@ from hitcount.models import HitCountModelMixin
 
 class Attachment(models.Model, HitCountModelMixin):
     url = models.TextField(primary_key=True)
-    type = models.TextField()
+    used_by = models.TextField()
     filename = models.TextField()
     author = models.TextField(blank=True)
     description = models.TextField(blank=True)

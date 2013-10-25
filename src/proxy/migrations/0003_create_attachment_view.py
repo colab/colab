@@ -15,7 +15,7 @@ class Migration(DataMigration):
         cursor.execute('''
             CREATE OR REPLACE VIEW attachment_view AS SELECT
                 CONCAT(attachment.type, '/' , attachment.id, '/', attachment.filename) AS url,
-                attachment.type AS type,
+                attachment.type AS used_by,
                 attachment.filename as filename,
                 (SELECT LOWER(SUBSTRING(attachment.filename FROM '\w{2,3}$'))) AS mimetype,
                 attachment.author as author,
@@ -29,7 +29,7 @@ class Migration(DataMigration):
         connection = connections['trac']
 
         cursor = connection.cursor()
-        cursor.execute('DROP VIEW attachment_view;')
+        cursor.execute('DROP VIEW IF EXISTS attachment_view;')
 
     models = {
         u'proxy.attachment': {
