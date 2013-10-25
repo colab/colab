@@ -34,18 +34,7 @@ class Migration(DataMigration):
 
         cursor = connection.cursor()
         cursor.execute('''
-            CREATE OR REPLACE VIEW revision_view AS SELECT
-                revision.rev,
-                revision.author,
-                revision.message,
-                repository.value AS repository_name,
-                TIMESTAMP WITH TIME ZONE 'epoch' + (revision.time/1000000) * INTERVAL '1s' AS created
-            FROM revision
-            INNER JOIN repository ON(
-                repository.id = revision.repos
-                AND repository.name = 'name'
-                AND repository.value != ''
-            );
+                ALTER VIEW revision_view ALTER COLUMN key DROP DEFAULT;
         ''')
 
     models = {
