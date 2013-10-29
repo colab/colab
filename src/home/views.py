@@ -17,7 +17,7 @@ def index(request):
 
     count_types = OrderedDict()
     six_months = timezone.now() - timezone.timedelta(days=180)
-    for type in ['thread', 'ticket', 'wiki', 'changeset']:
+    for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:
         count_types[trans(type)] = SearchQuerySet().filter(
             type=type,
             modified__gte=six_months,

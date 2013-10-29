@@ -8,6 +8,7 @@ def trans(key):
         'thread': _('Emails'),
         'changeset': _('Code'),
         'ticket': _('Tickets'),
+        'attachment': _('Attachments'),
     }
 
     return translations.get(key, key)

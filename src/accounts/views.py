@@ -61,7 +61,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         )
 
 
-        for type in ['thread', 'ticket', 'wiki', 'changeset']:
+        for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:
             sqs = SearchQuerySet().filter(
                 type=type,
                 modified__gte=six_months,
