@@ -21,7 +21,7 @@
 
       <ul class="none indent">
         <li {% ifequal type "wiki" %} title="{% trans "Remove filter" %}" {% endifequal %}>
-          <span class="glyphicon glyphicon-file"></span>
+          <span class="glyphicon glyphicon-book"></span>
           <a href="{% ifnotequal type "wiki" %} {% append_to_get type='wiki' %} {% else %} {% append_to_get type="" %} {% endifnotequal %}">{% trans "Wiki" %}</a>
         </li>
         <li {% ifequal type "thread" %} title="{% trans "Remove filter" %}" {% endifequal %}>

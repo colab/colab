@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+import os
+import urllib2
+
+from django.conf import settings
 from django.db import models
 
 from accounts.models import User
@@ -8,16 +12,27 @@ from hitcount.models import HitCountModelMixin
 
 class Attachment(models.Model, HitCountModelMixin):
     url = models.TextField(primary_key=True)
+    attach_id = models.TextField()
     used_by = models.TextField()
     filename = models.TextField()
     author = models.TextField(blank=True)
     description = models.TextField(blank=True)
     created = models.DateTimeField(blank=True)
     mimetype = models.TextField(blank=True)
+    size = models.IntegerField(blank=True)
 
     class Meta:
         managed = False
         db_table = 'attachment_view'
+
+    @property
+    def filepath(self):
+        return os.path.join(
+            settings.ATTACHMENTS_FOLDER_PATH,
+            self.used_by,
+            self.attach_id,
+            urllib2.quote(self.filename.encode('utf8'))
+        )
 
     def get_absolute_url(self):
         return u'/raw-attachment/{}'.format(self.url)

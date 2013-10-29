@@ -10,6 +10,7 @@ django-cliauth==0.9
 django-mobile==0.3.0
 django-haystack==2.1
 pysolr==2.1
+poster==0.8.1
 etiquetando==0.1
 html2text
 django-taggit

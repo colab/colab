@@ -1,0 +1,15 @@
+{{ object.filename }}
+{{ object.filename|slugify }}
+{{ object.description }}
+{{ object.description|slugify }}
+{{ object.used_by }}
+{{ object.mimetype }}
+{{ object.get_author.get_full_name }}
+
+{% for k, v in extracted.metadata.items %}
+  {% for val in v %}
+    {{ k }}: {{ val|safe }}
+  {% endfor %}
+{% endfor %}
+
+{{ extracted.contents|striptags|safe }}

@@ -1,14 +1,74 @@
 # -*- coding: utf-8 -*-
 
 import math
+import string
 
-from datetime import datetime
-
-from django.db.models import Q
+from django.template import loader, Context
+from django.utils.text import slugify
 from haystack import indexes
+from haystack.utils import log as logging
 
 from search.base_indexes import BaseIndex
-from .models import Ticket, Wiki, Revision
+from .models import Attachment, Ticket, Wiki, Revision
+
+
+logger = logging.getLogger('haystack')
+
+# the string maketrans always return a string encoded with latin1
+# http://stackoverflow.com/questions/1324067/how-do-i-get-str-translate-to-work-with-unicode-strings
+table = string.maketrans(
+    string.punctuation,
+    '.' * len(string.punctuation)
+).decode('latin1')
+
+
+class AttachmentIndex(BaseIndex, indexes.Indexable):
+    title = indexes.CharField(model_attr='filename')
+    description = indexes.CharField(model_attr='description', null=True)
+    modified = indexes.DateTimeField(model_attr='created', null=True)
+    used_by = indexes.CharField(model_attr='used_by', null=True, stored=False)
+    mimetype = indexes.CharField(
+        model_attr='mimetype',
+        null=True,
+        stored=False
+    )
+    size = indexes.IntegerField(model_attr='size', null=True, stored=False)
+    filename = indexes.CharField(stored=False)
+
+    def get_model(self):
+        return Attachment
+
+    def get_updated_field(self):
+        return 'created'
+
+    def prepare(self, obj):
+        data = super(AttachmentIndex, self).prepare(obj)
+
+        try:
+            file_obj = open(obj.filepath)
+        except IOError as e:
+            logger.warning(u'IOError: %s - %s', e.strerror, e.filename)
+            return data
+        backend = self._get_backend(None)
+        extracted_data = backend.extract_file_contents(file_obj)
+
+        t = loader.select_template(
+            ('search/indexes/proxy/attachment_text.txt', )
+        )
+        data['text'] = t.render(Context({
+            'object': obj,
+            'extracted': extracted_data,
+        }))
+        return data
+
+    def prepare_filename(self, obj):
+        return obj.filename.translate(table).replace('.', ' ')
+
+    def prepare_icon_name(self, obj):
+        return u'file'
+
+    def prepare_type(self, obj):
+        return u'attachment'
 
 
 class WikiIndex(BaseIndex, indexes.Indexable):
@@ -26,7 +86,7 @@ class WikiIndex(BaseIndex, indexes.Indexable):
         return u'{}\n{}'.format(obj.wiki_text, obj.collaborators)
 
     def prepare_icon_name(self, obj):
-        return u'file'
+        return u'book'
 
     def prepare_type(self, obj):
         return u'wiki'

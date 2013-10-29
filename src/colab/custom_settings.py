@@ -20,6 +20,9 @@ DJANGO_DATE_FORMAT_TO_JS = {
 
 LANGUAGE_CODE = 'pt-br'
 
+# The absolute path to the folder containing the attachments
+ATTACHMENTS_FOLDER_PATH = ''
+
 # ORDERING_DATA receives the options to order for as it's keys and a dict as
 # value, if you want to order for the last name, you can use something like:
 # 'last_name': {'name': 'Last Name', 'fields': 'last_name'} inside the dict,
@@ -38,6 +41,23 @@ ORDERING_DATA = {
         'fields': None,
     },
 }
+
+# File type groupings is a tuple of tuples containg what it should filter,
+# how it should be displayed, and a tuple of which mimetypes it includes
+FILE_TYPE_GROUPINGS = (
+    ('document', gettext(u'Document'),
+     ('doc', 'docx', 'odt', 'otx', 'dotx', 'pdf', 'ott')),
+    ('presentation', gettext(u'Presentation'), ('ppt', 'pptx', 'odp')),
+    ('text', gettext(u'Text'), ('txt', 'po', 'conf', 'log')),
+    ('code', gettext(u'Code'),
+     ('py', 'php', 'js', 'sql', 'sh', 'patch', 'diff', 'html', '')),
+    ('compressed', gettext(u'Compressed'), ('rar', 'zip', 'gz', 'tgz', 'bz2')),
+    ('image', gettext(u'Image'),
+     ('jpg', 'jpeg', 'png', 'tiff', 'gif', 'svg', 'psd', 'planner', 'cdr')),
+    ('spreadsheet', gettext(u'Spreadsheet'),
+     ('ods', 'xls', 'xlsx', 'xslt', 'csv')),
+)
+
 
 # the following variable define how many characters should be shown before
 # a highlighted word, to make sure that the highlighted word will appear

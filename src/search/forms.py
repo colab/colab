@@ -23,8 +23,8 @@ class ColabSearchForm(SearchForm):
     list = forms.MultipleChoiceField(
         required=False,
         label=_(u'Mailinglist'),
-        choices=[(v, v) for v in MailingList.objects.values('name')
-                 for (v, v) in v.items()]
+        choices=[(v, v) for v in MailingList.objects.values_list(
+                 'name', flat=True)]
     )
     milestone = forms.CharField(required=False, label=_(u'Milestone'))
     priority = forms.CharField(required=False, label=_(u'Priority'))
@@ -40,30 +40,71 @@ class ColabSearchForm(SearchForm):
     role = forms.CharField(required=False, label=_(u'Role'))
     since = forms.DateField(required=False, label=_(u'Since'))
     until = forms.DateField(required=False, label=_(u'Until'))
+    filename = forms.CharField(required=False, label=_(u'Filename'))
+    used_by = forms.CharField(required=False, label=_(u'Used by'))
+    mimetype = forms.CharField(required=False, label=_(u'File type'))
+    size = forms.CharField(required=False, label=_(u'Size'))
 
     def search(self):
         if not self.is_valid():
             return self.no_query_found()
 
+        # filter_or goes here
+        sqs = self.searchqueryset.all()
+        mimetype = self.cleaned_data['mimetype']
+        if mimetype:
+            filter_mimetypes = {'mimetype__in': []}
+            for type_, display, mimelist in settings.FILE_TYPE_GROUPINGS:
+                if type_ in mimetype:
+                    filter_mimetypes['mimetype__in'] += mimelist
+                    if not self.cleaned_data['size']:
+                        sqs = sqs.filter_or(mimetype__in=mimelist)
+
+        if self.cleaned_data['size']:
+            # (1024 * 1024) / 2
+            # (1024 * 1024) * 10
+            filter_sizes = {}
+            filter_sizes_exp = {}
+            if '<500KB' in self.cleaned_data['size']:
+                filter_sizes['size__lt'] = 524288
+            if '500KB__10MB' in self.cleaned_data['size']:
+                filter_sizes_exp['size__gte'] = 524288
+                filter_sizes_exp['size__lte'] = 10485760
+            if '>10MB' in self.cleaned_data['size']:
+                filter_sizes['size__gt'] = 10485760
+
+            if self.cleaned_data['mimetype']:
+                # Add the mimetypes filters to this dict and filter it
+                if filter_sizes_exp:
+                    filter_sizes_exp.update(filter_mimetypes)
+                    sqs = sqs.filter_or(**filter_sizes_exp)
+                for filter_or in filter_sizes.items():
+                    filter_or = dict((filter_or, ))
+                    filter_or.update(filter_mimetypes)
+                    sqs = sqs.filter_or(**filter_or)
+            else:
+                for filter_or in filter_sizes.items():
+                    filter_or = dict((filter_or, ))
+                    sqs = sqs.filter_or(**filter_or)
+                sqs = sqs.filter_or(**filter_sizes_exp)
+
+        if self.cleaned_data['used_by']:
+            sqs = sqs.filter_or(used_by__in=self.cleaned_data['used_by'].split())
+
         if self.cleaned_data.get('q'):
             q = unicodedata.normalize(
                 'NFKD', unicode(self.cleaned_data.get('q'))
             ).encode('ascii', 'ignore')
-            sqs = self.searchqueryset.auto_query(q)
+            sqs = sqs.auto_query(q)
             sqs = sqs.filter(content=AltParser(
                 'dismax',
                 q,
                 pf='title^2.1 author^1.9 description^1.7',
                 mm='2<70%'
             ))
-        else:
-            sqs = self.searchqueryset.all()
-
 
         if self.cleaned_data['type']:
-            "It will consider other types with a whitespace"
-            types = self.cleaned_data['type']
-            sqs = sqs.filter(type__in=types.split())
+            sqs = sqs.filter(type=self.cleaned_data['type'])
 
         if self.cleaned_data['order']:
             for option, dict_order in settings.ORDERING_DATA.items():
@@ -110,6 +151,9 @@ class ColabSearchForm(SearchForm):
             sqs = sqs.filter(modified__gte=self.cleaned_data['since'])
         if self.cleaned_data['until']:
             sqs = sqs.filter(modified__lte=self.cleaned_data['until'])
+
+        if self.cleaned_data['filename']:
+            sqs = sqs.filter(filename=self.cleaned_data['filename'])
 
         if self.load_all:
             sqs = sqs.load_all()

@@ -5,6 +5,8 @@ from django.utils.translation import ugettext as _
 
 from haystack.views import SearchView
 
+from proxy.models import Attachment
+
 
 class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
@@ -106,6 +108,26 @@ class ColabSearchView(SearchView):
                     ('role', _(u'Role'), self.request.GET.get('role'))
                 ),
             },
+            'attachment': {
+                'name': _(u'Attachment'),
+                'fields': (
+                    (
+                        'filename',
+                        _(u'Filename'),
+                        self.request.GET.get('filename')
+                    ),
+                    ('author', _(u'Author'), self.request.GET.get('author')),
+                    (
+                        'used_by',
+                        _(u'Used by'), self.request.GET.get('used_by')),
+                    (
+                        'mimetype',
+                        _(u'File type'),
+                        self.request.GET.get('mimetype')
+                    ),
+                    ('size', _(u'Size'), self.request.GET.get('size')),
+                )
+            }
         }
 
         try:
@@ -113,10 +135,36 @@ class ColabSearchView(SearchView):
         except AttributeError:
             type_chosen = ''
 
+        mimetype_choices = ()
+        size_choices = ()
+        used_by_choices = ()
+
+        if type_chosen == 'attachment':
+            mimetype_choices = [(type_, display) for type_, display, mimelist_ in settings.FILE_TYPE_GROUPINGS]
+            size_choices = [
+                ('<500KB', u'< 500 KB'),
+                ('500KB__10MB', u'>= 500 KB <= 10 MB'),
+                ('>10MB', u'> 10 MB'),
+            ]
+            used_by_choices = set([
+                (v, v) for v in Attachment.objects.values_list(
+                'used_by', flat=True)
+            ])
+
+        mimetype_chosen = self.request.GET.get('mimetype')
+        size_chosen = self.request.GET.get('size')
+        used_by_chosen = self.request.GET.get('used_by')
+
         return dict(
             filters=types.get(type_chosen),
             type_chosen=type_chosen,
             order_data=settings.ORDERING_DATA,
             date_format=date_format,
             use_language=use_language,
+            mimetype_chosen=mimetype_chosen if mimetype_chosen else '',
+            mimetype_choices=mimetype_choices,
+            size_chosen=size_chosen if size_chosen else '',
+            size_choices=size_choices,
+            used_by_chosen=used_by_chosen if used_by_chosen else '',
+            used_by_choices=used_by_choices,
         )
