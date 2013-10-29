@@ -90,7 +90,7 @@
                 <ul class="unstyled-list">
                   {% for value, option in mimetype_choices %}
                     {% with value|add:" "|add:mimetype_chosen as mimelistadd %}
-                      {% if value in mime_chosen %}
+                      {% if value in mimetype_chosen %}
                         <li class="selected"  title="{% trans "Remove filter" %}">
                           <span class="glyphicon glyphicon-remove"></span>
                           <a href="{% pop_from_get mimetype=value %}">{{ option }}</a>
