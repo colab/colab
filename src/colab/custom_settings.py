@@ -181,7 +181,7 @@ LOGGING = {
         },
         'django_browserid': {
             'handlers': ['sentry'],
-            'level': 'DEBUG',
+            'level': 'WARNING',
         },
         'conversejs': {
             'handlers': ['console'],
