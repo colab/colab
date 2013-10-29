@@ -21,7 +21,7 @@ DJANGO_DATE_FORMAT_TO_JS = {
 LANGUAGE_CODE = 'pt-br'
 
 # The absolute path to the folder containing the attachments
-ATTACHMENTS_FOLDER_PATH = ''
+ATTACHMENTS_FOLDER_PATH = '/home/colab/trac/attachments/'
 
 # ORDERING_DATA receives the options to order for as it's keys and a dict as
 # value, if you want to order for the last name, you can use something like:
