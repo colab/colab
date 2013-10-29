@@ -51,6 +51,7 @@ class AttachmentIndex(BaseIndex, indexes.Indexable):
             return data
         backend = self._get_backend(None)
         extracted_data = backend.extract_file_contents(file_obj)
+        file_obj.close()
 
         t = loader.select_template(
             ('search/indexes/proxy/attachment_text.txt', )
