@@ -9,7 +9,6 @@ from django.contrib import messages
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, UpdateView
-from django.utils import timezone
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
@@ -52,28 +51,23 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context = {}
 
         count_types = OrderedDict()
-        six_months = timezone.now() - datetime.timedelta(days=180)
 
         fields_or_lookup = (
             {'collaborators__contains': user.username},
-            {'author': user.username},
+            {'author_and_username__contains': user.username},
         )
 
-
         for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:
-            sqs = SearchQuerySet().filter(
-                type=type,
-                modified__gte=six_months,
-            )
+            sqs = SearchQuerySet()
             for filter_or in fields_or_lookup:
-                sqs = sqs.filter_or(**filter_or)
+                sqs = sqs.filter_or(type=type, **filter_or)
             count_types[trans(type)] = sqs.count()
 
         context['type_count'] = count_types
 
-        sqs = SearchQuerySet().exclude(type='thread')
+        sqs = SearchQuerySet()
         for filter_or in fields_or_lookup:
-            sqs = sqs.filter_or(**filter_or)
+            sqs = sqs.filter_or(**filter_or).exclude(type='thread')
 
         context['results'] = sqs.order_by('-modified', '-created')[:10]
 
