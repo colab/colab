@@ -56,7 +56,6 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         fields_or_lookup = (
             {'collaborators__contains': user.username},
-            {'description__contains': user.username},
             {'author': user.username},
         )
 
