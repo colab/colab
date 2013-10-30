@@ -214,7 +214,7 @@
     <div class="col-lg-10">
       <ul class="list-unstyled">
       {% for result in page.object_list  %}
-        {% include "search/preview-search.html" %}
+        {% include "message-preview.html" %}
       {% empty %}
         <li class="text-center">
           {% trans "No results for your search." %}

@@ -22,7 +22,7 @@
       </a>
       <ul class="message-list">
         {% for result in latest_results %}
-          {% include "search/preview-search.html" %}
+          {% include "message-preview.html" %}
         {% endfor %}
       </ul>
       <a class="column-align"
@@ -50,7 +50,7 @@
       </a>
       <ul class="message-list">
         {% for thread in hottest_threads %}
-          {% include "message-preview.html" with doc=thread.latest_message %}
+          {% include "message-preview.html" with result=thread.latest_message %}
         {% endfor %}
       </ul>
       <a class="column-align"
@@ -70,7 +70,7 @@
       </a>
       <ul class="message-list">
         {% for thread in latest_threads %}
-          {% include "message-preview.html" with doc=thread.latest_message %}
+          {% include "message-preview.html" with result=thread.latest_message %}
         {% endfor %}
       </ul>
       <a class="column-align" href="{% url 'thread_list' %}">

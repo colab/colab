@@ -50,7 +50,7 @@
     <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
       <ul class="unstyled-list">
         {% for thread in threads.object_list %}
-          {% include "message-preview.html" with doc=thread.latest_message %}
+          {% include "message-preview.html" with result=thread.latest_message %}
         {% empty %}
           <br/><br/>
           <span>
