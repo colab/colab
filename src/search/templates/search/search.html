@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load i18n highlight superarchives %}
+
+{% block head_js %}
+<script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+{% if use_language %}
+  <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js"></script>
+{% endif %}
+
+<script type="text/javascript">
+  $(function () {
+    $('#datepicker_since, #datepicker_until').datetimepicker({
+      pickTime: false,
+      {% if use_language and date_format %}
+        language: '{{ use_language }}',
+        format: '{{ date_format }}',
+      {% endif %}
+    });
+  });
+</script>
+{% endblock %}
+
+{% block head_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+{% endblock %}
+
+{% block main-content %}
+  <div class="row">
+    <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
+      <h2>{% trans "Search" %}</h2>
+    </div>
+    <div class="col-xs-6 col-sm-8 col-md-10 col-lg-10">
+      <br/><br/>
+      <p class="text-right quiet">
+        {{ page.paginator.count }} {% trans "documents found" %}
+      </p>
+    </div>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <div id="filters" class="hidden-xs hidden-sm col-md-2 col-lg-2">
+      {% include "search/includes/search_filters.html" %}
+    </div>
+  
+    <div class="col-lg-10">
+      <ul class="list-unstyled">
+      {% for result in page.object_list  %}
+        {% include "message-preview.html" %}
+      {% empty %}
+        <li class="text-center">
+          {% trans "No results for your search." %}
+        </li>
+      {% endfor %}
+      </ul>
+
+      {% if page.has_other_pages %}
+        <div class="text-center">
+          <span>
+            {% if page.has_previous %}
+              <a href="{% append_to_get page=page.previous_page_number %}">{% trans "Previous" %}</a>
+            {% endif %}
+            <span>
+              {% trans "Page" %} {{ page.number }} {% trans "of" %}
+              {{ page.paginator.num_pages }}
+            </span>
+
+            {% if page.has_next %}
+              <a href="{% append_to_get page=page.next_page_number %}">{% trans "Next" %}</a>
+            {% endif %}
+          </span>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+{% endblock %}
