@@ -70,6 +70,9 @@
       {% empty %}
         <li class="text-center">
           {% trans "No results for your search." %}
+          {% if request.GET.q %}
+            <p class="text-muted">{% trans "You are searching for" %} {{ request.GET.q }}</p>
+          {% endif %}
         </li>
       {% endfor %}
       </ul>
