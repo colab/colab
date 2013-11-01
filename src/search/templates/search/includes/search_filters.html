@@ -138,30 +138,58 @@
   </ul>
 {% endif %}
 <hr />
-<form role="form">
+
+<!-- Desktop since and date filters -->
+<form role="form" class="hidden-sm hidden-xs">
   {% for name, value in request.GET.items %}
     {% if value and not name == "since" and not name == "until" %}
       <input type="hidden" name="{{ name }}" value="{{ value }}" />
     {% endif %}
   {% endfor %}
+
   <div class="form-group">
     <label for="since">{% trans "Since" %}</label>
-      <div class="input-group date" id="datepicker_since">
-        <input type="text" class="form-control" placeholder="{% trans "Since" %}" name="since" value="{{ request.GET.since }}" />
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+    <div class="input-group date" id="datepicker_since">
+      <input type="text" class="form-control" placeholder="{% trans "Since" %}" name="since" value="{{ request.GET.since }}" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
   </div>
   <div class="form-group">
     <label for="until">{% trans "Until" %}</label>
-      <div class="input-group date" id="datepicker_until">
-        <input type="text" class="form-control" placeholder="{% trans "Until" %}" name="until" value="{{ request.GET.until }}" />
-        <span class="input-group-addon">
-          <span class="glyphicon glyphicon-calendar"></span>
-        </span>
-      </div>
+    <div class="input-group date" id="datepicker_until">
+      <input type="text" class="form-control" placeholder="{% trans "Until" %}" name="until" value="{{ request.GET.until }}" />
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
   </div>
+
+  <p class="text-right">
+    <button type="submit" class="btn btn-default">
+      <span class="glyphicon glyphicon-filter"></span> {% trans "Filter" %}
+    </button>
+  </p>
+</form>
+
+<!-- Mobile since and date filters -->
+<form role="form" class="hidden-md hidden-lg">
+  {% for name, value in request.GET.items %}
+    {% if value and not name == "since" and not name == "until" %}
+      <input type="hidden" name="{{ name }}" value="{{ value }}" />
+    {% endif %}
+  {% endfor %}
+
+  <div class="form-group">
+    <label for="since">{% trans "Since" %}</label>
+    <input type="date" class="form-control" placeholder="{% trans "Since" %}" name="since" value="{{ request.GET.since }}" />
+  </div>
+  <div class="form-group hidden-md hidden-lg">
+    <label for="until">{% trans "Until" %}</label>
+    <input type="date" class="form-control" placeholder="{% trans "Until" %}" name="until" value="{{ request.GET.until }}" />
+  </div>
+
   <p class="text-right">
     <button type="submit" class="btn btn-default">
       <span class="glyphicon glyphicon-filter"></span> {% trans "Filter" %}
