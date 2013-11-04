@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n gravatar superarchives %}
+{% load i18n superarchives %}
 
 {% trans "Anonymous" as anonymous %}
 
@@ -99,56 +99,12 @@
   <div class="col-lg-9 col-md-9 col-sm-12">
     <ul class="unstyled-list">
     {% for email in emails %}
-      {% with email.from_address.user.get_absolute_url as profile_link %}
-      <li>
-        {% spaceless %}
-        <div class="email-message" id="msg-{{ email.id }}">
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                {% if profile_link %}
-                <a href="{{ profile_link }}">
-                {% endif %}
-                {% gravatar email.from_address 34 %}
-                <strong class="user-fullname">{{ email.from_address.get_full_name_or_anonymous }}</strong>
-                {% if profile_link %}
-                </a>
-                {% endif %}
-              </div>
-
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="pull-right text-right">
-                  <span class="date">
-                    {{ email.received_time|date:'DATETIME_FORMAT' }}
-                  </span>
-
-                  <div class="btn-group">
-                    <button class="btn btn-default vote-count disabled">
-                      {{ email.votes_count }}
-                    </button>
-                    {% if user in email.vote_list %}
-                    <button class="btn btn-success vote" data-loading-text="...">
-                    {% else %}
-                    <button class="btn btn-default vote" data-loading-text="...">
-                    {% endif %}
-                      <span class="glyphicon glyphicon-thumbs-up"></span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-            <div class="panel-collapse in">
-              <div class="panel-body">
-                {% display_message email %}
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endspaceless %}
-      </li>
-      {% endwith %}
+      {% include "superarchives/includes/message.html" with userprofile=email.from_address.user emailaddress=email.from_address fullname=email.from_address.get_full_name_or_anonymous %}
     {% endfor %}
+
+    {% if user.is_active %}
+      {% include "superarchives/includes/message.html" with userprofile=user emailaddress=user.email fullname=user.get_full_name reply=True %}
+    {% endif %}
     </ul>
   </div>
 
