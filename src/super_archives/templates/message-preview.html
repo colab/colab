@@ -1,55 +1,53 @@
 {% load i18n %}
+{% load highlight %}
 
-{% if doc.Title %}
 <li class="preview-message">
-  {% if doc.Type %}
-  <img alt="{{ doc.Type }}" title="{{ doc.Type }}"
-       src="{{ STATIC_URL }}img/{{ doc.Type }}.png" />
-  {% else %}
-      <span class="glyphicon glyphicon-envelope"></span>
-  {% endif %}
+<span class="glyphicon glyphicon-{{ result.icon_name }}" title="{{ result.type }}"></span>
 
-  {% if doc.mailinglist %}
-  <a href="{% url 'super_archives.views.list_messages' %}?list={{ doc.mailinglist }}">
-    <span class="label label-primary">{{ doc.mailinglist }}</span>
-  </a>
-  {% endif %}
-
-  <span class="subject">
-    <a href="{{ doc.url }}#msg-{{ doc.id }}"
-       {% if
-       title="{% filter striptags|truncatewords:50 %}
-                {{ doc.Description|escape }}
-              {% endfilter %}">
-      {{ doc.Title }}
-    </a>
-  </span>
-
-  <span class="quiet">-
-    {{ doc.Description|striptags }}
-  </span>
-
-  <div class="quiet">
-    <span class="pull-left">
-      {% if doc.from_address.user.get_absolute_url or doc.from_address.get_full_name or doc.last_author or doc.Creator %}
-        {% trans "by" %}
-      {% endif %}
-
-      {% if doc.from_address.user.get_absolute_url %}
-      <a href="{{ doc.from_address.user.get_absolute_url }}">
-        {{ doc.from_address.user.get_full_name }}
-      </a>
-      {% elif doc.from_address.get_full_name %}
-        <span>{{ doc.from_address.get_full_name }}</span>
-      {% else %}
-        {% firstof doc.last_author doc.Creator "" %}
-      {% endif %}
-    </span>
-
-    <span class="pull-right">
-      {{ doc.modified|timesince }}
-      {% trans "ago" %}
-    </span>
-  </div>
-</li>
+{% if result.tag %}
+<a href="{% firstof result.mailinglist_url result.url %}">
+  <span class="label label-primary">{{ result.tag }}</span>
+</a>
 {% endif %}
+
+{% if result.title %}
+  <a href="{{ result.url }}" {% if result.description %}title="{{ result.description|escape|truncatechars:200 }}"{% endif %}>
+    <span class="subject">
+      <!-- a striptags filter was raising an error here because using with highlight -->
+      {% if query %}
+        {% highlight result.title with query max_length "1000" %}
+      {% else %}
+        {{ result.title }}
+      {% endif %}
+    </span>
+  </a>
+{% endif %}
+
+{% if result.description %}
+      <!-- a striptags filter was raising an error here because using with highlight -->
+  <span class="quiet">- {% if query %}{% highlight result.description with query max_length "150" %}{% else %}{{ result.description }}{% endif %}</span>
+{% endif %}
+
+{% if result.author or result.modified %}
+  <div class="quiet">
+    {% if result.author %}
+      <span class="pull-left">{% trans "by" %}
+        {% if result.author and result.author_url %}
+          <a href="{{ result.author_url }}">
+            {% if query %}
+              {% highlight result.author with query %}
+            {% else %}
+              {{ result.author }}
+            {% endif %}
+          </a>
+        {% else %}
+          <span>{{ result.author }}</span>
+        {% endif %}
+      </span>
+    {% endif %}
+    {% if result.modified %}
+    <span class="pull-right">{{ result.modified|timesince }} {% trans "ago" %}</span>
+    {% endif %}
+  </div>
+{% endif %}
+</li>

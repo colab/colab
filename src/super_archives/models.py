@@ -283,7 +283,7 @@ class Message(models.Model):
 
     @property
     def mailinglist(self):
-        if not self.thread or not self.thread.mailinglist:
+        if not self.thread:
             return None
 
         return self.thread.mailinglist
@@ -314,12 +314,12 @@ class Message(models.Model):
                                             self.thread.subject_token])
 
     @property
-    def Description(self):
+    def description(self):
         """Alias to self.body"""
         return self.body
 
     @property
-    def Title(self):
+    def title(self):
         """Alias to self.subject_clean"""
         return self.subject_clean
 
@@ -327,6 +327,28 @@ class Message(models.Model):
     def modified(self):
         """Alias to self.modified"""
         return self.received_time
+
+    @property
+    def tag(self):
+        if not self.thread:
+            return None
+        return self.mailinglist.name
+
+    @property
+    def author(self):
+        return self.from_address.get_full_name()
+
+    @property
+    def author_url(self):
+        return self.from_address.user.get_absolute_url()
+
+    @property
+    def icon_name(self):
+        return u'envelope'
+
+    @property
+    def type(self):
+        return u'thread'
 
 
 class MessageBlock(models.Model):

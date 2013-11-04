@@ -395,3 +395,11 @@ ul.emails {
 span.highlighted {
     background-color: yellow;
 }
+
+/* Mobile search form */
+.navbar-nav > li > .mobile-search-form {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+  padding: 5px 15px 5px 15px;
+}

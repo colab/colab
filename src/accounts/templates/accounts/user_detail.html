@@ -91,7 +91,7 @@
         <h3>{% trans "Latest posted" %} </h3>
         <ul class="message-list">
         {% for doc in emails %}
-          {% include "message-preview.html" %}
+          {% include "message-preview.html" with result=doc %}
         {% empty %}
           <li>{% trans "There are no posts by this user so far." %}</li>
         {% endfor %}
@@ -102,7 +102,7 @@
         <h3>{% trans "Community inside participations" %}</h3>
         <ul class="message-list">
         {% for result in results %}
-          {% include "search/preview-search.html" %}
+          {% include "message-preview.html" %}
         {% empty %}
           <li>{% trans "No contributions of this user so far." %}</li>
         {% endfor %}
