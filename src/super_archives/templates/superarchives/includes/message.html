@@ -1,7 +1,7 @@
 {% load gravatar superarchives i18n %}
 <li>
   {% spaceless %}
-  <div class="email-message" id="msg-{{ email.id }}">
+  <div class="email-message" id="msg-{% firstof email.id 'reply' %}">
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
         <div class="col-lg-6 col-md-6 col-sm-6">
@@ -34,6 +34,10 @@
                 <span class="glyphicon glyphicon-thumbs-up"></span>
               </button>
             </div>
+
+            <button class="btn btn-default reply" title="{% trans 'Reply' %}">
+              <span class="glyphicon glyphicon-share"></span>
+            </button>
           </div>
         </div>
         {% endif %}

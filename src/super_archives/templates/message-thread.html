@@ -68,6 +68,17 @@
     $ajax.fail(vote_fail_callback);
   }
 
+  function scrollToAnchor(aid){
+    var aTag = $(aid);
+    console.log(aTag);
+    $('html, body').animate({scrollTop: aTag.offset().top}, 800);
+  }
+
+  function focus_reply(event) {
+    scrollToAnchor('#msg-reply');
+    $('textarea', '#msg-reply').focus();
+  }
+
   // Binding functions
   $(function() {
     $(".panel-heading").on('click', function(event) {
@@ -82,6 +93,7 @@
     });
 
     $('.vote.btn', this).on('click', vote);
+    $('.reply.btn', this).on('click', focus_reply);
   });
 
 </script>

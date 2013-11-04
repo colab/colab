@@ -216,6 +216,10 @@ ul.unstyled-list .glyphicon-chevron-right {
     margin-top: 1em;
 }
 
+.reply.btn {
+    margin-left: 1em;
+}
+
 .email-message pre {
     border: 0;
     background-color: #fff;
