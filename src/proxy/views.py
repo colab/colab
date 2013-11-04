@@ -5,13 +5,13 @@ from django.conf import settings
 
 from revproxy.views import ProxyView
 from .models import Wiki, Ticket, Revision
-from hitcount.views import HitCountViewMixin
+from hitcounter.views import HitCounterViewMixin
 
 
 CWD = os.path.abspath(os.path.dirname(__file__))
 DIAZO_RULES_DIR = os.path.join(CWD, 'diazo')
 
-class TracProxyView(HitCountViewMixin, ProxyView):
+class TracProxyView(HitCounterViewMixin, ProxyView):
     base_url = settings.COLAB_TRAC_URL
     add_remote_user = settings.REVPROXY_ADD_REMOTE_USER
     diazo_theme_template = 'proxy/trac.html'
