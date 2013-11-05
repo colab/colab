@@ -135,7 +135,7 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
             lists = self.request.POST.getlist(email)
             user.update_subscription(email, lists)
 
-        return self.get(request, *args, **kwargs)
+        return redirect('user_profile', username=user.username)
 
     def get_context_data(self, **kwargs):
         context = {}
