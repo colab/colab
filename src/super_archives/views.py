@@ -63,7 +63,7 @@ def thread_get(request, mailinglist, thread_token):
     context = {
         'first_msg': first_message,
         'emails': [first_message] + list(emails),
-        'pagehits': queries.get_page_hits(request.path_info),
+        'pagehits': thread.hits,
         'total_votes': total_votes,
         'thread': thread,
     }

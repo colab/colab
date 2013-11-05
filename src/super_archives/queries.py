@@ -1,6 +1,6 @@
 
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Thread, Vote, Message, PageHit
+from .models import Thread, Vote, Message
 
 
 def get_messages_by_date():
@@ -10,9 +10,9 @@ def get_messages_by_date():
 def get_messages_by_voted():
     """Query for the most voted messages sorting by the sum of
     voted and after by date."""
-    
+
     sql = """
-        SELECT 
+        SELECT
             count(sav.id)
         FROM
             super_archives_vote AS sav
@@ -43,12 +43,3 @@ def get_latest_threads():
 
 def get_hottest_threads():
     return Thread.objects.order_by('-score', '-latest_message__received_time')
-
-
-def get_page_hits(path_info):
-    pagehit = PageHit.objects.filter(url_path=path_info)
-    
-    if pagehit:
-        return pagehit[0].hit_count
-    return 0
-

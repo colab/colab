@@ -30,11 +30,6 @@ class NotSpamManager(models.Manager):
         return super(NotSpamManager, self).get_query_set().exclude(spam=True)
 
 
-class PageHit(models.Model):
-    url_path = models.CharField(max_length=2048, unique=True, db_index=True)
-    hit_count = models.IntegerField(default=0)
-
-
 class EmailAddressValidation(models.Model):
     address = models.EmailField(unique=True)
     user = models.ForeignKey(User, null=True,
@@ -217,13 +212,7 @@ class Thread(models.Model, HitCounterModelMixin):
                 vote_score += get_score(100, vote.created)
 
         # Calculate page_view_score
-        try:
-            url = reverse('thread_view', args=[self.mailinglist.name,
-                                               self.subject_token])
-            pagehit = PageHit.objects.get(url_path=url)
-            page_view_score = pagehit.hit_count * 10
-        except (NoReverseMatch, PageHit.DoesNotExist):
-            page_view_score = 0
+        page_view_score = self.hits * 10
 
         self.score = (page_view_score + vote_score + replies_score) // 10
         self.save()
