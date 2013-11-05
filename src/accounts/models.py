@@ -1,7 +1,9 @@
 
 import urlparse
+import requests
 
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
 
@@ -23,6 +25,15 @@ class User(AbstractUser):
 
     def facebook_link(self):
         return urlparse.urljoin('https://www.facebook.com', self.facebook)
+
+    def mailinglists(self):
+        list_set = set()
+        for email in self.emails.all():
+            lists = requests.get(settings.MAILMAN_API_URL, timeout=1,
+                                 params={'address': email.address})
+            list_set.update(lists.json())
+        return tuple(list_set)
+
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
