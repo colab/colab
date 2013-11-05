@@ -89,13 +89,18 @@ def deploy(update=False):
     sudo('supervisorctl restart all')
 
 
-def rebuild_index(age=None):
+def rebuild_index(age=None, batch=None):
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
         age_arg = ''
         if age:
             age_arg = '--age={}'.format(age)
 
-        run('python manage.py rebuild_index {}'.format(age_arg))
+        batch_arg = ''
+        if batch:
+            batch_arg = '--batch-size={}'.format(batch)
+
+
+        run('python manage.py rebuild_index {} {}'.format(age_arg, batch_arg))
 
 
 @with_settings(user='vagrant')

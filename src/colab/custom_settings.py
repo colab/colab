@@ -259,6 +259,10 @@ FEEDZILLA_SITE_TITLE = gettext(u'Planet Colab')
 FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
 
 
+### Mailman API settings
+MAILMAN_API_URL = 'http://listas.interlegis.gov.br:8000'
+
+
 ### BrowserID / Persona
 SITE_URL = 'https://colab.interlegis.leg.br'
 BROWSERID_AUDIENCES = [SITE_URL]

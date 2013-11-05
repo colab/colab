@@ -2,6 +2,9 @@
 
 import smtplib
 import logging
+import urlparse
+
+import requests
 
 from django import http
 from django.conf import settings
@@ -21,7 +24,15 @@ from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
 
 
 def thread(request, mailinglist, thread_token):
+    if request.method == 'GET':
+        return thread_get(request, mailinglist, thread_token)
+    elif request.method == 'POST':
+        return thread_post(request, mailinglist, thread_token)
+    else:
+        return HttpResponseNotAllowed(['HEAD', 'GET', 'POST'])
 
+
+def thread_get(request, mailinglist, thread_token):
     try:
         first_message = queries.get_first_message_in_thread(mailinglist,
                                                             thread_token)
@@ -58,6 +69,47 @@ def thread(request, mailinglist, thread_token):
     }
 
     return render(request, 'message-thread.html', context)
+
+
+def thread_post(request, mailinglist, thread_token):
+    try:
+        thread = Thread.objects.get(subject_token=thread_token,
+                                    mailinglist__name=mailinglist)
+    except Thread.DoesNotExist:
+        raise http.Http404
+
+    data = {}
+    data['email_from']  = '{} <{}>'.format(request.user.get_full_name(),
+                                  request.user.email)
+    data['subject'] = thread.message_set.first().subject_clean
+    data['body'] = request.POST.get('body', '').strip()
+
+    url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
+
+    error_msg = None
+    try:
+        resp = requests.post(url, data=data, timeout=2)
+    except requests.exceptions.ConnectionError:
+        resp = None
+        error_msg = _('Error trying to connect to Mailman API')
+    except requests.exceptions.Timeout:
+        resp = None
+        error_msg = _('Timout trying to connect to Mailman API')
+
+    if resp and resp.status_code == 200:
+        messages.success(request, _("Your message was sent. It may take "
+                                    "some minutes before it's delivered. "
+                                    "Why don't you breath some fresh air "
+                                    "in the meanwhile."))
+    else:
+        if not error_msg:
+            if resp and resp.status_code == 400:
+                error_msg = _('You cannot send an empty email')
+            else:
+               error_msg = _('Unkown error trying to connect to Mailman API')
+        messages.error(request, error_msg)
+
+    return thread_get(request, mailinglist, thread_token)
 
 
 def list_messages(request):
