@@ -1,7 +1,8 @@
 
 from django.conf.urls import patterns, include, url
 
-from .views import UserProfileDetailView, UserProfileUpdateView
+from .views import UserProfileDetailView, UserProfileUpdateView, \
+                   ManageUserSubscriptionsView
 
 
 urlpatterns = patterns('',
@@ -12,4 +13,7 @@ urlpatterns = patterns('',
 
     url(r'^(?P<username>[\w@+.-]+)/edit/?$',
         UserProfileUpdateView.as_view(), name='user_profile_update'),
+
+    url(r'^(?P<username>[\w@+.-]+)/subscriptions/?$',
+        ManageUserSubscriptionsView.as_view(), name='user_subscriptions'),
 )

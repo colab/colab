@@ -2,9 +2,11 @@
 # encoding: utf-8
 
 import datetime
+import requests
 
 from collections import OrderedDict
 
+from django.conf import settings
 from django.contrib import messages
 from django.db.models import Count
 from django.contrib.auth import get_user_model
@@ -42,6 +44,7 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
             raise PermissionDenied
 
         return obj
+
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
     template_name = 'accounts/user_detail.html'
@@ -121,3 +124,25 @@ def signup(request):
                                 'Profiles not validated are deleted in 24h.'))
 
     return redirect('user_profile', username=user.username)
+
+
+class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
+    http_method_names = [u'get', u'post']
+    template_name = u'accounts/manage_subscriptions.html'
+
+    def post(self, request, *args, **kwargs):
+        user = self.get_object()
+        for email in user.emails.values_list('address', flat=True):
+            current_lists = user.mailinglists(email)
+        #url = urlparse.urljoin(settings.MAILMAN_API_URL,
+        #                       )
+        #requests.put()
+        return self.get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        resp = requests.get(settings.MAILMAN_API_URL)
+        context['lists'] = resp.json()
+
+        context.update(kwargs)
+        return super(ManageUserSubscriptionsView, self).get_context_data(**context)
