@@ -38,9 +38,9 @@ class User(AbstractUser):
             try:
                 lists = requests.get(settings.MAILMAN_API_URL, timeout=1,
                                      params={'address': email})
+                list_set.update(lists.json())
             except requests.exceptions.Timeout:
                 pass
-            list_set.update(lists.json())
 
         return tuple(list_set)
 
