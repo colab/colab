@@ -60,6 +60,15 @@
         {% endif %}
       {% endif %}
       </ul>
+
+      {% if user_.mailinglists %}
+      <b>{% trans 'Subscribes: ' %}</b>
+        {% for list in user_.mailinglists %}
+          <span class="label label-primary">{{ list }}</span>
+        {% endfor %}
+      {% endif %}
+
+      <div class="divider"></div>
     </div>
 
     <div class="col-lg-4 col-md-4 col-sm-8">

@@ -8,11 +8,11 @@ from collections import OrderedDict
 from django.contrib import messages
 from django.db.models import Count
 from django.contrib.auth import get_user_model
-from django.views.generic import DetailView, UpdateView
 from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
+from django.views.generic import DetailView, UpdateView
 
 from haystack.query import SearchQuerySet
 
