@@ -15,6 +15,7 @@ etiquetando==0.1
 html2text
 django-taggit
 python-memcached
+django-hitcounter
 
 gunicorn
 gevent

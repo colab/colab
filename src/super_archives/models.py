@@ -14,7 +14,7 @@ from django.utils.translation import ugettext_lazy as _
 from html2text import html2text
 from haystack.query import SearchQuerySet
 from taggit.managers import TaggableManager
-from hitcount.models import HitCountModelMixin
+from hitcounter.models import HitCounterModelMixin
 
 from .utils import blocks
 from .utils.etiquetador import etiquetador
@@ -108,7 +108,7 @@ class Keyword(models.Model):
         return self.keyword
 
 
-class Thread(models.Model, HitCountModelMixin):
+class Thread(models.Model, HitCounterModelMixin):
 
     subject_token = models.CharField(max_length=512)
     mailinglist = models.ForeignKey(MailingList,

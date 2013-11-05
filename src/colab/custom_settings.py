@@ -107,6 +107,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'django_browserid',
     'conversejs',
     'haystack',
+    'hitcounter',
 
     # Own apps
     'super_archives',
@@ -116,7 +117,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'accounts',
     'proxy',
     'search',
-    'hitcount',
 
     # Feedzilla and deps
     'feedzilla',

@@ -7,10 +7,10 @@ from django.conf import settings
 from django.db import models
 
 from accounts.models import User
-from hitcount.models import HitCountModelMixin
+from hitcounter.models import HitCounterModelMixin
 
 
-class Attachment(models.Model, HitCountModelMixin):
+class Attachment(models.Model, HitCounterModelMixin):
     url = models.TextField(primary_key=True)
     attach_id = models.TextField()
     used_by = models.TextField()
@@ -44,7 +44,7 @@ class Attachment(models.Model, HitCountModelMixin):
             return None
 
 
-class Revision(models.Model, HitCountModelMixin):
+class Revision(models.Model, HitCounterModelMixin):
     key = models.TextField(blank=True, primary_key=True)
     rev = models.TextField(blank=True)
     author = models.TextField(blank=True)
@@ -65,7 +65,7 @@ class Revision(models.Model, HitCountModelMixin):
         except User.DoesNotExist:
             return None
 
-class Ticket(models.Model, HitCountModelMixin):
+class Ticket(models.Model, HitCounterModelMixin):
     id = models.IntegerField(primary_key=True)
     summary = models.TextField(blank=True)
     description = models.TextField(blank=True)
@@ -96,7 +96,7 @@ class Ticket(models.Model, HitCountModelMixin):
             return None
 
 
-class Wiki(models.Model, HitCountModelMixin):
+class Wiki(models.Model, HitCounterModelMixin):
     name = models.TextField(primary_key=True)
     wiki_text = models.TextField(blank=True)
     author = models.TextField(blank=True)
