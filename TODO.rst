@@ -1,7 +1,12 @@
 TODO
 -----
 
-Django
+Gestão de listas
+================
+* Sincronizar informações de  membership do mailman com o django
+* Usar informações do banco de dados local ao inves de fazer queries constantes
+
+Updates
 ======
 * Update Django to 1.7 and remove south dependency
 
