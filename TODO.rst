@@ -1,6 +1,10 @@
 TODO
 -----
 
+Django
+======
+* Update Django to 1.7 and remove south dependency
+
 Async
 =====
 * Usar celery para tornar tasks como envio de emails asincronas.
