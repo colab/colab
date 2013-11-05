@@ -74,10 +74,12 @@
     $('html, body').animate({scrollTop: aTag.offset().top}, 800);
   }
 
+  {% if user.is_active %}
   function focus_reply(event) {
     scrollToAnchor('#msg-reply');
     $('textarea', '#msg-reply').focus();
   }
+  {% endif %}
 
   // Binding functions
   $(function() {
