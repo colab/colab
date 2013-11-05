@@ -79,10 +79,10 @@ def thread_post(request, mailinglist, thread_token):
         raise http.Http404
 
     data = {}
-    data['email_from']  = '{} <{}>'.format(request.user.get_full_name(),
+    data['from']  = '{} <{}>'.format(request.user.get_full_name(),
                                   request.user.email)
     data['subject'] = thread.message_set.first().subject_clean
-    data['body'] = request.POST.get('body', '').strip()
+    data['body'] = request.POST.get('emailbody', '').strip()
 
     url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
 
@@ -103,10 +103,13 @@ def thread_post(request, mailinglist, thread_token):
                                     "in the meanwhile."))
     else:
         if not error_msg:
-            if resp and resp.status_code == 400:
-                error_msg = _('You cannot send an empty email')
+            if resp is not None:
+                if resp.status_code == 400:
+                    error_msg = _('You cannot send an empty email')
+                elif resp.status_code == 404:
+                    error_msg = _('Mailing list does not exist')
             else:
-               error_msg = _('Unkown error trying to connect to Mailman API')
+                error_msg = _('Unkown error trying to connect to Mailman API')
         messages.error(request, error_msg)
 
     return thread_get(request, mailinglist, thread_token)

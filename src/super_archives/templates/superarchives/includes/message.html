@@ -53,7 +53,7 @@
             <form method="POST">
               {% csrf_token %}
               <p>
-                <textarea placeholder="{% trans 'Send a message' %}" rows="5" class="form-control"></textarea>
+                <textarea name="emailbody" placeholder="{% trans 'Send a message' %}" rows="5" class="form-control"></textarea>
               </p>
               <div class="col-lg-9 col-md-8 col-sm-8 col-xs-7">
                 <p class="quiet">{% trans "After sending a message it will take few minutes before it shows up in here. Why don't you grab a coffee?" %}</p>
