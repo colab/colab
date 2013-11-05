@@ -26,12 +26,22 @@ class User(AbstractUser):
     def facebook_link(self):
         return urlparse.urljoin('https://www.facebook.com', self.facebook)
 
-    def mailinglists(self):
+    def mailinglists(self, email=None):
         list_set = set()
-        for email in self.emails.all():
-            lists = requests.get(settings.MAILMAN_API_URL, timeout=1,
-                                 params={'address': email.address})
+
+        if not email:
+            emails = self.emails.values_list('address', flat=True)
+        else:
+            emails = [email]
+
+        for email in emails:
+            try:
+                lists = requests.get(settings.MAILMAN_API_URL, timeout=1,
+                                     params={'address': email})
+            except requests.exceptions.Timeout:
+                pass
             list_set.update(lists.json())
+
         return tuple(list_set)
 
 
