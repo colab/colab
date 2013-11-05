@@ -1,10 +1,16 @@
 TODO
 -----
 
+Async
+=====
+* Usar celery para tornar tasks como envio de emails asincronas.
+
+
 Envio de emails
 ===============
 * Não perder o email em caso de falha de envio. Exibir o erro mas trazer a mensagem de volta para o usuário
 * Permitir apenas que usuarios pertencentes a lista enviem mensagens 
+
 
 Planet
 ======
