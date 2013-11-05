@@ -15,5 +15,5 @@ urlpatterns = patterns('',
         UserProfileUpdateView.as_view(), name='user_profile_update'),
 
     url(r'^(?P<username>[\w@+.-]+)/subscriptions/?$',
-        ManageUserSubscriptionsView.as_view(), name='user_subscriptions'),
+        ManageUserSubscriptionsView.as_view(), name='user_list_subscriptions'),
 )
