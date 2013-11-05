@@ -1,11 +1,11 @@
 
 import urlparse
-import requests
 
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
+
+from .utils import mailman
 
 
 class User(AbstractUser):
@@ -26,23 +26,11 @@ class User(AbstractUser):
     def facebook_link(self):
         return urlparse.urljoin('https://www.facebook.com', self.facebook)
 
-    def mailinglists(self, email=None):
-        list_set = set()
+    def mailinglists(self):
+        return mailman.user_lists(self)
 
-        if not email:
-            emails = self.emails.values_list('address', flat=True)
-        else:
-            emails = [email]
-
-        for email in emails:
-            try:
-                lists = requests.get(settings.MAILMAN_API_URL, timeout=1,
-                                     params={'address': email})
-                list_set.update(lists.json())
-            except requests.exceptions.Timeout:
-                pass
-
-        return tuple(list_set)
+    def update_subscription(self, email, lists):
+        mailman.update_subscription(email, lists)
 
 
 # We need to have `email` field set as unique but Django does not

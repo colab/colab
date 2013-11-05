@@ -2,11 +2,9 @@
 # encoding: utf-8
 
 import datetime
-import requests
 
 from collections import OrderedDict
 
-from django.conf import settings
 from django.contrib import messages
 from django.db.models import Count
 from django.contrib.auth import get_user_model
@@ -22,6 +20,7 @@ from super_archives.models import EmailAddress, Message
 from super_archives.utils.email import send_email_lists
 from search.utils import trans
 from .forms import UserCreationForm, ListsForm, UserUpdateForm
+from .utils import mailman
 
 
 class UserProfileBaseMixin(object):
@@ -133,16 +132,31 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
     def post(self, request, *args, **kwargs):
         user = self.get_object()
         for email in user.emails.values_list('address', flat=True):
-            current_lists = user.mailinglists(email)
-        #url = urlparse.urljoin(settings.MAILMAN_API_URL,
-        #                       )
-        #requests.put()
+            lists = self.request.POST.getlist(email)
+            user.update_subscription(email, lists)
+
         return self.get(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = {}
-        resp = requests.get(settings.MAILMAN_API_URL)
-        context['lists'] = resp.json()
+        context['membership'] = {}
+
+        user = self.get_object()
+        emails = user.emails.values_list('address', flat=True)
+        all_lists = mailman.all_lists()
+
+        for email in emails:
+            lists = []
+            lists_for_address = mailman.address_lists(email)
+            for listname in all_lists:
+                if listname in lists_for_address:
+                    checked = True
+                else:
+                    checked = False
+                lists.append((listname, checked))
+
+            context['membership'].update({email: lists})
 
         context.update(kwargs)
+
         return super(ManageUserSubscriptionsView, self).get_context_data(**context)
