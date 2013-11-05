@@ -5,7 +5,7 @@
 <span class="glyphicon glyphicon-{{ result.icon_name }}" title="{{ result.type }}"></span>
 
 {% if result.tag %}
-<a href="{% firstof result.mailinglist_url result.url %}">
+<a href="{% firstof result.mailinglist_url result.mailinglist.get_absolute_url result.url %}">
   <span class="label label-primary">{{ result.tag }}</span>
 </a>
 {% endif %}
