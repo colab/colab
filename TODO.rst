@@ -5,10 +5,15 @@ Gestão de listas
 ================
 * Sincronizar informações de  membership do mailman com o django
 * Usar informações do banco de dados local ao inves de fazer queries constantes
+* Logar erros ao falhar inscricao ou remocao de listas
+* Processo de cadastro em listas com moderacao
+
 
 Updates
 ======
-* Update Django to 1.7 and remove south dependency
+* Atualizar a versao do Django para 1.7
+* Remover South (django 1.7 ja implementa migrations)
+
 
 Async
 =====
@@ -26,10 +31,11 @@ Planet
 
 * Paginator esta quebrado em telas xs
 
+
 Chat
 ====
 
-* Allow user to change passwords
+* Permitir que usuario altere senha
 
 
 Outros
