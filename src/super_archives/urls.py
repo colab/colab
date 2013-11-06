@@ -1,12 +1,12 @@
 from django.conf.urls import patterns, include, url
 
-from .views import EmailView, EmailValidationView
+from .views import EmailView, EmailValidationView, ThreadView
 
 
 urlpatterns = patterns('super_archives.views',
 #    url(r'thread/(?P<thread>\d+)/$', 'thread', name='thread'),
-    url(r'thread/(?P<mailinglist>[-\w]+)/(?P<thread_token>[-\w]+)$', 'thread', 
-        name="thread_view"),
+    url(r'thread/(?P<mailinglist>[-\w]+)/(?P<thread_token>[-\w]+)$',
+        ThreadView.as_view(), name="thread_view"),
     url(r'thread/$', 'list_messages', name='thread_list'),
     url(r'manage/email/validate/?$', EmailValidationView.as_view(),
                                      name="archive_email_validation_view"),

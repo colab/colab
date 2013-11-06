@@ -23,96 +23,89 @@ from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
 
 
-def thread(request, mailinglist, thread_token):
-    if request.method == 'GET':
-        return thread_get(request, mailinglist, thread_token)
-    elif request.method == 'POST':
-        return thread_post(request, mailinglist, thread_token)
-    else:
-        return HttpResponseNotAllowed(['HEAD', 'GET', 'POST'])
+class ThreadView(View):
+    http_method_names = [u'get', u'post']
 
+    def get(self, request, mailinglist, thread_token):
+        try:
+            first_message = queries.get_first_message_in_thread(mailinglist,
+                                                                thread_token)
+        except ObjectDoesNotExist:
+            raise http.Http404
 
-def thread_get(request, mailinglist, thread_token):
-    try:
-        first_message = queries.get_first_message_in_thread(mailinglist,
-                                                            thread_token)
-    except ObjectDoesNotExist:
-        raise http.Http404
-
-    thread = Thread.objects.get(subject_token=thread_token,
-                                mailinglist__name=mailinglist)
-    thread.hit(request)
-
-    order_by = request.GET.get('order')
-    if order_by == 'voted':
-        msgs_query = queries.get_messages_by_voted()
-    else:
-        msgs_query = queries.get_messages_by_date()
-
-    msgs_query = msgs_query.filter(thread__subject_token=thread_token)
-    msgs_query = msgs_query.filter(thread__mailinglist__name=mailinglist)
-    emails = msgs_query.exclude(id=first_message.id)
-
-    total_votes = first_message.votes_count()
-    for email in emails:
-        total_votes += email.votes_count()
-
-    # Update relevance score
-    thread.update_score()
-
-    context = {
-        'first_msg': first_message,
-        'emails': [first_message] + list(emails),
-        'pagehits': thread.hits,
-        'total_votes': total_votes,
-        'thread': thread,
-    }
-
-    return render(request, 'message-thread.html', context)
-
-
-def thread_post(request, mailinglist, thread_token):
-    try:
         thread = Thread.objects.get(subject_token=thread_token,
                                     mailinglist__name=mailinglist)
-    except Thread.DoesNotExist:
-        raise http.Http404
+        thread.hit(request)
 
-    data = {}
-    data['from']  = '{} <{}>'.format(request.user.get_full_name(),
-                                  request.user.email)
-    data['subject'] = thread.message_set.first().subject_clean
-    data['body'] = request.POST.get('emailbody', '').strip()
+        order_by = request.GET.get('order')
+        if order_by == 'voted':
+            msgs_query = queries.get_messages_by_voted()
+        else:
+            msgs_query = queries.get_messages_by_date()
 
-    url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
+        msgs_query = msgs_query.filter(thread__subject_token=thread_token)
+        msgs_query = msgs_query.filter(thread__mailinglist__name=mailinglist)
+        emails = msgs_query.exclude(id=first_message.id)
 
-    error_msg = None
-    try:
-        resp = requests.post(url, data=data, timeout=2)
-    except requests.exceptions.ConnectionError:
-        resp = None
-        error_msg = _('Error trying to connect to Mailman API')
-    except requests.exceptions.Timeout:
-        resp = None
-        error_msg = _('Timout trying to connect to Mailman API')
+        total_votes = first_message.votes_count()
+        for email in emails:
+            total_votes += email.votes_count()
 
-    if resp and resp.status_code == 200:
-        messages.success(request, _("Your message was sent. It may take "
-                                    "some minutes before it's delivered. "
-                                    "Why don't you breath some fresh air "
-                                    "in the meanwhile."))
-    else:
-        if not error_msg:
-            if resp is not None:
-                if resp.status_code == 400:
-                    error_msg = _('You cannot send an empty email')
-                elif resp.status_code == 404:
-                    error_msg = _('Mailing list does not exist')
-            else:
-                error_msg = _('Unkown error trying to connect to Mailman API')
-        messages.error(request, error_msg)
+        # Update relevance score
+        thread.update_score()
 
-    return thread_get(request, mailinglist, thread_token)
+        context = {
+            'first_msg': first_message,
+            'emails': [first_message] + list(emails),
+            'pagehits': thread.hits,
+            'total_votes': total_votes,
+            'thread': thread,
+        }
+
+        return render(request, 'message-thread.html', context)
+
+    def post(self, request, mailinglist, thread_token):
+        try:
+            thread = Thread.objects.get(subject_token=thread_token,
+                                        mailinglist__name=mailinglist)
+        except Thread.DoesNotExist:
+            raise http.Http404
+
+        data = {}
+        data['from']  = '{} <{}>'.format(request.user.get_full_name(),
+                                      request.user.email)
+        data['subject'] = thread.message_set.first().subject_clean
+        data['body'] = request.POST.get('emailbody', '').strip()
+
+        url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
+
+        error_msg = None
+        try:
+            resp = requests.post(url, data=data, timeout=2)
+        except requests.exceptions.ConnectionError:
+            resp = None
+            error_msg = _('Error trying to connect to Mailman API')
+        except requests.exceptions.Timeout:
+            resp = None
+            error_msg = _('Timout trying to connect to Mailman API')
+
+        if resp and resp.status_code == 200:
+            messages.success(request, _("Your message was sent. It may take "
+                                        "some minutes before it's delivered. "
+                                        "Why don't you breath some fresh air "
+                                        "in the meanwhile."))
+        else:
+            if not error_msg:
+                if resp is not None:
+                    if resp.status_code == 400:
+                        error_msg = _('You cannot send an empty email')
+                    elif resp.status_code == 404:
+                        error_msg = _('Mailing list does not exist')
+                else:
+                    error_msg = _('Unkown error trying to connect to Mailman API')
+            messages.error(request, error_msg)
+
+        return self.get(request, mailinglist, thread_token)
 
 
 def list_messages(request):
