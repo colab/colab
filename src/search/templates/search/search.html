@@ -9,6 +9,7 @@
 
 <script type="text/javascript">
   $(function () {
+
     $('#datepicker_since, #datepicker_until').datetimepicker({
       pickTime: false,
       {% if use_language and date_format %}
@@ -16,6 +17,14 @@
         format: '{{ date_format }}',
       {% endif %}
     });
+
+    $('#collapseFilters').on('hide.bs.collapse', function() {
+      $('.collapse-icon-controller').toggleClass('glyphicon-collapse-down glyphicon-collapse-up');
+    });
+    $('#collapseFilters').on('show.bs.collapse', function() {
+      $('.collapse-icon-controller').toggleClass('glyphicon-collapse-down glyphicon-collapse-up');
+    });
+
   });
 </script>
 {% endblock %}
@@ -41,7 +50,7 @@
 
   <div class="row">
 
-    <form class="col-xs-12 col-sm-12 col-md-12 hidden-lg" action="{% url "haystack_search" %}">
+    <form class="col-xs-12 col-sm-12 hidden-md hidden-lg" action="{% url "haystack_search" %}">
       <div class="input-group">
         <input type="text" class="form-control" name="q" placeholder="{% trans "Search here" %}"
          {% if request.GET.q %}value="{{ request.GET.q }}"{% endif %} />
@@ -64,7 +73,10 @@
         <div class="panel panel-default">
           <div class="panel-heading subject">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFilters">
-              <h4 class="panel-title">{% trans "Filters" %}</h4>
+              <h4 class="panel-title">
+                {% trans "Filters" %}
+                <span class="glyphicon glyphicon-collapse-down pull-right collapse-icon-controller"></span>
+              </h4>
             </a>
           </div>
           <div id="collapseFilters" class="panel-collapse collapse">
