@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block main-content %}
+
+  {% for listname, latest, most_relevant in lists %}
+    {% if latest or most_relevant %}
+      <h2>{{ listname|title }}</h2>
+      <hr/>
+     
+      <div class="row">
+        <div class="col-lg-6">
+          <h4>{% trans 'latest'|title %}</h4>
+          <ul class="message-list">
+            {% for thread in latest %}
+              {% include "message-preview.html" with result=thread.latest_message %}
+            {% endfor %}
+          </ul>
+          <div class="text-right">
+            <a href="{% url 'haystack_search' %}?order=latest&list={{ listname }}&type=thread">
+              {% trans "more..." %}
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>{% trans 'most relevant'|title %}</h4>
+          <ul class="message-list">
+            {% for thread in most_relevant %}
+              {% include "message-preview.html" with result=thread %}
+            {% endfor %}
+          </ul>
+          <div class="text-right">
+            <a href="{% url 'haystack_search' %}?list={{ listname }}&type=thread">
+              {% trans "more..." %}
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    {% endif %}
+  {% endfor %}
+
+{% endblock %}

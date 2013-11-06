@@ -18,6 +18,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from haystack.query import SearchQuerySet
+
 from . import queries
 from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
@@ -108,38 +110,23 @@ class ThreadView(View):
         return self.get(request, mailinglist, thread_token)
 
 
-def list_messages(request):
-    selected_lists = request.GET.get('list', [])
-    if selected_lists:
-        selected_lists = selected_lists.split()
+class ThreadDashboardView(View):
+    http_method_names = ['get']
 
-    order_by = request.GET.get('order')
-    if order_by == 'hottest':
-        threads = queries.get_hottest_threads()
-    else:
-        threads = queries.get_latest_threads()
+    def get(self, request):
+        MAX = 6
+        context = {}
 
-    mail_list = selected_lists
-    if mail_list:
-        threads = threads.filter(mailinglist__name__in=mail_list)
+        context['lists'] = []
+        lists = MailingList.objects.filter()
+        for list_ in MailingList.objects.order_by('name'):
+            context['lists'].append((
+                list_.name,
+                list_.thread_set.filter(spam=False)[:MAX],
+                SearchQuerySet().filter(type='thread', tag=list_.name)[:MAX],
+            ))
 
-    paginator = Paginator(threads, 16)
-    try:
-        page = int(request.GET.get('p', '1'))
-    except ValueError:
-        page = 1
-    threads = paginator.page(page)
-
-    lists = MailingList.objects.all()
-
-    template_data = {
-        'lists': lists,
-        'n_results': paginator.count,
-        'threads': threads,
-        'selected_lists': ' '.join(selected_lists) if selected_lists else '',
-        'order_data': settings.ORDERING_DATA,
-    }
-    return render(request, 'message-list.html', template_data)
+        return render(request, 'superarchives/thread-dashboard.html', context)
 
 
 class EmailView(View):

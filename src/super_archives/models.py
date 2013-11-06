@@ -77,7 +77,7 @@ class MailingList(models.Model):
     last_imported_index = models.IntegerField(default=0)
 
     def get_absolute_url(self):
-	return u'{}?list={}'.format(reverse('thread_list'), self.name)
+        return u'{}?list={}'.format(reverse('thread_list'), self.name)
 
     def __unicode__(self):
         return self.name
