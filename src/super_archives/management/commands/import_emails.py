@@ -13,10 +13,10 @@ from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.core.management.base import BaseCommand, CommandError
 
-from colab.super_archives.models import MailingList, Message, \
-                                        Thread, EmailAddress
-from colab.super_archives.management.commands.message import Message as \
-                                                             CustomMessage
+from super_archives.models import MailingList, Message, \
+                                  Thread, EmailAddress
+from super_archives.management.commands.message import Message as \
+                                                       CustomMessage
 
 
 class Command(BaseCommand, object):
