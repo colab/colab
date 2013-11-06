@@ -124,6 +124,7 @@ class Thread(models.Model, HitCounterModelMixin):
         verbose_name = _(u"Thread")
         verbose_name_plural = _(u"Threads")
         unique_together = ('subject_token', 'mailinglist')
+        ordering = ('-latest_message__received_time', )
 
     @models.permalink
     def get_absolute_url(self):
