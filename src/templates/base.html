@@ -63,27 +63,6 @@
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="/"><img alt="Colab" src="/static/img/logo_nav.png"></a>
-
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".mobile-search">
-            <span class="glyphicon glyphicon-search"></span>
-          </button>
-
-        </div>
-
-        <!-- Mobile Search -->
-        <div class="collapse mobile-search">
-          <ul class="nav navbar-nav hidden-md hidden-lg">
-            <li>
-              <form action="{% url 'haystack_search' %}" class="search mobile-search-form" role="search">
-                <div class="form-group">
-                  <input name="q" class="form-control"
-                         value="{{ request.GET.q }}"
-                         type="search" placeholder="{% trans 'Search here...' %}" />
-                </div>
-                <button class="btn btn-default">{% trans "Search" %} <span class="glyphicon glyphicon-search"></span></button>
-              </form>
-            </li>
-          </ul>
         </div>
 
         <div class="collapse navbar-collapse navbar-main">
@@ -106,6 +85,9 @@
                 <li><a href="/browser">{% trans "Browse Source" %}</a></li>
                 <li><a href="/report">{% trans "View Tickets" %}</a></li>
               </ul>
+            </li>
+            <li>
+              <a href="{% url 'haystack_search' %}?q=">{% trans "Search" %}</a>
             </li>
           </ul>
 

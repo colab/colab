@@ -40,6 +40,20 @@
   <hr/>
 
   <div class="row">
+
+    <form class="col-xs-12 col-sm-12 col-md-12 hidden-lg" action="{% url "haystack_search" %}">
+      <div class="input-group">
+        <input type="text" class="form-control" name="q" placeholder="{% trans "Search here" %}"
+         {% if request.GET.q %}value="{{ request.GET.q }}"{% endif %} />
+        <div class="input-group-btn">
+          <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <br />
+
     <div id="filters" class="hidden-xs hidden-sm col-md-2 col-lg-2">
       <h3>{% trans "Filters" %}</h3>
       {% include "search/includes/search_filters.html" %}
