@@ -43,6 +43,7 @@ Interface
 * Utilizar paginador do bootstrap 3 em todas as telas
 * Implementar breadcrumbs
 * Utilizar biblioteca de gráficos local (substituir google charts)
+* Melhorar filtros para interfaces móveis
 
 
 Outros
