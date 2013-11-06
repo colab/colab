@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load i18n gravatar %}
 
 {% block main-content %}
 
+  <h2>{% blocktrans %}Mailing List Subscriptions{% endblocktrans %}</h2>
+  <h3>{% gravatar user_.email 50 %} {{ user_.get_full_name }} ({{ user_.username }})</h3>
   <br>
 
   <form method='post'>

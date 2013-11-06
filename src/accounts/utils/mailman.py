@@ -34,7 +34,6 @@ def unsubscribe(listname, address):
 
 def update_subscription(address, lists):
     current_lists = address_lists(address)
-    print lists
 
     for maillist in current_lists:
         if maillist not in lists:
