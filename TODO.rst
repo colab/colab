@@ -38,6 +38,13 @@ Chat
 * Permitir que usuario altere senha
 
 
+Interface
+=========
+
+* Utilizar paginador do bootstrap 3 em todas as telas
+* Implementar breadcrumbs
+
+
 Outros
 =======
 
