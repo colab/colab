@@ -2,14 +2,16 @@
 {% load i18n %}
 
 {% block main-content %}
+  <h2>{% trans 'Discussions'|title %}</h2>
+  <hr/>
 
   {% for listname, latest, most_relevant in lists %}
     {% if latest or most_relevant %}
-      <h2>{{ listname|title }}</h2>
+      <h3 class="text-center"><b>{{ listname|title }}</b></h3>
       <hr/>
      
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <h4>{% trans 'latest'|title %}</h4>
           <ul class="message-list">
             {% for thread in latest %}
@@ -23,7 +25,7 @@
           </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
           <h4>{% trans 'most relevant'|title %}</h4>
           <ul class="message-list">
             {% for thread in most_relevant %}
