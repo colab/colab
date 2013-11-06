@@ -11,7 +11,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.db import IntegrityError
 from django.views.generic import View
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
@@ -128,7 +128,10 @@ def list_messages(request):
         page = int(request.GET.get('p', '1'))
     except ValueError:
         page = 1
-    threads = paginator.page(page)
+    try:
+        threads = paginator.page(page)
+    except EmptyPage:
+        raise http.Http404
 
     lists = MailingList.objects.all()
 
