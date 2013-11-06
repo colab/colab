@@ -100,7 +100,8 @@ class ColabSearchForm(SearchForm):
                 'dismax',
                 q,
                 pf='title^2.1 author^1.9 description^1.7',
-                mm='2<70%'
+                mm='2<70%',
+                b='recip(ms((NOW/HOUR),(modified/HOUR)),3.16e-11,1,1)',
             ))
 
         if self.cleaned_data['type']:
