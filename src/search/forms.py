@@ -95,13 +95,12 @@ class ColabSearchForm(SearchForm):
             q = unicodedata.normalize(
                 'NFKD', unicode(self.cleaned_data.get('q'))
             ).encode('ascii', 'ignore')
-            sqs = sqs.auto_query(q)
             sqs = sqs.filter(content=AltParser(
                 'dismax',
                 q,
                 pf='title^2.1 author^1.9 description^1.7',
                 mm='2<70%',
-                b='recip(ms((NOW/HOUR),(modified/HOUR)),3.16e-11,1,1)',
+                bf='recip(ms(NOW/DAY,modified),3.16e-11,1,1)^10',
             ))
 
         if self.cleaned_data['type']:
