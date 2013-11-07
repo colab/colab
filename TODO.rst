@@ -44,11 +44,14 @@ Interface
 * Implementar breadcrumbs
 * Utilizar biblioteca de gráficos local (substituir google charts)
 * Melhorar filtros para interfaces móveis
+* Paginar discussoes
+* Paginar dashboard de discussoes
 
 
 Outros
 =======
 
+* Escrever casos de teste
 * Criacao de repositorios distribuidos pela interface do colab
 * Fazer thread querysets ter um objeto (most_relevant_message)
 * BUG: alguns subjects comecam e terminam com [] fazendo com que a RE de limpeza apague todo o subject.
