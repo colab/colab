@@ -25,6 +25,7 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
         model_attr='mailinglist__get_absolute_url',
         indexed=False,
     )
+    score = indexes.IntegerField(model_attr='score')
 
     def get_model(self):
         return Thread
@@ -64,3 +65,11 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
         return self.get_model().objects.filter(
             spam=False
         ).exclude(subject_token='')
+
+    def get_boost(self, obj):
+        boost = super(ThreadIndex, self).get_boost(obj)
+
+        if obj.score >= 20:
+            boost = boost * math.log(obj.score, 20)
+
+        return boost

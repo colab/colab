@@ -22,15 +22,15 @@ class BaseIndex(indexes.SearchIndex):
     def get_updated_field(self):
         return 'modified'
 
-    def get_boost(self, obj, data):
+    def get_boost(self, obj):
         if obj.hits <= 10:
-            data['boost'] = 1
-        else:
-            data['boost'] = math.log(obj.hits)
+            return 1
+
+        return math.log(obj.hits)
 
     def prepare(self, obj):
         data = super(BaseIndex, self).prepare(obj)
-        self.get_boost(obj, data)
+        data['boost'] = self.get_boost(obj)
         return data
 
     def prepare_author(self, obj):

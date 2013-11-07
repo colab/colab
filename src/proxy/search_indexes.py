@@ -143,11 +143,9 @@ class RevisionIndex(BaseIndex, indexes.Indexable):
     def get_updated_field(self):
         return 'created'
 
-    def get_boost(self, obj, data):
-        if obj.hits <= 10:
-            data['boost'] = 0.8
-        else:
-            data['boost'] = math.log(obj.hits) * 0.8
+    def get_boost(self, obj):
+        boost = super(RevisionIndex, self).get_boost(obj)
+        return boost * 0.8
 
     def prepare_icon_name(self, obj):
         return u'align-right'
