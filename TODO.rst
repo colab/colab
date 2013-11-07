@@ -51,6 +51,7 @@ Interface
 Outros
 =======
 
+* Utilizar SOLR para listar documentos relevantes ao inves de thread.score
 * Escrever casos de teste
 * Criacao de repositorios distribuidos pela interface do colab
 * Fazer thread querysets ter um objeto (most_relevant_message)
