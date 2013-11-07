@@ -131,6 +131,10 @@ div.submit {
 
 /* User profile */
 
+.vcard {
+    min-height: 400px;
+}
+
 .vcard .thumbnail {
     width: 200px;
     height: 200px;
