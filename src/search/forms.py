@@ -93,9 +93,7 @@ class ColabSearchForm(SearchForm):
 
 
         if self.cleaned_data['q']:
-            q = unicodedata.normalize(
-                'NFKD', unicode(self.cleaned_data.get('q'))
-            ).encode('ascii', 'ignore')
+            q = self.cleaned_data.get('q')
 
             dismax_opts = {
                 'q.alt': '*.*',
