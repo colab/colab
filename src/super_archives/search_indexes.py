@@ -69,7 +69,7 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     def get_boost(self, obj):
         boost = super(ThreadIndex, self).get_boost(obj)
 
-        if obj.score >= 20:
-            boost = boost * math.log(obj.score, 20)
+        if obj.score >= 10:
+            boost = boost * math.log(obj.score)
 
         return boost
