@@ -91,18 +91,20 @@ class ColabSearchForm(SearchForm):
         if self.cleaned_data['used_by']:
             sqs = sqs.filter_or(used_by__in=self.cleaned_data['used_by'].split())
 
-        q = unicodedata.normalize(
-            'NFKD', unicode(self.cleaned_data.get('q'))
-        ).encode('ascii', 'ignore')
 
-        dismax_opts = {
-            'q.alt': '*.*',
-            'pf': 'title^2.1 author^1.9 description^1.7',
-            'mm': '2<70%',
-            'bf': 'recip(ms(NOW/DAY,modified),3.16e-11,1,1)^10',
-        }
+        if self.cleaned_data['q']:
+            q = unicodedata.normalize(
+                'NFKD', self.cleaned_data.get('q')
+            ).encode('ascii', 'ignore')
 
-        sqs = sqs.filter(content=AltParser('dismax', q, **dismax_opts))
+            dismax_opts = {
+                'q.alt': '*.*',
+                'pf': 'title^2.1 author^1.9 description^1.7',
+                'mm': '2<70%',
+                'bf': 'recip(ms(NOW/HOUR,modified),3.16e-11,1,1)^10',
+            }
+
+            sqs = sqs.filter(content=AltParser('edismax', q, **dismax_opts))
 
         if self.cleaned_data['type']:
             sqs = sqs.filter(type=self.cleaned_data['type'])
