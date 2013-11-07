@@ -46,6 +46,7 @@ Interface
 * Melhorar filtros para interfaces móveis
 * Paginar discussoes
 * Paginar dashboard de discussoes
+* Highlight mostrar resultados normalizados (com e sem acentos)
 
 
 Outros
