@@ -16,18 +16,12 @@ from haystack.query import SearchQuerySet
 from taggit.managers import TaggableManager
 from hitcounter.models import HitCounterModelMixin
 
+from .managers import NotSpamManager, MostVotedManager, HighestScore
 from .utils import blocks
 from .utils.etiquetador import etiquetador
 
 
 User = get_user_model()
-
-
-class NotSpamManager(models.Manager):
-    """Only return objects which are not marked as spam."""
-
-    def get_query_set(self):
-        return super(NotSpamManager, self).get_query_set().exclude(spam=True)
 
 
 class EmailAddressValidation(models.Model):
@@ -116,6 +110,7 @@ class Thread(models.Model, HitCounterModelMixin):
     score = models.IntegerField(default=0, verbose_name=_(u"Score"), help_text=_(u"Thread score"))
     spam = models.BooleanField(default=False)
 
+    highest_score = HighestScore()
     all_objects = models.Manager()
     objects = NotSpamManager()
     tags = TaggableManager()
@@ -252,6 +247,7 @@ class Message(models.Model):
 
     all_objects = models.Manager()
     objects = NotSpamManager()
+    most_voted = MostVotedManager()
 
     class Meta:
         verbose_name = _(u"Message")

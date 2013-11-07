@@ -52,6 +52,7 @@ Interface
 Outros
 =======
 
+* Contabilizar votos dentro do modelo de mensagem. Com a implementação atual ordenar uma thread por votos é uma operação muito cara.
 * Utilizar SOLR para listar documentos relevantes ao inves de thread.score
 * Escrever casos de teste
 * Criacao de repositorios distribuidos pela interface do colab

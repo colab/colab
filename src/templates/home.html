@@ -50,11 +50,10 @@
       </a>
       <ul class="message-list">
         {% for thread in hottest_threads %}
-          {% include "message-preview.html" with result=thread.latest_message %}
+          {% include "message-preview.html" with result=thread %}
         {% endfor %}
       </ul>
-      <a class="column-align"
-         href="{% url 'thread_list' %}?order=hottest">
+      <a href="{% url 'haystack_search' %}?type=thread">
         {% trans "View more discussions..." %}
       </a>
       <div>&nbsp;</div>
@@ -73,7 +72,7 @@
           {% include "message-preview.html" with result=thread.latest_message %}
         {% endfor %}
       </ul>
-      <a class="column-align" href="{% url 'thread_list' %}">
+      <a href="{% url 'haystack_search' %}?type=thread&order=latest">
         {% trans "View more discussions..." %}
       </a>
       <div>&nbsp;</div>

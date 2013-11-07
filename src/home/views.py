@@ -4,16 +4,18 @@ from collections import OrderedDict
 from django.shortcuts import render
 from django.utils import timezone
 
-from haystack.query import SearchQuerySet
-from super_archives import queries
 from search.utils import trans
+from haystack.query import SearchQuerySet
+
+from super_archives.models import Thread
 
 
 def index(request):
     """Index page view"""
 
-    latest_threads = queries.get_latest_threads()
-    hottest_threads = queries.get_hottest_threads()
+
+    latest_threads = Thread.objects.all()[:6]
+    hottest_threads = Thread.highest_score.from_haystack()[:6]
 
     count_types = OrderedDict()
     six_months = timezone.now() - timezone.timedelta(days=180)
@@ -25,7 +27,7 @@ def index(request):
 
     context = {
         'hottest_threads': hottest_threads[:6],
-        'latest_threads': latest_threads[:6],
+        'latest_threads': latest_threads,
         'type_count': count_types,
         'latest_results': SearchQuerySet().all().order_by(
             '-modified', '-created'

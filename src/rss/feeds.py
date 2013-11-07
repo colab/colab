@@ -7,7 +7,6 @@ from django.utils.translation import ugettext as _
 from haystack.query import SearchQuerySet
 
 from super_archives.models import Thread
-from super_archives import queries
 
 
 class LatestThreadsFeeds(Feed):
@@ -15,7 +14,7 @@ class LatestThreadsFeeds(Feed):
     link = '/rss/threads/latest/'
 
     def items(self):
-        return queries.get_latest_threads()[:20]
+        return Thread.objects.all()[:20]
 
     def item_link(self, item):
         return item.latest_message.url
@@ -34,7 +33,7 @@ class HottestThreadsFeeds(Feed):
     link = '/rss/threads/hottest/'
 
     def items(self):
-        return queries.get_hottest_threads()[:20]
+        return Thread.highest_score.all()[:20]
 
     def item_link(self, item):
         return item.latest_message.url

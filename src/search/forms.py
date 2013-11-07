@@ -158,7 +158,4 @@ class ColabSearchForm(SearchForm):
         if self.cleaned_data['filename']:
             sqs = sqs.filter(filename=self.cleaned_data['filename'])
 
-        if self.load_all:
-            sqs = sqs.load_all()
-
         return sqs

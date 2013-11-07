@@ -20,30 +20,30 @@ from django.shortcuts import render, redirect
 
 from haystack.query import SearchQuerySet
 
-from . import queries
 from .utils.email import send_verification_email
-from .models import MailingList, Thread, EmailAddress, EmailAddressValidation
+from .models import MailingList, Thread, EmailAddress, \
+                    EmailAddressValidation, Message
 
 
 class ThreadView(View):
     http_method_names = [u'get', u'post']
 
     def get(self, request, mailinglist, thread_token):
-        try:
-            first_message = queries.get_first_message_in_thread(mailinglist,
-                                                                thread_token)
-        except ObjectDoesNotExist:
-            raise http.Http404
 
         thread = Thread.objects.get(subject_token=thread_token,
                                     mailinglist__name=mailinglist)
         thread.hit(request)
 
+        try:
+            first_message = thread.message_set.first()
+        except ObjectDoesNotExist:
+            raise http.Http404
+
         order_by = request.GET.get('order')
         if order_by == 'voted':
-            msgs_query = queries.get_messages_by_voted()
+            msgs_query = Message.most_voted
         else:
-            msgs_query = queries.get_messages_by_date()
+            msgs_query = Message.objects
 
         msgs_query = msgs_query.filter(thread__subject_token=thread_token)
         msgs_query = msgs_query.filter(thread__mailinglist__name=mailinglist)
