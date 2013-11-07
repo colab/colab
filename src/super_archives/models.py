@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import urllib
+
 from uuid import uuid4
 from hashlib import md5
 
@@ -71,7 +73,13 @@ class MailingList(models.Model):
     last_imported_index = models.IntegerField(default=0)
 
     def get_absolute_url(self):
-        return u'{}?list={}'.format(reverse('thread_list'), self.name)
+        params = {
+            'list': self.name,
+            'type': 'thread',
+            'order': 'latest',
+        }
+        return u'{}?{}'.format(reverse('haystack_search'),
+                               urllib.urlencode(params))
 
     def __unicode__(self):
         return self.name
