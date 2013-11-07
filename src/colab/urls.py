@@ -14,13 +14,8 @@ urlpatterns = patterns('',
     url(r'^$', 'home.views.index', name='home'),
 
     url(r'^search/', include('search.urls')),
-    url(r'open-data/$', TemplateView.as_view(template_name='open-data.html'),
-        name='opendata'),
-
     url(r'^archives/', include('super_archives.urls')),
-
     url(r'^api/', include('api.urls')),
-
     url(r'^rss/', include('rss.urls')),
 
     url(r'^user/', include('accounts.urls')),    # Kept for backwards compatibility
