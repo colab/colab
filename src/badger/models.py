@@ -19,12 +19,12 @@ class Badge(models.Model):
         (u'messages', _(u'Messages')),
         (u'contributions', _(u'Contributions')),
         (u'wikis', _(u'Wikis')),
-        (u'codes', _(u'Codes')),
+        (u'revisions', _(u'Revisions')),
         (u'tickets', _(u'Ticket')),
     )
     title = models.CharField(_(u'Title'), max_length=200)
     description = models.CharField(_(u'Description'), max_length=200)
-    image = models.ImageField(upload_to=u'badges')
+    image = models.ImageField(upload_to='badges')
     type = models.CharField(_(u'Type'), max_length=200, choices=TYPE_CHOICES)
     user_attr = models.CharField(
         _(u'User attribute'),max_length=100,
