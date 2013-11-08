@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -54,6 +55,9 @@ class Badge(models.Model):
     class Meta:
         verbose_name = _(u'Badge')
         verbose_name_plural = _(u'Badges')
+
+    def get_badge_url(self):
+        return u'{}{}'.format(settings.MEDIA_URL, self.image)
 
     def __unicode__(self):
         return u'{} ({}, {})'.format(
