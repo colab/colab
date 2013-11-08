@@ -99,20 +99,22 @@
     </div>
 
 
-    <div class="col-lg-8 col-md-12 col-sm-7">
-      <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{% trans "Badges" %}</h3>
-          </div>
-          <div class="panel-body">
-            <div>
-              {% for badge in user_.badge_set.all %}
-                <img src="{{ badge.get_badge_url }}" title="{{ badge.description }}" />
-              {% endfor %}
+    {% if user_.badge_set.exists %}
+      <div class="col-lg-8 col-md-12 col-sm-7">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">{% trans "Badges" %}</h3>
             </div>
-          </div>
+            <div class="panel-body">
+              <div>
+                {% for badge in user_.badge_set.all %}
+                  <img src="{{ badge.get_badge_url }}" title="{{ badge.description }}" />
+                {% endfor %}
+              </div>
+            </div>
+        </div>
       </div>
-    </div>
+    {% endif %}
 
   </div> <!-- End of user-profile row -->
 
