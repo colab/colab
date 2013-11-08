@@ -56,7 +56,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         fields_or_lookup = (
             {'collaborators__contains': user.username},
-            {'author_and_username__contains': user.username},
+            {'fullname_and_username__contains': user.username},
         )
 
         for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:

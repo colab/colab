@@ -10,13 +10,14 @@ class BaseIndex(indexes.SearchIndex):
     url = indexes.CharField(model_attr='get_absolute_url', indexed=False)
     title = indexes.CharField()
     description = indexes.CharField(null=True)
+    fullname = indexes.CharField(null=True)
     author = indexes.CharField(null=True)
     author_url = indexes.CharField(null=True, indexed=False)
     created = indexes.DateTimeField(model_attr='created', null=True)
     modified = indexes.DateTimeField(model_attr='modified', null=True)
     type = indexes.CharField()
     icon_name = indexes.CharField(indexed=False)
-    author_and_username = indexes.CharField(null=True, stored=False)
+    fullname_and_username = indexes.CharField(null=True, stored=False)
     hits = indexes.IntegerField(model_attr='hits')
 
     def get_updated_field(self):
@@ -36,10 +37,10 @@ class BaseIndex(indexes.SearchIndex):
     def prepare_author(self, obj):
         author = obj.get_author()
         if author:
-            return author.get_full_name()
+            return author.username
         return obj.author
 
-    def prepare_author_and_username(self, obj):
+    def prepare_fullname_and_username(self, obj):
         author = obj.get_author()
         if not author:
             return obj.author
@@ -53,3 +54,9 @@ class BaseIndex(indexes.SearchIndex):
         if author:
             return author.get_absolute_url()
         return None
+
+    def prepare_fullname(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_full_name()
+        return obj.author

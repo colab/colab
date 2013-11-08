@@ -330,6 +330,13 @@ class Message(models.Model):
 
     @property
     def author(self):
+        from_address = self.from_address
+        if from_address.user:
+            return from_address.user.username
+        return None
+
+    @property
+    def fullname(self):
         return self.from_address.get_full_name()
 
     @property

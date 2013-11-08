@@ -28,20 +28,20 @@
   <span class="quiet">- {% if query %}{% highlight result.description with query max_length "150" %}{% else %}{{ result.description }}{% endif %}</span>
 {% endif %}
 
-{% if result.author or result.modified %}
+{% if result.fullname or result.modified %}
   <div class="quiet">
-    {% if result.author %}
+    {% if result.fullname %}
       <span class="pull-left">{% trans "by" %}
-        {% if result.author and result.author_url %}
+        {% if result.fullname and result.author_url %}
           <a href="{{ result.author_url }}">
             {% if query %}
-              {% highlight result.author with query %}
+              {% highlight result.fullname with query %}
             {% else %}
-              {{ result.author }}
+              {{ result.fullname }}
             {% endif %}
           </a>
         {% else %}
-          <span>{{ result.author }}</span>
+          <span>{{ result.fullname }}</span>
         {% endif %}
       </span>
     {% endif %}

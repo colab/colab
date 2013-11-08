@@ -34,9 +34,15 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
         return 'latest_message__received_time'
 
     def prepare_author(self, obj):
+        from_address = obj.message_set.first().from_address
+        if from_address.user:
+            return from_address.user.username
+        return None
+
+    def prepare_fullname(self, obj):
         return obj.message_set.first().from_address.get_full_name()
 
-    def prepare_author_and_username(self, obj):
+    def prepare_fullname_and_username(self, obj):
         from_address = obj.message_set.first().from_address
         if not from_address.user:
             return from_address.get_full_name()
