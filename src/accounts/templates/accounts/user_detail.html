@@ -1,5 +1,7 @@
 {% extends "base.html" %}
+
 {% load i18n gravatar %}
+
 
 {% block head_js %}
   {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 %}
@@ -36,40 +38,41 @@
 
       <ul class="unstyled-list">
         {% if user_.institution or user_.role %}
-        <li>
-          <span class="icon-briefcase icon-fixed-width"></span>
-          {{ user_.role }}
-          {% if user_.institution and user_.role %}-{% endif %}
-          {{ user_.institution }}
-        </li>
+          <li>
+            <span class="icon-briefcase icon-fixed-width"></span>
+            {{ user_.role }}
+            {% if user_.institution and user_.role %}-{% endif %}
+            {{ user_.institution }}
+          </li>
         {% endif %}
-      {% if request.user.is_active %}
-        <li>
-        {% if user_.twitter %}
-        <span class="icon-twitter icon-fixed-width"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
-        {% endif %}
-        {% if user_.facebook %}
-        <span class="icon-facebook icon-fixed-width"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
-        {% endif %}
-        </li>
+        {% if request.user.is_active %}
+          <li>
+            {% if user_.twitter %}
+            <span class="icon-twitter icon-fixed-width"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
+            {% endif %}
+            {% if user_.facebook %}
+            <span class="icon-facebook icon-fixed-width"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
+            {% endif %}
+          </li>
 
-        {% if user_.google_talk %}
-        <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.google_talk }}</li>
+          {% if user_.google_talk %}
+            <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.google_talk }}</li>
+          {% endif %}
+          {% if user_.webpage %}
+            <li><span class="icon-link icon-fixed-width"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
+          {% endif %}
         {% endif %}
-        {% if user_.webpage %}
-        <li><span class="icon-link icon-fixed-width"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
-        {% endif %}
-      {% endif %}
       </ul>
 
       {% if user_.mailinglists %}
-      <b>{% trans 'Subscribes: ' %}</b>
+        <b>{% trans 'Subscribes: ' %}</b>
         {% for list in user_.mailinglists %}
           <span class="label label-primary">{{ list }}</span>
         {% endfor %}
       {% endif %}
 
       <div class="divider"></div>
+
     </div>
 
     <div class="col-lg-4 col-md-4 col-sm-7">
@@ -95,29 +98,47 @@
       </div>
     </div>
 
-    </div>
-    <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-12">
-        <h3>{% trans "Latest posted" %} </h3>
-        <ul class="message-list">
-        {% for doc in emails %}
-          {% include "message-preview.html" with result=doc %}
-        {% empty %}
-          <li>{% trans "There are no posts by this user so far." %}</li>
-        {% endfor %}
-        </ul>
-      </div>
 
-      <div class="col-lg-6 col-md-6 col-sm-12">
-        <h3>{% trans "Community inside participations" %}</h3>
-        <ul class="message-list">
-        {% for result in results %}
-          {% include "message-preview.html" %}
-        {% empty %}
-          <li>{% trans "No contributions of this user so far." %}</li>
-        {% endfor %}
-        </ul>
+    <div class="col-lg-8 col-md-12 col-sm-7">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Badges" %}</h3>
+          </div>
+          <div class="panel-body">
+            <div>
+              {% for badge in user_.badge_set.all %}
+                <img src="{{ badge.get_badge_url }}" title="{{ badge.description }}" />
+              {% endfor %}
+            </div>
+          </div>
       </div>
+    </div>
+
+  </div> <!-- End of user-profile row -->
+
+  <div class="row">
+
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <h3>{% trans "Latest posted" %} </h3>
+      <ul class="message-list">
+      {% for doc in emails %}
+        {% include "message-preview.html" with result=doc %}
+      {% empty %}
+        <li>{% trans "There are no posts by this user so far." %}</li>
+      {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <h3>{% trans "Community inside participations" %}</h3>
+      <ul class="message-list">
+      {% for result in results %}
+        {% include "message-preview.html" %}
+      {% empty %}
+        <li>{% trans "No contributions of this user so far." %}</li>
+      {% endfor %}
+      </ul>
+    </div>
 
   </div>
 
