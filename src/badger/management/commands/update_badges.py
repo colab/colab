@@ -8,7 +8,7 @@ from badger.models import Badge
 
 
 class Command(BaseCommand):
-    help = "Updates the user's badges"
+    help = "Update the user's badges"
 
     def handle(self, *args, **kwargs):
         for badge in Badge.objects.filter(type='auto'):
