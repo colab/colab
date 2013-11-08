@@ -12,7 +12,7 @@ server {
     listen 80;
 
     root /;
-    server_name colab.interlegis.leg.br colab.interlegis.gov.br colab-demo.tracy.com.br;
+    server_name colab.interlegis.leg.br colab.interlegis.gov.br colab-demo.tracy.com.br localhost;
     
     location @django {
         proxy_hide_header Vary;
