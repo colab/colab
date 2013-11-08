@@ -108,6 +108,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'conversejs',
     'haystack',
     'hitcounter',
+    'badger',
 
     # Own apps
     'super_archives',
