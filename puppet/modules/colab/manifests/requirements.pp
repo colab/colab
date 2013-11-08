@@ -93,4 +93,16 @@ class colab::requirements {
     ensure => installed,
   }
 
+  package { 'libjpeg-dev':
+    ensure => installed,
+  }
+
+  package { 'zlib1g-dev':
+    ensure => installed,
+  }
+
+  package { 'libfreetype6-dev':
+    ensure => installed,
+  }
+
 }
