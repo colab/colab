@@ -11,6 +11,7 @@ class Badge(models.Model):
         (u'gte', _(u'Greater than or equal')),
         (u'lte', _(u'less than or equal')),
         (u'equal', _(u'Equal')),
+        (u'biggest', _(u'Biggest')),
     )
     TYPE_CHOICES = (
         (u'auto', _(u'Automatically')),
@@ -23,6 +24,13 @@ class Badge(models.Model):
         (u'revisions', _(u'Revisions')),
         (u'tickets', _(u'Ticket')),
     )
+    USER_ATTR_OPTS = {
+        u'messages': u'message_count',
+        u'revisions': u'changeset_count',
+        u'tickets': u'ticket_count',
+        u'wikis': u'wiki_count',
+        u'contributions': u'contribution_count',
+    }
     title = models.CharField(_(u'Title'), max_length=200)
     description = models.CharField(_(u'Description'), max_length=200)
     image = models.ImageField(upload_to='badges')
