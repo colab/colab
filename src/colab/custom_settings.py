@@ -108,7 +108,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'conversejs',
     'haystack',
     'hitcounter',
-    'badger',
 
     # Own apps
     'super_archives',
@@ -118,6 +117,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'accounts',
     'proxy',
     'search',
+    'badger',
 
     # Feedzilla and deps
     'feedzilla',
