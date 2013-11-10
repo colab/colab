@@ -8,9 +8,9 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 gettext = lambda s: s
 LANGUAGES = (
+    ('pt-br', gettext('Portuguese')),
     ('en', gettext('English')),
     ('es', gettext('Spanish')),
-    ('pt-br', gettext('Portuguese')),
 )
 
 DJANGO_DATE_FORMAT_TO_JS = {
@@ -108,6 +108,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'conversejs',
     'haystack',
     'hitcounter',
+    'linguo',
 
     # Own apps
     'super_archives',

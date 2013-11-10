@@ -3,11 +3,13 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from PIL import Image
+from linguo.models import MultilingualModel
+from linguo.managers import MultilingualManager
 
 
-class Badge(models.Model):
+class Badge(MultilingualModel):
     COMPARISON_CHOICES = (
         (u'gte', _(u'Greater than or equal')),
         (u'lte', _(u'less than or equal')),
@@ -32,8 +34,11 @@ class Badge(models.Model):
         u'wikis': u'wiki_count',
         u'contributions': u'contribution_count',
     }
-    title = models.CharField(_(u'Title'), max_length=200)
-    description = models.CharField(_(u'Description'), max_length=200)
+
+    title = models.CharField(_(u'Title'), max_length=200, blank=True,
+                             null=True)
+    description = models.CharField(_(u'Description'), max_length=200,
+                                   blank=True, null=True)
     image = models.ImageField(upload_to='badges')
     type = models.CharField(_(u'Type'), max_length=200, choices=TYPE_CHOICES)
     user_attr = models.CharField(
@@ -61,9 +66,12 @@ class Badge(models.Model):
         null=True
     )
 
+    objects = MultilingualManager()
+
     class Meta:
         verbose_name = _(u'Badge')
         verbose_name_plural = _(u'Badges')
+        translate = ('title', 'description')
 
     def get_badge_url(self):
         return u'{}{}'.format(settings.MEDIA_URL, self.image)
