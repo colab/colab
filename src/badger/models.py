@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext as _
+from PIL import Image
 
 
 class Badge(models.Model):
@@ -66,6 +67,13 @@ class Badge(models.Model):
 
     def get_badge_url(self):
         return u'{}{}'.format(settings.MEDIA_URL, self.image)
+
+    def save(self, *args, **kwargs):
+        img = Image.open(self.image)
+        (width, height) = img.size
+        img = img.resize((50, 50), Image.ANTIALIAS)
+        super(Badge, self).save(*args, **kwargs)
+        img.save(self.image.path)
 
     def __unicode__(self):
         return u'{} ({}, {})'.format(
