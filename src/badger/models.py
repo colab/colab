@@ -64,10 +64,12 @@ class Badge(models.Model):
         blank=True,
         null=True
     )
+    order = models.PositiveSmallIntegerField(_(u'Order'), default=100)
 
     class Meta:
         verbose_name = _(u'Badge')
         verbose_name_plural = _(u'Badges')
+        ordering = ['order', ]
 
     def get_badge_url(self):
         return u'{}{}'.format(settings.MEDIA_URL, self.image)

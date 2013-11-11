@@ -12,6 +12,8 @@ class BadgeI18NInline(admin.TabularInline):
 
 class BadgeAdmin(admin.ModelAdmin):
     inlines = [BadgeI18NInline, ]
+    list_display = ['title', 'description', 'order']
+    list_editable = ['order', ]
 
 
 admin.site.register(Badge, BadgeAdmin)
