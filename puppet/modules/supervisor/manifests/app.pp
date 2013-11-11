@@ -3,6 +3,9 @@ define supervisor::app (
   $command,
   $directory,
   $user = 'ubuntu',
+  $startsecs = undef,
+  $stopwaitsecs = undef,
+  $priority = undef,
 ) {
 
   $conf_file = "supervisor_${app_name}"
