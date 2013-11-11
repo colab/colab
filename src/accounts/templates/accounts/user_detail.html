@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load i18n gravatar %}
+{% load i18n gravatar i18n_model %}
 
 
 {% block head_js %}
@@ -108,7 +108,8 @@
             <div class="panel-body">
               <div>
                 {% for badge in user_.badge_set.all %}
-                  <img src="{{ badge.get_badge_url }}" title="{{ badge.description }}" />
+                  {% translate badge as badge_trans %}
+                  <img src="{{ badge.get_badge_url }}" title="({{ badge_trans.title }}) {{ badge_trans.description }}" />
                 {% endfor %}
               </div>
             </div>

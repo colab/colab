@@ -8,8 +8,8 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 gettext = lambda s: s
 LANGUAGES = (
-    ('pt-br', gettext('Portuguese')),
     ('en', gettext('English')),
+    ('pt-br', gettext('Portuguese')),
     ('es', gettext('Spanish')),
 )
 
@@ -18,7 +18,7 @@ DJANGO_DATE_FORMAT_TO_JS = {
     'es': ('es', 'dd/MM/yyyy'),
 }
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en'
 
 # The absolute path to the folder containing the attachments
 ATTACHMENTS_FOLDER_PATH = '/home/colab/trac/attachments/'
