@@ -47,6 +47,7 @@ Interface
 * Paginar discussoes
 * Paginar dashboard de discussoes
 * Highlight mostrar resultados normalizados (com e sem acentos)
+* Adicionar opção para escolha de idioma
 
 
 Outros
