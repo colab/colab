@@ -4,6 +4,7 @@ from haystack import indexes
 from django.db.models import Count
 
 from proxy.models import Revision, Ticket, Wiki
+from badger.utils import get_users_counters
 from .models import User
 
 
@@ -33,6 +34,12 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
 
     def get_model(self):
         return User
+
+    @property
+    def badge_counters(self):
+        if not hasattr(self, '_badge_counters'):
+            self._badge_counters = get_users_counters()
+        return self._badge_counters
 
     def get_updated_field(self):
         return 'date_joined'
@@ -66,16 +73,16 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
         return u'user'
 
     def prepare_message_count(self, obj):
-        return obj.emails.aggregate(Count('message'))['message__count']
+        return self.badge_counters[obj.username]['messages']
 
     def prepare_changeset_count(self, obj):
-        return Revision.objects.filter(author=obj.username).count()
+        return self.badge_counters[obj.username]['revisions']
 
     def prepare_ticket_count(self, obj):
-        return Ticket.objects.filter(author=obj.username).count()
+        return self.badge_counters[obj.username]['tickets']
 
     def prepare_wiki_count(self, obj):
-        return Wiki.objects.filter(author=obj.username).count()
+        return self.badge_counters[obj.username]['wikis']
 
     def index_queryset(self, using=None):
         return self.get_model().objects.filter(is_active=True)

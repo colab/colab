@@ -4,7 +4,6 @@ from django.core.management.base import BaseCommand, CommandError
 from haystack.query import SearchQuerySet
 
 from accounts.models import User
-from badger.utils import get_counters_to_badge
 from badger.models import Badge
 
 
