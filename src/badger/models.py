@@ -5,11 +5,10 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from PIL import Image
-from linguo.models import MultilingualModel
-from linguo.managers import MultilingualManager
+from i18n_model.models import I18nModel
 
 
-class Badge(MultilingualModel):
+class Badge(models.Model):
     COMPARISON_CHOICES = (
         (u'gte', _(u'Greater than or equal')),
         (u'lte', _(u'less than or equal')),
@@ -66,12 +65,9 @@ class Badge(MultilingualModel):
         null=True
     )
 
-    objects = MultilingualManager()
-
     class Meta:
         verbose_name = _(u'Badge')
         verbose_name_plural = _(u'Badges')
-        translate = ('title', 'description')
 
     def get_badge_url(self):
         return u'{}{}'.format(settings.MEDIA_URL, self.image)
@@ -89,3 +85,9 @@ class Badge(MultilingualModel):
             self.get_user_attr_display(),
             self.get_type_display(),
         )
+
+
+class BadgeI18N(I18nModel):
+    class Meta:
+        source_model = Badge
+        translation_fields = ('title', 'description')

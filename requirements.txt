@@ -16,7 +16,7 @@ django-taggit
 python-memcached
 django-hitcounter
 Pillow
-django-linguo
+django-i18n-model
 
 gunicorn
 gevent
