@@ -1,0 +1,637 @@
+[
+{
+    "pk": 6, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [], 
+        "comparison": "gte", 
+        "description": "More than 10000 Messages", 
+        "title": "Diamond Messenger", 
+        "image": "badges/diamond_messenger.png", 
+        "value": 10000, 
+        "user_attr": "messages", 
+        "type": "auto", 
+        "order": 4
+    }
+},
+{
+    "pk": 8, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "claudiomorale"
+            ], 
+            [
+                "drica"
+            ], 
+            [
+                "angeloneto"
+            ], 
+            [
+                "andrebrum"
+            ], 
+            [
+                "lucianodefazio"
+            ], 
+            [
+                "adrianogomes"
+            ], 
+            [
+                "nilolobo"
+            ], 
+            [
+                "thiagoathayde"
+            ], 
+            [
+                "marcoscamargo"
+            ], 
+            [
+                "clcampos"
+            ], 
+            [
+                "davilima6"
+            ], 
+            [
+                "ivanlucio"
+            ], 
+            [
+                "Eduardo"
+            ], 
+            [
+                "Luis"
+            ], 
+            [
+                "pcpaulo"
+            ], 
+            [
+                "fernanda123ja"
+            ], 
+            [
+                "ornatrindade"
+            ], 
+            [
+                "camaramg2"
+            ], 
+            [
+                "celsomagela"
+            ], 
+            [
+                "gouveia"
+            ], 
+            [
+                "leandroroberto.br@gmail.com"
+            ], 
+            [
+                "cintiacinquini"
+            ], 
+            [
+                "taniaa"
+            ], 
+            [
+                "sergiodamiati"
+            ], 
+            [
+                "fabiano"
+            ], 
+            [
+                "ramiroluz"
+            ], 
+            [
+                "JapaNix"
+            ], 
+            [
+                "jeanferri"
+            ], 
+            [
+                "szalbuque"
+            ], 
+            [
+                "FerPerboni"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 100 messages", 
+        "title": "Brass Messenger", 
+        "image": "badges/brass_messenger.png", 
+        "value": 100, 
+        "user_attr": "messages", 
+        "type": "auto", 
+        "order": 1
+    }
+},
+{
+    "pk": 9, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "angeloneto"
+            ], 
+            [
+                "andrebrum"
+            ], 
+            [
+                "lucianodefazio"
+            ], 
+            [
+                "clcampos"
+            ], 
+            [
+                "ivanlucio"
+            ], 
+            [
+                "camaramg2"
+            ], 
+            [
+                "sergiodamiati"
+            ], 
+            [
+                "JapaNix"
+            ], 
+            [
+                "szalbuque"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 500 Messages", 
+        "title": "Silver Messenger", 
+        "image": "badges/silver_messenger.png", 
+        "value": 500, 
+        "user_attr": "messages", 
+        "type": "auto", 
+        "order": 2
+    }
+},
+{
+    "pk": 10, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "angeloneto"
+            ], 
+            [
+                "andrebrum"
+            ], 
+            [
+                "ivanlucio"
+            ], 
+            [
+                "JapaNix"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 1000 Messages", 
+        "title": "Gold Messenger", 
+        "image": "badges/gold_messenger.png", 
+        "value": 1000, 
+        "user_attr": "messages", 
+        "type": "auto", 
+        "order": 3
+    }
+},
+{
+    "pk": 11, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "claudiomorale"
+            ], 
+            [
+                "angeloneto"
+            ], 
+            [
+                "andrebrum"
+            ], 
+            [
+                "lucianodefazio"
+            ], 
+            [
+                "mazza"
+            ], 
+            [
+                "gouveia"
+            ], 
+            [
+                "gustavolepri"
+            ], 
+            [
+                "rafahela"
+            ], 
+            [
+                "taniaa"
+            ], 
+            [
+                "sergiodamiati"
+            ], 
+            [
+                "jeanferri"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 10 Tickets", 
+        "title": "Brass Tracker", 
+        "image": "badges/brass_tracker.png", 
+        "value": 10, 
+        "user_attr": "tickets", 
+        "type": "auto", 
+        "order": 5
+    }
+},
+{
+    "pk": 12, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "taniaa"
+            ], 
+            [
+                "jeanferri"
+            ], 
+            [
+                "claudiomorale"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 50 Tickets", 
+        "title": "Silver Tracker", 
+        "image": "badges/silver_tracker.png", 
+        "value": 50, 
+        "user_attr": "tickets", 
+        "type": "auto", 
+        "order": 6
+    }
+},
+{
+    "pk": 13, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "taniaa"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "Mais que 100 Tickets", 
+        "title": "Gold Tracker", 
+        "image": "badges/gold_tracker.png", 
+        "value": 100, 
+        "user_attr": "tickets", 
+        "type": "auto", 
+        "order": 7
+    }
+},
+{
+    "pk": 14, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [], 
+        "comparison": "gte", 
+        "description": "Mais que 500 Tickets", 
+        "title": "Diamond Tracker", 
+        "image": "badges/diamond_tracker.png", 
+        "value": 500, 
+        "user_attr": "tickets", 
+        "type": "auto", 
+        "order": 8
+    }
+},
+{
+    "pk": 15, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "claudiomorale"
+            ], 
+            [
+                "angeloneto"
+            ], 
+            [
+                "lucianodefazio"
+            ], 
+            [
+                "mazza"
+            ], 
+            [
+                "fabianosantos"
+            ], 
+            [
+                "gustavolepri"
+            ], 
+            [
+                "fragomeni"
+            ], 
+            [
+                "jeanferri"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 100 Changesets", 
+        "title": "Brass Coder", 
+        "image": "badges/brass_coder.png", 
+        "value": 100, 
+        "user_attr": "revisions", 
+        "type": "auto", 
+        "order": 9
+    }
+},
+{
+    "pk": 16, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "jeanferri"
+            ], 
+            [
+                "claudiomorale"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 500 Changesets", 
+        "title": "Silver Coder", 
+        "image": "badges/silver_coder.png", 
+        "value": 500, 
+        "user_attr": "revisions", 
+        "type": "auto", 
+        "order": 10
+    }
+},
+{
+    "pk": 17, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [], 
+        "comparison": "gte", 
+        "description": "More than 1000 Changesets", 
+        "title": "Gold Coder", 
+        "image": "badges/gold_coder.png", 
+        "value": 1000, 
+        "user_attr": "revisions", 
+        "type": "auto", 
+        "order": 11
+    }
+},
+{
+    "pk": 18, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [], 
+        "comparison": "gte", 
+        "description": "More than 10000 Changesets", 
+        "title": "Diamond Coder", 
+        "image": "badges/diamond_coder.png", 
+        "value": 10000, 
+        "user_attr": "revisions", 
+        "type": "auto", 
+        "order": 12
+    }
+},
+{
+    "pk": 19, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "claudiomorale"
+            ], 
+            [
+                "angeloneto"
+            ], 
+            [
+                "lucianodefazio"
+            ], 
+            [
+                "cintiacinquini"
+            ], 
+            [
+                "jeanferri"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 10 Wikis", 
+        "title": "Brass Writer", 
+        "image": "badges/brass_writer.png", 
+        "value": 10, 
+        "user_attr": "wikis", 
+        "type": "auto", 
+        "order": 13
+    }
+},
+{
+    "pk": 20, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [
+            [
+                "angeloneto"
+            ], 
+            [
+                "jeanferri"
+            ]
+        ], 
+        "comparison": "gte", 
+        "description": "More than 50 Wikis", 
+        "title": "Silver Writer", 
+        "image": "badges/silver_writer.png", 
+        "value": 50, 
+        "user_attr": "wikis", 
+        "type": "auto", 
+        "order": 14
+    }
+},
+{
+    "pk": 21, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [], 
+        "comparison": "gte", 
+        "description": "More than 100 Wikis", 
+        "title": "Gold Writer", 
+        "image": "badges/gold_writer.png", 
+        "value": 100, 
+        "user_attr": "wikis", 
+        "type": "auto", 
+        "order": 15
+    }
+},
+{
+    "pk": 22, 
+    "model": "badger.badge", 
+    "fields": {
+        "awardees": [], 
+        "comparison": "gte", 
+        "description": "More than 500 Wikis", 
+        "title": "Diamond Writer", 
+        "image": "badges/diamond_writer.png", 
+        "value": 500, 
+        "user_attr": "wikis", 
+        "type": "auto", 
+        "order": 16
+    }
+},
+{
+    "pk": 1, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 8, 
+        "description": "Mais que 100 Mensagens", 
+        "title": "Mensageiro Bronze"
+    }
+},
+{
+    "pk": 2, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 9, 
+        "description": "Mais que 500 Mensagens", 
+        "title": "Mensageiro Prata"
+    }
+},
+{
+    "pk": 3, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 6, 
+        "description": "Mais que 10000 Mensagens", 
+        "title": "Mensageiro Diamante"
+    }
+},
+{
+    "pk": 4, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 10, 
+        "description": "Mais que 1000 Mensagens", 
+        "title": "Mensageiro Ouro"
+    }
+},
+{
+    "pk": 5, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 11, 
+        "description": "Mais que 10 T\u00edquetes", 
+        "title": "Rastreador Bronze"
+    }
+},
+{
+    "pk": 6, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 12, 
+        "description": "Mais que 50 T\u00edquetes", 
+        "title": "Rastreador Prata"
+    }
+},
+{
+    "pk": 7, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 13, 
+        "description": "Mais que 100 T\u00edquetes", 
+        "title": "Rastreador Ouro"
+    }
+},
+{
+    "pk": 8, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 14, 
+        "description": "Mais que 500 T\u00edquetes", 
+        "title": "Rastreador Diamante"
+    }
+},
+{
+    "pk": 9, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 15, 
+        "description": "Mais que 100 Modifica\u00e7\u00f5es de c\u00f3digo", 
+        "title": "Programador Bronze"
+    }
+},
+{
+    "pk": 10, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 16, 
+        "description": "Mais que 500 Modifica\u00e7\u00f5es de c\u00f3digo", 
+        "title": "Programador Prata"
+    }
+},
+{
+    "pk": 11, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 17, 
+        "description": "Mais que 1000 Modifica\u00e7\u00f5es de c\u00f3digo", 
+        "title": "Programador Ouro"
+    }
+},
+{
+    "pk": 12, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 18, 
+        "description": "Mais que 10000 Modifica\u00e7\u00f5es de c\u00f3digo", 
+        "title": "Programador Diamante"
+    }
+},
+{
+    "pk": 13, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 19, 
+        "description": "Escreveu mais que 10 Wikis", 
+        "title": "Escritor Bronze"
+    }
+},
+{
+    "pk": 14, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 20, 
+        "description": "Escreveu mais que 50 Wikis", 
+        "title": "Escritor Prata"
+    }
+},
+{
+    "pk": 15, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 21, 
+        "description": "Escreveu mais que 100 Wikis", 
+        "title": "Escritor Ouro"
+    }
+},
+{
+    "pk": 16, 
+    "model": "badger.badgei18n", 
+    "fields": {
+        "i18n_language": "pt-br", 
+        "i18n_source": 22, 
+        "description": "Escreveu mais que 500 Wikis", 
+        "title": "Escritor Diamante"
+    }
+}
+]
