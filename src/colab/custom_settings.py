@@ -9,8 +9,8 @@ TIME_ZONE = 'America/Sao_Paulo'
 gettext = lambda s: s
 LANGUAGES = (
     ('en', gettext('English')),
-    ('es', gettext('Spanish')),
     ('pt-br', gettext('Portuguese')),
+    ('es', gettext('Spanish')),
 )
 
 DJANGO_DATE_FORMAT_TO_JS = {
@@ -18,7 +18,7 @@ DJANGO_DATE_FORMAT_TO_JS = {
     'es': ('es', 'dd/MM/yyyy'),
 }
 
-LANGUAGE_CODE = 'pt-br'
+LANGUAGE_CODE = 'en'
 
 # The absolute path to the folder containing the attachments
 ATTACHMENTS_FOLDER_PATH = '/home/colab/trac/attachments/'
@@ -108,7 +108,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'conversejs',
     'haystack',
     'hitcounter',
-    'badger',
+    'i18n_model',
 
     # Own apps
     'super_archives',
@@ -118,6 +118,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'accounts',
     'proxy',
     'search',
+    'badger',
 
     # Feedzilla and deps
     'feedzilla',
@@ -231,6 +232,7 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static', 'media')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),

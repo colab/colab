@@ -8,7 +8,7 @@ from badger.models import Badge
 
 
 class Command(BaseCommand):
-    help = "Update the user's badges"
+    help = "Rebuild the user's badges."
 
     def handle(self, *args, **kwargs):
         for badge in Badge.objects.filter(type='auto'):
@@ -18,6 +18,7 @@ class Command(BaseCommand):
                 order = u'-{}'.format(Badge.USER_ATTR_OPTS[badge.user_attr])
                 sqs = SearchQuerySet().filter(type='user')
                 user = sqs.order_by(order)[0]
+                badge.awardees.remove(*list(badge.awardees.all()))
                 badge.awardees.add(User.objects.get(pk=user.pk))
                 continue
 
@@ -34,6 +35,10 @@ class Command(BaseCommand):
                 type='user',
                 **opts
             )
+
+            # Remove all awardees to make sure that all of then
+            # still accomplish the necessary to keep the badge
+            badge.awardees.remove(*list(badge.awardees.all()))
 
             for user in sqs:
                 badge.awardees.add(User.objects.get(pk=user.pk))

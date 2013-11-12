@@ -2,32 +2,45 @@
 
 from django.db.models import Count
 
-from haystack.query import SearchQuerySet
-
 from proxy.models import Revision, Ticket, Wiki
-from super_archives.models import Message
+from accounts.models import User
 
 
-def get_counters_to_badge(user):
-    # count_revisions = Revision.objects.filter(author=user.username).count()
-    # count_tickets = Ticket.objects.filter(author=user.username).count()
-    # count_wikis = Wiki.objects.filter(author=user.username).count()
-    count_revisions = SearchQuerySet().filter(
-        type='changeset',
-        author=user.username
-    ).count()
-    count_tickets = SearchQuerySet().filter(
-        type='ticket',
-        author=user.username
-    ).count()
-    count_wikis = SearchQuerySet().filter(
-        type='wiki',
-        author=user.username
-    ).count()
-    return dict(
-        messages=user.emails.aggregate(Count('message'))['message__count'],
-        revisions=count_revisions,
-        tickets=count_tickets,
-        wikis=count_wikis,
-        contributions=count_revisions + count_tickets + count_wikis,
-    )
+def get_wiki_counters():
+    return {
+        author: count for author, count in Wiki.objects.values_list(
+            'author'
+        ).annotate(count=Count('author'))
+    }
+
+
+def get_revision_counters():
+    return {
+        author: count for author, count in Revision.objects.values_list(
+            'author'
+        ).annotate(count=Count('author'))
+    }
+
+
+def get_ticket_counters():
+    return {
+        author: count for author, count in Ticket.objects.values_list(
+            'author'
+        ).annotate(count=Count('author'))
+    }
+
+
+def get_users_counters():
+    wiki_counters = get_wiki_counters()
+    revision_counters = get_revision_counters()
+    ticket_counters = get_ticket_counters()
+
+    users_counters = {}
+    for user in User.objects.annotate(message_count=Count('emails__message')):
+        users_counters[user.username] = {
+            'messages': user.message_count,
+            'wikis': wiki_counters.get(user.username, 0),
+            'revisions': revision_counters.get(user.username, 0),
+            'tickets': ticket_counters.get(user.username, 0),
+        }
+    return users_counters
