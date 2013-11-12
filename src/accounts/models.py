@@ -16,6 +16,7 @@ class User(AbstractUser):
     google_talk = models.EmailField(null=True, blank=True)
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
+    modified = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})

@@ -42,7 +42,7 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
         return self._badge_counters
 
     def get_updated_field(self):
-        return 'date_joined'
+        return 'modified'
 
     def prepare(self, obj):
         prepared_data = super(UserIndex, self).prepare(obj)
