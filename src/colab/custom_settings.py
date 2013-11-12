@@ -232,7 +232,7 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'media')
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
