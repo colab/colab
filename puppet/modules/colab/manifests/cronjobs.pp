@@ -2,10 +2,16 @@
 class colab::cronjobs {
 
   $virtualenv_python = "/home/colab/.virtualenvs/colab/bin/python"
-  $manage_colab = "$virtualenv_python colab/src/manage.py"
+  $manage_colab = "$virtualenv_python ~/colab/src/manage.py"
 
   Cron {
     user => colab,
+  }
+
+  cron { 'update-badges':
+    command => "$manage_colab update_badges",
+    hour    => '*',
+    minute  => '*/5',
   }
 
   cron { 'update-haystack-index':
