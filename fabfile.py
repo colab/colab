@@ -90,9 +90,8 @@ def deploy(update=False):
 
 
 def load_badges():
-    put('~/colab/badges', '~/colab/www/static/media/badges')
-
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
+        run('cp ~/colab/badges ~/colab/www/static/media/badges')
         run('python manage.py loaddata badger/fixtures/badges.py')
 
 
