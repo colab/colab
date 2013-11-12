@@ -89,6 +89,13 @@ def deploy(update=False):
     sudo('supervisorctl restart all')
 
 
+def load_badges():
+    put('~/colab/badges', '~/colab/www/static/media/badges')
+
+    with cd('~/colab/src/'), prefix(WORKON_COLAB):
+        run('python manage.py loaddata badger/fixtures/badges.py')
+
+
 def rebuild_index(age=None, batch=None):
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
         age_arg = ''
