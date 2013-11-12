@@ -90,9 +90,11 @@ def deploy(update=False):
 
 
 def load_badges():
+
+    run('mkdir -p ~/colab/www/media/badges')
+
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
-        run('mkdir -p ~/colab/www/static/media/badges')
-        run('cp ~/colab/badges/* ~/colab/www/static/media/badges/')
+        run('cp badger/fixtures/images/*.png ../www/media/badges/')
         run('python manage.py loaddata badger/fixtures/badges.json')
 
 
@@ -133,4 +135,6 @@ def runserver(update_requirements=False):
 
         run('python manage.py syncdb')
         run('python manage.py migrate')
+        run('python manage.py loaddata badger/fixtures/badges.json')
+        run('python manage.py update_badges')
         run('python manage.py runserver 0.0.0.0:7000')
