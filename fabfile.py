@@ -89,13 +89,15 @@ def deploy(update=False):
     sudo('supervisorctl restart all')
 
 
-def load_badges():
+def load_badges(local=False):
+    path = '/vagrant/' if local else '~/colab/'
 
-    run('mkdir -p ~/colab/www/media/badges')
+    run(u'mkdir -p {}www/media/badges'.format(path))
 
-    with cd('~/colab/src/'), prefix(WORKON_COLAB):
+    with cd(u'{}src/'.format(path)), prefix(WORKON_COLAB):
         run('cp badger/fixtures/images/*.png ../www/media/badges/')
         run('python manage.py loaddata badger/fixtures/badges.json')
+        run('python manage.py update_badges')
 
 
 def rebuild_index(age=None, batch=None):
@@ -135,6 +137,5 @@ def runserver(update_requirements=False):
 
         run('python manage.py syncdb')
         run('python manage.py migrate')
-        run('python manage.py loaddata badger/fixtures/badges.json')
-        run('python manage.py update_badges')
+        load_badges(local=True)
         run('python manage.py runserver 0.0.0.0:7000')
