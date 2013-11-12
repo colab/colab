@@ -47,16 +47,11 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     def prepare(self, obj):
         prepared_data = super(UserIndex, self).prepare(obj)
 
-        message_count = self.prepared_data['message_count']
-        changeset_count = self.prepared_data['changeset_count']
-        ticket_count = self.prepared_data['ticket_count']
-        wiki_count = self.prepared_data['wiki_count']
-
         prepared_data['contribution_count'] = sum((
-            message_count,
-            changeset_count,
-            ticket_count,
-            wiki_count
+            self.prepared_data['message_count'],
+            self.prepared_data['changeset_count'],
+            self.prepared_data['ticket_count'],
+            self.prepared_data['wiki_count']
         ))
 
         return prepared_data
