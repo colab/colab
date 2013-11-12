@@ -18,98 +18,7 @@
     "pk": 8, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "claudiomorale"
-            ], 
-            [
-                "drica"
-            ], 
-            [
-                "angeloneto"
-            ], 
-            [
-                "andrebrum"
-            ], 
-            [
-                "lucianodefazio"
-            ], 
-            [
-                "adrianogomes"
-            ], 
-            [
-                "nilolobo"
-            ], 
-            [
-                "thiagoathayde"
-            ], 
-            [
-                "marcoscamargo"
-            ], 
-            [
-                "clcampos"
-            ], 
-            [
-                "davilima6"
-            ], 
-            [
-                "ivanlucio"
-            ], 
-            [
-                "Eduardo"
-            ], 
-            [
-                "Luis"
-            ], 
-            [
-                "pcpaulo"
-            ], 
-            [
-                "fernanda123ja"
-            ], 
-            [
-                "ornatrindade"
-            ], 
-            [
-                "camaramg2"
-            ], 
-            [
-                "celsomagela"
-            ], 
-            [
-                "gouveia"
-            ], 
-            [
-                "leandroroberto.br@gmail.com"
-            ], 
-            [
-                "cintiacinquini"
-            ], 
-            [
-                "taniaa"
-            ], 
-            [
-                "sergiodamiati"
-            ], 
-            [
-                "fabiano"
-            ], 
-            [
-                "ramiroluz"
-            ], 
-            [
-                "JapaNix"
-            ], 
-            [
-                "jeanferri"
-            ], 
-            [
-                "szalbuque"
-            ], 
-            [
-                "FerPerboni"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 100 messages", 
         "title": "Brass Messenger", 
@@ -124,35 +33,7 @@
     "pk": 9, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "angeloneto"
-            ], 
-            [
-                "andrebrum"
-            ], 
-            [
-                "lucianodefazio"
-            ], 
-            [
-                "clcampos"
-            ], 
-            [
-                "ivanlucio"
-            ], 
-            [
-                "camaramg2"
-            ], 
-            [
-                "sergiodamiati"
-            ], 
-            [
-                "JapaNix"
-            ], 
-            [
-                "szalbuque"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 500 Messages", 
         "title": "Silver Messenger", 
@@ -167,20 +48,7 @@
     "pk": 10, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "angeloneto"
-            ], 
-            [
-                "andrebrum"
-            ], 
-            [
-                "ivanlucio"
-            ], 
-            [
-                "JapaNix"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 1000 Messages", 
         "title": "Gold Messenger", 
@@ -195,41 +63,7 @@
     "pk": 11, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "claudiomorale"
-            ], 
-            [
-                "angeloneto"
-            ], 
-            [
-                "andrebrum"
-            ], 
-            [
-                "lucianodefazio"
-            ], 
-            [
-                "mazza"
-            ], 
-            [
-                "gouveia"
-            ], 
-            [
-                "gustavolepri"
-            ], 
-            [
-                "rafahela"
-            ], 
-            [
-                "taniaa"
-            ], 
-            [
-                "sergiodamiati"
-            ], 
-            [
-                "jeanferri"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 10 Tickets", 
         "title": "Brass Tracker", 
@@ -244,17 +78,7 @@
     "pk": 12, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "taniaa"
-            ], 
-            [
-                "jeanferri"
-            ], 
-            [
-                "claudiomorale"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 50 Tickets", 
         "title": "Silver Tracker", 
@@ -269,11 +93,7 @@
     "pk": 13, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "taniaa"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "Mais que 100 Tickets", 
         "title": "Gold Tracker", 
@@ -303,32 +123,7 @@
     "pk": 15, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "claudiomorale"
-            ], 
-            [
-                "angeloneto"
-            ], 
-            [
-                "lucianodefazio"
-            ], 
-            [
-                "mazza"
-            ], 
-            [
-                "fabianosantos"
-            ], 
-            [
-                "gustavolepri"
-            ], 
-            [
-                "fragomeni"
-            ], 
-            [
-                "jeanferri"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 100 Changesets", 
         "title": "Brass Coder", 
@@ -343,14 +138,7 @@
     "pk": 16, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "jeanferri"
-            ], 
-            [
-                "claudiomorale"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 500 Changesets", 
         "title": "Silver Coder", 
@@ -395,23 +183,7 @@
     "pk": 19, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "claudiomorale"
-            ], 
-            [
-                "angeloneto"
-            ], 
-            [
-                "lucianodefazio"
-            ], 
-            [
-                "cintiacinquini"
-            ], 
-            [
-                "jeanferri"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 10 Wikis", 
         "title": "Brass Writer", 
@@ -426,14 +198,7 @@
     "pk": 20, 
     "model": "badger.badge", 
     "fields": {
-        "awardees": [
-            [
-                "angeloneto"
-            ], 
-            [
-                "jeanferri"
-            ]
-        ], 
+        "awardees": [], 
         "comparison": "gte", 
         "description": "More than 50 Wikis", 
         "title": "Silver Writer", 
