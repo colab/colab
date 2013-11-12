@@ -10,6 +10,7 @@ class colab::cronjobs {
 
   cron { 'update-haystack-index':
     command => "$manage_colab update_index --age=1",
+    hour    => '*',
     minute  => '*',
   }
 
@@ -20,7 +21,7 @@ class colab::cronjobs {
   }
 
   cron { 'import-mailman-messages':
-    command => "$manage_colab import_emails --archives_path=/usr/local/django/colab/mnt/archives/ --exclude-list=saberes-divulgacao --exclude-list=pml --exclude-list=mailman --exclude-list=lexml-anuncios",
+    command => "$manage_colab import_emails --archives_path=/mnt/mailman/archives/ --exclude-list=saberes-divulgacao --exclude-list=pml --exclude-list=mailman --exclude-list=lexml-anuncios",
     hour    => '*',
     minute  => '*',
   }
