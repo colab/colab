@@ -10,3 +10,5 @@ postfix::admin_email: test@test.test
 nginx::worker_processes: 8
 nginx::error_log: '/var/log/nginx/error.log'
 nginx::access_log: '/var/log/nginx/access.log'
+
+# Remember to replace the id_rsa and id_rsa.pub on colab/files

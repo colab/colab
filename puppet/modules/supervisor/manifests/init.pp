@@ -16,8 +16,13 @@ class supervisor {
     subscribe => File['/etc/supervisord.conf'],
   }
 
+  case $operatingsystem {
+    debian: { $supervisord_conf = "puppet:///modules/supervisor/debian-isnok-initscript" }
+    ubuntu: { $supervisord_conf = "puppet:///modules/supervisor/ubuntu-initscript" }
+  }
+
   file { '/etc/init.d/supervisord':
-    source  => 'puppet:///modules/supervisor/debian-isnok',
+    source  => $supervisord_conf,
     mode    => '0755',
   }
 

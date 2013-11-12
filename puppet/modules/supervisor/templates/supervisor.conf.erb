@@ -5,3 +5,12 @@ user=<%= @user %>
 autostart=true
 autorestart=true
 redirect_stderr=True
+<%- if @startsecs -%>
+startsecs=<%= @startsecs %>
+<%- end -%>
+<%- if @stopwaitsecs -%>
+stopwaitsecs=<%= @stopwaitsecs %>
+<%- end -%>
+<%- if @priority -%>
+priority=<%= @priority %>
+<%- end -%>
