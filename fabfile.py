@@ -93,7 +93,7 @@ def load_badges():
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
         run('mkdir -p ~/colab/www/static/media/badges')
         run('cp ~/colab/badges/* ~/colab/www/static/media/badges/')
-        run('python manage.py loaddata badger/fixtures/badges.py')
+        run('python manage.py loaddata badger/fixtures/badges.json')
 
 
 def rebuild_index(age=None, batch=None):
