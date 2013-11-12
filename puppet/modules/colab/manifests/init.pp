@@ -11,6 +11,7 @@ class colab {
 
   include supervisor
   include colab::requirements
+  include colab::cronjobs
 
   apt::ppa { 'ppa:nginx/stable': }
 
@@ -40,6 +41,30 @@ class colab {
     path    => '/etc/sudoers.d/colab-sudoers',
     source  => 'puppet:///modules/colab/colab-sudoers',
     mode    => '0440',
+    owner   => root,
+    group   => root,
+  }
+
+  file { 'root-ssh-dir':
+    ensure => directory,
+    mode   => '0700',
+    path   => '/root/.ssh',
+  }
+
+  file { 'root-ssh-private-key':
+    ensure  => present,
+    mode    => '0600',
+    path    => '/root/.ssh/id_rsa',
+    source  => 'puppet:///modules/colab/root_id_rsa',
+    owner   => root,
+    group   => root,
+  }
+
+  file { 'root-ssh-public-key':
+    ensure  => present,
+    mode    => '0644',
+    path    => '/root/.ssh/id_rsa.pub',
+    source  => 'puppet:///modules/colab/root_id_rsa.pub',
     owner   => root,
     group   => root,
   }

@@ -106,4 +106,7 @@ class colab::requirements {
     ensure => installed,
   }
 
+  package { 'sshfs':
+    ensure => installed,
+  }
 }
