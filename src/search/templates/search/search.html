@@ -105,19 +105,49 @@
 
       {% if page.has_other_pages %}
         <div class="text-center">
-          <span>
+          <ul class="pagination">
+            <li {% if page.number == 1 %}class="disabled"{% endif %}>
+              <a href="{% if page.number == 1 %}javascript:void(0);{% else %}{% append_to_get page=1 %}{% endif %}"><span class="glyphicon glyphicon-chevron-left small-icon"></span><span class="glyphicon glyphicon-chevron-left small-icon"></span></a>
+            </li>
+            <li {% if not page.has_previous %}class="disabled"{% endif %}>
+              <a href="{% if page.has_previous %}{% append_to_get page=page.previous_page_number %}{% else %}javascript:void(0);{% endif %}"><span class="glyphicon glyphicon-chevron-left small-icon"></span></a>
+            </li>
+
             {% if page.has_previous %}
-              <a href="{% append_to_get page=page.previous_page_number %}">{% trans "Previous" %}</a>
+              {% if page.previous_page_number > 1 %}
+                <li>
+                  <a href="{% append_to_get page=page.previous_page_number|add:-2 %}">{{ page.number|add:-2 }}</a>
+                </li>
+              {% endif %}
+              <li>
+                <a href="{% append_to_get page=page.previous_page_number %}">{{ page.number|add:-1 }}</a>
+              </li>
             {% endif %}
-            <span>
-              {% trans "Page" %} {{ page.number }} {% trans "of" %}
-              {{ page.paginator.num_pages }}
-            </span>
+
+            <li class="active">
+              <a href="javascript:void(0);">{{ page.number }}</a>
+            </li>
 
             {% if page.has_next %}
-              <a href="{% append_to_get page=page.next_page_number %}">{% trans "Next" %}</a>
+              <li>
+                <a href="{% append_to_get page=page.next_page_number %}">{{ page.number|add:1 }}</a>
+              </li>
+              {% if page.next_page_number < page.paginator.num_pages %}
+                <li>
+                  <a href="{% append_to_get page=page.next_page_number|add:1 %}">{{ page.number|add:2 }}</a>
+                </li>
+              {% endif %}
             {% endif %}
-          </span>
+
+            <li {% if not page.has_next %}class="disabled"{% endif %}>
+              <a href="{% if page.has_next %}{% append_to_get page=page.next_page_number %}{% else %}javascript:void(0);{% endif %}"><span class="glyphicon glyphicon-chevron-right small-icon"></span></a>
+            </li>
+
+            <li {% if page.number == page.paginator.num_pages %}class="disabled"{% endif %}>
+              <a href="{% if page.number == page.paginator.num_pages %}javascript:void(0);{% else %}{% append_to_get page=page.paginator.num_pages %}{% endif %}"><span class="glyphicon glyphicon-chevron-right small-icon"></span><span class="glyphicon glyphicon-chevron-right small-icon"></span></a>
+            </li>
+
+          </ul>
         </div>
       {% endif %}
     </div>
