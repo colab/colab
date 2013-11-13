@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-13 11:49-0200\n"
+"POT-Creation-Date: 2013-11-13 15:58-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -229,7 +229,6 @@ msgstr "Conjunto de mudanças"
 
 #: badger/models.py:27 search/views.py:42
 #: search/templates/search/includes/search_filters.html:124
-#: templates/search.html:33
 msgid "Ticket"
 msgstr "Tíquetes"
 
@@ -403,7 +402,7 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:39
-#: templates/base.html:90 templates/search.html:7
+#: templates/base.html:90
 msgid "Search"
 msgstr "Busca"
 
@@ -500,7 +499,6 @@ msgstr "Tamanho"
 
 #: search/utils.py:7 search/views.py:20
 #: search/templates/search/includes/search_filters.html:116
-#: templates/search.html:25
 msgid "Wiki"
 msgstr "Wiki"
 
@@ -513,12 +511,10 @@ msgid "Attachments"
 msgstr "Anexos"
 
 #: search/views.py:31 search/templates/search/includes/search_filters.html:120
-#: templates/search.html:29
 msgid "Discussion"
 msgstr "Discussões"
 
 #: search/views.py:84 search/templates/search/includes/search_filters.html:128
-#: templates/search.html:37
 msgid "Changeset"
 msgstr "Conjunto de Mudanças"
 
@@ -540,11 +536,11 @@ msgid "Search here"
 msgstr "Pesquise aqui"
 
 #: search/templates/search/search.html:67
-#: search/templates/search/search.html:77 templates/search.html:18
+#: search/templates/search/search.html:77
 msgid "Filters"
 msgstr "Filtros"
 
-#: search/templates/search/search.html:98 templates/search.html:48
+#: search/templates/search/search.html:98
 msgid "No results for your search."
 msgstr "Não há resultados para sua busca."
 
@@ -552,28 +548,10 @@ msgstr "Não há resultados para sua busca."
 msgid "You are searching for"
 msgstr "Você está procurando por"
 
-#: search/templates/search/search.html:110 templates/search.html:57
-msgid "Previous"
-msgstr "Anterior"
-
-#: search/templates/search/search.html:113 templates/search.html:61
-msgid "Page"
-msgstr "Página"
-
-#: search/templates/search/search.html:113 templates/search.html:61
-msgid "of"
-msgstr "de"
-
-#: search/templates/search/search.html:118 templates/search.html:65
-msgid "Next"
-msgstr "Pŕoximo"
-
 #: search/templates/search/includes/search_filters.html:5
 #: search/templates/search/includes/search_filters.html:33
 #: search/templates/search/includes/search_filters.html:51
 #: search/templates/search/includes/search_filters.html:69
-#: templates/search.html:23 templates/search.html.py:27
-#: templates/search.html:31 templates/search.html.py:35
 msgid "Remove filter"
 msgstr "Remover filtro"
 
@@ -587,18 +565,7 @@ msgstr "Filtro"
 msgid "Sort by"
 msgstr "Ordenar por"
 
-#: search/templates/search/includes/search_filters.html:101
-#, python-format
-msgid "<strong>%(name)s</strong>"
-msgstr "<strong>%(name)s</strong>"
-
-#: search/templates/search/includes/search_filters.html:103
-#, python-format
-msgid "%(name)s"
-msgstr "%(name)s"
-
 #: search/templates/search/includes/search_filters.html:111
-#: templates/search.html:20
 msgid "Types"
 msgstr "Tipos"
 
@@ -921,17 +888,36 @@ msgstr "RSS - Últimas Discussões"
 msgid "Willing to help"
 msgstr "Vontade de ajudar"
 
-#: templates/search.html:10
-msgid "documents found in"
-msgstr "documentos encontrados em"
-
-#: templates/search.html:11
-msgid "seconds"
-msgstr "segundos"
-
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "documents found in"
+#~ msgstr "documentos encontrados em"
+
+#~ msgid "seconds"
+#~ msgstr "segundos"
+
+#~ msgid "Previous"
+#~ msgstr "Anterior"
+
+#~ msgid "Page"
+#~ msgstr "Página"
+
+#~ msgid "of"
+#~ msgstr "de"
+
+#~ msgid "Next"
+#~ msgstr "Pŕoximo"
+
+#~ msgid "%(option)s"
+#~ msgstr "%(option)s"
+
+#~ msgid "%(name)s"
+#~ msgstr "%(name)s"
+
+#~ msgid "<strong>%(name)s</strong>"
+#~ msgstr "<strong>%(name)s</strong>"
 
 #~ msgid "OpenData - Communities Interlegis"
 #~ msgstr "OpenData - Comunidades Interlegis"
