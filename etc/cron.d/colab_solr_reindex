@@ -1,3 +1,0 @@
-PATH="/usr/bin"
-*/1 * * * * root wget "http://solr.interlegis.leg.br:8080/solr/dataimport?wt=json&indent=true&command=delta-import" -q -O - >> /tmp/solr-delta-import.log
-4 6 * * * root wget "http://solr.interlegis.leg.br:8080/solr/dataimport?wt=json&indent=true&command=full-import" -q -O - >> /tmp/solr-full-import.log
