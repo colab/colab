@@ -136,7 +136,7 @@
     </ul>
 
     {% if thread.get_related %}
-    <h4><strong>{% trans "Releated:" %}</strong></h4>
+    <h4><strong>{% trans "Related:" %}</strong></h4>
     <ul class="unstyled-list">
       {% for similar in thread.get_related|slice:":10" %}
       <li>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-12 19:45-0200\n"
+"POT-Creation-Date: 2013-11-13 11:49-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -323,7 +323,7 @@ msgstr ""
 
 #: colab/custom_settings.py:262
 msgid "Colab blog aggregator"
-msgstr ""
+msgstr "Agregador de blog Colab"
 
 #: planet/templates/feedzilla/_post_template.html:8
 msgid "From"
@@ -343,11 +343,11 @@ msgstr ""
 
 #: planet/templates/feedzilla/base.html:15
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: planet/templates/feedzilla/base.html:19
 msgid "Source Blogs"
-msgstr ""
+msgstr "Blogs de origem"
 
 #: planet/templates/feedzilla/base.html:22
 #: planet/templates/feedzilla/submit_blog.html:5
@@ -374,7 +374,8 @@ msgstr "enviar um blog"
 msgid ""
 "Thank you. Your application has been accepted and will be reviewed by admin "
 "in the near time."
-msgstr "Obrigado. Sua aplicação foi aceita e logo será revisada por um administrador."
+msgstr ""
+"Obrigado. Sua aplicação foi aceita e logo será revisada por um administrador."
 
 #: planet/templates/feedzilla/submit_blog.html:29
 msgid "Submit"
@@ -383,7 +384,7 @@ msgstr "Enviar"
 #: planet/templates/feedzilla/tag.html:7
 #, python-format
 msgid "Posts with &laquo;%(tag)s&raquo; label"
-msgstr ""
+msgstr "Postagens com a etiqueta &laquo;%(tag)s&raquo;"
 
 #: planet/templates/feedzilla/tag.html:16
 msgid "No posts with such label"
@@ -589,12 +590,12 @@ msgstr "Ordenar por"
 #: search/templates/search/includes/search_filters.html:101
 #, python-format
 msgid "<strong>%(name)s</strong>"
-msgstr ""
+msgstr "<strong>%(name)s</strong>"
 
 #: search/templates/search/includes/search_filters.html:103
 #, python-format
 msgid "%(name)s"
-msgstr ""
+msgstr "%(name)s"
 
 #: search/templates/search/includes/search_filters.html:111
 #: templates/search.html:20
@@ -662,8 +663,8 @@ msgid "Error trying to connect to Mailman API"
 msgstr "Erro na conexão com a API do Mailman"
 
 #: super_archives/views.py:92
-msgid "Timout trying to connect to Mailman API"
-msgstr "Tempo esgotado na conexão com a API do Mailman"
+msgid "Timeout trying to connect to Mailman API"
+msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
 
 #: super_archives/views.py:95
 msgid ""
@@ -682,7 +683,7 @@ msgid "Mailing list does not exist"
 msgstr "Lista de e-mail não existe"
 
 #: super_archives/views.py:107
-msgid "Unkown error trying to connect to Mailman API"
+msgid "Unknown error trying to connect to Mailman API"
 msgstr "Erro desconhecido na conexão com a API do Mailman"
 
 #: super_archives/views.py:143
@@ -698,8 +699,8 @@ msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
 msgstr ""
-"O endereço de e-mail que você está tentando verificar já é um endereço "
-"de e-mail ativo"
+"O endereço de e-mail que você está tentando verificar já é um endereço de e-"
+"mail ativo"
 
 #: super_archives/views.py:164
 msgid "Email address verified!"
@@ -731,8 +732,8 @@ msgid "Date"
 msgstr "Data"
 
 #: super_archives/templates/message-thread.html:139
-msgid "Releated:"
-msgstr ""
+msgid "Related:"
+msgstr "Relacionado:"
 
 #: super_archives/templates/message-thread.html:150
 msgid "Statistics:"
@@ -813,8 +814,8 @@ msgid ""
 "After sending a message it will take few minutes before it shows up in here. "
 "Why don't you grab a coffee?"
 msgstr ""
-"Depois de enviar uma mensagem levará alguns minutos antes dela aparecer aqui. "
-"Por que você não pega um café?"
+"Depois de enviar uma mensagem levará alguns minutos antes dela aparecer "
+"aqui. Por que você não pega um café?"
 
 #: super_archives/templates/superarchives/includes/message.html:62
 msgid "Send"

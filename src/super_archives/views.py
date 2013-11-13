@@ -89,7 +89,7 @@ class ThreadView(View):
             error_msg = _('Error trying to connect to Mailman API')
         except requests.exceptions.Timeout:
             resp = None
-            error_msg = _('Timout trying to connect to Mailman API')
+            error_msg = _('Timeout trying to connect to Mailman API')
 
         if resp and resp.status_code == 200:
             messages.success(request, _("Your message was sent. It may take "
@@ -104,7 +104,7 @@ class ThreadView(View):
                     elif resp.status_code == 404:
                         error_msg = _('Mailing list does not exist')
                 else:
-                    error_msg = _('Unkown error trying to connect to Mailman API')
+                    error_msg = _('Unknown error trying to connect to Mailman API')
             messages.error(request, error_msg)
 
         return self.get(request, mailinglist, thread_token)
