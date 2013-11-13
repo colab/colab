@@ -1,4 +1,5 @@
 from settings import *
+from django.utils.translation import ugettext_lazy as _
 
 DEBUG = False
 
@@ -6,11 +7,10 @@ TEMPLATE_DEBUG = False
 
 TIME_ZONE = 'America/Sao_Paulo'
 
-gettext = lambda s: s
 LANGUAGES = (
-    ('en', gettext('English')),
-    ('pt-br', gettext('Portuguese')),
-    ('es', gettext('Spanish')),
+    ('en', _('English')),
+    ('pt-br', _('Portuguese')),
+    ('es', _('Spanish')),
 )
 
 DJANGO_DATE_FORMAT_TO_JS = {
@@ -33,11 +33,11 @@ ATTACHMENTS_FOLDER_PATH = '/home/colab/trac/attachments/'
 
 ORDERING_DATA = {
     'latest':  {
-        'name': gettext(u'Recent activity'),
+        'name': _(u'Recent activity'),
         'fields': ('-modified', '-created'),
     },
     'hottest': {
-        'name': gettext(u'Relevance'),
+        'name': _(u'Relevance'),
         'fields': None,
     },
 }
@@ -45,16 +45,16 @@ ORDERING_DATA = {
 # File type groupings is a tuple of tuples containg what it should filter,
 # how it should be displayed, and a tuple of which mimetypes it includes
 FILE_TYPE_GROUPINGS = (
-    ('document', gettext(u'Document'),
+    ('document', _(u'Document'),
      ('doc', 'docx', 'odt', 'otx', 'dotx', 'pdf', 'ott')),
-    ('presentation', gettext(u'Presentation'), ('ppt', 'pptx', 'odp')),
-    ('text', gettext(u'Text'), ('txt', 'po', 'conf', 'log')),
-    ('code', gettext(u'Code'),
+    ('presentation', _(u'Presentation'), ('ppt', 'pptx', 'odp')),
+    ('text', _(u'Text'), ('txt', 'po', 'conf', 'log')),
+    ('code', _(u'Code'),
      ('py', 'php', 'js', 'sql', 'sh', 'patch', 'diff', 'html', '')),
-    ('compressed', gettext(u'Compressed'), ('rar', 'zip', 'gz', 'tgz', 'bz2')),
-    ('image', gettext(u'Image'),
+    ('compressed', _(u'Compressed'), ('rar', 'zip', 'gz', 'tgz', 'bz2')),
+    ('image', _(u'Image'),
      ('jpg', 'jpeg', 'png', 'tiff', 'gif', 'svg', 'psd', 'planner', 'cdr')),
-    ('spreadsheet', gettext(u'Spreadsheet'),
+    ('spreadsheet', _(u'Spreadsheet'),
      ('ods', 'xls', 'xlsx', 'xslt', 'csv')),
 )
 
@@ -258,8 +258,8 @@ MESSAGE_TAGS = {
 ### Feedzilla  (planet)
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
-FEEDZILLA_SITE_TITLE = gettext(u'Planet Colab')
-FEEDZILLA_SITE_DESCRIPTION = gettext(u'Colab blog aggregator')
+FEEDZILLA_SITE_TITLE = _(u'Planet Colab')
+FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 
 
 ### Mailman API settings
