@@ -51,23 +51,24 @@ class colab {
     path   => '/root/.ssh',
   }
 
-  file { 'root-ssh-private-key':
-    ensure  => present,
-    mode    => '0600',
-    path    => '/root/.ssh/id_rsa',
-    source  => 'puppet:///modules/colab/root_id_rsa',
-    owner   => root,
-    group   => root,
-  }
+  # Should generate instead of copying
+  #file { 'root-ssh-private-key':
+  #  ensure  => present,
+  #  mode    => '0600',
+  #  path    => '/root/.ssh/id_rsa',
+  #  source  => 'puppet:///modules/colab/root_id_rsa',
+  #  owner   => root,
+  #  group   => root,
+  #}
 
-  file { 'root-ssh-public-key':
-    ensure  => present,
-    mode    => '0644',
-    path    => '/root/.ssh/id_rsa.pub',
-    source  => 'puppet:///modules/colab/root_id_rsa.pub',
-    owner   => root,
-    group   => root,
-  }
+  #file { 'root-ssh-public-key':
+  #  ensure  => present,
+  #  mode    => '0644',
+  #  path    => '/root/.ssh/id_rsa.pub',
+  #  source  => 'puppet:///modules/colab/root_id_rsa.pub',
+  #  owner   => root,
+  #  group   => root,
+  #}
 
   supervisor::app { 'colab':
     command   => '/home/colab/.virtualenvs/colab/bin/gunicorn colab.wsgi:application -c colab/gunicorn.conf.py',
