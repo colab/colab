@@ -98,9 +98,9 @@
       <span class="glyphicon glyphicon-chevron-right"></span>
       <a href="{% append_to_get order=option p=1 %}">
         {% ifequal request.GET.order option %}
-          {% blocktrans with name=dict_order.name %}<strong>{{ name }}</strong>{% endblocktrans %}
+          <strong>{{ dict_order.name }}</strong>
         {% else %}
-          {% blocktrans with name=dict_order.name %}{{ name }}{% endblocktrans %}
+          {{ dict_order.name }}
         {% endifequal %}
       </a>
     </li>

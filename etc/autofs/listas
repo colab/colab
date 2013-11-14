@@ -1,1 +1,0 @@
-archives -fstype=fuse,rw,nodev,users,noatime :sshfs\#root@listas.interlegis.gov.br\:/var/lib/mailman/archives/private
