@@ -31,6 +31,7 @@ django-revproxy
 
 # Converse.js (XMPP client)
 django-conversejs==0.2.8
+git+https://github.com/TracyWebTech/SleekXMPP@fix-gevent
 
 # Feedzilla (planet) and deps
 #feedzilla==0.22
