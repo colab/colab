@@ -67,7 +67,7 @@ HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': os.environ.get('COLAB_SOLR_URL'),
+        'URL': os.environ.get('COLAB_SOLR_URL', 'http://localhost:8983/solr'),
     }
 }
 
@@ -193,7 +193,9 @@ LOGGING = {
 }
 
 COLAB_FROM_ADDRESS = '"Colab Interlegis" <noreply@interlegis.leg.br>'
-SERVER_EMAIL = EMAIL_HOST_USER = COLAB_FROM_ADDRESS
+SERVER_EMAIL = COLAB_FROM_ADDRESS
+EMAIL_HOST = 'smtp.interlegis.leg.br'
+EMAIL_PORT = 25
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
