@@ -270,7 +270,7 @@ MAILMAN_API_URL = 'http://listas.interlegis.gov.br:8000'
 
 ### BrowserID / Persona
 SITE_URL = 'https://colab.interlegis.leg.br'
-BROWSERID_AUDIENCES = [SITE_URL]
+BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
 
 LOGIN_URL = '/'
