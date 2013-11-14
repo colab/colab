@@ -1,2 +1,0 @@
-PATH="/usr/local/django/colab/bin"
-* * * * * root DJANGO_SETTINGS_MODULE="colab.settings" django-admin.py import_emails --archives_path=/usr/local/django/colab/mnt/archives/ --exclude-list=saberes-divulgacao --exclude-list=pml --exclude-list=mailman --exclude-list=lexml-anuncios > /tmp/colab-import-emails-last.log

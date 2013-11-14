@@ -21,7 +21,7 @@ DJANGO_DATE_FORMAT_TO_JS = {
 LANGUAGE_CODE = 'en'
 
 # The absolute path to the folder containing the attachments
-ATTACHMENTS_FOLDER_PATH = '/home/colab/trac/attachments/'
+ATTACHMENTS_FOLDER_PATH = '/mnt/trac/attachments/'
 
 # ORDERING_DATA receives the options to order for as it's keys and a dict as
 # value, if you want to order for the last name, you can use something like:
@@ -67,7 +67,7 @@ HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': os.environ.get('COLAB_SOLR_URL'),
+        'URL': os.environ.get('COLAB_SOLR_URL', 'http://localhost:8983/solr'),
     }
 }
 
@@ -193,7 +193,9 @@ LOGGING = {
 }
 
 COLAB_FROM_ADDRESS = '"Colab Interlegis" <noreply@interlegis.leg.br>'
-SERVER_EMAIL = EMAIL_HOST_USER = COLAB_FROM_ADDRESS
+SERVER_EMAIL = COLAB_FROM_ADDRESS
+EMAIL_HOST = 'smtp.interlegis.leg.br'
+EMAIL_PORT = 25
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -268,7 +270,7 @@ MAILMAN_API_URL = 'http://listas.interlegis.gov.br:8000'
 
 ### BrowserID / Persona
 SITE_URL = 'https://colab.interlegis.leg.br'
-BROWSERID_AUDIENCES = [SITE_URL]
+BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
 
 LOGIN_URL = '/'

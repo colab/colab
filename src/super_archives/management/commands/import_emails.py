@@ -135,7 +135,7 @@ class Command(BaseCommand, object):
         subject_slug = slugify(email.subject_clean)
         thread = self.THREAD_CACHE.get(subject_slug, {}).get(mailinglist.id)
         if thread is None:
-            thread = Thread.objects.get_or_create(
+            thread = Thread.all_objects.get_or_create(
                 mailinglist=mailinglist,
                 subject_token=subject_slug
             )[0]
@@ -167,7 +167,7 @@ class Command(BaseCommand, object):
         else:
             # If the message is already at the database don't do anything
             try:
-                messages = Message.objects.get(
+                messages = Message.all_objects.get(
                     message_id=msg_id,
                     thread__mailinglist=mailinglist
                 )
@@ -196,7 +196,7 @@ class Command(BaseCommand, object):
 
         subject = email_msg.get_subject()
 
-        email = Message.objects.create(
+        email = Message.all_objects.create(
             message_id=email_msg.get('Message-ID'),
             from_address=email_addr,
             subject=subject,
