@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-13 15:58-0200\n"
+"POT-Creation-Date: 2013-11-14 15:22-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,52 +138,64 @@ msgstr "Participações em comunidades internas"
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_update_form.html:58
+#: accounts/templates/accounts/user_update_form.html:63
 msgid "We sent a verification email to "
 msgstr "Enviamos um email de verificação para "
 
-#: accounts/templates/accounts/user_update_form.html:59
+#: accounts/templates/accounts/user_update_form.html:64
 msgid "Please follow the instructions in it."
 msgstr "Por favor, siga as instruções."
 
-#: accounts/templates/accounts/user_update_form.html:94
+#: accounts/templates/accounts/user_update_form.html:113
 msgid "profile information"
 msgstr "informações do perfil"
 
-#: accounts/templates/accounts/user_update_form.html:99
+#: accounts/templates/accounts/user_update_form.html:118
 msgid "Change your avatar at Gravatar.com"
 msgstr "Troque seu avatar em Gravatar.com"
 
-#: accounts/templates/accounts/user_update_form.html:126 search/utils.py:8
+#: accounts/templates/accounts/user_update_form.html:145 search/utils.py:8
 msgid "Emails"
 msgstr "E-mails"
 
-#: accounts/templates/accounts/user_update_form.html:135
+#: accounts/templates/accounts/user_update_form.html:154
 msgid "Primary"
 msgstr "Primários"
 
-#: accounts/templates/accounts/user_update_form.html:138
+#: accounts/templates/accounts/user_update_form.html:157
+msgid "Setting..."
+msgstr "Definindo..."
+
+#: accounts/templates/accounts/user_update_form.html:157
 msgid "Set as Primary"
 msgstr "Definir como Primário"
 
-#: accounts/templates/accounts/user_update_form.html:139
-#: accounts/templates/accounts/user_update_form.html:151
+#: accounts/templates/accounts/user_update_form.html:158
+msgid "Deleting..."
+msgstr "Deletando..."
+
+#: accounts/templates/accounts/user_update_form.html:158
+#: accounts/templates/accounts/user_update_form.html:170
 msgid "Delete"
 msgstr "Apagar"
 
-#: accounts/templates/accounts/user_update_form.html:150
+#: accounts/templates/accounts/user_update_form.html:169
+msgid "Sending verification..."
+msgstr "Enviando verificação..."
+
+#: accounts/templates/accounts/user_update_form.html:169
 msgid "Verify"
 msgstr "Verificar"
 
-#: accounts/templates/accounts/user_update_form.html:158
+#: accounts/templates/accounts/user_update_form.html:177
 msgid "Add another email address:"
 msgstr "Adicionar outro endereço de e-mail"
 
-#: accounts/templates/accounts/user_update_form.html:161
+#: accounts/templates/accounts/user_update_form.html:180
 msgid "Add"
 msgstr "Adicionar"
 
-#: accounts/templates/accounts/user_update_form.html:168
+#: accounts/templates/accounts/user_update_form.html:187
 msgid "Update"
 msgstr "Atualizar"
 
@@ -316,11 +328,11 @@ msgstr "Imagem"
 msgid "Spreadsheet"
 msgstr "Planilha"
 
-#: colab/custom_settings.py:261
+#: colab/custom_settings.py:263
 msgid "Planet Colab"
 msgstr ""
 
-#: colab/custom_settings.py:262
+#: colab/custom_settings.py:264
 msgid "Colab blog aggregator"
 msgstr "Agregador de blog Colab"
 
@@ -836,15 +848,19 @@ msgstr "Meu Perfil"
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:156
+#: templates/base.html:138
+msgid "The login has failed. Please, try again."
+msgstr "O login falhou. Por favor, tente novamente."
+
+#: templates/base.html:163
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:161
+#: templates/base.html:168
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:163
+#: templates/base.html:170
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 

@@ -47,7 +47,7 @@ class colab::cronjobs {
     user    => 'root',
     require => [
         File['/mnt/mailman/archives/'],
-        File['root-ssh-private-key'],
+        #File['root-ssh-private-key'],
         Package['sshfs'],
     ],
   }

@@ -12,7 +12,7 @@ server {
     listen 80;
 
     root /;
-    server_name colab.interlegis.leg.br colab.interlegis.gov.br colab-demo.tracy.com.br localhost;
+    server_name colab.interlegis.leg.br colab01a.interlegis.leg.br colab01b.interlegis.leg.br colab.interlegis.gov.br colab-demo.tracy.com.br localhost;
     
     location @django {
         proxy_hide_header Vary;
@@ -23,8 +23,21 @@ server {
         proxy_redirect off;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Scheme $scheme;
+        proxy_set_header X-Forwarded-Protocol https;
         proxy_pass http://django;
         access_log /var/log/nginx/proxy-access.log proxy;
+    }
+
+    location /http-bind {
+        proxy_pass http://127.0.0.1:5280;
+    }
+
+    location /chrome {
+        proxy_pass http://ambientedev01a.interlegis.leg.br;
+    }
+
+    location /raw-attachment {
+        proxy_pass http://ambientedev01a.interlegis.leg.br;
     }
 
     location / {
