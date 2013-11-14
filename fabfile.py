@@ -11,12 +11,13 @@ env.use_shell = False
 environments = {
     'dev': {
         'hosts': ['127.0.0.1'],
-        'port': 2222,
         'key_filename': '~/.vagrant.d/insecure_private_key',
+        'port': 2222,
     },
     'live': {
-        'hosts': [], #TODO
+        'hosts': ['10.1.2.153'],
         'key_filename': '~/.ssh/id_rsa',
+	'port': 22,
     },
     'demo': {
         'hosts': ['colab-demo.tracy.com.br'],
