@@ -81,6 +81,7 @@ def deploy(update=False):
     if update:
         update_requirements()
 
+    load_badges()
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
         run('python manage.py syncdb')
         run('python manage.py migrate')
