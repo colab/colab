@@ -9,7 +9,7 @@ class colab::cronjobs {
   }
 
   cron { 'feedzilla':
-    command => "$manage_colab feedzilla_update &> /dev/null"
+    command => "$manage_colab feedzilla_update &> /dev/null",
     hour    => '*',
     minute  => '0',
   }
