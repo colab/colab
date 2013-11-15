@@ -12,12 +12,12 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='latest_message__subject_clean')
     description = indexes.CharField(use_template=True)
     latest_description = indexes.CharField(
-        model_attr='latest_message__body',
+        model_attr='latest_message__description',
         indexed=False,
     )
     created = indexes.DateTimeField()
     modified = indexes.DateTimeField(
-        model_attr='latest_message__received_time'
+        model_attr='latest_message__modified'
     )
     tag = indexes.CharField(model_attr='mailinglist__name')
     collaborators = indexes.CharField(use_template=True, stored=False)
@@ -33,12 +33,6 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     def get_updated_field(self):
         return 'latest_message__received_time'
 
-    def prepare_author(self, obj):
-        from_address = obj.message_set.first().from_address
-        if from_address.user:
-            return from_address.user.username
-        return None
-
     def prepare_fullname(self, obj):
         return obj.message_set.first().from_address.get_full_name()
 
@@ -51,6 +45,9 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
             from_address.get_full_name(),
             from_address.user.username,
         )
+
+    def prepare_author(self, obj):
+        return obj.latest_message.author
 
     def prepare_author_url(self, obj):
         first_message = obj.message_set.first()

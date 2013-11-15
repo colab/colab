@@ -11,7 +11,7 @@
 {% endif %}
 
 {% if result.title %}
-  <a href="{{ result.url }}" {% if result.description %}title="{{ result.description|escape|truncatechars:200 }}"{% endif %}>
+  <a href="{{ result.url }}" {% if result.latest_description %}title="{{ result.latest_description|escape|truncatechars:150 }}"{% elif result.description %}title="{{ result.description|escape|truncatechars:150 }}"{% endif %}>
     <span class="subject">
       <!-- a striptags filter was raising an error here because using with highlight -->
       {% if query %}
@@ -25,7 +25,16 @@
 
 {% if result.description %}
       <!-- a striptags filter was raising an error here because using with highlight -->
-  <span class="quiet">- {% if query %}{% highlight result.description with query max_length "150" %}{% else %}{{ result.description|truncatechars:150 }}{% endif %}</span>
+  <span class="quiet">- {% if query %}
+    {% highlight result.description with query max_length "150" %}
+  {% else %}
+    {% if result.latest_description %}
+      {{ result.latest_description|escape|truncatechars:150 }}
+    {% elif result.description %}
+      {{ result.description|escape|truncatechars:150 }}
+    {% endif %}
+  {% endif %}
+  </span>
 {% endif %}
 
 {% if result.fullname or result.modified %}
