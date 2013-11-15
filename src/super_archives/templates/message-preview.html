@@ -25,7 +25,7 @@
 
 {% if result.description %}
       <!-- a striptags filter was raising an error here because using with highlight -->
-  <span class="quiet">- {% if query %}{% highlight result.description with query max_length "150" %}{% else %}{{ result.description }}{% endif %}</span>
+  <span class="quiet">- {% if query %}{% highlight result.description with query max_length "150" %}{% else %}{{ result.description|truncatechars:150 }}{% endif %}</span>
 {% endif %}
 
 {% if result.fullname or result.modified %}

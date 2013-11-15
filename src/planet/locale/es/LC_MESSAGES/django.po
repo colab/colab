@@ -1,0 +1,103 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-07-26 11:28-0300\n"
+"PO-Revision-Date: 2013-10-15 23:46-0430\n"
+"Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
+"Language-Team: ES <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#: templates/common/pagination.html:5 templates/common/pagination.html.py:7
+msgid "previous"
+msgstr "anterior"
+
+#: templates/common/pagination.html:31 templates/common/pagination.html:33
+msgid "next"
+msgstr "próximo"
+
+#: templates/feedzilla/_post_template.html:9
+msgid "From"
+msgstr "De"
+
+#: templates/feedzilla/_post_template.html:9
+msgid "on"
+msgstr "en"
+
+#: templates/feedzilla/_post_template.html:17
+msgid "Read original"
+msgstr "Leer original"
+
+#: templates/feedzilla/base.html:6
+msgid "Planet"
+msgstr "Planeta"
+
+#: templates/feedzilla/base.html:15 templates/feedzilla/submit_blog.html:5
+msgid "Submit a blog"
+msgstr "Solicite la inclusión de un blog"
+
+#: templates/feedzilla/base.html:18
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: templates/feedzilla/base.html:22
+msgid "Source Blogs"
+msgstr "Fuente de Blogs"
+
+#: templates/feedzilla/submit_blog.html:8
+msgid ""
+"Thank you. Your application has been accepted and will be reviewed by admin "
+"in the near time."
+msgstr "Gracias. Su solicitud ha sido aceptado y sera revisado por el administrador, lo mas pronto posible."
+
+#: templates/feedzilla/submit_blog.html:10
+msgid "Required fields"
+msgstr "Campos requeridos"
+
+#: templates/feedzilla/submit_blog.html:14
+msgid "Blog Information"
+msgstr "Información del blog"
+
+#: templates/feedzilla/submit_blog.html:15
+msgid "Blog URL"
+msgstr "Dirección URL de Blog"
+
+#: templates/feedzilla/submit_blog.html:16
+msgid "Blog name"
+msgstr "Nombre de blog"
+
+#: templates/feedzilla/submit_blog.html:17
+msgid "Name of author of the blog"
+msgstr "Nombre del autor del blog"
+
+#: templates/feedzilla/submit_blog.html:18
+msgid "Feed URL"
+msgstr "Dirección URL de Feed"
+
+#: templates/feedzilla/submit_blog.html:18
+msgid "You can specify what exactly feed you want submit"
+msgstr ""
+"Usted puede especificar cual feed exactamente usted quiere solicitar su "
+"inclusión"
+
+#: templates/feedzilla/submit_blog.html:19
+msgid "Submit"
+msgstr "Solicite la inclusión de un blog"
+
+#: templates/feedzilla/tag.html:5
+#, python-format
+msgid "Posts with &laquo;%(tag)s&raquo; label"
+msgstr "Envíos con etiqueta &laquo;%(tag)s&raquo;"
+
+#: templates/feedzilla/tag.html:14
+msgid "No posts with such label"
+msgstr "No hay envíos con dicha etiqueta"
