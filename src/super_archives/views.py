@@ -73,11 +73,12 @@ class ThreadView(View):
         except Thread.DoesNotExist:
             raise http.Http404
 
-        data = {}
-        data['from']  = '{} <{}>'.format(request.user.get_full_name(),
-                                      request.user.email)
-        data['subject'] = thread.message_set.first().subject_clean
-        data['body'] = request.POST.get('emailbody', '').strip()
+        data = {
+            'email_from': request.user.email,
+            'name_from': request.user.get_full_name(),
+            'subject': thread.message_set.first().subject_clean,
+            'body': request.POST.get('emailbody', '').strip(),
+        }
 
         url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
 
