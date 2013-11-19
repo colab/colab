@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-19 13:05-0200\n"
+"POT-Creation-Date: 2013-11-19 13:46-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -130,9 +130,9 @@ msgstr "Últimas postagens"
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:136
-msgid "Community inside participations"
-msgstr "Participações em comunidades internas"
+#: accounts/templates/accounts/user_detail.html:136 badger/models.py:24
+msgid "Contributions"
+msgstr "Contribuições"
 
 #: accounts/templates/accounts/user_detail.html:141
 msgid "No contributions of this user so far."
@@ -226,10 +226,6 @@ msgstr "Manual"
 #: badger/models.py:23 super_archives/models.py:262
 msgid "Messages"
 msgstr "Mensagens"
-
-#: badger/models.py:24
-msgid "Contributions"
-msgstr "Contribuições"
 
 #: badger/models.py:25
 msgid "Wikis"
@@ -812,7 +808,7 @@ msgstr "Inscrição na lista de e-mail"
 msgid "Not found. Keep searching! :)"
 msgstr "Não encontrado. Continue procurando! :)"
 
-#: templates/500.html:5
+#: templates/500.html:2
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
@@ -907,6 +903,9 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Community inside participations"
+#~ msgstr "Participações internas da comunidade"
 
 #~ msgid "documents found in"
 #~ msgstr "documentos encontrados em"
