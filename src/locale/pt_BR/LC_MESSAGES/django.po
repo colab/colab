@@ -692,7 +692,7 @@ msgstr "atrás"
 
 #: super_archives/templates/message-thread.html:33
 msgid "You must login before voting."
-msgstr "Você deve está logado antes de votar."
+msgstr "Você deve estar logado antes de votar."
 
 #: super_archives/templates/message-thread.html:126
 msgid "Order by"
