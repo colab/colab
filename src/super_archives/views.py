@@ -16,7 +16,7 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from haystack.query import SearchQuerySet
 
@@ -30,8 +30,8 @@ class ThreadView(View):
 
     def get(self, request, mailinglist, thread_token):
 
-        thread = Thread.objects.get(subject_token=thread_token,
-                                    mailinglist__name=mailinglist)
+        thread = get_object_or_404(Thread, subject_token=thread_token,
+                                   mailinglist__name=mailinglist)
         thread.hit(request)
 
         try:
