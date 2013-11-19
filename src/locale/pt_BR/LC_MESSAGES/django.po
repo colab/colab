@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-19 14:05-0200\n"
+"POT-Creation-Date: 2013-11-19 14:43-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "Informações pessoais"
 msgid "Subscribe to mail lists"
 msgstr "Inscreva-se para listas de e-mails"
 
-#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:96
+#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:97
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -344,7 +344,7 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:5 templates/base.html:74
+#: planet/templates/feedzilla/base.html:5 templates/base.html:75
 msgid "Planet"
 msgstr ""
 
@@ -410,7 +410,7 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:39
-#: templates/base.html:90
+#: templates/base.html:91
 msgid "Search"
 msgstr "Busca"
 
@@ -741,13 +741,13 @@ msgid "Tags:"
 msgstr "Etiquetas:"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:5
-#: templates/base.html:71
+#: templates/base.html:72
 msgid "Discussions"
 msgstr "Discussões"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:15
 msgid "latest"
-msgstr "mais recente"
+msgstr "mais recentes"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:23
 #: super_archives/templates/superarchives/thread-dashboard.html:37
@@ -756,7 +756,7 @@ msgstr "mais..."
 
 #: super_archives/templates/superarchives/thread-dashboard.html:29
 msgid "most relevant"
-msgstr "mais relevante"
+msgstr "mais relevantes"
 
 #: super_archives/templates/superarchives/emails/email_verification.txt:2
 #, python-format
@@ -812,51 +812,51 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:77
+#: templates/base.html:78
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:81
+#: templates/base.html:82
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:83
+#: templates/base.html:84
 msgid "Timeline"
 msgstr "Histórico"
 
-#: templates/base.html:84
+#: templates/base.html:85
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:85
+#: templates/base.html:86
 msgid "Browse Source"
 msgstr "Ver Código"
 
-#: templates/base.html:86
+#: templates/base.html:87
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
 
-#: templates/base.html:110
+#: templates/base.html:111
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:122 templates/base.html.py:125
+#: templates/base.html:123 templates/base.html.py:126
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:138
+#: templates/base.html:139
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:163
+#: templates/base.html:164
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:168
+#: templates/base.html:169
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:170
+#: templates/base.html:171
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
