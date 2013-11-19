@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-19 14:43-0200\n"
+"POT-Creation-Date: 2013-11-19 16:26-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "Informações pessoais"
 msgid "Subscribe to mail lists"
 msgstr "Inscreva-se para listas de e-mails"
 
-#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:97
+#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:95
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -344,7 +344,7 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:5 templates/base.html:75
+#: planet/templates/feedzilla/base.html:5 templates/base.html:73
 msgid "Planet"
 msgstr ""
 
@@ -359,7 +359,7 @@ msgstr "Blogs de origem"
 #: planet/templates/feedzilla/base.html:22
 #: planet/templates/feedzilla/submit_blog.html:5
 msgid "Submit a blog"
-msgstr "Enviar um blog"
+msgstr "Sugerir um blog"
 
 #: planet/templates/feedzilla/index.html:10
 msgid "There is no RSS registered"
@@ -410,7 +410,7 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:39
-#: templates/base.html:91
+#: templates/base.html:89
 msgid "Search"
 msgstr "Busca"
 
@@ -741,7 +741,7 @@ msgid "Tags:"
 msgstr "Etiquetas:"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:5
-#: templates/base.html:72
+#: templates/base.html:70
 msgid "Discussions"
 msgstr "Discussões"
 
@@ -812,51 +812,51 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:78
+#: templates/base.html:76
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:82
+#: templates/base.html:80
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:84
+#: templates/base.html:82
 msgid "Timeline"
 msgstr "Histórico"
 
-#: templates/base.html:85
+#: templates/base.html:83
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:86
+#: templates/base.html:84
 msgid "Browse Source"
 msgstr "Ver Código"
 
-#: templates/base.html:87
+#: templates/base.html:85
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
 
-#: templates/base.html:111
+#: templates/base.html:109
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:123 templates/base.html.py:126
+#: templates/base.html:121 templates/base.html.py:124
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:139
+#: templates/base.html:137
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:164
+#: templates/base.html:162
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:169
+#: templates/base.html:167
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:171
+#: templates/base.html:169
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
