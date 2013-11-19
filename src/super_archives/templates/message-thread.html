@@ -95,7 +95,9 @@
     });
 
     $('.vote.btn', this).on('click', vote);
-    $('.reply.btn', this).on('click', focus_reply);
+    {% if user.is_active %}
+      $('.reply.btn', this).on('click', focus_reply);
+    {% endif %}
   });
 
 </script>
