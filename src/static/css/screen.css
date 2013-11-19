@@ -406,5 +406,10 @@ span.highlighted {
 
 /* paginator icon */
 .small-icon {
-  font-size: 10px;
+    font-size: 10px;
+}
+
+/* Subscribe list */
+.vcard .label {
+    line-height: 2;
 }
