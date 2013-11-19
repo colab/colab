@@ -145,6 +145,7 @@ class Command(BaseCommand, object):
             self.THREAD_CACHE[subject_slug][mailinglist.id] = thread
 
         thread.latest_message = email
+        thread.update_keywords()
         thread.save()
         return thread
 
