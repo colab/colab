@@ -47,9 +47,6 @@
   </head>
 
   <body class="container">
-    {% csrf_token %}
-    {% browserid_info %}
-
 
     {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,7 +92,7 @@
           <ul class="nav navbar-nav navbar-right">
             {% if not user.is_authenticated %}
               <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
-              <li>{% browserid_login text='Login' next=request.path %}</li>
+              <li>{% browserid_login text='Login' %}</li>
             {% else %}
               <li id="user-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
