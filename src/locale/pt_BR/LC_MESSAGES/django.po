@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-14 15:22-0200\n"
+"POT-Creation-Date: 2013-11-19 13:05-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -138,64 +138,64 @@ msgstr "Participações em comunidades internas"
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_update_form.html:63
+#: accounts/templates/accounts/user_update_form.html:65
 msgid "We sent a verification email to "
 msgstr "Enviamos um email de verificação para "
 
-#: accounts/templates/accounts/user_update_form.html:64
+#: accounts/templates/accounts/user_update_form.html:66
 msgid "Please follow the instructions in it."
 msgstr "Por favor, siga as instruções."
 
-#: accounts/templates/accounts/user_update_form.html:113
+#: accounts/templates/accounts/user_update_form.html:110
 msgid "profile information"
 msgstr "informações do perfil"
 
-#: accounts/templates/accounts/user_update_form.html:118
+#: accounts/templates/accounts/user_update_form.html:115
 msgid "Change your avatar at Gravatar.com"
 msgstr "Troque seu avatar em Gravatar.com"
 
-#: accounts/templates/accounts/user_update_form.html:145 search/utils.py:8
+#: accounts/templates/accounts/user_update_form.html:142 search/utils.py:8
 msgid "Emails"
 msgstr "E-mails"
 
-#: accounts/templates/accounts/user_update_form.html:154
+#: accounts/templates/accounts/user_update_form.html:151
 msgid "Primary"
-msgstr "Primários"
+msgstr "Primário"
 
-#: accounts/templates/accounts/user_update_form.html:157
+#: accounts/templates/accounts/user_update_form.html:154
 msgid "Setting..."
 msgstr "Definindo..."
 
-#: accounts/templates/accounts/user_update_form.html:157
+#: accounts/templates/accounts/user_update_form.html:154
 msgid "Set as Primary"
 msgstr "Definir como Primário"
 
-#: accounts/templates/accounts/user_update_form.html:158
+#: accounts/templates/accounts/user_update_form.html:155
 msgid "Deleting..."
 msgstr "Deletando..."
 
-#: accounts/templates/accounts/user_update_form.html:158
-#: accounts/templates/accounts/user_update_form.html:170
+#: accounts/templates/accounts/user_update_form.html:155
+#: accounts/templates/accounts/user_update_form.html:167
 msgid "Delete"
 msgstr "Apagar"
 
-#: accounts/templates/accounts/user_update_form.html:169
+#: accounts/templates/accounts/user_update_form.html:166
 msgid "Sending verification..."
 msgstr "Enviando verificação..."
 
-#: accounts/templates/accounts/user_update_form.html:169
+#: accounts/templates/accounts/user_update_form.html:166
 msgid "Verify"
 msgstr "Verificar"
 
-#: accounts/templates/accounts/user_update_form.html:177
+#: accounts/templates/accounts/user_update_form.html:174
 msgid "Add another email address:"
 msgstr "Adicionar outro endereço de e-mail"
 
-#: accounts/templates/accounts/user_update_form.html:180
+#: accounts/templates/accounts/user_update_form.html:177
 msgid "Add"
 msgstr "Adicionar"
 
-#: accounts/templates/accounts/user_update_form.html:187
+#: accounts/templates/accounts/user_update_form.html:184
 msgid "Update"
 msgstr "Atualizar"
 
@@ -637,15 +637,15 @@ msgstr "Por favor, digite o corpo da mensagem"
 msgid "Message"
 msgstr "Mensagem"
 
-#: super_archives/views.py:89
+#: super_archives/views.py:90
 msgid "Error trying to connect to Mailman API"
 msgstr "Erro na conexão com a API do Mailman"
 
-#: super_archives/views.py:92
+#: super_archives/views.py:93
 msgid "Timeout trying to connect to Mailman API"
 msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
 
-#: super_archives/views.py:95
+#: super_archives/views.py:96
 msgid ""
 "Your message was sent. It may take some minutes before it's delivered. Why "
 "don't you breath some fresh air in the meanwhile."
@@ -653,15 +653,15 @@ msgstr ""
 "Sua mensagem foi enviada. Pode levar alguns minutos antes de ser entregue. "
 "Por quê você respira um ar fresco enquanto isso."
 
-#: super_archives/views.py:103
+#: super_archives/views.py:104
 msgid "You cannot send an empty email"
 msgstr "Você não pode enviar um e-mail vazio"
 
-#: super_archives/views.py:105
+#: super_archives/views.py:106
 msgid "Mailing list does not exist"
 msgstr "Lista de e-mail não existe"
 
-#: super_archives/views.py:107
+#: super_archives/views.py:108
 msgid "Unknown error trying to connect to Mailman API"
 msgstr "Erro desconhecido na conexão com a API do Mailman"
 
@@ -685,11 +685,11 @@ msgstr ""
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
-#: super_archives/templates/message-preview.html:34
+#: super_archives/templates/message-preview.html:43
 msgid "by"
 msgstr "por"
 
-#: super_archives/templates/message-preview.html:49
+#: super_archives/templates/message-preview.html:58
 #: super_archives/templates/message-thread.html:155
 msgid "ago"
 msgstr "atrás"
