@@ -170,13 +170,13 @@ class EmailView(View):
         """Create new email address that will wait for validation"""
 
         email = request.POST.get('email')
-        user_pk = request.POST.get('user')
+        user_id = request.POST.get('user')
         if not email:
             return http.HttpResponseBadRequest()
 
         try:
             EmailAddressValidation.objects.create(address=email,
-                                                  user_pk=user_pk)
+                                                  user_id=user_id)
         except IntegrityError:
             # 409 Conflict
             #   duplicated entries
@@ -191,14 +191,14 @@ class EmailView(View):
 
         request.DELETE = http.QueryDict(request.body)
         email_addr = request.DELETE.get('email')
-        user_pk = request.DELETE.get('user')
+        user_id = request.DELETE.get('user')
 
         if not email_addr:
             return http.HttpResponseBadRequest()
 
         try:
             email = EmailAddressValidation.objects.get(address=email_addr,
-                                                       user_pk=user_pk)
+                                                       user_id=user_id)
         except EmailAddressValidation.DoesNotExist:
             pass
         else:
@@ -207,7 +207,7 @@ class EmailView(View):
 
         try:
             email = EmailAddress.objects.get(address=email_addr,
-                                             user_pk=user_pk)
+                                             user_id=user_id)
         except EmailAddress.DoesNotExist:
             raise http.Http404
 
@@ -222,13 +222,13 @@ class EmailView(View):
         request.UPDATE = http.QueryDict(request.body)
 
         email_addr = request.UPDATE.get('email')
-        user_pk = request.UPDATE.get('user')
+        user_id = request.UPDATE.get('user')
         if not email_addr:
             return http.HttpResponseBadRequest()
 
         try:
             email = EmailAddress.objects.get(address=email_addr,
-                                             user_pk=user_pk)
+                                             user_id=user_id)
         except EmailAddress.DoesNotExist:
             raise http.Http404
 
@@ -243,10 +243,10 @@ class EmailValidationView(View):
 
     def post(self, request):
         email_addr = request.POST.get('email')
-        user_pk = request.POST.get('user')
+        user_id = request.POST.get('user')
         try:
             email = EmailAddressValidation.objects.get(address=email_addr,
-                                                       user_pk=user_pk)
+                                                       user_id=user_id)
         except http.DoesNotExist:
             raise http.Http404
 
