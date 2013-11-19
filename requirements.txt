@@ -36,7 +36,8 @@ git+https://github.com/TracyWebTech/SleekXMPP@fix-gevent
 
 # Feedzilla (planet) and deps
 #feedzilla==0.22
-hg+https://bitbucket.org/lorien/feedzilla
+#hg+https://bitbucket.org/lorien/feedzilla
+hg+https://bitbucket.org/TracyWebTech/feedzilla/
 django-common
 feedparser
 lxml
