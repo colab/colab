@@ -166,10 +166,6 @@ class Thread(models.Model, HitCounterModelMixin):
 
         return tuple()
 
-    def save(self, *args, **kwargs):
-        super(Thread, self).save(*args, **kwargs)
-        self.update_keywords()
-
     def __unicode__(self):
         return '%s - %s (%s)' % (self.id,
                                  self.subject_token,
