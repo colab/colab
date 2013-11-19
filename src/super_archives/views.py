@@ -96,7 +96,7 @@ class ThreadView(View):
             messages.success(request, _("Your message was sent. It may take "
                                         "some minutes before it's delivered. "
                                         "Why don't you breath some fresh air "
-                                        "in the meanwhile."))
+                                        "in the meanwhile?"))
         else:
             if not error_msg:
                 if resp is not None:
