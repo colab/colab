@@ -26,7 +26,8 @@ raven
 tornado
 
 # Deps for Single SignOn (SSO)
-git+https://github.com/TracyWebTech/django-browserid@issue210
+git+https://github.com/mozilla/django-browserid
+
 django-revproxy
 
 # Converse.js (XMPP client)
