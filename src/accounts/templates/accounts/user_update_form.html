@@ -5,10 +5,6 @@
 <script>
 $(function() {
 
-  // Reset buttons to default state
-  $('.set-primary').button('reset');
-  $('.delete-email').button('reset');
-
   $('#add-email').on('click', function(event) {
     $.ajax({
       url: "{% url 'archive_email_view' %}",
@@ -98,16 +94,8 @@ $(function() {
   });
 
   // User feedbacks
-  $('.panel-default').on('click', '.set-primary', function() {
-    $('.set-primary').button('loading');
-  });
-
-  $('.panel-default').on('click', '.verify-email', function() {
-    $('.verify-email').button('loading');
-  });
-
-  $('.panel-default').on('click', '.delete-email', function() {
-    $('.delete-email').button('loading');
+  $('.panel-default').on('click', '.set-primary, .verify-email, .delete-email', function() {
+    $(this).button('loading');
   });
 
 });
