@@ -13,7 +13,7 @@ $(function() {
     $.ajax({
       url: "{% url 'archive_email_view' %}",
       type: 'post',
-      data: { email: $('#new_email').val() },
+      data: { email: $('#new_email').val(), user: '{{ user_.pk }}' },
       beforeSend: function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
       }
@@ -36,7 +36,10 @@ $(function() {
     $.ajax({
       url: "{% url 'archive_email_view' %}",
       type: 'delete',
-      data: { email: $('.email-address', $email_block).text() },
+      data: {
+        email: $('.email-address', $email_block).text(),
+        user: '{{ user_.pk }}'
+      },
       context: $email_block[0],
       beforeSend: function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
@@ -53,7 +56,10 @@ $(function() {
     $.ajax({
       url: "{% url 'archive_email_validation_view' %}",
       type: 'post',
-      data: { email: $('.email-address', $email_block).text() },
+      data: {
+        email: $('.email-address', $email_block).text(),
+        user: '{{ user_.pk }}'
+      },
       context: $email_block[0],
       beforeSend: function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
@@ -77,7 +83,10 @@ $(function() {
     $.ajax({
       url: "{% url 'archive_email_view' %}",
       type: 'update',
-      data: { email: $('.email-address', $email_block).text() },
+      data: {
+        email: $('.email-address', $email_block).text(),
+        user: '{{ user_.pk }}'
+      },
       beforeSend: function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
       }
