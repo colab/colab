@@ -5,8 +5,6 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-TIME_ZONE = 'America/Sao_Paulo'
-
 LANGUAGES = (
     ('en', _('English')),
     ('pt-br', _('Portuguese')),

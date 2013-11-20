@@ -1,4 +1,4 @@
-{% load gravatar superarchives i18n %}
+{% load gravatar superarchives tz i18n %}
 <li>
   {% spaceless %}
   <div class="email-message" id="msg-{% firstof email.id 'reply' %}">
@@ -19,7 +19,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="pull-right text-right">
             <span class="date">
-              {{ email.received_time|date:'DATETIME_FORMAT' }}
+              {{ email.received_time|localtime|date:'DATETIME_FORMAT' }}
             </span>
 
             <div class="btn-group">

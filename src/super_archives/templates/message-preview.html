@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load highlight %}
+{% load i18n tz highlight %}
 
 <li class="preview-message">
 <span class="glyphicon glyphicon-{{ result.icon_name }}" title="{{ result.type }}"></span>
@@ -55,7 +54,7 @@
       </span>
     {% endif %}
     {% if result.modified %}
-    <span class="pull-right">{{ result.modified|timesince }} {% trans "ago" %}</span>
+    <span class="pull-right">{{ result.modified|localtime|timesince }} {% trans "ago" %}</span>
     {% endif %}
   </div>
 {% endif %}
