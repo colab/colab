@@ -178,6 +178,7 @@
     {% conversejs_initialize %}
   {% endif %}
 
+  {% include "tz/set_utc_offset.html" %}
   {% browserid_js %}
   </body>
 </html>
