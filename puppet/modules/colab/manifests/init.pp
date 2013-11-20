@@ -19,6 +19,15 @@ class colab {
     require => Apt::Ppa['ppa:nginx/stable'],
   }
 
+  Mailalias {
+    notify => Exec['newaliases'],
+  }
+
+  exec { 'newaliases':
+    path        => '/usr/bin/newaliases',
+    refreshonly => true,
+  }
+
   group { 'colab':
     ensure => present,
   }
