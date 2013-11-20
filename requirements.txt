@@ -11,24 +11,24 @@ django-haystack==2.1
 pysolr==2.1
 poster==0.8.1
 etiquetando==0.1
-html2text
-django-taggit
-python-memcached
-django-hitcounter
-Pillow
-django-i18n-model
+html2text==3.200.3
+django-taggit==0.10
+python-memcached==1.53
+django-hitcounter==0.1.1
+Pillow==2.2.1
+django-i18n-model==0.0.7
 
-gunicorn
-gevent
+gunicorn==18.0
+gevent==0.13.8
 
 # Deps for sentry client (raven)
-raven
-tornado
+raven==3.5.2
+tornado==3.1.1
 
 # Deps for Single SignOn (SSO)
 git+https://github.com/mozilla/django-browserid
 
-django-revproxy
+django-revproxy==0.2.4
 
 # Converse.js (XMPP client)
 django-conversejs==0.2.8
@@ -38,11 +38,11 @@ git+https://github.com/TracyWebTech/SleekXMPP@fix-gevent
 #feedzilla==0.22
 #hg+https://bitbucket.org/lorien/feedzilla
 hg+https://bitbucket.org/TracyWebTech/feedzilla/
-django-common
-feedparser
-lxml
-grab
-transliterate
+django-common==0.1.51
+feedparser==5.1.3
+lxml==3.2.4
+grab==0.4.13
+transliterate==1.5
 
 # Diazo
 #diazo
