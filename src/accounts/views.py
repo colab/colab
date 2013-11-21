@@ -129,6 +129,14 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
     http_method_names = [u'get', u'post']
     template_name = u'accounts/manage_subscriptions.html'
 
+    def get_object(self, *args, **kwargs):
+        obj = super(ManageUserSubscriptionsView, self).get_object(*args,
+                                                                  **kwargs)
+        if self.request.user != obj and not self.request.user.is_superuser:
+            raise PermissionDenied
+
+        return obj
+
     def post(self, request, *args, **kwargs):
         user = self.get_object()
         for email in user.emails.values_list('address', flat=True):
