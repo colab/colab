@@ -5,8 +5,6 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-TIME_ZONE = 'America/Sao_Paulo'
-
 LANGUAGES = (
     ('en', _('English')),
     ('pt-br', _('Portuguese')),
@@ -119,6 +117,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'proxy',
     'search',
     'badger',
+    'tz',
 
     # Feedzilla and deps
     'feedzilla',
@@ -221,6 +220,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
+    'tz.middleware.TimezoneMiddleware',
 )
 
 # Add the django_browserid authentication backend.

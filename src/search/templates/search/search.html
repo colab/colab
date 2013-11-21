@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load i18n highlight superarchives %}
 
+{% block title %}{% trans 'search'|title %}{% endblock %}
+
 {% block head_js %}
 <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 {% if use_language %}

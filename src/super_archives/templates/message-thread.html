@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n superarchives %}
+{% load i18n tz superarchives %}
 
 {% trans "Anonymous" as anonymous %}
 
@@ -95,7 +95,9 @@
     });
 
     $('.vote.btn', this).on('click', vote);
-    $('.reply.btn', this).on('click', focus_reply);
+    {% if user.is_active %}
+      $('.reply.btn', this).on('click', focus_reply);
+    {% endif %}
   });
 
 </script>
@@ -152,7 +154,7 @@
       <li>
         <span class="glyphicon glyphicon-chevron-right"></span>
         {% trans "started at" %}
-        <h5>{{ first_msg.received_time|timesince }} {% trans "ago" %}</h5>
+        <h5>{{ first_msg.received_time|localtime|timesince }} {% trans "ago" %}</h5>
       </li>
 
       <li>

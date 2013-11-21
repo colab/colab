@@ -5,6 +5,7 @@
 
     <replace css:theme="#trac-css" content="//head/link" />
     <replace css:theme="#trac-js" content="//head/script" />
+    <replace theme="//head/title" content="//head/title" />
 
     <before css:theme-children="#main-content" css:content="#main" />
 

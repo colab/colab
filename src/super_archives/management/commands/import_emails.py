@@ -145,6 +145,7 @@ class Command(BaseCommand, object):
             self.THREAD_CACHE[subject_slug][mailinglist.id] = thread
 
         thread.latest_message = email
+        thread.update_keywords()
         thread.save()
         return thread
 
@@ -206,6 +207,7 @@ class Command(BaseCommand, object):
         )
         email.thread = self.get_thread(email, mailinglist)
         email.save()
+        email.update_blocks()
 
     @transaction.commit_manually
     def import_emails(self, archives_path, all, exclude_lists=None):

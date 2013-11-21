@@ -36,7 +36,10 @@ class TracProxyView(HitCounterViewMixin, ProxyView):
             except (Ticket.DoesNotExist, ValueError):
                 return None
         elif self.request.path_info.startswith('/changeset'):
-            changeset, repo = self.request.path_info.split('/')[2:4]
+            try:
+                changeset, repo = self.request.path_info.split('/')[2:4]
+            except ValueError:
+                return None
             try:
                 obj = Revision.objects.get(rev=changeset,
                                            repository_name=repo)

@@ -31,4 +31,4 @@ def send_email_lists(user, mailing_lists):
         subscribe_addr = list_name + '-subscribe@listas.interlegis.gov.br'
         to.append(subscribe_addr)
 
-    send_mail(subject, '', from_, to)
+    mail.send_mail(subject, '', from_, to)

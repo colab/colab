@@ -5,19 +5,22 @@
   {% block head %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Colab - {% block title %}Colab{% endblock %}</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}img/interlegis.ico">
 
     <link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap/css/bootstrap.min.css" type="text/css" media="screen, projection" />
 
     <link rel="stylesheet"
           href="{{ STATIC_URL }}third-party/font-awesome/css/font-awesome.min.css"
-          type="text/css" media="screen" charset="utf-8"/>
+          type="text/css" media="screen" />
 
     {% if not is_mobile %}
       {% conversejs_static %}
     {% endif %}
 
     <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
-                                type="text/css" media="screen" charset="utf-8"/>
+                                type="text/css" media="screen" />
 
     <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery.debouncedresize.js"></script>
@@ -47,8 +50,6 @@
   </head>
 
   <body class="container">
-    {% browserid_info %}
-
 
     {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -94,7 +95,7 @@
           <ul class="nav navbar-nav navbar-right">
             {% if not user.is_authenticated %}
               <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
-              <li>{% browserid_login text='Login' next=request.path %}</li>
+              <li>{% browserid_login text='Login' %}</li>
             {% else %}
               <li id="user-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
@@ -179,6 +180,7 @@
     {% conversejs_initialize %}
   {% endif %}
 
+  {% include "tz/set_utc_offset.html" %}
   {% browserid_js %}
   </body>
 </html>

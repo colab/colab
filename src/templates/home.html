@@ -26,7 +26,7 @@
         {% endfor %}
       </ul>
       <a class="column-align"
-         href="{% url 'haystack_search' %}?order=latest&type=thread">
+         href="{% url 'haystack_search' %}?order=latest">
         {% trans "View more collaborations..." %}
       </a>
       <div>&nbsp;</div>
@@ -72,7 +72,7 @@
           {% include "message-preview.html" with result=thread.latest_message %}
         {% endfor %}
       </ul>
-      <a href="{% url 'haystack_search' %}?type=thread&order=latest">
+      <a href="{% url 'haystack_search' %}?type=thread&amp;order=latest">
         {% trans "View more discussions..." %}
       </a>
       <div>&nbsp;</div>

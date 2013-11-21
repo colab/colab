@@ -16,7 +16,7 @@ from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from haystack.query import SearchQuerySet
 
@@ -30,8 +30,8 @@ class ThreadView(View):
 
     def get(self, request, mailinglist, thread_token):
 
-        thread = Thread.objects.get(subject_token=thread_token,
-                                    mailinglist__name=mailinglist)
+        thread = get_object_or_404(Thread, subject_token=thread_token,
+                                   mailinglist__name=mailinglist)
         thread.hit(request)
 
         try:
@@ -73,11 +73,12 @@ class ThreadView(View):
         except Thread.DoesNotExist:
             raise http.Http404
 
-        data = {}
-        data['from']  = '{} <{}>'.format(request.user.get_full_name(),
-                                      request.user.email)
-        data['subject'] = thread.message_set.first().subject_clean
-        data['body'] = request.POST.get('emailbody', '').strip()
+        data = {
+            'email_from': request.user.email,
+            'name_from': request.user.get_full_name(),
+            'subject': thread.message_set.first().subject_clean,
+            'body': request.POST.get('emailbody', '').strip(),
+        }
 
         url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
 
@@ -95,7 +96,7 @@ class ThreadView(View):
             messages.success(request, _("Your message was sent. It may take "
                                         "some minutes before it's delivered. "
                                         "Why don't you breath some fresh air "
-                                        "in the meanwhile."))
+                                        "in the meanwhile?"))
         else:
             if not error_msg:
                 if resp is not None:
@@ -137,8 +138,7 @@ class EmailView(View):
         """Validate an email with the given key"""
 
         try:
-            email_val = EmailAddressValidation.objects.get(validation_key=key,
-                                                           user__pk=request.user.pk)
+            email_val = EmailAddressValidation.objects.get(validation_key=key)
         except EmailAddressValidation.DoesNotExist:
             messages.error(request, _('The email address you are trying to '
                                       'verify either has already been verified '
@@ -170,12 +170,13 @@ class EmailView(View):
         """Create new email address that will wait for validation"""
 
         email = request.POST.get('email')
+        user_id = request.POST.get('user')
         if not email:
             return http.HttpResponseBadRequest()
 
         try:
             EmailAddressValidation.objects.create(address=email,
-                                                  user=request.user)
+                                                  user_id=user_id)
         except IntegrityError:
             # 409 Conflict
             #   duplicated entries
@@ -190,13 +191,14 @@ class EmailView(View):
 
         request.DELETE = http.QueryDict(request.body)
         email_addr = request.DELETE.get('email')
+        user_id = request.DELETE.get('user')
 
         if not email_addr:
             return http.HttpResponseBadRequest()
 
         try:
             email = EmailAddressValidation.objects.get(address=email_addr,
-                                                       user=request.user)
+                                                       user_id=user_id)
         except EmailAddressValidation.DoesNotExist:
             pass
         else:
@@ -205,7 +207,7 @@ class EmailView(View):
 
         try:
             email = EmailAddress.objects.get(address=email_addr,
-                                             user=request.user)
+                                             user_id=user_id)
         except EmailAddress.DoesNotExist:
             raise http.Http404
 
@@ -220,17 +222,18 @@ class EmailView(View):
         request.UPDATE = http.QueryDict(request.body)
 
         email_addr = request.UPDATE.get('email')
+        user_id = request.UPDATE.get('user')
         if not email_addr:
             return http.HttpResponseBadRequest()
 
         try:
             email = EmailAddress.objects.get(address=email_addr,
-                                             user=request.user)
+                                             user_id=user_id)
         except EmailAddress.DoesNotExist:
             raise http.Http404
 
-        request.user.email = email_addr
-        request.user.save()
+        email.user.email = email_addr
+        email.user.save()
         return http.HttpResponse(status=204)
 
 
@@ -240,14 +243,15 @@ class EmailValidationView(View):
 
     def post(self, request):
         email_addr = request.POST.get('email')
+        user_id = request.POST.get('user')
         try:
             email = EmailAddressValidation.objects.get(address=email_addr,
-                                                       user=request.user)
+                                                       user_id=user_id)
         except http.DoesNotExist:
             raise http.Http404
 
         try:
-            send_verification_email(email_addr, request.user,
+            send_verification_email(email_addr, email.user,
                                     email.validation_key)
         except smtplib.SMTPException:
             logging.exception('Error sending validation email')
