@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-19 16:26-0200\n"
+"POT-Creation-Date: 2013-11-21 10:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,7 +82,7 @@ msgstr "Informações pessoais"
 msgid "Subscribe to mail lists"
 msgstr "Inscreva-se para listas de e-mails"
 
-#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:95
+#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:97
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -223,7 +223,7 @@ msgstr "Automaticamente"
 msgid "Manual"
 msgstr "Manual"
 
-#: badger/models.py:23 super_archives/models.py:262
+#: badger/models.py:23 super_archives/models.py:258
 msgid "Messages"
 msgstr "Mensagens"
 
@@ -276,51 +276,51 @@ msgstr "Ordem"
 msgid "Badge"
 msgstr "Medalha"
 
-#: colab/custom_settings.py:11
+#: colab/custom_settings.py:9
 msgid "English"
 msgstr "Inglês"
 
-#: colab/custom_settings.py:12
+#: colab/custom_settings.py:10
 msgid "Portuguese"
 msgstr "Português"
 
-#: colab/custom_settings.py:13
+#: colab/custom_settings.py:11
 msgid "Spanish"
 msgstr "Espanhol"
 
-#: colab/custom_settings.py:36
+#: colab/custom_settings.py:34
 msgid "Recent activity"
 msgstr "Atividade recente"
 
-#: colab/custom_settings.py:40
+#: colab/custom_settings.py:38
 msgid "Relevance"
 msgstr "Relevância"
 
-#: colab/custom_settings.py:48
+#: colab/custom_settings.py:46
 msgid "Document"
 msgstr "Documento"
 
-#: colab/custom_settings.py:50
+#: colab/custom_settings.py:48
 msgid "Presentation"
 msgstr "Apresentação"
 
-#: colab/custom_settings.py:51
+#: colab/custom_settings.py:49
 msgid "Text"
 msgstr "Texto"
 
-#: colab/custom_settings.py:52 search/utils.py:9
+#: colab/custom_settings.py:50 search/utils.py:9
 msgid "Code"
 msgstr "Código"
 
-#: colab/custom_settings.py:54
+#: colab/custom_settings.py:52
 msgid "Compressed"
 msgstr "Compactado"
 
-#: colab/custom_settings.py:55
+#: colab/custom_settings.py:53
 msgid "Image"
 msgstr "Imagem"
 
-#: colab/custom_settings.py:57
+#: colab/custom_settings.py:55
 msgid "Spreadsheet"
 msgstr "Planilha"
 
@@ -344,7 +344,7 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:5 templates/base.html:73
+#: planet/templates/feedzilla/base.html:5 templates/base.html:75
 msgid "Planet"
 msgstr ""
 
@@ -409,8 +409,8 @@ msgstr "Discussões Mais Relevantes"
 msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
-#: search/forms.py:16 search/templates/search/search.html:39
-#: templates/base.html:89
+#: search/forms.py:16 search/templates/search/search.html:41
+#: templates/base.html:91
 msgid "Search"
 msgstr "Busca"
 
@@ -535,24 +535,28 @@ msgstr "Usuário"
 msgid "Attachment"
 msgstr "Anexo"
 
-#: search/templates/search/search.html:44
+#: search/templates/search/search.html:4
+msgid "search"
+msgstr "busca"
+
+#: search/templates/search/search.html:46
 msgid "documents found"
 msgstr "documentos encontrados"
 
-#: search/templates/search/search.html:55
+#: search/templates/search/search.html:57
 msgid "Search here"
 msgstr "Pesquise aqui"
 
-#: search/templates/search/search.html:67
-#: search/templates/search/search.html:77
+#: search/templates/search/search.html:69
+#: search/templates/search/search.html:79
 msgid "Filters"
 msgstr "Filtros"
 
-#: search/templates/search/search.html:98
+#: search/templates/search/search.html:100
 msgid "No results for your search."
 msgstr "Não há resultados para sua busca."
 
-#: search/templates/search/search.html:100
+#: search/templates/search/search.html:102
 msgid "You are searching for"
 msgstr "Você está procurando por"
 
@@ -613,23 +617,23 @@ msgstr "Conjunto de mensagens"
 msgid "Threads"
 msgstr "Conjuntos de mensagens"
 
-#: super_archives/models.py:246
+#: super_archives/models.py:242
 msgid "Subject"
 msgstr "Assunto"
 
-#: super_archives/models.py:247
+#: super_archives/models.py:243
 msgid "Please enter a message subject"
 msgstr "Por favor, digite o assunto da mensagem"
 
-#: super_archives/models.py:250
+#: super_archives/models.py:246
 msgid "Message body"
 msgstr "Corpo da mensagem"
 
-#: super_archives/models.py:251
+#: super_archives/models.py:247
 msgid "Please enter a message body"
 msgstr "Por favor, digite o corpo da mensagem"
 
-#: super_archives/models.py:261
+#: super_archives/models.py:257
 msgid "Message"
 msgstr "Mensagem"
 
@@ -644,10 +648,10 @@ msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
 #: super_archives/views.py:96
 msgid ""
 "Your message was sent. It may take some minutes before it's delivered. Why "
-"don't you breath some fresh air in the meanwhile."
+"don't you breath some fresh air in the meanwhile?"
 msgstr ""
 "Sua mensagem foi enviada. Pode levar alguns minutos antes de ser entregue. "
-"Por quê você respira um ar fresco enquanto isso."
+"Por quê você respira um ar fresco enquanto isso?"
 
 #: super_archives/views.py:104
 msgid "You cannot send an empty email"
@@ -681,12 +685,12 @@ msgstr ""
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
-#: super_archives/templates/message-preview.html:43
+#: super_archives/templates/message-preview.html:42
 msgid "by"
 msgstr "por"
 
-#: super_archives/templates/message-preview.html:58
-#: super_archives/templates/message-thread.html:155
+#: super_archives/templates/message-preview.html:57
+#: super_archives/templates/message-thread.html:157
 msgid "ago"
 msgstr "atrás"
 
@@ -694,54 +698,54 @@ msgstr "atrás"
 msgid "You must login before voting."
 msgstr "Você deve estar logado antes de votar."
 
-#: super_archives/templates/message-thread.html:126
+#: super_archives/templates/message-thread.html:128
 msgid "Order by"
 msgstr "Ordernar por"
 
-#: super_archives/templates/message-thread.html:130
+#: super_archives/templates/message-thread.html:132
 msgid "Votes"
 msgstr "Votos"
 
-#: super_archives/templates/message-thread.html:134
+#: super_archives/templates/message-thread.html:136
 msgid "Date"
 msgstr "Data"
 
-#: super_archives/templates/message-thread.html:139
+#: super_archives/templates/message-thread.html:141
 msgid "Related:"
 msgstr "Relacionado:"
 
-#: super_archives/templates/message-thread.html:150
+#: super_archives/templates/message-thread.html:152
 msgid "Statistics:"
 msgstr "Estátisticas:"
 
-#: super_archives/templates/message-thread.html:154
+#: super_archives/templates/message-thread.html:156
 msgid "started at"
 msgstr "começou às"
 
-#: super_archives/templates/message-thread.html:160
+#: super_archives/templates/message-thread.html:162
 msgid "viewed"
 msgstr "visualizado"
 
-#: super_archives/templates/message-thread.html:161
-#: super_archives/templates/message-thread.html:166
-#: super_archives/templates/message-thread.html:171
+#: super_archives/templates/message-thread.html:163
+#: super_archives/templates/message-thread.html:168
+#: super_archives/templates/message-thread.html:173
 msgid "times"
 msgstr "vezes"
 
-#: super_archives/templates/message-thread.html:165
+#: super_archives/templates/message-thread.html:167
 msgid "answered"
 msgstr "respondido"
 
-#: super_archives/templates/message-thread.html:170
+#: super_archives/templates/message-thread.html:172
 msgid "voted"
 msgstr "votado"
 
-#: super_archives/templates/message-thread.html:176
+#: super_archives/templates/message-thread.html:178
 msgid "Tags:"
 msgstr "Etiquetas:"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:5
-#: templates/base.html:70
+#: templates/base.html:72
 msgid "Discussions"
 msgstr "Discussões"
 
@@ -812,51 +816,51 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:76
+#: templates/base.html:78
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:80
+#: templates/base.html:82
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:82
+#: templates/base.html:84
 msgid "Timeline"
 msgstr "Histórico"
 
-#: templates/base.html:83
+#: templates/base.html:85
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:84
+#: templates/base.html:86
 msgid "Browse Source"
 msgstr "Ver Código"
 
-#: templates/base.html:85
+#: templates/base.html:87
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
 
-#: templates/base.html:109
+#: templates/base.html:111
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:121 templates/base.html.py:124
+#: templates/base.html:123 templates/base.html.py:126
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:137
+#: templates/base.html:139
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:162
+#: templates/base.html:164
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:167
+#: templates/base.html:169
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:169
+#: templates/base.html:171
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
