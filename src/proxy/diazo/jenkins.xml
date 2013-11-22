@@ -10,6 +10,8 @@
     <!-- Breadcrumbs -->
     <after css:theme="nav.navbar-fixed-top" css:content="#left-top-nav" />
 
+    <merge attributes="class" css:theme="body" css:content="body" />
+
     <after theme-children="/html/head">
       <script>jQuery.noConflict();</script>
       <style>
