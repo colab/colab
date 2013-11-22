@@ -3,28 +3,28 @@
     xmlns:css="http://namespaces.plone.org/diazo/css"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
-    <notheme if-path="/ci/job/colab/configSubmit" />
+    <rules css:if-content="#main-table">
+      <replace css:theme="#jenkins-css" content="//head/link" />
+      <replace css:theme="#jenkins-js" content="//head/script" />
+      <before css:theme-children="#main-content" css:content="#main-table" />
 
-    <replace css:theme="#jenkins-css" content="//head/link" />
-    <replace css:theme="#jenkins-js" content="//head/script" />
-    <before css:theme-children="#main-content" css:content="#main-table" />
+      <!-- Breadcrumbs -->
+      <after css:theme="nav.navbar-fixed-top" css:content="#left-top-nav" />
 
-    <!-- Breadcrumbs -->
-    <after css:theme="nav.navbar-fixed-top" css:content="#left-top-nav" />
+      <merge attributes="class" css:theme="body" css:content="body" />
 
-    <merge attributes="class" css:theme="body" css:content="body" />
+      <after theme-children="/html/head">
+        <script>jQuery.noConflict();</script>
+        <style>
+          #breadcrumbs {
+            border: 0 !important;
+          }
 
-    <after theme-children="/html/head">
-      <script>jQuery.noConflict();</script>
-      <style>
-        #breadcrumbs {
-          border: 0 !important;
-        }
-
-        #right-top-nav {
-          margin-right: 5em !important;
-        }
-      </style>
-    </after>
+          #right-top-nav {
+            margin-right: 5em !important;
+          }
+        </style>
+      </after>
+    </rules>
 
 </rules>
