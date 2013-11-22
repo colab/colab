@@ -4,6 +4,7 @@
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
     <rules css:if-content="#main-table">
+      <replace theme="//head/title" content="//head/title" />
       <replace css:theme="#jenkins-css" content="//head/link" />
       <replace css:theme="#jenkins-js" content="//head/script" />
 
