@@ -7,8 +7,20 @@
     <replace css:theme="#jenkins-js" content="//head/script" />
     <before css:theme-children="#main-content" css:content="#main-table" />
 
+    <!-- Breadcrumbs -->
+    <after css:theme="nav.navbar-fixed-top" css:content="#left-top-nav" />
+
     <after theme-children="/html/head">
-        <script>jQuery.noConflict();</script>
+      <script>jQuery.noConflict();</script>
+      <style>
+        #breadcrumbs {
+          border: 0 !important;
+        }
+
+        #right-top-nav {
+          margin-right: 5em !important;
+        }
+      </style>
     </after>
 
 </rules>
