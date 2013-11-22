@@ -6,12 +6,10 @@
     <rules css:if-content="#main-table">
       <replace css:theme="#jenkins-css" content="//head/link" />
       <replace css:theme="#jenkins-js" content="//head/script" />
-      <before css:theme-children="#main-content" css:content="#main-table" />
 
-      <!-- Breadcrumbs -->
-      <after css:theme="nav.navbar-fixed-top" css:content="#left-top-nav" />
-
+      <before css:theme-children="#main-content" css:content-children="body" />
       <merge attributes="class" css:theme="body" css:content="body" />
+      <drop css:content="#top-panel" />
 
       <after theme-children="/html/head">
         <script>jQuery.noConflict();</script>
