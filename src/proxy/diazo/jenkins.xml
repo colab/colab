@@ -3,6 +3,7 @@
     xmlns:css="http://namespaces.plone.org/diazo/css"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
+    <drop css:theme="script[data-framework='jquery']" />
     <replace css:theme="#jenkins-css" content="//head/link" />
     <replace css:theme="#jenkins-js" content="//head/script" />
     <before css:theme-children="#main-content" css:content="#main-table" />
