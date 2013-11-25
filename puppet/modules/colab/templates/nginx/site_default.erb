@@ -40,6 +40,14 @@ server {
         proxy_pass http://10.1.2.81;
     }
 
+    location /ci/static {
+        proxy_pass http://10.1.2.171:8080;
+    }
+
+    location /ci/adjuncts {
+        proxy_pass http://10.1.2.171:8080;
+    }
+
     location / {
         try_files /home/colab/colab/www$uri @django;
     }
