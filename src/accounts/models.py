@@ -21,18 +21,6 @@ class User(AbstractUser):
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)
 
-    def check_password(raw_password):
-        """
-        Returns a boolean of whether the raw_password was correct. Handles
-        hashing formats behind the scenes.
-        """
-        if not raw_password or not self.has_usable_password():
-            return False
-        return self.password == raw_password
-
-    def set_password(self, raw_password):
-        self.password = unicode(raw_password)
-
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})
 
