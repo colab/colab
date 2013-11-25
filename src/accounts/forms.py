@@ -81,6 +81,7 @@ class ChangeXMPPPasswordForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ChangeXMPPPasswordForm, self).__init__(*args, **kwargs)
+
         for field_name, field in self.fields.items():
             # Adds form-control class to all form fields
             field.widget.attrs.update({'class': 'form-control'})
@@ -90,7 +91,13 @@ class ChangeXMPPPasswordForm(forms.ModelForm):
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError(
-                self.error_messages['password_mismatch'],
+                _("Password mismatch"),
                 code='password_mismatch',
             )
         return password2
+
+    def save(self, commit=True):
+        self.instance.password = self.cleaned_data['password2']
+        if commit:
+            self.instance.save()
+        return self.instance

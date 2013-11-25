@@ -192,13 +192,18 @@ class ChangeXMPPPasswordView(UpdateView):
         })
 
     def get_object(self, queryset=None):
-        return get_object_or_404(XMPPAccount, user=self.request.user.pk)
+        obj = get_object_or_404(XMPPAccount, user=self.request.user.pk)
+        self.old_password = obj.password
+        return obj
 
     def form_valid(self, form):
-        self.object = form.save()
+        response = super(ChangeXMPPPasswordView, self).form_valid(form)
 
-        xmpp_account = self.get_object()
-        changed = xmpp.change_password(xmpp_account, password)
+        changed = xmpp.change_password(
+            self.object.jid,
+            self.old_password,
+            form.cleaned_data['password2']
+        )
         if not changed:
             raise Exception
-        return super(ChangeXMPPPassword, self).form_valid(form)
+        return response
