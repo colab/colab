@@ -6,20 +6,25 @@ import datetime
 from collections import OrderedDict
 
 from django.contrib import messages
+from django.db import transaction
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView
+from django.utils.decorators import method_decorator
 
+from conversejs import xmpp
+from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
 from super_archives.models import EmailAddress, Message
 from super_archives.utils.email import send_email_lists
 from search.utils import trans
-from .forms import UserCreationForm, ListsForm, UserUpdateForm
+from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
+                    ChangeXMPPPasswordForm)
 from .utils import mailman
 
 
@@ -168,3 +173,32 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
         context.update(kwargs)
 
         return super(ManageUserSubscriptionsView, self).get_context_data(**context)
+
+
+class ChangeXMPPPasswordView(UpdateView):
+    model = XMPPAccount
+    form_class = ChangeXMPPPasswordForm
+    fields = ['password', ]
+    template_name = 'accounts/change_password.html'
+
+    @method_decorator(transaction.atomic)
+    def dispatch(self, request, *args, **kwargs):
+        return super(ChangeXMPPPasswordView, self).dispatch(request, *args,
+                                                        **kwargs)
+
+    def get_success_url(self):
+        return reverse('user_profile', kwargs={
+            'username': self.request.user.username
+        })
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(XMPPAccount, user=self.request.user.pk)
+
+    def form_valid(self, form):
+        self.object = form.save()
+
+        xmpp_account = self.get_object()
+        changed = xmpp.change_password(xmpp_account, password)
+        if not changed:
+            raise Exception
+        return super(ChangeXMPPPassword, self).form_valid(form)

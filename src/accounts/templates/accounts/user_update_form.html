@@ -178,6 +178,21 @@ $(function() {
           </div>
         </div>
       </div>
+
+      <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{% trans "Change SVN and XMPP Client password" %}</h3>
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+            {% trans "You don't need to change this password. Change it only if you really know what you are doing." %}
+            </div>
+            <a href="{% url 'change_password' %}" class="btn btn-primary pull-right">{% trans "Change Password" %}</a>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="row">
       <div class="submit">
