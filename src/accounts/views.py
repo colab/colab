@@ -25,6 +25,7 @@ from super_archives.utils.email import send_email_lists
 from search.utils import trans
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
+from .errors import XMPPChangePwdException
 from .utils import mailman
 
 
@@ -181,11 +182,6 @@ class ChangeXMPPPasswordView(UpdateView):
     fields = ['password', ]
     template_name = 'accounts/change_password.html'
 
-    @method_decorator(transaction.atomic)
-    def dispatch(self, request, *args, **kwargs):
-        return super(ChangeXMPPPasswordView, self).dispatch(request, *args,
-                                                        **kwargs)
-
     def get_success_url(self):
         return reverse('user_profile', kwargs={
             'username': self.request.user.username
@@ -197,6 +193,8 @@ class ChangeXMPPPasswordView(UpdateView):
         return obj
 
     def form_valid(self, form):
+        transaction.set_autocommit(False)
+
         response = super(ChangeXMPPPasswordView, self).form_valid(form)
 
         changed = xmpp.change_password(
@@ -204,6 +202,19 @@ class ChangeXMPPPasswordView(UpdateView):
             self.old_password,
             form.cleaned_data['password2']
         )
+
         if not changed:
-            raise Exception
+            messages.error(
+                self.request,
+                _(u'Could not change your password. Please, try again later.')
+            )
+            transaction.rollback()
+            return response
+        else:
+            transaction.commit()
+
+        messages.success(
+            self.request,
+            _("You've changed your password successfully!")
+        )
         return response
