@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-25 15:42+0000\n"
+"POT-Creation-Date: 2013-11-26 13:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,17 +53,26 @@ msgstr "Digite a mesma senha que acima, para verificação."
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
-#: accounts/views.py:126
+#: accounts/views.py:127
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: accounts/views.py:127
+#: accounts/views.py:128
 msgid ""
 "You must login to validated your profile. Profiles not validated are deleted "
 "in 24h."
 msgstr ""
 "Você deve se logar para validar seu perfil. Perfis não validados serão "
 "deletados em 24h."
+
+#: accounts/views.py:209
+msgid "Could not change your password. Please, try again later."
+msgstr ""
+"Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
+
+#: accounts/views.py:218
+msgid "You've changed your password successfully!"
+msgstr "Senha alterada com sucesso!"
 
 #: accounts/management/commands/delete_invalid.py:42
 #, python-format
@@ -229,8 +238,8 @@ msgid ""
 "You don't need to change this password. Change it only if you really know "
 "what you are doing."
 msgstr ""
-"Você não precisa trocar essa senha. Troque-a somente se tem "
-"certeza do que está fazendo."
+"Você não precisa trocar essa senha. Troque-a somente se tem certeza do que "
+"está fazendo."
 
 #: accounts/templates/accounts/user_update_form.html:199
 msgid "Update"
