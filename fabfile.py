@@ -81,7 +81,6 @@ def deploy(update=False):
     if update:
         update_requirements()
 
-    load_badges()
     with cd('~/colab/src/'), prefix(WORKON_COLAB):
         run('python manage.py syncdb')
         run('python manage.py migrate')
@@ -89,17 +88,6 @@ def deploy(update=False):
         run('python manage.py build_solr_schema -f ~/apache-solr-3.6.2/example/solr/conf/schema.xml')
 
     sudo('supervisorctl restart all')
-
-
-def load_badges(local=False):
-    path = '/vagrant/' if local else '~/colab/'
-
-    run(u'mkdir -p {}www/media/badges'.format(path))
-
-    with cd(u'{}src/'.format(path)), prefix(WORKON_COLAB):
-        run('cp badger/fixtures/images/*.png ../www/media/badges/')
-        run('python manage.py loaddata badger/fixtures/badges.json')
-        run('python manage.py update_badges')
 
 
 def rebuild_index(age=None, batch=None):
@@ -139,5 +127,4 @@ def runserver(update_requirements=False):
 
         run('python manage.py syncdb')
         run('python manage.py migrate')
-        load_badges(local=True)
         run('python manage.py runserver 0.0.0.0:7000')
