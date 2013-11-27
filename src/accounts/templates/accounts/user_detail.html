@@ -109,7 +109,7 @@
               <div>
                 {% for badge in user_.badge_set.all %}
                   {% translate badge as badge_trans %}
-                  <img src="{{ badge.get_badge_url }}" title="({{ badge_trans.title }}) {{ badge_trans.description }}" />
+                  <img src="data:image/png;base64,{{ badge.image_base64 }}" title="({{ badge_trans.title }}) {{ badge_trans.description }}" />
                 {% endfor %}
               </div>
             </div>
