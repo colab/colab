@@ -200,7 +200,7 @@ class ChangeXMPPPasswordView(UpdateView):
         changed = xmpp.change_password(
             self.object.jid,
             self.old_password,
-            form.cleaned_data['password2']
+            form.cleaned_data['password1']
         )
 
         if not changed:
@@ -211,6 +211,8 @@ class ChangeXMPPPasswordView(UpdateView):
             transaction.rollback()
             return response
         else:
+            self.request.user.set_password(form.cleaned_data['password1'])
+            self.request.user.save()
             transaction.commit()
 
         messages.success(
