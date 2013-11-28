@@ -19,4 +19,6 @@ urlpatterns = patterns('',
 
     url(r'^(?P<username>[\w@+.-]+)/subscriptions/?$',
         ManageUserSubscriptionsView.as_view(), name='user_list_subscriptions'),
+
+    url(r'^logout/?$', 'django.contrib.auth.logout'),
 )
