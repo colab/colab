@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
+
 import base64
-import StringIO
 
 from django import forms
 from django.utils.translation import ugettext_lazy as _
@@ -7,6 +8,11 @@ from django.utils.translation import ugettext_lazy as _
 from PIL import Image
 
 from .models import Badge
+
+try:
+    from cStringIO import StringIO
+except ImportError:
+    from StringIO import StringIO
 
 
 class BadgeForm(forms.ModelForm):
@@ -31,7 +37,7 @@ class BadgeForm(forms.ModelForm):
         if self.cleaned_data['image']:
             img = Image.open(self.cleaned_data['image'])
             img = img.resize((50, 50), Image.ANTIALIAS)
-            f = StringIO.StringIO()
+            f = StringIO()
             img.save(f, 'png')
             instance.image_base64 = f.getvalue().encode('base64')
             f.close()
