@@ -3,6 +3,7 @@
 import urlparse
 
 from django.db import models, DatabaseError
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
 
@@ -23,19 +24,19 @@ class User(AbstractUser):
 
     def check_password(self, raw_password):
         """
-        Returns a boolean of whether the raw_password was correct.
+        Returns a boolean of whether the raw_password was correct. Handles
+        hashing formats behind the scenes.
         """
-        if not raw_password or not self.has_usable_password():
-            return False
-        return self.password == raw_password
+        def setter(raw_password):
+            self.set_password(raw_password)
+            self.save(update_fields=["password"])
 
-    def has_usable_password(self):
-        if not self.password:
-            return False
-        return True
+        if self.xmpp.exists():
+            is_correct = raw_password == self.xmpp.all()[0].password
+            if is_correct:
+                return is_correct
 
-    def set_password(self, raw_password):
-        self.password = unicode(raw_password)
+        return check_password(raw_password, self.password, setter)
 
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})
