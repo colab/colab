@@ -25,6 +25,9 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
         model_attr='mailinglist__get_absolute_url',
         indexed=False,
     )
+    latest_message_pk = indexes.IntegerField(
+        model_attr='latest_message__pk', indexed=False
+    )
     score = indexes.IntegerField(model_attr='score')
 
     def get_model(self):
