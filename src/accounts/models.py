@@ -23,14 +23,11 @@ class User(AbstractUser):
     modified = models.DateTimeField(auto_now=True)
 
     def check_password(self, raw_password):
-        is_correct_ = super(User, self).check_password(raw_password)
 
-        if self.xmpp.exists():
-            is_correct = raw_password == self.xmpp.all()[0].password
-            if is_correct:
-                return is_correct
+        if self.xmpp.exists() and raw_password == self.xmpp.first().password:
+            return True
 
-        return is_correct_
+        return super(User, self).check_password(raw_password)
 
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})
