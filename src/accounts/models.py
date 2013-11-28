@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
 
 import urlparse
 
-from django.db import models
+from django.db import models, DatabaseError
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
+
+from conversejs import xmpp
 
 from .utils import mailman
 
@@ -17,6 +21,13 @@ class User(AbstractUser):
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)
+
+    def check_password(self, raw_password):
+
+        if self.xmpp.exists() and raw_password == self.xmpp.first().password:
+            return True
+
+        return super(User, self).check_password(raw_password)
 
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})

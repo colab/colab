@@ -10,7 +10,7 @@
 {% endif %}
 
 {% if result.title %}
-  <a href="{{ result.url }}" {% if result.latest_description %}title="{{ result.latest_description|escape|truncatechars:150 }}"{% elif result.description %}title="{{ result.description|escape|truncatechars:150 }}"{% endif %}>
+  <a href="{{ result.url }}{% if result.type == 'thread' and result.latest_message_pk %}#msg-{{ result.latest_message_pk }}{% elif result.type == 'thread' and result.pk %}#msg-{{ result.pk }}{% endif %}" {% if result.latest_description %}title="{{ result.latest_description|escape|truncatechars:150 }}"{% elif result.description %}title="{{ result.description|escape|truncatechars:150 }}"{% endif %}>
     <span class="subject">
       <!-- a striptags filter was raising an error here because using with highlight -->
       {% if query %}

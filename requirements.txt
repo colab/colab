@@ -5,7 +5,7 @@ django-piston==0.2.3
 pytz==2011n
 chardet==1.0.1
 python-dateutil==1.5
-django-cliauth==0.9
+django-cliauth==0.9.1
 django-mobile==0.3.0
 django-haystack==2.1
 pysolr==2.1
@@ -28,10 +28,10 @@ tornado==3.1.1
 # Deps for Single SignOn (SSO)
 git+https://github.com/mozilla/django-browserid
 
-django-revproxy==0.2.5
+django-revproxy==0.2.7
 
 # Converse.js (XMPP client)
-django-conversejs==0.2.8
+django-conversejs==0.2.9
 git+https://github.com/TracyWebTech/SleekXMPP@fix-gevent
 
 # Feedzilla (planet) and deps

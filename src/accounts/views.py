@@ -6,20 +6,26 @@ import datetime
 from collections import OrderedDict
 
 from django.contrib import messages
+from django.db import transaction
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView
+from django.utils.decorators import method_decorator
 
+from conversejs import xmpp
+from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
 from super_archives.models import EmailAddress, Message
 from super_archives.utils.email import send_email_lists
 from search.utils import trans
-from .forms import UserCreationForm, ListsForm, UserUpdateForm
+from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
+                    ChangeXMPPPasswordForm)
+from .errors import XMPPChangePwdException
 from .utils import mailman
 
 
@@ -129,6 +135,14 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
     http_method_names = [u'get', u'post']
     template_name = u'accounts/manage_subscriptions.html'
 
+    def get_object(self, *args, **kwargs):
+        obj = super(ManageUserSubscriptionsView, self).get_object(*args,
+                                                                  **kwargs)
+        if self.request.user != obj and not self.request.user.is_superuser:
+            raise PermissionDenied
+
+        return obj
+
     def post(self, request, *args, **kwargs):
         user = self.get_object()
         for email in user.emails.values_list('address', flat=True):
@@ -160,3 +174,47 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
         context.update(kwargs)
 
         return super(ManageUserSubscriptionsView, self).get_context_data(**context)
+
+
+class ChangeXMPPPasswordView(UpdateView):
+    model = XMPPAccount
+    form_class = ChangeXMPPPasswordForm
+    fields = ['password', ]
+    template_name = 'accounts/change_password.html'
+
+    def get_success_url(self):
+        return reverse('user_profile', kwargs={
+            'username': self.request.user.username
+        })
+
+    def get_object(self, queryset=None):
+        obj = get_object_or_404(XMPPAccount, user=self.request.user.pk)
+        self.old_password = obj.password
+        return obj
+
+    def form_valid(self, form):
+        transaction.set_autocommit(False)
+
+        response = super(ChangeXMPPPasswordView, self).form_valid(form)
+
+        changed = xmpp.change_password(
+            self.object.jid,
+            self.old_password,
+            form.cleaned_data['password1']
+        )
+
+        if not changed:
+            messages.error(
+                self.request,
+                _(u'Could not change your password. Please, try again later.')
+            )
+            transaction.rollback()
+            return response
+        else:
+            transaction.commit()
+
+        messages.success(
+            self.request,
+            _("You've changed your password successfully!")
+        )
+        return response

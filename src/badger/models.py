@@ -4,7 +4,6 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from PIL import Image
 from i18n_model.models import I18nModel
 
 
@@ -38,7 +37,7 @@ class Badge(models.Model):
                              null=True)
     description = models.CharField(_(u'Description'), max_length=200,
                                    blank=True, null=True)
-    image = models.ImageField(upload_to='badges')
+    image_base64 = models.TextField(_(u'Image'))
     type = models.CharField(_(u'Type'), max_length=200, choices=TYPE_CHOICES)
     user_attr = models.CharField(
         _(u'User attribute'),max_length=100,
@@ -70,16 +69,6 @@ class Badge(models.Model):
         verbose_name = _(u'Badge')
         verbose_name_plural = _(u'Badges')
         ordering = ['order', ]
-
-    def get_badge_url(self):
-        return u'{}{}'.format(settings.MEDIA_URL, self.image)
-
-    def save(self, *args, **kwargs):
-        img = Image.open(self.image)
-        (width, height) = img.size
-        img = img.resize((50, 50), Image.ANTIALIAS)
-        super(Badge, self).save(*args, **kwargs)
-        img.save(self.image.path)
 
     def __unicode__(self):
         return u'{} ({}, {})'.format(

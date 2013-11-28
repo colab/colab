@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-21 10:48+0000\n"
+"POT-Creation-Date: 2013-11-26 13:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,19 +29,35 @@ msgstr "Permissões"
 msgid "Important dates"
 msgstr "Datas importantes"
 
-#: accounts/forms.py:22
+#: accounts/forms.py:24
 msgid "Social account does not exist"
 msgstr "Conta social não existe"
 
-#: accounts/forms.py:63
+#: accounts/forms.py:65
 msgid "Mailing lists"
 msgstr "Listas de e-mail"
 
-#: accounts/views.py:121
+#: accounts/forms.py:72
+msgid "Password"
+msgstr "Senha"
+
+#: accounts/forms.py:74
+msgid "Password confirmation"
+msgstr "Confirmação de senha"
+
+#: accounts/forms.py:76
+msgid "Enter the same password as above, for verification."
+msgstr "Digite a mesma senha que acima, para verificação."
+
+#: accounts/forms.py:94
+msgid "Password mismatch"
+msgstr "Senhas diferentes"
+
+#: accounts/views.py:127
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: accounts/views.py:122
+#: accounts/views.py:128
 msgid ""
 "You must login to validated your profile. Profiles not validated are deleted "
 "in 24h."
@@ -49,10 +65,28 @@ msgstr ""
 "Você deve se logar para validar seu perfil. Perfis não validados serão "
 "deletados em 24h."
 
+#: accounts/views.py:209
+msgid "Could not change your password. Please, try again later."
+msgstr ""
+"Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
+
+#: accounts/views.py:218
+msgid "You've changed your password successfully!"
+msgstr "Senha alterada com sucesso!"
+
 #: accounts/management/commands/delete_invalid.py:42
 #, python-format
 msgid "%(count)s users deleted."
 msgstr "%(count)s usuários deletados."
+
+#: accounts/templates/accounts/change_password.html:8
+msgid "Change XMPP Client and SVN Password"
+msgstr "Trocar senha do SVN e do Mensageiro"
+
+#: accounts/templates/accounts/change_password.html:17
+#: accounts/templates/accounts/user_update_form.html:191
+msgid "Change Password"
+msgstr "Trocar senha"
 
 #: accounts/templates/accounts/manage_subscriptions.html:6
 msgid "Mailing List Subscriptions"
@@ -195,7 +229,19 @@ msgstr "Adicionar outro endereço de e-mail"
 msgid "Add"
 msgstr "Adicionar"
 
-#: accounts/templates/accounts/user_update_form.html:184
+#: accounts/templates/accounts/user_update_form.html:185
+msgid "Change SVN and XMPP Client password"
+msgstr "Trocar a senha do SVN e do Mensageiro"
+
+#: accounts/templates/accounts/user_update_form.html:189
+msgid ""
+"You don't need to change this password. Change it only if you really know "
+"what you are doing."
+msgstr ""
+"Você não precisa trocar essa senha. Troque-a somente se tem certeza do que "
+"está fazendo."
+
+#: accounts/templates/accounts/user_update_form.html:199
 msgid "Update"
 msgstr "Atualizar"
 

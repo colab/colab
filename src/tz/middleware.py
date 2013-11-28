@@ -10,11 +10,11 @@ class TimezoneMiddleware(object):
 
         try:
             offset = int(offset) * -1
+            tz = pytz.FixedOffset(offset)
         except ValueError:
             offset = 0
 
         if offset:
-            tz = pytz.FixedOffset(offset)
             timezone.activate(tz)
         else:
             timezone.deactivate()

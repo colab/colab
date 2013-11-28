@@ -4,6 +4,8 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
 
+from conversejs.models import XMPPAccount
+
 from super_archives.models import MailingList
 from .utils.validators import validate_social_account
 
@@ -50,7 +52,7 @@ class UserUpdateForm(UserForm):
 
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name',
+        fields = ('first_name', 'last_name',
                   'institution', 'role', 'twitter', 'facebook',
                   'google_talk', 'webpage')
 
@@ -64,3 +66,38 @@ class ListsForm(forms.Form):
                                       required=False,
                                       widget=forms.CheckboxSelectMultiple,
                                       choices=LISTS_NAMES)
+
+
+class ChangeXMPPPasswordForm(forms.ModelForm):
+    password1 = forms.CharField(label=_("Password"),
+        widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_("Password confirmation"),
+        widget=forms.PasswordInput,
+        help_text=_("Enter the same password as above, for verification."))
+
+    class Meta:
+        model = XMPPAccount
+        fields = ('password1', 'password2')
+
+    def __init__(self, *args, **kwargs):
+        super(ChangeXMPPPasswordForm, self).__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            # Adds form-control class to all form fields
+            field.widget.attrs.update({'class': 'form-control'})
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError(
+                _("Password mismatch"),
+                code='password_mismatch',
+            )
+        return password2
+
+    def save(self, commit=True):
+        self.instance.password = self.cleaned_data['password2']
+        if commit:
+            self.instance.save()
+        return self.instance
