@@ -211,7 +211,6 @@ class ChangeXMPPPasswordView(UpdateView):
             transaction.rollback()
             return response
         else:
-            self.request.user.set_password(form.cleaned_data['password1'])
             transaction.commit()
 
         messages.success(
