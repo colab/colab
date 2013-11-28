@@ -212,7 +212,6 @@ class ChangeXMPPPasswordView(UpdateView):
             return response
         else:
             self.request.user.set_password(form.cleaned_data['password1'])
-            self.request.user.save()
             transaction.commit()
 
         messages.success(
