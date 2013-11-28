@@ -10,7 +10,7 @@ from .models import Badge
 
 
 class BadgeForm(forms.ModelForm):
-    image = forms.ImageField(label=_(u'Image'))
+    image = forms.ImageField(label=_(u'Image'), required=False)
 
     class Meta:
         model = Badge
@@ -19,16 +19,22 @@ class BadgeForm(forms.ModelForm):
             'value', 'awardees'
         )
 
+    def clean_image(self):
+        if not self.instance.pk and not self.cleaned_data['image']:
+            raise forms.ValidationError(_(u'You must add an Image'))
+        return self.cleaned_data['image']
+
     def save(self, commit=True):
 
         instance = super(BadgeForm, self).save(commit=False)
 
-        img = Image.open(self.cleaned_data['image'])
-        img = img.resize((50, 50), Image.ANTIALIAS)
-        f = StringIO.StringIO()
-        img.save(f, 'png')
-        instance.image_base64 = f.getvalue().encode('base64')
-        f.close()
+        if self.cleaned_data['image']:
+            img = Image.open(self.cleaned_data['image'])
+            img = img.resize((50, 50), Image.ANTIALIAS)
+            f = StringIO.StringIO()
+            img.save(f, 'png')
+            instance.image_base64 = f.getvalue().encode('base64')
+            f.close()
 
         if commit:
             instance.save()
