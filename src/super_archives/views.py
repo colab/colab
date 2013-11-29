@@ -74,6 +74,7 @@ class ThreadView(View):
             raise http.Http404
 
         data = {
+            'in_reply_to': thread.message_set.last().message_id,
             'email_from': request.user.email,
             'name_from': request.user.get_full_name(),
             'subject': thread.message_set.first().subject_clean,
