@@ -332,12 +332,10 @@ class Message(models.Model):
         return None
 
     @property
-    def fullname(self):
-        return self.from_address.get_full_name()
-
-    @property
     def author_url(self):
-        return self.from_address.user.get_absolute_url()
+        if self.from_address.user_id:
+            return self.from_address.user.get_absolute_url()
+        return None
 
     @property
     def icon_name(self):

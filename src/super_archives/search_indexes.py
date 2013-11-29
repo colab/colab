@@ -19,6 +19,8 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     modified = indexes.DateTimeField(
         model_attr='latest_message__modified'
     )
+    modified_by = indexes.CharField(null=True)
+    modified_by_url = indexes.CharField(null=True)
     tag = indexes.CharField(model_attr='mailinglist__name')
     collaborators = indexes.CharField(use_template=True, stored=False)
     mailinglist_url = indexes.CharField(
@@ -58,8 +60,17 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
             return first_message.from_address.user.get_absolute_url()
         return None
 
+    def prepare_modified_by(self, obj):
+        return obj.latest_message.author
+
+    def prepare_modified_by_url(self, obj):
+        return obj.latest_message.author_url
+
     def prepare_created(self, obj):
         return obj.message_set.first().received_time
+
+    def prepare_fullname(self, obj):
+        return obj.latest_message.from_address.get_full_name()
 
     def prepare_icon_name(self, obj):
         return u'envelope'

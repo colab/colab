@@ -78,6 +78,8 @@ class AttachmentIndex(BaseIndex, indexes.Indexable):
 
 class WikiIndex(BaseIndex, indexes.Indexable):
     title = indexes.CharField(model_attr='name')
+    modified_by = indexes.CharField(model_attr='modified_by', null=True)
+    modified_by_url = indexes.CharField(null=True)
     collaborators = indexes.CharField(
         model_attr='collaborators',
         null=True,
@@ -89,6 +91,15 @@ class WikiIndex(BaseIndex, indexes.Indexable):
 
     def prepare_description(self, obj):
         return u'{}\n{}'.format(obj.wiki_text, obj.collaborators)
+
+    def prepare_modified_by(self, obj):
+        return obj.modified_by
+
+    def prepare_modified_by_url(self, obj):
+        modified_by = obj.get_modified_by()
+        if modified_by:
+            return modified_by.get_absolute_url()
+        return None
 
     def prepare_icon_name(self, obj):
         return u'book'
@@ -104,6 +115,8 @@ class TicketIndex(BaseIndex, indexes.Indexable):
     severity = indexes.CharField(model_attr='severity', null=True)
     reporter = indexes.CharField(model_attr='reporter', null=True)
     keywords = indexes.CharField(model_attr='keywords', null=True)
+    modified_by = indexes.CharField(model_attr='modified_by', null=True)
+    modified_by_url = indexes.CharField(null=True)
     collaborators = indexes.CharField(
         model_attr='collaborators',
         null=True,
@@ -118,6 +131,15 @@ class TicketIndex(BaseIndex, indexes.Indexable):
             obj.description, obj.milestone, obj.component, obj.severity,
             obj.reporter, obj.keywords, obj.collaborators
         )
+
+    def prepare_modified_by(self, obj):
+        return obj.modified_by
+
+    def prepare_modified_by_url(self, obj):
+        modified_by = obj.get_modified_by()
+        if modified_by:
+            return modified_by.get_absolute_url()
+        return None
 
     def prepare_icon_name(self, obj):
         return u'tag'

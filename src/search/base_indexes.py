@@ -56,7 +56,13 @@ class BaseIndex(indexes.SearchIndex):
         return None
 
     def prepare_fullname(self, obj):
-        author = obj.get_author()
-        if author:
-            return author.get_full_name()
-        return obj.author
+        if hasattr(obj, 'modified_by':
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return modified_by.get_full_name()
+            return None
+        else:
+            author = obj.get_author()
+            if author:
+                return author.get_full_name()
+            return obj.author
