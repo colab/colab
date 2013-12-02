@@ -41,9 +41,6 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
             self._badge_counters = get_users_counters()
         return self._badge_counters
 
-    def get_updated_field(self):
-        return 'modified'
-
     def prepare(self, obj):
         prepared_data = super(UserIndex, self).prepare(obj)
 
