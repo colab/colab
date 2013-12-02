@@ -56,6 +56,8 @@
           <span>{{ result.fullname }}</span>
         {% endif %}
       </span>
+    {% else %}
+      <span class="pull-left">{% trans "by" %} {% trans "Anonymous" %}</span>
     {% endif %}
     {% if result.modified %}
     <span class="pull-right">{{ result.modified|localtime|timesince }} {% trans "ago" %}</span>
