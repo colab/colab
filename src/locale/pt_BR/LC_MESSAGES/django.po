@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-26 13:17+0000\n"
+"POT-Creation-Date: 2013-12-02 15:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -152,7 +152,7 @@ msgstr "Contribuições por área"
 msgid "Mailing list Participation"
 msgstr "Participação em listas de e-mail"
 
-#: accounts/templates/accounts/user_detail.html:106 badger/models.py:71
+#: accounts/templates/accounts/user_detail.html:106 badger/models.py:70
 msgid "Badges"
 msgstr "Medalhas"
 
@@ -164,7 +164,7 @@ msgstr "Últimas postagens"
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:136 badger/models.py:24
+#: accounts/templates/accounts/user_detail.html:136 badger/models.py:23
 msgid "Contributions"
 msgstr "Contribuições"
 
@@ -245,80 +245,88 @@ msgstr ""
 msgid "Update"
 msgstr "Atualizar"
 
-#: badger/models.py:13
+#: badger/forms.py:19 badger/models.py:40 colab/custom_settings.py:53
+msgid "Image"
+msgstr "Imagem"
+
+#: badger/forms.py:30
+msgid "You must add an Image"
+msgstr ""
+
+#: badger/models.py:12
 msgid "Greater than or equal"
 msgstr "Maior que ou igual"
 
-#: badger/models.py:14
+#: badger/models.py:13
 msgid "less than or equal"
 msgstr "menor que ou igual"
 
-#: badger/models.py:15
+#: badger/models.py:14
 msgid "Equal"
 msgstr "Igual"
 
-#: badger/models.py:16
+#: badger/models.py:15
 msgid "Biggest"
 msgstr "Maior"
 
-#: badger/models.py:19
+#: badger/models.py:18
 msgid "Automatically"
 msgstr "Automaticamente"
 
-#: badger/models.py:20
+#: badger/models.py:19
 msgid "Manual"
 msgstr "Manual"
 
-#: badger/models.py:23 super_archives/models.py:258
+#: badger/models.py:22 super_archives/models.py:258
 msgid "Messages"
 msgstr "Mensagens"
 
-#: badger/models.py:25
+#: badger/models.py:24
 msgid "Wikis"
 msgstr "Wikis"
 
-#: badger/models.py:26
+#: badger/models.py:25
 msgid "Revisions"
 msgstr "Conjunto de mudanças"
 
-#: badger/models.py:27 search/views.py:42
+#: badger/models.py:26 search/views.py:42
 #: search/templates/search/includes/search_filters.html:124
 msgid "Ticket"
 msgstr "Tíquetes"
 
-#: badger/models.py:37
+#: badger/models.py:36
 msgid "Title"
 msgstr "Título"
 
-#: badger/models.py:39
+#: badger/models.py:38
 msgid "Description"
 msgstr "Descrição"
 
-#: badger/models.py:42 search/forms.py:18
+#: badger/models.py:41 search/forms.py:18
 msgid "Type"
 msgstr "Tipo"
 
-#: badger/models.py:44
+#: badger/models.py:43
 msgid "User attribute"
 msgstr "Atributo do usuário"
 
-#: badger/models.py:50
+#: badger/models.py:49
 msgid "Comparison"
 msgstr "Comparação"
 
-#: badger/models.py:57
+#: badger/models.py:56
 msgid "Value"
 msgstr "Valor"
 
-#: badger/models.py:63
+#: badger/models.py:62
 msgid "Awardees"
 msgstr "Premiados"
 
-#: badger/models.py:67
+#: badger/models.py:66
 msgid "Order"
 msgstr "Ordem"
 
-#: badger/models.py:70
+#: badger/models.py:69
 msgid "Badge"
 msgstr "Medalha"
 
@@ -362,19 +370,15 @@ msgstr "Código"
 msgid "Compressed"
 msgstr "Compactado"
 
-#: colab/custom_settings.py:53
-msgid "Image"
-msgstr "Imagem"
-
 #: colab/custom_settings.py:55
 msgid "Spreadsheet"
 msgstr "Planilha"
 
-#: colab/custom_settings.py:263
+#: colab/custom_settings.py:265
 msgid "Planet Colab"
 msgstr ""
 
-#: colab/custom_settings.py:264
+#: colab/custom_settings.py:266
 msgid "Colab blog aggregator"
 msgstr "Agregador de blog Colab"
 
@@ -627,7 +631,9 @@ msgstr "Ordenar por"
 msgid "Types"
 msgstr "Tipos"
 
-#: super_archives/models.py:62 super_archives/templates/message-thread.html:4
+#: super_archives/models.py:62
+#: super_archives/templates/message-preview.html:60
+#: super_archives/templates/message-thread.html:4
 msgid "Anonymous"
 msgstr "Anônimo"
 
@@ -683,35 +689,35 @@ msgstr "Por favor, digite o corpo da mensagem"
 msgid "Message"
 msgstr "Mensagem"
 
-#: super_archives/views.py:90
+#: super_archives/views.py:91
 msgid "Error trying to connect to Mailman API"
 msgstr "Erro na conexão com a API do Mailman"
 
-#: super_archives/views.py:93
+#: super_archives/views.py:94
 msgid "Timeout trying to connect to Mailman API"
 msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
 
-#: super_archives/views.py:96
+#: super_archives/views.py:97
 msgid ""
 "Your message was sent. It may take some minutes before it's delivered. Why "
 "don't you breath some fresh air in the meanwhile?"
 msgstr ""
 "Sua mensagem foi enviada. Pode levar alguns minutos antes de ser entregue. "
-"Por quê você respira um ar fresco enquanto isso?"
+"Por quê você não respira um ar fresco enquanto isso?"
 
-#: super_archives/views.py:104
+#: super_archives/views.py:105
 msgid "You cannot send an empty email"
 msgstr "Você não pode enviar um e-mail vazio"
 
-#: super_archives/views.py:106
+#: super_archives/views.py:107
 msgid "Mailing list does not exist"
 msgstr "Lista de e-mail não existe"
 
-#: super_archives/views.py:108
+#: super_archives/views.py:109
 msgid "Unknown error trying to connect to Mailman API"
 msgstr "Erro desconhecido na conexão com a API do Mailman"
 
-#: super_archives/views.py:143
+#: super_archives/views.py:144
 msgid ""
 "The email address you are trying to verify either has already been verified "
 "or does not exist."
@@ -719,7 +725,7 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar ou já foi verificado "
 "ou não existe."
 
-#: super_archives/views.py:154
+#: super_archives/views.py:155
 msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
@@ -727,15 +733,16 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar já é um endereço de e-"
 "mail ativo"
 
-#: super_archives/views.py:164
+#: super_archives/views.py:165
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
 #: super_archives/templates/message-preview.html:42
+#: super_archives/templates/message-preview.html:60
 msgid "by"
 msgstr "por"
 
-#: super_archives/templates/message-preview.html:57
+#: super_archives/templates/message-preview.html:63
 #: super_archives/templates/message-thread.html:157
 msgid "ago"
 msgstr "atrás"
