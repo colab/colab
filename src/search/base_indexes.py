@@ -19,6 +19,8 @@ class BaseIndex(indexes.SearchIndex):
     icon_name = indexes.CharField(indexed=False)
     fullname_and_username = indexes.CharField(null=True, stored=False)
     hits = indexes.IntegerField(model_attr='hits')
+    modified_by = indexes.CharField(null=True)
+    modified_by_url = indexes.CharField(null=True)
 
     def get_updated_field(self):
         return 'modified'
@@ -40,6 +42,24 @@ class BaseIndex(indexes.SearchIndex):
             return author.username
         return obj.author
 
+    def prepare_author_url(self, obj):
+        author = obj.get_author()
+        if author:
+            return author.get_absolute_url()
+        return None
+
+    def prepare_fullname(self, obj):
+        if hasattr(obj, 'modified_by'):
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return modified_by.get_full_name()
+            return None
+        else:
+            author = obj.get_author()
+            if author:
+                return author.get_full_name()
+            return obj.author
+
     def prepare_fullname_and_username(self, obj):
         author = obj.get_author()
         if not author:
@@ -49,14 +69,14 @@ class BaseIndex(indexes.SearchIndex):
             author.username,
         )
 
-    def prepare_author_url(self, obj):
-        author = obj.get_author()
-        if author:
-            return author.get_absolute_url()
+    def prepare_modified_by(self, obj):
+        if hasattr(obj, 'modified_by'):
+            return obj.modified_by
         return None
 
-    def prepare_fullname(self, obj):
-        author = obj.get_author()
-        if author:
-            return author.get_full_name()
-        return obj.author
+    def prepare_modified_by_url(self, obj):
+        if hasattr(obj, 'modified_by'):
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return modified_by.get_absolute_url()
+        return None

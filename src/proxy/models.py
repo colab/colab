@@ -81,6 +81,7 @@ class Ticket(models.Model, HitCounterModelMixin):
     collaborators = models.TextField(blank=True)
     created = models.DateTimeField(blank=True, null=True)
     modified = models.DateTimeField(blank=True, null=True)
+    modified_by = models.TextField(blank=True)
 
     class Meta:
         managed = False
@@ -95,6 +96,12 @@ class Ticket(models.Model, HitCounterModelMixin):
         except User.DoesNotExist:
             return None
 
+    def get_modified_by(self):
+        try:
+            return User.objects.get(username=self.modified_by)
+        except User.DoesNotExist:
+            return None
+
 
 class Wiki(models.Model, HitCounterModelMixin):
     name = models.TextField(primary_key=True)
@@ -103,6 +110,7 @@ class Wiki(models.Model, HitCounterModelMixin):
     collaborators = models.TextField(blank=True)
     created = models.DateTimeField(blank=True, null=True)
     modified = models.DateTimeField(blank=True, null=True)
+    modified_by = models.TextField(blank=True)
 
     class Meta:
         managed = False
@@ -114,5 +122,11 @@ class Wiki(models.Model, HitCounterModelMixin):
     def get_author(self):
         try:
             return User.objects.get(username=self.author)
+        except User.DoesNotExist:
+            return None
+
+    def get_modified_by(self):
+        try:
+            return User.objects.get(username=self.modified_by)
         except User.DoesNotExist:
             return None
