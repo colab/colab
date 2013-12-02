@@ -19,8 +19,6 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     modified = indexes.DateTimeField(
         model_attr='latest_message__modified'
     )
-    modified_by = indexes.CharField(null=True)
-    modified_by_url = indexes.CharField(null=True)
     tag = indexes.CharField(model_attr='mailinglist__name')
     collaborators = indexes.CharField(use_template=True, stored=False)
     mailinglist_url = indexes.CharField(
