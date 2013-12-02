@@ -75,7 +75,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
             CounterClass = counter_class.get(type)
             if CounterClass:
                 try:
-                    counter = CounterClass.objects.get(username=user.username)
+                    counter = CounterClass.objects.get(author=user.username)
                 except CounterClass.DoesNotExist:
                     count_types[trans(type)] = 0
                 else:
