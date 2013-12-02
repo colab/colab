@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 15:05+0000\n"
+"POT-Creation-Date: 2013-12-02 15:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -631,9 +631,7 @@ msgstr "Ordenar por"
 msgid "Types"
 msgstr "Tipos"
 
-#: super_archives/models.py:62
-#: super_archives/templates/message-preview.html:60
-#: super_archives/templates/message-thread.html:4
+#: super_archives/models.py:62 super_archives/templates/message-thread.html:4
 msgid "Anonymous"
 msgstr "Anônimo"
 
@@ -697,27 +695,29 @@ msgstr "Erro na conexão com a API do Mailman"
 msgid "Timeout trying to connect to Mailman API"
 msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
 
-#: super_archives/views.py:97
+#: super_archives/views.py:98
 msgid ""
-"Your message was sent. It may take some minutes before it's delivered. Why "
-"don't you breath some fresh air in the meanwhile?"
+"Your message was sent to this topic. It may take some minutes before it's "
+"delivered by email to the group. Why don't you breath some fresh air in the "
+"meanwhile?"
 msgstr ""
-"Sua mensagem foi enviada. Pode levar alguns minutos antes de ser entregue. "
-"Por quê você não respira um ar fresco enquanto isso?"
+"Sua mensagem foi enviada para esse tópico. Pode levar alguns minutos até "
+"ser entregue via e-mail para o grupo. Por quê você não respira um ar fresco "
+"enquanto isso?"
 
-#: super_archives/views.py:105
+#: super_archives/views.py:107
 msgid "You cannot send an empty email"
 msgstr "Você não pode enviar um e-mail vazio"
 
-#: super_archives/views.py:107
+#: super_archives/views.py:109
 msgid "Mailing list does not exist"
 msgstr "Lista de e-mail não existe"
 
-#: super_archives/views.py:109
+#: super_archives/views.py:111
 msgid "Unknown error trying to connect to Mailman API"
 msgstr "Erro desconhecido na conexão com a API do Mailman"
 
-#: super_archives/views.py:144
+#: super_archives/views.py:146
 msgid ""
 "The email address you are trying to verify either has already been verified "
 "or does not exist."
@@ -725,7 +725,7 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar ou já foi verificado "
 "ou não existe."
 
-#: super_archives/views.py:155
+#: super_archives/views.py:157
 msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
@@ -733,16 +733,15 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar já é um endereço de e-"
 "mail ativo"
 
-#: super_archives/views.py:165
+#: super_archives/views.py:167
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
 #: super_archives/templates/message-preview.html:42
-#: super_archives/templates/message-preview.html:60
 msgid "by"
 msgstr "por"
 
-#: super_archives/templates/message-preview.html:63
+#: super_archives/templates/message-preview.html:57
 #: super_archives/templates/message-thread.html:157
 msgid "ago"
 msgstr "atrás"

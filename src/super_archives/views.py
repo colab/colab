@@ -94,10 +94,12 @@ class ThreadView(View):
             error_msg = _('Timeout trying to connect to Mailman API')
 
         if resp and resp.status_code == 200:
-            messages.success(request, _("Your message was sent. It may take "
-                                        "some minutes before it's delivered. "
-                                        "Why don't you breath some fresh air "
-                                        "in the meanwhile?"))
+            messages.success(request, _(
+                "Your message was sent to this topic. "
+                "It may take some minutes before it's delivered by email "
+                "to the group. Why don't you breath some fresh air in the "
+                "meanwhile?"
+            ))
         else:
             if not error_msg:
                 if resp is not None:
