@@ -92,9 +92,6 @@ class WikiIndex(BaseIndex, indexes.Indexable):
     def prepare_description(self, obj):
         return u'{}\n{}'.format(obj.wiki_text, obj.collaborators)
 
-    def prepare_modified_by(self, obj):
-        return obj.modified_by
-
     def prepare_modified_by_url(self, obj):
         modified_by = obj.get_modified_by()
         if modified_by:
@@ -131,9 +128,6 @@ class TicketIndex(BaseIndex, indexes.Indexable):
             obj.description, obj.milestone, obj.component, obj.severity,
             obj.reporter, obj.keywords, obj.collaborators
         )
-
-    def prepare_modified_by(self, obj):
-        return obj.modified_by
 
     def prepare_modified_by_url(self, obj):
         modified_by = obj.get_modified_by()
