@@ -23,6 +23,7 @@ from haystack.query import SearchQuerySet
 from super_archives.models import EmailAddress, Message
 from super_archives.utils.email import send_email_lists
 from search.utils import trans
+from proxy.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
 from .errors import XMPPChangePwdException
@@ -65,11 +66,25 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
             {'fullname_and_username__contains': user.username},
         )
 
+        counter_class = {
+            'wiki': WikiCollabCount,
+            'ticket': TicketCollabCount,
+        }
+
         for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:
-            sqs = SearchQuerySet()
-            for filter_or in fields_or_lookup:
-                sqs = sqs.filter_or(type=type, **filter_or)
-            count_types[trans(type)] = sqs.count()
+            CounterClass = counter_class.get(type)
+            if CounterClass:
+                try:
+                    counter = CounterClass.objects.get(username=user.username)
+                except CounterClass.DoesNotExist:
+                    count_types[trans(type)] = 0
+                else:
+                    count_types[trans(type)] = counter.count
+            else:
+                sqs = SearchQuerySet()
+                for filter_or in fields_or_lookup:
+                    sqs = sqs.filter_or(type=type, **filter_or)
+                count_types[trans(type)] = sqs.count()
 
         context['type_count'] = count_types
 

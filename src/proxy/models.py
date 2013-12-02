@@ -130,3 +130,21 @@ class Wiki(models.Model, HitCounterModelMixin):
             return User.objects.get(username=self.modified_by)
         except User.DoesNotExist:
             return None
+
+
+class WikiCollabCount(models.Model):
+    author = models.TextField(primary_key=True)
+    count = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'wiki_collab_count_view'
+
+
+class TicketCollabCount(models.Model):
+    author = models.TextField(primary_key=True)
+    count = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'ticket_collab_count_view'
