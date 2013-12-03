@@ -40,20 +40,28 @@
   <div class="quiet">
     {% if result.fullname or result.modified_by %}
       <span class="pull-left">{% trans "by" %}
-        {% if result.fullname and result.author_url or result.modified_by and result.modified_by_url %}
-          <a href="{% firstof result.modified_by_url result.author_url %}">
+        {% if result.modified_by and result.modified_by_url %}
+          <a href="{{ result.author_url }}">
             {% if query %}
-              {% if result.modified_by %}
-                {% highlight result.modified_by with query %}
-              {% else %}
-                {% highlight result.fullname with query %}
-              {% endif %}
+              {% highlight result.fullname with query %}
             {% else %}
-              {% firstof result.modified_by result.fullname %}
+              {{ result.fullname }}
+            {% endif %}
+          </a>
+        {% elif result.fullname and result.author_url %}
+          <a href="{{ result.modified_by_url }}">
+            {% if query %}
+              {% highlight result.modified_by with query %}
+            {% else %}
+              {{ result.modified_by }}
             {% endif %}
           </a>
         {% else %}
-          <span>{{ result.fullname }}</span>
+          {% if result.modified_by %}
+            <span>{{ result.modified_by }}</span>
+          {% else %}
+            <span>{{ result.fullname }}</span>
+          {% endif %}
         {% endif %}
       </span>
     {% else %}
