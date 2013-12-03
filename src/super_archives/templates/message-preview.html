@@ -41,19 +41,19 @@
     {% if result.fullname or result.modified_by %}
       <span class="pull-left">{% trans "by" %}
         {% if result.modified_by and result.modified_by_url %}
-          <a href="{{ result.author_url }}">
-            {% if query %}
-              {% highlight result.fullname with query %}
-            {% else %}
-              {{ result.fullname }}
-            {% endif %}
-          </a>
-        {% elif result.fullname and result.author_url %}
           <a href="{{ result.modified_by_url }}">
             {% if query %}
               {% highlight result.modified_by with query %}
             {% else %}
               {{ result.modified_by }}
+            {% endif %}
+          </a>
+        {% elif result.fullname and result.author_url %}
+          <a href="{{ result.author_url }}">
+            {% if query %}
+              {% highlight result.fullname with query %}
+            {% else %}
+              {{ result.fullname }}
             {% endif %}
           </a>
         {% else %}
