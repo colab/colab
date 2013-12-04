@@ -38,28 +38,24 @@
 
 {% if result.fullname or result.modified or result.modified_by %}
   <div class="quiet">
-    {% if result.fullname or result.modified_by %}
+    {% if result.modified_by %}
       <span class="pull-left">{% trans "by" %}
-        {% if result.modified_by and result.modified_by_url %}
+        {% if result.modified_by_url %}
           <a href="{{ result.modified_by_url }}">
-            {% if query %}
-              {% highlight result.modified_by with query %}
-            {% else %}
-              {{ result.modified_by }}
-            {% endif %}
-          </a>
-        {% elif result.modified_by and not result.modified_by_url %}
-          <span>{{ result.modified_by }}</span>
-        {% elif result.fullname and result.author_url %}
-          <a href="{{ result.author_url }}">
-            {% if query %}
-              {% highlight result.fullname with query %}
-            {% else %}
-              {{ result.fullname }}
-            {% endif %}
+        {% else %}
+          <span>
+        {% endif %}
+
+        {% if query %}
+          {% highlight result.modified_by with query %}
+        {% else %}
+          {{ result.modified_by }}
+        {% endif %}
+
+        {% if result.modified_by_url %}
           </a>
         {% else %}
-          <span>{{ result.fullname }}</span>
+          </span>
         {% endif %}
       </span>
     {% else %}
