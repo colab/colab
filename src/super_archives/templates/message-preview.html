@@ -48,6 +48,8 @@
               {{ result.modified_by }}
             {% endif %}
           </a>
+        {% elif result.modified_by and not result.modified_by_url %}
+          <span>{{ result.modified_by }}</span>
         {% elif result.fullname and result.author_url %}
           <a href="{{ result.author_url }}">
             {% if query %}
@@ -57,18 +59,14 @@
             {% endif %}
           </a>
         {% else %}
-          {% if result.modified_by %}
-            <span>{{ result.modified_by }}</span>
-          {% else %}
-            <span>{{ result.fullname }}</span>
-          {% endif %}
+          <span>{{ result.fullname }}</span>
         {% endif %}
       </span>
     {% else %}
       <span class="pull-left">{% trans "by" %} {% trans "Anonymous" %}</span>
     {% endif %}
     {% if result.modified %}
-    <span class="pull-right">{{ result.modified|localtime|timesince }} {% trans "ago" %}</span>
+      <span class="pull-right">{{ result.modified|localtime|timesince }} {% trans "ago" %}</span>
     {% endif %}
   </div>
 {% endif %}
