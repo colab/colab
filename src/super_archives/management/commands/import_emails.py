@@ -11,7 +11,10 @@ from optparse import make_option
 
 from django.db import transaction
 from django.template.defaultfilters import slugify
+from django.core.mail.message import EmailMessage
 from django.core.management.base import BaseCommand, CommandError
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext as _
 
 from super_archives.models import MailingList, Message, \
                                   Thread, EmailAddress
@@ -196,6 +199,22 @@ class Command(BaseCommand, object):
             email_addr.save()
 
         subject = email_msg.get_subject()
+        if not subject:
+            no_subject_mail = EmailMessage(
+                subject=_(
+                    u"[Colab] Warning - Email sent with a blank subject."
+                ),
+                body=render_to_string(
+                    u'superarchives/emails/email_blank_subject.txt',
+                    {
+                        'email_body': email_msg.get_body(),
+                        'mailinglist': mailinglist.name,
+                        'user': email_addr.get_full_name()
+                    }
+                ),
+                to=[email_addr.address, ]
+            )
+            no_subject_mail.send()
 
         email = Message.all_objects.create(
             message_id=email_msg.get('Message-ID'),
