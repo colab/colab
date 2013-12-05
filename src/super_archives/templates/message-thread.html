@@ -3,6 +3,8 @@
 
 {% trans "Anonymous" as anonymous %}
 
+{% block title %}{{ first_msg.subject_clean }}{% endblock %}
+
 {% block head_js %}
 
 <script>
