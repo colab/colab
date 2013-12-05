@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-02 15:26+0000\n"
+"POT-Creation-Date: 2013-12-05 13:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,11 +53,11 @@ msgstr "Digite a mesma senha que acima, para verificação."
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
-#: accounts/views.py:127
+#: accounts/views.py:144
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: accounts/views.py:128
+#: accounts/views.py:145
 msgid ""
 "You must login to validated your profile. Profiles not validated are deleted "
 "in 24h."
@@ -65,12 +65,12 @@ msgstr ""
 "Você deve se logar para validar seu perfil. Perfis não validados serão "
 "deletados em 24h."
 
-#: accounts/views.py:209
+#: accounts/views.py:226
 msgid "Could not change your password. Please, try again later."
 msgstr ""
 "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
 
-#: accounts/views.py:218
+#: accounts/views.py:235
 msgid "You've changed your password successfully!"
 msgstr "Senha alterada com sucesso!"
 
@@ -113,10 +113,10 @@ msgid "Personal Information"
 msgstr "Informações pessoais"
 
 #: accounts/templates/accounts/user_create_form.html:46
-msgid "Subscribe to mail lists"
-msgstr "Inscreva-se para listas de e-mails"
+msgid "Subscribe to groups"
+msgstr "Inscreva-se nos grupos"
 
-#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:97
+#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:98
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -128,47 +128,47 @@ msgstr "perfil"
 msgid "list membership"
 msgstr "participação em listas"
 
-#: accounts/templates/accounts/user_detail.html:51
+#: accounts/templates/accounts/user_detail.html:49
 msgid "Twitter account"
 msgstr "Conta Twitter"
 
-#: accounts/templates/accounts/user_detail.html:54
+#: accounts/templates/accounts/user_detail.html:52
 msgid "Facebook account"
 msgstr "Conta Facebook"
 
-#: accounts/templates/accounts/user_detail.html:62
+#: accounts/templates/accounts/user_detail.html:60
 msgid "Personal webpage"
 msgstr "Página web pessoal"
 
-#: accounts/templates/accounts/user_detail.html:68
+#: accounts/templates/accounts/user_detail.html:66
 msgid "Subscribes: "
 msgstr "Inscrições: "
 
-#: accounts/templates/accounts/user_detail.html:81
+#: accounts/templates/accounts/user_detail.html:79
 msgid "Contributions by Area"
 msgstr "Contribuições por área"
 
-#: accounts/templates/accounts/user_detail.html:93
+#: accounts/templates/accounts/user_detail.html:91
 msgid "Mailing list Participation"
 msgstr "Participação em listas de e-mail"
 
-#: accounts/templates/accounts/user_detail.html:106 badger/models.py:70
+#: accounts/templates/accounts/user_detail.html:104 badger/models.py:70
 msgid "Badges"
 msgstr "Medalhas"
 
-#: accounts/templates/accounts/user_detail.html:125
+#: accounts/templates/accounts/user_detail.html:123
 msgid "Latest posted"
 msgstr "Últimas postagens"
 
-#: accounts/templates/accounts/user_detail.html:130
+#: accounts/templates/accounts/user_detail.html:128
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:136 badger/models.py:23
+#: accounts/templates/accounts/user_detail.html:134 badger/models.py:23
 msgid "Contributions"
 msgstr "Contribuições"
 
-#: accounts/templates/accounts/user_detail.html:141
+#: accounts/templates/accounts/user_detail.html:139
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
@@ -394,7 +394,7 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:5 templates/base.html:75
+#: planet/templates/feedzilla/base.html:5 templates/base.html:76
 msgid "Planet"
 msgstr ""
 
@@ -460,7 +460,7 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:41
-#: templates/base.html:91
+#: templates/base.html:92
 msgid "Search"
 msgstr "Busca"
 
@@ -631,7 +631,9 @@ msgstr "Ordenar por"
 msgid "Types"
 msgstr "Tipos"
 
-#: super_archives/models.py:62 super_archives/templates/message-thread.html:4
+#: super_archives/models.py:62
+#: super_archives/templates/message-preview.html:62
+#: super_archives/templates/message-thread.html:4
 msgid "Anonymous"
 msgstr "Anônimo"
 
@@ -701,8 +703,8 @@ msgid ""
 "delivered by email to the group. Why don't you breath some fresh air in the "
 "meanwhile?"
 msgstr ""
-"Sua mensagem foi enviada para esse tópico. Pode levar alguns minutos até "
-"ser entregue via e-mail para o grupo. Por quê você não respira um ar fresco "
+"Sua mensagem foi enviada para esse tópico. Pode levar alguns minutos até ser "
+"entregue via e-mail para o grupo. Por quê você não respira um ar fresco "
 "enquanto isso?"
 
 #: super_archives/views.py:107
@@ -738,66 +740,67 @@ msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
 #: super_archives/templates/message-preview.html:42
+#: super_archives/templates/message-preview.html:62
 msgid "by"
 msgstr "por"
 
-#: super_archives/templates/message-preview.html:57
-#: super_archives/templates/message-thread.html:157
+#: super_archives/templates/message-preview.html:65
+#: super_archives/templates/message-thread.html:159
 msgid "ago"
 msgstr "atrás"
 
-#: super_archives/templates/message-thread.html:33
+#: super_archives/templates/message-thread.html:35
 msgid "You must login before voting."
 msgstr "Você deve estar logado antes de votar."
 
-#: super_archives/templates/message-thread.html:128
+#: super_archives/templates/message-thread.html:130
 msgid "Order by"
 msgstr "Ordernar por"
 
-#: super_archives/templates/message-thread.html:132
+#: super_archives/templates/message-thread.html:134
 msgid "Votes"
 msgstr "Votos"
 
-#: super_archives/templates/message-thread.html:136
+#: super_archives/templates/message-thread.html:138
 msgid "Date"
 msgstr "Data"
 
-#: super_archives/templates/message-thread.html:141
+#: super_archives/templates/message-thread.html:143
 msgid "Related:"
 msgstr "Relacionado:"
 
-#: super_archives/templates/message-thread.html:152
+#: super_archives/templates/message-thread.html:154
 msgid "Statistics:"
 msgstr "Estátisticas:"
 
-#: super_archives/templates/message-thread.html:156
+#: super_archives/templates/message-thread.html:158
 msgid "started at"
 msgstr "começou às"
 
-#: super_archives/templates/message-thread.html:162
+#: super_archives/templates/message-thread.html:164
 msgid "viewed"
 msgstr "visualizado"
 
-#: super_archives/templates/message-thread.html:163
-#: super_archives/templates/message-thread.html:168
-#: super_archives/templates/message-thread.html:173
+#: super_archives/templates/message-thread.html:165
+#: super_archives/templates/message-thread.html:170
+#: super_archives/templates/message-thread.html:175
 msgid "times"
 msgstr "vezes"
 
-#: super_archives/templates/message-thread.html:167
+#: super_archives/templates/message-thread.html:169
 msgid "answered"
 msgstr "respondido"
 
-#: super_archives/templates/message-thread.html:172
+#: super_archives/templates/message-thread.html:174
 msgid "voted"
 msgstr "votado"
 
-#: super_archives/templates/message-thread.html:178
+#: super_archives/templates/message-thread.html:180
 msgid "Tags:"
 msgstr "Etiquetas:"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:5
-#: templates/base.html:72
+#: templates/base.html:73
 msgid "Discussions"
 msgstr "Discussões"
 
@@ -868,51 +871,51 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:78
+#: templates/base.html:79
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:82
+#: templates/base.html:83
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:84
+#: templates/base.html:85
 msgid "Timeline"
 msgstr "Histórico"
 
-#: templates/base.html:85
+#: templates/base.html:86
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:86
+#: templates/base.html:87
 msgid "Browse Source"
 msgstr "Ver Código"
 
-#: templates/base.html:87
+#: templates/base.html:88
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
 
-#: templates/base.html:111
+#: templates/base.html:112
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:123 templates/base.html.py:126
+#: templates/base.html:124 templates/base.html.py:127
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:139
+#: templates/base.html:140
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:164
+#: templates/base.html:165
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:169
+#: templates/base.html:170
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:171
+#: templates/base.html:172
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
