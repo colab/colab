@@ -96,7 +96,8 @@
           <ul class="nav navbar-nav navbar-right">
             {% if not user.is_authenticated %}
               <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
-              <li>{% browserid_login text='Login' %}</li>
+              {% trans 'Login' as login_text %}
+              <li>{% browserid_login text=login_text %}</li>
             {% else %}
               <li id="user-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
@@ -110,7 +111,8 @@
                       </div>
                       <div>
                         <a class="btn btn-info pull-left" href="{% url 'user_profile' user.username %}">{% trans "My Profile" %}</a>
-                        {% browserid_logout text='Logout' link_class='btn btn-default pull-right' %}
+                        {% trans 'Logout' as logout_text %}
+                        {% browserid_logout text=logout_text link_class='btn btn-default pull-right' %}
                       </div>
                     </div>
                   </li>
