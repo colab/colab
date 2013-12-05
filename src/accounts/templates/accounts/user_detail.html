@@ -29,9 +29,7 @@
       <div class="divider"></div>
       {% if request.user.is_active %}
         <ul class="unstyled-list">
-        {% for email in user_.emails.iterator %}
-          <li><span class="icon-envelope icon-fixed-width"></span> {{ email.address }}</li>
-        {% endfor %}
+          <li><span class="icon-envelope icon-fixed-width"></span> {{ user_.email }}</li>
         </ul>
         <div class="divider"></div>
       {% endif %}
