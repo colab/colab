@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 17:12+0000\n"
+"POT-Creation-Date: 2013-12-05 18:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,10 +81,10 @@ msgstr "%(count)s usuários deletados."
 
 #: accounts/templates/accounts/change_password.html:8
 msgid "Change XMPP Client and SVN Password"
-msgstr "Trocar senha do SVN e do Mensageiro"
+msgstr "Trocar senha do Repositório e do Mensageiro"
 
 #: accounts/templates/accounts/change_password.html:17
-#: accounts/templates/accounts/user_update_form.html:191
+#: accounts/templates/accounts/user_update_form.html:195
 msgid "Change Password"
 msgstr "Trocar senha"
 
@@ -229,19 +229,30 @@ msgstr "Adicionar outro endereço de e-mail"
 msgid "Add"
 msgstr "Adicionar"
 
-#: accounts/templates/accounts/user_update_form.html:185
-msgid "Change SVN and XMPP Client password"
-msgstr "Trocar a senha do SVN e do Mensageiro"
-
-#: accounts/templates/accounts/user_update_form.html:189
+#: accounts/templates/accounts/user_update_form.html:188
 msgid ""
-"You don't need to change this password. Change it only if you really know "
-"what you are doing."
+"Change <a href=\"http://repositorio.interlegis.gov.br/\">SVN</a> and <a href="
+"\"http://mensageiro.interlegis.gov.br/\">XMPP Client</a> password"
 msgstr ""
-"Você não precisa trocar essa senha. Troque-a somente se tem certeza do que "
-"está fazendo."
+"Trocar a senha do <a href=\"http://repositorio.interlegis.gov.br/"
+"\">Repositório</a> e do <a href=\"http://mensageiro.interlegis.gov.br/"
+"\">Mensageiro</a>"
 
-#: accounts/templates/accounts/user_update_form.html:199
+#: accounts/templates/accounts/user_update_form.html:193
+msgid ""
+"This feature is available only for who needs to change the password for some "
+"reason as having an old user with the same username, forgot your password to "
+"commit, usage of other XMPP Client for connection. Usually, you won't need "
+"to change this password. Only change it if you are sure about what you are "
+"doing."
+msgstr ""
+"Este recurso está disponível para quem precisa trocar a senha por algum "
+"motivo como ter um usuário antigo com mesmo nome de usuário, esqueceu da "
+"senha antiga para commit, uso de outro cliente XMPP para conexão. "
+"Normalmente, você não terá que trocar essa senha. Somente troque essa senha "
+"se tiver certeza do que está fazendo."
+
+#: accounts/templates/accounts/user_update_form.html:203
 msgid "Update"
 msgstr "Atualizar"
 
@@ -974,6 +985,16 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Change SVN and XMPP Client password"
+#~ msgstr "Trocar a senha do SVN e do Mensageiro"
+
+#~ msgid ""
+#~ "You don't need to change this password. Change it only if you really know "
+#~ "what you are doing."
+#~ msgstr ""
+#~ "Você não precisa trocar essa senha. Troque-a somente se tem certeza do "
+#~ "que está fazendo."
 
 #~ msgid "Subscribes: "
 #~ msgstr "Inscrições: "
