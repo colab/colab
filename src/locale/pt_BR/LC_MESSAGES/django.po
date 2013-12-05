@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 13:41+0000\n"
+"POT-Creation-Date: 2013-12-05 15:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,16 +141,16 @@ msgid "Personal webpage"
 msgstr "Página web pessoal"
 
 #: accounts/templates/accounts/user_detail.html:66
-msgid "Subscribes: "
-msgstr "Inscrições: "
+msgid "Groups: "
+msgstr "Grupos: "
 
 #: accounts/templates/accounts/user_detail.html:79
 msgid "Contributions by Area"
 msgstr "Contribuições por área"
 
 #: accounts/templates/accounts/user_detail.html:91
-msgid "Mailing list Participation"
-msgstr "Participação em listas de e-mail"
+msgid "Groups Inscriptions"
+msgstr "Inscrições em grupos"
 
 #: accounts/templates/accounts/user_detail.html:104 badger/models.py:70
 msgid "Badges"
@@ -801,8 +801,8 @@ msgstr "Etiquetas:"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:5
 #: templates/base.html:73
-msgid "Discussions"
-msgstr "Discussões"
+msgid "Groups"
+msgstr "Grupos"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:15
 msgid "latest"
@@ -962,6 +962,12 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Subscribes: "
+#~ msgstr "Inscrições: "
+
+#~ msgid "Discussions"
+#~ msgstr "Discussões"
 
 #~ msgid "Community inside participations"
 #~ msgstr "Participações internas da comunidade"
