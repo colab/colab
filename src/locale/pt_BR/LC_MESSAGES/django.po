@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-04 18:28+0000\n"
+"POT-Creation-Date: 2013-12-06 10:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,11 +53,11 @@ msgstr "Digite a mesma senha que acima, para verificação."
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
-#: accounts/views.py:142
+#: accounts/views.py:144
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: accounts/views.py:143
+#: accounts/views.py:145
 msgid ""
 "You must login to validated your profile. Profiles not validated are deleted "
 "in 24h."
@@ -65,12 +65,12 @@ msgstr ""
 "Você deve se logar para validar seu perfil. Perfis não validados serão "
 "deletados em 24h."
 
-#: accounts/views.py:224
+#: accounts/views.py:226
 msgid "Could not change your password. Please, try again later."
 msgstr ""
 "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
 
-#: accounts/views.py:233
+#: accounts/views.py:235
 msgid "You've changed your password successfully!"
 msgstr "Senha alterada com sucesso!"
 
@@ -81,10 +81,10 @@ msgstr "%(count)s usuários deletados."
 
 #: accounts/templates/accounts/change_password.html:8
 msgid "Change XMPP Client and SVN Password"
-msgstr "Trocar senha do SVN e do Mensageiro"
+msgstr "Trocar senha do Repositório e do Mensageiro"
 
 #: accounts/templates/accounts/change_password.html:17
-#: accounts/templates/accounts/user_update_form.html:191
+#: accounts/templates/accounts/user_update_form.html:195
 msgid "Change Password"
 msgstr "Trocar senha"
 
@@ -113,8 +113,8 @@ msgid "Personal Information"
 msgstr "Informações pessoais"
 
 #: accounts/templates/accounts/user_create_form.html:46
-msgid "Subscribe to mail lists"
-msgstr "Inscreva-se para listas de e-mails"
+msgid "Subscribe to groups"
+msgstr "Inscreva-se nos grupos"
 
 #: accounts/templates/accounts/user_create_form.html:60 templates/base.html:98
 msgid "Register"
@@ -128,47 +128,47 @@ msgstr "perfil"
 msgid "list membership"
 msgstr "participação em listas"
 
-#: accounts/templates/accounts/user_detail.html:51
+#: accounts/templates/accounts/user_detail.html:49
 msgid "Twitter account"
 msgstr "Conta Twitter"
 
-#: accounts/templates/accounts/user_detail.html:54
+#: accounts/templates/accounts/user_detail.html:52
 msgid "Facebook account"
 msgstr "Conta Facebook"
 
-#: accounts/templates/accounts/user_detail.html:62
+#: accounts/templates/accounts/user_detail.html:60
 msgid "Personal webpage"
 msgstr "Página web pessoal"
 
-#: accounts/templates/accounts/user_detail.html:68
-msgid "Subscribes: "
-msgstr "Inscrições: "
+#: accounts/templates/accounts/user_detail.html:66
+msgid "Groups: "
+msgstr "Grupos: "
 
-#: accounts/templates/accounts/user_detail.html:81
+#: accounts/templates/accounts/user_detail.html:79
 msgid "Contributions by Area"
 msgstr "Contribuições por área"
 
-#: accounts/templates/accounts/user_detail.html:93
-msgid "Mailing list Participation"
-msgstr "Participação em listas de e-mail"
+#: accounts/templates/accounts/user_detail.html:91
+msgid "Groups Inscriptions"
+msgstr "Inscrições em grupos"
 
-#: accounts/templates/accounts/user_detail.html:106 badger/models.py:70
+#: accounts/templates/accounts/user_detail.html:104 badger/models.py:70
 msgid "Badges"
 msgstr "Medalhas"
 
-#: accounts/templates/accounts/user_detail.html:125
+#: accounts/templates/accounts/user_detail.html:123
 msgid "Latest posted"
 msgstr "Últimas postagens"
 
-#: accounts/templates/accounts/user_detail.html:130
+#: accounts/templates/accounts/user_detail.html:128
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:136 badger/models.py:23
+#: accounts/templates/accounts/user_detail.html:134 badger/models.py:23
 msgid "Contributions"
 msgstr "Contribuições"
 
-#: accounts/templates/accounts/user_detail.html:141
+#: accounts/templates/accounts/user_detail.html:139
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
@@ -229,19 +229,30 @@ msgstr "Adicionar outro endereço de e-mail"
 msgid "Add"
 msgstr "Adicionar"
 
-#: accounts/templates/accounts/user_update_form.html:185
-msgid "Change SVN and XMPP Client password"
-msgstr "Trocar a senha do SVN e do Mensageiro"
-
-#: accounts/templates/accounts/user_update_form.html:189
+#: accounts/templates/accounts/user_update_form.html:188
 msgid ""
-"You don't need to change this password. Change it only if you really know "
-"what you are doing."
+"Change <a href=\"http://repositorio.interlegis.gov.br/\">SVN</a> and <a href="
+"\"http://mensageiro.interlegis.gov.br/\">XMPP Client</a> password"
 msgstr ""
-"Você não precisa trocar essa senha. Troque-a somente se tem certeza do que "
-"está fazendo."
+"Trocar a senha do <a href=\"http://repositorio.interlegis.gov.br/"
+"\">Repositório</a> e do <a href=\"http://mensageiro.interlegis.gov.br/"
+"\">Mensageiro</a>"
 
-#: accounts/templates/accounts/user_update_form.html:199
+#: accounts/templates/accounts/user_update_form.html:193
+msgid ""
+"This feature is available only for who needs to change the password for some "
+"reason as having an old user with the same username, forgot your password to "
+"commit, usage of other XMPP Client for connection. Usually, you won't need "
+"to change this password. Only change it if you are sure about what you are "
+"doing."
+msgstr ""
+"Este recurso está disponível para quem precisa trocar a senha por algum "
+"motivo como ter um usuário antigo com mesmo nome de usuário, esqueceu da "
+"senha antiga para commit, uso de outro cliente XMPP para conexão. "
+"Normalmente, você não terá que trocar essa senha. Somente troque essa senha "
+"se tiver certeza do que está fazendo."
+
+#: accounts/templates/accounts/user_update_form.html:203
 msgid "Update"
 msgstr "Atualizar"
 
@@ -394,19 +405,23 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:5 templates/base.html:76
+#: planet/templates/feedzilla/base.html:4
+msgid "Community Blogs"
+msgstr "Blogs da comunidade"
+
+#: planet/templates/feedzilla/base.html:7 templates/base.html:76
 msgid "Planet"
 msgstr ""
 
-#: planet/templates/feedzilla/base.html:15
+#: planet/templates/feedzilla/base.html:17
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: planet/templates/feedzilla/base.html:19
+#: planet/templates/feedzilla/base.html:21
 msgid "Source Blogs"
 msgstr "Blogs de origem"
 
-#: planet/templates/feedzilla/base.html:22
+#: planet/templates/feedzilla/base.html:24
 #: planet/templates/feedzilla/submit_blog.html:5
 msgid "Submit a blog"
 msgstr "Sugerir um blog"
@@ -741,7 +756,7 @@ msgstr "Endereço de e-mail verificado!"
 
 #: super_archives/management/commands/import_emails.py:205
 msgid "[Colab] Warning - Email sent with a blank subject."
-msgstr "[Colab] Aviso - E-mail enviado com o campo assunto em branco."
+msgstr ""
 
 #: super_archives/templates/message-preview.html:42
 #: super_archives/templates/message-preview.html:62
@@ -749,64 +764,64 @@ msgid "by"
 msgstr "por"
 
 #: super_archives/templates/message-preview.html:65
-#: super_archives/templates/message-thread.html:157
+#: super_archives/templates/message-thread.html:159
 msgid "ago"
 msgstr "atrás"
 
-#: super_archives/templates/message-thread.html:33
+#: super_archives/templates/message-thread.html:35
 msgid "You must login before voting."
 msgstr "Você deve estar logado antes de votar."
 
-#: super_archives/templates/message-thread.html:128
+#: super_archives/templates/message-thread.html:130
 msgid "Order by"
 msgstr "Ordernar por"
 
-#: super_archives/templates/message-thread.html:132
+#: super_archives/templates/message-thread.html:134
 msgid "Votes"
 msgstr "Votos"
 
-#: super_archives/templates/message-thread.html:136
+#: super_archives/templates/message-thread.html:138
 msgid "Date"
 msgstr "Data"
 
-#: super_archives/templates/message-thread.html:141
+#: super_archives/templates/message-thread.html:143
 msgid "Related:"
 msgstr "Relacionado:"
 
-#: super_archives/templates/message-thread.html:152
+#: super_archives/templates/message-thread.html:154
 msgid "Statistics:"
 msgstr "Estátisticas:"
 
-#: super_archives/templates/message-thread.html:156
+#: super_archives/templates/message-thread.html:158
 msgid "started at"
 msgstr "começou às"
 
-#: super_archives/templates/message-thread.html:162
+#: super_archives/templates/message-thread.html:164
 msgid "viewed"
 msgstr "visualizado"
 
-#: super_archives/templates/message-thread.html:163
-#: super_archives/templates/message-thread.html:168
-#: super_archives/templates/message-thread.html:173
+#: super_archives/templates/message-thread.html:165
+#: super_archives/templates/message-thread.html:170
+#: super_archives/templates/message-thread.html:175
 msgid "times"
 msgstr "vezes"
 
-#: super_archives/templates/message-thread.html:167
+#: super_archives/templates/message-thread.html:169
 msgid "answered"
 msgstr "respondido"
 
-#: super_archives/templates/message-thread.html:172
+#: super_archives/templates/message-thread.html:174
 msgid "voted"
 msgstr "votado"
 
-#: super_archives/templates/message-thread.html:178
+#: super_archives/templates/message-thread.html:180
 msgid "Tags:"
 msgstr "Etiquetas:"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:5
 #: templates/base.html:73
-msgid "Discussions"
-msgstr "Discussões"
+msgid "Groups"
+msgstr "Grupos"
 
 #: super_archives/templates/superarchives/thread-dashboard.html:15
 msgid "latest"
@@ -823,7 +838,7 @@ msgstr "mais relevantes"
 
 #: super_archives/templates/superarchives/emails/email_blank_subject.txt:2
 msgid "Hello"
-msgstr "Olá"
+msgstr ""
 
 #: super_archives/templates/superarchives/emails/email_blank_subject.txt:3
 #, python-format
@@ -838,15 +853,6 @@ msgid ""
 "\n"
 "Thank you.\n"
 msgstr ""
-"\n"
-"Você enviou um e-mail para %(mailinglist)s com o campo Assunto em branco e "
-"o seguinte conteúdo:\n"
-"\n"
-"\"%(body)s\"\n"
-"\n"
-"Por favor, preencha o assunto em todos os e-mails que você enviar.\n"
-"\n"
-"Obrigado.\n"
 
 #: super_archives/templates/superarchives/emails/email_verification.txt:2
 #, python-format
@@ -906,47 +912,55 @@ msgstr "Opa... algo saiu errado!"
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:83
-msgid "New Ticket"
-msgstr "Novo Tíquete"
-
-#: templates/base.html:85
+#: templates/base.html:82
 msgid "Timeline"
 msgstr "Histórico"
 
-#: templates/base.html:86
+#: templates/base.html:83
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:87
+#: templates/base.html:84
 msgid "Browse Source"
 msgstr "Ver Código"
+
+#: templates/base.html:86
+msgid "New Ticket"
+msgstr "Novo Tíquete"
 
 #: templates/base.html:88
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
 
-#: templates/base.html:112
+#: templates/base.html:99
+msgid "Login"
+msgstr "Entrar"
+
+#: templates/base.html:113
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:124 templates/base.html.py:127
+#: templates/base.html:114
+msgid "Logout"
+msgstr "Sair"
+
+#: templates/base.html:126 templates/base.html.py:129
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:140
+#: templates/base.html:142
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:165
+#: templates/base.html:167
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:170
+#: templates/base.html:172
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:172
+#: templates/base.html:174
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
@@ -993,6 +1007,22 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Change SVN and XMPP Client password"
+#~ msgstr "Trocar a senha do SVN e do Mensageiro"
+
+#~ msgid ""
+#~ "You don't need to change this password. Change it only if you really know "
+#~ "what you are doing."
+#~ msgstr ""
+#~ "Você não precisa trocar essa senha. Troque-a somente se tem certeza do "
+#~ "que está fazendo."
+
+#~ msgid "Subscribes: "
+#~ msgstr "Inscrições: "
+
+#~ msgid "Discussions"
+#~ msgstr "Discussões"
 
 #~ msgid "Community inside participations"
 #~ msgstr "Participações internas da comunidade"

@@ -29,9 +29,7 @@
       <div class="divider"></div>
       {% if request.user.is_active %}
         <ul class="unstyled-list">
-        {% for email in user_.emails.iterator %}
-          <li><span class="icon-envelope icon-fixed-width"></span> {{ email.address }}</li>
-        {% endfor %}
+          <li><span class="icon-envelope icon-fixed-width"></span> <a href="mailto:{{ user_.email }}">{{ user_.email }}</a></li>
         </ul>
         <div class="divider"></div>
       {% endif %}
@@ -65,7 +63,7 @@
       </ul>
 
       {% if user_.mailinglists %}
-        <b>{% trans 'Subscribes: ' %}</b>
+        <b>{% trans 'Groups: ' %}</b>
         {% for list in user_.mailinglists %}
           <span class="label label-primary">{{ list }}</span>
         {% endfor %}
@@ -90,7 +88,7 @@
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Mailing list Participation" %}</h3>
+          <h3 class="panel-title">{% trans "Groups Inscriptions" %}</h3>
         </div>
         <div class="panel-body">
           <div id="collabs2"></div>

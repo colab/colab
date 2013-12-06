@@ -71,6 +71,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
             'ticket': TicketCollabCount,
         }
 
+        messages = Message.objects.filter(from_address__user__pk=user.pk)
         for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:
             CounterClass = counter_class.get(type)
             if CounterClass:
@@ -80,6 +81,8 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
                     count_types[trans(type)] = 0
                 else:
                     count_types[trans(type)] = counter.count
+            elif type == 'thread':
+                count_types[trans(type)] = messages.count()
             else:
                 sqs = SearchQuerySet()
                 for filter_or in fields_or_lookup:
@@ -100,7 +103,6 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context['emails'] = query[:10]
 
         count_by = 'thread__mailinglist__name'
-        messages = Message.objects.filter(from_address__user__pk=user.pk)
         context['list_activity'] = dict(messages.values_list(count_by)\
                                            .annotate(Count(count_by))\
                                            .order_by(count_by))
