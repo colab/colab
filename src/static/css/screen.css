@@ -413,3 +413,18 @@ span.highlighted {
 .vcard .label {
     line-height: 2;
 }
+
+/* Message link */
+
+.div-message-link {
+    display: inline !important;
+}
+
+.message-link {
+    margin-left: 15px;
+}
+
+.email-message .popover {
+    max-width: 350px;
+    width: 350px;
+}

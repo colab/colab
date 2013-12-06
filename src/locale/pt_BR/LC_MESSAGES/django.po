@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-05 18:14+0000\n"
+"POT-Creation-Date: 2013-12-06 12:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -760,7 +760,7 @@ msgid "by"
 msgstr "por"
 
 #: super_archives/templates/message-preview.html:65
-#: super_archives/templates/message-thread.html:159
+#: super_archives/templates/message-thread.html:161
 msgid "ago"
 msgstr "atrás"
 
@@ -768,49 +768,49 @@ msgstr "atrás"
 msgid "You must login before voting."
 msgstr "Você deve estar logado antes de votar."
 
-#: super_archives/templates/message-thread.html:130
+#: super_archives/templates/message-thread.html:132
 msgid "Order by"
 msgstr "Ordernar por"
 
-#: super_archives/templates/message-thread.html:134
+#: super_archives/templates/message-thread.html:136
 msgid "Votes"
 msgstr "Votos"
 
-#: super_archives/templates/message-thread.html:138
+#: super_archives/templates/message-thread.html:140
 msgid "Date"
 msgstr "Data"
 
-#: super_archives/templates/message-thread.html:143
+#: super_archives/templates/message-thread.html:145
 msgid "Related:"
 msgstr "Relacionado:"
 
-#: super_archives/templates/message-thread.html:154
+#: super_archives/templates/message-thread.html:156
 msgid "Statistics:"
 msgstr "Estátisticas:"
 
-#: super_archives/templates/message-thread.html:158
+#: super_archives/templates/message-thread.html:160
 msgid "started at"
 msgstr "começou às"
 
-#: super_archives/templates/message-thread.html:164
+#: super_archives/templates/message-thread.html:166
 msgid "viewed"
 msgstr "visualizado"
 
-#: super_archives/templates/message-thread.html:165
-#: super_archives/templates/message-thread.html:170
-#: super_archives/templates/message-thread.html:175
+#: super_archives/templates/message-thread.html:167
+#: super_archives/templates/message-thread.html:172
+#: super_archives/templates/message-thread.html:177
 msgid "times"
 msgstr "vezes"
 
-#: super_archives/templates/message-thread.html:169
+#: super_archives/templates/message-thread.html:171
 msgid "answered"
 msgstr "respondido"
 
-#: super_archives/templates/message-thread.html:174
+#: super_archives/templates/message-thread.html:176
 msgid "voted"
 msgstr "votado"
 
-#: super_archives/templates/message-thread.html:180
+#: super_archives/templates/message-thread.html:182
 msgid "Tags:"
 msgstr "Etiquetas:"
 
@@ -850,15 +850,20 @@ msgstr ""
 "Se você não é %(username)s ou não pediu uma verificação você pode ignorar "
 "esse e-mail"
 
-#: super_archives/templates/superarchives/includes/message.html:39
+#: super_archives/templates/superarchives/includes/message.html:16
+#: super_archives/templates/superarchives/includes/message.html:17
+msgid "Link to this message"
+msgstr "Link para essa mensagem"
+
+#: super_archives/templates/superarchives/includes/message.html:44
 msgid "Reply"
 msgstr "Responder"
 
-#: super_archives/templates/superarchives/includes/message.html:56
+#: super_archives/templates/superarchives/includes/message.html:61
 msgid "Send a message"
 msgstr "Enviar uma mensagem"
 
-#: super_archives/templates/superarchives/includes/message.html:59
+#: super_archives/templates/superarchives/includes/message.html:64
 msgid ""
 "After sending a message it will take few minutes before it shows up in here. "
 "Why don't you grab a coffee?"
@@ -866,7 +871,7 @@ msgstr ""
 "Depois de enviar uma mensagem levará alguns minutos antes dela aparecer "
 "aqui. Por que você não pega um café?"
 
-#: super_archives/templates/superarchives/includes/message.html:62
+#: super_archives/templates/superarchives/includes/message.html:67
 msgid "Send"
 msgstr "Enviar"
 
