@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 12:50+0000\n"
+"POT-Creation-Date: 2013-12-06 13:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -754,6 +754,10 @@ msgstr ""
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
+#: super_archives/management/commands/import_emails.py:205
+msgid "[Colab] Warning - Email sent with a blank subject."
+msgstr "[Colab] Aviso - E-mail enviado com o campo assunto em branco."
+
 #: super_archives/templates/message-preview.html:42
 #: super_archives/templates/message-preview.html:62
 msgid "by"
@@ -831,6 +835,33 @@ msgstr "mais..."
 #: super_archives/templates/superarchives/thread-dashboard.html:29
 msgid "most relevant"
 msgstr "mais relevantes"
+
+#: super_archives/templates/superarchives/emails/email_blank_subject.txt:2
+msgid "Hello"
+msgstr "Olá"
+
+#: super_archives/templates/superarchives/emails/email_blank_subject.txt:3
+#, python-format
+msgid ""
+"\n"
+"You've sent an email to %(mailinglist)s with a blank subject and the "
+"following content:\n"
+"\n"
+"\"%(body)s\"\n"
+"\n"
+"Please, fill the subject in every email you send it.\n"
+"\n"
+"Thank you.\n"
+msgstr ""
+"\n"
+"Você enviou um e-mail para %(mailinglist)s com o campo Assunto em branco e "
+"o seguinte conteúdo:\n"
+"\n"
+"\"%(body)s\"\n"
+"\n"
+"Por favor, preencha o assunto em todos os e-mails que você enviar.\n"
+"\n"
+"Obrigado.\n"
 
 #: super_archives/templates/superarchives/emails/email_verification.txt:2
 #, python-format

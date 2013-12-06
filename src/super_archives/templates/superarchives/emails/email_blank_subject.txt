@@ -1,0 +1,11 @@
+{% load i18n %}
+{% trans 'Hello' %} {{ user }},
+{% blocktrans with body=email_body mailinglist=mailinglist %}
+You've sent an email to {{ mailinglist }} with a blank subject and the following content:
+
+"{{ body }}"
+
+Please, fill the subject in every email you send it.
+
+Thank you.
+{% endblocktrans %}
