@@ -25,7 +25,6 @@ class colab::requirements {
   # XMPP connection manager
   package { 'punjab':
     ensure   => installed,
-    source   => 'git+https://github.com/twonds/punjab@c96ffe4#egg=punjab',
     provider => pip,
     require  => Package['python-pip'],
   }
