@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-06 13:01+0000\n"
+"POT-Creation-Date: 2013-12-09 15:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -164,13 +164,22 @@ msgstr "Últimas postagens"
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:134 badger/models.py:23
+#: accounts/templates/accounts/user_detail.html:132 templates/home.html:57
+#: templates/home.html.py:76
+msgid "View more discussions..."
+msgstr "Ver mais discussões..."
+
+#: accounts/templates/accounts/user_detail.html:138 badger/models.py:23
 msgid "Contributions"
 msgstr "Contribuições"
 
-#: accounts/templates/accounts/user_detail.html:139
+#: accounts/templates/accounts/user_detail.html:143
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
+
+#: accounts/templates/accounts/user_detail.html:147
+msgid "View more contributions..."
+msgstr "Ver mais colaborações..."
 
 #: accounts/templates/accounts/user_update_form.html:65
 msgid "We sent a verification email to "
@@ -484,89 +493,93 @@ msgstr "Busca"
 msgid "Author"
 msgstr "Autor"
 
-#: search/forms.py:21 search/views.py:70
+#: search/forms.py:20
+msgid "Modified by"
+msgstr "Modificado por"
+
+#: search/forms.py:22 search/views.py:70
 msgid "Status"
 msgstr ""
 
-#: search/forms.py:25 search/views.py:36
+#: search/forms.py:26 search/views.py:36
 msgid "Mailinglist"
 msgstr "Lista de email"
 
-#: search/forms.py:29 search/views.py:46
+#: search/forms.py:30 search/views.py:46
 msgid "Milestone"
 msgstr "Etapa"
 
-#: search/forms.py:30 search/views.py:51
+#: search/forms.py:31 search/views.py:51
 msgid "Priority"
 msgstr "Prioridade"
 
-#: search/forms.py:31 search/views.py:56
+#: search/forms.py:32 search/views.py:56
 msgid "Component"
 msgstr "Componente"
 
-#: search/forms.py:32 search/views.py:61
+#: search/forms.py:33 search/views.py:61
 msgid "Severity"
 msgstr "Seriedade"
 
-#: search/forms.py:33 search/views.py:66
+#: search/forms.py:34 search/views.py:66
 msgid "Reporter"
 msgstr "Relator"
 
-#: search/forms.py:34 search/views.py:73
+#: search/forms.py:35 search/views.py:73
 msgid "Keywords"
 msgstr "Palavras chaves"
 
-#: search/forms.py:35 search/views.py:25 search/views.py:78
+#: search/forms.py:36 search/views.py:25 search/views.py:78
 msgid "Collaborators"
 msgstr "Colaboradores"
 
-#: search/forms.py:36 search/views.py:89
+#: search/forms.py:37 search/views.py:89
 msgid "Repository"
 msgstr "Repositório"
 
-#: search/forms.py:37 search/views.py:99
+#: search/forms.py:38 search/views.py:99
 msgid "Username"
 msgstr "Usuário"
 
-#: search/forms.py:38 search/views.py:102
+#: search/forms.py:39 search/views.py:102
 msgid "Name"
 msgstr "Nome"
 
-#: search/forms.py:39 search/views.py:105
+#: search/forms.py:40 search/views.py:105
 msgid "Institution"
 msgstr "Instituição"
 
-#: search/forms.py:40 search/views.py:108
+#: search/forms.py:41 search/views.py:108
 msgid "Role"
 msgstr "Cargo"
 
-#: search/forms.py:41 search/templates/search/includes/search_filters.html:151
+#: search/forms.py:42 search/templates/search/includes/search_filters.html:151
 #: search/templates/search/includes/search_filters.html:153
 #: search/templates/search/includes/search_filters.html:185
 #: search/templates/search/includes/search_filters.html:186
 msgid "Since"
 msgstr "Desde"
 
-#: search/forms.py:42 search/templates/search/includes/search_filters.html:160
+#: search/forms.py:43 search/templates/search/includes/search_filters.html:160
 #: search/templates/search/includes/search_filters.html:162
 #: search/templates/search/includes/search_filters.html:189
 #: search/templates/search/includes/search_filters.html:190
 msgid "Until"
 msgstr "Até"
 
-#: search/forms.py:43 search/views.py:116
+#: search/forms.py:44 search/views.py:116
 msgid "Filename"
 msgstr "Nome do arquivo"
 
-#: search/forms.py:44 search/views.py:122
+#: search/forms.py:45 search/views.py:122
 msgid "Used by"
 msgstr "Usado por"
 
-#: search/forms.py:45 search/views.py:125
+#: search/forms.py:46 search/views.py:125
 msgid "File type"
 msgstr "Tipo do arquivo"
 
-#: search/forms.py:46 search/views.py:128
+#: search/forms.py:47 search/views.py:128
 msgid "Size"
 msgstr "Tamanho"
 
@@ -854,8 +867,8 @@ msgid ""
 "Thank you.\n"
 msgstr ""
 "\n"
-"Você enviou um e-mail para %(mailinglist)s com o campo Assunto em branco e "
-"o seguinte conteúdo:\n"
+"Você enviou um e-mail para %(mailinglist)s com o campo Assunto em branco e o "
+"seguinte conteúdo:\n"
 "\n"
 "\"%(body)s\"\n"
 "\n"
@@ -881,20 +894,20 @@ msgstr ""
 "Se você não é %(username)s ou não pediu uma verificação você pode ignorar "
 "esse e-mail"
 
-#: super_archives/templates/superarchives/includes/message.html:16
 #: super_archives/templates/superarchives/includes/message.html:17
+#: super_archives/templates/superarchives/includes/message.html:18
 msgid "Link to this message"
 msgstr "Link para essa mensagem"
 
-#: super_archives/templates/superarchives/includes/message.html:44
+#: super_archives/templates/superarchives/includes/message.html:46
 msgid "Reply"
 msgstr "Responder"
 
-#: super_archives/templates/superarchives/includes/message.html:61
+#: super_archives/templates/superarchives/includes/message.html:63
 msgid "Send a message"
 msgstr "Enviar uma mensagem"
 
-#: super_archives/templates/superarchives/includes/message.html:64
+#: super_archives/templates/superarchives/includes/message.html:66
 msgid ""
 "After sending a message it will take few minutes before it shows up in here. "
 "Why don't you grab a coffee?"
@@ -902,7 +915,7 @@ msgstr ""
 "Depois de enviar uma mensagem levará alguns minutos antes dela aparecer "
 "aqui. Por que você não pega um café?"
 
-#: super_archives/templates/superarchives/includes/message.html:67
+#: super_archives/templates/superarchives/includes/message.html:69
 msgid "Send"
 msgstr "Enviar"
 
@@ -934,17 +947,17 @@ msgstr "Histórico"
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:84
-msgid "Browse Source"
-msgstr "Ver Código"
-
-#: templates/base.html:86
+#: templates/base.html:85
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:88
+#: templates/base.html:87
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
+
+#: templates/base.html:88
+msgid "Browse Source"
+msgstr "Ver Códigos Fontes"
 
 #: templates/base.html:99
 msgid "Login"
@@ -1001,10 +1014,6 @@ msgstr "Discussões Mais Relevantes"
 #: templates/home.html:49
 msgid "RSS - Most Relevant Threads"
 msgstr "RSS - Discussões Mais Relevantes"
-
-#: templates/home.html:57 templates/home.html.py:76
-msgid "View more discussions..."
-msgstr "Ver mais discussões..."
 
 #: templates/home.html:64
 msgid "Latest Threads"
