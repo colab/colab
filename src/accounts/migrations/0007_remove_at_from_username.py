@@ -12,7 +12,7 @@ class Migration(DataMigration):
         # Use orm.ModelName to refer to models in this application,
         # and orm['appname.ModelName'] for models in other applications.
         for u in orm.User.objects.filter(username__contains='@'):
-            u.username = u.username.replace('@', '')
+            u.username = u.username.split('@')[0]
             u.save()
 
     def backwards(self, orm):
