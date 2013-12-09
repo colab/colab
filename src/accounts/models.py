@@ -5,7 +5,9 @@ import urlparse
 from django.db import models, DatabaseError
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import AbstractUser
+from django.core import validators
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 from conversejs import xmpp
 
@@ -50,3 +52,12 @@ class User(AbstractUser):
 # The following workaroud allows to change email field to unique
 #   without having to rewrite all AbstractUser here
 User._meta.get_field('email')._unique = True
+User._meta.get_field('username').help_text = _(
+    u'Required. 30 characters or fewer. Letters, digits and '
+    u'./+/-/_ only.'
+)
+User._meta.get_field('username').validators[0] = validators.RegexValidator(
+    r'^[\w.+-]+$',
+    _('Enter a valid username.'),
+    'invalid'
+)
