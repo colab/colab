@@ -126,7 +126,9 @@ class ThreadDashboardView(View):
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,
-                list_.thread_set.filter(spam=False)[:MAX],
+                list_.thread_set.filter(spam=False).order_by(
+                    '-latest_message__received_time'
+                )[:MAX],
                 SearchQuerySet().filter(type='thread', tag=list_.name)[:MAX],
             ))
 
