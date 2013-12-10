@@ -49,12 +49,19 @@ class UserCreationForm(UserForm):
 
 
 class UserUpdateForm(UserForm):
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': '6', 'maxlength': '200'}),
+        max_length=200,
+        label=_(u'Biography'),
+        help_text=_(u'Write something about you in 200 characters or less.'),
+        required=False,
+    )
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name',
                   'institution', 'role', 'twitter', 'facebook',
-                  'google_talk', 'webpage')
+                  'google_talk', 'webpage', 'bio')
 
     twitter = SocialAccountField(url='https://twitter.com/', required=False)
     facebook = SocialAccountField(url='https://graph.facebook.com/', required=False)

@@ -23,6 +23,7 @@ class User(AbstractUser):
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)
+    bio = models.CharField(max_length=200, null=True, blank=True)
 
     def check_password(self, raw_password):
 
