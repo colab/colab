@@ -22,8 +22,8 @@
       </h1>
 
       {% if request.user == user_ or request.user.is_superuser %}
-        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "profile"|title %}</a>
-        <a class="btn btn-info" href="{% url 'user_list_subscriptions' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "list membership"|title %}</a>
+        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "edit profile"|title %}</a>
+        <a class="btn btn-info" href="{% url 'user_list_subscriptions' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "group membership"|title %}</a>
       {% endif %}
 
       <div class="divider"></div>
@@ -76,7 +76,7 @@
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Contributions by Area" %}</h3>
+          <h3 class="panel-title">{% trans "Contributions by Type" %}</h3>
         </div>
         <div class="panel-body">
           <div id="collabs"></div>
@@ -88,7 +88,7 @@
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Groups Inscriptions" %}</h3>
+          <h3 class="panel-title">{% trans "Participation by Group" %}</h3>
         </div>
         <div class="panel-body">
           <div id="collabs2"></div>

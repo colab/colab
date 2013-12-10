@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-09 15:48+0000\n"
+"POT-Creation-Date: 2013-12-10 11:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,6 +53,14 @@ msgstr "Digite a mesma senha que acima, para verificação."
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
+#: accounts/models.py:56
+msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
+msgstr ""
+
+#: accounts/models.py:61
+msgid "Enter a valid username."
+msgstr ""
+
 #: accounts/views.py:144
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
@@ -89,8 +97,8 @@ msgid "Change Password"
 msgstr "Trocar senha"
 
 #: accounts/templates/accounts/manage_subscriptions.html:6
-msgid "Mailing List Subscriptions"
-msgstr "Inscrições em listas de e-mails"
+msgid "Group Subscriptions"
+msgstr "Inscrições em grupos"
 
 #: accounts/templates/accounts/manage_subscriptions.html:36
 msgid "Update subscriptions"
@@ -121,12 +129,12 @@ msgid "Register"
 msgstr "Cadastre-se"
 
 #: accounts/templates/accounts/user_detail.html:25
-msgid "profile"
-msgstr "perfil"
+msgid "edit profile"
+msgstr "editar perfil"
 
 #: accounts/templates/accounts/user_detail.html:26
-msgid "list membership"
-msgstr "participação em listas"
+msgid "group membership"
+msgstr "Inscrições nos grupos"
 
 #: accounts/templates/accounts/user_detail.html:49
 msgid "Twitter account"
@@ -145,12 +153,12 @@ msgid "Groups: "
 msgstr "Grupos: "
 
 #: accounts/templates/accounts/user_detail.html:79
-msgid "Contributions by Area"
-msgstr "Contribuições por área"
+msgid "Contributions by Type"
+msgstr "Contribuições por tipo"
 
 #: accounts/templates/accounts/user_detail.html:91
-msgid "Groups Inscriptions"
-msgstr "Inscrições em grupos"
+msgid "Participation by Group"
+msgstr "Participação por grupo"
 
 #: accounts/templates/accounts/user_detail.html:104 badger/models.py:70
 msgid "Badges"
@@ -747,7 +755,7 @@ msgstr "Lista de e-mail não existe"
 msgid "Unknown error trying to connect to Mailman API"
 msgstr "Erro desconhecido na conexão com a API do Mailman"
 
-#: super_archives/views.py:146
+#: super_archives/views.py:148
 msgid ""
 "The email address you are trying to verify either has already been verified "
 "or does not exist."
@@ -755,7 +763,7 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar ou já foi verificado "
 "ou não existe."
 
-#: super_archives/views.py:157
+#: super_archives/views.py:159
 msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
@@ -763,7 +771,7 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar já é um endereço de e-"
 "mail ativo"
 
-#: super_archives/views.py:167
+#: super_archives/views.py:169
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
@@ -1030,6 +1038,9 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Mailing List Subscriptions"
+#~ msgstr "Inscrições em listas de e-mails"
 
 #~ msgid "Change SVN and XMPP Client password"
 #~ msgstr "Trocar a senha do SVN e do Mensageiro"
