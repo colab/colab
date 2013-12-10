@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-10 11:38+0000\n"
+"POT-Creation-Date: 2013-12-10 12:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -422,23 +422,19 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:4
-msgid "Community Blogs"
-msgstr "Blogs da comunidade"
+#: planet/templates/feedzilla/base.html:5
+msgid "Planet - Community Blogs"
+msgstr "Planet - Blogs da comunidade"
 
-#: planet/templates/feedzilla/base.html:7 templates/base.html:76
-msgid "Planet"
-msgstr ""
-
-#: planet/templates/feedzilla/base.html:17
+#: planet/templates/feedzilla/base.html:15
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: planet/templates/feedzilla/base.html:21
+#: planet/templates/feedzilla/base.html:19
 msgid "Source Blogs"
 msgstr "Blogs de origem"
 
-#: planet/templates/feedzilla/base.html:24
+#: planet/templates/feedzilla/base.html:23
 #: planet/templates/feedzilla/submit_blog.html:5
 msgid "Submit a blog"
 msgstr "Sugerir um blog"
@@ -943,6 +939,10 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
+#: templates/base.html:76
+msgid "Planet"
+msgstr ""
+
 #: templates/base.html:79
 msgid "Contribute"
 msgstr "Contribua"
@@ -1038,6 +1038,9 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Community Blogs"
+#~ msgstr "Blogs da comunidade"
 
 #~ msgid "Mailing List Subscriptions"
 #~ msgstr "Inscrições em listas de e-mails"

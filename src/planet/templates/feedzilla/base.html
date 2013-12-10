@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 {% load i18n feedzilla_tags %}
 
-{% block title %}{% trans "Community Blogs" %}{% endblock %}
-
 {% block main-content %}
-    <h2>{% trans 'Planet' %}</h2>
+    <h2>{% trans 'Planet - Community Blogs' %}</h2>
     <hr/>
 
     <div id="planet" class="row">
@@ -20,9 +18,11 @@
         <div class="well">
           <h3>{% trans 'Source Blogs' %}</h3>
           {% feedzilla_donor_list order_by="title" %}
-          <div class="text-center">
-            <a class="btn btn-primary" href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
-          </div>
+          {% if user.is_authenticated %}
+            <div class="text-center">
+              <a class="btn btn-primary" href="{% url "feedzilla_submit_blog" %}">{% trans "Submit a blog" %}</a>
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>
