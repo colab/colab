@@ -46,18 +46,29 @@
         {% if request.user.is_active %}
           <li>
             {% if user_.twitter %}
-            <span class="icon-twitter icon-fixed-width"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
+              <span class="icon-twitter icon-fixed-width" title="{% trans 'Twitter account' %}"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
             {% endif %}
             {% if user_.facebook %}
-            <span class="icon-facebook icon-fixed-width"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
+              <span class="icon-facebook icon-fixed-width" title="{% trans 'Facebook account' %}"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
             {% endif %}
           </li>
 
           {% if user_.google_talk %}
-            <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.google_talk }}</li>
+            <li><span class="icon-google-plus icon-fixed-width" title="{% trans 'Google talk account' %}"></span> {{ user_.google_talk }}</li>
           {% endif %}
+
+          {% if user_.identi_ca %}
+            <li><span class="icon-comments icon-fixed-width" title="{% trans 'Identi.ca account' %}"></span> {{ user_.identi_ca }}</li>
+          {% endif %}
+
           {% if user_.webpage %}
-            <li><span class="icon-link icon-fixed-width"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
+            <li><span class="icon-link icon-fixed-width" title="{% trans 'Personal webpage' %}"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
+          {% endif %}
+          {% if user_.bio %}
+            <li class="divider">
+              <strong><abbr title="{% trans 'Biography' %}">{% trans 'Bio' %}</abbr></strong>
+            </li>
+            <li class="text-muted"> {{ user_.bio }}</li>
           {% endif %}
         {% endif %}
       </ul>
