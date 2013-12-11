@@ -61,7 +61,7 @@ class UserUpdateForm(UserForm):
         model = User
         fields = ('first_name', 'last_name',
                   'institution', 'role', 'twitter', 'facebook',
-                  'google_talk', 'webpage', 'bio')
+                  'google_talk', 'identi_ca', 'webpage', 'bio')
 
     twitter = SocialAccountField(url='https://twitter.com/', required=False)
     facebook = SocialAccountField(url='https://graph.facebook.com/', required=False)
