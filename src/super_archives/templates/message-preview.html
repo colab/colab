@@ -28,9 +28,9 @@
     {% highlight result.description with query max_length "150" %}
   {% else %}
     {% if result.latest_description %}
-      {{ result.latest_description|escape|truncatechars:150 }}
+      {{ result.latest_description|striptags|escape|truncatechars:150 }}
     {% elif result.description %}
-      {{ result.description|escape|truncatechars:150 }}
+      {{ result.description|striptags|escape|truncatechars:150 }}
     {% endif %}
   {% endif %}
   </span>
