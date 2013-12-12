@@ -11,7 +11,7 @@ from optparse import make_option
 
 from django.db import transaction
 from django.template.defaultfilters import slugify
-from super_archives.utils.message import colab_send_email
+from super_archives.utils.email import colab_send_email
 from django.core.management.base import BaseCommand, CommandError
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
