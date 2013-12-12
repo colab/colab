@@ -33,7 +33,7 @@ def index(request):
         count_types[trans('wiki')] = sum([
             wiki.count for wiki in WikiCollabCount.objects.all()
         ])
-        cache.set('home_chart', count_types, 60)
+        cache.set('home_chart', count_types)
 
     context = {
         'hottest_threads': hottest_threads[:6],
