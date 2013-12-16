@@ -19,9 +19,9 @@
           </div>
           <div class="panel-body">
             {% for list, checked in lists %}
-              <div class="checkbox">
+              <div class="checkbox" title="{{ list.description }}">
                 <label>
-                  <input name="{{ email }}" value="{{ list.listname }}" type="checkbox" {% if checked %}checked{% endif%} title="{{ list.description }}">{{ list.listname }}</input>
+                  <input name="{{ email }}" value="{{ list.listname }}" type="checkbox" {% if checked %}checked{% endif%}>{{ list.listname }}</input>
                 </label>
               </div>
             {% endfor %}
