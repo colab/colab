@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-10 16:24+0000\n"
+"POT-Creation-Date: 2013-12-10 17:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,31 +33,39 @@ msgstr "Datas importantes"
 msgid "Social account does not exist"
 msgstr "Conta social não existe"
 
-#: accounts/forms.py:65
+#: accounts/forms.py:55
+msgid "Biography"
+msgstr "Biografia"
+
+#: accounts/forms.py:56
+msgid "Write something about you in 200 characters or less."
+msgstr "Escreva algo sobre você em 200 caracteres ou menos."
+
+#: accounts/forms.py:72
 msgid "Mailing lists"
 msgstr "Listas de e-mail"
 
-#: accounts/forms.py:72
+#: accounts/forms.py:79
 msgid "Password"
 msgstr "Senha"
 
-#: accounts/forms.py:74
+#: accounts/forms.py:81
 msgid "Password confirmation"
 msgstr "Confirmação de senha"
 
-#: accounts/forms.py:76
+#: accounts/forms.py:83
 msgid "Enter the same password as above, for verification."
 msgstr "Digite a mesma senha que acima, para verificação."
 
-#: accounts/forms.py:94
+#: accounts/forms.py:101
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
-#: accounts/models.py:56
+#: accounts/models.py:57
 msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
 msgstr ""
 
-#: accounts/models.py:61
+#: accounts/models.py:62
 msgid "Enter a valid username."
 msgstr ""
 

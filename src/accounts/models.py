@@ -20,9 +20,12 @@ class User(AbstractUser):
     twitter = models.CharField(max_length=128, null=True, blank=True)
     facebook = models.CharField(max_length=128, null=True, blank=True)
     google_talk = models.EmailField(null=True, blank=True)
+    identi_ca = models.CharField(max_length=128, null=True, blank=True,
+                                 verbose_name=u'identi.ca')
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)
+    bio = models.CharField(max_length=200, null=True, blank=True)
 
     def check_password(self, raw_password):
 
