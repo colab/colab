@@ -26,14 +26,6 @@ from .models import MailingList, Thread, EmailAddress, \
                     EmailAddressValidation, Message
 
 
-def get_description(all_lists, listname_):
-    # if not isinstance(all_lists[0], (tuple, list, dict)):
-    #     return
-    for listname, description in all_lists:
-        if listname == listname_:
-            return description
-
-
 class ThreadView(View):
     http_method_names = [u'get', u'post']
 
@@ -129,14 +121,14 @@ class ThreadDashboardView(View):
     def get(self, request):
         MAX = 6
         context = {}
-        all_lists = mailman.all_lists(description=1)
+        all_lists = mailman.all_lists(description=True)
 
         context['lists'] = []
         lists = MailingList.objects.filter()
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,
-                get_description(all_lists, list_.name),
+                mailman.get_list_description(list_.name, all_lists),
                 list_.thread_set.filter(spam=False).order_by(
                     '-latest_message__received_time'
                 )[:MAX],

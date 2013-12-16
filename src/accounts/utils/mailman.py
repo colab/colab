@@ -69,3 +69,10 @@ def user_lists(user):
         list_set.update(address_lists(email))
 
     return tuple(list_set)
+
+
+def get_list_description(listname, lists=None):
+    if not lists:
+        lists = dict(all_lists(description=True))
+
+    return lists.get(listname)
