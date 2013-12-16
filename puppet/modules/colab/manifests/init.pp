@@ -26,6 +26,7 @@ class colab {
   exec { 'newaliases':
     path        => '/usr/bin/newaliases',
     refreshonly => true,
+    require     => Class['postfix'],
   }
 
   group { 'colab':
