@@ -174,17 +174,20 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         user = self.get_object()
         emails = user.emails.values_list('address', flat=True)
-        all_lists = mailman.all_lists()
+        all_lists = mailman.all_lists(description=True)
 
         for email in emails:
             lists = []
             lists_for_address = mailman.address_lists(email)
-            for listname in all_lists:
+            for listname, description in all_lists:
                 if listname in lists_for_address:
                     checked = True
                 else:
                     checked = False
-                lists.append((listname, checked))
+                lists.append((
+                    {'listname': listname, 'description': description},
+                    checked
+                ))
 
             context['membership'].update({email: lists})
 

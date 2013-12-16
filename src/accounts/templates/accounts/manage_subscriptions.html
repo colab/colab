@@ -21,7 +21,7 @@
             {% for list, checked in lists %}
               <div class="checkbox">
                 <label>
-                  <input name="{{ email }}" value="{{ list }}" type="checkbox" {% if checked %}checked{% endif%}>{{ list }}</input>
+                  <input name="{{ email }}" value="{{ list.listname }}" type="checkbox" {% if checked %}checked{% endif%} title="{{ list.description }}">{{ list.listname }}</input>
                 </label>
               </div>
             {% endfor %}

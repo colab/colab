@@ -20,6 +20,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from haystack.query import SearchQuerySet
 
+from accounts.utils import mailman
 from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, \
                     EmailAddressValidation, Message
@@ -120,12 +121,14 @@ class ThreadDashboardView(View):
     def get(self, request):
         MAX = 6
         context = {}
+        all_lists = mailman.all_lists(description=True)
 
         context['lists'] = []
         lists = MailingList.objects.filter()
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,
+                mailman.get_list_description(list_.name, all_lists),
                 list_.thread_set.filter(spam=False).order_by(
                     '-latest_message__received_time'
                 )[:MAX],
