@@ -44,15 +44,14 @@ def update_subscription(address, lists):
             subscribe(maillist, address)
 
 
-def address_lists(address, description=None):
+def address_lists(address, description=''):
     url = get_url()
 
-    kwargs = {'address': address}
-    if description:
-        kwargs.update(description=description)
+    params = {'address': address,
+              'description': description}
 
     try:
-        lists = requests.get(url, timeout=TIMEOUT, params=kwargs)
+        lists = requests.get(url, timeout=TIMEOUT, params=params)
     except requests.exceptions.RequestException:
         return []
 
