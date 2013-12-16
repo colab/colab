@@ -174,7 +174,7 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         user = self.get_object()
         emails = user.emails.values_list('address', flat=True)
-        all_lists = mailman.all_lists(description=1)
+        all_lists = mailman.all_lists(description=True)
 
         for email in emails:
             lists = []
