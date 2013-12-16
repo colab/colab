@@ -74,5 +74,7 @@ def user_lists(user):
 def get_list_description(listname, lists=None):
     if not lists:
         lists = dict(all_lists(description=True))
+    elif not isinstance(lists, dict):
+        lists = dict(lists)
 
     return lists.get(listname)
