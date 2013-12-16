@@ -52,7 +52,7 @@ class UserUpdateForm(UserForm):
     bio = forms.CharField(
         widget=forms.Textarea(attrs={'rows': '6', 'maxlength': '200'}),
         max_length=200,
-        label=_(u'Biography'),
+        label=_(u'Bio'),
         help_text=_(u'Write something about you in 200 characters or less.'),
         required=False,
     )
