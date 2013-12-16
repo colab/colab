@@ -44,18 +44,23 @@ def update_subscription(address, lists):
             subscribe(maillist, address)
 
 
-def address_lists(address):
+def address_lists(address, description=None):
     url = get_url()
+
+    kwargs = {'address': address}
+    if description:
+        kwargs.update(description=description)
+
     try:
-        lists = requests.get(url, timeout=TIMEOUT, params={'address': address})
+        lists = requests.get(url, timeout=TIMEOUT, params=kwargs)
     except requests.exceptions.RequestException:
         return []
 
     return lists.json()
 
 
-def all_lists():
-    return address_lists('')
+def all_lists(*args, **kwargs):
+    return address_lists('', *args, **kwargs)
 
 
 def user_lists(user):
