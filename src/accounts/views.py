@@ -185,7 +185,7 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
                 else:
                     checked = False
                 lists.append((
-                    {'listname': listname: 'description': description},
+                    {'listname': listname, 'description': description},
                     checked
                 ))
 
