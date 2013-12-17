@@ -26,7 +26,6 @@ class colab {
   exec { 'newaliases':
     path        => '/usr/bin/newaliases',
     refreshonly => true,
-    require     => Class['postfix'],
   }
 
   group { 'colab':
@@ -44,6 +43,7 @@ class colab {
   mailalias { 'colab':
     ensure    => present,
     recipient => 'root',
+    require   => Package['postfix'],
   }
 
   file { 'colab-sudoers':

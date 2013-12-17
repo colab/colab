@@ -47,15 +47,15 @@ class colab::cronjobs {
     require => File['/mnt/mailman/'],
   }
 
-  cron { 'mount-sshfs':
-    command => 'test -e /mnt/mailman/archives/flag || sshfs root@listas.interlegis.gov.br:/var/lib/mailman/archives/private /mnt/mailman/archives/ -o ro,nosuid,nodev,max_read=65536,allow_other,IdentityFile=/root/.ssh/id_rsa && touch /mnt/mailman/archives/flag &> /dev/null',
-    minute  => '*/5',
-    user    => 'root',
-    require => [
-        File['/mnt/mailman/archives/'],
-        #File['root-ssh-private-key'],
-        Package['sshfs'],
-    ],
-  }
+  #cron { 'mount-sshfs':
+  #  command => 'test -e /mnt/mailman/archives/flag || sshfs root@listas.interlegis.gov.br:/var/lib/mailman/archives/private /mnt/mailman/archives/ -o ro,nosuid,nodev,max_read=65536,allow_other,IdentityFile=/root/.ssh/id_rsa && touch /mnt/mailman/archives/flag &> /dev/null',
+  #  minute  => '*/5',
+  #  user    => 'root',
+  #  require => [
+  #      File['/mnt/mailman/archives/'],
+  #      #File['root-ssh-private-key'],
+  #      Package['sshfs'],
+  #  ],
+  #}
 
 }
