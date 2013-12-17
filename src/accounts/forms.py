@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from conversejs.models import XMPPAccount
 
+from accounts.utils import mailman
 from super_archives.models import MailingList
 from .utils.validators import validate_social_account
 
@@ -68,7 +69,10 @@ class UserUpdateForm(UserForm):
 
 
 class ListsForm(forms.Form):
-    LISTS_NAMES = ((list.name, list.name) for list in MailingList.objects.all())
+    LISTS_NAMES = ((
+        listname, u'{} ({})'.format(listname, description)
+    ) for listname, description in mailman.all_lists(description=True))
+
     lists = forms.MultipleChoiceField(label=_(u'Mailing lists'),
                                       required=False,
                                       widget=forms.CheckboxSelectMultiple,
