@@ -162,3 +162,16 @@ def change_session_attribute_email(sender, instance, **kwargs):
     cursor.execute(("UPDATE session_attribute SET value=%s "
                     "WHERE name='name' AND sid=%s"),
                     [instance.get_full_name(), instance.username])
+
+    cursor.execute(("INSERT INTO session_attribute "
+                    "(sid, authenticated,  name, value) "
+                    "SELECT %s, '1', 'email', %s WHERE NOT EXISTS "
+                    "(SELECT 1 FROM session_attribute WHERE sid=%s)"),
+                    [instance.username, instance.email, instance.username])
+
+    cursor.execute(("INSERT INTO session_attribute "
+                    "(sid, authenticated, name, value) "
+                    "SELECT %s, '1', 'name', %s WHERE NOT EXISTS "
+                    "(SELECT 1 FROM session_attribute WHERE sid=%s)"),
+                    [instance.username, instance.get_full_name(),
+                     instance.username])
