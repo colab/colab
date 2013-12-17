@@ -4,7 +4,7 @@ import os
 import urllib2
 
 from django.conf import settings
-from django.db import models
+from django.db import models, connections
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -152,25 +152,13 @@ class TicketCollabCount(models.Model):
         db_table = 'ticket_collab_count_view'
 
 
-class SessionAttribute(models.Model):
-    sid = models.TextField(primary_key=True)
-    authenticated = models.IntegerField()
-    name = models.TextField()
-    value = models.TextField(blank=True)
-
-    class Meta:
-        managed = False
-        db_table = 'session_attribute'
-
-
 @receiver(post_save, sender=User)
 def change_session_attribute_email(sender, instance, **kwargs):
-    try:
-        session_attr = SessionAttribute.objects.get(
-            sid=instance.username, name='email'
-        )
-    except SessionAttribute.DoesNotExist:
-        pass
-    else:
-        session_attr.value = instance.email
-        session_attr.save()
+    cursor = connections['trac'].cursor()
+
+    cursor.execute(("UPDATE session_attribute SET value = '%s' "
+                    "WHERE name='email' AND sid='%s'"),
+                    [instance.email, instance.username])
+    cursor.execute(("UPDATE session_attribute SET value = '%s' "
+                    "WHERE name='name' AND sid='%s'"),
+                    [instance.get_full_name(), instance.username])
