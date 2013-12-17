@@ -26,6 +26,18 @@
         <a class="btn btn-info" href="{% url 'user_list_subscriptions' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "group membership"|title %}</a>
       {% endif %}
 
+      {% if request.user.is_active %}
+        {% if user_.bio %}
+          <div class="divider"></div>
+          <ul class="unstyled-list">
+            <li>
+              <strong>{% trans 'Bio' %}</strong>
+            </li>
+            <li class="text-muted"> {{ user_.bio }}</li>
+          </ul>
+        {% endif %}
+      {% endif %}
+
       <div class="divider"></div>
       {% if request.user.is_active %}
         <ul class="unstyled-list">
@@ -58,17 +70,11 @@
           {% endif %}
 
           {% if user_.identi_ca %}
-            <li><span class="icon-comments icon-fixed-width" title="{% trans 'Identi.ca account' %}"></span> {{ user_.identi_ca }}</li>
+            <li><span class="icon-comments icon-fixed-width" title="{% trans 'Identi.ca account' %}"></span> <a target="_blank" href="https://identi.ca/{{ user_.identi_ca }}">{{ user_.identi_ca }}</a></li>
           {% endif %}
 
           {% if user_.webpage %}
             <li><span class="icon-link icon-fixed-width" title="{% trans 'Personal webpage' %}"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
-          {% endif %}
-          {% if user_.bio %}
-            <li class="divider">
-              <strong>{% trans 'Bio' %}</strong>
-            </li>
-            <li class="text-muted"> {{ user_.bio }}</li>
           {% endif %}
         {% endif %}
       </ul>
@@ -146,7 +152,7 @@
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-12">
-      <h3>{% trans "Other Collaborations" %}</h3>
+      <h3>{% trans "Contributions" %}</h3>
       <ul class="message-list">
       {% for result in results %}
         {% include "message-preview.html" %}
