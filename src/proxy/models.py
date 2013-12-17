@@ -156,9 +156,9 @@ class TicketCollabCount(models.Model):
 def change_session_attribute_email(sender, instance, **kwargs):
     cursor = connections['trac'].cursor()
 
-    cursor.execute(("UPDATE session_attribute SET value = '%s' "
-                    "WHERE name='email' AND sid='%s'"),
+    cursor.execute(("UPDATE session_attribute SET value=%s "
+                    "WHERE name=email AND sid=%s"),
                     [instance.email, instance.username])
-    cursor.execute(("UPDATE session_attribute SET value = '%s' "
-                    "WHERE name='name' AND sid='%s'"),
+    cursor.execute(("UPDATE session_attribute SET value=%s "
+                    "WHERE name=name AND sid=%s"),
                     [instance.get_full_name(), instance.username])
