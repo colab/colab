@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-10 17:09+0000\n"
+"POT-Creation-Date: 2013-12-17 11:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,9 +33,9 @@ msgstr "Datas importantes"
 msgid "Social account does not exist"
 msgstr "Conta social não existe"
 
-#: accounts/forms.py:55
-msgid "Biography"
-msgstr "Biografia"
+#: accounts/forms.py:55 accounts/templates/accounts/user_detail.html:34
+msgid "Bio"
+msgstr "Bio"
 
 #: accounts/forms.py:56
 msgid "Write something about you in 200 characters or less."
@@ -61,13 +61,14 @@ msgstr "Digite a mesma senha que acima, para verificação."
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
-#: accounts/models.py:57
+#: accounts/models.py:59
 msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
 msgstr ""
+"Obrigatório. 30 caracteres ou menos. Letras, números e ./+/-/_ somente."
 
-#: accounts/models.py:62
+#: accounts/models.py:64
 msgid "Enter a valid username."
-msgstr ""
+msgstr "Insira um nome de usuário válido."
 
 #: accounts/views.py:144
 msgid "Your profile has been created!"
@@ -81,12 +82,12 @@ msgstr ""
 "Você deve se logar para validar seu perfil. Perfis não validados serão "
 "deletados em 24h."
 
-#: accounts/views.py:226
+#: accounts/views.py:229
 msgid "Could not change your password. Please, try again later."
 msgstr ""
 "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
 
-#: accounts/views.py:235
+#: accounts/views.py:238
 msgid "You've changed your password successfully!"
 msgstr "Senha alterada com sucesso!"
 
@@ -144,56 +145,64 @@ msgstr "editar perfil"
 msgid "group membership"
 msgstr "Inscrições nos grupos"
 
-#: accounts/templates/accounts/user_detail.html:49
+#: accounts/templates/accounts/user_detail.html:61
 msgid "Twitter account"
 msgstr "Conta Twitter"
 
-#: accounts/templates/accounts/user_detail.html:52
+#: accounts/templates/accounts/user_detail.html:64
 msgid "Facebook account"
 msgstr "Conta Facebook"
 
-#: accounts/templates/accounts/user_detail.html:60
+#: accounts/templates/accounts/user_detail.html:69
+msgid "Google talk account"
+msgstr "Conta Google"
+
+#: accounts/templates/accounts/user_detail.html:73
+msgid "Identi.ca account"
+msgstr "Conta Identi.ca"
+
+#: accounts/templates/accounts/user_detail.html:77
 msgid "Personal webpage"
 msgstr "Página web pessoal"
 
-#: accounts/templates/accounts/user_detail.html:66
+#: accounts/templates/accounts/user_detail.html:83
 msgid "Groups: "
 msgstr "Grupos: "
 
-#: accounts/templates/accounts/user_detail.html:79
+#: accounts/templates/accounts/user_detail.html:96
 msgid "Contributions by Type"
 msgstr "Contribuições por tipo"
 
-#: accounts/templates/accounts/user_detail.html:91
+#: accounts/templates/accounts/user_detail.html:108
 msgid "Participation by Group"
 msgstr "Participação por grupo"
 
-#: accounts/templates/accounts/user_detail.html:104 badger/models.py:70
+#: accounts/templates/accounts/user_detail.html:121 badger/models.py:70
 msgid "Badges"
 msgstr "Medalhas"
 
-#: accounts/templates/accounts/user_detail.html:123
+#: accounts/templates/accounts/user_detail.html:140
 msgid "Latest posted"
 msgstr "Últimas postagens"
 
-#: accounts/templates/accounts/user_detail.html:128
+#: accounts/templates/accounts/user_detail.html:145
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:132 templates/home.html:57
+#: accounts/templates/accounts/user_detail.html:149 templates/home.html:57
 #: templates/home.html.py:76
 msgid "View more discussions..."
 msgstr "Ver mais discussões..."
 
-#: accounts/templates/accounts/user_detail.html:138
-msgid "Other Collaborations"
-msgstr "Outras Colaborações"
+#: accounts/templates/accounts/user_detail.html:155 badger/models.py:23
+msgid "Contributions"
+msgstr "Contribuições"
 
-#: accounts/templates/accounts/user_detail.html:143
+#: accounts/templates/accounts/user_detail.html:160
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:147
+#: accounts/templates/accounts/user_detail.html:164
 msgid "View more contributions..."
 msgstr "Ver mais colaborações..."
 
@@ -287,7 +296,7 @@ msgstr "Imagem"
 
 #: badger/forms.py:30
 msgid "You must add an Image"
-msgstr ""
+msgstr "Você deve adicionar uma imagem"
 
 #: badger/models.py:12
 msgid "Greater than or equal"
@@ -316,10 +325,6 @@ msgstr "Manual"
 #: badger/models.py:22 super_archives/models.py:258
 msgid "Messages"
 msgstr "Mensagens"
-
-#: badger/models.py:23
-msgid "Contributions"
-msgstr "Contribuições"
 
 #: badger/models.py:24
 msgid "Wikis"
@@ -733,15 +738,15 @@ msgstr "Por favor, digite o corpo da mensagem"
 msgid "Message"
 msgstr "Mensagem"
 
-#: super_archives/views.py:91
+#: super_archives/views.py:92
 msgid "Error trying to connect to Mailman API"
 msgstr "Erro na conexão com a API do Mailman"
 
-#: super_archives/views.py:94
+#: super_archives/views.py:95
 msgid "Timeout trying to connect to Mailman API"
 msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
 
-#: super_archives/views.py:98
+#: super_archives/views.py:99
 msgid ""
 "Your message was sent to this topic. It may take some minutes before it's "
 "delivered by email to the group. Why don't you breath some fresh air in the "
@@ -751,19 +756,19 @@ msgstr ""
 "entregue via e-mail para o grupo. Por quê você não respira um ar fresco "
 "enquanto isso?"
 
-#: super_archives/views.py:107
+#: super_archives/views.py:108
 msgid "You cannot send an empty email"
 msgstr "Você não pode enviar um e-mail vazio"
 
-#: super_archives/views.py:109
+#: super_archives/views.py:110
 msgid "Mailing list does not exist"
 msgstr "Lista de e-mail não existe"
 
-#: super_archives/views.py:111
+#: super_archives/views.py:112
 msgid "Unknown error trying to connect to Mailman API"
 msgstr "Erro desconhecido na conexão com a API do Mailman"
 
-#: super_archives/views.py:148
+#: super_archives/views.py:151
 msgid ""
 "The email address you are trying to verify either has already been verified "
 "or does not exist."
@@ -771,7 +776,7 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar ou já foi verificado "
 "ou não existe."
 
-#: super_archives/views.py:159
+#: super_archives/views.py:162
 msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
@@ -779,7 +784,7 @@ msgstr ""
 "O endereço de e-mail que você está tentando verificar já é um endereço de e-"
 "mail ativo"
 
-#: super_archives/views.py:169
+#: super_archives/views.py:172
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
@@ -1050,6 +1055,12 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Biography"
+#~ msgstr "Biografia"
+
+#~ msgid "Other Collaborations"
+#~ msgstr "Outras Colaborações"
 
 #~ msgid "Community Blogs"
 #~ msgstr "Blogs da comunidade"
