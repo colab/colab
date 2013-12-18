@@ -298,6 +298,10 @@ CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
 CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 
 
+# Tastypie settings
+TASTYPIE_DEFAULT_FORMATS = ['json', ]
+
+
 try:
     from local_settings import *
 except ImportError:
