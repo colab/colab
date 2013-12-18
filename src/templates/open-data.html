@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main-content %}
+  <div class="col-lg-12">
+    <h2>{% trans "OpenData - Communities Interlegis" %}</h2>
+    <p>{% trans "If you are interested in integrating your system with the Colab environment and requires no other data provided by this API, please contact us via the ticketing system (you must be registered in order to create a ticket)." %}</p>
+
+    <h3>{% trans "Retrieving data via API" %}</h3>
+    <p>{% trans "Colab API works through an HTTP/REST always returning JSON objects." %}</p>
+    <p>
+      {% trans "The base API URL is" %}:
+      {% with "/api/colab/" as BASE_API_URL %}
+      <a href="{{ BASE_API_URL }}">http://colab.interlegis.leg.br{{ BASE_API_URL }}</a>
+    </p>
+
+    <ul class="list-unstyled">
+      <li>
+        <p>{% trans "Each model listed below has a resource_uri field available, which is the object's data URI." %}</p>
+        <p>{% trans "The following list contains the available models to retrieve data" %}:</p>
+        <ul>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}message/">message</a></strong>:
+            {% trans "Retrieve messages with body, id, received_time and subject" %}
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}revision/">revision</a></strong>:
+            {% trans "Retrieve revisions with author, created, key, message and repository_name" %}
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}ticket/">ticket</a></strong>:
+            {% trans "Retrieve tickets with author, component, created, description, id, keywords, milestone, modified, modified_by, priority, reporter, severity, status, summary and version" %}
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}wiki/">wiki</a></strong>:
+            {% trans "Retrieve wikis with author, created, modified, modified_by, name and wiki_text" %}
+          </li>
+          {% endwith %}
+        </ul>
+      </li>
+    </ul>
+    <ul class="list-unstyled">
+      <li><h3>{% trans 'Parameters' %}:</h3></li>
+      <li class="divider"></li>
+      <li>
+        <h4><i>limit</i> - {% trans "Results per page" %}</h4>
+        {% trans "Number of results to be displayed per page." %}
+        <i>{% trans "Default: 20" %}</i>.
+      </li>
+      <li class="divider"></li>
+      <li>
+        <h4><i>offset</i> - {% trans "Starts of n element" %}</h4>
+        {% trans "Where n is the index of the first result to appear in the page." %}
+        <i>{% trans "Default: 0" %}</i>.
+      </li>
+    </ul>
+  </div>
+{% endblock %}
