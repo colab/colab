@@ -107,6 +107,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'haystack',
     'hitcounter',
     'i18n_model',
+    'tastypie',
 
     # Own apps
     'super_archives',
