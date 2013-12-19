@@ -69,8 +69,8 @@
             <li><span class="icon-google-plus icon-fixed-width" title="{% trans 'Google talk account' %}"></span> {{ user_.google_talk }}</li>
           {% endif %}
 
-          {% if user_.identi_ca %}
-            <li><span class="icon-comments icon-fixed-width" title="{% trans 'Identi.ca account' %}"></span> <a target="_blank" href="https://identi.ca/{{ user_.identi_ca }}">{{ user_.identi_ca }}</a></li>
+          {% if user_.github %}
+            <li><span class="icon-github icon-fixed-width" title="{% trans 'Github account' %}"></span> <a target="_blank" href="https://github.com/{{ user_.github }}">{{ user_.github }}</a></li>
           {% endif %}
 
           {% if user_.webpage %}
