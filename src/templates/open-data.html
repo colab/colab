@@ -4,14 +4,14 @@
 {% block main-content %}
   <div class="col-lg-12">
     <h2>{% trans "OpenData - Communities Interlegis" %}</h2>
-    <p>{% trans "If you are interested in integrating your system with the Colab environment and requires no other data provided by this API, please contact us via the ticketing system (you must be registered in order to create a ticket)." %}</p>
+    <p>{% trans "If you are interested in any other data that is not provided by this API, please contact us via the ticketing system (you must be registered in order to create a ticket)." %}</p>
 
     <h3>{% trans "Retrieving data via API" %}</h3>
-    <p>{% trans "Colab API works through an HTTP/REST always returning JSON objects." %}</p>
+    <p>{% trans "Colab API works through HTTP/REST and always returning JSON objects." %}</p>
     <p>
       {% trans "The base API URL is" %}:
-      {% with "/api/colab/" as BASE_API_URL %}
-      <a href="{{ BASE_API_URL }}">http://colab.interlegis.leg.br{{ BASE_API_URL }}</a>
+      {% url 'api_v1_top_level' api_name='v1' as BASE_API_URL %}
+      <a href="{{ BASE_API_URL }}">{{ BASE_API_URL }}</a>
     </p>
 
     <ul class="list-unstyled">
@@ -43,7 +43,6 @@
             <strong><a href="{{ BASE_API_URL }}wiki/">wiki</a></strong>:
             {% trans "Retrieve wikis with author, created, modified, modified_by, name and wiki_text" %}
           </li>
-          {% endwith %}
         </ul>
       </li>
     </ul>

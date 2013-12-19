@@ -9,7 +9,7 @@ from .models import (UserResource, EmailAddressResource, MessageResource,
 from .views import VoteView
 
 
-api = Api(api_name='colab')
+api = Api(api_name='v1')
 api.register(UserResource())
 api.register(EmailAddressResource())
 api.register(MessageResource())
