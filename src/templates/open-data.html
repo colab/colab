@@ -17,31 +17,34 @@
     <ul class="list-unstyled">
       <li>
         <p>{% trans "Each model listed below has a resource_uri field available, which is the object's data URI." %}</p>
-        <p>{% trans "The following list contains the available models to retrieve data" %}:</p>
+        <p>{% trans "The following list contains the available models to retrieve data and its fields available for filtering" %}:</p>
         <ul>
           <li>
             <strong><a href="{{ BASE_API_URL }}user/">user</a></strong>:
-            {% trans "Retrieve users with username, institution, role, twitter, facebook, google talk, github, webpage and bio" %}
+            {% trans "Fields" %}: <i>username, email, institution, role and bio</i>
+            <p><strong>{% trans "The email field is not shown for user's privacy, but you can filter through it" %}</strong></p>
           </li>
           <li>
             <strong><a href="{{ BASE_API_URL }}emailaddress/">emailaddress</a></strong>:
-            {% trans "Retrieve emailaddress with user and real_name" %}
+            {% trans "Fields" %}: <i>user, address and real_name</i>
+            <p>{% trans "The user field is a foreign key for user objects and it can be null" %}</p>
           </li>
           <li>
             <strong><a href="{{ BASE_API_URL }}message/">message</a></strong>:
-            {% trans "Retrieve messages with body, id, received_time and subject" %}
+            {% trans "Fields" %}: <i>from_address, body, id, received_time and subject</i>
+            <p>{% trans  "The from_address field is a foreign key to emailaddress objects" %}</p>
           </li>
           <li>
             <strong><a href="{{ BASE_API_URL }}revision/">revision</a></strong>:
-            {% trans "Retrieve revisions with author, created, key, message and repository_name" %}
+            {% trans "Fields" %}: <i>author, created, key, message and repository_name</i>
           </li>
           <li>
             <strong><a href="{{ BASE_API_URL }}ticket/">ticket</a></strong>:
-            {% trans "Retrieve tickets with author, component, created, description, id, keywords, milestone, modified, modified_by, priority, reporter, severity, status, summary and version" %}
+            {% trans "Fields" %}: <i>author, component, created, description, id, keywords, milestone, modified, modified_by, priority, reporter, severity, status, summary and version</i>
           </li>
           <li>
             <strong><a href="{{ BASE_API_URL }}wiki/">wiki</a></strong>:
-            {% trans "Retrieve wikis with author, created, modified, modified_by, name and wiki_text" %}
+            {% trans "Fields" %}: <i>author, created, modified, modified_by, name and wiki_text</i>
           </li>
         </ul>
       </li>
@@ -60,14 +63,21 @@
         {% trans "Where n is the index of the first result to appear in the page." %}
         <i>{% trans "Default: 0" %}</i>.
       </li>
+      <li class="divider"><h3>{% trans "Filtering" %}:</h3></li>
       <li>
         <h4><i>fieldname</i> - {% trans "The field name" %}</h4>
         {% trans "If you are looking for a specific wiki, and you know the wiki's name, you can filter it as below" %}
         <p><i>...{{ BASE_API_URL }}wiki/?name={% trans "WikiName" %}</i></p>
-        {% trans "Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the value you want to filter. You can also filter using Django lookup fields as below" %}
+        <p>{% trans "Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the value you want to filter." %}</p>
+        <h4>{% trans "Usage" %}</h4>
+        <p>{% trans "You can also filter using Django lookup fields as below" %}</p>
         <p><i>...{{ BASE_API_URL }}wiki/?wiki_text__startswith={% trans "Wiki" %}</i></p>
         <p><i>...{{ BASE_API_URL }}ticket/?author__endswith={% trans "test" %}</i></p>
         <p><i>...{{ BASE_API_URL }}message/?body__contains={% trans "test" %}</i></p>
+        <h4>{% trans "Usage with related models" %}</h4>
+        <p><i>...{{ BASE_API_URL }}message/?from_address__user__email=usermailexample@host.com</i></p>
+        <p><i>...{{ BASE_API_URL }}message/?from_address__real_name=Name</i></p>
+        <p><strong>{% trans "Note: email filters must be exact." %} </strong></p>
       </li>
     </ul>
   </div>
