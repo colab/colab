@@ -70,7 +70,7 @@ class EmailAddressResource(ModelResource):
 
 
 class MessageResource(ModelResource):
-    emailaddress = fields.ForeignKey(EmailAddressResource, 'from_address',
+    from_address = fields.ForeignKey(EmailAddressResource, 'from_address',
                                      full=False)
 
     class Meta:
