@@ -13,32 +13,19 @@ class UserResource(ModelResource):
     class Meta:
         queryset = User.objects.filter(is_active=True)
         resource_name = 'user'
-        excludes = ['email', 'password', 'is_active', 'is_staff',
-                    'is_superuser', 'verification_hash']
+        fields = ['username', 'institution', 'role', 'bio', 'first_name',
+                  'last_name', 'email']
         allowed_methods = ['get', ]
         filtering = {
+            'email': ('exact', ),
             'username': ALL,
             'institution': ALL,
             'role': ALL,
-            'twitter': ALL,
-            'facebook': ALL,
-            'google_talk': ALL,
-            'github': ALL,
-            'webpage': ALL,
             'bio': ALL,
         }
 
-    def build_filters(self, filters=None):
-        if filters is None:
-            filters = {}
-
-        orm_filters = super(UserResource, self).build_filters(filters)
-
-        if 'email' in filters:
-            qs = User.objects.filter(email=filters['email'])
-            orm_filters['pk__in'] = [i.pk for i in qs]
-
-        return orm_filters
+    def dehydrate_email(self, bundle):
+        return ''
 
 
 class EmailAddressResource(ModelResource):
@@ -47,26 +34,16 @@ class EmailAddressResource(ModelResource):
     class Meta:
         queryset = EmailAddress.objects.all()
         resource_name = 'emailaddress'
-        excludes = ['address', 'md5']
+        excludes = ['md5', ]
         allowed_methods = ['get', ]
         filtering = {
+            'address': ('exact', ),
             'user': ALL_WITH_RELATIONS,
             'real_name': ALL,
         }
 
-    def build_filters(self, filters=None):
-        if filters is None:
-            filters = {}
-
-        orm_filters = super(EmailAddressResource, self).build_filters(filters)
-
-        if 'email' in filters or 'address' in filters:
-            address = filters.get('email') if filters.get('email') else \
-                    filters.get('address')
-            qs = EmailAddress.objects.filter(address=address)
-            orm_filters['pk__in'] = [i.pk for i in qs]
-
-        return orm_filters
+    def dehydrate_address(self, bundle):
+        return ''
 
 
 class MessageResource(ModelResource):
