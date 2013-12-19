@@ -4,8 +4,13 @@
 
 
 {% block head_js %}
-  {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 %}
-  {% include "pizza-chart.html" with chart_data=list_activity chart_div="collabs2" chart_height=300 %}
+  <script src="{{ STATIC_URL }}third-party/highcharts/js/highcharts.js"></script>
+
+  {% trans "Messages" as group_collabs %}
+  {% trans "Contributions" as type_collabs %}
+
+  {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 name=type_collabs %}
+  {% include "pizza-chart.html" with chart_data=list_activity chart_div="collabs2" chart_height=300 name=group_collabs %}
 {% endblock %}
 
 {% block main-content %}
