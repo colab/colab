@@ -4,13 +4,14 @@ from django.conf.urls import patterns, include, url
 
 from tastypie.api import Api
 
-from .models import (UserResource, MessageResource, RevisionResource,
-                     TicketResource, WikiResource)
+from .models import (UserResource, EmailAddressResource, MessageResource,
+                     RevisionResource, TicketResource, WikiResource)
 from .views import VoteView
 
 
 api = Api(api_name='colab')
 api.register(UserResource())
+api.register(EmailAddressResource())
 api.register(MessageResource())
 api.register(RevisionResource())
 api.register(TicketResource())
