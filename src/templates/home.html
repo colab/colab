@@ -2,8 +2,6 @@
 {% load i18n %}
 
 {% block head_js %}
-  <script src="{{ STATIC_URL }}third-party/highcharts/js/highcharts.js"></script>
-
   {% trans "Contributions" as collabs_name %}
 
   {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=330 name=collabs_name %}
