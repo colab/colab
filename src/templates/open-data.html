@@ -20,6 +20,14 @@
         <p>{% trans "The following list contains the available models to retrieve data" %}:</p>
         <ul>
           <li>
+            <strong><a href="{{ BASE_API_URL }}user/">user</a></strong>:
+            {% trans "Retrieve users with username, institution, role, twitter, facebook, google talk, github, webpage and bio" %}
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}emailaddress/">emailaddress</a></strong>:
+            {% trans "Retrieve emailaddress with user and real_name" %}
+          </li>
+          <li>
             <strong><a href="{{ BASE_API_URL }}message/">message</a></strong>:
             {% trans "Retrieve messages with body, id, received_time and subject" %}
           </li>
@@ -52,6 +60,15 @@
         <h4><i>offset</i> - {% trans "Starts of n element" %}</h4>
         {% trans "Where n is the index of the first result to appear in the page." %}
         <i>{% trans "Default: 0" %}</i>.
+      </li>
+      <li>
+        <h4><i>fieldname</i> - {% trans "The field name" %}</h4>
+        {% trans "If you are looking for a specific wiki, and you know the wiki's name, you can filter it as below" %}
+        <p><i>...{{ BASE_API_URL }}wiki/?name={% trans "WikiName" %}</i></p>
+        {% trans "You can also filter using Django lookup fields as below" %}
+        <p><i>...{{ BASE_API_URL }}wiki/?name__startswith={% trans "Wiki" %}</i></p>
+        <p><i>...{{ BASE_API_URL }}wiki/?name__endswith={% trans "Name" %}</i></p>
+        <p><i>...{{ BASE_API_URL }}wiki/?name__contains={% trans "Wiki" %}</i></p>
       </li>
     </ul>
   </div>
