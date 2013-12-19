@@ -9,6 +9,7 @@ $(function () {
       height: {{ chart_height }},
     },
 
+    // Add selectpoint and legends to the chart
     plotOptions: {
       pie: {
         allowPointSelect: true,
@@ -16,8 +17,13 @@ $(function () {
         dataLabels: {
           enabled: false
         },
-          showInLegend: true
+        showInLegend: true,
       }
+    },
+
+    // Removes highcharts watermark
+    credits: {
+      enabled: false
     },
 
     title: {
