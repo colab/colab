@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-17 11:15+0000\n"
+"POT-Creation-Date: 2013-12-19 11:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,35 +29,35 @@ msgstr "Permissões"
 msgid "Important dates"
 msgstr "Datas importantes"
 
-#: accounts/forms.py:24
+#: accounts/forms.py:25
 msgid "Social account does not exist"
 msgstr "Conta social não existe"
 
-#: accounts/forms.py:55 accounts/templates/accounts/user_detail.html:34
+#: accounts/forms.py:56 accounts/templates/accounts/user_detail.html:34
 msgid "Bio"
 msgstr "Bio"
 
-#: accounts/forms.py:56
+#: accounts/forms.py:57
 msgid "Write something about you in 200 characters or less."
 msgstr "Escreva algo sobre você em 200 caracteres ou menos."
 
-#: accounts/forms.py:72
+#: accounts/forms.py:76
 msgid "Mailing lists"
 msgstr "Listas de e-mail"
 
-#: accounts/forms.py:79
+#: accounts/forms.py:83
 msgid "Password"
 msgstr "Senha"
 
-#: accounts/forms.py:81
+#: accounts/forms.py:85
 msgid "Password confirmation"
 msgstr "Confirmação de senha"
 
-#: accounts/forms.py:83
+#: accounts/forms.py:87
 msgid "Enter the same password as above, for verification."
 msgstr "Digite a mesma senha que acima, para verificação."
 
-#: accounts/forms.py:101
+#: accounts/forms.py:105
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
@@ -158,8 +158,8 @@ msgid "Google talk account"
 msgstr "Conta Google"
 
 #: accounts/templates/accounts/user_detail.html:73
-msgid "Identi.ca account"
-msgstr "Conta Identi.ca"
+msgid "Github account"
+msgstr "Conta Github"
 
 #: accounts/templates/accounts/user_detail.html:77
 msgid "Personal webpage"
@@ -1055,6 +1055,9 @@ msgstr "Vontade de ajudar"
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Identi.ca account"
+#~ msgstr "Conta Identi.ca"
 
 #~ msgid "Biography"
 #~ msgstr "Biografia"
