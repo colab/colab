@@ -3,6 +3,7 @@ from collections import OrderedDict
 
 from django.core.cache import cache
 from django.shortcuts import render
+from django.http import HttpResponse, Http404
 
 from search.utils import trans
 from haystack.query import SearchQuerySet
@@ -44,3 +45,11 @@ def index(request):
         )[:6],
     }
     return render(request, 'home.html', context)
+
+
+def robots(request):
+    if settings.ROBOTS_NOINDEX:
+        return HttpResponse('User-agent: *\nDisallow: /',
+                            content_type='text/plain')
+
+    raise Http404

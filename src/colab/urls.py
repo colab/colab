@@ -12,7 +12,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'home.views.index', name='home'),
-    url(r'open-data/$', TemplateView.as_view(template_name='open-data.html'),
+    url(r'^robots.txt$', 'home.views.rebots', name='robots'),
+
+    url(r'^open-data/$', TemplateView.as_view(template_name='open-data.html'),
         name='opendata'),
 
     url(r'^search/', include('search.urls')),
