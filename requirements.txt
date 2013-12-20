@@ -17,6 +17,7 @@ python-memcached==1.53
 django-hitcounter==0.1.1
 Pillow==2.2.1
 django-i18n-model==0.0.7
+django-tastypie==0.11.0
 
 gunicorn==18.0
 gevent==0.13.8

@@ -12,6 +12,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^$', 'home.views.index', name='home'),
+    url(r'open-data/$', TemplateView.as_view(template_name='open-data.html'),
+        name='opendata'),
 
     url(r'^search/', include('search.urls')),
     url(r'^archives/', include('super_archives.urls')),
