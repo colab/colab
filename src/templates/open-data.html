@@ -39,7 +39,7 @@
             {% trans "Fields" %}: <i>user, address and real_name</i>
             <p><strong>{% trans "The address field is not shown for user's privacy, but you can use it to filter" %}</strong></p>
             <ul>
-              <li><i>user</i> - {% trans "It's a relation to the user described above" %}</li>
+              <li><i>user</i> - {% trans "It has a relationshop with the user described above" %}</li>
               <li><i>address</i> - {% trans "An email address" %}</li>
               <li><i>real_name</i> - {% trans "The user's real name" %}</li>
             </ul>
@@ -49,7 +49,7 @@
             <strong><a href="{{ BASE_API_URL }}message/">message</a></strong>:
             {% trans "Fields" %}: <i>from_address, body, id, received_time and subject</i>
             <ul>
-              <li><i>from_address</i> - {% trans "It's a relation with the emailaddress described above" %}</li>
+              <li><i>from_address</i> - {% trans "It has a relationship with the emailaddress described above" %}</li>
               <li><i>body</i> - {% trans "The message's body" %}</li>
               <li><i>subject</i> - {% trans "The message's subject" %}</li>
               <li><i>id</i> - {% trans "The message's id" %}</li>
@@ -126,16 +126,16 @@
         <p><i>...{{ BASE_API_URL }}wiki/?name={% trans "WikiName" %}</i></p>
         <p>{% trans "Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the value you want to filter." %}</p>
         <h4>{% trans "Usage" %}</h4>
-        <p>{% trans "You can also filter using Django lookup fields as below" %}</p>
+        <p>{% trans "You can also filter using Django lookup fields with the double underscores, just as below" %}</p>
         <p><i>...{{ BASE_API_URL }}wiki/?wiki_text__startswith={% trans "Wiki" %}</i></p>
         <p><i>...{{ BASE_API_URL }}ticket/?author__endswith={% trans "test" %}</i></p>
         <p><i>...{{ BASE_API_URL }}message/?body__contains={% trans "test" %}</i></p>
-        <h4>{% trans "Usage with related models" %}</h4>
-        <p>{% trans "You can use related fields to filter too. So, you can filter by any field of emailaddress using the 'from_address' field of message, which has a relation to emailaddress. You will achieve the relation fields by using double underscore and the field's name. See the example below" %}</p>
+        <h4>{% trans "Usage with relationships" %}</h4>
+        <p>{% trans "You can use related fields to filter too. So, you can filter by any field of emailaddress using the 'from_address' field of message, which has a relation to emailaddress. You will achieve the related fields by using double underscore and the field's name. See the example below" %}</p>
         <p><i>...{{ BASE_API_URL }}message/?from_address__real_name__contains=Name</i></p>
-        <p>{% trans "So, real_name is a field of emailaddress, and you had access to this field by a message field called from_address and using double underscore to say you want to use a field of that relation" %}</p>
+        <p>{% trans "So, real_name is a field of emailaddress, and you had access to this field by a message field called from_address and using double underscore to say you want to use a field of that relationship" %}</p>
         <p><strong>{% trans "Note: email filters must be exact. Which means that __contains, __startswith, __endswith and others won't work" %}</strong></p>
-        <p>{% trans "Another example of usage with relations to retrieve all messages of a given username or email" %}</p>
+        <p>{% trans "Another example of usage with relations. Used to retrieve all messages of a given user, using the username or the email field" %}</p>
         <p><i>...{{ BASE_API_URL }}message/?from_address__user__username=username</i></p>
         <p><i>...{{ BASE_API_URL }}message/?from_address__user__email=usermailexample@host.com</i></p>
       </li>
