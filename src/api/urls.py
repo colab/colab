@@ -4,7 +4,7 @@ from django.conf.urls import patterns, include, url
 
 from tastypie.api import Api
 
-from .models import (UserResource, EmailAddressResource, MessageResource,
+from .resources import (UserResource, EmailAddressResource, MessageResource,
                      RevisionResource, TicketResource, WikiResource)
 from .views import VoteView
 
