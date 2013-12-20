@@ -49,7 +49,7 @@ def index(request):
 
 
 def robots(request):
-    if getattr(settings, 'ROBOTS_NOINDEX'):
+    if getattr(settings, 'ROBOTS_NOINDEX', False):
         return HttpResponse('User-agent: *\nDisallow: /',
                             content_type='text/plain')
 
