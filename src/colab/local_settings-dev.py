@@ -38,3 +38,5 @@ COLAB_CI_URL = 'http://localhost:8080/ci/'
 CONVERSEJS_ENABLED = False
 
 DIAZO_THEME = SITE_URL
+
+ROBOTS_NOINDEX = True
