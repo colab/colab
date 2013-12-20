@@ -1,12 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from django.contrib.auth import get_user_model
+
 from tastypie import fields
 from tastypie.constants import ALL_WITH_RELATIONS, ALL
 from tastypie.resources import ModelResource
 
-from accounts.models import User
 from super_archives.models import Message, EmailAddress
 from proxy.models import Revision, Ticket, Wiki
+
+
+User = get_user_model()
 
 
 class UserResource(ModelResource):
