@@ -17,6 +17,7 @@ class ColabSearchForm(SearchForm):
     order = forms.CharField(widget=forms.HiddenInput(), required=False)
     type = forms.CharField(required=False, label=_(u'Type'))
     author = forms.CharField(required=False, label=_(u'Author'))
+    modified_by = forms.CharField(required=False, label=_(u'Modified by'))
     # ticket status
     tag = forms.CharField(required=False, label=_(u'Status'))
     # mailinglist tag
@@ -120,6 +121,11 @@ class ColabSearchForm(SearchForm):
         if self.cleaned_data['author']:
             sqs = sqs.filter(
                 fullname_and_username__contains=self.cleaned_data['author']
+            )
+
+        if self.cleaned_data['modified_by']:
+            sqs = sqs.filter(
+                fullname_and_username__contains=self.cleaned_data['modified_by']
             )
 
         if self.cleaned_data['milestone']:

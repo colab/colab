@@ -2,16 +2,14 @@
 
 from django.db.models import Count
 
-from proxy.models import Revision, Ticket, Wiki
+from proxy.models import (Revision, Ticket, Wiki,
+                          WikiCollabCount, TicketCollabCount)
 from accounts.models import User
 
 
 def get_wiki_counters():
-    return {
-        author: count for author, count in Wiki.objects.values_list(
-            'author'
-        ).annotate(count=Count('author'))
-    }
+    return {author: count for author, count in
+            WikiCollabCount.objects.values_list()}
 
 
 def get_revision_counters():
@@ -23,11 +21,8 @@ def get_revision_counters():
 
 
 def get_ticket_counters():
-    return {
-        author: count for author, count in Ticket.objects.values_list(
-            'author'
-        ).annotate(count=Count('author'))
-    }
+    return {author: count for author, count in
+            TicketCollabCount.objects.values_list()}
 
 
 def get_users_counters():

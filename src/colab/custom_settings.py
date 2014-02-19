@@ -210,6 +210,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django_browserid.context_processors.browserid',
     'django_mobile.context_processors.is_mobile',
     'super_archives.context_processors.mailarchive',
+    'home.context_processors.robots',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -294,6 +295,12 @@ REVPROXY_ADD_REMOTE_USER = True
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
 CONVERSEJS_AUTO_REGISTER = 'mensageiro.interlegis.gov.br'
+CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
+CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
+
+
+# Tastypie settings
+TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
 
 try:

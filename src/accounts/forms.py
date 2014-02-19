@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from conversejs.models import XMPPAccount
 
+from accounts.utils import mailman
 from super_archives.models import MailingList
 from .utils.validators import validate_social_account
 
@@ -49,19 +50,29 @@ class UserCreationForm(UserForm):
 
 
 class UserUpdateForm(UserForm):
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={'rows': '6', 'maxlength': '200'}),
+        max_length=200,
+        label=_(u'Bio'),
+        help_text=_(u'Write something about you in 200 characters or less.'),
+        required=False,
+    )
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name',
                   'institution', 'role', 'twitter', 'facebook',
-                  'google_talk', 'webpage')
+                  'google_talk', 'github', 'webpage', 'bio')
 
     twitter = SocialAccountField(url='https://twitter.com/', required=False)
     facebook = SocialAccountField(url='https://graph.facebook.com/', required=False)
 
 
 class ListsForm(forms.Form):
-    LISTS_NAMES = ((list.name, list.name) for list in MailingList.objects.all())
+    LISTS_NAMES = ((
+        listname, u'{} ({})'.format(listname, description)
+    ) for listname, description in mailman.all_lists(description=True))
+
     lists = forms.MultipleChoiceField(label=_(u'Mailing lists'),
                                       required=False,
                                       widget=forms.CheckboxSelectMultiple,

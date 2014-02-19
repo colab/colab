@@ -50,16 +50,33 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
         )
 
     def prepare_author(self, obj):
-        return obj.latest_message.author
+        first_message = obj.message_set.first()
+        return first_message.from_address.get_full_name()
 
     def prepare_author_url(self, obj):
         first_message = obj.message_set.first()
-        if first_message.from_address.user:
-            return first_message.from_address.user.get_absolute_url()
+        return first_message.author_url
+
+    def prepare_modified_by(self, obj):
+        modified_by = obj.latest_message.modified_by
+        if modified_by:
+            return modified_by
+        return obj.message_set.first().author
+
+    def prepare_modified_by_url(self, obj):
+        modified_by_url = obj.latest_message.modified_by_url
+        if modified_by_url:
+            return modified_by_url
         return None
 
     def prepare_created(self, obj):
         return obj.message_set.first().received_time
+
+    def prepare_fullname(self, obj):
+        fullname = obj.latest_message.from_address.get_full_name()
+        if not fullname:
+            fullname = obj.message_set.first().from_address.get_full_name()
+        return fullname
 
     def prepare_icon_name(self, obj):
         return u'envelope'

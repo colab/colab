@@ -326,18 +326,27 @@ class Message(models.Model):
 
     @property
     def author(self):
-        from_address = self.from_address
-        if from_address.user:
-            return from_address.user.username
+        return self.fullname
+
+    @property
+    def author_url(self):
+        if self.from_address.user_id:
+            return self.from_address.user.get_absolute_url()
         return None
+
+    # An alias for author
+    @property
+    def modified_by(self):
+        return self.author
+
+    # An alias for author_url
+    @property
+    def modified_by_url(self):
+        return self.author_url
 
     @property
     def fullname(self):
         return self.from_address.get_full_name()
-
-    @property
-    def author_url(self):
-        return self.from_address.user.get_absolute_url()
 
     @property
     def icon_name(self):

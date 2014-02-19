@@ -4,8 +4,11 @@
 
 
 {% block head_js %}
-  {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 %}
-  {% include "pizza-chart.html" with chart_data=list_activity chart_div="collabs2" chart_height=300 %}
+  {% trans "Messages" as group_collabs %}
+  {% trans "Contributions" as type_collabs %}
+
+  {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 name=type_collabs %}
+  {% include "pizza-chart.html" with chart_data=list_activity chart_div="collabs2" chart_height=300 name=group_collabs %}
 {% endblock %}
 
 {% block main-content %}
@@ -22,16 +25,26 @@
       </h1>
 
       {% if request.user == user_ or request.user.is_superuser %}
-        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "profile"|title %}</a>
-        <a class="btn btn-info" href="{% url 'user_list_subscriptions' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "list membership"|title %}</a>
+        <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "edit profile"|title %}</a>
+        <a class="btn btn-info" href="{% url 'user_list_subscriptions' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "group membership"|title %}</a>
+      {% endif %}
+
+      {% if request.user.is_active %}
+        {% if user_.bio %}
+          <div class="divider"></div>
+          <ul class="unstyled-list">
+            <li>
+              <strong>{% trans 'Bio' %}</strong>
+            </li>
+            <li class="text-muted"> {{ user_.bio }}</li>
+          </ul>
+        {% endif %}
       {% endif %}
 
       <div class="divider"></div>
       {% if request.user.is_active %}
         <ul class="unstyled-list">
-        {% for email in user_.emails.iterator %}
-          <li><span class="icon-envelope icon-fixed-width"></span> {{ email.address }}</li>
-        {% endfor %}
+          <li><span class="icon-envelope icon-fixed-width"></span> <a href="mailto:{{ user_.email }}">{{ user_.email }}</a></li>
         </ul>
         <div class="divider"></div>
       {% endif %}
@@ -48,26 +61,31 @@
         {% if request.user.is_active %}
           <li>
             {% if user_.twitter %}
-            <span class="icon-twitter icon-fixed-width"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
+              <span class="icon-twitter icon-fixed-width" title="{% trans 'Twitter account' %}"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
             {% endif %}
             {% if user_.facebook %}
-            <span class="icon-facebook icon-fixed-width"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
+              <span class="icon-facebook icon-fixed-width" title="{% trans 'Facebook account' %}"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
             {% endif %}
           </li>
 
           {% if user_.google_talk %}
-            <li><span class="icon-google-plus icon-fixed-width"></span> {{ user_.google_talk }}</li>
+            <li><span class="icon-google-plus icon-fixed-width" title="{% trans 'Google talk account' %}"></span> {{ user_.google_talk }}</li>
           {% endif %}
+
+          {% if user_.github %}
+            <li><span class="icon-github icon-fixed-width" title="{% trans 'Github account' %}"></span> <a target="_blank" href="https://github.com/{{ user_.github }}">{{ user_.github }}</a></li>
+          {% endif %}
+
           {% if user_.webpage %}
-            <li><span class="icon-link icon-fixed-width"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
+            <li><span class="icon-link icon-fixed-width" title="{% trans 'Personal webpage' %}"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
           {% endif %}
         {% endif %}
       </ul>
 
       {% if user_.mailinglists %}
-        <b>{% trans 'Subscribes: ' %}</b>
+        <b>{% trans 'Groups: ' %}</b>
         {% for list in user_.mailinglists %}
-          <span class="label label-primary">{{ list }}</span>
+          <a href="{% url 'haystack_search' %}?order=latest&amp;type=thread&amp;list={{ list }}"><span class="label label-primary">{{ list }}</span></a>
         {% endfor %}
       {% endif %}
 
@@ -78,7 +96,7 @@
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Contributions by Area" %}</h3>
+          <h3 class="panel-title">{% trans "Contributions by Type" %}</h3>
         </div>
         <div class="panel-body">
           <div id="collabs"></div>
@@ -90,7 +108,7 @@
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Mailing list Participation" %}</h3>
+          <h3 class="panel-title">{% trans "Participation by Group" %}</h3>
         </div>
         <div class="panel-body">
           <div id="collabs2"></div>
@@ -130,6 +148,10 @@
         <li>{% trans "There are no posts by this user so far." %}</li>
       {% endfor %}
       </ul>
+      <a href="{% url 'haystack_search' %}?type=thread&amp;author={{ user_.username }}">
+        {% trans "View more discussions..." %}
+      </a>
+      <div>&nbsp;</div>
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-12">
@@ -141,6 +163,10 @@
         <li>{% trans "No contributions of this user so far." %}</li>
       {% endfor %}
       </ul>
+      <a href="{% url 'haystack_search' %}?order=latest&amp;collaborators={{ user_.username }}">
+        {% trans "View more contributions..." %}
+      </a>
+      <div>&nbsp;</div>
     </div>
 
   </div>

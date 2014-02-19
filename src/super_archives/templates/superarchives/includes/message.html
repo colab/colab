@@ -13,6 +13,13 @@
           {% if userprofile.get_absolute_url %}
           </a>
           {% endif %}
+          {% if email.id %}
+            <div class="hidden-xs hidden-sm div-message-link" title="{% trans 'Link to this message' %}">
+              <button class="btn btn-default message-link" data-toggle="popover" data-content="<input type='text' value='{{ request.get_host }}{{ request.path }}#msg-{{ email.id }}' class='form-control' />" data-title="{% trans 'Link to this message' %}" data-html="true" data-container="body">
+                <span class="glyphicon glyphicon-link"></span>
+              </button>
+            </div>
+          {% endif %}
         </div>
 
         {% if not reply %}

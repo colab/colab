@@ -19,6 +19,8 @@ class BaseIndex(indexes.SearchIndex):
     icon_name = indexes.CharField(indexed=False)
     fullname_and_username = indexes.CharField(null=True, stored=False)
     hits = indexes.IntegerField(model_attr='hits')
+    modified_by = indexes.CharField(null=True)
+    modified_by_url = indexes.CharField(null=True)
 
     def get_updated_field(self):
         return 'modified'
@@ -30,33 +32,63 @@ class BaseIndex(indexes.SearchIndex):
         return math.log(obj.hits)
 
     def prepare(self, obj):
+        self.author_obj = None
+        if hasattr(obj, 'get_author'):
+            self.author_obj = obj.get_author()
+
         data = super(BaseIndex, self).prepare(obj)
         data['boost'] = self.get_boost(obj)
+
         return data
 
     def prepare_author(self, obj):
-        author = obj.get_author()
-        if author:
-            return author.username
+        if self.author_obj:
+            return self.author_obj.username
         return obj.author
 
-    def prepare_fullname_and_username(self, obj):
-        author = obj.get_author()
-        if not author:
-            return obj.author
-        return u'{}\n{}'.format(
-            author.get_full_name(),
-            author.username,
-        )
-
     def prepare_author_url(self, obj):
-        author = obj.get_author()
-        if author:
-            return author.get_absolute_url()
+        if self.author_obj:
+            return self.author_obj.get_absolute_url()
         return None
 
     def prepare_fullname(self, obj):
-        author = obj.get_author()
-        if author:
-            return author.get_full_name()
+        if hasattr(obj, 'modified_by'):
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return modified_by.get_full_name()
+        if self.author_obj:
+            return self.author_obj.get_full_name()
         return obj.author
+
+    def prepare_fullname_and_username(self, obj):
+        if hasattr(obj, 'modified_by'):
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return u'{}\n{}'.format(
+                    modified_by.get_full_name(),
+                    modified_by.username,
+                )
+        if not self.author_obj:
+            return obj.author
+        return u'{}\n{}'.format(
+            self.author_obj.get_full_name(),
+            self.author_obj.username,
+        )
+
+    def prepare_modified_by(self, obj):
+        if hasattr(obj, 'modified_by'):
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return modified_by.get_full_name()
+        if self.author_obj:
+            return self.author_obj.get_full_name()
+        return obj.author
+
+    def prepare_modified_by_url(self, obj):
+        if hasattr(obj, 'modified_by'):
+            modified_by = obj.get_modified_by()
+            if modified_by:
+                return modified_by.get_absolute_url()
+        if self.author_obj:
+            return self.author_obj.get_absolute_url()
+        return None

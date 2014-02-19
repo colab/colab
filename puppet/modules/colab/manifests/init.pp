@@ -20,11 +20,13 @@ class colab {
   }
 
   Mailalias {
-    notify => Exec['newaliases'],
+    notify  => Exec['newaliases'],
+    require => Class['postfix'],
   }
 
   exec { 'newaliases':
-    path        => '/usr/bin/newaliases',
+    command     => 'sendmail -bi',
+    path        => '/usr/sbin',
     refreshonly => true,
   }
 

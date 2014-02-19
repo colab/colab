@@ -3,6 +3,8 @@
 
 {% trans "Anonymous" as anonymous %}
 
+{% block title %}{{ first_msg.subject_clean }}{% endblock %}
+
 {% block head_js %}
 
 <script>
@@ -98,6 +100,8 @@
     {% if user.is_active %}
       $('.reply.btn', this).on('click', focus_reply);
     {% endif %}
+
+    $('.message-link').popover({'placement': 'right'});
   });
 
 </script>

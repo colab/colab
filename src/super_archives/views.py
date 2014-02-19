@@ -20,6 +20,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from haystack.query import SearchQuerySet
 
+from accounts.utils import mailman
 from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, \
                     EmailAddressValidation, Message
@@ -74,6 +75,7 @@ class ThreadView(View):
             raise http.Http404
 
         data = {
+            'in_reply_to': thread.message_set.last().message_id,
             'email_from': request.user.email,
             'name_from': request.user.get_full_name(),
             'subject': thread.message_set.first().subject_clean,
@@ -93,10 +95,12 @@ class ThreadView(View):
             error_msg = _('Timeout trying to connect to Mailman API')
 
         if resp and resp.status_code == 200:
-            messages.success(request, _("Your message was sent. It may take "
-                                        "some minutes before it's delivered. "
-                                        "Why don't you breath some fresh air "
-                                        "in the meanwhile?"))
+            messages.success(request, _(
+                "Your message was sent to this topic. "
+                "It may take some minutes before it's delivered by email "
+                "to the group. Why don't you breath some fresh air in the "
+                "meanwhile?"
+            ))
         else:
             if not error_msg:
                 if resp is not None:
@@ -117,13 +121,17 @@ class ThreadDashboardView(View):
     def get(self, request):
         MAX = 6
         context = {}
+        all_lists = mailman.all_lists(description=True)
 
         context['lists'] = []
         lists = MailingList.objects.filter()
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,
-                list_.thread_set.filter(spam=False)[:MAX],
+                mailman.get_list_description(list_.name, all_lists),
+                list_.thread_set.filter(spam=False).order_by(
+                    '-latest_message__received_time'
+                )[:MAX],
                 SearchQuerySet().filter(type='thread', tag=list_.name)[:MAX],
             ))
 

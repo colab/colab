@@ -28,33 +28,41 @@
     {% highlight result.description with query max_length "150" %}
   {% else %}
     {% if result.latest_description %}
-      {{ result.latest_description|escape|truncatechars:150 }}
+      {{ result.latest_description|striptags|escape|truncatechars:150 }}
     {% elif result.description %}
-      {{ result.description|escape|truncatechars:150 }}
+      {{ result.description|striptags|escape|truncatechars:150 }}
     {% endif %}
   {% endif %}
   </span>
 {% endif %}
 
-{% if result.fullname or result.modified %}
+{% if result.fullname or result.modified or result.modified_by %}
   <div class="quiet">
-    {% if result.fullname %}
+    {% if result.modified_by %}
       <span class="pull-left">{% trans "by" %}
-        {% if result.fullname and result.author_url %}
-          <a href="{{ result.author_url }}">
-            {% if query %}
-              {% highlight result.fullname with query %}
-            {% else %}
-              {{ result.fullname }}
-            {% endif %}
+        {% if result.modified_by_url %}
+          <a href="{{ result.modified_by_url }}">
+        {% else %}
+          <span>
+        {% endif %}
+
+        {% if query %}
+          {% highlight result.modified_by with query %}
+        {% else %}
+          {{ result.modified_by }}
+        {% endif %}
+
+        {% if result.modified_by_url %}
           </a>
         {% else %}
-          <span>{{ result.fullname }}</span>
+          </span>
         {% endif %}
       </span>
+    {% else %}
+      <span class="pull-left">{% trans "by" %} {% trans "Anonymous" %}</span>
     {% endif %}
     {% if result.modified %}
-    <span class="pull-right">{{ result.modified|localtime|timesince }} {% trans "ago" %}</span>
+      <span class="pull-right">{{ result.modified|localtime|timesince }} {% trans "ago" %}</span>
     {% endif %}
   </div>
 {% endif %}

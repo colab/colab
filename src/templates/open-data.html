@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block main-content %}
+  <div class="col-lg-12">
+    <h2>{% trans "OpenData - Communities Interlegis" %}</h2>
+    <p>{% trans "If you are interested in any other data that is not provided by this API, please contact us via the ticketing system (you must be registered in order to create a ticket)." %}</p>
+
+    <h3>{% trans "Retrieving data via API" %}</h3>
+    <p>{% trans "Colab API works through HTTP/REST, always returning JSON objects." %}</p>
+    <p>
+      {% trans "The base API URL is" %}:
+      {% url 'api_v1_top_level' api_name='v1' as BASE_API_URL %}
+      <a href="{{ BASE_API_URL }}">{{ BASE_API_URL }}</a>
+    </p>
+
+    <ul class="list-unstyled">
+      <li>
+        <p>{% trans "Each model listed below has a resource_uri field available, which is the object's data URI." %}</p>
+        <p>{% trans "The following list contains the available models to retrieve data and its fields available for filtering" %}:</p>
+        <ul>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}user/">user</a></strong>:
+            {% trans "Fields" %}: <i>username, email, institution, role, first_name, last_name and bio</i>
+            <p><strong>{% trans "The email field is not shown for user's privacy, but you can use it to filter" %}</strong></p>
+            <ul>
+              <li><i>username</i> - {% trans "The user's username" %}</li>
+              <li><i>email</i> - {% trans "The user's email address" %}</li>
+              <li><i>institution</i> - {% trans "What is the user's institution" %}</li>
+              <li><i>role</i> - {% trans "What is the user's role" %}</li>
+              <li><i>first_name</i> - {% trans "The user's first name" %}</li>
+              <li><i>last_name</i> - {% trans "The user's last name" %}</li>
+              <li><i>bio</i> - {% trans "A mini bio of the user" %}</li>
+            </ul>
+            <br />
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}emailaddress/">emailaddress</a></strong>:
+            {% trans "Fields" %}: <i>user, address and real_name</i>
+            <p><strong>{% trans "The address field is not shown for user's privacy, but you can use it to filter" %}</strong></p>
+            <ul>
+              <li><i>user</i> - {% trans "It has a relationshop with the user described above" %}</li>
+              <li><i>address</i> - {% trans "An email address" %}</li>
+              <li><i>real_name</i> - {% trans "The user's real name" %}</li>
+            </ul>
+            <br />
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}message/">message</a></strong>:
+            {% trans "Fields" %}: <i>from_address, body, id, received_time and subject</i>
+            <ul>
+              <li><i>from_address</i> - {% trans "It has a relationship with the emailaddress described above" %}</li>
+              <li><i>body</i> - {% trans "The message's body" %}</li>
+              <li><i>subject</i> - {% trans "The message's subject" %}</li>
+              <li><i>id</i> - {% trans "The message's id" %}</li>
+              <li><i>received_time</i> - {% trans "The message's received time" %}</li>
+            </ul>
+            <br />
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}revision/">revision</a></strong>:
+            {% trans "Fields" %}: <i>author, created, key, message and repository_name</i>
+            <ul>
+              <li><i>author</i> - {% trans "The revision's author username" %}</li>
+              <li><i>created</i> - {% trans "When the revision's were created" %}</li>
+              <li><i>key</i> - {% trans "The revision's key" %}</li>
+              <li><i>message</i> - {% trans "The revision's message" %}</li>
+              <li><i>repository_name</i> - {% trans "The revision's repository name" %}</li>
+            </ul>
+            <br />
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}ticket/">ticket</a></strong>:
+            {% trans "Fields" %}: <i>author, component, created, description, id, keywords, milestone, modified, modified_by, priority, reporter, severity, status, summary and version</i>
+            <ul>
+              <li><i>author</i> - {% trans "The ticket's author username" %}</li>
+              <li><i>component</i> - {% trans "The ticket's component" %}</li>
+              <li><i>created</i> - {% trans "When the ticket's were created" %}</li>
+              <li><i>description</i> - {% trans "The ticket's description" %}</li>
+              <li><i>id</i> - {% trans "The ticket's id" %}</li>
+              <li><i>keywords</i> - {% trans "The ticket's keywords" %}</li>
+              <li><i>milestone</i> - {% trans "The ticket's milestone" %}</li>
+              <li><i>modified</i> - {% trans "The time of the last modification" %}</li>
+              <li><i>modified_by</i> - {% trans "The username of the last user who modified the ticket" %}</li>
+              <li><i>priority</i> - {% trans "The ticket's priority" %}</li>
+              <li><i>severity</i> - {% trans "The ticket's severity" %}</li>
+              <li><i>status</i> - {% trans "The ticket's status" %}</li>
+              <li><i>summary</i> - {% trans "The ticket's summary" %}</li>
+              <li><i>version</i> - {% trans "The ticket's version" %}</li>
+            </ul>
+            <br />
+          </li>
+          <li>
+            <strong><a href="{{ BASE_API_URL }}wiki/">wiki</a></strong>:
+            {% trans "Fields" %}: <i>author, created, modified, modified_by, name and wiki_text</i>
+            <ul>
+              <li><i>author</i> - {% trans "The wiki's author username" %}</li>
+              <li><i>created</i> - {% trans "When the wiki's were created" %}</li>
+              <li><i>modified</i> - {% trans "The time of the last modification" %}</li>
+              <li><i>modified_by</i> - {% trans "The username of the last user who modified the wiki" %}</li>
+              <li><i>name</i> - {% trans "The wiki's name" %}</li>
+              <li><i>wiki_text</i> - {% trans "the wiki's content" %}</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="list-unstyled">
+      <li><h3>{% trans 'Parameters' %}:</h3></li>
+      <li class="divider"></li>
+      <li>
+        <h4><i>limit</i> - {% trans "Results per page" %}</h4>
+        {% trans "Number of results to be displayed per page." %}
+        <i>{% trans "Default: 20" %}</i>.
+      </li>
+      <li class="divider"></li>
+      <li>
+        <h4><i>offset</i> - {% trans "Starts of n element" %}</h4>
+        {% trans "Where n is the index of the first result to appear in the page." %}
+        <i>{% trans "Default: 0" %}</i>.
+      </li>
+      <li class="divider"><h3>{% trans "Filtering" %}:</h3></li>
+      <li>
+        <h4><i>fieldname</i> - {% trans "The field name" %}</h4>
+        {% trans "If you are looking for a specific wiki, and you know the wiki's name, you can filter it as below" %}
+        <p><i>...{{ BASE_API_URL }}wiki/?name={% trans "WikiName" %}</i></p>
+        <p>{% trans "Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the value you want to filter." %}</p>
+        <h4>{% trans "Usage" %}</h4>
+        <p>{% trans "You can also filter using Django lookup fields with the double underscores, just as below" %}</p>
+        <p><i>...{{ BASE_API_URL }}wiki/?wiki_text__startswith={% trans "Wiki" %}</i></p>
+        <p><i>...{{ BASE_API_URL }}ticket/?author__endswith={% trans "test" %}</i></p>
+        <p><i>...{{ BASE_API_URL }}message/?body__contains={% trans "test" %}</i></p>
+        <h4>{% trans "Usage with relationships" %}</h4>
+        <p>{% trans "You can use related fields to filter too. So, you can filter by any field of emailaddress using the 'from_address' field of message, which has a relation to emailaddress. You will achieve the related fields by using double underscore and the field's name. See the example below" %}</p>
+        <p><i>...{{ BASE_API_URL }}message/?from_address__real_name__contains=Name</i></p>
+        <p>{% trans "So, real_name is a field of emailaddress, and you had access to this field by a message field called from_address and using double underscore to say you want to use a field of that relationship" %}</p>
+        <p><strong>{% trans "Note: email filters must be exact. Which means that __contains, __startswith, __endswith and others won't work" %}</strong></p>
+        <p>{% trans "Another example of usage with relations. Used to retrieve all messages of a given user, using the username or the email field" %}</p>
+        <p><i>...{{ BASE_API_URL }}message/?from_address__user__username=username</i></p>
+        <p><i>...{{ BASE_API_URL }}message/?from_address__user__email=usermailexample@host.com</i></p>
+      </li>
+    </ul>
+  </div>
+{% endblock %}

@@ -1,4 +1,4 @@
-Django>=1.6,<1.7
+Django>=1.6.1,<1.7
 South==0.8.1
 psycopg2==2.5.1
 django-piston==0.2.3
@@ -17,6 +17,7 @@ python-memcached==1.53
 django-hitcounter==0.1.1
 Pillow==2.2.1
 django-i18n-model==0.0.7
+django-tastypie==0.11.0
 
 gunicorn==18.0
 gevent==0.13.8
@@ -31,7 +32,7 @@ git+https://github.com/mozilla/django-browserid
 django-revproxy==0.2.7
 
 # Converse.js (XMPP client)
-django-conversejs==0.2.9
+django-conversejs==0.3
 git+https://github.com/TracyWebTech/SleekXMPP@fix-gevent
 
 # Feedzilla (planet) and deps
