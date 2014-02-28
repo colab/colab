@@ -43,6 +43,10 @@ to get results: natively in XML or JSON, PHP, Ruby and Python and then treatment
 Installation (Development Environment)
 ==========================================
 
+A detailed installation steps can be found in:
+
+`Detailed full environment installation <install.rst>`_
+
 Here we'll cover how to setup a development environment using a Vagrant 
 virtual machine.
 
@@ -64,7 +68,7 @@ First you will need to clone the repository:
 
 .. code-block::
 
-  git clone git@github.com:interlegis/colab.git
+  git clone git@github.com:colab-community/colab.git
 
 
 *NOTE:*

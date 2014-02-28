@@ -1,49 +1,30 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from django.db import connections
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
-class Migration(DataMigration):
+
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Selecting trac database
-        connection = connections['trac']
-
-        cursor = connection.cursor()
-        cursor.execute('''
-            CREATE OR REPLACE VIEW attachment_view AS SELECT
-                CONCAT(attachment.type, '/' , attachment.id, '/', attachment.filename) AS url,
-                attachment.type AS used_by,
-                attachment.filename AS filename,
-                attachment.id as attach_id,
-                (SELECT LOWER(SUBSTRING(attachment.filename FROM '\.(\w+)$'))) AS mimetype,
-                attachment.author AS author,
-                attachment.description AS description,
-                attachment.size AS size,
-                TIMESTAMP WITH TIME ZONE 'epoch' + (attachment.time/1000000)* INTERVAL '1s' AS created
-            FROM attachment;
-        ''')
+        pass
 
     def backwards(self, orm):
-        # Selecting trac database
-        connection = connections['trac']
-
-        cursor = connection.cursor()
-        cursor.execute('DROP VIEW IF EXISTS attachment_view;')
+        pass
 
     models = {
         u'proxy.attachment': {
-            'Meta': {'object_name': 'Attachment', 'db_table': "'attachment'", 'managed': 'False'},
+            'Meta': {'object_name': 'Attachment', 'db_table': "'attachment_view'", 'managed': 'False'},
+            'attach_id': ('django.db.models.fields.TextField', [], {}),
             'author': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'created': ('django.db.models.fields.DateTimeField', [], {'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'filename': ('django.db.models.fields.TextField', [], {}),
-            'id': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'key': ('django.db.models.fields.TextField', [], {'primary_key': 'True'}),
-            'size': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'time': ('django.db.models.fields.DateTimeField', [], {'blank': 'True'}),
-            'type': ('django.db.models.fields.TextField', [], {})
+            'mimetype': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'size': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
+            'url': ('django.db.models.fields.TextField', [], {'primary_key': 'True'}),
+            'used_by': ('django.db.models.fields.TextField', [], {})
         },
         u'proxy.revision': {
             'Meta': {'object_name': 'Revision', 'db_table': "'revision_view'", 'managed': 'False'},
@@ -65,6 +46,7 @@ class Migration(DataMigration):
             'keywords': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'milestone': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'modified_by': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'priority': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'reporter': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'severity': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -72,16 +54,26 @@ class Migration(DataMigration):
             'summary': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'version': ('django.db.models.fields.TextField', [], {'blank': 'True'})
         },
+        u'proxy.ticketcollabcount': {
+            'Meta': {'object_name': 'TicketCollabCount', 'db_table': "'ticket_collab_count_view'", 'managed': 'False'},
+            'author': ('django.db.models.fields.TextField', [], {'primary_key': 'True'}),
+            'count': ('django.db.models.fields.IntegerField', [], {})
+        },
         u'proxy.wiki': {
             'Meta': {'object_name': 'Wiki', 'db_table': "'wiki_view'", 'managed': 'False'},
             'author': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'collaborators': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'created': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'modified': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
+            'modified_by': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'name': ('django.db.models.fields.TextField', [], {'primary_key': 'True'}),
             'wiki_text': ('django.db.models.fields.TextField', [], {'blank': 'True'})
+        },
+        u'proxy.wikicollabcount': {
+            'Meta': {'object_name': 'WikiCollabCount', 'db_table': "'wiki_collab_count_view'", 'managed': 'False'},
+            'author': ('django.db.models.fields.TextField', [], {'primary_key': 'True'}),
+            'count': ('django.db.models.fields.IntegerField', [], {})
         }
     }
 
     complete_apps = ['proxy']
-    symmetrical = True
