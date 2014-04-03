@@ -441,7 +441,7 @@ msgstr "Leia o original"
 
 #: planet/templates/feedzilla/base.html:5
 msgid "Community Blogs"
-msgstr "Blogs da comunidade"
+msgstr "Blogs da Comunidade"
 
 #: planet/templates/feedzilla/base.html:15
 msgid "Tags"
@@ -968,6 +968,10 @@ msgstr ""
 msgid "Contribute"
 msgstr "Contribua"
 
+#: templates/base.html:92
+msgid "New Wiki Page"
+msgstr "Nova Página Wiki"
+
 #: templates/base.html:91
 msgid "Roadmap"
 msgstr "Planejamento"
@@ -978,11 +982,11 @@ msgstr "Novo Tíquete"
 
 #: templates/base.html:95
 msgid "View Tickets"
-msgstr "Visualizar Tiquetes"
+msgstr "Ver Tiquetes"
 
 #: templates/base.html:96
 msgid "Browse Source"
-msgstr "Ver Códigos Fontes"
+msgstr "Códigos Fontes"
 
 #: templates/base.html:107
 msgid "Login"
