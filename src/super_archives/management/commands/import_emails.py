@@ -33,6 +33,8 @@ class Command(BaseCommand, object):
     THREAD_CACHE = {}
     EMAIL_ADDR_CACHE = {}
 
+    lock_file = '/var/lock/colab/import_emails.lock'
+
     # A new command line option to get the dump file to parse.
     option_list = BaseCommand.option_list + (
         make_option('--archives_path',
@@ -246,6 +248,7 @@ class Command(BaseCommand, object):
                 # This anti-pattern is needed to avoid the transations to
                 #   get stuck in case of errors.
                 transaction.rollback()
+                os.remove(self.lock_file)
                 raise
 
             count += 1
@@ -257,19 +260,15 @@ class Command(BaseCommand, object):
     def handle(self, *args, **options):
         """Main command method."""
 
-        lock_file = '/var/lock/colab/import_emails.lock'
 
         # Already running, so quit
-        if os.path.exists(lock_file):
+        if os.path.exists(self.lock_file):
             self.log(("This script is already running. (If your are sure it's "
-                     "not please delete the lock file in %s')") % lock_file)
+                     "not please delete the lock file in %s')") % self.lock_file)
             sys.exit(0)
 
-        if not os.path.exists(os.path.dirname(lock_file)):
-            os.mkdir(os.path.dirname(lock_file), 0755)
-
-        run_lock = file(lock_file, 'w')
-        run_lock.close()
+        if not os.path.exists(os.path.dirname(self.lock_file)):
+            os.mkdir(os.path.dirname(self.lock_file), 0755)
 
         archives_path = options.get('archives_path')
         self.log('Using archives_path `%s`' % self.default_archives_path)
@@ -277,9 +276,11 @@ class Command(BaseCommand, object):
         if not os.path.exists(archives_path):
             raise CommandError('archives_path (%s) does not exist' %
                                                                 archives_path)
+        run_lock = file(self.lock_file, 'w')
+        run_lock.close()
 
         self.import_emails(archives_path,
                            options.get('all'), options.get('exclude_lists'))
 
-        os.remove(lock_file)
+        os.remove(self.lock_file)
 
