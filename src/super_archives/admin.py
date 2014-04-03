@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Message, Thread, EmailAddress
+from .models import MailingList, Message, Thread, EmailAddress
 
 
 class EmailAddressAdmin(admin.ModelAdmin):
@@ -57,6 +57,7 @@ class ThreadAdmin(admin.ModelAdmin):
     )
     
 
+admin.site.register(MailingList)
 admin.site.register(Thread, ThreadAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(EmailAddress, EmailAddressAdmin)
