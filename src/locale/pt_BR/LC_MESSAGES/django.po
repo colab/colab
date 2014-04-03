@@ -440,8 +440,8 @@ msgid "Read original"
 msgstr "Leia o original"
 
 #: planet/templates/feedzilla/base.html:5
-msgid "Planet - Community Blogs"
-msgstr "Planet - Blogs da comunidade"
+msgid "Community Blogs"
+msgstr "Blogs da comunidade"
 
 #: planet/templates/feedzilla/base.html:15
 msgid "Tags"
@@ -956,63 +956,63 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:76
-msgid "Planet"
+#: templates/base.html:79
+msgid "Timeline"
+msgstr "Linha do Tempo"
+
+#: templates/base.html:85
+msgid "Blogs"
 msgstr ""
 
-#: templates/base.html:79
+#: templates/base.html:88
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:82
-msgid "Timeline"
-msgstr "Histórico"
-
-#: templates/base.html:83
+#: templates/base.html:91
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:85
+#: templates/base.html:93
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:87
+#: templates/base.html:95
 msgid "View Tickets"
 msgstr "Visualizar Tiquetes"
 
-#: templates/base.html:88
+#: templates/base.html:96
 msgid "Browse Source"
 msgstr "Ver Códigos Fontes"
 
-#: templates/base.html:99
+#: templates/base.html:107
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/base.html:113
+#: templates/base.html:121
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:114
+#: templates/base.html:122
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:126 templates/base.html.py:129
+#: templates/base.html:134 templates/base.html.py:129
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:142
+#: templates/base.html:150
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:167
+#: templates/base.html:179
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:172
+#: templates/base.html:181
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:174
+#: templates/base.html:183
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
@@ -1064,9 +1064,6 @@ msgstr "COMUNIDADES INTERLEGIS"
 
 #~ msgid "Other Collaborations"
 #~ msgstr "Outras Colaborações"
-
-#~ msgid "Community Blogs"
-#~ msgstr "Blogs da comunidade"
 
 #~ msgid "Mailing List Subscriptions"
 #~ msgstr "Inscrições em listas de e-mails"
