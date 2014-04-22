@@ -989,7 +989,7 @@ msgid "Browse Source"
 msgstr "Códigos Fontes"
 
 #: templates/base.html:84
-msgit "Continuous Integration"
+msgid "Continuous Integration"
 msgstr "Integração Contínua"
 
 #: templates/base.html:107
