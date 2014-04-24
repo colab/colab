@@ -988,6 +988,10 @@ msgstr "Ver Tiquetes"
 msgid "Browse Source"
 msgstr "Códigos Fontes"
 
+#: templates/base.html:84
+msgid "Continuous Integration"
+msgstr "Integração Contínua"
+
 #: templates/base.html:107
 msgid "Login"
 msgstr "Entrar"
