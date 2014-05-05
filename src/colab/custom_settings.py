@@ -313,7 +313,7 @@ DPASTE_EXPIRE_CHOICES = (
     ('never', _(u'Never')),
 )
 DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
-DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab'
+DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab Interlegis'
 DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
 
 try:
