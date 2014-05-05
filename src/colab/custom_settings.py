@@ -268,11 +268,11 @@ FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 
 
 ### Mailman API settings
-MAILMAN_API_URL = 'http://listas.interlegis.gov.br:8000'
+MAILMAN_API_URL = 'localhost:8000'
 
 
 ### BrowserID / Persona
-SITE_URL = 'https://colab.interlegis.leg.br'
+SITE_URL = 'localhost:8000'
 BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
 
@@ -284,8 +284,8 @@ BROWSERID_CREATE_USER = False
 
 
 ## Proxy settings
-COLAB_TRAC_URL = 'http://colab-backend.interlegis.leg.br/'
-COLAB_CI_URL = 'http://jenkins.interlegis.leg.br:8080/ci/'
+COLAB_TRAC_URL = 'localhost:5000/trac/'
+COLAB_CI_URL = 'localhost:9000/ci/'
 
 REVPROXY_ADD_REMOTE_USER = True
 
