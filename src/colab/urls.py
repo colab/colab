@@ -26,6 +26,8 @@ urlpatterns = patterns('',
     url(r'^signup/', include('accounts.urls')),  # (same here) TODO: move to nginx
     url(r'^account/', include('accounts.urls')),
 
+    url(r'', include('django_browserid.urls')),
+
     url(r'^planet/', include('feedzilla.urls')),
 
     url(r'paste/', include('dpaste.urls.dpaste')),
