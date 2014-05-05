@@ -48,3 +48,6 @@ transliterate==1.5
 # Diazo
 #diazo
 git+https://github.com/plone/diazo@44ca0da7de5a7ee5d4085c7344701b9cfecfb419
+
+# Dpaste
+git+https://github.com/interlegis/dpaste

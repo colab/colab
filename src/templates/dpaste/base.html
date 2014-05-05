@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head_css %}
+<link rel="stylesheet" href="{{ STATIC_URL }}dpaste/css/theme.css"
+                            type="text/css" media="screen" />
+{% endblock %}
+
+{% block header %}
+<h2>Paste</h2>
+{% endblock %}
+
+{% block main-content %}
+{% block page %}{% endblock %}
+{% endblock %}
+
+{% block footer_js %}{% endblock %}
