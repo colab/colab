@@ -58,4 +58,9 @@ class colab::cronjobs {
   #  ],
   #}
 
+  cron { 'cleanup-snippets':
+    command => "$manage_colab cleanup_snippets &> /dev/null",
+    hour    => '1',
+  }
+
 }

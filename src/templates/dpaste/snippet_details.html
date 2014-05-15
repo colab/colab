@@ -1,0 +1,207 @@
+{% extends "dpaste/base.html" %}
+
+{% load mptt_tags %}
+{% load i18n %}
+{% load dpaste_tags %}
+
+{% block page %}
+
+{# Snippet options #}
+
+
+<div id="snippet-diff" class="row">
+    <div class="col-md-10">
+        <div id="diff" style="display:none;"></div>
+    </div>
+    <div id="snippet-diff-form" class="col-md-2">
+        <form method="get" id="diffform" action="{% url "snippet_diff" %}">
+            {% csrf_token %}
+            <div class="form-group tree">
+                {% for tree_item,structure in tree|tree_info %}
+                {% if structure.new_level %}<ul><li>{% else %}</li><li>{% endif %}
+                <div>
+                    <span class="pull-right">
+                        <input type="radio" name="a" value="{{ tree_item.id }}" {% ifequal tree_item.id snippet.parent_id %}checked="checked"{% endifequal %}>
+                        <input type="radio" name="b" value="{{ tree_item.id }}" {% ifequal snippet tree_item %}checked="checked"{% endifequal %}>
+                    </span>
+                    {% ifequal snippet tree_item %}
+                    <strong>#{{ tree_item.id }}</strong>
+                    {% else %}
+                    <a href="{{ tree_item.get_absolute_url }}">#{{ tree_item.id }}</a>
+                    {% endifequal %}
+                </div>
+                {% for level in structure.closed_levels %}</li></ul>{% endfor %}
+                {% endfor %}
+            </div>
+            <div class="form-group pull-right">
+                <button type="submit" class="btn btn-default">{% trans "Compare" %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="btn-group btn-group-sm snippet-options">
+    <a href="#" class="btn btn-default disabled">
+        {% if snippet.expire_type == 1 %}
+            {% blocktrans with date=snippet.expires|timeuntil %}Expires in: {{ date }}{% endblocktrans %}
+        {% elif snippet.expire_type == 2 %}
+            {% trans "Snippet never expires" %}
+        {% elif snippet.expire_type == 3 %}
+            {% trans "One-time snippet" %}
+        {% endif %}
+    </a>
+
+    {% if snippet.pk|in_list:request.session.snippet_list %}
+    <a href="{% url "snippet_delete" snippet.secret_id %}" class="btn btn-default" onclick="return confirm('{% trans "Really delete this snippet?" %}');">
+    <span class="glyphicon glyphicon-trash"></span>
+    {% trans "Delete Now" %}
+    </a>
+    {% endif %}
+
+    {% if not snippet.is_single %}
+    <a href="#snippet-diff" class="btn btn-default snippet-diff-trigger" title="{% trans "Compare Snippets" %}">
+        <span class="glyphicon glyphicon-search"></span>
+        {% trans "Compare Snippets" %}
+    </a>
+    {% endif %}
+
+    <a href="{% url "snippet_details_raw" snippet.secret_id %}" class="btn btn-default" title="{% trans "View Raw" %}">
+        <span class="glyphicon glyphicon-align-left"></span>
+        {% trans "View Raw" %}
+    </a>
+    <a href="{% url "snippet_gist" snippet.secret_id %}" class="btn btn-default" rel="nofollow" title="Create a secret Gist">
+        <span class="glyphicon glyphicon-share"></span>
+        </i> {% trans "Gist" %}
+    </a>
+    <a href="/paste" class="btn btn-primary">
+        New snippet
+        <span class="glyphicon glyphicon-arrow-right"></span>
+    </a>
+</div>
+
+
+    {% if snippet.expire_type == 3 %}
+    <div class="alert alert-warning alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+        {% trans "This is a one-time snippet." %}
+        {% if snippet.remaining_views > 1 %}
+            {% trans "It will automatically get deleted after {{ remaining }} further views." %}
+        {% elif snippet.remaining_views == 1 %}
+            {% trans "It will automatically get deleted after the next view." %}
+        {% else %}
+            {% trans "It cannot be viewed again." %}
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if snippet.lexer == 'text' %}
+    <div class="snippet-rendered">
+        {{ snippet.content|linebreaksbr }}
+    </div>
+    {% else %}
+        {% include "dpaste/snippet_pre.html" %}
+    {% endif %}
+
+    {% if not snippet.expire_type == 3 %}
+    <div class="snippet-reply snippet-reply-hidden">
+        <h3>{% trans "Reply to this snippet" %} &rarr;</h3>
+        {% include "dpaste/snippet_form.html" %}
+    </div>
+    {% endif %}
+
+
+
+{% block footer_js %}
+<script>
+
+$(document).ready(function() {
+    $('.snippet-reply-hidden').click(function(e) {
+        $(this).removeClass('snippet-reply-hidden');
+    });
+
+    var diffReq;
+
+    $('.snippet-diff-trigger').click(function(event) {
+        $('#snippet-diff form').submit();
+        $('#snippet-diff').show();
+        event.preventDefault();
+    });
+
+
+    $('#diffform').submit(function() {
+        var a = $('input[name="a"]:checked').val(),
+            b = $('input[name="b"]:checked').val();
+
+        window.location.hash = 'D' + a + ',' + b;
+
+        // Cancel previous request if it is still pending
+        if (diffReq) {
+            diffReq.abort();
+        }
+
+        diffReq = $.get("{% url "snippet_diff" %}", {
+            a: a,
+            b: b
+        }).done(function(data) {
+            $('#diff').html(data).slideDown('fast');
+        }).complete(function() {
+            diffReq = null;
+        });
+
+        return false;
+    });
+
+    var curLine = document.location.hash,
+        hashlist;
+
+    if (curLine.substring(0, 2) === '#D') {
+        hashlist = curLine.substring(2).split(',');
+        if (hashlist.length === 2) {
+            console.log(hashlist);
+            $('#diffform input[name="a"][value="' + hashlist[0] + '"]').prop('checked', true);
+            $('#diffform input[name="b"][value="' + hashlist[1] + '"]').prop('checked', true);
+            $('#snippet-diff form').submit();
+            $('#snippet-diff').show();
+        }
+    }
+
+    /* ------------------------------------------------------------------------
+Line Highlighting
+------------------------------------------------------------------------ */
+    if (curLine.substring(0, 2) === '#L') {
+        hashlist = curLine.substring(2).split(',');
+        if (hashlist.length > 0 && hashlist[0] !== '') {
+            $.each(hashlist, function(index, elem){
+                $('.code li#' + elem).addClass('marked');
+            });
+        }
+    }
+
+    $('.code li').click(function(event) {
+        var hash = 'L';
+
+        $(this).toggleClass("marked");
+
+        $('.code li.marked').each(function (index, elem) {
+            if (hash !== 'L') hash += ',';
+            hash += $(elem).attr('id');
+        });
+
+        window.location.hash = hash;
+
+        e.preventDefault();
+    });
+
+    /* ------------------------------------------------------------------------
+Line Highlighting
+------------------------------------------------------------------------ */
+    $('#toggleWordwrap').click(function(e){
+        e.preventDefault();
+        $('.code').toggleClass('wordwrap');
+    });
+});
+</script>
+{% endblock %}
+{% endblock %}

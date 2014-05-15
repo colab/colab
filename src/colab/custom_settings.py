@@ -107,6 +107,8 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'haystack',
     'hitcounter',
     'i18n_model',
+    'mptt',
+    'dpaste',
 
     # Own apps
     'super_archives',
@@ -207,7 +209,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'django_browserid.context_processors.browserid',
     'django_mobile.context_processors.is_mobile',
     'super_archives.context_processors.mailarchive',
     'home.context_processors.robots',
@@ -302,6 +303,18 @@ CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
+
+# Dpaste settings
+DPASTE_EXPIRE_CHOICES = (
+    ('onetime', _(u'One Time Snippet')),
+    (3600, _(u'In one hour')),
+    (3600 * 24 * 7, _(u'In one week')),
+    (3600 * 24 * 30, _(u'In one month')),
+    ('never', _(u'Never')),
+)
+DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
+DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab Interlegis'
+DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
 
 try:
     from local_settings import *

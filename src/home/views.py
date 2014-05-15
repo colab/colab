@@ -24,18 +24,21 @@ def index(request):
     if count_types is None:
         count_types = OrderedDict()
         for type in ['thread', 'changeset', 'attachment']:
-            count_types[trans(type)] = SearchQuerySet().filter(
+            count_types[type] = SearchQuerySet().filter(
                 type=type,
             ).count()
 
-        count_types[trans('ticket')] = sum([
+        count_types['ticket'] = sum([
             ticket.count for ticket in TicketCollabCount.objects.all()
         ])
 
-        count_types[trans('wiki')] = sum([
+        count_types['wiki'] = sum([
             wiki.count for wiki in WikiCollabCount.objects.all()
         ])
         cache.set('home_chart', count_types)
+
+    for key in count_types.keys():
+        count_types[trans(key)] = count_types.pop(key)
 
     context = {
         'hottest_threads': hottest_threads[:6],
