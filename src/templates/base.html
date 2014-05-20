@@ -119,9 +119,18 @@
 
           <ul class="nav navbar-nav navbar-right">
             {% if not user.is_authenticated %}
-              <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
+
+              <li class="dropdown hidden-xs hidden-lg">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acesso <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
+                  {% trans 'Login' as login_text %}
+                  <li>{% browserid_login text=login_text %}</li>
+                </ul>
+              </li>
+              <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
               {% trans 'Login' as login_text %}
-              <li>{% browserid_login text=login_text %}</li>
+              <li class="visible-xs hidden-sm hidden-md">{% browserid_login text=login_text %}</li>
             {% else %}
               <li id="user-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
