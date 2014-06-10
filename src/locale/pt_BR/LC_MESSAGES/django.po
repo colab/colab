@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-12-19 11:20+0000\n"
+"POT-Creation-Date: 2014-06-10 14:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr "Datas importantes"
 msgid "Social account does not exist"
 msgstr "Conta social não existe"
 
-#: accounts/forms.py:56 accounts/templates/accounts/user_detail.html:34
+#: accounts/forms.py:56 accounts/templates/accounts/user_detail.html:38
 msgid "Bio"
 msgstr "Bio"
 
@@ -133,76 +133,87 @@ msgstr "Informações pessoais"
 msgid "Subscribe to groups"
 msgstr "Inscreva-se nos grupos"
 
-#: accounts/templates/accounts/user_create_form.html:60 templates/base.html:98
+#: accounts/templates/accounts/user_create_form.html:60
+#: templates/base.html:101 templates/base.html.py:106
 msgid "Register"
 msgstr "Cadastre-se"
 
-#: accounts/templates/accounts/user_detail.html:25
-msgid "edit profile"
-msgstr "editar perfil"
+#: accounts/templates/accounts/user_detail.html:8 badger/models.py:22
+#: super_archives/models.py:258
+msgid "Messages"
+msgstr "Mensagens"
 
-#: accounts/templates/accounts/user_detail.html:26
-msgid "group membership"
-msgstr "Inscrições nos grupos"
-
-#: accounts/templates/accounts/user_detail.html:61
-msgid "Twitter account"
-msgstr "Conta Twitter"
-
-#: accounts/templates/accounts/user_detail.html:64
-msgid "Facebook account"
-msgstr "Conta Facebook"
-
-#: accounts/templates/accounts/user_detail.html:69
-msgid "Google talk account"
-msgstr "Conta Google"
-
-#: accounts/templates/accounts/user_detail.html:73
-msgid "Github account"
-msgstr "Conta Github"
-
-#: accounts/templates/accounts/user_detail.html:77
-msgid "Personal webpage"
-msgstr "Página web pessoal"
-
-#: accounts/templates/accounts/user_detail.html:83
-msgid "Groups: "
-msgstr "Grupos: "
-
-#: accounts/templates/accounts/user_detail.html:96
-msgid "Contributions by Type"
-msgstr "Contribuições por tipo"
-
-#: accounts/templates/accounts/user_detail.html:108
-msgid "Participation by Group"
-msgstr "Participação por grupo"
-
-#: accounts/templates/accounts/user_detail.html:121 badger/models.py:70
-msgid "Badges"
-msgstr "Medalhas"
-
-#: accounts/templates/accounts/user_detail.html:140
-msgid "Latest posted"
-msgstr "Últimas postagens"
-
-#: accounts/templates/accounts/user_detail.html:145
-msgid "There are no posts by this user so far."
-msgstr "Não há posts deste usuário até agora."
-
-#: accounts/templates/accounts/user_detail.html:149 templates/home.html:57
-#: templates/home.html.py:76
-msgid "View more discussions..."
-msgstr "Ver mais discussões..."
-
-#: accounts/templates/accounts/user_detail.html:155 badger/models.py:23
+#: accounts/templates/accounts/user_detail.html:9 badger/models.py:23
+#: templates/home.html:7
 msgid "Contributions"
 msgstr "Contribuições"
 
-#: accounts/templates/accounts/user_detail.html:160
+#: accounts/templates/accounts/user_detail.html:29
+msgid "edit profile"
+msgstr "editar perfil"
+
+#: accounts/templates/accounts/user_detail.html:30
+msgid "group membership"
+msgstr "Inscrições nos grupos"
+
+#: accounts/templates/accounts/user_detail.html:65
+msgid "Twitter account"
+msgstr "Conta Twitter"
+
+#: accounts/templates/accounts/user_detail.html:68
+msgid "Facebook account"
+msgstr "Conta Facebook"
+
+#: accounts/templates/accounts/user_detail.html:73
+msgid "Google talk account"
+msgstr "Conta Google"
+
+#: accounts/templates/accounts/user_detail.html:77
+msgid "Github account"
+msgstr "Conta Github"
+
+#: accounts/templates/accounts/user_detail.html:81
+msgid "Personal webpage"
+msgstr "Página web pessoal"
+
+#: accounts/templates/accounts/user_detail.html:87
+msgid "Groups: "
+msgstr "Grupos: "
+
+#: accounts/templates/accounts/user_detail.html:100
+msgid "Contributions by Type"
+msgstr "Contribuições por tipo"
+
+#: accounts/templates/accounts/user_detail.html:112
+msgid "Participation by Group"
+msgstr "Participação por grupo"
+
+#: accounts/templates/accounts/user_detail.html:125 badger/models.py:70
+msgid "Badges"
+msgstr "Medalhas"
+
+#: accounts/templates/accounts/user_detail.html:144
+msgid "Latest posted"
+msgstr "Últimas postagens"
+
+#: accounts/templates/accounts/user_detail.html:149
+msgid "There are no posts by this user so far."
+msgstr "Não há posts deste usuário até agora."
+
+#: accounts/templates/accounts/user_detail.html:153 templates/home.html:61
+#: templates/home.html.py:80
+msgid "View more discussions..."
+msgstr "Ver mais discussões..."
+
+#: accounts/templates/accounts/user_detail.html:159
+msgid "Latest contributions"
+msgstr "Últimas colaborações"
+
+#: accounts/templates/accounts/user_detail.html:164
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:164
+#: accounts/templates/accounts/user_detail.html:168
 msgid "View more contributions..."
 msgstr "Ver mais colaborações..."
 
@@ -322,10 +333,6 @@ msgstr "Automaticamente"
 msgid "Manual"
 msgstr "Manual"
 
-#: badger/models.py:22 super_archives/models.py:258
-msgid "Messages"
-msgstr "Mensagens"
-
 #: badger/models.py:24
 msgid "Wikis"
 msgstr "Wikis"
@@ -419,13 +426,34 @@ msgstr "Compactado"
 msgid "Spreadsheet"
 msgstr "Planilha"
 
-#: colab/custom_settings.py:265
+#: colab/custom_settings.py:267
 msgid "Planet Colab"
 msgstr ""
 
-#: colab/custom_settings.py:266
+#: colab/custom_settings.py:268
 msgid "Colab blog aggregator"
 msgstr "Agregador de blog Colab"
+
+#: colab/custom_settings.py:309
+msgid "One Time Snippet"
+msgstr ""
+
+#: colab/custom_settings.py:310
+msgid "In one hour"
+msgstr ""
+
+#: colab/custom_settings.py:311
+msgid "In one week"
+msgstr ""
+
+#: colab/custom_settings.py:312
+msgid "In one month"
+msgstr ""
+
+#: colab/custom_settings.py:313
+#, fuzzy
+msgid "Never"
+msgstr "Seriedade"
 
 #: planet/templates/feedzilla/_post_template.html:8
 msgid "From"
@@ -439,19 +467,19 @@ msgstr "em"
 msgid "Read original"
 msgstr "Leia o original"
 
-#: planet/templates/feedzilla/base.html:5
+#: planet/templates/feedzilla/base.html:7
 msgid "Community Blogs"
 msgstr "Blogs da Comunidade"
 
-#: planet/templates/feedzilla/base.html:15
+#: planet/templates/feedzilla/base.html:17
 msgid "Tags"
 msgstr "Etiquetas"
 
-#: planet/templates/feedzilla/base.html:19
+#: planet/templates/feedzilla/base.html:21
 msgid "Source Blogs"
 msgstr "Blogs de origem"
 
-#: planet/templates/feedzilla/base.html:23
+#: planet/templates/feedzilla/base.html:25
 #: planet/templates/feedzilla/submit_blog.html:5
 msgid "Submit a blog"
 msgstr "Sugerir um blog"
@@ -505,7 +533,7 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:41
-#: templates/base.html:92
+#: templates/base.html:91
 msgid "Search"
 msgstr "Busca"
 
@@ -524,7 +552,7 @@ msgstr ""
 
 #: search/forms.py:26 search/views.py:36
 msgid "Mailinglist"
-msgstr "Lista de email"
+msgstr "Grupo"
 
 #: search/forms.py:30 search/views.py:46
 msgid "Milestone"
@@ -606,6 +634,7 @@ msgstr "Tamanho"
 
 #: search/utils.py:7 search/views.py:20
 #: search/templates/search/includes/search_filters.html:116
+#: templates/open-data.html:130
 msgid "Wiki"
 msgstr "Wiki"
 
@@ -788,7 +817,7 @@ msgstr ""
 msgid "Email address verified!"
 msgstr "Endereço de e-mail verificado!"
 
-#: super_archives/management/commands/import_emails.py:205
+#: super_archives/management/commands/import_emails.py:207
 msgid "[Colab] Warning - Email sent with a blank subject."
 msgstr "[Colab] Aviso - E-mail enviado com o campo assunto em branco."
 
@@ -852,21 +881,22 @@ msgstr "votado"
 msgid "Tags:"
 msgstr "Etiquetas:"
 
-#: super_archives/templates/superarchives/thread-dashboard.html:5
-#: templates/base.html:73
+#: super_archives/templates/superarchives/thread-dashboard.html:4
+#: super_archives/templates/superarchives/thread-dashboard.html:7
+#: templates/base.html:66
 msgid "Groups"
 msgstr "Grupos"
 
-#: super_archives/templates/superarchives/thread-dashboard.html:15
+#: super_archives/templates/superarchives/thread-dashboard.html:17
 msgid "latest"
 msgstr "mais recentes"
 
-#: super_archives/templates/superarchives/thread-dashboard.html:23
-#: super_archives/templates/superarchives/thread-dashboard.html:37
+#: super_archives/templates/superarchives/thread-dashboard.html:25
+#: super_archives/templates/superarchives/thread-dashboard.html:39
 msgid "more..."
 msgstr "mais..."
 
-#: super_archives/templates/superarchives/thread-dashboard.html:29
+#: super_archives/templates/superarchives/thread-dashboard.html:31
 msgid "most relevant"
 msgstr "mais relevantes"
 
@@ -956,43 +986,43 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:79
+#: templates/base.html:63
 msgid "Timeline"
 msgstr "Linha do Tempo"
 
-#: templates/base.html:85
+#: templates/base.html:69
 msgid "Blogs"
 msgstr ""
 
-#: templates/base.html:88
+#: templates/base.html:72
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:92
+#: templates/base.html:76
 msgid "New Wiki Page"
 msgstr "Nova Página Wiki"
 
-#: templates/base.html:91
-msgid "Roadmap"
-msgstr "Planejamento"
-
-#: templates/base.html:93
-msgid "New Ticket"
-msgstr "Novo Tíquete"
-
-#: templates/base.html:95
+#: templates/base.html:78
 msgid "View Tickets"
 msgstr "Ver Tiquetes"
 
-#: templates/base.html:96
+#: templates/base.html:80
+msgid "New Ticket"
+msgstr "Novo Tíquete"
+
+#: templates/base.html:82
+msgid "Roadmap"
+msgstr "Planejamento"
+
+#: templates/base.html:86
 msgid "Browse Source"
 msgstr "Códigos Fontes"
 
-#: templates/base.html:84
+#: templates/base.html:87
 msgid "Continuous Integration"
 msgstr "Integração Contínua"
 
-#: templates/base.html:107
+#: templates/base.html:102 templates/base.html.py:107
 msgid "Login"
 msgstr "Entrar"
 
@@ -1004,7 +1034,7 @@ msgstr "Meu Perfil"
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:134 templates/base.html.py:129
+#: templates/base.html:134 templates/base.html.py:137
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
@@ -1012,57 +1042,446 @@ msgstr "Pesquise aqui..."
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:179
+#: templates/base.html:180
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:181
+#: templates/base.html:183
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:183
+#: templates/base.html:185
 msgid "Creative Commons - attribution, non-commercial"
 msgstr "Creative Commons - atribuição e não-comercial"
 
-#: templates/home.html:17
+#: templates/home.html:21
 msgid "Latest Collaborations"
 msgstr "Últimas Colaborações"
 
-#: templates/home.html:21
+#: templates/home.html:25
 msgid "RSS - Latest collaborations"
 msgstr "RSS - Últimas Colaborações"
 
-#: templates/home.html:30
+#: templates/home.html:34
 msgid "View more collaborations..."
 msgstr "Ver mais colaborações..."
 
-#: templates/home.html:37
+#: templates/home.html:41
 msgid "Collaboration Graph"
 msgstr "Gráfico de Colaborações"
 
-#: templates/home.html:45
+#: templates/home.html:49
 msgid "Most Relevant Threads"
 msgstr "Discussões Mais Relevantes"
 
-#: templates/home.html:49
+#: templates/home.html:53
 msgid "RSS - Most Relevant Threads"
 msgstr "RSS - Discussões Mais Relevantes"
 
-#: templates/home.html:64
+#: templates/home.html:68
 msgid "Latest Threads"
 msgstr "Últimas Discussões"
 
-#: templates/home.html:68
+#: templates/home.html:72
 msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
 
-#: templates/pizza-chart.html:26
-msgid "Willing to help"
-msgstr "Vontade de ajudar"
+#: templates/open-data.html:6
+msgid "OpenData - Communities Interlegis"
+msgstr "OpenData - Comunidades Interlegis"
+
+#: templates/open-data.html:7
+msgid ""
+"If you are interested in any other data that is not provided by this API, "
+"please contact us via the ticketing system (you must be registered in order "
+"to create a ticket)."
+msgstr ""
+
+#: templates/open-data.html:9
+msgid "Retrieving data via API"
+msgstr ""
+
+#: templates/open-data.html:10
+msgid "Colab API works through HTTP/REST, always returning JSON objects."
+msgstr ""
+
+#: templates/open-data.html:12
+msgid "The base API URL is"
+msgstr ""
+
+#: templates/open-data.html:19
+msgid ""
+"Each model listed below has a resource_uri field available, which is the "
+"object's data URI."
+msgstr ""
+
+#: templates/open-data.html:20
+msgid ""
+"The following list contains the available models to retrieve data and its "
+"fields available for filtering"
+msgstr ""
+
+#: templates/open-data.html:24 templates/open-data.html.py:39
+#: templates/open-data.html:50 templates/open-data.html.py:62
+#: templates/open-data.html:74 templates/open-data.html.py:95
+msgid "Fields"
+msgstr ""
+
+#: templates/open-data.html:25
+msgid ""
+"The email field is not shown for user's privacy, but you can use it to filter"
+msgstr ""
+
+#: templates/open-data.html:27
+msgid "The user's username"
+msgstr ""
+
+#: templates/open-data.html:28
+#, fuzzy
+msgid "The user's email address"
+msgstr "Adicionar outro endereço de e-mail"
+
+#: templates/open-data.html:29
+msgid "What is the user's institution"
+msgstr ""
+
+#: templates/open-data.html:30
+msgid "What is the user's role"
+msgstr ""
+
+#: templates/open-data.html:31
+msgid "The user's first name"
+msgstr ""
+
+#: templates/open-data.html:32
+msgid "The user's last name"
+msgstr ""
+
+#: templates/open-data.html:33
+msgid "A mini bio of the user"
+msgstr ""
+
+#: templates/open-data.html:40
+msgid ""
+"The address field is not shown for user's privacy, but you can use it to "
+"filter"
+msgstr ""
+
+#: templates/open-data.html:42
+msgid "It has a relationshop with the user described above"
+msgstr ""
+
+#: templates/open-data.html:43
+#, fuzzy
+msgid "An email address"
+msgstr "Adicionar outro endereço de e-mail"
+
+#: templates/open-data.html:44
+msgid "The user's real name"
+msgstr ""
+
+#: templates/open-data.html:52
+msgid "It has a relationship with the emailaddress described above"
+msgstr ""
+
+#: templates/open-data.html:53
+#, fuzzy
+msgid "The message's body"
+msgstr "Corpo da mensagem"
+
+#: templates/open-data.html:54
+#, fuzzy
+msgid "The message's subject"
+msgstr "Por favor, digite o assunto da mensagem"
+
+#: templates/open-data.html:55
+#, fuzzy
+msgid "The message's id"
+msgstr "Última mensagem"
+
+#: templates/open-data.html:56
+msgid "The message's received time"
+msgstr ""
+
+#: templates/open-data.html:64
+msgid "The revision's author username"
+msgstr ""
+
+#: templates/open-data.html:65
+msgid "When the revision's were created"
+msgstr ""
+
+#: templates/open-data.html:66
+msgid "The revision's key"
+msgstr ""
+
+#: templates/open-data.html:67
+msgid "The revision's message"
+msgstr ""
+
+#: templates/open-data.html:68
+msgid "The revision's repository name"
+msgstr ""
+
+#: templates/open-data.html:76
+msgid "The ticket's author username"
+msgstr ""
+
+#: templates/open-data.html:77
+msgid "The ticket's component"
+msgstr ""
+
+#: templates/open-data.html:78
+msgid "When the ticket's were created"
+msgstr ""
+
+#: templates/open-data.html:79
+msgid "The ticket's description"
+msgstr ""
+
+#: templates/open-data.html:80
+#, fuzzy
+msgid "The ticket's id"
+msgstr "Tíquetes"
+
+#: templates/open-data.html:81
+msgid "The ticket's keywords"
+msgstr ""
+
+#: templates/open-data.html:82
+msgid "The ticket's milestone"
+msgstr ""
+
+#: templates/open-data.html:83 templates/open-data.html.py:99
+msgid "The time of the last modification"
+msgstr ""
+
+#: templates/open-data.html:84
+msgid "The username of the last user who modified the ticket"
+msgstr ""
+
+#: templates/open-data.html:85
+msgid "The ticket's priority"
+msgstr ""
+
+#: templates/open-data.html:86
+msgid "The ticket's severity"
+msgstr ""
+
+#: templates/open-data.html:87
+msgid "The ticket's status"
+msgstr ""
+
+#: templates/open-data.html:88
+msgid "The ticket's summary"
+msgstr ""
+
+#: templates/open-data.html:89
+msgid "The ticket's version"
+msgstr ""
+
+#: templates/open-data.html:97
+msgid "The wiki's author username"
+msgstr ""
+
+#: templates/open-data.html:98
+msgid "When the wiki's were created"
+msgstr ""
+
+#: templates/open-data.html:100
+msgid "The username of the last user who modified the wiki"
+msgstr ""
+
+#: templates/open-data.html:101
+msgid "The wiki's name"
+msgstr ""
+
+#: templates/open-data.html:102
+msgid "the wiki's content"
+msgstr ""
+
+#: templates/open-data.html:109
+msgid "Parameters"
+msgstr ""
+
+#: templates/open-data.html:112
+msgid "Results per page"
+msgstr ""
+
+#: templates/open-data.html:113
+msgid "Number of results to be displayed per page."
+msgstr ""
+
+#: templates/open-data.html:114
+msgid "Default: 20"
+msgstr ""
+
+#: templates/open-data.html:118
+msgid "Starts of n element"
+msgstr ""
+
+#: templates/open-data.html:119
+msgid "Where n is the index of the first result to appear in the page."
+msgstr ""
+
+#: templates/open-data.html:120
+msgid "Default: 0"
+msgstr ""
+
+#: templates/open-data.html:122
+#, fuzzy
+msgid "Filtering"
+msgstr "Filtro"
+
+#: templates/open-data.html:124
+msgid "The field name"
+msgstr ""
+
+#: templates/open-data.html:125
+msgid ""
+"If you are looking for a specific wiki, and you know the wiki's name, you "
+"can filter it as below"
+msgstr ""
+
+#: templates/open-data.html:126
+#, fuzzy
+msgid "WikiName"
+msgstr "Nome"
+
+#: templates/open-data.html:127
+msgid ""
+"Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the "
+"value you want to filter."
+msgstr ""
+
+#: templates/open-data.html:128
+#, fuzzy
+msgid "Usage"
+msgstr "Mensagem"
+
+#: templates/open-data.html:129
+msgid ""
+"You can also filter using Django lookup fields with the double underscores, "
+"just as below"
+msgstr ""
+
+#: templates/open-data.html:131 templates/open-data.html.py:132
+#, fuzzy
+msgid "test"
+msgstr "mais recentes"
+
+#: templates/open-data.html:133
+msgid "Usage with relationships"
+msgstr ""
+
+#: templates/open-data.html:134
+msgid ""
+"You can use related fields to filter too. So, you can filter by any field of "
+"emailaddress using the 'from_address' field of message, which has a relation "
+"to emailaddress. You will achieve the related fields by using double "
+"underscore and the field's name. See the example below"
+msgstr ""
+
+#: templates/open-data.html:136
+msgid ""
+"So, real_name is a field of emailaddress, and you had access to this field "
+"by a message field called from_address and using double underscore to say "
+"you want to use a field of that relationship"
+msgstr ""
+
+#: templates/open-data.html:137
+msgid ""
+"Note: email filters must be exact. Which means that __contains, "
+"__startswith, __endswith and others won't work"
+msgstr ""
+
+#: templates/open-data.html:138
+msgid ""
+"Another example of usage with relations. Used to retrieve all messages of a "
+"given user, using the username or the email field"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:37
+#, fuzzy
+msgid "Compare"
+msgstr "Comparação"
+
+#: templates/dpaste/snippet_details.html:47
+#, python-format
+msgid "Expires in: %(date)s"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:49
+msgid "Snippet never expires"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:51
+msgid "One-time snippet"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:56
+msgid "Really delete this snippet?"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:58
+#, fuzzy
+msgid "Delete Now"
+msgstr "Apagar"
+
+#: templates/dpaste/snippet_details.html:63
+#: templates/dpaste/snippet_details.html:65
+#, fuzzy
+msgid "Compare Snippets"
+msgstr "Comparação"
+
+#: templates/dpaste/snippet_details.html:69
+#: templates/dpaste/snippet_details.html:71
+msgid "View Raw"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:75
+msgid "Gist"
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:88
+msgid "This is a one-time snippet."
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:90
+msgid "It will automatically get deleted after {{ remaining }} further views."
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:92
+msgid "It will automatically get deleted after the next view."
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:94
+msgid "It cannot be viewed again."
+msgstr ""
+
+#: templates/dpaste/snippet_details.html:109
+msgid "Reply to this snippet"
+msgstr ""
+
+#: templates/dpaste/snippet_diff.html:5
+#, python-format
+msgid ""
+"\n"
+"    Diff between <a href=\"%(filea_url)s\">#%(filea_id)s</a> and <a href="
+"\"%(fileb_url)s\">#%(fileb_id)s</a>\n"
+"    "
+msgstr ""
+
+#: templates/dpaste/snippet_form.html:28
+msgid "Paste it"
+msgstr ""
 
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Willing to help"
+#~ msgstr "Vontade de ajudar"
 
 #~ msgid "Identi.ca account"
 #~ msgstr "Conta Identi.ca"
@@ -1121,6 +1540,3 @@ msgstr "COMUNIDADES INTERLEGIS"
 
 #~ msgid "<strong>%(name)s</strong>"
 #~ msgstr "<strong>%(name)s</strong>"
-
-#~ msgid "OpenData - Communities Interlegis"
-#~ msgstr "OpenData - Comunidades Interlegis"
