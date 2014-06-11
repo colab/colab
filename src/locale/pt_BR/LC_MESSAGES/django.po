@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-10 14:24+0000\n"
+"POT-Creation-Date: 2014-06-11 13:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -200,10 +200,9 @@ msgstr "Últimas postagens"
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:153 templates/home.html:61
-#: templates/home.html.py:80
-msgid "View more discussions..."
-msgstr "Ver mais discussões..."
+#: accounts/templates/accounts/user_detail.html:153
+msgid "View more posts..."
+msgstr "Ver mais postagens..."
 
 #: accounts/templates/accounts/user_detail.html:159
 msgid "Latest contributions"
@@ -1077,6 +1076,10 @@ msgstr "Discussões Mais Relevantes"
 #: templates/home.html:53
 msgid "RSS - Most Relevant Threads"
 msgstr "RSS - Discussões Mais Relevantes"
+
+#: templates/home.html:61 templates/home.html.py:80
+msgid "View more discussions..."
+msgstr "Ver mais discussões..."
 
 #: templates/home.html:68
 msgid "Latest Threads"
