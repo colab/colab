@@ -4,6 +4,7 @@ from django.conf.urls import patterns, include, url
 from .views import (UserProfileDetailView, UserProfileUpdateView,
                     ManageUserSubscriptionsView, ChangeXMPPPasswordView)
 
+from accounts import views
 
 urlpatterns = patterns('',
     url(r'^register/$', 'accounts.views.signup', name='signup'),
@@ -11,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^change-password/$',
         ChangeXMPPPasswordView.as_view(), name='change_password'),
 
-    url(r'^logout/?$', 'django.contrib.auth.views.logout'),
+    url(r'^logout/?$',  'accounts.views.logoutColab'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),

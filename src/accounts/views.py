@@ -5,6 +5,7 @@ import datetime
 
 from collections import OrderedDict
 
+from django.contrib.auth.views import logout
 from django.contrib import messages
 from django.db import transaction
 from django.db.models import Count
@@ -16,6 +17,7 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView
 from django.utils.decorators import method_decorator
 
+from django.http import HttpResponse
 from conversejs import xmpp
 from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
@@ -109,6 +111,13 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
+
+
+def logoutColab(request):
+       response = logout(request, next_page='/')
+       response.delete_cookie('_redmine_session')
+       response.delete_cookie('_gitlab_session')
+       return response
 
 
 def signup(request):
