@@ -9,7 +9,7 @@
 
   {% for listname, description, latest, most_relevant in lists %}
     {% if latest or most_relevant %}
-      <h3><b>{{ listname|title }} {% if description %} ({{ description }}){% endif %}</b></h3>
+      <h3><b>{{ listname|title|lower }} {% if description %} ({{ description }}){% endif %}</b></h3>
       <hr/>
 
       <div class="row">

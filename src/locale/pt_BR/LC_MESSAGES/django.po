@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-11 13:17+0000\n"
+"POT-Creation-Date: 2014-06-16 14:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgid "Subscribe to groups"
 msgstr "Inscreva-se nos grupos"
 
 #: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:101 templates/base.html.py:106
+#: templates/base.html:106 templates/base.html.py:111
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -1021,37 +1021,42 @@ msgstr "Códigos Fontes"
 msgid "Continuous Integration"
 msgstr "Integração Contínua"
 
-#: templates/base.html:102 templates/base.html.py:107
+#: templates/base.html:95
+msgid "Help"
+msgstr "Ajuda"
+
+#: templates/base.html:107 templates/base.html.py:112
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/base.html:121
+#: templates/base.html:126
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:122
+#: templates/base.html:127
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:134 templates/base.html.py:137
+#: templates/base.html:139 templates/base.html.py:142
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:150
+#: templates/base.html:155
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:180
+#: templates/base.html:182
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:183
+#: templates/base.html:189
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:185
-msgid "Creative Commons - attribution, non-commercial"
-msgstr "Creative Commons - atribuição e não-comercial"
+#: templates/base.html:192
+msgid ""
+"Creative Commons 3.0 Brasil - Atribuição - Não-Comercial - Compartilha-Igual"
+msgstr ""
 
 #: templates/home.html:21
 msgid "Latest Collaborations"
@@ -1482,6 +1487,9 @@ msgstr ""
 #: templates/includes/big_header.html:9
 msgid "INTERLEGIS COMMUNITIES"
 msgstr "COMUNIDADES INTERLEGIS"
+
+#~ msgid "Creative Commons - attribution, non-commercial"
+#~ msgstr "Creative Commons - atribuição e não-comercial"
 
 #~ msgid "Willing to help"
 #~ msgstr "Vontade de ajudar"
