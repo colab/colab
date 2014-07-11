@@ -852,7 +852,7 @@ msgstr "Relacionado:"
 
 #: super_archives/templates/message-thread.html:156
 msgid "Statistics:"
-msgstr "Estátisticas:"
+msgstr "Estatísticas:"
 
 #: super_archives/templates/message-thread.html:160
 msgid "started at"
