@@ -856,7 +856,7 @@ msgstr "Estatísticas:"
 
 #: super_archives/templates/message-thread.html:160
 msgid "started at"
-msgstr "começou às"
+msgstr "começou à"
 
 #: super_archives/templates/message-thread.html:166
 msgid "viewed"
