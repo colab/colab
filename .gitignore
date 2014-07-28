@@ -4,6 +4,7 @@
 *.pyc
 *.pyo
 local_settings.py
+project_cfg.py
 
 *.swp
 *.sqlite3

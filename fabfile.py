@@ -3,17 +3,15 @@
 import os
 
 from fabric import colors
+from fabric.utils import error
 from fabric.decorators import task
 from fabric.api import env, run, sudo, local
 from fabric.contrib.files import exists
 from fabric.context_managers import prefix, cd, settings, shell_env
 
 
-### Start of config
-
 APP_USER = APP_NAME = VENV_NAME = 'colab'
-REPO_URL = 'To be defined'
-
+REPO_URL = 'git@github.com:colab-community/colab.git'
 
 environments = {
     'dev': {
@@ -23,22 +21,8 @@ environments = {
         'is_vagrant': True,
         'superuser': 'vagrant',
     },
-    'qa': {
-        'hosts': [],
-        'port': 22,
-        'is_vagrant': False,
-        'superuser': 'root',
-    },
-    'prod': {
-        'hosts': [],
-        'port': 22,
-        'is_vagrant': False,
-        'superuser': 'root',
-    },
 }
 DEFAULT_ENVIRONMENT = 'dev'
-
-### End of config
 
 env.user = APP_USER
 env.use_shell = False
@@ -52,11 +36,24 @@ SETTINGS_PATH = os.path.join(MANAGE_PATH, APP_NAME)
 
 
 @task
-def environment(name):
+def environment(name=DEFAULT_ENVIRONMENT):
     """Set the environment where the tasks will be executed"""
+    global REPO_URL
+
+    try:
+        import project_cfg
+    except ImportError:
+        pass
+    else:
+        REPO_URL = project_cfg.repository_url
+        environments.update(project_cfg.environments)
+
+    if name not in environments:
+        error(colors.red('Environment `{}` does not exist.'.format(name)))
+
     env.update(environments[name])
     env.environment = name
-environment(DEFAULT_ENVIRONMENT)
+environment()
 
 
 def aptget_install(pkg):
