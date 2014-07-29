@@ -32,7 +32,7 @@ DATABASES['trac']['HOST'] = 'localhost'
 
 HAYSTACK_CONNECTIONS['default']['URL'] = 'http://localhost:8983/solr/'
 
-COLAB_TRAC_URL = 'http://localhost:5000/'
+COLAB_TRAC_URL = 'http://localhost:5000/trac/'
 COLAB_CI_URL = 'http://localhost:8080/ci/'
 COLAB_GITLAB_URL = 'http://localhost:8090/gitlab/'
 COLAB_REDMINE_URL = 'http://localhost:9080/redmine/'
