@@ -9,6 +9,16 @@ from fabric.api import env, run, sudo, local
 from fabric.contrib.files import exists
 from fabric.context_managers import prefix, cd, settings, shell_env
 
+LINUX_DISTRO = 'Debian'
+DISTRO_CMD = {'Debian': {
+			'install': 'apt-get install',
+			'update': 'apt-get update',
+			}, 
+	      'CentOS': {
+			'install': 'yum install',
+			'install': 'yum update -y',
+	                }
+             }
 
 APP_USER = APP_NAME = VENV_NAME = 'colab'
 REPO_URL = 'git@github.com:colab-community/colab.git'
@@ -35,6 +45,15 @@ MANAGE_PATH = os.path.join(REPO_PATH, 'src')
 SETTINGS_PATH = os.path.join(MANAGE_PATH, APP_NAME)
 
 
+def get_distro():
+    global LINUX_DISTRO
+    linux_name = run('python -c "import platform; print platform.dist()[0]"')
+
+    if 'Ubuntu' in linux_name or 'Debian' in linux_name:
+	LINUX_DISTRO = 'Debian'
+    elif 'centos' in linux_name:
+	LINUX_DISTRO = 'CentOS'
+
 @task
 def environment(name=DEFAULT_ENVIRONMENT):
     """Set the environment where the tasks will be executed"""
@@ -53,12 +72,9 @@ def environment(name=DEFAULT_ENVIRONMENT):
 
     env.update(environments[name])
     env.environment = name
-environment()
 
-
-def aptget_install(pkg):
-    sudo('DEBIAN_FRONTEND=noninteractive apt-get install -y -q {}'.format(pkg))
-
+def package_install(pkg): 
+    sudo(DISTRO_CMD[LINUX_DISTRO]['install'] + ' ' + pkg + ' -y -q')
 
 def install_requirements():
     with cd(REPO_PATH), prefix(WORKON_ENV):
@@ -130,11 +146,12 @@ def update_code():
 @task
 def bootstrap():
     """Bootstrap machine to run fabric tasks"""
-
     with settings(user=env.superuser):
 
-        if not exists('/usr/bin/git'):
-            aptget_install('git')
+	sudo(DISTRO_CMD[LINUX_DISTRO]['update'])
+        
+	if not exists('/usr/bin/git'):
+            package_install('git-core')
 
         if env.is_vagrant:
             groups = 'sudo,vagrant'
@@ -222,3 +239,6 @@ def deploy(noprovision=False):
     migrate()
 
     sudo('supervisorctl start all')
+
+# Main
+environment()
