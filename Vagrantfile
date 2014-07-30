@@ -1,6 +1,13 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+# CHOOSE THE DISTRO FOR COLAB VM (set the distro variable):
+# - ubuntu_precise
+# - ubuntu_trusty
+# - centos_65
+
+distro = "centos_65"
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -10,24 +17,43 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "trusty64"
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  config.vm.define "colab" do |colab|
+
+    colab.vm.box = distro
+
+    if distro == "ubuntu_precise"
+      puts "Installing Ubuntu Precise VM!"
+      colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+    elsif distro == "ubuntu_trusty"
+      puts "Installing Ubuntu Trusty VM!"
+      colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    elsif distro == "centos_65"
+      puts "Installing CentOS 6.5 VM!"
+      colab.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
+    end
+
+    colab.vm.network "forwarded_port", guest: 80, host: 80
+    colab.vm.network "private_network", ip: "192.168.33.10"
+    colab.vm.provider "virtualbox" do |vb|
+      # Use VBoxManage to customize the VM. For example to change memory:
+      vb.customize ["modifyvm", :id, "--memory", "1024"]
+    end
+  end
+
+  # Disable automatic box update checking. If you disable this, then
+  # boxes will only be checked for updates when the user runs
+  # `vagrant box outdated`. This is not recommended.
+  # config.vm.box_check_update = false
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network :forwarded_port, guest: 80, host: 8080
-  config.vm.network :forwarded_port, guest: 8000, host: 8000
-  config.vm.network :forwarded_port, guest: 5280, host: 5280
-  config.vm.network :forwarded_port, guest: 8080, host: 8081
-  config.vm.network :forwarded_port, guest: 8983, host: 8983
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.33.10"
+  # config.vm.network "private_network", ip: "192.168.33.10"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -43,40 +69,42 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  config.vm.provider "virtualbox" do |vb|
+  # config.vm.provider "virtualbox" do |vb|
   #   # Don't boot with headless mode
   #   vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
-  end
+  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
+  # end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
 
+  # Enable provisioning with CFEngine. CFEngine Community packages are
+  # automatically installed. For example, configure the host as a
+  # policy server and optionally a policy file to run:
+  #
+  # config.vm.provision "cfengine" do |cf|
+  #   cf.am_policy_hub = true
+  #   # cf.run_file = "motd.cf"
+  # end
+  #
+  # You can also configure and bootstrap a client to an existing
+  # policy server:
+  #
+  # config.vm.provision "cfengine" do |cf|
+  #   cf.policy_server_address = "10.0.2.15"
+  # end
+
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
-  # the file base.pp in the manifests_path directory.
-  #
-  # An example Puppet manifest to provision the message of the day:
-  #
-  # # group { "puppet":
-  # #   ensure => "present",
-  # # }
-  # #
-  # # File { owner => 0, group => 0, mode => 0644 }
-  # #
-  # # file { '/etc/motd':
-  # #   content => "Welcome to your Vagrant-built virtual machine!
-  # #               Managed by Puppet.\n"
-  # # }
+  # the file default.pp in the manifests_path directory.
   #
   # config.vm.provision "puppet" do |puppet|
   #   puppet.manifests_path = "manifests"
@@ -95,7 +123,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.add_role "web"
   #
   #   # You may also specify custom JSON attributes:
-  #   chef.json = { :mysql_password => "foo" }
+  #   chef.json = { mysql_password: "foo" }
   # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
