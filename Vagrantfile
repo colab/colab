@@ -2,11 +2,11 @@
 # vi: set ft=ruby :
 
 # CHOOSE THE DISTRO FOR COLAB VM (set the distro variable):
-# - ubuntu_precise
-# - ubuntu_trusty
-# - centos_65
+# - precise64
+# - trusty64
+# - centos6.5
 
-distro = "centos_65"
+distro = "precise64"
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -22,14 +22,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     colab.vm.box = distro
 
-    if distro == "ubuntu_precise"
-      puts "Installing Ubuntu Precise VM!"
+    if distro == "precise64"
       colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    elsif distro == "ubuntu_trusty"
-      puts "Installing Ubuntu Trusty VM!"
+    elsif distro == "trusty64"
       colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-    elsif distro == "centos_65"
-      puts "Installing CentOS 6.5 VM!"
+    elsif distro == "centos6.5"
       colab.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
     end
 
