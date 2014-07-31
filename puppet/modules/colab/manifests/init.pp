@@ -24,7 +24,7 @@ class colab {
     }
   }
 
-  ensure_packages(['mercurial', 'memcached'])
+  ensure_packages(['memcached'])
 
   # XMPP connection manager
   pip::install { 'punjab': }
