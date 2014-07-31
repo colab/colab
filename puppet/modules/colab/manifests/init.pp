@@ -5,6 +5,7 @@ class colab {
   require appdeploy::deps::python
   require appdeploy::deps::essential
 
+  include security_updates
   include appdeploy::deps::lxml
   include appdeploy::deps::postgresql
   include colab::cronjobs
