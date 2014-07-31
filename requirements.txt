@@ -33,8 +33,7 @@ tornado==3.1.1
 django-revproxy==0.2.7
 
 # Converse.js (XMPP client)
-django-conversejs==0.3
-git+https://github.com/TracyWebTech/SleekXMPP@fix-gevent
+django-conversejs==0.3.1
 
 # Feedzilla (planet) and deps
 #feedzilla==0.22
@@ -47,8 +46,8 @@ grab==0.4.13
 transliterate==1.5
 
 # Diazo
-#diazo
-git+https://github.com/plone/diazo@44ca0da7de5a7ee5d4085c7344701b9cfecfb419
+diazo==1.0.5
 
 # Dpaste
+# TODO: Pull-request to mainstream repository
 git+https://github.com/interlegis/dpaste
