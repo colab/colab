@@ -18,5 +18,9 @@ colab::mailman_exclude_lists:
   - pml
   - mailman
   - lexml-anuncions
+colab::hostnames: 
+  - colab.interlegis.leg.br
+  - colab.interlegis.gov.br
+colab::solr_project_path: '/home/colab/apache-solr-3.6.2/example'
 
 # Remember to replace the id_rsa and id_rsa.pub on colab/files
