@@ -33,12 +33,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       colab.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
     end
 
-    colab.vm.network "forwarded_port", guest: 80, host: 80
+    colab.vm.network :forwarded_port, guest: 80, host: 8080
+    colab.vm.network :forwarded_port, guest: 7000, host: 8000
+    colab.vm.network :forwarded_port, guest: 5280, host: 5280
+    colab.vm.network :forwarded_port, guest: 8080, host: 8081
+    colab.vm.network :forwarded_port, guest: 8983, host: 8983
+
     colab.vm.network "private_network", ip: "192.168.33.10"
+
     colab.vm.provider "virtualbox" do |vb|
       # Use VBoxManage to customize the VM. For example to change memory:
       vb.customize ["modifyvm", :id, "--memory", "1024"]
     end
+
   end
 
   # Disable automatic box update checking. If you disable this, then
