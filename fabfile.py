@@ -9,6 +9,19 @@ from fabric.api import env, run, sudo, local
 from fabric.contrib.files import exists
 from fabric.context_managers import prefix, cd, settings, shell_env
 
+LINUX_DISTRO = ''
+DEBIAN_FAMILY = ['debian', 'ubuntu']
+REDHAT_FAMILY = ['centos', 'fedora']
+
+DISTRO_CMD = {'debian': ('apt-get', {
+				'install': '-y',
+				'update': '-y',
+			}), 
+	      'redhat': ('yum', {
+				'install': '-y',
+				'update': '-y',
+	                })
+             }
 
 APP_USER = APP_NAME = VENV_NAME = 'colab'
 REPO_URL = 'git@github.com:colab-community/colab.git'
@@ -34,6 +47,19 @@ WORKON_ENV = '{} && workon {}'.format(SOURCE_VENV, VENV_NAME)
 MANAGE_PATH = os.path.join(REPO_PATH, 'src')
 SETTINGS_PATH = os.path.join(MANAGE_PATH, APP_NAME)
 
+def get_distro_family():
+    linux_name = run('python -c "import platform; print platform.dist()[0]"').lower()
+    if linux_name in DEBIAN_FAMILY:
+	return 'debian'
+    elif linux_name in REDHAT_FAMILY:
+	return 'redhat'
+    else :
+	error(colors.red('Distribuiton `{}` not supported.'.format(linux_name)))
+	exit(1)
+
+def cmd(family, command, args = ''):
+    pkgmanager, commands = DISTRO_CMD[family]
+    return '{} {} {} {}'.format(pkgmanager, command, commands[command], args)
 
 @task
 def environment(name=DEFAULT_ENVIRONMENT):
@@ -53,12 +79,10 @@ def environment(name=DEFAULT_ENVIRONMENT):
 
     env.update(environments[name])
     env.environment = name
-environment()
 
-
-def aptget_install(pkg):
-    sudo('DEBIAN_FRONTEND=noninteractive apt-get install -y -q {}'.format(pkg))
-
+def package_install(pkg): 
+    family = get_distro_family()
+    sudo(cmd(family, 'install', pkg ))
 
 def install_requirements():
     with cd(REPO_PATH), prefix(WORKON_ENV):
@@ -72,13 +96,11 @@ def install_requirements():
         else:
             run('pip install -r requirements.txt')
 
-
 def mkvirtualenv():
     if not exists('~/.virtualenvs/' + VENV_NAME):
         with prefix(SOURCE_VENV):
             run('mkvirtualenv ' + VENV_NAME)
             return True
-
 
 def manage(command):
     django_settings = env.get('django_settings')
@@ -90,20 +112,16 @@ def manage(command):
         with cd(MANAGE_PATH), prefix(WORKON_ENV):
             run('python manage.py {}'.format(command))
 
-
 def syncdb():
     manage('syncdb')
 
-
 def migrate():
     manage('migrate')
-
 
 def collectstatic():
     sudo('mkdir -p /usr/share/nginx/{}'.format(APP_NAME))
     sudo('chown {} /usr/share/nginx/{}'.format(env.user, APP_NAME))
     manage('collectstatic --noinput')
-
 
 def create_local_settings():
     with cd(SETTINGS_PATH), settings(user=env.superuser):
@@ -112,7 +130,6 @@ def create_local_settings():
         if not exists('local_settings.py') and exists(env_local_settings):
             run('ln -s {} {}'.format(env_local_settings, 'local_settings.py'))
             run('chown {} local_settings.py'.format(env.user))
-
 
 def update_code():
     if env.is_vagrant:
@@ -126,24 +143,27 @@ def update_code():
         with cd(REPO_PATH):
             run('git pull')
 
-
 @task
 def bootstrap():
     """Bootstrap machine to run fabric tasks"""
-
     with settings(user=env.superuser):
-
-        if not exists('/usr/bin/git'):
-            aptget_install('git')
+	family = get_distro_family()
+	sudo(cmd(family, 'update'))
+        
+	if not exists('/usr/bin/git'):
+            package_install('git-core')
 
         if env.is_vagrant:
-            groups = 'sudo,vagrant'
+            groups = ['sudo' ,'vagrant']
             local('chmod -fR g+w {}'.format(PROJECT_PATH))
         else:
-            groups = 'sudo'
+            groups = ['sudo']
 
-        sudo('useradd {} -G {} -m -s /bin/bash'.format(APP_USER, groups),
-             quiet=True)
+	for group in groups:
+  	    sudo('groupadd -f {}'.format(group))
+
+        sudo('useradd {} -G {} -m -s /bin/bash'.format(APP_USER, ','.join(groups)))
+
         ssh_dir = '/home/{0}/.ssh/'.format(APP_USER)
         if not exists(ssh_dir):
             sudo('mkdir -p {0}'.format(ssh_dir))
@@ -162,13 +182,11 @@ def bootstrap():
             sudo('chmod 440 {}'.format(tmp_file))
             sudo('mv {} {}'.format(tmp_file, sudoers_file))
 
-
 @task
 def provision():
     """Run puppet"""
 
     update_code()
-
     puppet_path = os.path.join(REPO_PATH, 'puppet/')
     modules_path = os.path.join(puppet_path, 'modules')
     puppet_modules = '{}:/etc/puppet/modules'.format(modules_path)
@@ -187,7 +205,6 @@ def provision():
 
     sudo('puppet apply --modulepath={} {}'.format(puppet_modules, cmd))
 
-
 @task
 def ssh_keygen():
     """Create SSH credentials"""
@@ -200,7 +217,6 @@ def ssh_keygen():
     print(colors.yellow(key))
     print('')
     print('Add the key above to your github repository deploy keys')
-
 
 @task
 def deploy(noprovision=False):
@@ -222,3 +238,6 @@ def deploy(noprovision=False):
     migrate()
 
     sudo('supervisorctl start all')
+
+# Main
+environment()
