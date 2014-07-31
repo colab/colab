@@ -8,8 +8,15 @@ import subprocess
 import urllib
 
 from distutils.version import StrictVersion
-from pkg_resources import parse_requirements
 from shutil import copyfile
+
+try:
+    from pkg_resources import parse_requirements
+except ImportError:
+    # Needed dependency for import pkg_resources
+    pkg_res = ['apt-get', 'install', 'python-pkg-resources', '-y']
+    subprocess.call(pkg_res)
+    from pkg_resources import parse_requirements
 
 PUPPET_TARGET_VERSION = "3.6.2"
 PUPPET_DIR = os.path.join(os.path.dirname(__file__))
@@ -129,9 +136,6 @@ def main():
         update = ['apt-get', 'update', '-y']
         install = ['apt-get', 'install', 'puppet', '-y']
 
-        # Needed dependency for import pkg_resources
-        pkg_res = ['apt-get', 'install', 'python-pkg-resources', '-y']
-        subprocess.call(pkg_res)
     else:
         print('This distribuition is currently not supported!')
         print('exiting...')
