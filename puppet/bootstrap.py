@@ -151,7 +151,7 @@ def main():
     result = subprocess.call(install)
     if result != 0:
         print('Failed installing puppet')
-        return result
+        exit(result)
 
     if os.path.isfile('/vagrant/puppet/hiera.yaml'):
         copyfile('/vagrant/puppet/hiera.yaml', '/etc/puppet/hiera.yaml')
@@ -159,7 +159,6 @@ def main():
     locale.setlocale(locale.LC_ALL, '')
 
     install_puppet_modules()
-    return 0
 
 
 if __name__ == '__main__':
