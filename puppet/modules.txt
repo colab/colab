@@ -1,3 +1,4 @@
 tracywebtech-appdeploy==0.8.4
+tracywebtech-security_updates==0.9.0
 
 puppetlabs-postgresql
