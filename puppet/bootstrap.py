@@ -1,74 +1,39 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 
 import os
-import apt
-import apt_pkg
+import re
 import locale
 import platform
 import subprocess
 import urllib
 
-from apt import debfile
 from distutils.version import StrictVersion
 from pkg_resources import parse_requirements
 from shutil import copyfile
-from subprocess import check_output
 
-
-PUPPET_TARGET_VERSION="3.4.3-1"
+PUPPET_TARGET_VERSION = "3.6.2"
 PUPPET_DIR = os.path.join(os.path.dirname(__file__))
 MODULES_FILE_PATH = os.path.join(PUPPET_DIR, 'modules.txt')
 
 
-def get_package(name):
-    cache = apt.cache.Cache()
-    if name in cache:
-        return cache[name], cache
-
-    return None, None
-
-
-def pkg_available(name):
-    pkg = get_package(name)[0]
-    if pkg and pkg.versions.get(PUPPET_TARGET_VERSION):
-        return True
-
-    return False
-
-
-def config_puppetlabs_repo():
-    dist = platform.dist()[-1]
-
-    url = 'http://apt.puppetlabs.com/puppetlabs-release-{}.deb'.format(dist)
-    filename = '/tmp/puppet_apt.deb'
-    try:
-        urllib.urlretrieve(url, filename)
-    except IOError:
-        print "Could not install puppet"
-        raise
-
-    deb_pkg = debfile.DebPackage(filename)
-    if deb_pkg.check():
-        deb_pkg.install()
-        cache = apt.cache.Cache()
-        cache.update()
-        cache.open()
-
-
-def install_puppet(upgrade=False):
-    pkg, cache = get_package('puppet')
-
-    pkg.candidate = pkg.versions.get(PUPPET_TARGET_VERSION)
-    if upgrade:
-        pkg.mark_upgrade()
+def get_release_name():
+    distro = platform.dist()[0].lower()
+    if distro == 'centos':
+        with open('/etc/centos-release') as release_file:
+            regex = r'CentOS release (\d)'
+            release = re.search(regex, release_file.read()).group(1)
+            return 'centos', release
+    elif distro == 'ubuntu':
+        with open('/etc/lsb-release') as release_file:
+            regex = r'DISTRIB_CODENAME=([a-z]+)'
+            release = re.search(regex, release_file.read()).group(1)
+            return 'ubuntu', release
     else:
-        pkg.mark_install()
-
-    cache.commit()
+        return '', ''
 
 
 def get_modules_installed():
-    modules_list = check_output(['puppet', 'module', 'list']).split('\n')
+    modules_list = os.popen('puppet module list').read().split('\n')
     modules_list = [line for line in modules_list if 'no modules' not in line]
     modules_list = [item.split()[1:] for item in modules_list]
     modules_list = [item for item in modules_list if item]
@@ -83,9 +48,9 @@ def get_modules_installed():
 
 def run(cmd, module, version=''):
     if version:
-        version = ' --version {}'.format(version)
+        version = ' --version %s' % (version)
 
-    cmd = 'puppet module {} {}{}'.format(cmd, module, version)
+    cmd = 'puppet module %s %s%s' % (cmd, module, version)
     process = subprocess.Popen(cmd, shell=True, executable='/bin/bash')
     process.wait()
 
@@ -97,16 +62,19 @@ def install_puppet_modules():
         modules_requirements = modules_file.read().replace('/', '-')
 
     for module in parse_requirements(modules_requirements):
-
         current_cmd, compare, version, version_comparison = '', '', '', None
         if module.project_name in modules_installed:
-
             if module.specs:
                 compare, version = module.specs[0]
-                version_comparison = apt_pkg.version_compare(
-                    modules_installed[module.project_name],
-                    version
-                )
+
+                tmp_version = modules_installed[module.project_name]
+                installed_version = StrictVersion(tmp_version)
+                required_version = StrictVersion(version)
+
+                if installed_version >= required_version:
+                    version_comparison = 0
+                else:
+                    version_comparison = -1
             else:
                 continue
 
@@ -125,17 +93,65 @@ def install_puppet_modules():
             if not version_comparison or version_comparison < 0:
                 run(current_cmd, module.project_name)
 
-def main():
-    # If the package not found or if the version is outdated, install puppet
-    if not pkg_available('puppet'):
-        config_puppetlabs_repo()
 
-    pkg = get_package('puppet')[0]
-    if not pkg.is_installed:
-        install_puppet()
-    elif apt_pkg.version_compare(pkg.installed.version,
-                                 PUPPET_TARGET_VERSION) < 0:
-        install_puppet(upgrade=True)
+def iscentos(distro):
+    return distro == 'centos'
+
+
+def isubuntu(distro):
+    return distro == 'ubuntu'
+
+
+def download(url, filename):
+    try:
+        urllib.urlretrieve(url, filename)
+    except IOError:
+        print "Could not install puppet"
+        raise
+
+
+def main():
+    distro, release = get_release_name()
+    print('Distro %s, release %s' % (distro, release))
+
+    if iscentos(distro):
+        cmd = 'rpm'
+        flags = '-ivh'
+        url = 'http://yum.puppetlabs.com/'
+        pkg = 'puppetlabs-release-el-%s.noarch.rpm' % (release)
+        update = ['yum', 'update', '-y']
+        install = ['yum', 'install', 'puppet', '-y']
+    elif isubuntu(distro):
+        cmd = 'dpkg'
+        flags = '-i'
+        url = 'https://apt.puppetlabs.com/'
+        pkg = 'puppetlabs-release-%s.deb' % (release)
+        update = ['apt-get', 'update', '-y']
+        install = ['apt-get', 'install', 'puppet', '-y']
+
+        # Needed dependency for import pkg_resources
+        pkg_res = ['apt-get', 'install', 'python-pkg-resources', '-y']
+        subprocess.call(pkg_res)
+    else:
+        print('This distribuition is currently not supported!')
+        print('exiting...')
+        exit(1)
+
+    tmp_file = '/tmp/%s' % (pkg)
+    download(url + pkg, tmp_file)
+    args = [cmd, flags, tmp_file]
+
+    # Add repository
+    result = subprocess.call(args)
+    if result != 0:
+        print('Repository %s already set' % pkg)
+
+    # Install Puppet
+    subprocess.call(update)
+    result = subprocess.call(install)
+    if result != 0:
+        print('Failed installing puppet')
+        exit(result)
 
     if os.path.isfile('/vagrant/puppet/hiera.yaml'):
         copyfile('/vagrant/puppet/hiera.yaml', '/etc/puppet/hiera.yaml')
