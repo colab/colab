@@ -2,6 +2,8 @@
 class colab {
 
   require pip
+  require appdeploy::deps::python
+  require appdeploy::deps::essential
 
   include appdeploy::deps::lxml
   include appdeploy::deps::postgresql
@@ -10,31 +12,26 @@ class colab {
   appdeploy::django { 'colab':
     user      => 'colab',
     directory => '/home/colab/colab/src',
-    proxy_hosts => [
-      'colab.interlegis.leg.br',
-    ],
-
+    proxy_hosts => $colab::hostnames,
   }
 
-  ensure_packages(['mercurial', 'openjdk-7-jre', 'memcached', 'sshfs'])
+  case $osfamily {
+    'Redhat': {
+      ensure_packages(['java-1.7.0-openjdk','fuse-sshfs'])
+    }
+    'Debian': {
+      ensure_packages(['openjdk-7-jre','sshfs']) 
+    }
+  }
+
+  ensure_packages(['mercurial', 'memcached'])
 
   # XMPP connection manager
-  package { 'punjab':
-    ensure   => installed,
-    provider => pip,
-  }
+  pip::install { 'punjab': }
 
   # Punjab dep
-  package { 'Twisted':
-    ensure   => installed,
-    provider => pip,
-  }
-
-  # Punjab dep
-  package { 'pyOpenSSL':
-    ensure   => installed,
-    provider => pip,
-  }
+  pip::install { 'Twisted': }
+  pip::install { 'pyOpenSSL': }
 
   supervisor::app { 'punjab':
     command   => 'twistd --nodaemon punjab',
@@ -44,7 +41,7 @@ class colab {
 
   supervisor::app { 'solr':
     command   => 'java -jar start.jar',
-    directory => '/home/colab/apache-solr-3.6.2/example',
+    directory => $colab::solr_project_path,
     user      => 'colab',
   }
 }
