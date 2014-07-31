@@ -5,7 +5,7 @@ from fabric.contrib.files import exists
 from fabric.decorators import with_settings
 from fabric.context_managers import prefix, cd, settings
 
-env.user = 'colab' # key depends on env
+env.user = 'colab'  # key depends on env
 env.use_shell = False
 
 environments = {
@@ -17,7 +17,7 @@ environments = {
     'live': {
         'hosts': ['10.1.2.153'],
         'key_filename': '~/.ssh/id_rsa',
-	'port': 22,
+        'port': 22,
     },
     'demo': {
         'hosts': ['colab-demo.tracy.com.br'],
@@ -90,8 +90,9 @@ def deploy(update=False):
     sudo('supervisorctl restart all')
 
 
+@with_settings(user='vagrant')
 def rebuild_index(age=None, batch=None):
-    with cd('~/colab/src/'), prefix(WORKON_COLAB):
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
         age_arg = ''
         if age:
             age_arg = '--age={}'.format(age)
@@ -100,8 +101,22 @@ def rebuild_index(age=None, batch=None):
         if batch:
             batch_arg = '--batch-size={}'.format(batch)
 
+        cmd = 'python manage.py rebuild_index {} {}'.format(age_arg, batch_arg)
+        returnMessage = run(cmd)
+        if 'error: [Errno 111] Connection refused' in returnMessage:
+            print red("Please run fab solr to start solr first")
+        else:
+            print green("All the index were updated")
 
-        run('python manage.py rebuild_index {} {}'.format(age_arg, batch_arg))
+
+@with_settings(user='vagrant')
+def solr_update_index():
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        returnMessage = run('python manage.py update_index')
+        if 'error: [Errno 111] Connection refused' in returnMessage:
+            print red("Please run fab solr to start solr first")
+        else:
+            print green("All the index were updated")
 
 
 @with_settings(user='vagrant')
@@ -128,3 +143,55 @@ def runserver(update_requirements=False):
         run('python manage.py syncdb')
         run('python manage.py migrate')
         run('python manage.py runserver 0.0.0.0:7000')
+
+
+@with_settings(user='vagrant')
+def solr(port=8983):
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        run('cd ~/solr-4.6.1/example; java -jar start.jar -Djetty.port={}'.format(port))
+
+
+@with_settings(user='vagrant')
+def solr_rebuild_index():
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        returnMessage = run('python manage.py rebuild_index')
+        if 'error: [Errno 111] Connection refused' in returnMessage:
+            print red("Please run fab solr to start solr first")
+        else:
+            print green("All the index were updated")
+
+
+@with_settings(user='vagrant')
+def install_solr_4_6():
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        if not exists('~/solr-4.6.1'):
+            run('wget https://archive.apache.org/dist/lucene/solr/4.6.1/solr-4.6.1.tgz -O /tmp/solr-4.6.1.tgz')
+            run('tar xzf /tmp/solr-4.6.1.tgz -C /tmp/')
+            run('cp -rf /tmp/solr-4.6.1 ~/solr-4.6.1')
+            run('rm /tmp/solr-4.6.1')
+
+    with cd('~/solr-4.6.1/example/solr/collection1/conf/'), prefix(WORKON_COLAB):
+        if not exists('stopwords_en.txt'):
+            run('cp stopwords.txt stopwords_en.txt')
+
+
+@with_settings(user='vagrant')
+def import_emails():
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        run('python manage.py import_emails')
+
+
+@with_settings(user='vagrant')
+def solr_4_build_schema():
+    with cd('/vagrant/src/'), prefix(WORKON_COLAB):
+        solr_schema_file = '~/solr-4.6.1/example/solr/collection1/conf/schema.xml'
+        run('python manage.py build_solr_schema -f {}'.format(solr_schema_file))
+        run(r'sed -i "s/<fields>/<fields>\n<field name=\"_version_\" type=\"long\" indexed=\"true\" stored =\"true\"\/>/" {}'.format(solr_schema_file))
+
+
+def red(message):
+    return "\033[0;31m" + message + "\033[0m"
+
+
+def green(message):
+    return "\033[0;32m" + message + "\033[0m"
