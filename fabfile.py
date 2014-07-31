@@ -9,7 +9,6 @@ from fabric.api import env, run, sudo, local
 from fabric.contrib.files import exists
 from fabric.context_managers import prefix, cd, settings, shell_env
 
-LINUX_DISTRO = ''
 DEBIAN_FAMILY = ['debian', 'ubuntu']
 REDHAT_FAMILY = ['centos', 'fedora']
 
