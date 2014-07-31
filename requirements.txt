@@ -20,8 +20,8 @@ django-i18n-model==0.0.7
 django-tastypie==0.11.0
 django-browserid==0.9
 
-gunicorn==18.0
-gevent==0.13.8
+gunicorn==19.1.0
+eventlet==0.15.0
 
 # Deps for sentry client (raven)
 raven==3.5.2
