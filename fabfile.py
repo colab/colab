@@ -283,5 +283,35 @@ def solr(port=8983):
     """Start Solr"""
     with cd('~/solr-4.6.1/colab'), settings(user='colab'):
         run('java -jar start.jar -Djetty.port={}'.format(port))
+
+
+@task
+def rebuild_index(age=None, batch=None):
+    """Rebuild the solr index"""
+    age_arg = ''
+    if age:
+        age_arg = '--age={}'.format(age)
+
+    batch_arg = ''
+    if batch:
+        batch_arg = '--batch-size={}'.format(batch)
+
+    manage('rebuild_index {} {}'.format(age_arg, batch_arg))
+
+
+@task
+def update_index():
+    """Update solr index"""
+    manage('update_index')
+
+
+@task
+def build_schema():
+    """Build solr schema"""
+    solr_schema_file = '~/solr-4.6.1/colab/solr/collection1/conf/schema.xml'
+    manage('build_solr_schema -f {}'.format(solr_schema_file))
+    run(r'sed -i "s/<fields>/<fields>\n<field name=\"_version_\" type=\"long\" indexed=\"true\" stored =\"true\"\/>/" {}'.format(solr_schema_file))
+
+
 # Main
 environment()
