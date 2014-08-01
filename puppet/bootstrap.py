@@ -17,6 +17,9 @@ except ImportError:
     pkg_res = ['apt-get', 'install', 'python-pkg-resources', '-y']
     subprocess.call(pkg_res)
     from pkg_resources import parse_requirements
+finally:
+    from pkg_resources import to_filename
+
 
 PUPPET_TARGET_VERSION = "3.6.2"
 PUPPET_DIR = os.path.join(os.path.dirname(__file__))
@@ -70,11 +73,12 @@ def install_puppet_modules():
 
     for module in parse_requirements(modules_requirements):
         current_cmd, compare, version, version_comparison = '', '', '', None
-        if module.project_name in modules_installed:
+        module_name = to_filename(module.project_name).replace('_', '-', 1)
+        if module_name in modules_installed:
             if module.specs:
                 compare, version = module.specs[0]
 
-                tmp_version = modules_installed[module.project_name]
+                tmp_version = modules_installed[module_name]
                 installed_version = StrictVersion(tmp_version)
                 required_version = StrictVersion(version)
 
@@ -95,10 +99,10 @@ def install_puppet_modules():
             current_cmd = 'install'
 
         if version and compare and '>' not in compare:
-            run(current_cmd, module.project_name, version)
+            run(current_cmd, module_name, version)
         else:
             if not version_comparison or version_comparison < 0:
-                run(current_cmd, module.project_name)
+                run(current_cmd, module_name)
 
 
 def iscentos(distro):
