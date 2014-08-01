@@ -20,22 +20,22 @@ PUPPET_DIR = os.path.join(os.path.dirname(__file__))
 MODULES_FILE_PATH = os.path.join(PUPPET_DIR, 'modules.txt')
 
 DIST_CMD = {
-    'ubuntu': [
-        {'pkg_manager': 'apt-get'},
-        {'pkg_flags': '-y'},
-        {'rep_manager': 'dpkg'},
-        {'rep_flags': '-i'},
-        {'puppet_repo': 'https://apt.puppetlabs.com/'},
-        {'puppet_pkg': 'puppetlabs-release-%s.deb'},
-    ],
-    'centos': [
-        {'pkg_manager': 'yum'},
-        {'pkg_flags': '-y'},
-        {'rep_manager': 'rpm'},
-        {'rep_flags': '-ivh'},
-        {'puppet_repo': 'http://yum.puppetlabs.com/'},
-        {'puppet_pkg': 'puppetlabs-release-el-%s.noarch.rpm'},
-    ],
+    'ubuntu': {
+        'pkg_manager': 'apt-get',
+        'pkg_flags': '-y',
+        'rep_manager': 'dpkg',
+        'rep_flags': '-i',
+        'puppet_repo': 'https://apt.puppetlabs.com/',
+        'puppet_pkg': 'puppetlabs-release-%s.deb',
+    },
+    'centos': {
+        'pkg_manager': 'yum',
+        'pkg_flags': '-y',
+        'rep_manager': 'rpm',
+        'rep_flags': '-ivh',
+        'puppet_repo': 'http://yum.puppetlabs.com/',
+        'puppet_pkg': 'puppetlabs-release-el-%s.noarch.rpm',
+    },
 }
 
 
