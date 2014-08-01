@@ -1,7 +1,7 @@
 
 from django.conf.urls import patterns, include, url
 
-from .views import ProxyView, JenkinsProxyView, GitlabProxyView, RedmineProxyView 
+from .views import ProxyView, JenkinsProxyView, GitlabProxyView, RedmineProxyView, TracProxyView 
 
 
 urlpatterns = patterns('',
