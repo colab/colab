@@ -1,6 +1,6 @@
 class colab::cronjobs {
 
-  include colab::cronmailmain
+  include colab::cronmailman
 
   $virtualenv_python = "/home/colab/.virtualenvs/colab/bin/python"
   $manage_colab = "$virtualenv_python ~/colab/src/manage.py"
