@@ -231,8 +231,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'www', 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'media')
+STATIC_ROOT = '/usr/share/nginx/colab/static/'
+MEDIA_ROOT = '/usr/share/nginx/colab/media/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates'),
