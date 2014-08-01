@@ -1,5 +1,10 @@
 
-class colab {
+class colab (
+  $mailman_archive_path = 'default',
+  $mailman_exclude_lists = [],
+  $hostnames = [],
+  $solr_project_path = '',
+){
 
   require pip
   require appdeploy::deps::python
