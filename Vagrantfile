@@ -31,7 +31,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
 
     colab.vm.network :forwarded_port, guest: 80, host: 8080
-    colab.vm.network :forwarded_port, guest: 7000, host: 8000
+    colab.vm.network :forwarded_port, guest: 8000, host: 8000
     colab.vm.network :forwarded_port, guest: 5280, host: 5280
     colab.vm.network :forwarded_port, guest: 8080, host: 8081
     colab.vm.network :forwarded_port, guest: 8983, host: 8983
