@@ -77,13 +77,6 @@ DATABASES = {
         'PASSWORD': os.environ.get('COLAB_DEFAULT_DB_PWD'),
         'HOST': os.environ.get('COLAB_DEFAULT_DB_HOST'),
     },
-    'trac': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'trac_colab',
-        'USER': 'colab',
-        'PASSWORD': os.environ.get('COLAB_TRAC_DB_PWD'),
-        'HOST': os.environ.get('COLAB_TRAC_DB_HOST'),
-    }
 }
 
 CACHES = {
@@ -262,6 +255,14 @@ MESSAGE_TAGS = {
 }
 
 
+### Trac
+TRAC_ENABLED = False
+
+if TRAC_ENABLED:
+    from trac_settings import *
+    DATABASES['trac'] = TRAC_DATABASE
+
+
 ### Feedzilla  (planet)
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
@@ -286,7 +287,6 @@ BROWSERID_CREATE_USER = False
 
 
 ## Proxy settings
-COLAB_TRAC_URL = 'localhost:5000/trac/'
 COLAB_CI_URL = 'localhost:9000/ci/'
 
 REVPROXY_ADD_REMOTE_USER = True
