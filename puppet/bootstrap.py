@@ -196,8 +196,6 @@ def main():
     if os.path.isfile('/vagrant/puppet/hiera.yaml'):
         copyfile('/vagrant/puppet/hiera.yaml', '/etc/puppet/hiera.yaml')
 
-    locale.setlocale(locale.LC_ALL, '')
-
     install_puppet_modules()
 
 
