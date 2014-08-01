@@ -22,23 +22,31 @@ class colab (
     proxy_hosts => $colab::hostnames,
   }
 
+  $package_defaults = {
+    before => Pip::Install['pyOpenSSL'],
+  }
+
   case $osfamily {
+
     'Redhat': {
-      ensure_packages(['java-1.7.0-openjdk','fuse-sshfs'])
+      ensure_packages(['java-1.7.0-openjdk', 'fuse-sshfs', 'libffi-devel'],
+                      $package_defaults)
     }
     'Debian': {
-      ensure_packages(['openjdk-7-jre','sshfs']) 
+      ensure_packages(['openjdk-7-jre', 'sshfs', 'libffi-dev'], $package_defaults)
     }
   }
 
   ensure_packages(['memcached'])
 
-  # XMPP connection manager
-  pip::install { 'punjab': }
-
   # Punjab dep
   pip::install { 'Twisted': }
   pip::install { 'pyOpenSSL': }
+
+  # XMPP connection manager
+  pip::install { 'punjab':
+    require => Pip::Install['Twisted', 'pyOpenSSL'],
+  }
 
   supervisor::app { 'punjab':
     command   => 'twistd --nodaemon punjab',
