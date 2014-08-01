@@ -22,6 +22,38 @@ PUPPET_TARGET_VERSION = "3.6.2"
 PUPPET_DIR = os.path.join(os.path.dirname(__file__))
 MODULES_FILE_PATH = os.path.join(PUPPET_DIR, 'modules.txt')
 
+DIST_CMD = {
+    'ubuntu': [
+        {'pkg_manager': 'apt-get'},
+        {'pkg_flags': '-y'},
+        {'rep_manager': 'dpkg'},
+        {'rep_flags': '-i'},
+    ],
+    'centos': [
+        {'pkg_manager': 'yum'},
+        {'pkg_flags': '-y'},
+        {'pkg_manager': 'yum'},
+        {'rep_flags': '-ivh'},
+    ],
+}
+
+def package_install(package):
+    distro, release = get_release_name()
+    cmd_dict = DIST_CMD[distro]
+    pkg_manager = cmd_dict['pkg_manager']
+    flags = cmd_dict['pkg_flags']
+    cmd = [pkg_manager, flags, 'install', package]
+    return subprocess.call(cmd)
+
+
+def distro_update():
+    distro, release = get_release_name()
+    cmd_dict = DIST_CMD[distro]
+    pkg_manager = cmd_dict['pkg_manager']
+    flags = cmd_dict['flags']
+    cmd = [pkg_manager, 'update', flags]
+    return subprocess.call(cmd)
+
 
 def get_release_name():
     distro = platform.dist()[0].lower()
