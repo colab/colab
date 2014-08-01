@@ -262,6 +262,9 @@ TRAC_ENABLED = False
 if TRAC_ENABLED:
     from trac_settings import *
     DATABASES['trac'] = TRAC_DATABASE
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'proxy.trac',
+    )
 
 
 ### Feedzilla  (planet)

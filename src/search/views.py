@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 
 from haystack.views import SearchView
 
-from proxy.models import Attachment
+from proxy.trac.models import Attachment
 
 
 class ColabSearchView(SearchView):

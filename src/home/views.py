@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from search.utils import trans
 from haystack.query import SearchQuerySet
 
-from proxy.models import WikiCollabCount, TicketCollabCount
+from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from super_archives.models import Thread
 
 
@@ -28,13 +28,15 @@ def index(request):
                 type=type,
             ).count()
 
-        count_types['ticket'] = sum([
-            ticket.count for ticket in TicketCollabCount.objects.all()
-        ])
+        if settings.TRAC_ENABLED:
+            count_types['ticket'] = sum([
+                ticket.count for ticket in TicketCollabCount.objects.all()
+            ])
 
-        count_types['wiki'] = sum([
-            wiki.count for wiki in WikiCollabCount.objects.all()
-        ])
+            count_types['wiki'] = sum([
+                wiki.count for wiki in WikiCollabCount.objects.all()
+            ])
+        
         cache.set('home_chart', count_types)
 
     for key in count_types.keys():
