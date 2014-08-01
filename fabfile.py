@@ -248,6 +248,8 @@ def deploy(noprovision=False):
     else:
         update_code()
 
+    install_solr()
+
     mkvirtualenv()
 
     sudo('supervisorctl stop all')
@@ -264,9 +266,11 @@ def deploy(noprovision=False):
 @task
 def install_solr():
     """Install Solr"""
+
+    SOLR_PKG = 'https://archive.apache.org/dist/lucene/solr/4.6.1/solr-4.6.1.tgz'
+
     if not exists('~/solr-4.6.1'):
-        link = 'https://archive.apache.org/dist/lucene/solr/4.6.1/solr-4.6.1.tgz'
-        run('wget {} -O /tmp/solr-4.6.1.tgz'.format(link))
+        run('wget {} -O /tmp/solr-4.6.1.tgz'.format(SOLR_PKG))
         run('tar xzf /tmp/solr-4.6.1.tgz -C /tmp/')
         run('cp -rf /tmp/solr-4.6.1 ~/solr-4.6.1')
         run('mv ~/solr-4.6.1/example ~/solr-4.6.1/colab')
