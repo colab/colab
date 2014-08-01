@@ -96,6 +96,8 @@ CACHES = {
 DATABASE_ROUTERS = ['colab.routers.TracRouter',]
 
 INSTALLED_APPS = INSTALLED_APPS + (
+    # First app to provide  AUTH_USER_MODEL to others
+    'accounts',
 
     # Not standard apps
     'raven.contrib.django.raven_compat',
@@ -115,7 +117,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'api',
     'rss',
     'planet',
-    'accounts',
     'proxy',
     'search',
     'badger',
