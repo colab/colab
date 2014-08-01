@@ -174,17 +174,19 @@ def main():
     distro, release = get_release_name()
     print('Distro %s, release %s' % (distro, release))
 
-    # Add repository
-    add_puppet_repository()
+    if not os.path.exists('/usr/bin/puppet'):
 
-    # Install Puppet
-    if isubuntu(distro):
-        distro_update()
+        # Add repository
+        add_puppet_repository()
 
-    result = package_install('puppet')
-    if result != 0:
-        print('Failed installing puppet')
-        exit(result)
+        # Install Puppet
+        if isubuntu(distro):
+            distro_update()
+
+        result = package_install('puppet')
+        if result != 0:
+            print('Failed installing puppet')
+            exit(result)
 
     if os.path.isfile('/vagrant/puppet/hiera.yaml'):
         copyfile('/vagrant/puppet/hiera.yaml', '/etc/puppet/hiera.yaml')
