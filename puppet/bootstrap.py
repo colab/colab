@@ -2,7 +2,6 @@
 
 import os
 import re
-import locale
 import platform
 import subprocess
 import urllib
@@ -11,34 +10,52 @@ from distutils.version import StrictVersion
 from shutil import copyfile
 
 try:
-    from pkg_resources import parse_requirements
+    from pkg_resources import parse_requirements, to_filename
 except ImportError:
-    # Needed dependency for import pkg_resources
-    pkg_res = ['apt-get', 'install', 'python-pkg-resources', '-y']
-    subprocess.call(pkg_res)
-    from pkg_resources import parse_requirements
-finally:
-    from pkg_resources import to_filename
-
+    # Import local version if not installed
+    from pkg_resources_local import parse_requirements, to_filename
 
 PUPPET_TARGET_VERSION = "3.6.2"
 PUPPET_DIR = os.path.join(os.path.dirname(__file__))
 MODULES_FILE_PATH = os.path.join(PUPPET_DIR, 'modules.txt')
 
 DIST_CMD = {
-    'ubuntu': [
-        {'pkg_manager': 'apt-get'},
-        {'pkg_flags': '-y'},
-        {'rep_manager': 'dpkg'},
-        {'rep_flags': '-i'},
-    ],
-    'centos': [
-        {'pkg_manager': 'yum'},
-        {'pkg_flags': '-y'},
-        {'pkg_manager': 'yum'},
-        {'rep_flags': '-ivh'},
-    ],
+    'ubuntu': {
+        'pkg_manager': 'apt-get',
+        'pkg_flags': '-y',
+        'rep_manager': 'dpkg',
+        'rep_flags': '-i',
+        'puppet_repo': 'https://apt.puppetlabs.com/',
+        'puppet_pkg': 'puppetlabs-release-%s.deb',
+    },
+    'centos': {
+        'pkg_manager': 'yum',
+        'pkg_flags': '-y',
+        'rep_manager': 'rpm',
+        'rep_flags': '-ivh',
+        'puppet_repo': 'http://yum.puppetlabs.com/',
+        'puppet_pkg': 'puppetlabs-release-el-%s.noarch.rpm',
+    },
 }
+
+
+def add_puppet_repository():
+    distro, release = get_release_name()
+    cmd_dict = DIST_CMD[distro]
+    rep_manager = cmd_dict['rep_manager']
+    flags = cmd_dict['rep_flags']
+    puppet_repo = cmd_dict['puppet_repo']
+    puppet_pkg = cmd_dict['puppet_pkg'] % (release)
+
+    # Download repository file
+    tmp_file = '/tmp/%s' % (puppet_pkg)
+    download(puppet_repo + puppet_pkg, tmp_file)
+
+    # Add repository
+    cmd = [rep_manager, flags, tmp_file]
+    if subprocess.call(cmd) != 0:
+        print('Repository %s already set' % puppet_pkg)
+
 
 def package_install(package):
     distro, release = get_release_name()
@@ -53,8 +70,8 @@ def distro_update():
     distro, release = get_release_name()
     cmd_dict = DIST_CMD[distro]
     pkg_manager = cmd_dict['pkg_manager']
-    flags = cmd_dict['flags']
-    cmd = [pkg_manager, 'update', flags]
+    flags = cmd_dict['pkg_flags']
+    cmd = [pkg_manager, flags, 'update']
     return subprocess.call(cmd)
 
 
@@ -157,38 +174,14 @@ def main():
     distro, release = get_release_name()
     print('Distro %s, release %s' % (distro, release))
 
-    if iscentos(distro):
-        cmd = 'rpm'
-        flags = '-ivh'
-        url = 'http://yum.puppetlabs.com/'
-        pkg = 'puppetlabs-release-el-%s.noarch.rpm' % (release)
-        update = ['yum', 'update', '-y']
-        install = ['yum', 'install', 'puppet', '-y']
-    elif isubuntu(distro):
-        cmd = 'dpkg'
-        flags = '-i'
-        url = 'https://apt.puppetlabs.com/'
-        pkg = 'puppetlabs-release-%s.deb' % (release)
-        update = ['apt-get', 'update', '-y']
-        install = ['apt-get', 'install', 'puppet', '-y']
-
-    else:
-        print('This distribuition is currently not supported!')
-        print('exiting...')
-        exit(1)
-
-    tmp_file = '/tmp/%s' % (pkg)
-    download(url + pkg, tmp_file)
-    args = [cmd, flags, tmp_file]
-
     # Add repository
-    result = subprocess.call(args)
-    if result != 0:
-        print('Repository %s already set' % pkg)
+    add_puppet_repository()
 
     # Install Puppet
-    subprocess.call(update)
-    result = subprocess.call(install)
+    if isubuntu(distro):
+        distro_update()
+
+    result = package_install('puppet')
     if result != 0:
         print('Failed installing puppet')
         exit(result)
