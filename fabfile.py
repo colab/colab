@@ -261,5 +261,27 @@ def deploy(noprovision=False):
     sudo('supervisorctl start all')
 
 
+@task
+def install_solr():
+    """Install Solr"""
+    if not exists('~/solr-4.6.1'):
+        link = 'https://archive.apache.org/dist/lucene/solr/4.6.1/solr-4.6.1.tgz'
+        run('wget {} -O /tmp/solr-4.6.1.tgz'.format(link))
+        run('tar xzf /tmp/solr-4.6.1.tgz -C /tmp/')
+        run('cp -rf /tmp/solr-4.6.1 ~/solr-4.6.1')
+        run('mv ~/solr-4.6.1/example ~/solr-4.6.1/colab')
+        run('chmod +x ~/solr-4.6.1/colab/start.jar')
+        run('rm /tmp/solr-4.6.1')
+
+    with cd('~/solr-4.6.1/colab/solr/collection1/conf/'):
+        if not exists('stopwords_en.txt'):
+            run('cp stopwords.txt stopwords_en.txt')
+
+
+@task
+def solr(port=8983):
+    """Start Solr"""
+    with cd('~/solr-4.6.1/colab'), settings(user='colab'):
+        run('java -jar start.jar -Djetty.port={}'.format(port))
 # Main
 environment()
