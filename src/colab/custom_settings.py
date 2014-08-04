@@ -255,18 +255,6 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-
-### Trac
-TRAC_ENABLED = False
-
-if TRAC_ENABLED:
-    from trac_settings import *
-    DATABASES['trac'] = TRAC_DATABASE
-    INSTALLED_APPS = INSTALLED_APPS + (
-        'proxy.trac',
-    )
-
-
 ### Feedzilla  (planet)
 from feedzilla.settings import *
 FEEDZILLA_PAGE_SIZE = 5
@@ -321,7 +309,19 @@ DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
 DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab Interlegis'
 DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
 
+
+### Trac
+TRAC_ENABLED = False
+
+from trac_settings import *
+DATABASES['trac'] = TRAC_DATABASE
+
 try:
     from local_settings import *
 except ImportError:
     pass
+
+if TRAC_ENABLED:
+    INSTALLED_APPS = INSTALLED_APPS + (
+        'proxy.trac',
+    )

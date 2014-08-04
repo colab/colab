@@ -3,7 +3,7 @@
 from haystack import indexes
 from django.db.models import Count
 
-from proxy.trac.models import Revision, Ticket, Wiki
+from proxy.models import Revision, Ticket, Wiki
 from badger.utils import get_users_counters
 from .models import User
 

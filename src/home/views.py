@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from search.utils import trans
 from haystack.query import SearchQuerySet
 
-from proxy.trac.models import WikiCollabCount, TicketCollabCount
+from proxy.models import WikiCollabCount, TicketCollabCount
 from super_archives.models import Thread
 
 
@@ -23,12 +23,16 @@ def index(request):
     count_types = cache.get('home_chart')
     if count_types is None:
         count_types = OrderedDict()
-        for type in ['thread', 'changeset', 'attachment']:
-            count_types[type] = SearchQuerySet().filter(
-                type=type,
-            ).count()
+        count_types['thread'] = SearchQuerySet().filter(
+            type='thread',
+        ).count()
 
         if settings.TRAC_ENABLED:
+            for type in ['changeset', 'attachment']:
+                count_types[type] = SearchQuerySet().filter(
+                    type=type,
+                ).count()
+
             count_types['ticket'] = sum([
                 ticket.count for ticket in TicketCollabCount.objects.all()
             ])

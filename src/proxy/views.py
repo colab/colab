@@ -4,7 +4,7 @@ import os
 from django.conf import settings
 
 from revproxy.views import ProxyView
-from trac.models import Wiki, Ticket, Revision
+from .models import Wiki, Ticket, Revision
 from hitcounter.views import HitCounterViewMixin
 
 

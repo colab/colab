@@ -2,6 +2,7 @@
 from django import template
 
 from super_archives.utils import url
+from django.conf import settings
 
 
 register = template.Library()
@@ -32,3 +33,7 @@ def pop_from_get(context, **kwargs):
         context['request'].META['QUERY_STRING'],
         **kwargs
     )
+
+@register.assignment_tag
+def is_trac_enable():
+    return settings.TRAC_ENABLED
