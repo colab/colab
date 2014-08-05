@@ -1,4 +1,4 @@
-tracywebtech-appdeploy==0.8.5
+tracywebtech-appdeploy==0.8.6
 tracywebtech-security_updates==0.9.0
 
 puppetlabs-ntp
