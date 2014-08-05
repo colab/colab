@@ -275,7 +275,7 @@ def install_solr():
         run('cp -rf /tmp/solr-4.6.1 ~/solr-4.6.1')
         run('mv ~/solr-4.6.1/example ~/solr-4.6.1/colab')
         run('chmod +x ~/solr-4.6.1/colab/start.jar')
-        run('rm /tmp/solr-4.6.1')
+        run('rm /tmp/solr-4.6.1.tgz')
 
     with cd('~/solr-4.6.1/colab/solr/collection1/conf/'):
         if not exists('stopwords_en.txt'):
