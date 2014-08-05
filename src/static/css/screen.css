@@ -428,3 +428,18 @@ span.highlighted {
     max-width: 350px;
     width: 350px;
 }
+
+/* Chart div */
+.chart {
+    width: 250px;
+    margin:0px auto;
+}
+
+.chart-description {
+    text-align: center;
+    margin-top: 10px;
+}
+.chart-description > label {
+    margin: 0 3px;
+    line-height: 2.5em;
+}

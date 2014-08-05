@@ -1,0 +1,42 @@
+{% load i18n %}
+
+<script src="{{ STATIC_URL }}third-party/chartjs/js/Chart.min.js"></script>
+<script src="{{ STATIC_URL }}third-party/chroma/js/chroma.min.js"></script>
+
+<script>
+$(function () {
+    var color;
+    var colors = ['#2F7ED8', '#0D233A', '#8BBC21', '#910000', '#1AADCE',
+        '#492970', '#F28F43', '#77A1E5', '#C42525', '#A6C96A', '#FFDB42',
+        '#A2B4BD', '#AA734A'];
+    var description = $('.chart-description');
+    var data = [];
+
+    {% for option, value in type_count.items %}
+    color = colors.shift();
+    data.push(
+        {
+            value: {{ value }},
+            color: color,
+            highlight: chroma(color).darken().hex(),
+            label: "{{ option }}"
+        }
+    );
+    description.append($('<label>')
+        .addClass('label label-defaultj')
+        .css('background', color)
+        .append('{{ option }}')
+    );
+    description.append(' ');
+    {% endfor %}
+    var context = document.getElementById("{{ chart_div }}").getContext("2d");
+    var chart = new Chart(context).Pie(data, {
+        animateRotate: true,
+        responsive: true,
+        animationSteps: 30,
+        animationEasing: "easeInOutCirc",
+        segmentStrokeWidth: 1,
+        tooltipFontSize: 16,
+    });
+});
+</script>
