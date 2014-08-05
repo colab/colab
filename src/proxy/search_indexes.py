@@ -9,7 +9,7 @@ from haystack import indexes
 from haystack.utils import log as logging
 
 from search.base_indexes import BaseIndex
-from proxy.models import Attachment, Ticket, Wiki, Revision
+from .models import Attachment, Ticket, Wiki, Revision
 
 
 logger = logging.getLogger('haystack')
