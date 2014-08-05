@@ -16,6 +16,18 @@ class colab (
   include appdeploy::deps::postgresql
   include colab::cronjobs
 
+  include postgresql::server
+
+  postgresql::server::role { 'colab':
+    password_hash => postgresql_password('colab', 'colab'),
+  }
+
+  postgresql::server::db { 'colab':
+    user     => 'colab',
+    password => postgresql_password('colab', 'colab'),
+    owner    => 'colab',
+  }
+
   appdeploy::django { 'colab':
     user      => 'colab',
     directory => '/home/colab/colab/src',
