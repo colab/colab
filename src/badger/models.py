@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from i18n_model.models import I18nModel
@@ -58,7 +57,7 @@ class Badge(models.Model):
         null=True
     )
     awardees = models.ManyToManyField(
-        get_user_model(),
+        settings.AUTH_USER_MODEL,
         verbose_name=_(u'Awardees'),
         blank=True,
         null=True

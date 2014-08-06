@@ -23,7 +23,7 @@ from .utils import blocks
 from .utils.etiquetador import etiquetador
 
 
-User = get_user_model()
+User = settings.AUTH_USER_MODEL
 
 
 class EmailAddressValidation(models.Model):
@@ -360,7 +360,7 @@ class Message(models.Model):
 class MessageBlock(models.Model):
     message = models.ForeignKey(Message, related_name='blocks')
     text = models.TextField()
-    is_reply = models.BooleanField()
+    is_reply = models.BooleanField(default=False)
     order = models.IntegerField()
 
     def __unicode__(self):

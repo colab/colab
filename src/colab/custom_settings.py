@@ -94,7 +94,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
 
     # Not standard apps
     'raven.contrib.django.raven_compat',
-    'south',
     'cliauth',
     'django_mobile',
     'django_browserid',
