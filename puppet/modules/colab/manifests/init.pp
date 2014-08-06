@@ -18,14 +18,10 @@ class colab (
 
   include postgresql::server
 
-  postgresql::server::role { 'colab':
-    password_hash => postgresql_password('colab', 'colab'),
-  }
-
   postgresql::server::db { 'colab':
     user     => 'colab',
-    password => postgresql_password('colab', 'colab'),
-    owner    => 'colab',
+    password => 'colab',
+    grant    => 'all',
   }
 
   appdeploy::django { 'colab':
