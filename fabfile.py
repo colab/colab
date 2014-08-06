@@ -123,11 +123,12 @@ def manage(command):
 
 
 def syncdb():
-    manage('syncdb')
+    manage('syncdb --no-initial-data')
 
 
 def migrate():
     manage('migrate')
+    manage('loaddata super_archives/fixture/initial_data.json')
 
 
 def collectstatic():
@@ -259,6 +260,8 @@ def deploy(noprovision=False):
     collectstatic()
     syncdb()
     migrate()
+
+    build_schema()
 
     sudo('supervisorctl start all')
 
