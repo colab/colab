@@ -7,23 +7,12 @@ class NotSpamManager(models.Manager):
     """Only return objects which are not marked as spam."""
 
     def get_queryset(self):
-        if django.VERSION < (1, 7):
-            return super(NotSpamManager, self).get_queryset().exclude(spam=True)
-        else:
-            return super(NotSpamManager, self).get_query_set().exclude(spam=True)
-
-    if django.VERSION < (1, 7):
-        # in 1.7+, get_query_set gets defined by the base ChangeList and complains if it's called.
-        # otherwise, we have to define it ourselves.
-        get_query_set = get_queryset
+        return super(NotSpamManager, self).get_queryset().exclude(spam=True)
 
 
 class HighestScore(NotSpamManager):
     def get_queryset(self):
-        if django.VERSION < (1, 7):
-            queryset = super(HighestScore, self).get_queryset()
-        else:
-            queryset = super(HighestScore, self).get_query_set()
+        queryset = super(HighestScore, self).get_queryset()
         return queryset.order_by('-score', '-latest_message__received_time')
 
     def from_haystack(self):
@@ -35,10 +24,7 @@ class MostVotedManager(NotSpamManager):
         """Query for the most voted messages sorting by the sum of
         voted and after by date."""
 
-        if django.VERSION < (1, 7):
-            queryset = super(MostVotedManager, self).get_queryset()
-        else:
-            queryset = super(MostVotedManager, self).get_query_set()
+        queryset = super(MostVotedManager, self).get_queryset()
 
         sql = """
             SELECT
