@@ -28,7 +28,7 @@ class ColabSearchView(SearchView):
                 ),
             },
         }
-
+        # TODO: Replace for a more generic plugin architecture
         if settings.TRAC_ENABLED:
             types['wiki'] = {
                 'name': _(u'Wiki'),

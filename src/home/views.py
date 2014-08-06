@@ -26,7 +26,7 @@ def index(request):
         count_types['thread'] = SearchQuerySet().filter(
             type='thread',
         ).count()
-
+        # TODO: this section should be inside trac app and only use it here
         if settings.TRAC_ENABLED:
             for type in ['changeset', 'attachment']:
                 count_types[type] = SearchQuerySet().filter(
