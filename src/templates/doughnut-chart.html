@@ -9,7 +9,7 @@ $(function () {
     var colors = ['#2F7ED8', '#0D233A', '#8BBC21', '#910000', '#1AADCE',
         '#492970', '#F28F43', '#77A1E5', '#C42525', '#A6C96A', '#FFDB42',
         '#A2B4BD', '#AA734A'];
-    var description = $('.chart-description');
+    var description = $('.{{ chart_canvas }} > p');
     var data = [];
 
     {% for option, value in type_count.items %}
@@ -29,10 +29,10 @@ $(function () {
     );
     description.append(' ');
     {% endfor %}
-    var context = document.getElementById("{{ chart_div }}").getContext("2d");
+
+    var context = $('.{{ chart_canvas }} > canvas').get(0).getContext("2d");
     var chart = new Chart(context).Pie(data, {
         animateRotate: true,
-        responsive: true,
         animationSteps: 30,
         animationEasing: "easeInOutCirc",
         segmentStrokeWidth: 1,

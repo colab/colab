@@ -431,15 +431,18 @@ span.highlighted {
 
 /* Chart div */
 .chart {
-    width: 250px;
-    margin:0px auto;
+    text-align: center;
 }
 
-.chart-description {
+.chart > canvas {
+    width: 250px;
+}
+
+.chart > p {
     text-align: center;
     margin-top: 10px;
 }
-.chart-description > label {
+.chart > p > label {
     margin: 0 3px;
     line-height: 2.5em;
 }

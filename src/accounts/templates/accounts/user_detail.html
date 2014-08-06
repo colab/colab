@@ -8,8 +8,8 @@
   {% trans "Messages" as group_collabs %}
   {% trans "Contributions" as type_collabs %}
 
-  {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 name=type_collabs %}
-  {% include "pizza-chart.html" with chart_data=list_activity chart_div="collabs2" chart_height=300 name=group_collabs %}
+  {% include "doughnut-chart.html" with chart_data=type_count chart_div="collabs" name=type_collabs %}
+  {% include "doughnut-chart.html" with chart_data=list_activity chart_div="collabs2" name=group_collabs %}
 {% endblock %}
 
 {% block main-content %}
@@ -101,6 +101,10 @@
         </div>
         <div class="panel-body">
           <div id="collabs"></div>
+          <div class="chart collabs">
+              <canvas width="270" height="270"></canvas>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
@@ -112,7 +116,10 @@
           <h3 class="panel-title">{% trans "Participation by Group" %}</h3>
         </div>
         <div class="panel-body">
-          <div id="collabs2"></div>
+          <div class="chart collabs2">
+              <canvas width="270" height="270"></canvas>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
