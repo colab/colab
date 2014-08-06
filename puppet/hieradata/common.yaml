@@ -20,4 +20,4 @@ colab::mailman_exclude_lists:
 colab::hostnames: 
   - colab.interlegis.leg.br
   - colab.interlegis.gov.br
-colab::solr_project_path: '/home/colab/apache-solr-3.6.2/example'
+colab::solr_project_path: '/home/colab/solr-4.6.1/colab'
