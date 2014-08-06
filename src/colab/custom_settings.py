@@ -313,9 +313,6 @@ DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
 ### Trac
 TRAC_ENABLED = False
 
-from trac_settings import *
-DATABASES['trac'] = TRAC_DATABASE
-
 try:
     from local_settings import *
 except ImportError:

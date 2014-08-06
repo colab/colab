@@ -31,6 +31,8 @@ DATABASES['default']['HOST'] = 'localhost'
 TRAC_ENABLED = False
 
 if TRAC_ENABLED:
+    from trac_settings import *
+    DATABASES['trac'] = TRAC_DATABASE
     DATABASES['trac']['PASSWORD'] = 'colab'
     DATABASES['trac']['HOST'] = 'localhost'
 
