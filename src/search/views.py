@@ -16,17 +16,6 @@ class ColabSearchView(SearchView):
         )
 
         types = {
-            'wiki': {
-                'name': _(u'Wiki'),
-                'fields': (
-                    ('author', _(u'Author'), self.request.GET.get('author')),
-                    (
-                        'collaborators',
-                        _(u'Collaborators'),
-                        self.request.GET.get('collaborators'),
-                    ),
-                ),
-            },
             'thread': {
                 'name': _(u'Discussion'),
                 'fields': (
@@ -38,7 +27,22 @@ class ColabSearchView(SearchView):
                     ),
                 ),
             },
-            'ticket': {
+        }
+        # TODO: Replace for a more generic plugin architecture
+        if settings.TRAC_ENABLED:
+            types['wiki'] = {
+                'name': _(u'Wiki'),
+                'fields': (
+                    ('author', _(u'Author'), self.request.GET.get('author')),
+                    (
+                        'collaborators',
+                        _(u'Collaborators'),
+                        self.request.GET.get('collaborators'),
+                    ),
+                ),
+            }
+
+            types['ticket'] = {
                 'name': _(u'Ticket'),
                 'fields': (
                     (
@@ -79,8 +83,9 @@ class ColabSearchView(SearchView):
                         self.request.GET.get('collaborators')
                     ),
                 ),
-            },
-            'changeset': {
+            }
+
+            types['changeset'] = {
                 'name': _(u'Changeset'),
                 'fields': (
                     ('author', _(u'Author'), self.request.GET.get('author')),
@@ -90,8 +95,9 @@ class ColabSearchView(SearchView):
                         self.request.GET.get('repository_name'),
                     ),
                 )
-            },
-            'user': {
+            }
+
+            types['user'] = {
                 'name': _(u'User'),
                 'fields': (
                     (
@@ -107,8 +113,9 @@ class ColabSearchView(SearchView):
                     ),
                     ('role', _(u'Role'), self.request.GET.get('role'))
                 ),
-            },
-            'attachment': {
+            }
+
+            types['attachment'] = {
                 'name': _(u'Attachment'),
                 'fields': (
                     (
@@ -128,7 +135,6 @@ class ColabSearchView(SearchView):
                     ('size', _(u'Size'), self.request.GET.get('size')),
                 )
             }
-        }
 
         try:
             type_chosen = self.form.cleaned_data.get('type')

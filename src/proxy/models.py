@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-
+from django.db import models
+from django.conf import settings
 import os
 import urllib2
 
@@ -10,7 +11,6 @@ from django.dispatch import receiver
 
 from accounts.models import User
 from hitcounter.models import HitCounterModelMixin
-
 
 class Attachment(models.Model, HitCounterModelMixin):
     url = models.TextField(primary_key=True)
@@ -103,7 +103,6 @@ class Ticket(models.Model, HitCounterModelMixin):
             return User.objects.get(username=self.modified_by)
         except User.DoesNotExist:
             return None
-
 
 class Wiki(models.Model, HitCounterModelMixin):
     name = models.TextField(primary_key=True)

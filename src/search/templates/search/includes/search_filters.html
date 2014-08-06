@@ -1,4 +1,4 @@
-{% load i18n superarchives %}
+{% load i18n superarchives proxy %}
 
 {% if filters %}
   <ul class="unstyled-list">
@@ -111,29 +111,33 @@
   <h4>{% trans "Types" %}</h4>
 
   <ul class="unstyled-list">
-    <li>
-      <span class="glyphicon glyphicon-book"></span>
-      <a href="{% append_to_get type='wiki' %}">{% trans "Wiki" %}</a>
-    </li>
+    {% is_trac_enable as is_trac %}
+
+    {% if is_trac %}
+      <li>
+        <span class="glyphicon glyphicon-book"></span>
+        <a href="{% append_to_get type='wiki' %}">{% trans "Wiki" %}</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-tag"></span>
+        <a href="{% append_to_get type='ticket' %}">{% trans "Ticket" %}</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-align-right"></span>
+        <a href="{% append_to_get type='changeset' %}">{% trans "Changeset" %}</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-user"></span>
+        <a href="{% append_to_get type='user' %}">{% trans "User" %}</a>
+      </li>
+      <li>
+        <span class="glyphicon glyphicon-file"></span>
+        <a href="{% append_to_get type='attachment' %}">{% trans "Attachment" %}</a>
+      </li>
+    {% endif %}
     <li>
       <span class="glyphicon glyphicon-envelope"></span>
       <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
-    </li>
-    <li>
-      <span class="glyphicon glyphicon-tag"></span>
-      <a href="{% append_to_get type='ticket' %}">{% trans "Ticket" %}</a>
-    </li>
-    <li>
-      <span class="glyphicon glyphicon-align-right"></span>
-      <a href="{% append_to_get type='changeset' %}">{% trans "Changeset" %}</a>
-    </li>
-    <li>
-      <span class="glyphicon glyphicon-user"></span>
-      <a href="{% append_to_get type='user' %}">{% trans "User" %}</a>
-    </li>
-    <li>
-      <span class="glyphicon glyphicon-file"></span>
-      <a href="{% append_to_get type='attachment' %}">{% trans "Attachment" %}</a>
     </li>
   </ul>
 {% endif %}
