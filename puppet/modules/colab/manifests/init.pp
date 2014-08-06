@@ -9,6 +9,7 @@ class colab (
   require pip
   require appdeploy::deps::python
   require appdeploy::deps::essential
+  require appdeploy::deps::openssl
 
   include ntp
   include security_updates
@@ -37,11 +38,10 @@ class colab (
   case $osfamily {
 
     'Redhat': {
-      ensure_packages(['java-1.7.0-openjdk', 'fuse-sshfs', 'libffi-devel'],
-                      $package_defaults)
+      ensure_packages(['java-1.7.0-openjdk', 'fuse-sshfs'], $package_defaults)
     }
     'Debian': {
-      ensure_packages(['openjdk-7-jre', 'sshfs', 'libffi-dev'], $package_defaults)
+      ensure_packages(['openjdk-7-jre', 'sshfs'], $package_defaults)
     }
   }
 
