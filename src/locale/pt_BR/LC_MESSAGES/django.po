@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-16 14:22+0000\n"
+"POT-Creation-Date: 2014-08-07 12:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -181,38 +181,38 @@ msgid "Groups: "
 msgstr "Grupos: "
 
 #: accounts/templates/accounts/user_detail.html:100
-msgid "Contributions by Type"
-msgstr "Contribuições por tipo"
+msgid "Collaborations by Type"
+msgstr "Colaborações por tipo"
 
-#: accounts/templates/accounts/user_detail.html:112
+#: accounts/templates/accounts/user_detail.html:116
 msgid "Participation by Group"
 msgstr "Participação por grupo"
 
-#: accounts/templates/accounts/user_detail.html:125 badger/models.py:70
+#: accounts/templates/accounts/user_detail.html:132 badger/models.py:70
 msgid "Badges"
 msgstr "Medalhas"
 
-#: accounts/templates/accounts/user_detail.html:144
+#: accounts/templates/accounts/user_detail.html:151
 msgid "Latest posted"
 msgstr "Últimas postagens"
 
-#: accounts/templates/accounts/user_detail.html:149
+#: accounts/templates/accounts/user_detail.html:156
 msgid "There are no posts by this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:153
+#: accounts/templates/accounts/user_detail.html:160
 msgid "View more posts..."
 msgstr "Ver mais postagens..."
 
-#: accounts/templates/accounts/user_detail.html:159
+#: accounts/templates/accounts/user_detail.html:166
 msgid "Latest contributions"
 msgstr "Últimas colaborações"
 
-#: accounts/templates/accounts/user_detail.html:164
+#: accounts/templates/accounts/user_detail.html:171
 msgid "No contributions of this user so far."
 msgstr "Não há posts deste usuário até agora."
 
-#: accounts/templates/accounts/user_detail.html:168
+#: accounts/templates/accounts/user_detail.html:175
 msgid "View more contributions..."
 msgstr "Ver mais colaborações..."
 
@@ -1074,23 +1074,23 @@ msgstr "Ver mais colaborações..."
 msgid "Collaboration Graph"
 msgstr "Gráfico de Colaborações"
 
-#: templates/home.html:49
+#: templates/home.html:52
 msgid "Most Relevant Threads"
 msgstr "Discussões Mais Relevantes"
 
-#: templates/home.html:53
+#: templates/home.html:56
 msgid "RSS - Most Relevant Threads"
 msgstr "RSS - Discussões Mais Relevantes"
 
-#: templates/home.html:61 templates/home.html.py:80
+#: templates/home.html:64 templates/home.html.py:83
 msgid "View more discussions..."
 msgstr "Ver mais discussões..."
 
-#: templates/home.html:68
+#: templates/home.html:71
 msgid "Latest Threads"
 msgstr "Últimas Discussões"
 
-#: templates/home.html:72
+#: templates/home.html:75
 msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
 
@@ -1484,9 +1484,8 @@ msgstr ""
 msgid "Paste it"
 msgstr ""
 
-#: templates/includes/big_header.html:9
-msgid "INTERLEGIS COMMUNITIES"
-msgstr "COMUNIDADES INTERLEGIS"
+#~ msgid "INTERLEGIS COMMUNITIES"
+#~ msgstr "COMUNIDADES INTERLEGIS"
 
 #~ msgid "Creative Commons - attribution, non-commercial"
 #~ msgstr "Creative Commons - atribuição e não-comercial"
