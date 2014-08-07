@@ -1,4 +1,5 @@
-https://www.djangoproject.com/download/1.7c2/tarball/ # Download django 1.7 #
+Django>=1.6.1,<1.7
+South==0.8.1
 psycopg2==2.5.1
 django-piston==0.2.3
 pytz==2011n

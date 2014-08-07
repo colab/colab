@@ -93,6 +93,7 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'accounts',
 
     # Not standard apps
+    'south',
     'raven.contrib.django.raven_compat',
     'cliauth',
     'django_mobile',
