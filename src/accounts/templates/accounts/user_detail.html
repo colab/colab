@@ -8,8 +8,8 @@
   {% trans "Messages" as group_collabs %}
   {% trans "Contributions" as type_collabs %}
 
-  {% include "doughnut-chart.html" with chart_data=type_count chart_div="collabs" name=type_collabs %}
-  {% include "doughnut-chart.html" with chart_data=list_activity chart_div="collabs2" name=group_collabs %}
+  {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=type_collabs %}
+  {% include "doughnut-chart.html" with chart_data=list_activity chart_canvas="collabs2" name=group_collabs %}
 {% endblock %}
 
 {% block main-content %}
@@ -102,7 +102,7 @@
         <div class="panel-body">
           <div id="collabs"></div>
           <div class="chart collabs">
-              <canvas width="270" height="270"></canvas>
+              <canvas width="200" height="200"></canvas>
             <p></p>
           </div>
         </div>
@@ -117,7 +117,7 @@
         </div>
         <div class="panel-body">
           <div class="chart collabs2">
-              <canvas width="270" height="270"></canvas>
+              <canvas width="200" height="200"></canvas>
             <p></p>
           </div>
         </div>

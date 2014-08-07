@@ -12,7 +12,7 @@ $(function () {
     var description = $('.{{ chart_canvas }} > p');
     var data = [];
 
-    {% for option, value in type_count.items %}
+    {% for option, value in chart_data.items %}
     color = colors.shift();
     data.push(
         {
@@ -23,7 +23,7 @@ $(function () {
         }
     );
     description.append($('<label>')
-        .addClass('label label-defaultj')
+        .addClass('label label-default')
         .css('background', color)
         .append('{{ option }}')
     );

@@ -440,9 +440,8 @@ span.highlighted {
 
 .chart > p {
     text-align: center;
-    margin-top: 10px;
+    line-height: 1.5em;
 }
 .chart > p > label {
-    margin: 0 3px;
-    line-height: 2.5em;
+    margin: 0 2px;
 }

@@ -22,10 +22,6 @@
           href="{{ STATIC_URL }}third-party/font-awesome/css/font-awesome.min.css"
           type="text/css" media="screen" />
 
-    {% if not is_mobile %}
-      {% conversejs_static %}
-    {% endif %}
-
     <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
                                 type="text/css" media="screen" />
 
@@ -37,6 +33,10 @@
 
     {% block head_js %}{% endblock %}
     {% block head_css %}{% endblock %}
+
+    {% if not is_mobile %}
+      {% conversejs_static %}
+    {% endif %}
 
   {% endblock %}
   </head>
