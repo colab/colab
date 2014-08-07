@@ -44,6 +44,7 @@ env.use_shell = False
 PROJECT_PATH = os.path.join(os.path.dirname(__file__))
 REPO_PATH = '/home/{}/{}'.format(APP_USER, APP_NAME)
 SOURCE_VENV = 'source /usr/local/bin/virtualenvwrapper.sh'
+
 WORKON_ENV = '{} && workon {}'.format(SOURCE_VENV, VENV_NAME)
 MANAGE_PATH = os.path.join(REPO_PATH, 'src')
 SETTINGS_PATH = os.path.join(MANAGE_PATH, APP_NAME)
@@ -106,6 +107,7 @@ def install_requirements():
 
 def mkvirtualenv():
     if not exists('~/.virtualenvs/' + VENV_NAME):
+
         with prefix(SOURCE_VENV):
             run('mkvirtualenv ' + VENV_NAME)
             return True
@@ -169,6 +171,7 @@ def bootstrap():
 
         if not exists('/usr/bin/git'):
             package_install('git-core')
+        package_install('wget')
 
         if env.is_vagrant:
             groups = ['sudo', 'vagrant']
@@ -244,6 +247,8 @@ def ssh_keygen():
 def deploy(noprovision=False):
     """Deploy and run the new code (master branch)"""
 
+    fix_path()
+
     if noprovision is False:
         provision()
     else:
@@ -264,6 +269,14 @@ def deploy(noprovision=False):
     build_schema()
 
     sudo('supervisorctl start all')
+
+
+def fix_path():
+    global SOURCE_VENV
+    global WORKON_ENV
+    if exists('/usr/bin/virtualenvwrapper.sh'):
+        SOURCE_VENV = 'source /usr/bin/virtualenvwrapper.sh'
+        WORKON_ENV = '{} && workon {}'.format(SOURCE_VENV, VENV_NAME)
 
 
 @task
