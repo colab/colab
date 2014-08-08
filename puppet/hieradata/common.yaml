@@ -7,6 +7,9 @@ timezone::timezone: America/Sao_Paulo
 
 postfix::admin_email: test@test.test
 
+postgresql::globals::version: '9.3'
+postgresql::globals::manage_package_repo: 'true'
+
 nginx::worker_processes: 8
 nginx::error_log: '/var/log/nginx/error.log'
 nginx::access_log: '/var/log/nginx/access.log'

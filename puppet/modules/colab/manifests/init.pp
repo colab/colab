@@ -16,13 +16,8 @@ class colab (
   include appdeploy::deps::lxml
   include appdeploy::deps::postgresql
   include colab::cronjobs
+  include postgresql::globals
   include postgresql::server
-
-  class { 'postgresql::globals':
-    manage_package_repo => true,
-    version             => '9.3',
-    before              => Class['postgresql::server'],
-  }
 
   postgresql::server::db { 'colab':
     user     => 'colab',
