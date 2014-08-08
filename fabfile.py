@@ -167,11 +167,13 @@ def bootstrap():
 
     with settings(user=env.superuser):
         family = get_distro_family()
-        sudo(cmd(family, 'update'))
+        if(family == 'debian'):
+            sudo(cmd(family, 'update'))
+        else:
+            package_install('wget')
 
         if not exists('/usr/bin/git'):
             package_install('git-core')
-        package_install('wget')
 
         if env.is_vagrant:
             groups = ['sudo', 'vagrant']
