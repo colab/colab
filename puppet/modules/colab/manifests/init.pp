@@ -33,6 +33,7 @@ class colab (
 
   file { '/etc/nginx/conf.d/default.conf':
     ensure => 'absent',
+    notify => Service['nginx'],
   }
 
   $package_defaults = {
