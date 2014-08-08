@@ -36,6 +36,14 @@ class colab (
     proxy_hosts => $colab::hostnames,
   }
 
+  file { '/etc/nginx/conf.d/default.conf':
+    ensure => 'absent',
+  }
+
+  file { '/etc/nginx/sites-enabled/default.conf':
+    ensure => 'absent',
+  }
+
   $package_defaults = {
     before => Pip::Install['pyOpenSSL'],
   }
