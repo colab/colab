@@ -35,10 +35,6 @@ class colab (
     ensure => 'absent',
   }
 
-  file { '/etc/nginx/sites-enabled/default.conf':
-    ensure => 'absent',
-  }
-
   $package_defaults = {
     before => Pip::Install['pyOpenSSL'],
   }

@@ -23,4 +23,5 @@ colab::mailman_exclude_lists:
 colab::hostnames: 
   - colab.interlegis.leg.br
   - colab.interlegis.gov.br
+  - localhost
 colab::solr_project_path: '/home/colab/solr-4.6.1/colab'
