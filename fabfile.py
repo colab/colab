@@ -140,7 +140,7 @@ def collectstatic():
 
 
 def create_local_settings():
-    with cd(SETTINGS_PATH), settings(user=env.superuser):
+    with cd(SETTINGS_PATH):
         env_local_settings = 'local_settings-{}.py'.format(env.environment)
 
         if not exists('local_settings.py') and exists(env_local_settings):
@@ -247,12 +247,12 @@ def ssh_keygen():
 def deploy(noprovision=False):
     """Deploy and run the new code (master branch)"""
 
-    fix_path()
-
     if noprovision is False:
         provision()
     else:
         update_code()
+
+    fix_path()
 
     install_solr()
 

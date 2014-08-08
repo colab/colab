@@ -6,13 +6,13 @@ import django
 class NotSpamManager(models.Manager):
     """Only return objects which are not marked as spam."""
 
-    def get_queryset(self):
-        return super(NotSpamManager, self).get_queryset().exclude(spam=True)
+    def get_query_set(self):
+        return super(NotSpamManager, self).get_query_set().exclude(spam=True)
 
 
 class HighestScore(NotSpamManager):
-    def get_queryset(self):
-        queryset = super(HighestScore, self).get_queryset()
+    def get_query_set(self):
+        queryset = super(HighestScore, self).get_query_set()
         return queryset.order_by('-score', '-latest_message__received_time')
 
     def from_haystack(self):
@@ -20,11 +20,11 @@ class HighestScore(NotSpamManager):
 
 
 class MostVotedManager(NotSpamManager):
-    def get_queryset(self):
+    def get_query_set(self):
         """Query for the most voted messages sorting by the sum of
         voted and after by date."""
 
-        queryset = super(MostVotedManager, self).get_queryset()
+        queryset = super(MostVotedManager, self).get_query_set()
 
         sql = """
             SELECT
