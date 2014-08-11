@@ -22,8 +22,6 @@
           href="{{ STATIC_URL }}third-party/font-awesome/css/font-awesome.min.css"
           type="text/css" media="screen" />
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
-                                type="text/css" media="screen" />
 
     <!-- JQuery 2+ won't work for IE < 9 -->
     <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery-2.0.3.min.js"></script>
@@ -37,6 +35,9 @@
     {% if not is_mobile %}
       {% conversejs_static %}
     {% endif %}
+
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
+        type="text/css" media="screen" />
 
   {% endblock %}
   </head>
