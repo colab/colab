@@ -1,4 +1,0 @@
-colab ALL = (root) NOPASSWD: /usr/local/bin/supervisorctl
-colab ALL = (root) NOPASSWD: /etc/init.d/supervisord
-
-# Keep a blank line at the end of the file
