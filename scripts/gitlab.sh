@@ -56,30 +56,30 @@ sudo -iu git rvm use 2.0.0@gitlab --default
 sudo -iu git gem install bundler --no-ri --no-rdoc
 sudo -iu git /usr/local/bin/git clone https://gitlab.com/gitlab-org/gitlab-shell.git
 sudo -iu git /usr/local/bin/git --git-dir=/home/git/gitlab-shell/.git --work-tree=/home/git/gitlab-shell/ reset --hard v1.9.3
-sudo su - git -c 'cat /home/git/gitlab-shell/config.yml.example > /home/git/gitlab-shell/config.yml'
+sudo -u git cp /home/git/gitlab-shell/config.yml.example /home/git/gitlab-shell/config.yml
 sudo -iu git ruby /home/git/gitlab-shell/bin/install
 sudo restorecon -Rv /home/git/.ssh
 
 sudo -iu git /usr/local/bin/git clone https://github.com/colab-community/gitlabhq.git -b spb-stable /home/git/gitlab
-sudo su - git 'cat /home/git/gitlab/config/gitlab.yml.example > /home/git/gitlab/config/gitlab.yml'
+sudo -u git cp /home/git/gitlab/config/gitlab.yml.example /home/git/gitlab/config/gitlab.yml
 
 sudo -iu git mkdir /home/git/gitlab-satellites
 sudo chmod u+rwx,g+rx,o-rwx /home/git/gitlab-satellites
-sudo su - git -c 'cat /home/git/gitlab/config/unicorn.rb.example > /home/git/gitlab/config/unicorn.rb'
-sudo su - git -c 'cat /home/git/gitlab/config/initializers/rack_attack.rb.example > /home/git/gitlab/config/initializers/rack_attack.rb'
+sudo -u git cp /home/git/gitlab/config/unicorn.rb.example /home/git/gitlab/config/unicorn.rb
+sudo -u git cp /home/git/gitlab/config/initializers/rack_attack.rb.example /home/git/gitlab/config/initializers/rack_attack.rb
 sudo sed -i "s/gitlab_url: \"http:\/\/localhost\/\"/gitlab_url: \"http:\/\/$2:8090\/gitlab\//" /home/git/gitlab-shell/config.yml
 
 sudo -iu git /usr/local/bin/git config --global user.name "GitLab"
 sudo -iu git /usr/local/bin/git config --global user.email "gitlab@localhost"
 sudo -iu git /usr/local/bin/git config --global core.autocrlf input
 sudo chmod o-rwx /home/git/gitlab/config/database.yml
-sudo su - git -c "echo 'production:
+sudo -u git echo "production:
   adapter: postgresql
   encoding: unicode
   database: gitlabhq_production
   pool: 10
   username: git
-  host: $DATABASE_HOST' > /home/git/gitlab/config/database.yml"
+  host: $DATABASE_HOST" > /home/git/gitlab/config/database.yml
 
 # Baixando as dependencias, criando o banco, instalando de fato
 sudo su - git -c 'cd /home/git/gitlab && bundle config build.pg'
