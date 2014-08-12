@@ -1,0 +1,45 @@
+#!/bin/bash
+# chkconfig: 2345 95 20
+# description: Solr
+# processname: myscript
+#
+#-----------------------------------------------------
+# Script for running solr as a service.
+#
+# Usage: service solr {start|stop|restart|status}"
+#
+#-----------------------------------------------------
+# This should be placed in /etc/init.d
+
+. /etc/rc.d/init.d/functions
+
+# Path to pid file
+PIDFILE=/var/run/solr.pid
+
+# Service name
+NAME="Solr"
+
+# Service description
+DESC="start/stop Solr Server"
+
+SOLR_INIT="/usr/share/solr/start.sh"
+
+case $1 in
+    start)
+        action "Starting ${NAME}: " daemon --pidfile $PIDFILE $SOLR_INIT 
+        ;;
+    stop)
+        action "Stopping ${NAME}: " killproc -p $PIDFILE
+        ;;
+    restart)
+        $0 stop
+        $0 start
+        ;;
+    status)
+        status -p $PIDFILE solr
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 3
+        ;;
+esac
