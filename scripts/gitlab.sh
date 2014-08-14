@@ -1,13 +1,11 @@
 #!/bin/bash
 
 DATABASE_HOST=$1
-THIS_HOST=$2
 
-if [[ ! "$DATABASE_HOST" || ! "$THIS_HOST" ]]
-        then
-        echo " Parametros nao encontrados."
-        echo " ./mailman.sh <DATABASE_HOST> <LOCAL_IP> "
-        exit -1
+if [[ ! "$DATABASE_HOST" ]]
+    then
+    echo "Uso: ./gitlab.sh <DATABASE_HOST>"
+    exit -1
 fi
 
 [ -s "$HOME/.rvm/scripts/rvm" ] && . "$HOME/.rvm/scripts/rvm"
