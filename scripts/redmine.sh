@@ -31,7 +31,7 @@ cd /opt
 git clone https://github.com/redmine/redmine.git --branch 2.3-stable
 
 cd /opt/redmine
-bundle install --without mysql sqlite
+bundle install --verbose --without mysql sqlite
 gem install unicorn --no-ri --no-rdoc
 gem install pg -v '0.17.1' --no-ri --no-rdoc
 
@@ -69,12 +69,12 @@ git checkout v1.0.6
 
 RAILS_ENV=production
 export RAILS_ENV
-bundle install
+bundle install --verbose
 
 gem uninstall rack -v '1.5.2'
 
 cd /opt/redmine
-bundle install --without mysql sqlite
+bundle install --verbose --without mysql sqlite
 bundle exec rake db:migrate
 bundle exec rake redmine:backlogs:install story_trackers=2 task_tracker=1
 

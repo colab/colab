@@ -84,7 +84,7 @@ sudo -u git echo "production:
 # Baixando as dependencias, criando o banco, instalando de fato
 sudo su - git -c 'cd /home/git/gitlab && bundle config build.pg'
 sudo su - git -c 'cd /home/git/gitlab && bundle config build.nokogiri --use-system-libraries'
-sudo su - git -c 'cd /home/git/gitlab && bundle install --deployment --without development test mysql aws'
+sudo su - git -c 'cd /home/git/gitlab && bundle install --verbose --deployment --without development test mysql aws'
 sudo su - git -c 'cd /home/git/gitlab && echo yes | bundle exec rake db:create db:migrate RAILS_ENV=production'
 sudo su - git -c 'cd /home/git/gitlab && echo yes | bundle exec rake gitlab:setup RAILS_ENV=production'
 sudo su - git -c 'cd /home/git/gitlab bundle exec rake assets:precompile RAILS_ENV=production'
