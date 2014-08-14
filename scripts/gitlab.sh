@@ -41,17 +41,17 @@ sudo adduser --system --shell /bin/bash --comment 'GitLab' --create-home --home-
 sudo echo 'git ALL=(ALL) ALL' >> /etc/sudoers.d/git
 #################################################
 
-sudo sh -c "curl -L get.rvm.io | bash -s stable"
+#sudo sh -c "curl -L get.rvm.io | bash -s stable"
 sudo usermod -a -G rvm git
-source /etc/profile.d/rvm.sh
-sudo -iu git source '/usr/local/rvm/scripts/rvm'
-sudo -iu git rvm install 2.0.0 
-sudo -iu git rvm gemset create gitlab
+#source /etc/profile.d/rvm.sh
+#sudo -iu git source '/usr/local/rvm/scripts/rvm'
+#sudo -iu git rvm install 2.0.0 
+#sudo -iu git rvm gemset create gitlab
 sudo -iu git rvm use 2.0.0@gitlab --default
 
 #################################################
 
-sudo -iu git gem install bundler --no-ri --no-rdoc
+#sudo -iu git gem install bundler --no-ri --no-rdoc
 sudo -iu git /usr/local/bin/git clone https://gitlab.com/gitlab-org/gitlab-shell.git
 sudo -iu git /usr/local/bin/git --git-dir=/home/git/gitlab-shell/.git --work-tree=/home/git/gitlab-shell/ reset --hard v1.9.3
 sudo -u git cp /home/git/gitlab-shell/config.yml.example /home/git/gitlab-shell/config.yml
