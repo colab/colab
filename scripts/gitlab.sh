@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#To show the debug log
+set -x
+
 DATABASE_HOST=$1
 
 if [[ ! "$DATABASE_HOST" ]]
@@ -71,13 +74,13 @@ sudo -iu git /usr/local/bin/git config --global user.name "GitLab"
 sudo -iu git /usr/local/bin/git config --global user.email "gitlab@localhost"
 sudo -iu git /usr/local/bin/git config --global core.autocrlf input
 sudo chmod o-rwx /home/git/gitlab/config/database.yml
-sudo -u git echo "production:
+sudo -u git -H bash -c 'echo "production:
   adapter: postgresql
   encoding: unicode
   database: gitlabhq_production
   pool: 10
   username: git
-  host: $DATABASE_HOST" > /home/git/gitlab/config/database.yml
+  host: $DATABASE_HOST" > /home/git/gitlab/config/database.yml'
 
 # Baixando as dependencias, criando o banco, instalando de fato
 sudo su - git -c 'cd /home/git/gitlab && bundle config build.pg'
