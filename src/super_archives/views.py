@@ -133,6 +133,7 @@ class ThreadDashboardView(View):
                     '-latest_message__received_time'
                 )[:MAX],
                 SearchQuerySet().filter(type='thread', tag=list_.name)[:MAX],
+	        len(mailman.list_users(list_.name)),
             ))
 
         return render(request, 'superarchives/thread-dashboard.html', context)

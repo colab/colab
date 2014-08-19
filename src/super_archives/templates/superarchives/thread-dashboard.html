@@ -7,9 +7,13 @@
   <h2>{% trans 'Groups'|title %}</h2>
   <hr/>
 
-  {% for listname, description, latest, most_relevant in lists %}
+  {% for listname, description, latest, most_relevant, number_of_users in lists %}
     {% if latest or most_relevant %}
       <h3><b>{{ listname|title|lower }} {% if description %} ({{ description }}){% endif %}</b></h3>
+      <div class="btn-group btn-group-sm">
+        <a href="#" class="btn btn-default" disabled="disabled">{{ number_of_users }} membros</a>
+        <a href="/wiki/grupos/{{listname}}" class="btn btn-default">Wiki</a>
+      </div>
       <hr/>
 
       <div class="row">

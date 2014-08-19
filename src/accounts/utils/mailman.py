@@ -82,3 +82,16 @@ def get_list_description(listname, lists=None):
         lists = dict(lists)
 
     return lists.get(listname)
+
+
+def list_users(listname):
+    url = get_url(listname)
+
+    params = {}
+
+    try:
+        users = requests.get(url, timeout=TIMEOUT, params=params)
+    except requests.exceptions.RequestException:
+        return []
+
+    return users.json()
