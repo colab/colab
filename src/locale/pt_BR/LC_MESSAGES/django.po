@@ -284,7 +284,7 @@ msgstr ""
 
 #: accounts/templates/accounts/user_update_form.html:193
 msgid ""
-"This feature is available only for who needs to change the password for some "
+"This feature is available only for those who need to change the password for some "
 "reason as having an old user with the same username, forgot your password to "
 "commit, usage of other XMPP Client for connection. Usually, you won't need "
 "to change this password. Only change it if you are sure about what you are "
