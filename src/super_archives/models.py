@@ -9,7 +9,9 @@ from django.db import models
 from django.conf import settings
 from django.utils import timezone
 from django.core.cache import cache
+from django.dispatch import receiver
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.utils.translation import ugettext_lazy as _
 
@@ -390,3 +392,23 @@ class MessageMetadata(models.Model):
         return 'Email Message Id: %s - %s: %s' % (self.Message.id,
                                                   self.name, self.value)
 
+
+# For django 1.7 erase the 2 next lines
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+@receiver(post_save, sender=User)
+def create_email_address(sender, instance, created, **kwargs):
+    if not created:
+        return
+
+    email, email_created = EmailAddress.objects.get_or_create(
+        address=instance.email,
+        defaults= {
+            'real_name': instance.get_full_name(),
+            'user': instance,
+        }
+    )
+
+    email.user = instance
+    email.save()
