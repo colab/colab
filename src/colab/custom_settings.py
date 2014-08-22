@@ -203,7 +203,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'django_browserid.context_processors.browserid',
     'django_mobile.context_processors.is_mobile',
     'super_archives.context_processors.mailarchive',
     'home.context_processors.robots',
