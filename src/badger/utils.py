@@ -2,8 +2,8 @@
 
 from django.db.models import Count
 
-from proxy.models import (Revision, Ticket, Wiki,
-                          WikiCollabCount, TicketCollabCount)
+#from proxy.trac.models import (Revision, Ticket, Wiki,
+#                          WikiCollabCount, TicketCollabCount)
 from accounts.models import User
 
 

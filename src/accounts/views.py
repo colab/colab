@@ -25,7 +25,7 @@ from haystack.query import SearchQuerySet
 from super_archives.models import EmailAddress, Message
 from super_archives.utils.email import send_email_lists
 from search.utils import trans
-from proxy.models import WikiCollabCount, TicketCollabCount
+#from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
 from .errors import XMPPChangePwdException

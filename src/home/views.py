@@ -9,7 +9,7 @@ from django.http import HttpResponse, Http404
 from search.utils import trans
 from haystack.query import SearchQuerySet
 
-from proxy.models import WikiCollabCount, TicketCollabCount
+#from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from super_archives.models import Thread
 
 

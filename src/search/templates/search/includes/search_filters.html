@@ -1,4 +1,4 @@
-{% load i18n superarchives proxy %}
+{% load i18n superarchives  %}
 
 {% if filters %}
   <ul class="unstyled-list">
@@ -111,7 +111,6 @@
   <h4>{% trans "Types" %}</h4>
 
   <ul class="unstyled-list">
-    {% is_trac_enable as is_trac %}
 
     {% if is_trac %}
       <li>

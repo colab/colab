@@ -36,6 +36,7 @@ urlpatterns = patterns('',
     url(r'^colab/admin/', include(admin.site.urls)),
 
     url(r'^', include('proxy.urls')),
+    url(r'^', include('proxy.trac.urls')),
 )
 
 if settings.DEBUG:

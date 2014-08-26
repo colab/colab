@@ -110,7 +110,6 @@ INSTALLED_APPS = INSTALLED_APPS + (
     'api',
     'rss',
     'planet',
-    'proxy',
     'search',
     'badger',
     'tz',
