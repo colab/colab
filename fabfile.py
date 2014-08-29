@@ -158,8 +158,7 @@ def update_code():
         return
 
     if not exists(REPO_PATH):
-        run('git clone {} {}'.format(REPO_URL, REPO_PATH))
-        run('git checkout {}'.format(REPO_BRANCH))
+        run('git clone {} {} -b {}'.format(REPO_URL, REPO_PATH, REPO_BRANCH))
     else:
         with cd(REPO_PATH):
             run('git checkout {}'.format(REPO_BRANCH))
