@@ -68,13 +68,17 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
             {'fullname_and_username__contains': user.username},
         )
 
-        counter_class = {
-            'wiki': WikiCollabCount,
-            'ticket': TicketCollabCount,
-        }
+        counter_class = {}
+        #{
+        #    'wiki': WikiCollabCount,
+        #    'ticket': TicketCollabCount,
+        #}
+
+        types = ['thread']
+        #types.extend(['ticket', 'wiki', 'changeset', 'attachment'])
 
         messages = Message.objects.filter(from_address__user__pk=user.pk)
-        for type in ['thread', 'ticket', 'wiki', 'changeset', 'attachment']:
+        for type in types:
             CounterClass = counter_class.get(type)
             if CounterClass:
                 try:
