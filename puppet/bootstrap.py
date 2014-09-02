@@ -17,6 +17,7 @@ except ImportError:
 
 PUPPET_TARGET_VERSION = "3.6.2"
 PUPPET_DIR = os.path.join(os.path.dirname(__file__))
+HIERA_FILE = os.path.join(PUPPET_DIR, 'hiera.yaml')
 MODULES_FILE_PATH = os.path.join(PUPPET_DIR, 'modules.txt')
 
 DIST_CMD = {
@@ -188,8 +189,8 @@ def main():
             print('Failed installing puppet')
             exit(result)
 
-    if os.path.isfile('/vagrant/puppet/hiera.yaml'):
-        copyfile('/vagrant/puppet/hiera.yaml', '/etc/puppet/hiera.yaml')
+    if os.path.isfile(HIERA_FILE):
+        copyfile(HIERA_FILE, '/etc/puppet/hiera.yaml')
 
     install_puppet_modules()
 

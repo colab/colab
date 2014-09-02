@@ -24,7 +24,8 @@ DISTRO_CMD = {
 }
 
 APP_USER = APP_NAME = VENV_NAME = 'colab'
-REPO_URL = 'git@github.com:colab-community/colab.git'
+REPO_URL = 'https://github.com/colab-community/colab.git'
+REPO_BRANCH = 'master'
 
 
 environments = {
@@ -71,6 +72,7 @@ def cmd(family, command, args=''):
 def environment(name=DEFAULT_ENVIRONMENT):
     """Set the environment where the tasks will be executed"""
     global REPO_URL
+    global REPO_BRANCH
 
     try:
         import project_cfg
@@ -78,6 +80,7 @@ def environment(name=DEFAULT_ENVIRONMENT):
         pass
     else:
         REPO_URL = project_cfg.repository_url
+        REPO_BRANCH = project_cfg.branch
         environments.update(project_cfg.environments)
 
     if name not in environments:
@@ -155,9 +158,10 @@ def update_code():
         return
 
     if not exists(REPO_PATH):
-        run('git clone {} {}'.format(REPO_URL, REPO_PATH))
+        run('git clone {} {} -b {}'.format(REPO_URL, REPO_PATH, REPO_BRANCH))
     else:
         with cd(REPO_PATH):
+            run('git checkout {}'.format(REPO_BRANCH))
             run('git pull')
 
 
