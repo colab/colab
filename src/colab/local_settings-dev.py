@@ -18,6 +18,7 @@ EMAIL_SUBJECT_PREFIX = ''
 SECRET_KEY = ')(jksdfhsjkadfhjkh234ns!8fqu-1186h$vuj'
 
 SITE_URL = 'http://localhost:8000'
+BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
 ALLOWED_HOSTS = ['*']
 

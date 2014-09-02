@@ -18,7 +18,6 @@ django-hitcounter==0.1.1
 Pillow==2.5.1
 django-i18n-model==0.0.7
 django-tastypie==0.11.0
-django-browserid==0.10.1
 
 gunicorn==19.1.0
 eventlet==0.15.0
@@ -28,7 +27,10 @@ raven==3.5.2
 tornado==3.1.1
 
 # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
-# git+https://github.com/mozilla/django-browserid
+
+# Release 0.10.1 has a bug already fixed on 55f0b9b0ebc.
+# django-browserid==0.10.1
+-e git+https://github.com/mozilla/django-browserid.git#egg=django-browserid
 
 django-revproxy==0.2.7
 
