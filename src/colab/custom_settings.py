@@ -262,7 +262,7 @@ FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 
 
 ### Mailman API settings
-MAILMAN_API_URL = 'localhost:8000'
+MAILMAN_API_URL = 'http://localhost:8000'
 
 
 ### BrowserID / Persona
