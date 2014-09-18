@@ -3,4 +3,9 @@ class colab::cronmailman {
     content => template('colab/import_mailman_messages.erb'),
     ensure  => present,
   }
+
+  file { '/var/lock/colab':
+    ensure => directory,
+    owner  => 'colab',
+  }
 }

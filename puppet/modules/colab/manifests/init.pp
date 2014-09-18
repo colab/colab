@@ -19,6 +19,18 @@ class colab (
   include postgresql::globals
   include postgresql::server
 
+  user { 'colab':
+    gid    => 'colab',
+    groups => ['sudo', 'mailman'],
+    managehome => true,
+  }
+
+  group { 'mailman':
+    ensure => present,
+    system => true,
+    before => User['colab'],
+  }
+
   postgresql::server::db { 'colab':
     user     => 'colab',
     password => 'colab',
@@ -65,6 +77,12 @@ class colab (
   supervisor::app { 'solr':
     command   => 'java -jar start.jar',
     directory => $colab::solr_project_path,
+    user      => 'colab',
+  }
+
+  supervisor::app { 'mailmanapi':
+    command   => '/home/colab/.virtualenvs/colab/bin/mailman-api.py -b 127.0.0.1:9000',
+    directory => '/home/colab/',
     user      => 'colab',
   }
 }

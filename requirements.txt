@@ -1,4 +1,4 @@
-Django>=1.6.1,<1.7
+Django>=1.6.7,<1.7
 South==0.8.1
 psycopg2==2.5.1
 django-piston==0.2.3
@@ -53,3 +53,6 @@ diazo==1.0.5
 # Dpaste
 # TODO: Pull-request to mainstream repository
 git+https://github.com/interlegis/dpaste
+
+# Mailman 2 REST API
+mailman-api==0.2.1
