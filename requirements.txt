@@ -53,3 +53,6 @@ diazo==1.0.5
 # Dpaste
 # TODO: Pull-request to mainstream repository
 git+https://github.com/interlegis/dpaste
+
+# Mailman 2 REST API
+mailman-api==0.2.1

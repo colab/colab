@@ -67,4 +67,10 @@ class colab (
     directory => $colab::solr_project_path,
     user      => 'colab',
   }
+
+  supervisor::app { 'mailmanapi':
+    command   => '/home/colab/.virtualenvs/colab/bin/mailman-api.py -b 127.0.0.1:9000',
+    directory => '/home/colab/',
+    user      => 'colab',
+  }
 }
