@@ -19,6 +19,18 @@ class colab (
   include postgresql::globals
   include postgresql::server
 
+  user { 'colab':
+    gid    => 'colab',
+    groups => ['sudo', 'mailman'],
+    managehome => true,
+  }
+
+  group { 'mailman':
+    ensure => present,
+    system => true,
+    before => User['colab'],
+  }
+
   postgresql::server::db { 'colab':
     user     => 'colab',
     password => 'colab',
