@@ -229,7 +229,7 @@ class Vote(models.Model):
         unique_together = ('user', 'message')
 
     def __unicode__(self):
-        return 'Vote on %s by %s' % (self.Message.id,
+        return 'Vote on %s by %s' % (self.message.id,
                                      self.user.username)
 
 
