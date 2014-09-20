@@ -204,6 +204,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_mobile.context_processors.is_mobile',
     'super_archives.context_processors.mailarchive',
+    'proxy.context_processors.proxied_apps',
     'home.context_processors.robots',
 )
 
