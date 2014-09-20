@@ -86,7 +86,7 @@ CACHES = {
     }
 }
 
-DATABASE_ROUTERS = ['proxy.trac.routers.TracRouter',]
+DATABASE_ROUTERS = []
 
 INSTALLED_APPS = INSTALLED_APPS + (
     # First app to provide  AUTH_USER_MODEL to others
@@ -308,16 +308,7 @@ DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
 DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab Interlegis'
 DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
 
-
-### Trac
-TRAC_ENABLED = False
-
 try:
     from local_settings import *
 except ImportError:
     pass
-
-if TRAC_ENABLED:
-    INSTALLED_APPS = INSTALLED_APPS + (
-        'proxy.trac',
-    )

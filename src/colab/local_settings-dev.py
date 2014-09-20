@@ -50,3 +50,11 @@ CONVERSEJS_ENABLED = False
 DIAZO_THEME = SITE_URL
 
 ROBOTS_NOINDEX = True
+
+### Trac Settings
+
+INSTALLED_APPS = INSTALLED_APPS + (
+    'proxy.trac',
+)
+
+DATABASE_ROUTERS += ['proxy.trac.routers.TracRouter']
