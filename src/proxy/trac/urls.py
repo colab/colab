@@ -6,5 +6,5 @@ from .views import TracProxyView
 
 urlpatterns = patterns('',
     # Trac
-    url(r'^trac/(?P<path>.*)$', TracProxyView.as_view()),
+    url(r'^(?P<path>.*)$', TracProxyView.as_view()),
 )
