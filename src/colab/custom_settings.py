@@ -88,7 +88,7 @@ CACHES = {
 
 DATABASE_ROUTERS = []
 
-INSTALLED_APPS = INSTALLED_APPS + (
+INSTALLED_APPS += (
     # First app to provide  AUTH_USER_MODEL to others
     'accounts',
 

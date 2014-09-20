@@ -29,14 +29,6 @@ CONVERSEJS_BOSH_SERVICE_URL = 'http://localhost:5280/http-bind'
 DATABASES['default']['PASSWORD'] = 'colab'
 DATABASES['default']['HOST'] = 'localhost'
 
-TRAC_ENABLED = False
-
-if TRAC_ENABLED:
-    from trac_settings import *
-    DATABASES['trac'] = TRAC_DATABASE
-    DATABASES['trac']['PASSWORD'] = 'colab'
-    DATABASES['trac']['HOST'] = 'localhost'
-
 HAYSTACK_CONNECTIONS['default']['URL'] = 'http://localhost:8983/solr/'
 
 COLAB_TRAC_URL = 'http://localhost:5000/trac/'
@@ -51,10 +43,19 @@ DIAZO_THEME = SITE_URL
 
 ROBOTS_NOINDEX = True
 
+
 ### Trac Settings
 
-INSTALLED_APPS = INSTALLED_APPS + (
+INSTALLED_APPS += (
     'proxy.trac',
 )
 
 DATABASE_ROUTERS += ['proxy.trac.routers.TracRouter']
+
+DATABASES['trac'] = {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'trac_colab',
+    'USER': 'colab',
+    'PASSWORD': 'colab',
+    'HOST': 'localhost',
+}
