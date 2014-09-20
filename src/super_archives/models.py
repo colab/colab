@@ -8,11 +8,9 @@ from hashlib import md5
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.core.cache import cache
 from django.dispatch import receiver
-from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
-from django.core.urlresolvers import reverse, NoReverseMatch
+from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 from html2text import html2text
@@ -25,12 +23,9 @@ from .utils import blocks
 from .utils.etiquetador import etiquetador
 
 
-User = settings.AUTH_USER_MODEL
-
-
 class EmailAddressValidation(models.Model):
     address = models.EmailField(unique=True)
-    user = models.ForeignKey(User, null=True,
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                              related_name='emails_not_validated')
     validation_key = models.CharField(max_length=32, null=True,
                                       default=lambda: uuid4().hex)
@@ -41,8 +36,8 @@ class EmailAddressValidation(models.Model):
 
 
 class EmailAddress(models.Model):
-    user = models.ForeignKey(User, null=True, related_name='emails',
-                             on_delete=models.SET_NULL)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                             related_name='emails', on_delete=models.SET_NULL)
     address = models.EmailField(unique=True)
     real_name = models.CharField(max_length=64, blank=True, db_index=True)
     md5 = models.CharField(max_length=32, null=True)
@@ -71,7 +66,7 @@ class MailingList(models.Model):
     name = models.CharField(max_length=80)
     email = models.EmailField()
     description = models.TextField()
-    logo = models.FileField(upload_to='list_logo') #TODO
+    logo = models.FileField(upload_to='list_logo')  # TODO
     last_imported_index = models.IntegerField(default=0)
 
     def get_absolute_url(self):
@@ -88,7 +83,7 @@ class MailingList(models.Model):
 
 
 class MailingListMembership(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     mailinglist = models.ForeignKey(MailingList)
 
     def __unicode__(self):
@@ -101,7 +96,7 @@ class Keyword(models.Model):
     thread = models.ForeignKey('Thread')
 
     class Meta:
-        ordering = ('?', ) # random order
+        ordering = ('?', )  # random order
 
     def __unicode__(self):
         return self.keyword
@@ -221,7 +216,7 @@ class Thread(models.Model, HitCounterModelMixin):
 
 
 class Vote(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     message = models.ForeignKey('Message')
     created = models.DateTimeField(auto_now_add=True)
 
@@ -392,12 +387,7 @@ class MessageMetadata(models.Model):
         return 'Email Message Id: %s - %s: %s' % (self.Message.id,
                                                   self.name, self.value)
 
-
-# For django 1.7 erase the 2 next lines
-from django.contrib.auth import get_user_model
-User = get_user_model()
-
-@receiver(post_save, sender=User)
+@receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_email_address(sender, instance, created, **kwargs):
     if not created:
         return
