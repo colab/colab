@@ -27,19 +27,19 @@ def index(request):
             type='thread',
         ).count()
         # TODO: this section should be inside trac app and only use it here
-        if settings.TRAC_ENABLED:
-            for type in ['changeset', 'attachment']:
-                count_types[type] = SearchQuerySet().filter(
-                    type=type,
-                ).count()
+        #if settings.TRAC_ENABLED:
+        #    for type in ['changeset', 'attachment']:
+        #        count_types[type] = SearchQuerySet().filter(
+        #            type=type,
+        #        ).count()
 
-            count_types['ticket'] = sum([
-                ticket.count for ticket in TicketCollabCount.objects.all()
-            ])
+        #    count_types['ticket'] = sum([
+        #        ticket.count for ticket in TicketCollabCount.objects.all()
+        #    ])
 
-            count_types['wiki'] = sum([
-                wiki.count for wiki in WikiCollabCount.objects.all()
-            ])
+        #    count_types['wiki'] = sum([
+        #        wiki.count for wiki in WikiCollabCount.objects.all()
+        #    ])
         
         cache.set('home_chart', count_types)
 

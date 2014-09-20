@@ -29,112 +29,112 @@ class ColabSearchView(SearchView):
             },
         }
         # TODO: Replace for a more generic plugin architecture
-        if settings.TRAC_ENABLED:
-            types['wiki'] = {
-                'name': _(u'Wiki'),
-                'fields': (
-                    ('author', _(u'Author'), self.request.GET.get('author')),
-                    (
-                        'collaborators',
-                        _(u'Collaborators'),
-                        self.request.GET.get('collaborators'),
-                    ),
-                ),
-            }
+        #if settings.TRAC_ENABLED:
+        #    types['wiki'] = {
+        #        'name': _(u'Wiki'),
+        #        'fields': (
+        #            ('author', _(u'Author'), self.request.GET.get('author')),
+        #            (
+        #                'collaborators',
+        #                _(u'Collaborators'),
+        #                self.request.GET.get('collaborators'),
+        #            ),
+        #        ),
+        #    }
 
-            types['ticket'] = {
-                'name': _(u'Ticket'),
-                'fields': (
-                    (
-                        'milestone',
-                        _(u'Milestone'),
-                        self.request.GET.get('milestone')
-                    ),
-                    (
-                        'priority',
-                        _(u'Priority'),
-                        self.request.GET.get('priority')
-                    ),
-                    (
-                        'component',
-                        _(u'Component'),
-                        self.request.GET.get('component')
-                    ),
-                    (
-                        'severity',
-                        _(u'Severity'),
-                        self.request.GET.get('severity')
-                    ),
-                    (
-                        'reporter',
-                        _(u'Reporter'),
-                        self.request.GET.get('reporter')
-                    ),
-                    ('author', _(u'Author'), self.request.GET.get('author')),
-                    ('tag', _(u'Status'), self.request.GET.get('tag')),
-                    (
-                        'keywords',
-                        _(u'Keywords'),
-                        self.request.GET.get('keywords'),
-                    ),
-                    (
-                        'collaborators',
-                        _(u'Collaborators'),
-                        self.request.GET.get('collaborators')
-                    ),
-                ),
-            }
+        #    types['ticket'] = {
+        #        'name': _(u'Ticket'),
+        #        'fields': (
+        #            (
+        #                'milestone',
+        #                _(u'Milestone'),
+        #                self.request.GET.get('milestone')
+        #            ),
+        #            (
+        #                'priority',
+        #                _(u'Priority'),
+        #                self.request.GET.get('priority')
+        #            ),
+        #            (
+        #                'component',
+        #                _(u'Component'),
+        #                self.request.GET.get('component')
+        #            ),
+        #            (
+        #                'severity',
+        #                _(u'Severity'),
+        #                self.request.GET.get('severity')
+        #            ),
+        #            (
+        #                'reporter',
+        #                _(u'Reporter'),
+        #                self.request.GET.get('reporter')
+        #            ),
+        #            ('author', _(u'Author'), self.request.GET.get('author')),
+        #            ('tag', _(u'Status'), self.request.GET.get('tag')),
+        #            (
+        #                'keywords',
+        #                _(u'Keywords'),
+        #                self.request.GET.get('keywords'),
+        #            ),
+        #            (
+        #                'collaborators',
+        #                _(u'Collaborators'),
+        #                self.request.GET.get('collaborators')
+        #            ),
+        #        ),
+        #    }
 
-            types['changeset'] = {
-                'name': _(u'Changeset'),
-                'fields': (
-                    ('author', _(u'Author'), self.request.GET.get('author')),
-                    (
-                        'repository_name',
-                        _(u'Repository'),
-                        self.request.GET.get('repository_name'),
-                    ),
-                )
-            }
+        #    types['changeset'] = {
+        #        'name': _(u'Changeset'),
+        #        'fields': (
+        #            ('author', _(u'Author'), self.request.GET.get('author')),
+        #            (
+        #                'repository_name',
+        #                _(u'Repository'),
+        #                self.request.GET.get('repository_name'),
+        #            ),
+        #        )
+        #    }
 
-            types['user'] = {
-                'name': _(u'User'),
-                'fields': (
-                    (
-                        'username',
-                        _(u'Username'),
-                        self.request.GET.get('username'),
-                    ),
-                    ('name', _(u'Name'), self.request.GET.get('name')),
-                    (
-                        'institution',
-                        _(u'Institution'),
-                        self.request.GET.get('institution'),
-                    ),
-                    ('role', _(u'Role'), self.request.GET.get('role'))
-                ),
-            }
+        #    types['user'] = {
+        #        'name': _(u'User'),
+        #        'fields': (
+        #            (
+        #                'username',
+        #                _(u'Username'),
+        #                self.request.GET.get('username'),
+        #            ),
+        #            ('name', _(u'Name'), self.request.GET.get('name')),
+        #            (
+        #                'institution',
+        #                _(u'Institution'),
+        #                self.request.GET.get('institution'),
+        #            ),
+        #            ('role', _(u'Role'), self.request.GET.get('role'))
+        #        ),
+        #    }
 
-            types['attachment'] = {
-                'name': _(u'Attachment'),
-                'fields': (
-                    (
-                        'filename',
-                        _(u'Filename'),
-                        self.request.GET.get('filename')
-                    ),
-                    ('author', _(u'Author'), self.request.GET.get('author')),
-                    (
-                        'used_by',
-                        _(u'Used by'), self.request.GET.get('used_by')),
-                    (
-                        'mimetype',
-                        _(u'File type'),
-                        self.request.GET.get('mimetype')
-                    ),
-                    ('size', _(u'Size'), self.request.GET.get('size')),
-                )
-            }
+        #    types['attachment'] = {
+        #        'name': _(u'Attachment'),
+        #        'fields': (
+        #            (
+        #                'filename',
+        #                _(u'Filename'),
+        #                self.request.GET.get('filename')
+        #            ),
+        #            ('author', _(u'Author'), self.request.GET.get('author')),
+        #            (
+        #                'used_by',
+        #                _(u'Used by'), self.request.GET.get('used_by')),
+        #            (
+        #                'mimetype',
+        #                _(u'File type'),
+        #                self.request.GET.get('mimetype')
+        #            ),
+        #            ('size', _(u'Size'), self.request.GET.get('size')),
+        #        )
+        #    }
 
         try:
             type_chosen = self.form.cleaned_data.get('type')
