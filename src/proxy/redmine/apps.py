@@ -3,5 +3,5 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyRedmineAppConfig(ColabProxiedAppConfig):
-    name = 'redmine'
+    name = 'proxy.redmine'
     verbose_name = 'Redmine Proxy'

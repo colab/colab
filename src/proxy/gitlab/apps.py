@@ -3,5 +3,5 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyGitlabAppConfig(ColabProxiedAppConfig):
-    name = 'gitlab'
+    name = 'proxy.gitlab'
     verbose_name = 'Gitlab Proxy'
