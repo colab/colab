@@ -8,8 +8,6 @@ from hashlib import md5
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
@@ -386,19 +384,3 @@ class MessageMetadata(models.Model):
     def __unicode__(self):
         return 'Email Message Id: %s - %s: %s' % (self.Message.id,
                                                   self.name, self.value)
-
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_email_address(sender, instance, created, **kwargs):
-    if not created:
-        return
-
-    email, email_created = EmailAddress.objects.get_or_create(
-        address=instance.email,
-        defaults= {
-            'real_name': instance.get_full_name(),
-            'user': instance,
-        }
-    )
-
-    email.user = instance
-    email.save()
