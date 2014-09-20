@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 
-    url(r'^', include('proxy.trac.urls')),
+    url(r'^trac/', include('proxy.trac.urls')),
 )
 
 if settings.DEBUG:
