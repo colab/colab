@@ -3,7 +3,7 @@ from django.conf import settings
 
 from hitcounter.views import HitCounterViewMixin
 
-from ..utils import ColabProxyView
+from ..utils.views import ColabProxyView
 from .models import Wiki, Ticket, Revision
 
 

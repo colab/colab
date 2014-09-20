@@ -1,7 +1,7 @@
 
 from django.conf import settings
 
-from ..utils import ColabProxyView
+from ..utils.views import ColabProxyView
 
 
 class JenkinsProxyView(ColabProxyView):
