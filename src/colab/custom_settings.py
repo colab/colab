@@ -86,7 +86,7 @@ CACHES = {
     }
 }
 
-DATABASE_ROUTERS = ['colab.routers.TracRouter',]
+DATABASE_ROUTERS = ['proxy.trac.routers.TracRouter',]
 
 INSTALLED_APPS = INSTALLED_APPS + (
     # First app to provide  AUTH_USER_MODEL to others
