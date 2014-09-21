@@ -63,7 +63,7 @@
 
             {% if proxy.trac %}
               <li>
-                <a href="/timeline">{% trans "Timeline" %}</a></li>
+                <a href="/trac/timeline">{% trans "Timeline" %}</a></li>
               </li>
             {% endif %}
 
@@ -78,16 +78,16 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contribute" %} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/wiki">Wiki</a></li>
+                  <li><a href="/trac/wiki">Wiki</a></li>
                   {% if user.is_active %}
-                  <li><a href="/wiki/WikiNewPage">{% trans "New Wiki Page" %}</a></li>
+                  <li><a href="/trac/wiki/WikiNewPage">{% trans "New Wiki Page" %}</a></li>
                   {% endif %}
-                  <li><a href="/report">{% trans "View Tickets" %}</a></li>
+                  <li><a href="/trac/report">{% trans "View Tickets" %}</a></li>
                   {% if user.is_active %}
-                  <li><a href="/newticket">{% trans "New Ticket" %}</a></li>
+                  <li><a href="/trac/newticket">{% trans "New Ticket" %}</a></li>
                   {% endif %}
-                  <li><a href="/roadmap">{% trans "Roadmap" %}</a></li>
-                  <li><a href="/browser">{% trans "Browse Source" %}</a></li>
+                  <li><a href="/trac/roadmap">{% trans "Roadmap" %}</a></li>
+                  <li><a href="/trac/browser">{% trans "Browse Source" %}</a></li>
                   <!-- TODO: Must be optional like trac and separated -->
                   <li><a href="/ci">{% trans "Continuous Integration" %}</a></li>
                 </ul>
