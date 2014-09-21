@@ -32,7 +32,7 @@ tornado==3.1.1
 # django-browserid==0.10.1
 -e git+https://github.com/mozilla/django-browserid.git#egg=django-browserid
 
-django-revproxy==0.2.7
+django-revproxy==0.2.8
 
 # Converse.js (XMPP client)
 django-conversejs==0.3.1
