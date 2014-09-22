@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
-from django.db import connections
+from django.db import models, migrations, connections
 
 
 def create_views(apps, schema_editor):
