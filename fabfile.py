@@ -127,10 +127,6 @@ def manage(command):
             run('python manage.py {}'.format(command))
 
 
-def syncdb():
-    manage('syncdb --no-initial-data')
-
-
 def migrate():
     manage('migrate')
     manage('loaddata super_archives/fixture/initial_data.json')
@@ -269,7 +265,6 @@ def deploy(noprovision=False):
     install_requirements()
     create_local_settings()
     collectstatic()
-    syncdb()
     migrate()
 
     build_schema()
