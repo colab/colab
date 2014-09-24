@@ -29,6 +29,17 @@
 {% block head_js %}
 <script type="text/javascript">
   $(function(){
+    // By Default Gitlab uses an event listener to stop propagation on any links
+    //  and use HTML5 pseudo navigation. That was causing all links in our
+    //  headers and footers to send the user to the right location but
+    //  applying Gitlab CSS everywhere.
+    // The workaround below will run before the Gitlab event and will prevent
+    //  it to work.
+
+    $('.navbar a', 'footer').not('.dropdown-toggle').on("click",
+        function(evt) { evt.stopPropagation(); }
+    );
+
     $('div.panel-body div.automerge_widget').removeClass('hide');
   });
 </script>
