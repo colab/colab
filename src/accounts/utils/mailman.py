@@ -1,6 +1,7 @@
 
 import urlparse
 import requests
+import logging
 
 from django.conf import settings
 
@@ -18,7 +19,8 @@ def subscribe(listname, address):
     url = get_url(listname)
     try:
         requests.put(url, timeout=TIMEOUT, data={'address': address})
-    except requests.exceptions.RequestException:
+    except:
+        logging.exception('Unable to subscribe user')
         return False
     return True
 
@@ -27,7 +29,8 @@ def unsubscribe(listname, address):
     url = get_url(listname)
     try:
         requests.delete(url, timeout=TIMEOUT, data={'address': address})
-    except requests.exceptions.RequestException:
+    except:
+        logging.exception('Unable to unsubscribe user')
         return False
     return True
 
@@ -52,7 +55,8 @@ def address_lists(address, description=''):
 
     try:
         lists = requests.get(url, timeout=TIMEOUT, params=params)
-    except requests.exceptions.RequestException:
+    except:
+        logging.exception('Unable to list mailing lists')
         return []
 
     return lists.json()
