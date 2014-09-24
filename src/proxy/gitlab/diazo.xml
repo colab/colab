@@ -13,6 +13,15 @@
     <after theme-children="/html/head">
     <script>jQuery.noConflict();</script>
     <style>
+    div#main-content{
+        margin-top: 50px;
+    }
+    div#main-content div.container {
+        width: 1110px;
+    }
+    div#main-content div.flash-container{
+        width: 85%;
+    }
     #breadcrumbs {
     border: 0 !important;
     }
