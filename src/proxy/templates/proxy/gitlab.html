@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block head_css %}
+<style>
+  div#main-content {
+    margin-top: 65px;
+  }
+
+  div#main-content .main-nav {
+    margin-top: -15px;
+  }
+</style>
+{% endblock %}
+
 {% block head_js %}
 <script type="text/javascript">
   $(function(){
