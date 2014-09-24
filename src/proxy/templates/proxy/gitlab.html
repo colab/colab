@@ -1,20 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block head_js %}
-<!-- XXX / FIXME: Evil -->
 <script type="text/javascript">
-      $(function(){
-          $('body').append('<script type="text/javascript" src="/static/third-party/bootstrap/js/bootstrap.min.js">');
-          $('body').append('<script type="text/javascript" src="/static/third-party/jquery.cookie.js">');
-          $('a').click(function(evt){
-              url = $(this).attr('href');
-              if(url != undefined && url.match(/\/redmine\//)){ window.location =  url; }  });
-          $('.navbar a').click(function(evt){
-              evt.preventDefault();
-              url = $(this).attr('href');
-              if(url != '#')
-                  window.location = 'http://beta.softwarepublico.gov.br' + $(this).attr('href'); });
-          $('div.panel-body div.automerge_widget').removeClass('hide');
-      });
+  $(function(){
+    $('div.panel-body div.automerge_widget').removeClass('hide');
+  });
 </script>
+<script type="text/javascript" src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'third-party/jquery.cookie.js' %}"></script>
 {% endblock %}
