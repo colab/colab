@@ -10,6 +10,19 @@
   div#main-content .main-nav {
     margin-top: -15px;
   }
+  div#main-content div.container {
+    width: 1110px;
+  }
+  div#main-content div.flash-container{
+    width: 85%;
+  }
+  #breadcrumbs {
+    border: 0 !important;
+  }
+
+  #right-top-nav {
+    margin-right: 5em !important;
+  }
 </style>
 {% endblock %}
 
@@ -21,4 +34,5 @@
 </script>
 <script type="text/javascript" src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'third-party/jquery.cookie.js' %}"></script>
+<script>jQuery.noConflict();</script>
 {% endblock %}
