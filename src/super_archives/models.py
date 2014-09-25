@@ -21,12 +21,16 @@ from .utils import blocks
 from .utils.etiquetador import etiquetador
 
 
+def get_validation_key():
+    return uuid4().hex
+
+
 class EmailAddressValidation(models.Model):
     address = models.EmailField(unique=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
                              related_name='emails_not_validated')
     validation_key = models.CharField(max_length=32, null=True,
-                                      default=lambda: uuid4().hex)
+                                      default=get_validation_key)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
