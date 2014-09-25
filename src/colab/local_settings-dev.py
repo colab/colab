@@ -46,16 +46,16 @@ ROBOTS_NOINDEX = True
 
 ### Trac Settings
 
-INSTALLED_APPS += (
-    'proxy.trac',
-)
-
-DATABASE_ROUTERS += ['proxy.trac.routers.TracRouter']
-
-DATABASES['trac'] = {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'trac_colab',
-    'USER': 'colab',
-    'PASSWORD': 'colab',
-    'HOST': 'localhost',
-}
+#INSTALLED_APPS += (
+#    'proxy.trac',
+#)
+#
+#DATABASE_ROUTERS += ['proxy.trac.routers.TracRouter']
+#
+#DATABASES['trac'] = {
+#    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#    'NAME': 'trac_colab',
+#    'USER': 'colab',
+#    'PASSWORD': 'colab',
+#    'HOST': 'localhost',
+#}
