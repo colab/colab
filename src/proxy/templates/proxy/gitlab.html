@@ -37,7 +37,14 @@
         function(evt) { evt.stopPropagation(); }
     );
 
+    // Somehow when there's a merge request, all options just disapear
+    // so this fix makes it show up again
     $('div.panel-body div.automerge_widget').removeClass('hide');
+
+    // Somehow the dangerous settings are not showing up for default
+    // but for a mistery, they come back to live if the first status is
+    // not-hide
+    $('div.danger-settings div.js-toggle-content').removeClass('hide');
   });
 </script>
 <script type="text/javascript" src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
