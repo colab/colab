@@ -12,6 +12,9 @@ urlpatterns = patterns('',
         ChangeXMPPPasswordView.as_view(), name='change_password'),
 
     url(r'^login/?$', LoginView.as_view(), name='login'),
+#    url(r'^login/?$', 'django.contrib.auth.views.login', name='login'),
+
+#    url(r'^logout/?$',  'accounts.views.logoutColab', name='logout'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),
