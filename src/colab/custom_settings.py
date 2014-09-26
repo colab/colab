@@ -306,6 +306,7 @@ DPASTE_EXPIRE_CHOICES = (
 DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
 DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab Interlegis'
 DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
+DPASTE_LEXER_DEFAULT = 'text'
 
 try:
     from local_settings import *

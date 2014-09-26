@@ -24,11 +24,11 @@ Application that integrates existing systems to represent the contributions of t
 Features
 ========
 
-* Developerd by Interlegis Communities http://colab.interlegis.leg.br/
+* Developed by Interlegis Communities http://colab.interlegis.leg.br/
 
-* Writed with Python http://python.org/
+* Written with Python http://python.org/
 
-* Build in Django Web Framework https://www.djangoproject.com/
+* Built in Django Web Framework https://www.djangoproject.com/
 
 * Search engine with Solr https://lucene.apache.org/solr/
 

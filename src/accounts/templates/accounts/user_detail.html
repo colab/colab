@@ -8,8 +8,8 @@
   {% trans "Messages" as group_collabs %}
   {% trans "Contributions" as type_collabs %}
 
-  {% include "pizza-chart.html" with chart_data=type_count chart_div="collabs" chart_height=300 name=type_collabs %}
-  {% include "pizza-chart.html" with chart_data=list_activity chart_div="collabs2" chart_height=300 name=group_collabs %}
+  {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=type_collabs %}
+  {% include "doughnut-chart.html" with chart_data=list_activity chart_canvas="collabs2" name=group_collabs %}
 {% endblock %}
 
 {% block main-content %}
@@ -97,10 +97,14 @@
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Contributions by Type" %}</h3>
+          <h3 class="panel-title">{% trans "Collaborations by Type" %}</h3>
         </div>
         <div class="panel-body">
           <div id="collabs"></div>
+          <div class="chart collabs">
+              <canvas width="200" height="200"></canvas>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
@@ -112,7 +116,10 @@
           <h3 class="panel-title">{% trans "Participation by Group" %}</h3>
         </div>
         <div class="panel-body">
-          <div id="collabs2"></div>
+          <div class="chart collabs2">
+              <canvas width="200" height="200"></canvas>
+            <p></p>
+          </div>
         </div>
       </div>
     </div>
@@ -150,13 +157,13 @@
       {% endfor %}
       </ul>
       <a href="{% url 'haystack_search' %}?type=thread&amp;author={{ user_.username }}">
-        {% trans "View more discussions..." %}
+        {% trans "View more posts..." %}
       </a>
       <div>&nbsp;</div>
     </div>
 
     <div class="col-lg-6 col-md-6 col-sm-12">
-      <h3>{% trans "Contributions" %}</h3>
+      <h3>{% trans "Latest contributions" %}</h3>
       <ul class="message-list">
       {% for result in results %}
         {% include "message-preview.html" %}

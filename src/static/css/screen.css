@@ -10,7 +10,7 @@ li hr {
 /* Header */
 
 #header-searchbox {
-    width: 200px;
+    width: 190px;
 }
 
 #header-hr {
@@ -427,4 +427,21 @@ span.highlighted {
 .email-message .popover {
     max-width: 350px;
     width: 350px;
+}
+
+/* Chart div */
+.chart {
+    text-align: center;
+}
+
+.chart > canvas {
+    width: 250px;
+}
+
+.chart > p {
+    text-align: center;
+    line-height: 1.5em;
+}
+.chart > p > label {
+    margin: 0 2px;
 }
