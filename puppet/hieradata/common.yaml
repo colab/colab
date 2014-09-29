@@ -14,14 +14,9 @@ nginx::worker_processes: 8
 nginx::error_log: '/var/log/nginx/error.log'
 nginx::access_log: '/var/log/nginx/access.log'
 
-colab::mailman_archive_path: '/mnt/mailman/archives/'
+colab::mailman_archive_path: '/var/lib/mailman/archives/public/'
 colab::mailman_exclude_lists:
-  - saberes-divulgacao
-  - pml
   - mailman
-  - lexml-anuncions
 colab::hostnames: 
-  - colab.interlegis.leg.br
-  - colab.interlegis.gov.br
   - localhost
 colab::solr_project_path: '/home/colab/solr-4.6.1/colab'

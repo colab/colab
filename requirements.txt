@@ -47,7 +47,7 @@ diazo==1.0.5
 
 # Dpaste
 # TODO: Pull-request to mainstream repository
-git+https://github.com/interlegis/dpaste
+-e git+https://github.com/colab-community/dpaste@i18n/pt_BR#egg=dpaste
 
 # Mailman 2 REST API
 mailman-api==0.2.1

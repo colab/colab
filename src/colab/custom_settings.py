@@ -192,11 +192,6 @@ LOGGING = {
     }
 }
 
-COLAB_FROM_ADDRESS = '"Colab Interlegis" <noreply@interlegis.leg.br>'
-SERVER_EMAIL = COLAB_FROM_ADDRESS
-EMAIL_HOST = 'smtp.interlegis.leg.br'
-EMAIL_PORT = 25
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -248,7 +243,7 @@ LOCALE_PATHS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-ALLOWED_HOSTS = ['colab.interlegis.leg.br']
+ALLOWED_HOSTS = []
 
 from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
@@ -291,7 +286,6 @@ REVPROXY_ADD_REMOTE_USER = True
 # This URL must use SSL in order to keep chat sessions secure
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
-CONVERSEJS_AUTO_REGISTER = 'mensageiro.interlegis.gov.br'
 CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
 CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 
@@ -309,7 +303,7 @@ DPASTE_EXPIRE_CHOICES = (
     ('never', _(u'Never')),
 )
 DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
-DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created on Colab Interlegis'
+DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created from Colab DPaste'
 DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
 DPASTE_LEXER_DEFAULT = 'text'
 
