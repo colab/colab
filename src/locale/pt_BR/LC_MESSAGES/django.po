@@ -273,15 +273,6 @@ msgstr "Adicionar outro endereço de e-mail"
 msgid "Add"
 msgstr "Adicionar"
 
-#: accounts/templates/accounts/user_update_form.html:188
-msgid ""
-"Change <a href=\"http://repositorio.interlegis.gov.br/\">SVN</a> and <a href="
-"\"http://mensageiro.interlegis.gov.br/\">XMPP Client</a> password"
-msgstr ""
-"Trocar a senha do <a href=\"http://repositorio.interlegis.gov.br/"
-"\">Repositório</a> e do <a href=\"http://mensageiro.interlegis.gov.br/"
-"\">Mensageiro</a>"
-
 #: accounts/templates/accounts/user_update_form.html:193
 msgid ""
 "This feature is available only for those who need to change the password for some "
@@ -1095,8 +1086,8 @@ msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
 
 #: templates/open-data.html:6
-msgid "OpenData - Communities Interlegis"
-msgstr "OpenData - Comunidades Interlegis"
+msgid "OpenData"
+msgstr "OpenData"
 
 #: templates/open-data.html:7
 msgid ""
@@ -1483,9 +1474,6 @@ msgstr ""
 #: templates/dpaste/snippet_form.html:28
 msgid "Paste it"
 msgstr ""
-
-#~ msgid "INTERLEGIS COMMUNITIES"
-#~ msgstr "COMUNIDADES INTERLEGIS"
 
 #~ msgid "Creative Commons - attribution, non-commercial"
 #~ msgstr "Creative Commons - atribuição e não-comercial"
