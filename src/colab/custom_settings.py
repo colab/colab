@@ -1,6 +1,11 @@
 from settings import *
 from django.utils.translation import ugettext_lazy as _
 
+# Allow Django runserver to serve SVG files
+#   https://code.djangoproject.com/ticket/20162
+import mimetypes
+mimetypes.add_type('image/svg+xml', '.svg')
+
 DEBUG = False
 
 TEMPLATE_DEBUG = False
