@@ -1,6 +1,6 @@
-{% load i18n %}
+{% load i18n static %}
 
-<script src="{{ STATIC_URL }}third-party/highcharts/js/highcharts.js"></script>
+<script src="{% static 'third-party/highcharts/js/highcharts.js' %}"></script>
 <script>
 $(function () {
   $('#{{ chart_div }}').highcharts({

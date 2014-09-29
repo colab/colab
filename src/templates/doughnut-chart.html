@@ -1,7 +1,7 @@
-{% load i18n %}
+{% load i18n static %}
 
-<script src="{{ STATIC_URL }}third-party/chartjs/js/Chart.min.js"></script>
-<script src="{{ STATIC_URL }}third-party/chroma/js/chroma.min.js"></script>
+<script src="{% static 'third-party/chartjs/js/Chart.min.js' %}"></script>
+<script src="{% static 'third-party/chroma/js/chroma.min.js' %}"></script>
 
 <script>
 $(function () {

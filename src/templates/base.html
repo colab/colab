@@ -14,20 +14,20 @@
 
     <title>{% block title %}Colab{% endblock %} - Colab</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ STATIC_URL }}img/interlegis.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/interlegis.ico' %}">
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap/css/bootstrap.min.css" type="text/css" media="screen, projection" />
+    <link rel="stylesheet" href="{% static 'third-party/bootstrap/css/bootstrap.min.css' %}" type="text/css" media="screen, projection" />
 
     <link rel="stylesheet"
-          href="{{ STATIC_URL }}third-party/font-awesome/css/font-awesome.min.css"
+          href="{% static 'third-party/font-awesome/css/font-awesome.min.css' %}"
           type="text/css" media="screen" />
 
 
     <!-- JQuery 2+ won't work for IE < 9 -->
-    <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery.debouncedresize.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}third-party/jquery.cookie.js"></script>
-    <script src="{{ STATIC_URL }}third-party/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'third-party/jquery-2.0.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'third-party/jquery.debouncedresize.js' %}"></script>
+    <script type="text/javascript" src="{% static 'third-party/jquery.cookie.js' %}"></script>
+    <script src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
 
     {% block head_js %}{% endblock %}
     {% block head_css %}{% endblock %}
@@ -36,7 +36,7 @@
       {% conversejs_static %}
     {% endif %}
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css"
+    <link rel="stylesheet" href="{% static 'css/screen.css' %}"
         type="text/css" media="screen" />
 
   {% endblock %}
@@ -206,8 +206,8 @@
       <p class="col-lg-12 text-center">{% trans "Last email imported at" %} {{ last_imported_message.received_time|date:'DATETIME_FORMAT' }}</p>
       {% endif %}
       <p class="col-lg-12 text-center">
-        <a href="{% url 'opendata' %}"><img src="{{ STATIC_URL }}img/opendata3.png"/></a>
-        <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR"><img src="{{ STATIC_URL }}img/cc_by_sa.png"/></a>
+        <a href="{% url 'opendata' %}"><img src="{% static 'img/opendata3.png' %}"/></a>
+        <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR"><img src="{% static 'img/cc_by_sa.png' %}"/></a>
       </p>
       <p class="col-lg-12 text-center">
         {% trans "The contents of this site is published under license" %}:

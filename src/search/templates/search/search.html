@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% load i18n highlight superarchives %}
+{% load i18n highlight superarchives static %}
 
 {% block title %}{% trans 'search'|title %}{% endblock %}
 
 {% block head_js %}
-<script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="{% static 'third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
 {% if use_language %}
-  <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js"></script>
+  <script type="text/javascript" src="{% static 'third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js' %}"></script>
 {% endif %}
 
 <script type="text/javascript">
@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block head_css %}
-<link rel="stylesheet" href="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css"/>
+<link rel="stylesheet" href="{% static 'third-party/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}"/>
 {% endblock %}
 
 {% block main-content %}
