@@ -24,6 +24,10 @@ li hr {
     margin-left: 10px;
 }
 
+.navbar-brand img {
+    height: 40px;
+}
+
 #user-menu .wrapper {
     padding: 3px 10px;
     white-space: nowrap;
