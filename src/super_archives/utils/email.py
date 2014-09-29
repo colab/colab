@@ -17,18 +17,3 @@ def send_verification_email(to, user, validation_key):
                                        'key': validation_key,
                                        'SITE_URL': settings.SITE_URL}))
     return colab_send_email(subject, message, to)
-
-
-def send_email_lists(user, mailing_lists):
-    """XXX: this should be done using API instead of emails"""
-
-    subject = _(u'Registration on the mailing list')
-    from_ = user.email
-    to = []
-    for list_name in mailing_lists:
-        # TODO: The following line needs to be generic. Domain should be stored in settings file
-        #  or database (perharps read directly from mailman).
-        subscribe_addr = list_name + '-subscribe@listas.interlegis.gov.br'
-        to.append(subscribe_addr)
-
-    mail.send_mail(subject, '', from_, to)

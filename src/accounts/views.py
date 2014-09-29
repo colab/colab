@@ -23,7 +23,6 @@ from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
 from super_archives.models import EmailAddress, Message
-from super_archives.utils.email import send_email_lists
 from search.utils import trans
 #from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
@@ -141,10 +140,6 @@ def signup(request):
 
     user = user_form.save()
 
-    mailing_lists = lists_form.cleaned_data.get('lists')
-    if mailing_lists:
-        send_email_lists(user, mailing_lists)
-
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
     email_addr, created = EmailAddress.objects.get_or_create(address=user.email)
@@ -153,6 +148,9 @@ def signup(request):
 
     email_addr.user = user
     email_addr.save()
+
+    mailing_lists = lists_form.cleaned_data.get('lists')
+    mailman.update_subscription(user.email, mailing_lists)
 
     messages.success(request, _('Your profile has been created!'))
     messages.warning(request, _('You must login to validated your profile. '
