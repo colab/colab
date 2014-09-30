@@ -5,5 +5,5 @@ from ..utils.views import ColabProxyView
 
 
 class GitlabProxyView(ColabProxyView):
-    upstream = settings.COLAB_GITLAB_URL
+    upstream = settings.PROXIED_APPS['gitlab']['upstream']
     diazo_theme_template = 'proxy/gitlab.html'
