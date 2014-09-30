@@ -2,7 +2,8 @@
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
  
-reqs = [str(req.req) for req in parse_requirements('requirements.txt') if req]
+reqs = [str(req.req) for req in parse_requirements('requirements.txt')
+        if req.req]
 
 
 EXCLUDE_FROM_PACKAGES = []
