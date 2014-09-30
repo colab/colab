@@ -306,10 +306,10 @@ DPASTE_LEXER_DEFAULT = 'text'
 from .utils.conf import load_yaml_settings
 locals().update(load_yaml_settings())
 
-if RAVEN_DSN:
+if locals().get('RAVEN_DSN', False):
     RAVEN_CONFIG = {
         'dsn': RAVEN_DSN + '?timeout=30',
     }
 
-for app_label in PROXIED_APPS.keys():
+for app_label in locals().get('PROXIED_APPS', {}).keys():
     INSTALLED_APPS += ('proxy.{}'.format(app_label),)
