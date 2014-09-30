@@ -19,6 +19,9 @@ setup(
     license='LICENSE.txt',
     packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
     include_package_data=True,
+    entry_points={'console_scripts': [
+        'colab-admin = colab.management:execute_from_command_line',
+    ]},
     zip_safe=False,
     long_description=open('README.rst').read(),
     install_requires=reqs,
