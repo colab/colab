@@ -1,3 +1,3 @@
 
 
-default_app_config = 'super_archives.apps.SuperArchivesConfig'
+default_app_config = 'colab.super_archives.apps.SuperArchivesConfig'

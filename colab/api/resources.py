@@ -6,7 +6,7 @@ from tastypie import fields
 from tastypie.constants import ALL_WITH_RELATIONS, ALL
 from tastypie.resources import ModelResource
 
-from super_archives.models import Message, EmailAddress
+from colab.super_archives.models import Message, EmailAddress
 #from proxy.trac.models import Revision, Ticket, Wiki
 
 User = get_user_model()

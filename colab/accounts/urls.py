@@ -4,15 +4,15 @@ from django.conf.urls import patterns, include, url
 from .views import (UserProfileDetailView, UserProfileUpdateView,
                     ManageUserSubscriptionsView, ChangeXMPPPasswordView)
 
-from accounts import views
+from . import views
 
 urlpatterns = patterns('',
-    url(r'^register/$', 'accounts.views.signup', name='signup'),
+    url(r'^register/$', 'colab.accounts.views.signup', name='signup'),
 
     url(r'^change-password/$',
         ChangeXMPPPasswordView.as_view(), name='change_password'),
 
-    url(r'^logout/?$',  'accounts.views.logoutColab', name='logout'),
+    url(r'^logout/?$', 'colab.accounts.views.logoutColab', name='logout'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),

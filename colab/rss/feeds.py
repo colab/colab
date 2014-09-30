@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 from haystack.query import SearchQuerySet
 
-from super_archives.models import Thread
+from colab.super_archives.models import Thread
 
 
 class LatestThreadsFeeds(Feed):

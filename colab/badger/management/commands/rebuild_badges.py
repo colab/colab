@@ -3,8 +3,8 @@
 from django.core.management.base import BaseCommand, CommandError
 from haystack.query import SearchQuerySet
 
-from accounts.models import User
-from badger.models import Badge
+from colab.accounts.models import User
+from colab.badger.models import Badge
 
 
 class Command(BaseCommand):

@@ -3,7 +3,7 @@
 from haystack import indexes
 from django.db.models import Count
 
-from badger.utils import get_users_counters
+from colab.badger.utils import get_users_counters
 from .models import User
 
 

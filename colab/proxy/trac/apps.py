@@ -3,5 +3,5 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyTracAppConfig(ColabProxiedAppConfig):
-    name = 'proxy.trac'
+    name = 'colab.proxy.trac'
     verbose_name = 'Trac Proxy'

@@ -4,7 +4,7 @@ from django.db.models import Count
 
 #from proxy.trac.models import (Revision, Ticket, Wiki,
 #                          WikiCollabCount, TicketCollabCount)
-from accounts.models import User
+from colab.accounts.models import User
 
 
 def get_wiki_counters():

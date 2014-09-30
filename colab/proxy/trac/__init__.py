@@ -1,3 +1,3 @@
 
 
-default_app_config = 'proxy.trac.apps.ProxyTracAppConfig'
+default_app_config = 'colab.proxy.trac.apps.ProxyTracAppConfig'

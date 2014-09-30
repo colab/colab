@@ -3,5 +3,5 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyJenkinsAppConfig(ColabProxiedAppConfig):
-    name = 'proxy.jenkins'
+    name = 'colab.proxy.jenkins'
     verbose_name = 'Jenkins Proxy'

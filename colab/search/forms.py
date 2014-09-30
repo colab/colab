@@ -8,8 +8,8 @@ from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
 from haystack.inputs import AltParser
 
-from accounts.models import User
-from super_archives.models import Message, MailingList
+from colab.accounts.models import User
+from colab.super_archives.models import Message, MailingList
 
 
 class ColabSearchForm(SearchForm):

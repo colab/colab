@@ -4,7 +4,7 @@ import math
 
 from haystack import indexes
 
-from search.base_indexes import BaseIndex
+from colab.search.base_indexes import BaseIndex
 from .models import Thread
 
 

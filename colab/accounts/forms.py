@@ -6,9 +6,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from conversejs.models import XMPPAccount
 
-from accounts.utils import mailman
-from super_archives.models import MailingList
+from ..super_archives.models import MailingList
 from .utils.validators import validate_social_account
+from .utils import mailman
 
 User = get_user_model()
 

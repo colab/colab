@@ -20,7 +20,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from haystack.query import SearchQuerySet
 
-from accounts.utils import mailman
+from colab.accounts.utils import mailman
 from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, \
                     EmailAddressValidation, Message

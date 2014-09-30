@@ -1,3 +1,3 @@
 
 
-default_app_config = 'proxy.redmine.apps.ProxyRedmineAppConfig'
+default_app_config = 'colab.proxy.redmine.apps.ProxyRedmineAppConfig'

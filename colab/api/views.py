@@ -5,7 +5,7 @@ from django.views.generic import View
 from django.core.exceptions import ObjectDoesNotExist
 
 
-from super_archives.models import Message
+from colab.super_archives.models import Message
 
 
 class VoteView(View):

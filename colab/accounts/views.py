@@ -22,8 +22,8 @@ from conversejs import xmpp
 from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
-from super_archives.models import EmailAddress, Message
-from search.utils import trans
+from colab.super_archives.models import EmailAddress, Message
+from colab.search.utils import trans
 #from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)

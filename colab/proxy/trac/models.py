@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.db import models
-from django.conf import settings
 import os
 import urllib2
 
-from accounts.models import User
+from django.db import models
+from django.conf import settings
+
 from hitcounter.models import HitCounterModelMixin
+
+from colab.accounts.models import User
 
 
 class Attachment(models.Model, HitCounterModelMixin):

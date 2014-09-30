@@ -10,7 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+BASE_DIR = os.path.dirname(__file__)
 
 # Used for settings translation
 from django.utils.translation import ugettext_lazy as _
@@ -19,7 +19,7 @@ from django.utils.translation import ugettext_lazy as _
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "{{ secret_key }}"
+SECRET_KEY = ""
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,11 +40,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # First app to provide  AUTH_USER_MODEL to others
-    'accounts',
+    # First app to provide AUTH_USER_MODEL to others
+    'colab.accounts',
 
     # Not standard apps
-    'raven.contrib.django.raven_compat',
     'cliauth',
     'django_mobile',
     'django_browserid',
@@ -56,13 +55,14 @@ INSTALLED_APPS = (
     'dpaste',
 
     # Own apps
-    'super_archives',
-    'api',
-    'rss',
-    'planet',
-    'search',
-    'badger',
-    'tz',
+    'colab.home',
+    'colab.super_archives',
+    'colab.api',
+    'colab.rss',
+    'colab.planet',
+    'colab.search',
+    'colab.badger',
+    'colab.tz',
 
     # Feedzilla and deps
     'feedzilla',
@@ -211,9 +211,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
     'django_mobile.context_processors.is_mobile',
-    'super_archives.context_processors.mailarchive',
-    'proxy.context_processors.proxied_apps',
-    'home.context_processors.robots',
+    'colab.super_archives.context_processors.mailarchive',
+    'colab.proxy.context_processors.proxied_apps',
+    'colab.home.context_processors.robots',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -226,13 +226,13 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
-    'tz.middleware.TimezoneMiddleware',
+    'colab.tz.middleware.TimezoneMiddleware',
 )
 
 # Add the django_browserid authentication backend.
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'accounts.auth.ColabBrowserIDBackend',
+    'colab.accounts.auth.ColabBrowserIDBackend',
 )
 
 STATICFILES_DIRS = (
@@ -310,6 +310,7 @@ if locals().get('RAVEN_DSN', False):
     RAVEN_CONFIG = {
         'dsn': RAVEN_DSN + '?timeout=30',
     }
+    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
 
 for app_label in locals().get('PROXIED_APPS', {}).keys():
-    INSTALLED_APPS += ('proxy.{}'.format(app_label),)
+    INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)

@@ -6,11 +6,11 @@ from django.core.cache import cache
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 
-from search.utils import trans
 from haystack.query import SearchQuerySet
 
 #from proxy.trac.models import WikiCollabCount, TicketCollabCount
-from super_archives.models import Thread
+from colab.search.utils import trans
+from colab.super_archives.models import Thread
 
 
 def index(request):

@@ -12,14 +12,14 @@ from optparse import make_option
 
 from django.db import transaction
 from django.template.defaultfilters import slugify
-from super_archives.utils.email import colab_send_email
 from django.core.management.base import BaseCommand, CommandError
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
-from super_archives.models import MailingList, Message, \
+from colab.super_archives.utils.email import colab_send_email
+from colab.super_archives.models import MailingList, Message, \
                                   Thread, EmailAddress
-from super_archives.management.commands.message import Message as \
+from colab.super_archives.management.commands.message import Message as \
                                                        CustomMessage
 
 

@@ -1,3 +1,3 @@
 
 
-default_app_config = 'proxy.jenkins.apps.ProxyJenkinsAppConfig'
+default_app_config = 'colab.proxy.jenkins.apps.ProxyJenkinsAppConfig'

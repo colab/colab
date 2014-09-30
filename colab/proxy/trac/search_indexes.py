@@ -8,7 +8,7 @@ from django.utils.text import slugify
 from haystack import indexes
 from haystack.utils import log as logging
 
-from search.base_indexes import BaseIndex
+from colab.search.base_indexes import BaseIndex
 from .models import Attachment, Ticket, Wiki, Revision
 
 
