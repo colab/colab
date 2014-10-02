@@ -39,7 +39,7 @@ class colab (
 
   appdeploy::django { 'colab':
     user      => 'colab',
-    directory => '/home/colab/colab/src',
+    directory => '/home/colab/',
     proxy_hosts => $colab::hostnames,
   }
 
