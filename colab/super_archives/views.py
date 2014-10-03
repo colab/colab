@@ -21,6 +21,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from haystack.query import SearchQuerySet
 
 from colab.accounts.utils import mailman
+from colab.accounts.models import User
 from .utils.email import send_verification_email
 from .models import MailingList, Thread, EmailAddress, \
                     EmailAddressValidation, Message
@@ -159,7 +160,7 @@ class EmailView(View):
         except EmailAddress.DoesNotExist:
             email = EmailAddress(address=email_val.address)
 
-        if email.user:
+        if email.user and email.user.is_active:
             messages.error(request, _('The email address you are trying to '
                                       'verify is already an active email '
                                       'address.'))
@@ -169,6 +170,10 @@ class EmailView(View):
         email.user = email_val.user
         email.save()
         email_val.delete()
+        
+        user = User.objects.get(username=email.user.username)
+        user.is_active = True
+        user.save()
 
         messages.success(request, _('Email address verified!'))
         return redirect('user_profile', username=email_val.user.username)

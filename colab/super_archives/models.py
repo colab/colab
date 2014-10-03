@@ -17,7 +17,7 @@ from taggit.managers import TaggableManager
 from hitcounter.models import HitCounterModelMixin
 
 from .managers import NotSpamManager, MostVotedManager, HighestScore
-from .utils import blocks
+from .utils import blocks, email
 from .utils.etiquetador import etiquetador
 
 
@@ -36,6 +36,13 @@ class EmailAddressValidation(models.Model):
     class Meta:
         unique_together = ('user', 'address')
 
+    @classmethod
+    def create(cls, address, user):
+        email_address_validation = cls.objects.create(address=address, user=user)
+        email.send_verification_email(email_address_validation.address, 
+                email_address_validation.user, 
+                email_address_validation.validation_key)
+        return email_address_validation
 
 class EmailAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,

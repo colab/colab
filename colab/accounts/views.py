@@ -20,7 +20,7 @@ from conversejs import xmpp
 from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
-from colab.super_archives.models import EmailAddress, Message
+from colab.super_archives.models import EmailAddress, Message, EmailAddressValidation
 from colab.search.utils import trans
 # from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
@@ -160,6 +160,10 @@ def signup(request):
 
     user = user_form.save(commit=False)
     user.needs_update = False
+    if not browser_id:
+        user.is_active = False
+        EmailAddressValidation.create(user.email, user)
+
     user.save()
 
     # Check if the user's email have been used previously
