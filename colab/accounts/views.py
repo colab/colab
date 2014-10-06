@@ -275,3 +275,10 @@ class ChangeXMPPPasswordView(UpdateView):
             _("You've changed your password successfully!")
         )
         return response
+
+def password_changed(request):
+    messages.success(request, _('Your password has been updated!'))
+
+    user = request.user
+
+    return redirect('user_profile_update', username=user.username)
