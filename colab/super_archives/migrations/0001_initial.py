@@ -3,10 +3,10 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import hitcounter.models
-import colab.super_archives.models
+import taggit.managers
 import django.db.models.deletion
 from django.conf import settings
-import taggit.managers
+import colab.super_archives.models
 
 
 class Migration(migrations.Migration):
@@ -74,7 +74,7 @@ class Migration(migrations.Migration):
             name='MailingListMembership',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('mailinglist', models.ForeignKey(to='colab.super_archives.MailingList')),
+                ('mailinglist', models.ForeignKey(to='super_archives.MailingList')),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -91,7 +91,7 @@ class Migration(migrations.Migration):
                 ('received_time', models.DateTimeField(db_index=True)),
                 ('message_id', models.CharField(max_length=512)),
                 ('spam', models.BooleanField(default=False)),
-                ('from_address', models.ForeignKey(to='colab.super_archives.EmailAddress')),
+                ('from_address', models.ForeignKey(to='super_archives.EmailAddress')),
             ],
             options={
                 'ordering': ('received_time',),
@@ -107,7 +107,7 @@ class Migration(migrations.Migration):
                 ('text', models.TextField()),
                 ('is_reply', models.BooleanField(default=False)),
                 ('order', models.IntegerField()),
-                ('message', models.ForeignKey(related_name=b'blocks', to='colab.super_archives.Message')),
+                ('message', models.ForeignKey(related_name=b'blocks', to='super_archives.Message')),
             ],
             options={
                 'ordering': ('order',),
@@ -120,7 +120,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('name', models.CharField(max_length=512)),
                 ('value', models.TextField()),
-                ('Message', models.ForeignKey(to='colab.super_archives.Message')),
+                ('Message', models.ForeignKey(to='super_archives.Message')),
             ],
             options={
             },
@@ -133,8 +133,8 @@ class Migration(migrations.Migration):
                 ('subject_token', models.CharField(max_length=512)),
                 ('score', models.IntegerField(default=0, help_text='Thread score', verbose_name='Score')),
                 ('spam', models.BooleanField(default=False)),
-                ('latest_message', models.OneToOneField(related_name=b'+', null=True, to='colab.super_archives.Message', help_text='Latest message posted', verbose_name='Latest message')),
-                ('mailinglist', models.ForeignKey(verbose_name='Mailing List', to='colab.super_archives.MailingList', help_text='The Mailing List where is the thread')),
+                ('latest_message', models.OneToOneField(related_name=b'+', null=True, to='super_archives.Message', help_text='Latest message posted', verbose_name='Latest message')),
+                ('mailinglist', models.ForeignKey(verbose_name='Mailing List', to='super_archives.MailingList', help_text='The Mailing List where is the thread')),
                 ('tags', taggit.managers.TaggableManager(to='taggit.Tag', through='taggit.TaggedItem', help_text='A comma-separated list of tags.', verbose_name='Tags')),
             ],
             options={
@@ -149,7 +149,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', models.DateTimeField(auto_now_add=True)),
-                ('message', models.ForeignKey(to='colab.super_archives.Message')),
+                ('message', models.ForeignKey(to='super_archives.Message')),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
             options={
@@ -167,7 +167,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='message',
             name='thread',
-            field=models.ForeignKey(to='colab.super_archives.Thread', null=True),
+            field=models.ForeignKey(to='super_archives.Thread', null=True),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
@@ -177,7 +177,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='keyword',
             name='thread',
-            field=models.ForeignKey(to='colab.super_archives.Thread'),
+            field=models.ForeignKey(to='super_archives.Thread'),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
