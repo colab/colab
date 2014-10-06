@@ -1,6 +1,9 @@
 
 import os
+
 from django.core.management import ManagementUtility
+
+from .initconfig import initconfig
 
 
 def execute_from_command_line(argv=None):
@@ -12,3 +15,7 @@ def execute_from_command_line(argv=None):
 
     utility = ManagementUtility(argv)
     utility.execute()
+
+
+def run_colab_config(argv=None):
+    initconfig()

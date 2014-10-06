@@ -21,6 +21,7 @@ setup(
     include_package_data=True,
     entry_points={'console_scripts': [
         'colab-admin = colab.management:execute_from_command_line',
+        'colab-init-config = colab.management:initconfig',
     ]},
     zip_safe=False,
     long_description=open('README.rst').read(),
