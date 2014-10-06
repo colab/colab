@@ -5,5 +5,5 @@ from ..utils.views import ColabProxyView
 
 
 class RedmineProxyView(ColabProxyView):
-    upstream = settings.PROXIED_APPS['redmine']['upstream']
+    app_label = 'redmine'
     diazo_theme_template = 'proxy/redmine.html'

@@ -5,4 +5,4 @@ from ..utils.views import ColabProxyView
 
 
 class JenkinsProxyView(ColabProxyView):
-    upstream = settings.PROXIED_APPS['jenkins']['upstream']
+    app_label = 'jenkins'

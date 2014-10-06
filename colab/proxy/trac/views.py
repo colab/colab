@@ -8,7 +8,7 @@ from .models import Wiki, Ticket, Revision
 
 
 class TracProxyView(HitCounterViewMixin, ColabProxyView):
-    upstream = settings.PROXIED_APPS['trac']['upstream']
+    app_label = 'trac'
     diazo_theme_template = 'proxy/trac.html'
 
     def get_object(self):
