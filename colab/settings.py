@@ -312,5 +312,6 @@ if locals().get('RAVEN_DSN', False):
     }
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
 
-for app_label in locals().get('PROXIED_APPS', {}).keys():
+proxied_apps = locals().get('PROXIED_APPS') or {}
+for app_label in proxied_apps.keys():
     INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)
