@@ -1,1 +1,0 @@
-* * * * * colab /home/colab/.virtualenvs/colab/bin/python ~/colab/src/manage.py import_emails --archives_path=<%= scope['colab::mailman_archive_path'] %> <% scope['colab::mailman_exclude_lists'].each do |exclude| %>--exclude-list=<%= exclude %> <% end %>&> /dev/null

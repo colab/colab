@@ -1,6 +1,0 @@
-tracywebtech-appdeploy==0.8.10
-tracywebtech-security_updates==0.9.0
-tracywebtech-pip==1.3.2
-
-puppetlabs-ntp
-puppetlabs-postgresql
