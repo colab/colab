@@ -267,7 +267,7 @@ FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 MAILMAN_API_URL = 'http://localhost:9000'
 
 ### BrowserID / Persona
-SITE_URL = 'localhost:8000'
+SITE_URL = 'http://localhost:8000'
 BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
 

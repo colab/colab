@@ -29,6 +29,10 @@ EMAIL_SUBJECT_PREFIX: '[colab]'
 SECRET_KEY: '{secret_key}'
 
 SITE_URL: 'http://www.example.com/'
+BROWSERID_AUDIENCES:
+  - http://example.com
+  - https://example.org
+  - http://example.net
 
 ALLOWED_HOSTS:
   - example.com
