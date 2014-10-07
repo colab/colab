@@ -2,19 +2,11 @@
 
 UBUNTU=$(lsb_release -sc)
 
-if [[ $UBUNTU == 'precise' ]]
-then
-    postgresql_pkg='postgresql-9.1'
-elif [[ $UBUNTU == 'trusty' ]]
-then
-    postgresql_pkg='postgresql-9.3'
-fi
-
 
 ### Install dependencies
 apt-get update
 
-apt-get install curl git unzip mercurial build-essential libev-dev gettext libxml2-dev libxslt1-dev libssl-dev libffi-dev libjpeg-dev zlib1g-dev libfreetype6-dev libpq-dev python-dev $postgresql_pkg -y
+apt-get install curl git unzip mercurial build-essential libev-dev gettext libxml2-dev libxslt1-dev libssl-dev libffi-dev libjpeg-dev zlib1g-dev libfreetype6-dev libpq-dev python-dev postgresql -y
 
 
 ### Install Virtualenvwrapper
