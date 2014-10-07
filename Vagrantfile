@@ -18,27 +18,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
 
-  config.vm.define "colab" do |colab|
+  config.vm.box = distro
 
-    colab.vm.box = distro
-
-    if distro == "precise64"
-      colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-      config.vm.provision "shell", path: "vagrant/ubuntu.sh"
-    elsif distro == "trusty64"
-      colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-      config.vm.provision "shell", path: "vagrant/ubuntu.sh"
-    elsif distro == "centos6.5"
-      colab.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
-      config.vm.provision "shell", path: "vagrant/centos.sh"
-    end
-    config.vm.provision "shell", privileged: false, keep_color: true, path: "vagrant/provision.sh"
-
-    colab.vm.network :forwarded_port, guest: 8000, host: 8000 # Colab (runserver)
-    colab.vm.network :forwarded_port, guest: 5280, host: 5280 # BOSH server
-    colab.vm.network :forwarded_port, guest: 8983, host: 8983 # Solr
-
+  if distro == "precise64"
+    config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+    config.vm.provision "shell", path: "vagrant/ubuntu.sh"
+  elsif distro == "trusty64"
+    config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    config.vm.provision "shell", path: "vagrant/ubuntu.sh"
+  elsif distro == "centos6.5"
+    config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
+    config.vm.provision "shell", path: "vagrant/centos.sh"
   end
+  config.vm.provision "shell", privileged: false, keep_color: true, path: "vagrant/provision.sh"
+
+  config.vm.network :forwarded_port, guest: 8000, host: 8000 # Colab (runserver)
+  config.vm.network :forwarded_port, guest: 5280, host: 5280 # BOSH server
+  config.vm.network :forwarded_port, guest: 8983, host: 8983 # Solr
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
