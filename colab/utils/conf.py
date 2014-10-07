@@ -27,6 +27,6 @@ def load_yaml_settings():
                'has read rights.').format(yaml_path)
         raise InaccessibleYAMLSettings(msg)
 
-    return yaml_settings
+    return yaml_settings or {}
 
 yaml_settings = load_yaml_settings()
