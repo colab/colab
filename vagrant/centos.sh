@@ -49,10 +49,11 @@ chown vagrant:vagrant /etc/colab
 
 ## Configuring postgres
 if [ ! -f /var/lib/pgsql/data/pg_hba.conf.bkp ]; then
+    service postgresql initdb
     cp /var/lib/pgsql/data/pg_hba.conf /var/lib/pgsql/data/pg_hba.conf.bkp
-    echo "host  all  colab  127.0.0.1/32  md5" > /var/lib/pgsql/data/pg_hba.conf
-    echo "host  all  colab  ::1/128       md5" >> /var/lib/pgsql/data/pg_hba.conf
-    service postgresql initdb &> /dev/null
+    echo "local all  all                ident" > /var/lib/pgsql/data/pg_hba.conf
+    echo "host  all  all  127.0.0.1/32  md5" >> /var/lib/pgsql/data/pg_hba.conf
+    echo "host  all  all  ::1/128       md5" >> /var/lib/pgsql/data/pg_hba.conf
     service postgresql restart
 fi
 
