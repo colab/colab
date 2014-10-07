@@ -1,5 +1,8 @@
 #!/bin/bash
 
+### Disable annoying plugin
+sed -i'' s/enabled=1/enabled=0/g /etc/yum/pluginconf.d/fastestmirror.conf
+
 ### Add PUIAS repo
 
 yum install curl -y
