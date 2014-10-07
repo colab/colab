@@ -26,17 +26,11 @@
 {% block head_js %}
 <script type="text/javascript">
   $(function(){
-    // TODO: Somehow when there's a merge request, all options just disapear
-    // so this fix makes it show up again
-    $('div.panel-body div.automerge_widget').removeClass('hide');
-
-    // TODO: Somehow the dangerous settings are not showing up for default
-    // but for a mistery, they come back to live if the first status is
-    // not-hide
-    $('div.danger-settings div.js-toggle-content').removeClass('hide');
-
-    // TODO: For the same reason from the two walkarounds above
-    $('div.new-group-member-holder').removeClass('hide');
+    // bootstrap.css forces .hide {display:none!important}, and this makes
+    // gitlab .hide elements NEVER have a display:block, so
+    // instead of editing bootstrap.css, we just removed '.hide' css class and
+    // toggled 
+    $('.hide').removeClass('hide').css('display', 'none');
   });
 </script>
 <script type="text/javascript" src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
