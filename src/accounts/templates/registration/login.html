@@ -41,7 +41,7 @@
     <div class="submit">
       <input type="submit" value="{% trans 'Login' %}" class="btn btn-primary btn-lg btn-block">
     </div>
-    <p class="text-center"><a>{% trans 'Forgot Password?' %}</a></p>
+    <p class="text-center"><a href="{% url 'password_reset' %}">{% trans 'Forgot Password?' %}</a></p>
   </div>
 
 </form>

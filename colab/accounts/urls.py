@@ -10,6 +10,21 @@ from django.contrib.auth import views as auth_views
 urlpatterns = patterns('',
     url(r'^register/$', 'colab.accounts.views.signup', name='signup'),
 
+    url(r'^password-reset-done/?$',
+        'django.contrib.auth.views.password_reset_done',
+        name="password_reset_done"),
+
+    url(r'^password-reset-complete/$',
+        'django.contrib.auth.views.password_reset_complete',
+        name="password_reset_complete"),
+
+    url(r'^password-reset-confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
+        'django.contrib.auth.views.password_reset_confirm',
+        name="password_reset_confirm"),
+
+    url(r'^password-reset/?$',
+        'django.contrib.auth.views.password_reset', name="password_reset"),
+
     url(r'^change-password/?$',
         auth_views.password_change,
         {'template_name': 'registration/password_change.html'},
