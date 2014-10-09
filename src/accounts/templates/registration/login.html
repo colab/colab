@@ -9,7 +9,14 @@
     <b>{% trans "Please correct the errors below and try again" %}</b>
   </div>
   {% endif %}
+
+  {% for error in form.non_field_errors %}
+  <div class="alert alert-danger">
+    {{ error }}
+  </div>
+  {% endfor %}
 </div>
+
 
 <br>
 <form action="{% url 'login' %}" method="post" role="form" class="form-horizontal signup">
