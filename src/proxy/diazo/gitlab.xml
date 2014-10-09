@@ -7,6 +7,10 @@
     <before css:theme-children="#main-content" css:content-children="body" />
 
     <merge attributes="class" css:theme="body" css:content="body" />
+    
+    <!-- Add gitlab properties -->
+    <merge attributes="data-page" css:theme="body" css:content="body" />
+    <merge attributes="data-project-id" css:theme="body" css:content="body" />
 
     <drop css:content="#top-panel" />
     <drop css:content=".navbar-gitlab" />
