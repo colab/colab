@@ -3,6 +3,14 @@
 
 {% block head_css %}
 <style>
+  /* Reset left and with for .modal-dialog style (like gitlab does), 
+     the bootstrap.css one makes it small */
+  @media screen and (min-width: 768px) {
+    .modal-dialog {
+      left: auto;
+      width: auto;
+    }
+  }
   div#main-content {
     margin-top: 65px;
   }
