@@ -14,8 +14,14 @@ fi
 
 workon colab
 
-pip install -r /vagrant/requirements.txt
-pip install -e /vagrant
+for dir in /vagrant/colab /vagrant; do
+    if [ -f $dir/setup.py ]; then
+        basedir="$dir"
+        break
+    fi
+done
+pip install -r $basedir/requirements.txt
+pip install -e $basedir
 
 if [ ! -s /etc/colab/settings.yaml ]; then
     colab-init-config > /etc/colab/settings.yaml
