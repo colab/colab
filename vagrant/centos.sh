@@ -21,6 +21,14 @@ if [ ! -f /etc/yum.repos.d/puias-6-computational.repo ]; then
     yum install springdale-computational -y
 fi
 
+if [ -n "$http_proxy" ]; then
+    # force all repositories to always use the same host to take advantage of a
+    # local proxy
+    repos=$(grep -rl '^#baseurl' /etc/yum.repos.d)
+    if [ -n "$repos" ]; then
+        sed -i -e 's/^#baseurl/baseurl/; s/^mirrorlist=/#mirrorlist-/' $repos
+    fi
+fi
 
 ### Install dependencies
 
