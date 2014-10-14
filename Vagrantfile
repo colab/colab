@@ -6,7 +6,26 @@
 # - trusty64
 # - centos6.5
 
-distro = "precise64"
+default_box = "precise64"
+if $stdin.isatty
+  if Dir.glob(File.join(File.dirname("__FILE__"), '.vagrant/**/id')).empty?
+    puts "Bases boxes available locally:"
+    puts '------------------------------'
+    system('vagrant', 'box', 'list')
+    puts
+    puts 'Base boxes we can provide you:'
+    puts '------------------------------'
+    puts 'precise64 (virtualbox)'
+    puts 'trusty64  (virtualbox)'
+    puts 'centos6.5 (virtualbox)'
+    puts
+    print "Which box to use [#{default_box}]: "
+    choice = $stdin.gets.strip
+    if !choice.empty?
+      default_box = choice
+    end
+  end
+end
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -18,13 +37,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
 
-  config.vm.box = distro
+  config.vm.box = default_box
 
-  if distro == "precise64"
+  case config.vm.box
+  when "precise64"
     config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-  elsif distro == "trusty64"
+  when "trusty64"
     config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-  elsif distro == "centos6.5"
+  when "centos6.5"
     config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
   end
 
