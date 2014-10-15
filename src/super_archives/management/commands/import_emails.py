@@ -7,6 +7,7 @@ import os
 import re
 import sys
 import mailbox
+import logging
 from optparse import make_option
 
 from django.db import transaction
@@ -248,7 +249,6 @@ class Command(BaseCommand, object):
                 # This anti-pattern is needed to avoid the transations to
                 #   get stuck in case of errors.
                 transaction.rollback()
-                os.remove(self.lock_file)
                 raise
 
             count += 1
@@ -279,8 +279,14 @@ class Command(BaseCommand, object):
         run_lock = file(self.lock_file, 'w')
         run_lock.close()
 
-        self.import_emails(archives_path,
+        try:
+            self.import_emails(archives_path,
                            options.get('all'), options.get('exclude_lists'))
+        except Exception, e:
+            logging.except(e)
+            raise
+        finally:
+            os.remove(self.lock_file)
 
         os.remove(self.lock_file)
 
