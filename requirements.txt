@@ -45,8 +45,7 @@ transliterate==1.5
 diazo==1.0.5
 
 # Dpaste
-# TODO: Pull-request to mainstream repository
--e git+https://github.com/colab/dpaste@i18n/pt_BR#egg=dpaste
+dpaste-i18n==2.8
 
 # Mailman 2 REST API
 mailman-api==0.2.1
