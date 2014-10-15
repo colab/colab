@@ -2,11 +2,12 @@
 
 set -e
 
-if [ -d /vagrant/colab ]; then
-  basedir=/vagrant/colab
-else
-  basedir=/vagrant
-fi
+for dir in /vagrant/colab /vagrant; do
+    if [ -f $dir/setup.py ]; then
+        basedir="$dir"
+        break
+    fi
+done
 
 # very simple OS detection
 if [ -x /usr/bin/apt-get ]; then
