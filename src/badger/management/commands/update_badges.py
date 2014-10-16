@@ -11,21 +11,13 @@ import logging
 class Command(BaseCommand):
     help = "Update the user's badges"
 
-    def search(self, object_type, **opts={}):
-        try:
-            sqs = SearchQuerySet().filter(type=object_type, **opts)
-        except Exception, e:
-            logging.except(e)
-            raise
-        return sqs
-
-    def handle(self, *args, **kwargs):
+    def update_badges(self):
         for badge in Badge.objects.filter(type='auto'):
             if not badge.comparison:
                 continue
             elif badge.comparison == 'biggest':
                 order = u'-{}'.format(Badge.USER_ATTR_OPTS[badge.user_attr])
-                sqs = self.search('user')
+                sqs = SearchQuerySet().filter(type='user')
                 user = sqs.order_by(order)[0]
                 badge.awardees.add(User.objects.get(pk=user.pk))
                 continue
@@ -39,7 +31,14 @@ class Command(BaseCommand):
             )
             opts = {key: badge.value}
 
-            sqs = self.search('user', **opts)
+            sqs = SearchQuerySet().filter(type='user', **opts)
 
             for user in sqs:
                 badge.awardees.add(User.objects.get(pk=user.pk))
+
+    def handle(self, *args, **kwargs):
+        try:
+            self.update_badges()
+        except Exception as e:
+            logging.exception(e)
+            raise

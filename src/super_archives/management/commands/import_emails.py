@@ -282,11 +282,9 @@ class Command(BaseCommand, object):
         try:
             self.import_emails(archives_path,
                            options.get('all'), options.get('exclude_lists'))
-        except Exception, e:
-            logging.except(e)
+        except Exception as e:
+            logging.exception(e)
             raise
         finally:
             os.remove(self.lock_file)
-
-        os.remove(self.lock_file)
 
