@@ -6,7 +6,26 @@
 # - trusty64
 # - centos6.5
 
-distro = "precise64"
+default_box = "precise64"
+if $stdin.isatty
+  if Dir.glob(File.join(File.dirname("__FILE__"), '.vagrant/**/id')).empty?
+    puts "Bases boxes available locally:"
+    puts '------------------------------'
+    system('vagrant', 'box', 'list')
+    puts
+    puts 'Base boxes we can provide you:'
+    puts '------------------------------'
+    puts 'precise64 (virtualbox)'
+    puts 'trusty64  (virtualbox)'
+    puts 'centos6.5 (virtualbox)'
+    puts
+    print "Which box to use [#{default_box}]: "
+    choice = $stdin.gets.strip
+    if !choice.empty?
+      default_box = choice
+    end
+  end
+end
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
@@ -18,32 +37,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Every Vagrant virtual environment requires a box to build off of.
 
-  config.vm.define "colab" do |colab|
+  config.vm.box = default_box
 
-    colab.vm.box = distro
-
-    if distro == "precise64"
-      colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
-    elsif distro == "trusty64"
-      colab.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-    elsif distro == "centos6.5"
-      colab.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
-    end
-
-    colab.vm.network :forwarded_port, guest: 80, host: 8080
-    colab.vm.network :forwarded_port, guest: 8000, host: 8000
-    colab.vm.network :forwarded_port, guest: 5280, host: 5280
-    colab.vm.network :forwarded_port, guest: 8080, host: 8081
-    colab.vm.network :forwarded_port, guest: 8983, host: 8983
-
-    colab.vm.network "private_network", ip: "192.168.33.10"
-
-    colab.vm.provider "virtualbox" do |vb|
-      # Use VBoxManage to customize the VM. For example to change memory:
-      vb.customize ["modifyvm", :id, "--memory", "1024"]
-    end
-
+  case config.vm.box
+  when "precise64"
+    config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
+  when "trusty64"
+    config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+  when "centos6.5"
+    config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
   end
+
+  config.vm.provision "shell", keep_color: true, path: 'vagrant/bootstrap.sh'
+  config.vm.provision "shell", privileged: false, keep_color: true, path: "vagrant/provision.sh"
+
+  config.vm.network :forwarded_port, guest: 8000, host: 8000 # Colab (runserver)
+  config.vm.network :forwarded_port, guest: 5280, host: 5280 # BOSH server
+  config.vm.network :forwarded_port, guest: 8983, host: 8983 # Solr
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -73,19 +83,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder ".", "/vagrant", type: "nfs"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "virtualbox" do |vb|
   #   # Don't boot with headless mode
   #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
+
+    # Use VBoxManage to customize the VM. For example to change memory:
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.

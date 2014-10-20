@@ -8,7 +8,9 @@ project_cfg.py
 
 *.swp
 *.sqlite3
+*.db
 .DS_Store
 .vagrant
 
 ext/
+*.egg-info/
