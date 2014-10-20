@@ -6,11 +6,12 @@ from haystack.query import SearchQuerySet
 from accounts.models import User
 from badger.models import Badge
 
+import logging
 
 class Command(BaseCommand):
     help = "Update the user's badges"
 
-    def handle(self, *args, **kwargs):
+    def update_badges(self):
         for badge in Badge.objects.filter(type='auto'):
             if not badge.comparison:
                 continue
@@ -30,10 +31,14 @@ class Command(BaseCommand):
             )
             opts = {key: badge.value}
 
-            sqs = SearchQuerySet().filter(
-                type='user',
-                **opts
-            )
+            sqs = SearchQuerySet().filter(type='user', **opts)
 
             for user in sqs:
                 badge.awardees.add(User.objects.get(pk=user.pk))
+
+    def handle(self, *args, **kwargs):
+        try:
+            self.update_badges()
+        except Exception as e:
+            logging.exception(e)
+            raise
