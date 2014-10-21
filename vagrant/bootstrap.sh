@@ -11,8 +11,8 @@ done
 
 # very simple OS detection
 if [ -x /usr/bin/apt-get ]; then
-  exec sh $basedir/vagrant/ubuntu.sh
+  exec $basedir/vagrant/ubuntu.sh
 fi
 if [ -x /usr/bin/yum ]; then
-  exec sh $basedir/vagrant/centos.sh
+  exec $basedir/vagrant/centos.sh
 fi
