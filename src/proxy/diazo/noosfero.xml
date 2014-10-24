@@ -8,8 +8,8 @@
 
     <merge attributes="class" css:theme="body" css:content="body" />
 
-    <!-- Drop noosfero headers
-    <drop css:content="#top-panel" />
-    <drop css:content=".navbar-gitlab" />
-    -->
+    <drop css:content="#barra-brasil" />
+    <drop css:content="#theme-footer" />
+    <drop css:content="#homepage-link" />
+    <drop css:content=".header-content" />
 </rules>
