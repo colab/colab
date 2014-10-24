@@ -243,16 +243,16 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-#  Feedzilla  (planet)
-from feedzilla.settings import *
+# Feedzilla  (planet)
+from feedzilla.settings import *  # noqa (flake8 ignore)
 FEEDZILLA_PAGE_SIZE = 5
 FEEDZILLA_SITE_TITLE = _(u'Planet Colab')
 FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 
-#  Mailman API settings
+# Mailman API settings
 MAILMAN_API_URL = 'http://localhost:9000'
 
-#  BrowserID / Persona
+# BrowserID / Persona
 SITE_URL = 'http://localhost:8000'
 BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
@@ -265,7 +265,7 @@ BROWSERID_CREATE_USER = False
 
 REVPROXY_ADD_REMOTE_USER = True
 
-#  Converse.js settings
+# Converse.js settings
 # This URL must use SSL in order to keep chat sessions secure
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
