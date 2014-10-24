@@ -28,8 +28,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-DATABASE_ROUTERS = []
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -70,24 +68,12 @@ INSTALLED_APPS = (
     'common',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-
 ROOT_URLCONF = 'colab.urls'
 
 WSGI_APPLICATION = 'colab.wsgi.application'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -200,7 +186,6 @@ CACHES = {
 
 DATABASE_ROUTERS = []
 
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
@@ -222,6 +207,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_mobile.middleware.MobileDetectionMiddleware',
@@ -257,16 +243,16 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
-### Feedzilla  (planet)
-from feedzilla.settings import *
+# Feedzilla  (planet)
+from feedzilla.settings import *  # noqa (flake8 ignore)
 FEEDZILLA_PAGE_SIZE = 5
 FEEDZILLA_SITE_TITLE = _(u'Planet Colab')
 FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 
-### Mailman API settings
+# Mailman API settings
 MAILMAN_API_URL = 'http://localhost:9000'
 
-### BrowserID / Persona
+# BrowserID / Persona
 SITE_URL = 'http://localhost:8000'
 BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
@@ -279,7 +265,7 @@ BROWSERID_CREATE_USER = False
 
 REVPROXY_ADD_REMOTE_USER = True
 
-## Converse.js settings
+# Converse.js settings
 # This URL must use SSL in order to keep chat sessions secure
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
