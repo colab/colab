@@ -17,7 +17,7 @@ if $stdin.isatty
     puts '------------------------------'
     puts 'precise64 (virtualbox)'
     puts 'trusty64  (virtualbox)'
-    puts 'centos6.5 (virtualbox)'
+    puts 'centos7.0 (virtualbox)'
     puts
     print "Which box to use [#{default_box}]: "
     choice = $stdin.gets.strip
@@ -44,8 +44,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/precise/current/precise-server-cloudimg-amd64-vagrant-disk1.box"
   when "trusty64"
     config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-  when "centos6.5"
-    config.vm.box_url = "https://github.com/2creatives/vagrant-centos/releases/download/v6.5.3/centos65-x86_64-20140116.box"
+  when "centos7.0"
+    config.vm.box_url = "https://vagrantcloud.com/chef/boxes/centos-7.0/versions/1/providers/virtualbox.box"
   end
 
   config.vm.provision "shell", keep_color: true, path: 'vagrant/bootstrap.sh'
