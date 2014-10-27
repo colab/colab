@@ -5,23 +5,6 @@ set -ex
 ### Disable annoying plugin
 sed -i'' s/enabled=1/enabled=0/g /etc/yum/pluginconf.d/fastestmirror.conf
 
-### Add PUIAS repo
-
-yum install curl -y
-
-if [ ! -f /etc/pki/rpm-gpg/RPM-GPG-KEY-puias ]; then
-    curl -s http://www.math.ias.edu/data/puias/6/i386/os/RPM-GPG-KEY-puias > /etc/pki/rpm-gpg/RPM-GPG-KEY-puias
-fi
-
-if [ ! -f /etc/yum.repos.d/puias-6-core.repo ]; then
-    rpm -i --nodeps http://springdale.math.ias.edu/data/puias/6/x86_64/os/Packages/springdale-release-6-6.5.0.45.sdl6.3.x86_64.rpm --replacefiles
-
-    rpm -i --nodeps http://springdale.math.ias.edu/data/puias/6/x86_64/os/Packages/springdale-core-6-2.sdl6.10.noarch.rpm
-fi
-
-if [ ! -f /etc/yum.repos.d/puias-6-computational.repo ]; then
-    yum install springdale-computational -y
-fi
 
 if [ -n "$http_proxy" ]; then
     # force all repositories to always use the same host to take advantage of a
@@ -36,7 +19,7 @@ fi
 
 yum -y groupinstall "Development tools"
 
-yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python27 python27-devel postgresql-server
+yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python-devel postgresql-server
 
 ### Install Virtualenvwrapper
 which pip2.7 > /dev/null ||
