@@ -92,6 +92,37 @@
                 </ul>
               </li>
             {% endif %}
+            {% if proxy.noosfero %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Social <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="/social/search/people">
+                      Users
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/social/search/communities">
+                      Communities
+                    </a>
+                  </li>
+                  {% if user.is_active %}
+                  <li>
+                    <a href="/social/profile/chaws">
+                      Profile
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/social/myprofile/chaws">
+                      Control panel
+                    </a>
+                  </li>
+                {% endif %}
+                </ul>
+            </li>
+            {% endif %}
             {% if proxy.trac %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contribute" %} <b class="caret"></b></a>
