@@ -28,16 +28,18 @@ EMAIL_SUBJECT_PREFIX: '[colab]'
 
 SECRET_KEY: '{secret_key}'
 
-SITE_URL: 'http://www.example.com/'
+SITE_URL: 'http://localhost:8000/'
 BROWSERID_AUDIENCES:
-  - http://example.com
-  - https://example.org
-  - http://example.net
+  - http://localhost:8000
+#  - http://example.com
+#  - https://example.org
+#  - http://example.net
 
 ALLOWED_HOSTS:
-  - example.com
-  - example.org
-  - example.net
+  - localhost
+#  - example.com
+#  - example.org
+#  - example.net
 
 ### Uncomment to enable Converse.js
 # CONVERSEJS_ENABLED: True

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-UBUNTU=$(lsb_release -sc)
-
+set -ex
 
 ### Install dependencies
 apt-get update

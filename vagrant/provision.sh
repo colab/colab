@@ -1,7 +1,10 @@
 #!/bin/bash
 
+set -x
+
 export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python2.7"
 
+set +e
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 else
@@ -13,6 +16,7 @@ if [ ! -d /home/vagrant/.virtualenvs/colab ]; then
 fi
 
 workon colab
+set -e
 
 for dir in /vagrant/colab /vagrant; do
     if [ -f $dir/setup.py ]; then
