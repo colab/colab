@@ -1,0 +1,32 @@
+.box-1 {
+  margin: 0 200px 0 200px;
+}
+
+.box-1 .blocks {
+  width: 100%;
+  float: left;
+}
+
+.box-2 {
+  position: relative;
+  float: left;
+  width: 190px;
+}
+
+.box-3 {
+  position: relative;
+  float: right;
+  width: 190px;
+}
+
+#profile-activity ul,
+#profile-network ul,
+#profile-wall ul {
+  width: 460px;
+}
+#profile-activity ul.comment-replies,
+#profile-network ul.comment-replies,
+#profile-wall ul.comment-replies {
+  width: auto;
+}
+
