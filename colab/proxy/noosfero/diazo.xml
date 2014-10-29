@@ -7,11 +7,11 @@
     <before css:theme-children="#main-content" css:content-children="body" />
 
     <merge attributes="class" css:theme="body" css:content="body" />
-    <!-- This breaks some noosfero icons -->
-    <drop css:theme="link[href='/static/third-party/font-awesome/css/font-awesome.min.css']" />
-    <!-- <drop css:theme="script[src='/static/third-party/jquery-2.0.3.min.js']" /> -->
-    <!-- <drop theme="/html/head/script" /> -->
 
+    <drop css:theme="link[href='/static/third-party/font-awesome/css/font-awesome.min.css']" />
+    <drop css:theme="link[href='/static/third-party/bootstrap/css/bootstrap.min.css']" />
+    <drop css:theme="link[href='/static/css/screen.css']" />
+    <drop theme="/html/head/script" />
     <drop css:content="#barra-brasil" />
     <drop css:content="#theme-footer" />
     <drop css:content="#homepage-link" />
