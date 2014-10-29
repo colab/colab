@@ -15,3 +15,15 @@
 <script src="{% static 'js/jquery.dropdown.js' %}" type="text/javascript"></script>
 <script src="{% static 'js/collapse.js' %}" type="text/javascript"></script>
 {% endblock %}
+
+{% block navbar %}
+<div class=".colab-style">
+	{{ block.super }}
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class=".colab-style">
+	{{ block.super }}
+</div>
+{% endblock %}
