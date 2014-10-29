@@ -1,411 +1,44 @@
 <!DOCTYPE html>
-<!-- saved from url=(0037)http://10.1.0.39/social/search/people -->
-<html xmlns="http://www.w3.org/1999/xhtml" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>SPB</title><!--<meta http-equiv="refresh" content="1"/>--><meta name="description" content="SPB"><!-- Twitter Card --><meta name="twitter:card" value="summary"><meta name="twitter:title" content="SPB"><meta name="twitter:description" content="SPB"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:url" content="http://104.131.255.247/social"><meta property="og:title" content="SPB"><meta property="og:site_name" content="SPB"><meta property="og:description" content="SPB"><!-- site root --><meta property="noosfero:root" content="/social">
-
-<!-- CHAWS -->
-<link type="text/css" rel="stylesheet" href="./SPB_files/jquery.dropdown.css" />
-
-<!-- CHAWS -->
-<style type="text/css">
-/* lembrar de por pra funfar em xs, sm, md e lg */
-/*
-.navbar .container {
-padding-right: 15px;
-padding-left: 15px;
-margin-right: auto;
-margin-left: auto;
-}*/
-
-.navbar .navbar-brand img {
-width: 192px;
-height: 40px;
-}
-
-.navbar>.container .navbar-brand {
-margin-left: -15px;
-}
-
-.navbar .navbar-default .navbar-brand, .navbar a.dropdown-toggle.user {
-padding: 0;
-margin-top: 5px;
-margin-left: 10px;
-}
-
-.navbar .navbar-brand {
-float: left;
-padding: 15px 15px;
-font-size: 18px;
-line-height: 20px;
-}
-
-.navbar .navbar-toggle {
-display: none;
-}
-
-  .navbar-collapse {
-    max-height: 340px;
-    padding-right: 15px;
-    padding-left: 15px;
-    overflow-x: visible;
-    border-top: 1px solid transparent;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
-    -webkit-overflow-scrolling: touch;
-  }
-
-  @media (min-width: 768px) {
-    .navbar-collapse {
-    width: auto;
-    border-top: 0;
-    box-shadow: none;
-  }
-}
-
-@media (min-width: 768px) {
-  .container>.navbar-header, .container>.navbar-collapse {
-  margin-right: 0;
-  margin-left: 0;
-  }
-}
-
-@media (min-width: 768px){
-.navbar-nav {
-float: left;
-margin: 0;
-}
-}
-
-@media (min-width: 768px){
-.navbar-nav>li {
-float: left;
-}
-}
-
-@media (min-width: 768px) {
-.navbar .navbar-form {
-width: auto;
-padding-top: 0;
-padding-bottom: 0;
-margin-right: 0;
-margin-left: 0;
-border: 0;
--webkit-box-shadow: none;
-box-shadow: none;
-}
-}
 
 
-@media (min-width: 1200px) {
-.navbar .container {
-max-width: 1170px;
-}
-}
-
-@media (min-width: 992px) {
-.navbar .container {
-max-width: 970px;
-}
-}
-
-@media (min-width: 768px){
-.navbar .container {
-max-width: 750px;
-}
-}
-
-.navbar .navbar-form {
-padding: 10px 15px;
-margin-top: 8px;
-margin-right: -15px;
-margin-bottom: 8px;
-margin-left: -15px;
-border-top: 1px solid transparent;
-border-bottom: 1px solid transparent;
--webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(255,255,255,0.1);
-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(255,255,255,0.1);
-}
-
-.navbar .nav>li {
-position: relative;
-display: block;
-}
-
-.navbar ul, .navbar ol {
-list-style: none;
-}
-
-.navbar li {
-display: list-item;
-text-align: -webkit-match-parent;
-}
-
-.navbar .nav {
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-}
-
-.navbar .navbar-default .navbar-nav>li>a {
-color: #777;
-}
-
-
-.navbar .navbar-nav>li>a {
-padding-top: 15px;
-padding-bottom: 15px;
-}
-
-.navbar-nav>li>a {
-padding-top: 10px;
-padding-bottom: 10px;
-line-height: 20px;
-}
-
-.navbar .nav>li>a {
-position: relative;
-display: block;
-padding: 10px 15px;
-}
-
-.navbar .agenda-item a, .navbar a:visited {
-font-weight: bold;
-color: black;
-}
-
-.navbar :link, .navbar :visited {
-text-decoration: none;
-}
-
-.navbar ul, .navbar menu, .navbar dir {
-  display: block;
-  list-style-type: disc;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  -webkit-padding-start: 40px;
-}
-
-.navbar .navbar-default .navbar-collapse, .navbar .navbar-default .navbar-form {
-border-color: #e6e6e6;
-}
-
-  .navbar .navbar-collapse.collapse {
-display: block!important;
-height: auto!important;
-padding-bottom: 0;
-overflow: visible!important;
-}
-
-  .navbar {
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 1.428571429;
-    color: #333;
-    background-color: #fff;
-  }
-
-
-  .navbar, .navbar:before, .navbar:after {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  .navbar:before, .navbar:after {
-    display: table;
-    content: " ";
-  }
-
-  .navbar .nav:before, .navbar .nav:after {
-display: table;
-content: " ";
-}
-
-  .navbar:after {
-    clear: both;
-  }
-
-  .navbar:before, .navbar:after {
-    display: table;
-    content: " ";
-  }
-
-  nav {
-    display: block;
-  }
-
-  .navbar {
-    position: relative;
-    z-index: 1000;
-    min-height: 50px;
-    margin-bottom: 20px;
-    border: 1px solid transparent;
-  }
-
-  .navbar .navbar-fixed-top, .navbar .navbar-fixed-bottom {
-    position: fixed;
-    right: 0;
-    left: 0;
-    border-width: 0 0 1px;
-  }
+<html>
+  <head>
   
-  @media (min-width: 768px){
-      .navbar-fixed-top, .navbar-fixed-bottom {
-      border-radius: 0;
-    }
-  }
-
-  .navbar .navbar-fixed-top {
-    top: 0;
-    z-index: 1030;
-  }
-
-  .navbar .navbar-default {
-    background-color: #f8f8f8;
-    border-color: #e7e7e7;
-  }
-
-  .navbar .nav {
-padding-left: 0;
-margin-bottom: 0;
-list-style: none;
-}
-
-.navbar .glyphicon {
-position: relative;
-top: 1px;
-display: inline-block;
-font-family: 'Glyphicons Halflings';
--webkit-font-smoothing: antialiased;
-font-style: normal;
-font-weight: normal;
-line-height: 1;
-}
-
-.navbar .glyphicon-search:before {
-content: "\e003";
-}
-
-.navbar #header-searchbox {
-width: 200px;
-}
-
-.navbar .form-control {
-display: block;
-width: 100%;
-height: 34px;
-padding: 6px 12px;
-font-size: 14px;
-line-height: 1.428571429;
-color: #555;
-vertical-align: middle;
-background-color: #fff;
-border: 1px solid #ccc;
-border-radius: 4px;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
--webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-}
-
-.navbar .navbar-form .form-control {
-display: inline-block;
-}
-
-.navbar .sr-only {
-position: absolute;
-width: 1px;
-height: 1px;
-padding: 0;
-margin: -1px;
-overflow: hidden;
-clip: rect(0 0 0 0);
-border: 0;
-}
-
-.navbar .navbar-form .form-group {
-display: inline-block;
-margin-bottom: 0;
-vertical-align: middle;
-}
-
-.navbar .btn {
-display: inline-block;
-padding: 6px 12px;
-margin-bottom: 0;
-font-size: 14px;
-font-weight: normal;
-line-height: 1.428571429;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
-cursor: pointer;
-border: 1px solid transparent;
-border-radius: 4px;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
--o-user-select: none;
-user-select: none;
-}
-
-.navbar .nav > li > a > img {
-max-width: none;
-}
-
-.navbar a img, .navbar :link img, .navbar :visited img {
-border: none;
-}
-
-.navbar img {
-vertical-align: middle;
-}
-
-.navbar .navbar-default .navbar-nav > li > a:hover, .navbar .navbar-default .navbar-nav>li>a:focus {
-color: #333;
-background-color: transparent;
-}
-
-.navbar .navbar-default .navbar-brand, .navbar a.dropdown-toggle.user {
-padding: 0;
-margin-top: 5px;
-margin-left: 10px;
-}
-
-.navbar .navbar-nav>li {
-float: left;
-}
-
-.navbar .navbar-right {
-  float: right!important;
-}
-
-.navbar .hidden-sm {
-display: block!important;
-}
-
-.navbar .hidden-xs {
-display: block!important;
-}
-
-</style>
-
-
+    <meta charset="UTF-8" />
+    <title>SPB</title><!--<meta http-equiv="refresh" content="1"/>--><meta name="description" content="SPB"><!-- Twitter Card --><meta name="twitter:card" value="summary"><meta name="twitter:title" content="SPB"><meta name="twitter:description" content="SPB"><!-- Open Graph --><meta property="og:type" content="website"><meta property="og:url" content="http://104.131.255.247/social"><meta property="og:title" content="SPB"><meta property="og:site_name" content="SPB"><meta property="og:description" content="SPB"><!-- site root --><meta property="noosfero:root" content="/social">
 
 <link rel="shortcut icon" href="http://10.1.0.39/social/designs/themes/noosfero-spb-theme/favicon.ico?1413894680" type="image/x-icon"><script src="./SPB_files/application.js" type="text/javascript"></script><script type="text/javascript">
 //<![CDATA[
 render_all_jquery_ui_widgets()
 //]]>
 </script>
-
-<!-- CHAWS -->
-<script src="./SPB_files/jquery.dropdown.js" type="text/javascript"></script>
-
-
-<link href="./SPB_files/application.css" media="screen" rel="stylesheet" type="text/css"><link href="./SPB_files/style.css" media="screen" rel="stylesheet" type="text/css"><link href="./SPB_files/jquery-ui.css" media="screen" rel="stylesheet" type="text/css"><link href="./SPB_files/plugins-4b9477506a51135e5417e668e07fbd54.css" media="screen" rel="stylesheet" type="text/css"><link href="./SPB_files/style(1).css" media="screen" rel="stylesheet" type="text/css"><script type="text/javascript">
+<link href="colab.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="fix.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./SPB_files/application.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./SPB_files/style.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./SPB_files/jquery-ui.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./SPB_files/plugins-4b9477506a51135e5417e668e07fbd54.css" media="screen" rel="stylesheet" type="text/css">
+<link href="./SPB_files/style(1).css" media="screen" rel="stylesheet" type="text/css">
+<!--
+-->
+<script type="text/javascript">
       DEFAULT_LOADING_MESSAGE = 'loading...';
-    </script><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta name="robots" content="noindex, nofollow"><title>Colab - Colab</title><!-- JQuery 2+ won't work for IE < 9 --><style></style><style type="text/css">.fancybox-margin{margin-right:15px;}</style><meta content="authenticity_token" name="csrf-param"><meta content="CM8omEGJ1976h/5ZMK5UmgAq8j9QU93eqvHmvmRG7gY=" name="csrf-token"></head><!-- data-no-turbolink will disable Rails TurboLinks for all pages under Colab --><body class="container  controller-search action-search-people template-default webkit" data-no-turbolink=""><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="padding-bottom: 42px; padding-right: 42px; display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" class="" style="width: 0px; height: 0px; overflow: hidden;"></div><div id="cboxLoadingOverlay" class=""></div><div id="cboxLoadingGraphic" class=""></div><div id="cboxTitle" class=""></div><div id="cboxCurrent" class=""></div><div id="cboxNext" class=""></div><div id="cboxPrevious" class=""></div><div id="cboxSlideshow" class=""></div><div id="cboxClose" class=""></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div id="browserid-info" style="display: none;" data-info="{&quot;loginUrl&quot;: &quot;/browserid/login/&quot;, &quot;requestArgs&quot;: {}, &quot;logoutUrl&quot;: &quot;/browserid/logout/&quot;, &quot;csrfUrl&quot;: &quot;/browserid/csrf/&quot;}">
-</div><nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container">
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="robots" content="noindex, nofollow"><title>Colab - Colab</title><!-- JQuery 2+ won't work for IE < 9 -->
+<style></style>
+<style type="text/css">.fancybox-margin{margin-right:15px;}</style>
+<meta content="authenticity_token" name="csrf-param">
+<meta content="CM8omEGJ1976h/5ZMK5UmgAq8j9QU93eqvHmvmRG7gY=" name="csrf-token">
+</head>
+
+
+    <!-- data-no-turbolink will disable Rails TurboLinks for all pages under Colab --><body class="container  controller-search action-search-people template-default webkit" data-no-turbolink=""><div id="cboxOverlay" style="display: none;"></div><div id="colorbox" class="" style="padding-bottom: 42px; padding-right: 42px; display: none;"><div id="cboxWrapper"><div><div id="cboxTopLeft" style="float: left;"></div><div id="cboxTopCenter" style="float: left;"></div><div id="cboxTopRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxMiddleLeft" style="float: left;"></div><div id="cboxContent" style="float: left;"><div id="cboxLoadedContent" class="" style="width: 0px; height: 0px; overflow: hidden;"></div><div id="cboxLoadingOverlay" class=""></div><div id="cboxLoadingGraphic" class=""></div><div id="cboxTitle" class=""></div><div id="cboxCurrent" class=""></div><div id="cboxNext" class=""></div><div id="cboxPrevious" class=""></div><div id="cboxSlideshow" class=""></div><div id="cboxClose" class=""></div></div><div id="cboxMiddleRight" style="float: left;"></div></div><div style="clear: left;"><div id="cboxBottomLeft" style="float: left;"></div><div id="cboxBottomCenter" style="float: left;"></div><div id="cboxBottomRight" style="float: left;"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div><div id="browserid-info" style="display: none;" data-info="{&quot;loginUrl&quot;: &quot;/browserid/login/&quot;, &quot;requestArgs&quot;: {}, &quot;logoutUrl&quot;: &quot;/browserid/logout/&quot;, &quot;csrfUrl&quot;: &quot;/browserid/csrf/&quot;}">
+</div>
+
+<div class="colab-style">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation"><div class="container">
         <div class="navbar-header">
 
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main">
@@ -424,6 +57,7 @@ render_all_jquery_ui_widgets()
             <li>
               <a href="http://10.1.0.39/planet/">Blogs</a>
             </li>
+
             <li class="dropdown">
               <a href="http://10.1.0.39/social/search/people#" class="dropdown-toggle" data-toggle="dropdown">
               	Social <b class="caret"></b>
@@ -451,6 +85,7 @@ render_all_jquery_ui_widgets()
 				</li>
             	
                </ul></li>
+
             <li class="dropdown">
                <a href="http://10.1.0.39/social/search/people#" class="dropdown-toggle" data-toggle="dropdown">Repository <b class="caret"></b></a>
                <ul class="dropdown-menu"><li><a href="http://10.1.0.39/gitlab/public/projects">Public Projects</a></li>
@@ -474,13 +109,11 @@ render_all_jquery_ui_widgets()
                     <div class="wrapper">
                       <div class="thumbnail"><img src="./SPB_files/80bf7e338265f7a91f4144eaeded1f29(1)" height="100px" width="100px"></div>
                       <div class="user-info">
-                        <span><b>Charles Oliveira Oliveira</b></span>
+                        <span><b>Charles Oliveira</b></span>
                         <span class="quiet">18oliveira.charles@gmail.com</span>
                       </div>
                       <div>
                         <a class="btn btn-info pull-left" href="http://10.1.0.39/account/chaws">My Profile</a>
-                        
-                        
 
 <a href="http://10.1.0.39/browserid/logout/" data-next="/user/logout" class="btn btn-default pull-right">
 	<span>Logout</span>
@@ -499,7 +132,9 @@ render_all_jquery_ui_widgets()
           </form>
         </div>
       </div>
-    </nav><div id="alert-js" class="alert alert-dismissable alert-warning" hidden="">
+    </nav>
+</div>
+    <div id="alert-js" class="alert alert-dismissable alert-warning" hidden="">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
           <span id="alert-message"></span>
         </div><div id="main-content">
@@ -588,7 +223,11 @@ jQuery('#search-input').attr('title', "Type words about the person you're lookin
 
   <div style="clear:both"></div>
 
-  <link href="./SPB_files/jquery.fancybox.css" media="screen" rel="stylesheet" type="text/css"><script src="./SPB_files/jquery.fancybox.pack.js" type="text/javascript"></script><script type="text/javascript">
+  <!--
+  <link href="./SPB_files/jquery.fancybox.css" media="screen" rel="stylesheet" type="text/css">
+  <script src="./SPB_files/jquery.fancybox.pack.js" type="text/javascript"></script>
+  -->
+  <script type="text/javascript">
 //<![CDATA[
 apply_zoom_to_images("Zoom in")
 //]]>
@@ -609,7 +248,9 @@ apply_zoom_to_images("Zoom in")
     
     <script src="./SPB_files/theme.js" type="text/javascript"></script></div>
       
-    </div><div class="row">&nbsp;</div><div class="footer row">
+    </div><div class="row">&nbsp;</div>
+    <div class="colab-style">
+    <div class="footer row">
       <p class="col-lg-12 text-center">
         <a href="http://10.1.0.39/open-data/"><img src="./SPB_files/opendata3.png"></a>
       </p>
@@ -620,8 +261,14 @@ apply_zoom_to_images("Zoom in")
           Creative Commons - attribution, non-commercial
         </a>
       </p>
+    </div>
     </div><script type="text/javascript">
   var date = new Date();
   jQuery.cookie('utc_offset', date.getTimezoneOffset(), { path: '/' });
-</script><script src="./SPB_files/include.js"></script><script src="./SPB_files/api.js"></script><script src="./SPB_files/browserid.js"></script>
+</script>
+<script src="./SPB_files/include.js"></script><script src="./SPB_files/api.js"></script><script src="./SPB_files/browserid.js"></script>
+
+<!-- CHAWS -->
+<script src="jquery.dropdown.js" type="text/javascript"></script>
+<script src="collapse.js" type="text/javascript"></script>
 <div id="alt-beautify" style="display:none; position: absolute"><div class="alt-beautify-content"></div><div class="alt-beautify-arrow-border alt-beautify-arrow"></div><div class="alt-beautify-arrow-inner alt-beautify-arrow"></div></div><iframe src="./SPB_files/communication_iframe.html" style="display: none;"></iframe></body><object id="a998fb29-197a-8ea2-bb2b-dbbbdabeaa81" width="0" height="0" type="application/gas-events-bb"></object></html>
