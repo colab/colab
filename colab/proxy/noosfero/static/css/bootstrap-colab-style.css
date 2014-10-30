@@ -1,8 +1,15 @@
 /**
  *  This is a customized version of bootstrap v3.0.0
  *  - The main change is the namespace '.colab-style', which adds a namespace to every rule
- *  - Second of all is the 'body' and 'html' rules removal, since they don't make sense inside of
- *    a nampespace
+ *  - Do that by adding a bootstrap.css content inside of a rule. Example:
+ *    File: bootstrap-with-namespace.less
+ *    1. .namespace{
+ *    2.    # all bootstrap.min.css
+ *    3. }
+ *    Then compile it with lessc and you will get the final namespaced bootstrap
+ *    This is really usefull if you want bootstrap to act only in a few specific tags
+ *  - Second of all is the 'body' and 'html' rules replacement to '.colab-style', since they don't
+ *    make sense inside of a nampespace
  *  - Third is 'fonts' location, just search for fonts and then place the folder according to
  *    its place in the server
  */
