@@ -6,5 +6,5 @@ from .views import GitlabProxyView
 
 urlpatterns = patterns('',
     # Gitlab URLs
-    url(r'^gitlab/(?P<path>.*)$', GitlabProxyView.as_view()),
+    url(r'^(?P<path>.*)$', GitlabProxyView.as_view()),
 )
