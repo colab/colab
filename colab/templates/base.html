@@ -95,28 +95,28 @@
             {% if proxy.noosfero %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  Social <b class="caret"></b>
+                  {% trans "Social" %} <b class="caret"></b> 
                 </a>
                 <ul class="dropdown-menu">
                   <li>
                     <a href="/social/search/people">
-                      Users
+                      {% trans "Users" %} 
                     </a>
                   </li>
                   <li>
                     <a href="/social/search/communities">
-                      Communities
+                      {% trans "Communities" %} 
                     </a>
                   </li>
                   {% if user.is_active %}
                   <li>
-                    <a href="/social/profile/chaws">
-                      Profile
+                    <a href="/social/profile/{{ user.username }}">
+                      {% trans "Profile" %} 
                     </a>
                   </li>
                   <li>
-                    <a href="/social/myprofile/chaws">
-                      Control panel
+                    <a href="/social/myprofile/{{ user.username }}">
+                      {% trans "Control panel" %} 
                     </a>
                   </li>
                 {% endif %}
