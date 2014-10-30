@@ -57,3 +57,8 @@
 	font-size: 85%;
 }
 /* end of Fix user menu pop up */
+
+/* Increase container margin because of noosfero pup ups */
+div#main-content {
+	margin-top: 100px;
+}
