@@ -37,6 +37,7 @@ urlpatterns = patterns('',
 
     url(r'^trac/', include('colab.proxy.trac.urls')),
     url(r'^gitlab/', include('colab.proxy.gitlab.urls')),
+    url(r'^social/', include('colab.proxy.noosfero.urls')),
 )
 
 if settings.DEBUG:
