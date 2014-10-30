@@ -13,6 +13,7 @@
     <drop css:theme="link[href='/static/css/screen.css']" />
     <drop theme="/html/head/script" />
     <drop css:content="#barra-brasil" />
+    <drop css:content="#user" />
     <drop css:content="#theme-footer" />
     <drop css:content="#homepage-link" />
     <drop css:content=".header-content" />
