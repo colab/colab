@@ -1,20 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Sergio Oliveira <seocam@seocam.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-07 12:49+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2014-10-31 15:46-0200\n"
+"PO-Revision-Date: 2014-10-31 18:22+0000\n"
+"Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/colab/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: accounts/admin.py:40
@@ -61,46 +62,25 @@ msgstr "Digite a mesma senha que acima, para verificação."
 msgid "Password mismatch"
 msgstr "Senhas diferentes"
 
-#: accounts/models.py:59
-msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
-msgstr ""
-"Obrigatório. 30 caracteres ou menos. Letras, números e ./+/-/_ somente."
-
-#: accounts/models.py:64
-msgid "Enter a valid username."
-msgstr "Insira um nome de usuário válido."
-
-#: accounts/views.py:144
-msgid "Your profile has been created!"
-msgstr "Seu perfil foi criado!"
-
-#: accounts/views.py:145
-msgid ""
-"You must login to validated your profile. Profiles not validated are deleted "
-"in 24h."
-msgstr ""
-"Você deve se logar para validar seu perfil. Perfis não validados serão "
-"deletados em 24h."
-
-#: accounts/views.py:229
-msgid "Could not change your password. Please, try again later."
-msgstr ""
-"Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
-
-#: accounts/views.py:238
-msgid "You've changed your password successfully!"
-msgstr "Senha alterada com sucesso!"
-
 #: accounts/management/commands/delete_invalid.py:42
 #, python-format
 msgid "%(count)s users deleted."
 msgstr "%(count)s usuários deletados."
+
+#: accounts/models.py:59
+msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
+msgstr "Obrigatório. 30 caracteres ou menos. Letras, números e ./+/-/_ somente."
+
+#: accounts/models.py:64
+msgid "Enter a valid username."
+msgstr "Insira um nome de usuário válido."
 
 #: accounts/templates/accounts/change_password.html:8
 msgid "Change XMPP Client and SVN Password"
 msgstr "Trocar senha do Repositório e do Mensageiro"
 
 #: accounts/templates/accounts/change_password.html:17
+#: accounts/templates/accounts/user_update_form.html:188
 #: accounts/templates/accounts/user_update_form.html:195
 msgid "Change Password"
 msgstr "Trocar senha"
@@ -134,16 +114,15 @@ msgid "Subscribe to groups"
 msgstr "Inscreva-se nos grupos"
 
 #: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:106 templates/base.html.py:111
+#: templates/base.html:132 templates/base.html.py:137
 msgid "Register"
 msgstr "Cadastre-se"
 
-#: accounts/templates/accounts/user_detail.html:8 badger/models.py:22
-#: super_archives/models.py:258
+#: accounts/templates/accounts/user_detail.html:8 badger/models.py:21
 msgid "Messages"
 msgstr "Mensagens"
 
-#: accounts/templates/accounts/user_detail.html:9 badger/models.py:23
+#: accounts/templates/accounts/user_detail.html:9 badger/models.py:22
 #: templates/home.html:7
 msgid "Contributions"
 msgstr "Contribuições"
@@ -188,7 +167,7 @@ msgstr "Colaborações por tipo"
 msgid "Participation by Group"
 msgstr "Participação por grupo"
 
-#: accounts/templates/accounts/user_detail.html:132 badger/models.py:70
+#: accounts/templates/accounts/user_detail.html:132 badger/models.py:69
 msgid "Badges"
 msgstr "Medalhas"
 
@@ -275,23 +254,36 @@ msgstr "Adicionar"
 
 #: accounts/templates/accounts/user_update_form.html:193
 msgid ""
-"This feature is available only for those who need to change the password for some "
-"reason as having an old user with the same username, forgot your password to "
-"commit, usage of other XMPP Client for connection. Usually, you won't need "
-"to change this password. Only change it if you are sure about what you are "
-"doing."
-msgstr ""
-"Este recurso está disponível para quem precisa trocar a senha por algum "
-"motivo como ter um usuário antigo com mesmo nome de usuário, esqueceu da "
-"senha antiga para commit, uso de outro cliente XMPP para conexão. "
-"Normalmente, você não terá que trocar essa senha. Somente troque essa senha "
-"se tiver certeza do que está fazendo."
+"This feature is available only for those who need to change the password for"
+" some reason as having an old user with the same username, forgot your "
+"password to commit, usage of other XMPP Client for connection. Usually, you "
+"won't need to change this password. Only change it if you are sure about "
+"what you are doing."
+msgstr "Este recurso está disponível para quem precisa trocar a senha por algum motivo como ter um usuário antigo com mesmo nome de usuário, esqueceu da senha antiga para commit, uso de outro cliente XMPP para conexão. Normalmente, você não terá que trocar essa senha. Somente troque essa senha se tiver certeza do que está fazendo."
 
 #: accounts/templates/accounts/user_update_form.html:203
 msgid "Update"
 msgstr "Atualizar"
 
-#: badger/forms.py:19 badger/models.py:40 colab/custom_settings.py:53
+#: accounts/views.py:155
+msgid "Your profile has been created!"
+msgstr "Seu perfil foi criado!"
+
+#: accounts/views.py:156
+msgid ""
+"You must login to validated your profile. Profiles not validated are deleted"
+" in 24h."
+msgstr "Você deve se logar para validar seu perfil. Perfis não validados serão deletados em 24h."
+
+#: accounts/views.py:240
+msgid "Could not change your password. Please, try again later."
+msgstr "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
+
+#: accounts/views.py:249
+msgid "You've changed your password successfully!"
+msgstr "Senha alterada com sucesso!"
+
+#: badger/forms.py:19 badger/models.py:39 settings.py:162
 msgid "Image"
 msgstr "Imagem"
 
@@ -299,216 +291,78 @@ msgstr "Imagem"
 msgid "You must add an Image"
 msgstr "Você deve adicionar uma imagem"
 
-#: badger/models.py:12
+#: badger/models.py:11
 msgid "Greater than or equal"
 msgstr "Maior que ou igual"
 
-#: badger/models.py:13
+#: badger/models.py:12
 msgid "less than or equal"
 msgstr "menor que ou igual"
 
-#: badger/models.py:14
+#: badger/models.py:13
 msgid "Equal"
 msgstr "Igual"
 
-#: badger/models.py:15
+#: badger/models.py:14
 msgid "Biggest"
 msgstr "Maior"
 
-#: badger/models.py:18
+#: badger/models.py:17
 msgid "Automatically"
 msgstr "Automaticamente"
 
-#: badger/models.py:19
+#: badger/models.py:18
 msgid "Manual"
 msgstr "Manual"
 
-#: badger/models.py:24
+#: badger/models.py:23
 msgid "Wikis"
 msgstr "Wikis"
 
-#: badger/models.py:25
+#: badger/models.py:24
 msgid "Revisions"
 msgstr "Conjunto de mudanças"
 
-#: badger/models.py:26 search/views.py:42
-#: search/templates/search/includes/search_filters.html:124
+#: badger/models.py:25
+#: search/templates/search/includes/search_filters.html:122
 msgid "Ticket"
 msgstr "Tíquetes"
 
-#: badger/models.py:36
+#: badger/models.py:35
 msgid "Title"
 msgstr "Título"
 
-#: badger/models.py:38
+#: badger/models.py:37
 msgid "Description"
 msgstr "Descrição"
 
-#: badger/models.py:41 search/forms.py:18
+#: badger/models.py:40 search/forms.py:18
 msgid "Type"
 msgstr "Tipo"
 
-#: badger/models.py:43
+#: badger/models.py:42
 msgid "User attribute"
 msgstr "Atributo do usuário"
 
-#: badger/models.py:49
+#: badger/models.py:48
 msgid "Comparison"
 msgstr "Comparação"
 
-#: badger/models.py:56
+#: badger/models.py:55
 msgid "Value"
 msgstr "Valor"
 
-#: badger/models.py:62
+#: badger/models.py:61
 msgid "Awardees"
 msgstr "Premiados"
 
-#: badger/models.py:66
+#: badger/models.py:65
 msgid "Order"
 msgstr "Ordem"
 
-#: badger/models.py:69
+#: badger/models.py:68
 msgid "Badge"
 msgstr "Medalha"
-
-#: colab/custom_settings.py:9
-msgid "English"
-msgstr "Inglês"
-
-#: colab/custom_settings.py:10
-msgid "Portuguese"
-msgstr "Português"
-
-#: colab/custom_settings.py:11
-msgid "Spanish"
-msgstr "Espanhol"
-
-#: colab/custom_settings.py:34
-msgid "Recent activity"
-msgstr "Atividade recente"
-
-#: colab/custom_settings.py:38
-msgid "Relevance"
-msgstr "Relevância"
-
-#: colab/custom_settings.py:46
-msgid "Document"
-msgstr "Documento"
-
-#: colab/custom_settings.py:48
-msgid "Presentation"
-msgstr "Apresentação"
-
-#: colab/custom_settings.py:49
-msgid "Text"
-msgstr "Texto"
-
-#: colab/custom_settings.py:50 search/utils.py:9
-msgid "Code"
-msgstr "Código"
-
-#: colab/custom_settings.py:52
-msgid "Compressed"
-msgstr "Compactado"
-
-#: colab/custom_settings.py:55
-msgid "Spreadsheet"
-msgstr "Planilha"
-
-#: colab/custom_settings.py:267
-msgid "Planet Colab"
-msgstr ""
-
-#: colab/custom_settings.py:268
-msgid "Colab blog aggregator"
-msgstr "Agregador de blog Colab"
-
-#: colab/custom_settings.py:309
-msgid "One Time Snippet"
-msgstr ""
-
-#: colab/custom_settings.py:310
-msgid "In one hour"
-msgstr ""
-
-#: colab/custom_settings.py:311
-msgid "In one week"
-msgstr ""
-
-#: colab/custom_settings.py:312
-msgid "In one month"
-msgstr ""
-
-#: colab/custom_settings.py:313
-#, fuzzy
-msgid "Never"
-msgstr "Seriedade"
-
-#: planet/templates/feedzilla/_post_template.html:8
-msgid "From"
-msgstr "De"
-
-#: planet/templates/feedzilla/_post_template.html:8
-msgid "on"
-msgstr "em"
-
-#: planet/templates/feedzilla/_post_template.html:12
-msgid "Read original"
-msgstr "Leia o original"
-
-#: planet/templates/feedzilla/base.html:7
-msgid "Community Blogs"
-msgstr "Blogs da Comunidade"
-
-#: planet/templates/feedzilla/base.html:17
-msgid "Tags"
-msgstr "Etiquetas"
-
-#: planet/templates/feedzilla/base.html:21
-msgid "Source Blogs"
-msgstr "Blogs de origem"
-
-#: planet/templates/feedzilla/base.html:25
-#: planet/templates/feedzilla/submit_blog.html:5
-msgid "Submit a blog"
-msgstr "Sugerir um blog"
-
-#: planet/templates/feedzilla/index.html:10
-msgid "There is no RSS registered"
-msgstr "Não há RSS registrado"
-
-#: planet/templates/feedzilla/index.html:12
-msgid "Please"
-msgstr "Por favor"
-
-#: planet/templates/feedzilla/index.html:13
-msgid "click here"
-msgstr "clique aqui"
-
-#: planet/templates/feedzilla/index.html:14
-msgid "to submit a blog"
-msgstr "enviar um blog"
-
-#: planet/templates/feedzilla/submit_blog.html:8
-msgid ""
-"Thank you. Your application has been accepted and will be reviewed by admin "
-"in the near time."
-msgstr ""
-"Obrigado. Sua aplicação foi aceita e logo será revisada por um administrador."
-
-#: planet/templates/feedzilla/submit_blog.html:29
-msgid "Submit"
-msgstr "Enviar"
-
-#: planet/templates/feedzilla/tag.html:7
-#, python-format
-msgid "Posts with &laquo;%(tag)s&raquo; label"
-msgstr "Postagens com a etiqueta &laquo;%(tag)s&raquo;"
-
-#: planet/templates/feedzilla/tag.html:16
-msgid "No posts with such label"
-msgstr "Não há posts com essa etiqueta"
 
 #: rss/feeds.py:13
 msgid "Latest Discussions"
@@ -523,12 +377,11 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:41
-#: templates/base.html:91
+#: templates/base.html:117
 msgid "Search"
 msgstr "Busca"
 
-#: search/forms.py:19 search/views.py:22 search/views.py:33 search/views.py:69
-#: search/views.py:86 search/views.py:119
+#: search/forms.py:19 search/views.py:22
 msgid "Author"
 msgstr "Autor"
 
@@ -536,122 +389,133 @@ msgstr "Autor"
 msgid "Modified by"
 msgstr "Modificado por"
 
-#: search/forms.py:22 search/views.py:70
+#: search/forms.py:22
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
-#: search/forms.py:26 search/views.py:36
+#: search/forms.py:26 search/views.py:25
 msgid "Mailinglist"
 msgstr "Grupo"
 
-#: search/forms.py:30 search/views.py:46
+#: search/forms.py:30
 msgid "Milestone"
 msgstr "Etapa"
 
-#: search/forms.py:31 search/views.py:51
+#: search/forms.py:31
 msgid "Priority"
 msgstr "Prioridade"
 
-#: search/forms.py:32 search/views.py:56
+#: search/forms.py:32
 msgid "Component"
 msgstr "Componente"
 
-#: search/forms.py:33 search/views.py:61
+#: search/forms.py:33
 msgid "Severity"
 msgstr "Seriedade"
 
-#: search/forms.py:34 search/views.py:66
+#: search/forms.py:34
 msgid "Reporter"
 msgstr "Relator"
 
-#: search/forms.py:35 search/views.py:73
+#: search/forms.py:35
 msgid "Keywords"
 msgstr "Palavras chaves"
 
-#: search/forms.py:36 search/views.py:25 search/views.py:78
+#: search/forms.py:36
 msgid "Collaborators"
 msgstr "Colaboradores"
 
-#: search/forms.py:37 search/views.py:89
+#: search/forms.py:37 templates/base.html:80
 msgid "Repository"
 msgstr "Repositório"
 
-#: search/forms.py:38 search/views.py:99
+#: search/forms.py:38
 msgid "Username"
 msgstr "Usuário"
 
-#: search/forms.py:39 search/views.py:102
+#: search/forms.py:39
 msgid "Name"
 msgstr "Nome"
 
-#: search/forms.py:40 search/views.py:105
+#: search/forms.py:40
 msgid "Institution"
 msgstr "Instituição"
 
-#: search/forms.py:41 search/views.py:108
+#: search/forms.py:41
 msgid "Role"
 msgstr "Cargo"
 
-#: search/forms.py:42 search/templates/search/includes/search_filters.html:151
-#: search/templates/search/includes/search_filters.html:153
-#: search/templates/search/includes/search_filters.html:185
-#: search/templates/search/includes/search_filters.html:186
+#: search/forms.py:42 search/templates/search/includes/search_filters.html:154
+#: search/templates/search/includes/search_filters.html:156
+#: search/templates/search/includes/search_filters.html:188
+#: search/templates/search/includes/search_filters.html:189
 msgid "Since"
 msgstr "Desde"
 
-#: search/forms.py:43 search/templates/search/includes/search_filters.html:160
-#: search/templates/search/includes/search_filters.html:162
-#: search/templates/search/includes/search_filters.html:189
-#: search/templates/search/includes/search_filters.html:190
+#: search/forms.py:43 search/templates/search/includes/search_filters.html:163
+#: search/templates/search/includes/search_filters.html:165
+#: search/templates/search/includes/search_filters.html:192
+#: search/templates/search/includes/search_filters.html:193
 msgid "Until"
 msgstr "Até"
 
-#: search/forms.py:44 search/views.py:116
+#: search/forms.py:44
 msgid "Filename"
 msgstr "Nome do arquivo"
 
-#: search/forms.py:45 search/views.py:122
+#: search/forms.py:45
 msgid "Used by"
 msgstr "Usado por"
 
-#: search/forms.py:46 search/views.py:125
+#: search/forms.py:46
 msgid "File type"
 msgstr "Tipo do arquivo"
 
-#: search/forms.py:47 search/views.py:128
+#: search/forms.py:47
 msgid "Size"
 msgstr "Tamanho"
 
-#: search/utils.py:7 search/views.py:20
-#: search/templates/search/includes/search_filters.html:116
+#: search/templates/search/includes/search_filters.html:5
+#: search/templates/search/includes/search_filters.html:33
+#: search/templates/search/includes/search_filters.html:51
+#: search/templates/search/includes/search_filters.html:69
+msgid "Remove filter"
+msgstr "Remover filtro"
+
+#: search/templates/search/includes/search_filters.html:88
+#: search/templates/search/includes/search_filters.html:174
+#: search/templates/search/includes/search_filters.html:198
+msgid "Filter"
+msgstr "Filtro"
+
+#: search/templates/search/includes/search_filters.html:94
+msgid "Sort by"
+msgstr "Ordenar por"
+
+#: search/templates/search/includes/search_filters.html:111
+msgid "Types"
+msgstr "Tipos"
+
+#: search/templates/search/includes/search_filters.html:118 search/utils.py:7
 #: templates/open-data.html:130
 msgid "Wiki"
 msgstr "Wiki"
 
-#: search/utils.py:10
-msgid "Tickets"
-msgstr "Tíquetes"
-
-#: search/utils.py:11
-msgid "Attachments"
-msgstr "Anexos"
-
-#: search/views.py:31 search/templates/search/includes/search_filters.html:120
-msgid "Discussion"
-msgstr "Discussões"
-
-#: search/views.py:84 search/templates/search/includes/search_filters.html:128
+#: search/templates/search/includes/search_filters.html:126
 msgid "Changeset"
 msgstr "Conjunto de Mudanças"
 
-#: search/views.py:95 search/templates/search/includes/search_filters.html:132
+#: search/templates/search/includes/search_filters.html:130
 msgid "User"
 msgstr "Usuário"
 
-#: search/views.py:112
-#: search/templates/search/includes/search_filters.html:136
+#: search/templates/search/includes/search_filters.html:134
 msgid "Attachment"
 msgstr "Anexo"
+
+#: search/templates/search/includes/search_filters.html:139 search/views.py:20
+msgid "Discussion"
+msgstr "Discussões"
 
 #: search/templates/search/search.html:4
 msgid "search"
@@ -678,295 +542,85 @@ msgstr "Não há resultados para sua busca."
 msgid "You are searching for"
 msgstr "Você está procurando por"
 
-#: search/templates/search/includes/search_filters.html:5
-#: search/templates/search/includes/search_filters.html:33
-#: search/templates/search/includes/search_filters.html:51
-#: search/templates/search/includes/search_filters.html:69
-msgid "Remove filter"
-msgstr "Remover filtro"
+#: search/utils.py:9 settings.py:159
+msgid "Code"
+msgstr "Código"
 
-#: search/templates/search/includes/search_filters.html:88
-#: search/templates/search/includes/search_filters.html:171
-#: search/templates/search/includes/search_filters.html:195
-msgid "Filter"
-msgstr "Filtro"
+#: search/utils.py:10
+msgid "Tickets"
+msgstr "Tíquetes"
 
-#: search/templates/search/includes/search_filters.html:94
-msgid "Sort by"
-msgstr "Ordenar por"
+#: search/utils.py:11
+msgid "Attachments"
+msgstr "Anexos"
 
-#: search/templates/search/includes/search_filters.html:111
-msgid "Types"
-msgstr "Tipos"
+#: settings.py:117
+msgid "English"
+msgstr "Inglês"
 
-#: super_archives/models.py:62
-#: super_archives/templates/message-preview.html:62
-#: super_archives/templates/message-thread.html:4
-msgid "Anonymous"
-msgstr "Anônimo"
+#: settings.py:118
+msgid "Portuguese"
+msgstr "Português"
 
-#: super_archives/models.py:112
-msgid "Mailing List"
-msgstr "Lista de e-mail"
+#: settings.py:119
+msgid "Spanish"
+msgstr "Espanhol"
 
-#: super_archives/models.py:113
-msgid "The Mailing List where is the thread"
-msgstr "A lista de e-mail onde estão as mensagens"
+#: settings.py:142
+msgid "Recent activity"
+msgstr "Atividade recente"
 
-#: super_archives/models.py:116
-msgid "Latest message"
-msgstr "Última mensagem"
+#: settings.py:146
+msgid "Relevance"
+msgstr "Relevância"
 
-#: super_archives/models.py:117
-msgid "Latest message posted"
-msgstr "Última mensagem postada"
+#: settings.py:155
+msgid "Document"
+msgstr "Documento"
 
-#: super_archives/models.py:118
-msgid "Score"
-msgstr "Pontuação"
+#: settings.py:157
+msgid "Presentation"
+msgstr "Apresentação"
 
-#: super_archives/models.py:118
-msgid "Thread score"
-msgstr "Pontuação do conjunto de mensagens"
+#: settings.py:158
+msgid "Text"
+msgstr "Texto"
 
-#: super_archives/models.py:127
-msgid "Thread"
-msgstr "Conjunto de mensagens"
+#: settings.py:161
+msgid "Compressed"
+msgstr "Compactado"
 
-#: super_archives/models.py:128
-msgid "Threads"
-msgstr "Conjuntos de mensagens"
+#: settings.py:164
+msgid "Spreadsheet"
+msgstr "Planilha"
 
-#: super_archives/models.py:242
-msgid "Subject"
-msgstr "Assunto"
+#: settings.py:249
+msgid "Planet Colab"
+msgstr "Planet Colab"
 
-#: super_archives/models.py:243
-msgid "Please enter a message subject"
-msgstr "Por favor, digite o assunto da mensagem"
+#: settings.py:250
+msgid "Colab blog aggregator"
+msgstr "Agregador de blog Colab"
 
-#: super_archives/models.py:246
-msgid "Message body"
-msgstr "Corpo da mensagem"
+#: settings.py:281
+msgid "One Time Snippet"
+msgstr "Uma única visualização"
 
-#: super_archives/models.py:247
-msgid "Please enter a message body"
-msgstr "Por favor, digite o corpo da mensagem"
+#: settings.py:282
+msgid "In one hour"
+msgstr "Em uma hora"
 
-#: super_archives/models.py:257
-msgid "Message"
-msgstr "Mensagem"
+#: settings.py:283
+msgid "In one week"
+msgstr "Em uma semana"
 
-#: super_archives/views.py:92
-msgid "Error trying to connect to Mailman API"
-msgstr "Erro na conexão com a API do Mailman"
+#: settings.py:284
+msgid "In one month"
+msgstr "Em um mês"
 
-#: super_archives/views.py:95
-msgid "Timeout trying to connect to Mailman API"
-msgstr "Tempo de espera esgotado na conexão com a API do Mailman"
-
-#: super_archives/views.py:99
-msgid ""
-"Your message was sent to this topic. It may take some minutes before it's "
-"delivered by email to the group. Why don't you breath some fresh air in the "
-"meanwhile?"
-msgstr ""
-"Sua mensagem foi enviada para esse tópico. Pode levar alguns minutos até ser "
-"entregue via e-mail para o grupo. Por quê você não respira um ar fresco "
-"enquanto isso?"
-
-#: super_archives/views.py:108
-msgid "You cannot send an empty email"
-msgstr "Você não pode enviar um e-mail vazio"
-
-#: super_archives/views.py:110
-msgid "Mailing list does not exist"
-msgstr "Lista de e-mail não existe"
-
-#: super_archives/views.py:112
-msgid "Unknown error trying to connect to Mailman API"
-msgstr "Erro desconhecido na conexão com a API do Mailman"
-
-#: super_archives/views.py:151
-msgid ""
-"The email address you are trying to verify either has already been verified "
-"or does not exist."
-msgstr ""
-"O endereço de e-mail que você está tentando verificar ou já foi verificado "
-"ou não existe."
-
-#: super_archives/views.py:162
-msgid ""
-"The email address you are trying to verify is already an active email "
-"address."
-msgstr ""
-"O endereço de e-mail que você está tentando verificar já é um endereço de e-"
-"mail ativo"
-
-#: super_archives/views.py:172
-msgid "Email address verified!"
-msgstr "Endereço de e-mail verificado!"
-
-#: super_archives/management/commands/import_emails.py:207
-msgid "[Colab] Warning - Email sent with a blank subject."
-msgstr "[Colab] Aviso - E-mail enviado com o campo assunto em branco."
-
-#: super_archives/templates/message-preview.html:42
-#: super_archives/templates/message-preview.html:62
-msgid "by"
-msgstr "por"
-
-#: super_archives/templates/message-preview.html:65
-#: super_archives/templates/message-thread.html:161
-msgid "ago"
-msgstr "atrás"
-
-#: super_archives/templates/message-thread.html:35
-msgid "You must login before voting."
-msgstr "Você deve estar logado antes de votar."
-
-#: super_archives/templates/message-thread.html:132
-msgid "Order by"
-msgstr "Ordernar por"
-
-#: super_archives/templates/message-thread.html:136
-msgid "Votes"
-msgstr "Votos"
-
-#: super_archives/templates/message-thread.html:140
-msgid "Date"
-msgstr "Data"
-
-#: super_archives/templates/message-thread.html:145
-msgid "Related:"
-msgstr "Relacionado:"
-
-#: super_archives/templates/message-thread.html:156
-msgid "Statistics:"
-msgstr "Estatísticas:"
-
-#: super_archives/templates/message-thread.html:160
-msgid "started at"
-msgstr "começou à"
-
-#: super_archives/templates/message-thread.html:166
-msgid "viewed"
-msgstr "visualizado"
-
-#: super_archives/templates/message-thread.html:167
-#: super_archives/templates/message-thread.html:172
-#: super_archives/templates/message-thread.html:177
-msgid "times"
-msgstr "vezes"
-
-#: super_archives/templates/message-thread.html:171
-msgid "answered"
-msgstr "respondido"
-
-#: super_archives/templates/message-thread.html:176
-msgid "voted"
-msgstr "votado"
-
-#: super_archives/templates/message-thread.html:182
-msgid "Tags:"
-msgstr "Etiquetas:"
-
-#: super_archives/templates/superarchives/thread-dashboard.html:4
-#: super_archives/templates/superarchives/thread-dashboard.html:7
-#: templates/base.html:66
-msgid "Groups"
-msgstr "Grupos"
-
-#: super_archives/templates/superarchives/thread-dashboard.html:17
-msgid "latest"
-msgstr "mais recentes"
-
-#: super_archives/templates/superarchives/thread-dashboard.html:25
-#: super_archives/templates/superarchives/thread-dashboard.html:39
-msgid "more..."
-msgstr "mais..."
-
-#: super_archives/templates/superarchives/thread-dashboard.html:31
-msgid "most relevant"
-msgstr "mais relevantes"
-
-#: super_archives/templates/superarchives/emails/email_blank_subject.txt:2
-msgid "Hello"
-msgstr "Olá"
-
-#: super_archives/templates/superarchives/emails/email_blank_subject.txt:3
-#, python-format
-msgid ""
-"\n"
-"You've sent an email to %(mailinglist)s with a blank subject and the "
-"following content:\n"
-"\n"
-"\"%(body)s\"\n"
-"\n"
-"Please, fill the subject in every email you send it.\n"
-"\n"
-"Thank you.\n"
-msgstr ""
-"\n"
-"Você enviou um e-mail para %(mailinglist)s com o campo Assunto em branco e o "
-"seguinte conteúdo:\n"
-"\n"
-"\"%(body)s\"\n"
-"\n"
-"Por favor, preencha o assunto em todos os e-mails que você enviar.\n"
-"\n"
-"Obrigado.\n"
-
-#: super_archives/templates/superarchives/emails/email_verification.txt:2
-#, python-format
-msgid ""
-"Hey, we want to verify that you are indeed \"%(fullname)s (%(username)s)\".  "
-"If that's the case, please follow the link below:"
-msgstr ""
-"Hey, queremos verificar se você realmente é \"%(fullname)s (%(username)s)\". "
-"Se esse é o caso, por favor, clique no link abaixo:"
-
-#: super_archives/templates/superarchives/emails/email_verification.txt:6
-#, python-format
-msgid ""
-"If you're not %(username)s or didn't request verification you can ignore "
-"this email."
-msgstr ""
-"Se você não é %(username)s ou não pediu uma verificação você pode ignorar "
-"esse e-mail"
-
-#: super_archives/templates/superarchives/includes/message.html:17
-#: super_archives/templates/superarchives/includes/message.html:18
-msgid "Link to this message"
-msgstr "Link para essa mensagem"
-
-#: super_archives/templates/superarchives/includes/message.html:46
-msgid "Reply"
-msgstr "Responder"
-
-#: super_archives/templates/superarchives/includes/message.html:63
-msgid "Send a message"
-msgstr "Enviar uma mensagem"
-
-#: super_archives/templates/superarchives/includes/message.html:66
-msgid ""
-"After sending a message it will take few minutes before it shows up in here. "
-"Why don't you grab a coffee?"
-msgstr ""
-"Depois de enviar uma mensagem levará alguns minutos antes dela aparecer "
-"aqui. Por que você não pega um café?"
-
-#: super_archives/templates/superarchives/includes/message.html:69
-msgid "Send"
-msgstr "Enviar"
-
-#: super_archives/utils/email.py:14
-msgid "Please verify your email "
-msgstr "Por favor, verifique seu e-mail "
-
-#: super_archives/utils/email.py:25
-msgid "Registration on the mailing list"
-msgstr "Inscrição na lista de e-mail"
+#: settings.py:285
+msgid "Never"
+msgstr "Nunca"
 
 #: templates/404.html:5
 msgid "Not found. Keep searching! :)"
@@ -976,565 +630,444 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:63
+#: templates/base.html:68
 msgid "Timeline"
 msgstr "Linha do Tempo"
 
-#: templates/base.html:69
-msgid "Blogs"
-msgstr ""
+#: templates/base.html:73 templates/base.html.py:87
+msgid "Groups"
+msgstr "Grupos"
 
-#: templates/base.html:72
+#: templates/base.html:76
+msgid "Blogs"
+msgstr "Blogs"
+
+#: templates/base.html:82
+msgid "Public Projects"
+msgstr "Projetos Públicos"
+
+#: templates/base.html:84
+msgid "Profile"
+msgstr "Perfil"
+
+#: templates/base.html:85
+msgid "New Project"
+msgstr "Novo Projeto"
+
+#: templates/base.html:86
+msgid "Projects"
+msgstr "Projetos"
+
+#: templates/base.html:88
+msgid "Issues"
+msgstr "Tiquetes"
+
+#: templates/base.html:89
+msgid "Merge Requests"
+msgstr "Merge Requests"
+
+#: templates/base.html:96
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:76
+#: templates/base.html:100
 msgid "New Wiki Page"
 msgstr "Nova Página Wiki"
 
-#: templates/base.html:78
+#: templates/base.html:102
 msgid "View Tickets"
 msgstr "Ver Tiquetes"
 
-#: templates/base.html:80
+#: templates/base.html:104
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:82
+#: templates/base.html:106
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:86
+#: templates/base.html:109
 msgid "Browse Source"
 msgstr "Códigos Fontes"
 
-#: templates/base.html:87
+#: templates/base.html:111
 msgid "Continuous Integration"
 msgstr "Integração Contínua"
 
-#: templates/base.html:95
+#: templates/base.html:121
 msgid "Help"
 msgstr "Ajuda"
 
-#: templates/base.html:107 templates/base.html.py:112
+#: templates/base.html:133 templates/base.html.py:138
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/base.html:126
+#: templates/base.html:152
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:127
+#: templates/base.html:153
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:139 templates/base.html.py:142
+#: templates/base.html:165 templates/base.html.py:168
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:155
+#: templates/base.html:182
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:182
+#: templates/base.html:207
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:189
+#: templates/base.html:214
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:192
-msgid ""
-"Creative Commons 3.0 Brasil - Atribuição - Não-Comercial - Compartilha-Igual"
-msgstr ""
+#: templates/base.html:217
+msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
+msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 
-#: templates/home.html:21
+#: templates/home.html:17
 msgid "Latest Collaborations"
 msgstr "Últimas Colaborações"
 
-#: templates/home.html:25
+#: templates/home.html:21
 msgid "RSS - Latest collaborations"
 msgstr "RSS - Últimas Colaborações"
 
-#: templates/home.html:34
+#: templates/home.html:30
 msgid "View more collaborations..."
 msgstr "Ver mais colaborações..."
 
-#: templates/home.html:41
+#: templates/home.html:37
 msgid "Collaboration Graph"
 msgstr "Gráfico de Colaborações"
 
-#: templates/home.html:52
+#: templates/home.html:48
 msgid "Most Relevant Threads"
 msgstr "Discussões Mais Relevantes"
 
-#: templates/home.html:56
+#: templates/home.html:52
 msgid "RSS - Most Relevant Threads"
 msgstr "RSS - Discussões Mais Relevantes"
 
-#: templates/home.html:64 templates/home.html.py:83
+#: templates/home.html:60 templates/home.html.py:79
 msgid "View more discussions..."
 msgstr "Ver mais discussões..."
 
-#: templates/home.html:71
+#: templates/home.html:67
 msgid "Latest Threads"
 msgstr "Últimas Discussões"
 
-#: templates/home.html:75
+#: templates/home.html:71
 msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
 
 #: templates/open-data.html:6
-msgid "OpenData"
-msgstr "OpenData"
+msgid "OpenData - Communities"
+msgstr "OpenData - Comunidades"
 
 #: templates/open-data.html:7
 msgid ""
 "If you are interested in any other data that is not provided by this API, "
 "please contact us via the ticketing system (you must be registered in order "
 "to create a ticket)."
-msgstr ""
+msgstr "Se você estiver interessado por qualquer outra informação não provida por esta API, por favor nos contacte através do nosso sistema de tíquetes (você deve estar logado para conseguir criar um tíquete). "
 
 #: templates/open-data.html:9
 msgid "Retrieving data via API"
-msgstr ""
+msgstr "Recuperando informação através da API"
 
 #: templates/open-data.html:10
 msgid "Colab API works through HTTP/REST, always returning JSON objects."
-msgstr ""
+msgstr "A API do Colab funciona com a utilização de HTTP/REST e sempre retorna objetos JSON."
 
 #: templates/open-data.html:12
 msgid "The base API URL is"
-msgstr ""
+msgstr "A URL base da API é"
 
 #: templates/open-data.html:19
 msgid ""
 "Each model listed below has a resource_uri field available, which is the "
 "object's data URI."
-msgstr ""
+msgstr "Cada modelo listado abaixo tem um resource_uri que representa a URI do objeto"
 
 #: templates/open-data.html:20
 msgid ""
 "The following list contains the available models to retrieve data and its "
 "fields available for filtering"
-msgstr ""
+msgstr "A lista abaixo contém a lista de modelo disponíveis para pesquisa e os campos disponíveis para filtro"
 
 #: templates/open-data.html:24 templates/open-data.html.py:39
 #: templates/open-data.html:50 templates/open-data.html.py:62
 #: templates/open-data.html:74 templates/open-data.html.py:95
 msgid "Fields"
-msgstr ""
+msgstr "Campos"
 
 #: templates/open-data.html:25
 msgid ""
-"The email field is not shown for user's privacy, but you can use it to filter"
-msgstr ""
+"The email field is not shown for user's privacy, but you can use it to "
+"filter"
+msgstr "O campo email não é exibido por uma questão de privacidade do usuário, por outro lado ele poderá ser utilizado em filtros"
 
 #: templates/open-data.html:27
 msgid "The user's username"
-msgstr ""
+msgstr "O username do usuário"
 
 #: templates/open-data.html:28
-#, fuzzy
 msgid "The user's email address"
-msgstr "Adicionar outro endereço de e-mail"
+msgstr "O endereço e-mail do usuário"
 
 #: templates/open-data.html:29
 msgid "What is the user's institution"
-msgstr ""
+msgstr "Instituição do usuário"
 
 #: templates/open-data.html:30
 msgid "What is the user's role"
-msgstr ""
+msgstr "Posição do usuário"
 
 #: templates/open-data.html:31
 msgid "The user's first name"
-msgstr ""
+msgstr "Primeiro nome do usuário"
 
 #: templates/open-data.html:32
 msgid "The user's last name"
-msgstr ""
+msgstr "Último nome do usuário"
 
 #: templates/open-data.html:33
 msgid "A mini bio of the user"
-msgstr ""
+msgstr "O mini bio do usuário"
 
 #: templates/open-data.html:40
 msgid ""
 "The address field is not shown for user's privacy, but you can use it to "
 "filter"
-msgstr ""
+msgstr "O campo email não é exibido por uma questão de privacidade do usuário, por outro lado ele poderá ser utilizado em filtros"
 
 #: templates/open-data.html:42
 msgid "It has a relationshop with the user described above"
-msgstr ""
+msgstr "Tem um relacionamento com usuário como descrito acima"
 
 #: templates/open-data.html:43
-#, fuzzy
 msgid "An email address"
-msgstr "Adicionar outro endereço de e-mail"
+msgstr "Um endereço de e-mail"
 
 #: templates/open-data.html:44
 msgid "The user's real name"
-msgstr ""
+msgstr "O nome real do usuário"
 
 #: templates/open-data.html:52
 msgid "It has a relationship with the emailaddress described above"
-msgstr ""
+msgstr "Tem um relacionamento com emailaddress como descrito acima"
 
 #: templates/open-data.html:53
-#, fuzzy
 msgid "The message's body"
-msgstr "Corpo da mensagem"
+msgstr "O corpo da mensagem"
 
 #: templates/open-data.html:54
-#, fuzzy
 msgid "The message's subject"
-msgstr "Por favor, digite o assunto da mensagem"
+msgstr "O título da mensagem"
 
 #: templates/open-data.html:55
-#, fuzzy
 msgid "The message's id"
-msgstr "Última mensagem"
+msgstr "O ID da mensagem"
 
 #: templates/open-data.html:56
 msgid "The message's received time"
-msgstr ""
+msgstr "A hora que a mensagem foi recebida"
 
 #: templates/open-data.html:64
 msgid "The revision's author username"
-msgstr ""
+msgstr "O username do autor da revisão"
 
 #: templates/open-data.html:65
 msgid "When the revision's were created"
-msgstr ""
+msgstr "Quando a revisão foi criada"
 
 #: templates/open-data.html:66
 msgid "The revision's key"
-msgstr ""
+msgstr "A chave da revisão"
 
 #: templates/open-data.html:67
 msgid "The revision's message"
-msgstr ""
+msgstr "A mensagem da revisão"
 
 #: templates/open-data.html:68
 msgid "The revision's repository name"
-msgstr ""
+msgstr "O nome do repositório da revisão"
 
 #: templates/open-data.html:76
 msgid "The ticket's author username"
-msgstr ""
+msgstr "O nome do autor do tíquete"
 
 #: templates/open-data.html:77
 msgid "The ticket's component"
-msgstr ""
+msgstr "O componente do tíquete"
 
 #: templates/open-data.html:78
 msgid "When the ticket's were created"
-msgstr ""
+msgstr "Quando o tíquete foi criado"
 
 #: templates/open-data.html:79
 msgid "The ticket's description"
-msgstr ""
+msgstr "A descrição do tíquete"
 
 #: templates/open-data.html:80
-#, fuzzy
 msgid "The ticket's id"
-msgstr "Tíquetes"
+msgstr "O ID do tíquete"
 
 #: templates/open-data.html:81
 msgid "The ticket's keywords"
-msgstr ""
+msgstr "As keywords do tíquete"
 
 #: templates/open-data.html:82
 msgid "The ticket's milestone"
-msgstr ""
+msgstr "O milestone do tíquete"
 
 #: templates/open-data.html:83 templates/open-data.html.py:99
 msgid "The time of the last modification"
-msgstr ""
+msgstr "A hora da última modificação"
 
 #: templates/open-data.html:84
 msgid "The username of the last user who modified the ticket"
-msgstr ""
+msgstr "O username do último usuário que modificou o tíquete"
 
 #: templates/open-data.html:85
 msgid "The ticket's priority"
-msgstr ""
+msgstr "A prioridade do tíquete"
 
 #: templates/open-data.html:86
 msgid "The ticket's severity"
-msgstr ""
+msgstr "A gravidade do tíquete"
 
 #: templates/open-data.html:87
 msgid "The ticket's status"
-msgstr ""
+msgstr "O status do tíquete"
 
 #: templates/open-data.html:88
 msgid "The ticket's summary"
-msgstr ""
+msgstr "O resumo do tíquete"
 
 #: templates/open-data.html:89
 msgid "The ticket's version"
-msgstr ""
+msgstr "A versão do tíquete"
 
 #: templates/open-data.html:97
 msgid "The wiki's author username"
-msgstr ""
+msgstr "O username do autor da wiki"
 
 #: templates/open-data.html:98
 msgid "When the wiki's were created"
-msgstr ""
+msgstr "Quando a wiki foi criada"
 
 #: templates/open-data.html:100
 msgid "The username of the last user who modified the wiki"
-msgstr ""
+msgstr "O username do último usuário a modificar a wiki"
 
 #: templates/open-data.html:101
 msgid "The wiki's name"
-msgstr ""
+msgstr "O nome da wiki"
 
 #: templates/open-data.html:102
 msgid "the wiki's content"
-msgstr ""
+msgstr "O conteúdo da wiki"
 
 #: templates/open-data.html:109
 msgid "Parameters"
-msgstr ""
+msgstr "Parâmetros"
 
 #: templates/open-data.html:112
 msgid "Results per page"
-msgstr ""
+msgstr "Resultados por página"
 
 #: templates/open-data.html:113
 msgid "Number of results to be displayed per page."
-msgstr ""
+msgstr "Número de resultados a serem exibidos por página."
 
 #: templates/open-data.html:114
 msgid "Default: 20"
-msgstr ""
+msgstr "Padrão: 20"
 
 #: templates/open-data.html:118
 msgid "Starts of n element"
-msgstr ""
+msgstr "Inicia pelo n-ésimo elemento"
 
 #: templates/open-data.html:119
 msgid "Where n is the index of the first result to appear in the page."
-msgstr ""
+msgstr "Onde n é o índice do primeiro resultado a ser exibido na página."
 
 #: templates/open-data.html:120
 msgid "Default: 0"
-msgstr ""
+msgstr "Padrão: 0"
 
 #: templates/open-data.html:122
-#, fuzzy
 msgid "Filtering"
-msgstr "Filtro"
+msgstr "Filtrando"
 
 #: templates/open-data.html:124
 msgid "The field name"
-msgstr ""
+msgstr "O nome do campo"
 
 #: templates/open-data.html:125
 msgid ""
 "If you are looking for a specific wiki, and you know the wiki's name, you "
 "can filter it as below"
-msgstr ""
+msgstr "Se você está buscando especificamente por uma wiki e você sabe o nome da wiki, você pode utilizar o filtro abaixo"
 
 #: templates/open-data.html:126
-#, fuzzy
 msgid "WikiName"
-msgstr "Nome"
+msgstr "WikiName"
 
 #: templates/open-data.html:127
 msgid ""
 "Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the "
 "value you want to filter."
-msgstr ""
+msgstr "Onde  &quot;name&quot; é o fieldname e &quot;WikiName&quot; é o value que você quer filtrar."
 
 #: templates/open-data.html:128
-#, fuzzy
 msgid "Usage"
-msgstr "Mensagem"
+msgstr "Uso"
 
 #: templates/open-data.html:129
 msgid ""
 "You can also filter using Django lookup fields with the double underscores, "
 "just as below"
-msgstr ""
+msgstr "Você também pode filtrar usando lookup fields do Django com underscores duplos, como demonstrado abaixo"
 
 #: templates/open-data.html:131 templates/open-data.html.py:132
-#, fuzzy
 msgid "test"
-msgstr "mais recentes"
+msgstr "test"
 
 #: templates/open-data.html:133
 msgid "Usage with relationships"
-msgstr ""
+msgstr "Uso com relacionamentos"
 
 #: templates/open-data.html:134
 msgid ""
-"You can use related fields to filter too. So, you can filter by any field of "
-"emailaddress using the 'from_address' field of message, which has a relation "
-"to emailaddress. You will achieve the related fields by using double "
-"underscore and the field's name. See the example below"
-msgstr ""
+"You can use related fields to filter too. So, you can filter by any field of"
+" emailaddress using the 'from_address' field of message, which has a "
+"relation to emailaddress. You will achieve the related fields by using "
+"double underscore and the field's name. See the example below"
+msgstr "Você pode também pode utilizar campos relacionados para filtrar. Você pode filtrar por qualquer campo de emailaddress utilizando o 'from_address' da mensagem, que tem relação com emailaddress. Para tal você precisará utilizar os underscores duplos e o nome do campo desejado. Veja o exemplo abaixo"
 
 #: templates/open-data.html:136
 msgid ""
 "So, real_name is a field of emailaddress, and you had access to this field "
 "by a message field called from_address and using double underscore to say "
 "you want to use a field of that relationship"
-msgstr ""
+msgstr "real_name é um campo de emailaddress e você pode acessá-lo através de um campo do do objeto message, from_address, e underscores duplos para referenciar que este campo pertence ao modelo relacionado"
 
 #: templates/open-data.html:137
 msgid ""
 "Note: email filters must be exact. Which means that __contains, "
 "__startswith, __endswith and others won't work"
-msgstr ""
+msgstr "Nota: os filtros de email devem ser exatos. Isso significa que __contains, __startswith, __endswith e outros métodos de busca parcial não funcionarão"
 
 #: templates/open-data.html:138
 msgid ""
 "Another example of usage with relations. Used to retrieve all messages of a "
 "given user, using the username or the email field"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:37
-#, fuzzy
-msgid "Compare"
-msgstr "Comparação"
-
-#: templates/dpaste/snippet_details.html:47
-#, python-format
-msgid "Expires in: %(date)s"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:49
-msgid "Snippet never expires"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:51
-msgid "One-time snippet"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:56
-msgid "Really delete this snippet?"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:58
-#, fuzzy
-msgid "Delete Now"
-msgstr "Apagar"
-
-#: templates/dpaste/snippet_details.html:63
-#: templates/dpaste/snippet_details.html:65
-#, fuzzy
-msgid "Compare Snippets"
-msgstr "Comparação"
-
-#: templates/dpaste/snippet_details.html:69
-#: templates/dpaste/snippet_details.html:71
-msgid "View Raw"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:75
-msgid "Gist"
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:88
-msgid "This is a one-time snippet."
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:90
-msgid "It will automatically get deleted after {{ remaining }} further views."
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:92
-msgid "It will automatically get deleted after the next view."
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:94
-msgid "It cannot be viewed again."
-msgstr ""
-
-#: templates/dpaste/snippet_details.html:109
-msgid "Reply to this snippet"
-msgstr ""
-
-#: templates/dpaste/snippet_diff.html:5
-#, python-format
-msgid ""
-"\n"
-"    Diff between <a href=\"%(filea_url)s\">#%(filea_id)s</a> and <a href="
-"\"%(fileb_url)s\">#%(fileb_id)s</a>\n"
-"    "
-msgstr ""
-
-#: templates/dpaste/snippet_form.html:28
-msgid "Paste it"
-msgstr ""
-
-#~ msgid "Creative Commons - attribution, non-commercial"
-#~ msgstr "Creative Commons - atribuição e não-comercial"
-
-#~ msgid "Willing to help"
-#~ msgstr "Vontade de ajudar"
-
-#~ msgid "Identi.ca account"
-#~ msgstr "Conta Identi.ca"
-
-#~ msgid "Biography"
-#~ msgstr "Biografia"
-
-#~ msgid "Other Collaborations"
-#~ msgstr "Outras Colaborações"
-
-#~ msgid "Mailing List Subscriptions"
-#~ msgstr "Inscrições em listas de e-mails"
-
-#~ msgid "Change SVN and XMPP Client password"
-#~ msgstr "Trocar a senha do SVN e do Mensageiro"
-
-#~ msgid ""
-#~ "You don't need to change this password. Change it only if you really know "
-#~ "what you are doing."
-#~ msgstr ""
-#~ "Você não precisa trocar essa senha. Troque-a somente se tem certeza do "
-#~ "que está fazendo."
-
-#~ msgid "Subscribes: "
-#~ msgstr "Inscrições: "
-
-#~ msgid "Discussions"
-#~ msgstr "Discussões"
-
-#~ msgid "Community inside participations"
-#~ msgstr "Participações internas da comunidade"
-
-#~ msgid "documents found in"
-#~ msgstr "documentos encontrados em"
-
-#~ msgid "seconds"
-#~ msgstr "segundos"
-
-#~ msgid "Previous"
-#~ msgstr "Anterior"
-
-#~ msgid "Page"
-#~ msgstr "Página"
-
-#~ msgid "of"
-#~ msgstr "de"
-
-#~ msgid "Next"
-#~ msgstr "Pŕoximo"
-
-#~ msgid "%(option)s"
-#~ msgstr "%(option)s"
-
-#~ msgid "%(name)s"
-#~ msgstr "%(name)s"
-
-#~ msgid "<strong>%(name)s</strong>"
-#~ msgstr "<strong>%(name)s</strong>"
+msgstr "Outro exemplo de uso com relacionamento. Usado para recuperar todos as mensagem de um dado usuário usando o campo username ou email"
