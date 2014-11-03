@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-31 15:46-0200\n"
-"PO-Revision-Date: 2014-10-31 18:22+0000\n"
+"POT-Creation-Date: 2014-11-03 17:38-0200\n"
+"PO-Revision-Date: 2014-11-03 20:18+0000\n"
 "Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/colab/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -85,6 +85,15 @@ msgstr "Trocar senha do Repositório e do Mensageiro"
 msgid "Change Password"
 msgstr "Trocar senha"
 
+#: accounts/templates/accounts/login.html:7
+msgid "To login please click in the link below:"
+msgstr "Para acessar por favor clique no link abaixo:"
+
+#: accounts/templates/accounts/login.html:8 templates/base.html:165
+#: templates/base.html.py:170
+msgid "Login"
+msgstr "Entrar"
+
 #: accounts/templates/accounts/manage_subscriptions.html:6
 msgid "Group Subscriptions"
 msgstr "Inscrições em grupos"
@@ -114,7 +123,7 @@ msgid "Subscribe to groups"
 msgstr "Inscreva-se nos grupos"
 
 #: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:132 templates/base.html.py:137
+#: templates/base.html:164 templates/base.html.py:169
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -265,21 +274,21 @@ msgstr "Este recurso está disponível para quem precisa trocar a senha por algu
 msgid "Update"
 msgstr "Atualizar"
 
-#: accounts/views.py:155
+#: accounts/views.py:148
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: accounts/views.py:156
+#: accounts/views.py:149
 msgid ""
 "You must login to validated your profile. Profiles not validated are deleted"
 " in 24h."
 msgstr "Você deve se logar para validar seu perfil. Perfis não validados serão deletados em 24h."
 
-#: accounts/views.py:240
+#: accounts/views.py:233
 msgid "Could not change your password. Please, try again later."
 msgstr "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
 
-#: accounts/views.py:249
+#: accounts/views.py:242
 msgid "You've changed your password successfully!"
 msgstr "Senha alterada com sucesso!"
 
@@ -377,7 +386,7 @@ msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
 #: search/forms.py:16 search/templates/search/search.html:41
-#: templates/base.html:117
+#: templates/base.html:149
 msgid "Search"
 msgstr "Busca"
 
@@ -425,7 +434,7 @@ msgstr "Palavras chaves"
 msgid "Collaborators"
 msgstr "Colaboradores"
 
-#: search/forms.py:37 templates/base.html:80
+#: search/forms.py:37 templates/base.html:81
 msgid "Repository"
 msgstr "Repositório"
 
@@ -630,103 +639,115 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:68
+#: templates/base.html:69
 msgid "Timeline"
 msgstr "Linha do Tempo"
 
-#: templates/base.html:73 templates/base.html.py:87
+#: templates/base.html:74 templates/base.html.py:88
 msgid "Groups"
 msgstr "Grupos"
 
-#: templates/base.html:76
+#: templates/base.html:77
 msgid "Blogs"
 msgstr "Blogs"
 
-#: templates/base.html:82
+#: templates/base.html:83
 msgid "Public Projects"
 msgstr "Projetos Públicos"
 
-#: templates/base.html:84
+#: templates/base.html:85 templates/base.html.py:114
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/base.html:85
+#: templates/base.html:86
 msgid "New Project"
 msgstr "Novo Projeto"
 
-#: templates/base.html:86
+#: templates/base.html:87
 msgid "Projects"
 msgstr "Projetos"
 
-#: templates/base.html:88
+#: templates/base.html:89
 msgid "Issues"
 msgstr "Tiquetes"
 
-#: templates/base.html:89
+#: templates/base.html:90
 msgid "Merge Requests"
 msgstr "Merge Requests"
 
-#: templates/base.html:96
+#: templates/base.html:98
+msgid "Social"
+msgstr "Social"
+
+#: templates/base.html:103
+msgid "Users"
+msgstr "Usuários"
+
+#: templates/base.html:108
+msgid "Communities"
+msgstr "Comunidades"
+
+#: templates/base.html:119
+msgid "Control panel"
+msgstr "Painel de Controle"
+
+#: templates/base.html:128
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:100
+#: templates/base.html:132
 msgid "New Wiki Page"
 msgstr "Nova Página Wiki"
 
-#: templates/base.html:102
+#: templates/base.html:134
 msgid "View Tickets"
 msgstr "Ver Tiquetes"
 
-#: templates/base.html:104
+#: templates/base.html:136
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:106
+#: templates/base.html:138
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:109
+#: templates/base.html:141
 msgid "Browse Source"
 msgstr "Códigos Fontes"
 
-#: templates/base.html:111
+#: templates/base.html:143
 msgid "Continuous Integration"
 msgstr "Integração Contínua"
 
-#: templates/base.html:121
+#: templates/base.html:153
 msgid "Help"
 msgstr "Ajuda"
 
-#: templates/base.html:133 templates/base.html.py:138
-msgid "Login"
-msgstr "Entrar"
-
-#: templates/base.html:152
+#: templates/base.html:184
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:153
+#: templates/base.html:185
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:165 templates/base.html.py:168
+#: templates/base.html:197 templates/base.html.py:200
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:182
+#: templates/base.html:214
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:207
+#: templates/base.html:239
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:214
+#: templates/base.html:246
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:217
+#: templates/base.html:249
 msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 
