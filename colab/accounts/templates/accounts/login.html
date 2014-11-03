@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load browserid i18n %}
+
+{% block main-content %}
+  <br><br><br>
+  <div class="col-lg-12 text-center">
+    <p>{% trans 'To login please click in the link below:'%}</p>
+    {% trans 'Login' as login_text %}
+    {% browserid_login text=login_text link_class='btn btn-primary btn-lg' %}
+  </div>
+  <br><br><br>
+{% endblock %}
