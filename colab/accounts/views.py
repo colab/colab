@@ -13,7 +13,7 @@ from django.utils.translation import ugettext as _
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, TemplateView
 from django.utils.decorators import method_decorator
 
 from django.http import HttpResponse
@@ -28,6 +28,10 @@ from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
 from .errors import XMPPChangePwdException
 from .utils import mailman
+
+
+class LoginView(TemplateView):
+    template_name = "accounts/login.html"
 
 
 class UserProfileBaseMixin(object):

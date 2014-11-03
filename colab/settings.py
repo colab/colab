@@ -257,7 +257,7 @@ SITE_URL = 'http://localhost:8000'
 BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
 
 
-LOGIN_URL = '/'
+LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/'
 LOGOUT_REDIRECT_URL = '/'

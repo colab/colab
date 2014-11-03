@@ -1,16 +1,17 @@
 
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
-from .views import (UserProfileDetailView, UserProfileUpdateView,
+from .views import (UserProfileDetailView, UserProfileUpdateView, LoginView,
                     ManageUserSubscriptionsView, ChangeXMPPPasswordView)
 
-from . import views
 
 urlpatterns = patterns('',
     url(r'^register/$', 'colab.accounts.views.signup', name='signup'),
 
     url(r'^change-password/$',
         ChangeXMPPPasswordView.as_view(), name='change_password'),
+
+    url(r'^login/?$', LoginView.as_view(), name='login'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),
