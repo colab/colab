@@ -5,7 +5,6 @@ import datetime
 
 from collections import OrderedDict
 
-from django.contrib.auth.views import logout
 from django.contrib import messages
 from django.db import transaction
 from django.db.models import Count
@@ -114,13 +113,6 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
-
-
-def logoutColab(request):
-       response = logout(request, next_page='/')
-       response.delete_cookie('_redmine_session')
-       response.delete_cookie('_gitlab_session')
-       return response
 
 
 def signup(request):
