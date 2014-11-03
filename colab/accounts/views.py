@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import datetime
-
 from collections import OrderedDict
 
 from django.contrib import messages
@@ -14,19 +12,17 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, TemplateView
-from django.utils.decorators import method_decorator
 
-from django.http import HttpResponse
 from conversejs import xmpp
 from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
 from colab.super_archives.models import EmailAddress, Message
 from colab.search.utils import trans
-#from proxy.trac.models import WikiCollabCount, TicketCollabCount
+# from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
-from .errors import XMPPChangePwdException
+# from .errors import XMPPChangePwdException
 from .utils import mailman
 
 
@@ -46,7 +42,8 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     form_class = UserUpdateForm
 
     def get_success_url(self):
-        return reverse('user_profile', kwargs={'username': self.object.username})
+        return reverse('user_profile', kwargs={'username':
+                                               self.object.username})
 
     def get_object(self, *args, **kwargs):
         obj = super(UserProfileUpdateView, self).get_object(*args, **kwargs)
@@ -71,13 +68,13 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         )
 
         counter_class = {}
-        #{
-        #    'wiki': WikiCollabCount,
-        #    'ticket': TicketCollabCount,
-        #}
+        # {
+        #     'wiki': WikiCollabCount,
+        #     'ticket': TicketCollabCount,
+        # }
 
         types = ['thread']
-        #types.extend(['ticket', 'wiki', 'changeset', 'attachment'])
+        # types.extend(['ticket', 'wiki', 'changeset', 'attachment'])
 
         messages = Message.objects.filter(from_address__user__pk=user.pk)
         for type in types:
@@ -111,9 +108,9 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context['emails'] = query[:10]
 
         count_by = 'thread__mailinglist__name'
-        context['list_activity'] = dict(messages.values_list(count_by)\
-                                           .annotate(Count(count_by))\
-                                           .order_by(count_by))
+        context['list_activity'] = dict(messages.values_list(count_by)
+                                                .annotate(Count(count_by))
+                                                .order_by(count_by))
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
