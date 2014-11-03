@@ -9,6 +9,7 @@
     <merge attributes="class" css:theme="body" css:content="body" />
 
     <drop css:theme="link[href='/static/third-party/font-awesome/css/font-awesome.min.css']" />
+    <drop css:theme="link[href='/static/converse.js/converse.min.css']" />
     <drop css:theme="link[href='/static/third-party/bootstrap/css/bootstrap.min.css']" />
     <drop css:theme="link[href='/static/css/screen.css']" />
     <drop theme="/html/head/script" />
