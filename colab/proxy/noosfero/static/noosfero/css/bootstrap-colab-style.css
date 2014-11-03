@@ -1,0 +1,5807 @@
+/**
+ *  This is a customized version of bootstrap v3.0.0
+ *  - The main change is the namespace '.colab-style', which adds a namespace to every rule
+ *  - Do that by adding a bootstrap.css content inside of a rule. Example:
+ *    File: bootstrap-with-namespace.less
+ *    1. .namespace{
+ *    2.    # all bootstrap.min.css
+ *    3. }
+ *    Then compile it with lessc and you will get the final namespaced bootstrap
+ *    This is really usefull if you want bootstrap to act only in a few specific tags
+ *  - Second of all is the 'body' and 'html' rules replacement to '.colab-style', since they don't
+ *    make sense inside of a nampespace
+ *  - Third is 'fonts' location, just search for fonts and then place the folder according to
+ *    its place in the server
+ */
+.colab-style {
+  /*!
+ * Bootstrap v3.0.0
+ *
+ * Copyright 2013 Twitter, Inc
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by @mdo and @fat.
+ */
+  /*! normalize.css v2.1.0 | MIT License | git.io/normalize */
+}
+.colab-style article,
+.colab-style aside,
+.colab-style details,
+.colab-style figcaption,
+.colab-style figure,
+.colab-style footer,
+.colab-style header,
+.colab-style hgroup,
+.colab-style main,
+.colab-style nav,
+.colab-style section,
+.colab-style summary {
+  display: block;
+}
+.colab-style audio,
+.colab-style canvas,
+.colab-style video {
+  display: inline-block;
+}
+.colab-style audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+.colab-style [hidden] {
+  display: none;
+}
+.colab-style {
+  font-family: sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+.colab-style {
+  margin: 0;
+}
+.colab-style a:focus {
+  outline: thin dotted;
+}
+.colab-style a:active,
+.colab-style a:hover {
+  outline: 0;
+}
+.colab-style h1 {
+  margin: .67em 0;
+  font-size: 2em;
+}
+.colab-style abbr[title] {
+  border-bottom: 1px dotted;
+}
+.colab-style b,
+.colab-style strong {
+  font-weight: bold;
+}
+.colab-style dfn {
+  font-style: italic;
+}
+.colab-style hr {
+  height: 0;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+.colab-style mark {
+  color: #000;
+  background: #ffff00;
+}
+.colab-style code,
+.colab-style kbd,
+.colab-style pre,
+.colab-style samp {
+  font-family: monospace,serif;
+  font-size: 1em;
+}
+.colab-style pre {
+  white-space: pre-wrap;
+}
+.colab-style q {
+  quotes: "\201C" "\201D" "\2018" "\2019";
+}
+.colab-style small {
+  font-size: 80%;
+}
+.colab-style sub,
+.colab-style sup {
+  position: relative;
+  font-size: 75%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+.colab-style sup {
+  top: -0.5em;
+}
+.colab-style sub {
+  bottom: -0.25em;
+}
+.colab-style img {
+  border: 0;
+}
+.colab-style svg:not(:root) {
+  overflow: hidden;
+}
+.colab-style figure {
+  margin: 0;
+}
+.colab-style fieldset {
+  padding: .35em .625em .75em;
+  margin: 0 2px;
+  border: 1px solid #c0c0c0;
+}
+.colab-style legend {
+  padding: 0;
+  border: 0;
+}
+.colab-style button,
+.colab-style input,
+.colab-style select,
+.colab-style textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: 100%;
+}
+.colab-style button,
+.colab-style input {
+  line-height: normal;
+}
+.colab-style button,
+.colab-style select {
+  text-transform: none;
+}
+.colab-style button,
+.colab-style input[type="button"],
+.colab-style input[type="reset"],
+.colab-style input[type="submit"] {
+  cursor: pointer;
+  -webkit-appearance: button;
+}
+.colab-style button[disabled],
+.colab-style input[disabled] {
+  cursor: default;
+}
+.colab-style input[type="checkbox"],
+.colab-style input[type="radio"] {
+  padding: 0;
+  box-sizing: border-box;
+}
+.colab-style input[type="search"] {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  -webkit-appearance: textfield;
+}
+.colab-style input[type="search"]::-webkit-search-cancel-button,
+.colab-style input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+.colab-style button::-moz-focus-inner,
+.colab-style input::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+.colab-style textarea {
+  overflow: auto;
+  vertical-align: top;
+}
+.colab-style table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+@media print {
+  .colab-style * {
+    color: #000!important;
+    text-shadow: none!important;
+    background: transparent!important;
+    box-shadow: none !important;
+  }
+  .colab-style a,
+  .colab-style a:visited {
+    text-decoration: underline;
+  }
+  .colab-style a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  .colab-style abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  .colab-style .ir a:after,
+  .colab-style a[href^="javascript:"]:after,
+  .colab-style a[href^="#"]:after {
+    content: "";
+  }
+  .colab-style pre,
+  .colab-style blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  .colab-style thead {
+    display: table-header-group;
+  }
+  .colab-style tr,
+  .colab-style img {
+    page-break-inside: avoid;
+  }
+  .colab-style img {
+    max-width: 100% !important;
+  }
+  @page  {
+    margin: 2cm 0.5cm;
+  }
+  .colab-style p,
+  .colab-style h2,
+  .colab-style h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  .colab-style h2,
+  .colab-style h3 {
+    page-break-after: avoid;
+  }
+  .colab-style .navbar {
+    display: none;
+  }
+  .colab-style .table td,
+  .colab-style .table th {
+    background-color: #ffffff !important;
+  }
+  .colab-style .btn > .caret,
+  .colab-style .dropup > .btn > .caret {
+    border-top-color: #000000 !important;
+  }
+  .colab-style .label {
+    border: 1px solid #000000;
+  }
+  .colab-style .table {
+    border-collapse: collapse !important;
+  }
+  .colab-style .table-bordered th,
+  .colab-style .table-bordered td {
+    border: 1px solid #dddddd !important;
+  }
+}
+.colab-style *,
+.colab-style *:before,
+.colab-style *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.colab-style {
+  font-size: 62.5%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.colab-style {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #333;
+  background-color: #ffffff;
+}
+.colab-style input,
+.colab-style button,
+.colab-style select,
+.colab-style textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+.colab-style button,
+.colab-style input,
+.colab-style select[multiple],
+.colab-style textarea {
+  background-image: none;
+}
+.colab-style a {
+  color: #428bca;
+  text-decoration: none;
+}
+.colab-style a:hover,
+.colab-style a:focus {
+  color: #2a6496;
+  text-decoration: underline;
+}
+.colab-style a:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.colab-style img {
+  vertical-align: middle;
+}
+.colab-style .img-responsive {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+.colab-style .img-rounded {
+  border-radius: 6px;
+}
+.colab-style .img-thumbnail {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  padding: 4px;
+  line-height: 1.428571429;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.colab-style .img-circle {
+  border-radius: 50%;
+}
+.colab-style hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #eeeeee;
+}
+.colab-style .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+.colab-style p {
+  margin: 0 0 10px;
+}
+.colab-style .lead {
+  margin-bottom: 20px;
+  font-size: 16.099999999999998px;
+  font-weight: 200;
+  line-height: 1.4;
+}
+@media (min-width: 768px) {
+  .colab-style .lead {
+    font-size: 21px;
+  }
+}
+.colab-style small {
+  font-size: 85%;
+}
+.colab-style cite {
+  font-style: normal;
+}
+.colab-style .text-muted {
+  color: #999999;
+}
+.colab-style .text-primary {
+  color: #428bca;
+}
+.colab-style .text-warning {
+  color: #c09853;
+}
+.colab-style .text-danger {
+  color: #b94a48;
+}
+.colab-style .text-success {
+  color: #468847;
+}
+.colab-style .text-info {
+  color: #3a87ad;
+}
+.colab-style .text-left {
+  text-align: left;
+}
+.colab-style .text-right {
+  text-align: right;
+}
+.colab-style .text-center {
+  text-align: center;
+}
+.colab-style h1,
+.colab-style h2,
+.colab-style h3,
+.colab-style h4,
+.colab-style h5,
+.colab-style h6,
+.colab-style .h1,
+.colab-style .h2,
+.colab-style .h3,
+.colab-style .h4,
+.colab-style .h5,
+.colab-style .h6 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1.1;
+}
+.colab-style h1 small,
+.colab-style h2 small,
+.colab-style h3 small,
+.colab-style h4 small,
+.colab-style h5 small,
+.colab-style h6 small,
+.colab-style .h1 small,
+.colab-style .h2 small,
+.colab-style .h3 small,
+.colab-style .h4 small,
+.colab-style .h5 small,
+.colab-style .h6 small {
+  font-weight: normal;
+  line-height: 1;
+  color: #999999;
+}
+.colab-style h1,
+.colab-style h2,
+.colab-style h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.colab-style h4,
+.colab-style h5,
+.colab-style h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.colab-style h1,
+.colab-style .h1 {
+  font-size: 36px;
+}
+.colab-style h2,
+.colab-style .h2 {
+  font-size: 30px;
+}
+.colab-style h3,
+.colab-style .h3 {
+  font-size: 24px;
+}
+.colab-style h4,
+.colab-style .h4 {
+  font-size: 18px;
+}
+.colab-style h5,
+.colab-style .h5 {
+  font-size: 14px;
+}
+.colab-style h6,
+.colab-style .h6 {
+  font-size: 12px;
+}
+.colab-style h1 small,
+.colab-style .h1 small {
+  font-size: 24px;
+}
+.colab-style h2 small,
+.colab-style .h2 small {
+  font-size: 18px;
+}
+.colab-style h3 small,
+.colab-style .h3 small,
+.colab-style h4 small,
+.colab-style .h4 small {
+  font-size: 14px;
+}
+.colab-style .page-header {
+  padding-bottom: 9px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+.colab-style ul,
+.colab-style ol {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+.colab-style ul ul,
+.colab-style ol ul,
+.colab-style ul ol,
+.colab-style ol ol {
+  margin-bottom: 0;
+}
+.colab-style .list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+.colab-style .list-inline {
+  padding-left: 0;
+  list-style: none;
+}
+.colab-style .list-inline > li {
+  display: inline-block;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.colab-style dl {
+  margin-bottom: 20px;
+}
+.colab-style dt,
+.colab-style dd {
+  line-height: 1.428571429;
+}
+.colab-style dt {
+  font-weight: bold;
+}
+.colab-style dd {
+  margin-left: 0;
+}
+@media (min-width: 768px) {
+  .colab-style .dl-horizontal dt {
+    float: left;
+    width: 160px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .colab-style .dl-horizontal dd {
+    margin-left: 180px;
+  }
+  .colab-style .dl-horizontal dd:before,
+  .colab-style .dl-horizontal dd:after {
+    display: table;
+    content: " ";
+  }
+  .colab-style .dl-horizontal dd:after {
+    clear: both;
+  }
+  .colab-style .dl-horizontal dd:before,
+  .colab-style .dl-horizontal dd:after {
+    display: table;
+    content: " ";
+  }
+  .colab-style .dl-horizontal dd:after {
+    clear: both;
+  }
+}
+.colab-style abbr[title],
+.colab-style abbr[data-original-title] {
+  cursor: help;
+  border-bottom: 1px dotted #999999;
+}
+.colab-style abbr.initialism {
+  font-size: 90%;
+  text-transform: uppercase;
+}
+.colab-style blockquote {
+  padding: 10px 20px;
+  margin: 0 0 20px;
+  border-left: 5px solid #eeeeee;
+}
+.colab-style blockquote p {
+  font-size: 17.5px;
+  font-weight: 300;
+  line-height: 1.25;
+}
+.colab-style blockquote p:last-child {
+  margin-bottom: 0;
+}
+.colab-style blockquote small {
+  display: block;
+  line-height: 1.428571429;
+  color: #999999;
+}
+.colab-style blockquote small:before {
+  content: '\2014 \00A0';
+}
+.colab-style blockquote.pull-right {
+  padding-right: 15px;
+  padding-left: 0;
+  border-right: 5px solid #eee;
+  border-left: 0;
+}
+.colab-style blockquote.pull-right p,
+.colab-style blockquote.pull-right small {
+  text-align: right;
+}
+.colab-style blockquote.pull-right small:before {
+  content: '';
+}
+.colab-style blockquote.pull-right small:after {
+  content: '\00A0 \2014';
+}
+.colab-style q:before,
+.colab-style q:after,
+.colab-style blockquote:before,
+.colab-style blockquote:after {
+  content: "";
+}
+.colab-style address {
+  display: block;
+  margin-bottom: 20px;
+  font-style: normal;
+  line-height: 1.428571429;
+}
+.colab-style code,
+.colab-style pre {
+  font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+}
+.colab-style code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #c7254e;
+  white-space: nowrap;
+  background-color: #f9f2f4;
+  border-radius: 4px;
+}
+.colab-style pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.428571429;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.colab-style pre.prettyprint {
+  margin-bottom: 20px;
+}
+.colab-style pre code {
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
+  white-space: pre-wrap;
+  background-color: transparent;
+  border: 0;
+}
+.colab-style .pre-scrollable {
+  max-height: 340px;
+  overflow-y: scroll;
+}
+.colab-style .container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.colab-style .container:before,
+.colab-style .container:after {
+  display: table;
+  content: " ";
+}
+.colab-style .container:after {
+  clear: both;
+}
+.colab-style .container:before,
+.colab-style .container:after {
+  display: table;
+  content: " ";
+}
+.colab-style .container:after {
+  clear: both;
+}
+.colab-style .row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.colab-style .row:before,
+.colab-style .row:after {
+  display: table;
+  content: " ";
+}
+.colab-style .row:after {
+  clear: both;
+}
+.colab-style .row:before,
+.colab-style .row:after {
+  display: table;
+  content: " ";
+}
+.colab-style .row:after {
+  clear: both;
+}
+.colab-style .col-xs-1,
+.colab-style .col-xs-2,
+.colab-style .col-xs-3,
+.colab-style .col-xs-4,
+.colab-style .col-xs-5,
+.colab-style .col-xs-6,
+.colab-style .col-xs-7,
+.colab-style .col-xs-8,
+.colab-style .col-xs-9,
+.colab-style .col-xs-10,
+.colab-style .col-xs-11,
+.colab-style .col-xs-12,
+.colab-style .col-sm-1,
+.colab-style .col-sm-2,
+.colab-style .col-sm-3,
+.colab-style .col-sm-4,
+.colab-style .col-sm-5,
+.colab-style .col-sm-6,
+.colab-style .col-sm-7,
+.colab-style .col-sm-8,
+.colab-style .col-sm-9,
+.colab-style .col-sm-10,
+.colab-style .col-sm-11,
+.colab-style .col-sm-12,
+.colab-style .col-md-1,
+.colab-style .col-md-2,
+.colab-style .col-md-3,
+.colab-style .col-md-4,
+.colab-style .col-md-5,
+.colab-style .col-md-6,
+.colab-style .col-md-7,
+.colab-style .col-md-8,
+.colab-style .col-md-9,
+.colab-style .col-md-10,
+.colab-style .col-md-11,
+.colab-style .col-md-12,
+.colab-style .col-lg-1,
+.colab-style .col-lg-2,
+.colab-style .col-lg-3,
+.colab-style .col-lg-4,
+.colab-style .col-lg-5,
+.colab-style .col-lg-6,
+.colab-style .col-lg-7,
+.colab-style .col-lg-8,
+.colab-style .col-lg-9,
+.colab-style .col-lg-10,
+.colab-style .col-lg-11,
+.colab-style .col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.colab-style .col-xs-1,
+.colab-style .col-xs-2,
+.colab-style .col-xs-3,
+.colab-style .col-xs-4,
+.colab-style .col-xs-5,
+.colab-style .col-xs-6,
+.colab-style .col-xs-7,
+.colab-style .col-xs-8,
+.colab-style .col-xs-9,
+.colab-style .col-xs-10,
+.colab-style .col-xs-11 {
+  float: left;
+}
+.colab-style .col-xs-1 {
+  width: 8.333333333333332%;
+}
+.colab-style .col-xs-2 {
+  width: 16.666666666666664%;
+}
+.colab-style .col-xs-3 {
+  width: 25%;
+}
+.colab-style .col-xs-4 {
+  width: 33.33333333333333%;
+}
+.colab-style .col-xs-5 {
+  width: 41.66666666666667%;
+}
+.colab-style .col-xs-6 {
+  width: 50%;
+}
+.colab-style .col-xs-7 {
+  width: 58.333333333333336%;
+}
+.colab-style .col-xs-8 {
+  width: 66.66666666666666%;
+}
+.colab-style .col-xs-9 {
+  width: 75%;
+}
+.colab-style .col-xs-10 {
+  width: 83.33333333333334%;
+}
+.colab-style .col-xs-11 {
+  width: 91.66666666666666%;
+}
+.colab-style .col-xs-12 {
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .colab-style .container {
+    max-width: 750px;
+  }
+  .colab-style .col-sm-1,
+  .colab-style .col-sm-2,
+  .colab-style .col-sm-3,
+  .colab-style .col-sm-4,
+  .colab-style .col-sm-5,
+  .colab-style .col-sm-6,
+  .colab-style .col-sm-7,
+  .colab-style .col-sm-8,
+  .colab-style .col-sm-9,
+  .colab-style .col-sm-10,
+  .colab-style .col-sm-11 {
+    float: left;
+  }
+  .colab-style .col-sm-1 {
+    width: 8.333333333333332%;
+  }
+  .colab-style .col-sm-2 {
+    width: 16.666666666666664%;
+  }
+  .colab-style .col-sm-3 {
+    width: 25%;
+  }
+  .colab-style .col-sm-4 {
+    width: 33.33333333333333%;
+  }
+  .colab-style .col-sm-5 {
+    width: 41.66666666666667%;
+  }
+  .colab-style .col-sm-6 {
+    width: 50%;
+  }
+  .colab-style .col-sm-7 {
+    width: 58.333333333333336%;
+  }
+  .colab-style .col-sm-8 {
+    width: 66.66666666666666%;
+  }
+  .colab-style .col-sm-9 {
+    width: 75%;
+  }
+  .colab-style .col-sm-10 {
+    width: 83.33333333333334%;
+  }
+  .colab-style .col-sm-11 {
+    width: 91.66666666666666%;
+  }
+  .colab-style .col-sm-12 {
+    width: 100%;
+  }
+  .colab-style .col-sm-push-1 {
+    left: 8.333333333333332%;
+  }
+  .colab-style .col-sm-push-2 {
+    left: 16.666666666666664%;
+  }
+  .colab-style .col-sm-push-3 {
+    left: 25%;
+  }
+  .colab-style .col-sm-push-4 {
+    left: 33.33333333333333%;
+  }
+  .colab-style .col-sm-push-5 {
+    left: 41.66666666666667%;
+  }
+  .colab-style .col-sm-push-6 {
+    left: 50%;
+  }
+  .colab-style .col-sm-push-7 {
+    left: 58.333333333333336%;
+  }
+  .colab-style .col-sm-push-8 {
+    left: 66.66666666666666%;
+  }
+  .colab-style .col-sm-push-9 {
+    left: 75%;
+  }
+  .colab-style .col-sm-push-10 {
+    left: 83.33333333333334%;
+  }
+  .colab-style .col-sm-push-11 {
+    left: 91.66666666666666%;
+  }
+  .colab-style .col-sm-pull-1 {
+    right: 8.333333333333332%;
+  }
+  .colab-style .col-sm-pull-2 {
+    right: 16.666666666666664%;
+  }
+  .colab-style .col-sm-pull-3 {
+    right: 25%;
+  }
+  .colab-style .col-sm-pull-4 {
+    right: 33.33333333333333%;
+  }
+  .colab-style .col-sm-pull-5 {
+    right: 41.66666666666667%;
+  }
+  .colab-style .col-sm-pull-6 {
+    right: 50%;
+  }
+  .colab-style .col-sm-pull-7 {
+    right: 58.333333333333336%;
+  }
+  .colab-style .col-sm-pull-8 {
+    right: 66.66666666666666%;
+  }
+  .colab-style .col-sm-pull-9 {
+    right: 75%;
+  }
+  .colab-style .col-sm-pull-10 {
+    right: 83.33333333333334%;
+  }
+  .colab-style .col-sm-pull-11 {
+    right: 91.66666666666666%;
+  }
+  .colab-style .col-sm-offset-1 {
+    margin-left: 8.333333333333332%;
+  }
+  .colab-style .col-sm-offset-2 {
+    margin-left: 16.666666666666664%;
+  }
+  .colab-style .col-sm-offset-3 {
+    margin-left: 25%;
+  }
+  .colab-style .col-sm-offset-4 {
+    margin-left: 33.33333333333333%;
+  }
+  .colab-style .col-sm-offset-5 {
+    margin-left: 41.66666666666667%;
+  }
+  .colab-style .col-sm-offset-6 {
+    margin-left: 50%;
+  }
+  .colab-style .col-sm-offset-7 {
+    margin-left: 58.333333333333336%;
+  }
+  .colab-style .col-sm-offset-8 {
+    margin-left: 66.66666666666666%;
+  }
+  .colab-style .col-sm-offset-9 {
+    margin-left: 75%;
+  }
+  .colab-style .col-sm-offset-10 {
+    margin-left: 83.33333333333334%;
+  }
+  .colab-style .col-sm-offset-11 {
+    margin-left: 91.66666666666666%;
+  }
+}
+@media (min-width: 992px) {
+  .colab-style .container {
+    max-width: 970px;
+  }
+  .colab-style .col-md-1,
+  .colab-style .col-md-2,
+  .colab-style .col-md-3,
+  .colab-style .col-md-4,
+  .colab-style .col-md-5,
+  .colab-style .col-md-6,
+  .colab-style .col-md-7,
+  .colab-style .col-md-8,
+  .colab-style .col-md-9,
+  .colab-style .col-md-10,
+  .colab-style .col-md-11 {
+    float: left;
+  }
+  .colab-style .col-md-1 {
+    width: 8.333333333333332%;
+  }
+  .colab-style .col-md-2 {
+    width: 16.666666666666664%;
+  }
+  .colab-style .col-md-3 {
+    width: 25%;
+  }
+  .colab-style .col-md-4 {
+    width: 33.33333333333333%;
+  }
+  .colab-style .col-md-5 {
+    width: 41.66666666666667%;
+  }
+  .colab-style .col-md-6 {
+    width: 50%;
+  }
+  .colab-style .col-md-7 {
+    width: 58.333333333333336%;
+  }
+  .colab-style .col-md-8 {
+    width: 66.66666666666666%;
+  }
+  .colab-style .col-md-9 {
+    width: 75%;
+  }
+  .colab-style .col-md-10 {
+    width: 83.33333333333334%;
+  }
+  .colab-style .col-md-11 {
+    width: 91.66666666666666%;
+  }
+  .colab-style .col-md-12 {
+    width: 100%;
+  }
+  .colab-style .col-md-push-0 {
+    left: auto;
+  }
+  .colab-style .col-md-push-1 {
+    left: 8.333333333333332%;
+  }
+  .colab-style .col-md-push-2 {
+    left: 16.666666666666664%;
+  }
+  .colab-style .col-md-push-3 {
+    left: 25%;
+  }
+  .colab-style .col-md-push-4 {
+    left: 33.33333333333333%;
+  }
+  .colab-style .col-md-push-5 {
+    left: 41.66666666666667%;
+  }
+  .colab-style .col-md-push-6 {
+    left: 50%;
+  }
+  .colab-style .col-md-push-7 {
+    left: 58.333333333333336%;
+  }
+  .colab-style .col-md-push-8 {
+    left: 66.66666666666666%;
+  }
+  .colab-style .col-md-push-9 {
+    left: 75%;
+  }
+  .colab-style .col-md-push-10 {
+    left: 83.33333333333334%;
+  }
+  .colab-style .col-md-push-11 {
+    left: 91.66666666666666%;
+  }
+  .colab-style .col-md-pull-0 {
+    right: auto;
+  }
+  .colab-style .col-md-pull-1 {
+    right: 8.333333333333332%;
+  }
+  .colab-style .col-md-pull-2 {
+    right: 16.666666666666664%;
+  }
+  .colab-style .col-md-pull-3 {
+    right: 25%;
+  }
+  .colab-style .col-md-pull-4 {
+    right: 33.33333333333333%;
+  }
+  .colab-style .col-md-pull-5 {
+    right: 41.66666666666667%;
+  }
+  .colab-style .col-md-pull-6 {
+    right: 50%;
+  }
+  .colab-style .col-md-pull-7 {
+    right: 58.333333333333336%;
+  }
+  .colab-style .col-md-pull-8 {
+    right: 66.66666666666666%;
+  }
+  .colab-style .col-md-pull-9 {
+    right: 75%;
+  }
+  .colab-style .col-md-pull-10 {
+    right: 83.33333333333334%;
+  }
+  .colab-style .col-md-pull-11 {
+    right: 91.66666666666666%;
+  }
+  .colab-style .col-md-offset-0 {
+    margin-left: 0;
+  }
+  .colab-style .col-md-offset-1 {
+    margin-left: 8.333333333333332%;
+  }
+  .colab-style .col-md-offset-2 {
+    margin-left: 16.666666666666664%;
+  }
+  .colab-style .col-md-offset-3 {
+    margin-left: 25%;
+  }
+  .colab-style .col-md-offset-4 {
+    margin-left: 33.33333333333333%;
+  }
+  .colab-style .col-md-offset-5 {
+    margin-left: 41.66666666666667%;
+  }
+  .colab-style .col-md-offset-6 {
+    margin-left: 50%;
+  }
+  .colab-style .col-md-offset-7 {
+    margin-left: 58.333333333333336%;
+  }
+  .colab-style .col-md-offset-8 {
+    margin-left: 66.66666666666666%;
+  }
+  .colab-style .col-md-offset-9 {
+    margin-left: 75%;
+  }
+  .colab-style .col-md-offset-10 {
+    margin-left: 83.33333333333334%;
+  }
+  .colab-style .col-md-offset-11 {
+    margin-left: 91.66666666666666%;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .container {
+    max-width: 1170px;
+  }
+  .colab-style .col-lg-1,
+  .colab-style .col-lg-2,
+  .colab-style .col-lg-3,
+  .colab-style .col-lg-4,
+  .colab-style .col-lg-5,
+  .colab-style .col-lg-6,
+  .colab-style .col-lg-7,
+  .colab-style .col-lg-8,
+  .colab-style .col-lg-9,
+  .colab-style .col-lg-10,
+  .colab-style .col-lg-11 {
+    float: left;
+  }
+  .colab-style .col-lg-1 {
+    width: 8.333333333333332%;
+  }
+  .colab-style .col-lg-2 {
+    width: 16.666666666666664%;
+  }
+  .colab-style .col-lg-3 {
+    width: 25%;
+  }
+  .colab-style .col-lg-4 {
+    width: 33.33333333333333%;
+  }
+  .colab-style .col-lg-5 {
+    width: 41.66666666666667%;
+  }
+  .colab-style .col-lg-6 {
+    width: 50%;
+  }
+  .colab-style .col-lg-7 {
+    width: 58.333333333333336%;
+  }
+  .colab-style .col-lg-8 {
+    width: 66.66666666666666%;
+  }
+  .colab-style .col-lg-9 {
+    width: 75%;
+  }
+  .colab-style .col-lg-10 {
+    width: 83.33333333333334%;
+  }
+  .colab-style .col-lg-11 {
+    width: 91.66666666666666%;
+  }
+  .colab-style .col-lg-12 {
+    width: 100%;
+  }
+  .colab-style .col-lg-push-0 {
+    left: auto;
+  }
+  .colab-style .col-lg-push-1 {
+    left: 8.333333333333332%;
+  }
+  .colab-style .col-lg-push-2 {
+    left: 16.666666666666664%;
+  }
+  .colab-style .col-lg-push-3 {
+    left: 25%;
+  }
+  .colab-style .col-lg-push-4 {
+    left: 33.33333333333333%;
+  }
+  .colab-style .col-lg-push-5 {
+    left: 41.66666666666667%;
+  }
+  .colab-style .col-lg-push-6 {
+    left: 50%;
+  }
+  .colab-style .col-lg-push-7 {
+    left: 58.333333333333336%;
+  }
+  .colab-style .col-lg-push-8 {
+    left: 66.66666666666666%;
+  }
+  .colab-style .col-lg-push-9 {
+    left: 75%;
+  }
+  .colab-style .col-lg-push-10 {
+    left: 83.33333333333334%;
+  }
+  .colab-style .col-lg-push-11 {
+    left: 91.66666666666666%;
+  }
+  .colab-style .col-lg-pull-0 {
+    right: auto;
+  }
+  .colab-style .col-lg-pull-1 {
+    right: 8.333333333333332%;
+  }
+  .colab-style .col-lg-pull-2 {
+    right: 16.666666666666664%;
+  }
+  .colab-style .col-lg-pull-3 {
+    right: 25%;
+  }
+  .colab-style .col-lg-pull-4 {
+    right: 33.33333333333333%;
+  }
+  .colab-style .col-lg-pull-5 {
+    right: 41.66666666666667%;
+  }
+  .colab-style .col-lg-pull-6 {
+    right: 50%;
+  }
+  .colab-style .col-lg-pull-7 {
+    right: 58.333333333333336%;
+  }
+  .colab-style .col-lg-pull-8 {
+    right: 66.66666666666666%;
+  }
+  .colab-style .col-lg-pull-9 {
+    right: 75%;
+  }
+  .colab-style .col-lg-pull-10 {
+    right: 83.33333333333334%;
+  }
+  .colab-style .col-lg-pull-11 {
+    right: 91.66666666666666%;
+  }
+  .colab-style .col-lg-offset-0 {
+    margin-left: 0;
+  }
+  .colab-style .col-lg-offset-1 {
+    margin-left: 8.333333333333332%;
+  }
+  .colab-style .col-lg-offset-2 {
+    margin-left: 16.666666666666664%;
+  }
+  .colab-style .col-lg-offset-3 {
+    margin-left: 25%;
+  }
+  .colab-style .col-lg-offset-4 {
+    margin-left: 33.33333333333333%;
+  }
+  .colab-style .col-lg-offset-5 {
+    margin-left: 41.66666666666667%;
+  }
+  .colab-style .col-lg-offset-6 {
+    margin-left: 50%;
+  }
+  .colab-style .col-lg-offset-7 {
+    margin-left: 58.333333333333336%;
+  }
+  .colab-style .col-lg-offset-8 {
+    margin-left: 66.66666666666666%;
+  }
+  .colab-style .col-lg-offset-9 {
+    margin-left: 75%;
+  }
+  .colab-style .col-lg-offset-10 {
+    margin-left: 83.33333333333334%;
+  }
+  .colab-style .col-lg-offset-11 {
+    margin-left: 91.66666666666666%;
+  }
+}
+.colab-style table {
+  max-width: 100%;
+  background-color: transparent;
+}
+.colab-style th {
+  text-align: left;
+}
+.colab-style .table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.colab-style .table thead > tr > th,
+.colab-style .table tbody > tr > th,
+.colab-style .table tfoot > tr > th,
+.colab-style .table thead > tr > td,
+.colab-style .table tbody > tr > td,
+.colab-style .table tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.428571429;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+}
+.colab-style .table thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dddddd;
+}
+.colab-style .table caption + thead tr:first-child th,
+.colab-style .table colgroup + thead tr:first-child th,
+.colab-style .table thead:first-child tr:first-child th,
+.colab-style .table caption + thead tr:first-child td,
+.colab-style .table colgroup + thead tr:first-child td,
+.colab-style .table thead:first-child tr:first-child td {
+  border-top: 0;
+}
+.colab-style .table tbody + tbody {
+  border-top: 2px solid #dddddd;
+}
+.colab-style .table .table {
+  background-color: #ffffff;
+}
+.colab-style .table-condensed thead > tr > th,
+.colab-style .table-condensed tbody > tr > th,
+.colab-style .table-condensed tfoot > tr > th,
+.colab-style .table-condensed thead > tr > td,
+.colab-style .table-condensed tbody > tr > td,
+.colab-style .table-condensed tfoot > tr > td {
+  padding: 5px;
+}
+.colab-style .table-bordered {
+  border: 1px solid #dddddd;
+}
+.colab-style .table-bordered > thead > tr > th,
+.colab-style .table-bordered > tbody > tr > th,
+.colab-style .table-bordered > tfoot > tr > th,
+.colab-style .table-bordered > thead > tr > td,
+.colab-style .table-bordered > tbody > tr > td,
+.colab-style .table-bordered > tfoot > tr > td {
+  border: 1px solid #dddddd;
+}
+.colab-style .table-bordered > thead > tr > th,
+.colab-style .table-bordered > thead > tr > td {
+  border-bottom-width: 2px;
+}
+.colab-style .table-striped > tbody > tr:nth-child(odd) > td,
+.colab-style .table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+.colab-style .table-hover > tbody > tr:hover > td,
+.colab-style .table-hover > tbody > tr:hover > th {
+  background-color: #f5f5f5;
+}
+.colab-style table col[class*="col-"] {
+  display: table-column;
+  float: none;
+}
+.colab-style table td[class*="col-"],
+.colab-style table th[class*="col-"] {
+  display: table-cell;
+  float: none;
+}
+.colab-style .table > thead > tr > td.active,
+.colab-style .table > tbody > tr > td.active,
+.colab-style .table > tfoot > tr > td.active,
+.colab-style .table > thead > tr > th.active,
+.colab-style .table > tbody > tr > th.active,
+.colab-style .table > tfoot > tr > th.active,
+.colab-style .table > thead > tr.active > td,
+.colab-style .table > tbody > tr.active > td,
+.colab-style .table > tfoot > tr.active > td,
+.colab-style .table > thead > tr.active > th,
+.colab-style .table > tbody > tr.active > th,
+.colab-style .table > tfoot > tr.active > th {
+  background-color: #f5f5f5;
+}
+.colab-style .table > thead > tr > td.success,
+.colab-style .table > tbody > tr > td.success,
+.colab-style .table > tfoot > tr > td.success,
+.colab-style .table > thead > tr > th.success,
+.colab-style .table > tbody > tr > th.success,
+.colab-style .table > tfoot > tr > th.success,
+.colab-style .table > thead > tr.success > td,
+.colab-style .table > tbody > tr.success > td,
+.colab-style .table > tfoot > tr.success > td,
+.colab-style .table > thead > tr.success > th,
+.colab-style .table > tbody > tr.success > th,
+.colab-style .table > tfoot > tr.success > th {
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.colab-style .table-hover > tbody > tr > td.success:hover,
+.colab-style .table-hover > tbody > tr > th.success:hover,
+.colab-style .table-hover > tbody > tr.success:hover > td {
+  background-color: #d0e9c6;
+  border-color: #c9e2b3;
+}
+.colab-style .table > thead > tr > td.danger,
+.colab-style .table > tbody > tr > td.danger,
+.colab-style .table > tfoot > tr > td.danger,
+.colab-style .table > thead > tr > th.danger,
+.colab-style .table > tbody > tr > th.danger,
+.colab-style .table > tfoot > tr > th.danger,
+.colab-style .table > thead > tr.danger > td,
+.colab-style .table > tbody > tr.danger > td,
+.colab-style .table > tfoot > tr.danger > td,
+.colab-style .table > thead > tr.danger > th,
+.colab-style .table > tbody > tr.danger > th,
+.colab-style .table > tfoot > tr.danger > th {
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+.colab-style .table-hover > tbody > tr > td.danger:hover,
+.colab-style .table-hover > tbody > tr > th.danger:hover,
+.colab-style .table-hover > tbody > tr.danger:hover > td {
+  background-color: #ebcccc;
+  border-color: #e6c1c7;
+}
+.colab-style .table > thead > tr > td.warning,
+.colab-style .table > tbody > tr > td.warning,
+.colab-style .table > tfoot > tr > td.warning,
+.colab-style .table > thead > tr > th.warning,
+.colab-style .table > tbody > tr > th.warning,
+.colab-style .table > tfoot > tr > th.warning,
+.colab-style .table > thead > tr.warning > td,
+.colab-style .table > tbody > tr.warning > td,
+.colab-style .table > tfoot > tr.warning > td,
+.colab-style .table > thead > tr.warning > th,
+.colab-style .table > tbody > tr.warning > th,
+.colab-style .table > tfoot > tr.warning > th {
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+.colab-style .table-hover > tbody > tr > td.warning:hover,
+.colab-style .table-hover > tbody > tr > th.warning:hover,
+.colab-style .table-hover > tbody > tr.warning:hover > td {
+  background-color: #faf2cc;
+  border-color: #f8e5be;
+}
+@media (max-width: 768px) {
+  .colab-style .table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    border: 1px solid #dddddd;
+  }
+  .colab-style .table-responsive > .table {
+    margin-bottom: 0;
+    background-color: #ffffff;
+  }
+  .colab-style .table-responsive > .table > thead > tr > th,
+  .colab-style .table-responsive > .table > tbody > tr > th,
+  .colab-style .table-responsive > .table > tfoot > tr > th,
+  .colab-style .table-responsive > .table > thead > tr > td,
+  .colab-style .table-responsive > .table > tbody > tr > td,
+  .colab-style .table-responsive > .table > tfoot > tr > td {
+    white-space: nowrap;
+  }
+  .colab-style .table-responsive > .table-bordered {
+    border: 0;
+  }
+  .colab-style .table-responsive > .table-bordered > thead > tr > th:first-child,
+  .colab-style .table-responsive > .table-bordered > tbody > tr > th:first-child,
+  .colab-style .table-responsive > .table-bordered > tfoot > tr > th:first-child,
+  .colab-style .table-responsive > .table-bordered > thead > tr > td:first-child,
+  .colab-style .table-responsive > .table-bordered > tbody > tr > td:first-child,
+  .colab-style .table-responsive > .table-bordered > tfoot > tr > td:first-child {
+    border-left: 0;
+  }
+  .colab-style .table-responsive > .table-bordered > thead > tr > th:last-child,
+  .colab-style .table-responsive > .table-bordered > tbody > tr > th:last-child,
+  .colab-style .table-responsive > .table-bordered > tfoot > tr > th:last-child,
+  .colab-style .table-responsive > .table-bordered > thead > tr > td:last-child,
+  .colab-style .table-responsive > .table-bordered > tbody > tr > td:last-child,
+  .colab-style .table-responsive > .table-bordered > tfoot > tr > td:last-child {
+    border-right: 0;
+  }
+  .colab-style .table-responsive > .table-bordered > thead > tr:last-child > th,
+  .colab-style .table-responsive > .table-bordered > tbody > tr:last-child > th,
+  .colab-style .table-responsive > .table-bordered > tfoot > tr:last-child > th,
+  .colab-style .table-responsive > .table-bordered > thead > tr:last-child > td,
+  .colab-style .table-responsive > .table-bordered > tbody > tr:last-child > td,
+  .colab-style .table-responsive > .table-bordered > tfoot > tr:last-child > td {
+    border-bottom: 0;
+  }
+}
+.colab-style fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.colab-style legend {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 20px;
+  font-size: 21px;
+  line-height: inherit;
+  color: #333;
+  border: 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+.colab-style label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.colab-style input[type="search"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.colab-style input[type="radio"],
+.colab-style input[type="checkbox"] {
+  margin: 4px 0 0;
+  margin-top: 1px \9;
+  line-height: normal;
+}
+.colab-style input[type="file"] {
+  display: block;
+}
+.colab-style select[multiple],
+.colab-style select[size] {
+  height: auto;
+}
+.colab-style select optgroup {
+  font-family: inherit;
+  font-size: inherit;
+  font-style: inherit;
+}
+.colab-style input[type="file"]:focus,
+.colab-style input[type="radio"]:focus,
+.colab-style input[type="checkbox"]:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.colab-style input[type="number"]::-webkit-outer-spin-button,
+.colab-style input[type="number"]::-webkit-inner-spin-button {
+  height: auto;
+}
+.colab-style .form-control:-moz-placeholder {
+  color: #999999;
+}
+.colab-style .form-control::-moz-placeholder {
+  color: #999999;
+}
+.colab-style .form-control:-ms-input-placeholder {
+  color: #999999;
+}
+.colab-style .form-control::-webkit-input-placeholder {
+  color: #999999;
+}
+.colab-style .form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.colab-style .form-control:focus {
+  border-color: #66afe9;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.colab-style .form-control[disabled],
+.colab-style .form-control[readonly],
+.colab-style fieldset[disabled] .form-control {
+  cursor: not-allowed;
+  background-color: #eeeeee;
+}
+.colab-style textarea.form-control {
+  height: auto;
+}
+.colab-style .form-group {
+  margin-bottom: 15px;
+}
+.colab-style .radio,
+.colab-style .checkbox {
+  display: block;
+  min-height: 20px;
+  padding-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  vertical-align: middle;
+}
+.colab-style .radio label,
+.colab-style .checkbox label {
+  display: inline;
+  margin-bottom: 0;
+  font-weight: normal;
+  cursor: pointer;
+}
+.colab-style .radio input[type="radio"],
+.colab-style .radio-inline input[type="radio"],
+.colab-style .checkbox input[type="checkbox"],
+.colab-style .checkbox-inline input[type="checkbox"] {
+  float: left;
+  margin-left: -20px;
+}
+.colab-style .radio + .radio,
+.colab-style .checkbox + .checkbox {
+  margin-top: -5px;
+}
+.colab-style .radio-inline,
+.colab-style .checkbox-inline {
+  display: inline-block;
+  padding-left: 20px;
+  margin-bottom: 0;
+  font-weight: normal;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.colab-style .radio-inline + .radio-inline,
+.colab-style .checkbox-inline + .checkbox-inline {
+  margin-top: 0;
+  margin-left: 10px;
+}
+.colab-style input[type="radio"][disabled],
+.colab-style input[type="checkbox"][disabled],
+.colab-style .radio[disabled],
+.colab-style .radio-inline[disabled],
+.colab-style .checkbox[disabled],
+.colab-style .checkbox-inline[disabled],
+.colab-style fieldset[disabled] input[type="radio"],
+.colab-style fieldset[disabled] input[type="checkbox"],
+.colab-style fieldset[disabled] .radio,
+.colab-style fieldset[disabled] .radio-inline,
+.colab-style fieldset[disabled] .checkbox,
+.colab-style fieldset[disabled] .checkbox-inline {
+  cursor: not-allowed;
+}
+.colab-style .input-sm {
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.colab-style select.input-sm {
+  height: 30px;
+  line-height: 30px;
+}
+.colab-style textarea.input-sm {
+  height: auto;
+}
+.colab-style .input-lg {
+  height: 45px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.colab-style select.input-lg {
+  height: 45px;
+  line-height: 45px;
+}
+.colab-style textarea.input-lg {
+  height: auto;
+}
+.colab-style .has-warning .help-block,
+.colab-style .has-warning .control-label {
+  color: #c09853;
+}
+.colab-style .has-warning .form-control {
+  border-color: #c09853;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.colab-style .has-warning .form-control:focus {
+  border-color: #a47e3c;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #dbc59e;
+}
+.colab-style .has-warning .input-group-addon {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #c09853;
+}
+.colab-style .has-error .help-block,
+.colab-style .has-error .control-label {
+  color: #b94a48;
+}
+.colab-style .has-error .form-control {
+  border-color: #b94a48;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.colab-style .has-error .form-control:focus {
+  border-color: #953b39;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #d59392;
+}
+.colab-style .has-error .input-group-addon {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #b94a48;
+}
+.colab-style .has-success .help-block,
+.colab-style .has-success .control-label {
+  color: #468847;
+}
+.colab-style .has-success .form-control {
+  border-color: #468847;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+.colab-style .has-success .form-control:focus {
+  border-color: #356635;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #7aba7b;
+}
+.colab-style .has-success .input-group-addon {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #468847;
+}
+.colab-style .form-control-static {
+  padding-top: 7px;
+  margin-bottom: 0;
+}
+.colab-style .help-block {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+}
+@media (min-width: 768px) {
+  .colab-style .form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .colab-style .form-inline .form-control {
+    display: inline-block;
+  }
+  .colab-style .form-inline .radio,
+  .colab-style .form-inline .checkbox {
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .colab-style .form-inline .radio input[type="radio"],
+  .colab-style .form-inline .checkbox input[type="checkbox"] {
+    float: none;
+    margin-left: 0;
+  }
+}
+.colab-style .form-horizontal .control-label,
+.colab-style .form-horizontal .radio,
+.colab-style .form-horizontal .checkbox,
+.colab-style .form-horizontal .radio-inline,
+.colab-style .form-horizontal .checkbox-inline {
+  padding-top: 7px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.colab-style .form-horizontal .form-group {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.colab-style .form-horizontal .form-group:before,
+.colab-style .form-horizontal .form-group:after {
+  display: table;
+  content: " ";
+}
+.colab-style .form-horizontal .form-group:after {
+  clear: both;
+}
+.colab-style .form-horizontal .form-group:before,
+.colab-style .form-horizontal .form-group:after {
+  display: table;
+  content: " ";
+}
+.colab-style .form-horizontal .form-group:after {
+  clear: both;
+}
+@media (min-width: 768px) {
+  .colab-style .form-horizontal .control-label {
+    text-align: right;
+  }
+}
+.colab-style .btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.colab-style .btn:focus {
+  outline: thin dotted #333;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+.colab-style .btn:hover,
+.colab-style .btn:focus {
+  color: #333;
+  text-decoration: none;
+}
+.colab-style .btn:active,
+.colab-style .btn.active {
+  background-image: none;
+  outline: 0;
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.colab-style .btn.disabled,
+.colab-style .btn[disabled],
+.colab-style fieldset[disabled] .btn {
+  pointer-events: none;
+  cursor: not-allowed;
+  opacity: .65;
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.colab-style .btn-default {
+  color: #333;
+  background-color: #fff;
+  border-color: #cccccc;
+}
+.colab-style .btn-default:hover,
+.colab-style .btn-default:focus,
+.colab-style .btn-default:active,
+.colab-style .btn-default.active,
+.colab-style .open .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #ebebeb;
+  border-color: #adadad;
+}
+.colab-style .btn-default:active,
+.colab-style .btn-default.active,
+.colab-style .open .dropdown-toggle.btn-default {
+  background-image: none;
+}
+.colab-style .btn-default.disabled,
+.colab-style .btn-default[disabled],
+.colab-style fieldset[disabled] .btn-default,
+.colab-style .btn-default.disabled:hover,
+.colab-style .btn-default[disabled]:hover,
+.colab-style fieldset[disabled] .btn-default:hover,
+.colab-style .btn-default.disabled:focus,
+.colab-style .btn-default[disabled]:focus,
+.colab-style fieldset[disabled] .btn-default:focus,
+.colab-style .btn-default.disabled:active,
+.colab-style .btn-default[disabled]:active,
+.colab-style fieldset[disabled] .btn-default:active,
+.colab-style .btn-default.disabled.active,
+.colab-style .btn-default[disabled].active,
+.colab-style fieldset[disabled] .btn-default.active {
+  background-color: #fff;
+  border-color: #cccccc;
+}
+.colab-style .btn-primary {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.colab-style .btn-primary:hover,
+.colab-style .btn-primary:focus,
+.colab-style .btn-primary:active,
+.colab-style .btn-primary.active,
+.colab-style .open .dropdown-toggle.btn-primary {
+  color: #fff;
+  background-color: #3276b1;
+  border-color: #285e8e;
+}
+.colab-style .btn-primary:active,
+.colab-style .btn-primary.active,
+.colab-style .open .dropdown-toggle.btn-primary {
+  background-image: none;
+}
+.colab-style .btn-primary.disabled,
+.colab-style .btn-primary[disabled],
+.colab-style fieldset[disabled] .btn-primary,
+.colab-style .btn-primary.disabled:hover,
+.colab-style .btn-primary[disabled]:hover,
+.colab-style fieldset[disabled] .btn-primary:hover,
+.colab-style .btn-primary.disabled:focus,
+.colab-style .btn-primary[disabled]:focus,
+.colab-style fieldset[disabled] .btn-primary:focus,
+.colab-style .btn-primary.disabled:active,
+.colab-style .btn-primary[disabled]:active,
+.colab-style fieldset[disabled] .btn-primary:active,
+.colab-style .btn-primary.disabled.active,
+.colab-style .btn-primary[disabled].active,
+.colab-style fieldset[disabled] .btn-primary.active {
+  background-color: #428bca;
+  border-color: #357ebd;
+}
+.colab-style .btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+.colab-style .btn-warning:hover,
+.colab-style .btn-warning:focus,
+.colab-style .btn-warning:active,
+.colab-style .btn-warning.active,
+.colab-style .open .dropdown-toggle.btn-warning {
+  color: #fff;
+  background-color: #ed9c28;
+  border-color: #d58512;
+}
+.colab-style .btn-warning:active,
+.colab-style .btn-warning.active,
+.colab-style .open .dropdown-toggle.btn-warning {
+  background-image: none;
+}
+.colab-style .btn-warning.disabled,
+.colab-style .btn-warning[disabled],
+.colab-style fieldset[disabled] .btn-warning,
+.colab-style .btn-warning.disabled:hover,
+.colab-style .btn-warning[disabled]:hover,
+.colab-style fieldset[disabled] .btn-warning:hover,
+.colab-style .btn-warning.disabled:focus,
+.colab-style .btn-warning[disabled]:focus,
+.colab-style fieldset[disabled] .btn-warning:focus,
+.colab-style .btn-warning.disabled:active,
+.colab-style .btn-warning[disabled]:active,
+.colab-style fieldset[disabled] .btn-warning:active,
+.colab-style .btn-warning.disabled.active,
+.colab-style .btn-warning[disabled].active,
+.colab-style fieldset[disabled] .btn-warning.active {
+  background-color: #f0ad4e;
+  border-color: #eea236;
+}
+.colab-style .btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.colab-style .btn-danger:hover,
+.colab-style .btn-danger:focus,
+.colab-style .btn-danger:active,
+.colab-style .btn-danger.active,
+.colab-style .open .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: #d2322d;
+  border-color: #ac2925;
+}
+.colab-style .btn-danger:active,
+.colab-style .btn-danger.active,
+.colab-style .open .dropdown-toggle.btn-danger {
+  background-image: none;
+}
+.colab-style .btn-danger.disabled,
+.colab-style .btn-danger[disabled],
+.colab-style fieldset[disabled] .btn-danger,
+.colab-style .btn-danger.disabled:hover,
+.colab-style .btn-danger[disabled]:hover,
+.colab-style fieldset[disabled] .btn-danger:hover,
+.colab-style .btn-danger.disabled:focus,
+.colab-style .btn-danger[disabled]:focus,
+.colab-style fieldset[disabled] .btn-danger:focus,
+.colab-style .btn-danger.disabled:active,
+.colab-style .btn-danger[disabled]:active,
+.colab-style fieldset[disabled] .btn-danger:active,
+.colab-style .btn-danger.disabled.active,
+.colab-style .btn-danger[disabled].active,
+.colab-style fieldset[disabled] .btn-danger.active {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+}
+.colab-style .btn-success {
+  color: #fff;
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.colab-style .btn-success:hover,
+.colab-style .btn-success:focus,
+.colab-style .btn-success:active,
+.colab-style .btn-success.active,
+.colab-style .open .dropdown-toggle.btn-success {
+  color: #fff;
+  background-color: #47a447;
+  border-color: #398439;
+}
+.colab-style .btn-success:active,
+.colab-style .btn-success.active,
+.colab-style .open .dropdown-toggle.btn-success {
+  background-image: none;
+}
+.colab-style .btn-success.disabled,
+.colab-style .btn-success[disabled],
+.colab-style fieldset[disabled] .btn-success,
+.colab-style .btn-success.disabled:hover,
+.colab-style .btn-success[disabled]:hover,
+.colab-style fieldset[disabled] .btn-success:hover,
+.colab-style .btn-success.disabled:focus,
+.colab-style .btn-success[disabled]:focus,
+.colab-style fieldset[disabled] .btn-success:focus,
+.colab-style .btn-success.disabled:active,
+.colab-style .btn-success[disabled]:active,
+.colab-style fieldset[disabled] .btn-success:active,
+.colab-style .btn-success.disabled.active,
+.colab-style .btn-success[disabled].active,
+.colab-style fieldset[disabled] .btn-success.active {
+  background-color: #5cb85c;
+  border-color: #4cae4c;
+}
+.colab-style .btn-info {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.colab-style .btn-info:hover,
+.colab-style .btn-info:focus,
+.colab-style .btn-info:active,
+.colab-style .btn-info.active,
+.colab-style .open .dropdown-toggle.btn-info {
+  color: #fff;
+  background-color: #39b3d7;
+  border-color: #269abc;
+}
+.colab-style .btn-info:active,
+.colab-style .btn-info.active,
+.colab-style .open .dropdown-toggle.btn-info {
+  background-image: none;
+}
+.colab-style .btn-info.disabled,
+.colab-style .btn-info[disabled],
+.colab-style fieldset[disabled] .btn-info,
+.colab-style .btn-info.disabled:hover,
+.colab-style .btn-info[disabled]:hover,
+.colab-style fieldset[disabled] .btn-info:hover,
+.colab-style .btn-info.disabled:focus,
+.colab-style .btn-info[disabled]:focus,
+.colab-style fieldset[disabled] .btn-info:focus,
+.colab-style .btn-info.disabled:active,
+.colab-style .btn-info[disabled]:active,
+.colab-style fieldset[disabled] .btn-info:active,
+.colab-style .btn-info.disabled.active,
+.colab-style .btn-info[disabled].active,
+.colab-style fieldset[disabled] .btn-info.active {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.colab-style .btn-link {
+  font-weight: normal;
+  color: #428bca;
+  cursor: pointer;
+  border-radius: 0;
+}
+.colab-style .btn-link,
+.colab-style .btn-link:active,
+.colab-style .btn-link[disabled],
+.colab-style fieldset[disabled] .btn-link {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.colab-style .btn-link,
+.colab-style .btn-link:hover,
+.colab-style .btn-link:focus,
+.colab-style .btn-link:active {
+  border-color: transparent;
+}
+.colab-style .btn-link:hover,
+.colab-style .btn-link:focus {
+  color: #2a6496;
+  text-decoration: underline;
+  background-color: transparent;
+}
+.colab-style .btn-link[disabled]:hover,
+.colab-style fieldset[disabled] .btn-link:hover,
+.colab-style .btn-link[disabled]:focus,
+.colab-style fieldset[disabled] .btn-link:focus {
+  color: #999;
+  text-decoration: none;
+}
+.colab-style .btn-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.colab-style .btn-sm,
+.colab-style .btn-xs {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.colab-style .btn-xs {
+  padding: 1px 5px;
+}
+.colab-style .btn-block {
+  display: block;
+  width: 100%;
+  padding-right: 0;
+  padding-left: 0;
+}
+.colab-style .btn-block + .btn-block {
+  margin-top: 5px;
+}
+.colab-style input[type="submit"].btn-block,
+.colab-style input[type="reset"].btn-block,
+.colab-style input[type="button"].btn-block {
+  width: 100%;
+}
+.colab-style .fade {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+  transition: opacity 0.15s linear;
+}
+.colab-style .fade.in {
+  opacity: 1;
+}
+.colab-style .collapse {
+  display: none;
+}
+.colab-style .collapse.in {
+  display: block;
+}
+.colab-style .collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  -webkit-transition: height .35s ease;
+  transition: height 0.35s ease;
+}
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+}
+.colab-style .glyphicon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+}
+.colab-style .glyphicon-asterisk:before {
+  content: "\2a";
+}
+.colab-style .glyphicon-plus:before {
+  content: "\2b";
+}
+.colab-style .glyphicon-euro:before {
+  content: "\20ac";
+}
+.colab-style .glyphicon-minus:before {
+  content: "\2212";
+}
+.colab-style .glyphicon-cloud:before {
+  content: "\2601";
+}
+.colab-style .glyphicon-envelope:before {
+  content: "\2709";
+}
+.colab-style .glyphicon-pencil:before {
+  content: "\270f";
+}
+.colab-style .glyphicon-glass:before {
+  content: "\e001";
+}
+.colab-style .glyphicon-music:before {
+  content: "\e002";
+}
+.colab-style .glyphicon-search:before {
+  content: "\e003";
+}
+.colab-style .glyphicon-heart:before {
+  content: "\e005";
+}
+.colab-style .glyphicon-star:before {
+  content: "\e006";
+}
+.colab-style .glyphicon-star-empty:before {
+  content: "\e007";
+}
+.colab-style .glyphicon-user:before {
+  content: "\e008";
+}
+.colab-style .glyphicon-film:before {
+  content: "\e009";
+}
+.colab-style .glyphicon-th-large:before {
+  content: "\e010";
+}
+.colab-style .glyphicon-th:before {
+  content: "\e011";
+}
+.colab-style .glyphicon-th-list:before {
+  content: "\e012";
+}
+.colab-style .glyphicon-ok:before {
+  content: "\e013";
+}
+.colab-style .glyphicon-remove:before {
+  content: "\e014";
+}
+.colab-style .glyphicon-zoom-in:before {
+  content: "\e015";
+}
+.colab-style .glyphicon-zoom-out:before {
+  content: "\e016";
+}
+.colab-style .glyphicon-off:before {
+  content: "\e017";
+}
+.colab-style .glyphicon-signal:before {
+  content: "\e018";
+}
+.colab-style .glyphicon-cog:before {
+  content: "\e019";
+}
+.colab-style .glyphicon-trash:before {
+  content: "\e020";
+}
+.colab-style .glyphicon-home:before {
+  content: "\e021";
+}
+.colab-style .glyphicon-file:before {
+  content: "\e022";
+}
+.colab-style .glyphicon-time:before {
+  content: "\e023";
+}
+.colab-style .glyphicon-road:before {
+  content: "\e024";
+}
+.colab-style .glyphicon-download-alt:before {
+  content: "\e025";
+}
+.colab-style .glyphicon-download:before {
+  content: "\e026";
+}
+.colab-style .glyphicon-upload:before {
+  content: "\e027";
+}
+.colab-style .glyphicon-inbox:before {
+  content: "\e028";
+}
+.colab-style .glyphicon-play-circle:before {
+  content: "\e029";
+}
+.colab-style .glyphicon-repeat:before {
+  content: "\e030";
+}
+.colab-style .glyphicon-refresh:before {
+  content: "\e031";
+}
+.colab-style .glyphicon-list-alt:before {
+  content: "\e032";
+}
+.colab-style .glyphicon-flag:before {
+  content: "\e034";
+}
+.colab-style .glyphicon-headphones:before {
+  content: "\e035";
+}
+.colab-style .glyphicon-volume-off:before {
+  content: "\e036";
+}
+.colab-style .glyphicon-volume-down:before {
+  content: "\e037";
+}
+.colab-style .glyphicon-volume-up:before {
+  content: "\e038";
+}
+.colab-style .glyphicon-qrcode:before {
+  content: "\e039";
+}
+.colab-style .glyphicon-barcode:before {
+  content: "\e040";
+}
+.colab-style .glyphicon-tag:before {
+  content: "\e041";
+}
+.colab-style .glyphicon-tags:before {
+  content: "\e042";
+}
+.colab-style .glyphicon-book:before {
+  content: "\e043";
+}
+.colab-style .glyphicon-print:before {
+  content: "\e045";
+}
+.colab-style .glyphicon-font:before {
+  content: "\e047";
+}
+.colab-style .glyphicon-bold:before {
+  content: "\e048";
+}
+.colab-style .glyphicon-italic:before {
+  content: "\e049";
+}
+.colab-style .glyphicon-text-height:before {
+  content: "\e050";
+}
+.colab-style .glyphicon-text-width:before {
+  content: "\e051";
+}
+.colab-style .glyphicon-align-left:before {
+  content: "\e052";
+}
+.colab-style .glyphicon-align-center:before {
+  content: "\e053";
+}
+.colab-style .glyphicon-align-right:before {
+  content: "\e054";
+}
+.colab-style .glyphicon-align-justify:before {
+  content: "\e055";
+}
+.colab-style .glyphicon-list:before {
+  content: "\e056";
+}
+.colab-style .glyphicon-indent-left:before {
+  content: "\e057";
+}
+.colab-style .glyphicon-indent-right:before {
+  content: "\e058";
+}
+.colab-style .glyphicon-facetime-video:before {
+  content: "\e059";
+}
+.colab-style .glyphicon-picture:before {
+  content: "\e060";
+}
+.colab-style .glyphicon-map-marker:before {
+  content: "\e062";
+}
+.colab-style .glyphicon-adjust:before {
+  content: "\e063";
+}
+.colab-style .glyphicon-tint:before {
+  content: "\e064";
+}
+.colab-style .glyphicon-edit:before {
+  content: "\e065";
+}
+.colab-style .glyphicon-share:before {
+  content: "\e066";
+}
+.colab-style .glyphicon-check:before {
+  content: "\e067";
+}
+.colab-style .glyphicon-move:before {
+  content: "\e068";
+}
+.colab-style .glyphicon-step-backward:before {
+  content: "\e069";
+}
+.colab-style .glyphicon-fast-backward:before {
+  content: "\e070";
+}
+.colab-style .glyphicon-backward:before {
+  content: "\e071";
+}
+.colab-style .glyphicon-play:before {
+  content: "\e072";
+}
+.colab-style .glyphicon-pause:before {
+  content: "\e073";
+}
+.colab-style .glyphicon-stop:before {
+  content: "\e074";
+}
+.colab-style .glyphicon-forward:before {
+  content: "\e075";
+}
+.colab-style .glyphicon-fast-forward:before {
+  content: "\e076";
+}
+.colab-style .glyphicon-step-forward:before {
+  content: "\e077";
+}
+.colab-style .glyphicon-eject:before {
+  content: "\e078";
+}
+.colab-style .glyphicon-chevron-left:before {
+  content: "\e079";
+}
+.colab-style .glyphicon-chevron-right:before {
+  content: "\e080";
+}
+.colab-style .glyphicon-plus-sign:before {
+  content: "\e081";
+}
+.colab-style .glyphicon-minus-sign:before {
+  content: "\e082";
+}
+.colab-style .glyphicon-remove-sign:before {
+  content: "\e083";
+}
+.colab-style .glyphicon-ok-sign:before {
+  content: "\e084";
+}
+.colab-style .glyphicon-question-sign:before {
+  content: "\e085";
+}
+.colab-style .glyphicon-info-sign:before {
+  content: "\e086";
+}
+.colab-style .glyphicon-screenshot:before {
+  content: "\e087";
+}
+.colab-style .glyphicon-remove-circle:before {
+  content: "\e088";
+}
+.colab-style .glyphicon-ok-circle:before {
+  content: "\e089";
+}
+.colab-style .glyphicon-ban-circle:before {
+  content: "\e090";
+}
+.colab-style .glyphicon-arrow-left:before {
+  content: "\e091";
+}
+.colab-style .glyphicon-arrow-right:before {
+  content: "\e092";
+}
+.colab-style .glyphicon-arrow-up:before {
+  content: "\e093";
+}
+.colab-style .glyphicon-arrow-down:before {
+  content: "\e094";
+}
+.colab-style .glyphicon-share-alt:before {
+  content: "\e095";
+}
+.colab-style .glyphicon-resize-full:before {
+  content: "\e096";
+}
+.colab-style .glyphicon-resize-small:before {
+  content: "\e097";
+}
+.colab-style .glyphicon-exclamation-sign:before {
+  content: "\e101";
+}
+.colab-style .glyphicon-gift:before {
+  content: "\e102";
+}
+.colab-style .glyphicon-leaf:before {
+  content: "\e103";
+}
+.colab-style .glyphicon-eye-open:before {
+  content: "\e105";
+}
+.colab-style .glyphicon-eye-close:before {
+  content: "\e106";
+}
+.colab-style .glyphicon-warning-sign:before {
+  content: "\e107";
+}
+.colab-style .glyphicon-plane:before {
+  content: "\e108";
+}
+.colab-style .glyphicon-random:before {
+  content: "\e110";
+}
+.colab-style .glyphicon-comment:before {
+  content: "\e111";
+}
+.colab-style .glyphicon-magnet:before {
+  content: "\e112";
+}
+.colab-style .glyphicon-chevron-up:before {
+  content: "\e113";
+}
+.colab-style .glyphicon-chevron-down:before {
+  content: "\e114";
+}
+.colab-style .glyphicon-retweet:before {
+  content: "\e115";
+}
+.colab-style .glyphicon-shopping-cart:before {
+  content: "\e116";
+}
+.colab-style .glyphicon-folder-close:before {
+  content: "\e117";
+}
+.colab-style .glyphicon-folder-open:before {
+  content: "\e118";
+}
+.colab-style .glyphicon-resize-vertical:before {
+  content: "\e119";
+}
+.colab-style .glyphicon-resize-horizontal:before {
+  content: "\e120";
+}
+.colab-style .glyphicon-hdd:before {
+  content: "\e121";
+}
+.colab-style .glyphicon-bullhorn:before {
+  content: "\e122";
+}
+.colab-style .glyphicon-certificate:before {
+  content: "\e124";
+}
+.colab-style .glyphicon-thumbs-up:before {
+  content: "\e125";
+}
+.colab-style .glyphicon-thumbs-down:before {
+  content: "\e126";
+}
+.colab-style .glyphicon-hand-right:before {
+  content: "\e127";
+}
+.colab-style .glyphicon-hand-left:before {
+  content: "\e128";
+}
+.colab-style .glyphicon-hand-up:before {
+  content: "\e129";
+}
+.colab-style .glyphicon-hand-down:before {
+  content: "\e130";
+}
+.colab-style .glyphicon-circle-arrow-right:before {
+  content: "\e131";
+}
+.colab-style .glyphicon-circle-arrow-left:before {
+  content: "\e132";
+}
+.colab-style .glyphicon-circle-arrow-up:before {
+  content: "\e133";
+}
+.colab-style .glyphicon-circle-arrow-down:before {
+  content: "\e134";
+}
+.colab-style .glyphicon-globe:before {
+  content: "\e135";
+}
+.colab-style .glyphicon-tasks:before {
+  content: "\e137";
+}
+.colab-style .glyphicon-filter:before {
+  content: "\e138";
+}
+.colab-style .glyphicon-fullscreen:before {
+  content: "\e140";
+}
+.colab-style .glyphicon-dashboard:before {
+  content: "\e141";
+}
+.colab-style .glyphicon-heart-empty:before {
+  content: "\e143";
+}
+.colab-style .glyphicon-link:before {
+  content: "\e144";
+}
+.colab-style .glyphicon-phone:before {
+  content: "\e145";
+}
+.colab-style .glyphicon-usd:before {
+  content: "\e148";
+}
+.colab-style .glyphicon-gbp:before {
+  content: "\e149";
+}
+.colab-style .glyphicon-sort:before {
+  content: "\e150";
+}
+.colab-style .glyphicon-sort-by-alphabet:before {
+  content: "\e151";
+}
+.colab-style .glyphicon-sort-by-alphabet-alt:before {
+  content: "\e152";
+}
+.colab-style .glyphicon-sort-by-order:before {
+  content: "\e153";
+}
+.colab-style .glyphicon-sort-by-order-alt:before {
+  content: "\e154";
+}
+.colab-style .glyphicon-sort-by-attributes:before {
+  content: "\e155";
+}
+.colab-style .glyphicon-sort-by-attributes-alt:before {
+  content: "\e156";
+}
+.colab-style .glyphicon-unchecked:before {
+  content: "\e157";
+}
+.colab-style .glyphicon-expand:before {
+  content: "\e158";
+}
+.colab-style .glyphicon-collapse-down:before {
+  content: "\e159";
+}
+.colab-style .glyphicon-collapse-up:before {
+  content: "\e160";
+}
+.colab-style .glyphicon-log-in:before {
+  content: "\e161";
+}
+.colab-style .glyphicon-flash:before {
+  content: "\e162";
+}
+.colab-style .glyphicon-log-out:before {
+  content: "\e163";
+}
+.colab-style .glyphicon-new-window:before {
+  content: "\e164";
+}
+.colab-style .glyphicon-record:before {
+  content: "\e165";
+}
+.colab-style .glyphicon-save:before {
+  content: "\e166";
+}
+.colab-style .glyphicon-open:before {
+  content: "\e167";
+}
+.colab-style .glyphicon-saved:before {
+  content: "\e168";
+}
+.colab-style .glyphicon-import:before {
+  content: "\e169";
+}
+.colab-style .glyphicon-export:before {
+  content: "\e170";
+}
+.colab-style .glyphicon-send:before {
+  content: "\e171";
+}
+.colab-style .glyphicon-floppy-disk:before {
+  content: "\e172";
+}
+.colab-style .glyphicon-floppy-saved:before {
+  content: "\e173";
+}
+.colab-style .glyphicon-floppy-remove:before {
+  content: "\e174";
+}
+.colab-style .glyphicon-floppy-save:before {
+  content: "\e175";
+}
+.colab-style .glyphicon-floppy-open:before {
+  content: "\e176";
+}
+.colab-style .glyphicon-credit-card:before {
+  content: "\e177";
+}
+.colab-style .glyphicon-transfer:before {
+  content: "\e178";
+}
+.colab-style .glyphicon-cutlery:before {
+  content: "\e179";
+}
+.colab-style .glyphicon-header:before {
+  content: "\e180";
+}
+.colab-style .glyphicon-compressed:before {
+  content: "\e181";
+}
+.colab-style .glyphicon-earphone:before {
+  content: "\e182";
+}
+.colab-style .glyphicon-phone-alt:before {
+  content: "\e183";
+}
+.colab-style .glyphicon-tower:before {
+  content: "\e184";
+}
+.colab-style .glyphicon-stats:before {
+  content: "\e185";
+}
+.colab-style .glyphicon-sd-video:before {
+  content: "\e186";
+}
+.colab-style .glyphicon-hd-video:before {
+  content: "\e187";
+}
+.colab-style .glyphicon-subtitles:before {
+  content: "\e188";
+}
+.colab-style .glyphicon-sound-stereo:before {
+  content: "\e189";
+}
+.colab-style .glyphicon-sound-dolby:before {
+  content: "\e190";
+}
+.colab-style .glyphicon-sound-5-1:before {
+  content: "\e191";
+}
+.colab-style .glyphicon-sound-6-1:before {
+  content: "\e192";
+}
+.colab-style .glyphicon-sound-7-1:before {
+  content: "\e193";
+}
+.colab-style .glyphicon-copyright-mark:before {
+  content: "\e194";
+}
+.colab-style .glyphicon-registration-mark:before {
+  content: "\e195";
+}
+.colab-style .glyphicon-cloud-download:before {
+  content: "\e197";
+}
+.colab-style .glyphicon-cloud-upload:before {
+  content: "\e198";
+}
+.colab-style .glyphicon-tree-conifer:before {
+  content: "\e199";
+}
+.colab-style .glyphicon-tree-deciduous:before {
+  content: "\e200";
+}
+.colab-style .glyphicon-briefcase:before {
+  content: "\1f4bc";
+}
+.colab-style .glyphicon-calendar:before {
+  content: "\1f4c5";
+}
+.colab-style .glyphicon-pushpin:before {
+  content: "\1f4cc";
+}
+.colab-style .glyphicon-paperclip:before {
+  content: "\1f4ce";
+}
+.colab-style .glyphicon-camera:before {
+  content: "\1f4f7";
+}
+.colab-style .glyphicon-lock:before {
+  content: "\1f512";
+}
+.colab-style .glyphicon-bell:before {
+  content: "\1f514";
+}
+.colab-style .glyphicon-bookmark:before {
+  content: "\1f516";
+}
+.colab-style .glyphicon-fire:before {
+  content: "\1f525";
+}
+.colab-style .glyphicon-wrench:before {
+  content: "\1f527";
+}
+.colab-style .caret {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 2px;
+  vertical-align: middle;
+  border-top: 4px solid #000;
+  border-right: 4px solid transparent;
+  border-bottom: 0 dotted;
+  border-left: 4px solid transparent;
+  content: "";
+}
+.colab-style .dropdown {
+  position: relative;
+}
+.colab-style .dropdown-toggle:focus {
+  outline: 0;
+}
+.colab-style .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  background-clip: padding-box;
+}
+.colab-style .dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+.colab-style .dropdown-menu .divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.colab-style .dropdown-menu > li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333;
+  white-space: nowrap;
+}
+.colab-style .dropdown-menu > li > a:hover,
+.colab-style .dropdown-menu > li > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #428bca;
+}
+.colab-style .dropdown-menu > .active > a,
+.colab-style .dropdown-menu > .active > a:hover,
+.colab-style .dropdown-menu > .active > a:focus {
+  color: #fff;
+  text-decoration: none;
+  background-color: #428bca;
+  outline: 0;
+}
+.colab-style .dropdown-menu > .disabled > a,
+.colab-style .dropdown-menu > .disabled > a:hover,
+.colab-style .dropdown-menu > .disabled > a:focus {
+  color: #999999;
+}
+.colab-style .dropdown-menu > .disabled > a:hover,
+.colab-style .dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.colab-style .open > .dropdown-menu {
+  display: block;
+}
+.colab-style .open > a {
+  outline: 0;
+}
+.colab-style .dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 12px;
+  line-height: 1.428571429;
+  color: #999999;
+}
+.colab-style .dropdown-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 990;
+}
+.colab-style .pull-right > .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+.colab-style .dropup .caret,
+.colab-style .navbar-fixed-bottom .dropdown .caret {
+  border-top: 0 dotted;
+  border-bottom: 4px solid #000;
+  content: "";
+}
+.colab-style .dropup .dropdown-menu,
+.colab-style .navbar-fixed-bottom .dropdown .dropdown-menu {
+  top: auto;
+  bottom: 100%;
+  margin-bottom: 1px;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-right .dropdown-menu {
+    right: 0;
+    left: auto;
+  }
+}
+.colab-style .btn-default .caret {
+  border-top-color: #333333;
+}
+.colab-style .btn-primary .caret,
+.colab-style .btn-success .caret,
+.colab-style .btn-warning .caret,
+.colab-style .btn-danger .caret,
+.colab-style .btn-info .caret {
+  border-top-color: #ffffff;
+}
+.colab-style .dropup .btn-default .caret {
+  border-bottom-color: #333333;
+}
+.colab-style .dropup .btn-primary .caret,
+.colab-style .dropup .btn-success .caret,
+.colab-style .dropup .btn-warning .caret,
+.colab-style .dropup .btn-danger .caret,
+.colab-style .dropup .btn-info .caret {
+  border-bottom-color: #ffffff;
+}
+.colab-style .btn-group,
+.colab-style .btn-group-vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+}
+.colab-style .btn-group > .btn,
+.colab-style .btn-group-vertical > .btn {
+  position: relative;
+  float: left;
+}
+.colab-style .btn-group > .btn:hover,
+.colab-style .btn-group-vertical > .btn:hover,
+.colab-style .btn-group > .btn:focus,
+.colab-style .btn-group-vertical > .btn:focus,
+.colab-style .btn-group > .btn:active,
+.colab-style .btn-group-vertical > .btn:active,
+.colab-style .btn-group > .btn.active,
+.colab-style .btn-group-vertical > .btn.active {
+  z-index: 2;
+}
+.colab-style .btn-group > .btn:focus,
+.colab-style .btn-group-vertical > .btn:focus {
+  outline: 0;
+}
+.colab-style .btn-group .btn + .btn,
+.colab-style .btn-group .btn + .btn-group,
+.colab-style .btn-group .btn-group + .btn,
+.colab-style .btn-group .btn-group + .btn-group {
+  margin-left: -1px;
+}
+.colab-style .btn-toolbar:before,
+.colab-style .btn-toolbar:after {
+  display: table;
+  content: " ";
+}
+.colab-style .btn-toolbar:after {
+  clear: both;
+}
+.colab-style .btn-toolbar:before,
+.colab-style .btn-toolbar:after {
+  display: table;
+  content: " ";
+}
+.colab-style .btn-toolbar:after {
+  clear: both;
+}
+.colab-style .btn-toolbar .btn-group {
+  float: left;
+}
+.colab-style .btn-toolbar > .btn + .btn,
+.colab-style .btn-toolbar > .btn-group + .btn,
+.colab-style .btn-toolbar > .btn + .btn-group,
+.colab-style .btn-toolbar > .btn-group + .btn-group {
+  margin-left: 5px;
+}
+.colab-style .btn-group > .btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+  border-radius: 0;
+}
+.colab-style .btn-group > .btn:first-child {
+  margin-left: 0;
+}
+.colab-style .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.colab-style .btn-group > .btn:last-child:not(:first-child),
+.colab-style .btn-group > .dropdown-toggle:not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .btn-group > .btn-group {
+  float: left;
+}
+.colab-style .btn-group > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.colab-style .btn-group > .btn-group:first-child > .btn:last-child,
+.colab-style .btn-group > .btn-group:first-child > .dropdown-toggle {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.colab-style .btn-group > .btn-group:last-child > .btn:first-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .btn-group .dropdown-toggle:active,
+.colab-style .btn-group.open .dropdown-toggle {
+  outline: 0;
+}
+.colab-style .btn-group-xs > .btn {
+  padding: 5px 10px;
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.colab-style .btn-group-sm > .btn {
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.colab-style .btn-group-lg > .btn {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.colab-style .btn-group > .btn + .dropdown-toggle {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.colab-style .btn-group > .btn-lg + .dropdown-toggle {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+.colab-style .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.colab-style .btn .caret {
+  margin-left: 0;
+}
+.colab-style .btn-lg .caret {
+  border-width: 5px 5px 0;
+  border-bottom-width: 0;
+}
+.colab-style .dropup .btn-lg .caret {
+  border-width: 0 5px 5px;
+}
+.colab-style .btn-group-vertical > .btn,
+.colab-style .btn-group-vertical > .btn-group {
+  display: block;
+  float: none;
+  width: 100%;
+  max-width: 100%;
+}
+.colab-style .btn-group-vertical > .btn-group:before,
+.colab-style .btn-group-vertical > .btn-group:after {
+  display: table;
+  content: " ";
+}
+.colab-style .btn-group-vertical > .btn-group:after {
+  clear: both;
+}
+.colab-style .btn-group-vertical > .btn-group:before,
+.colab-style .btn-group-vertical > .btn-group:after {
+  display: table;
+  content: " ";
+}
+.colab-style .btn-group-vertical > .btn-group:after {
+  clear: both;
+}
+.colab-style .btn-group-vertical > .btn-group > .btn {
+  float: none;
+}
+.colab-style .btn-group-vertical > .btn + .btn,
+.colab-style .btn-group-vertical > .btn + .btn-group,
+.colab-style .btn-group-vertical > .btn-group + .btn,
+.colab-style .btn-group-vertical > .btn-group + .btn-group {
+  margin-top: -1px;
+  margin-left: 0;
+}
+.colab-style .btn-group-vertical > .btn:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+.colab-style .btn-group-vertical > .btn:first-child:not(:last-child) {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.colab-style .btn-group-vertical > .btn:last-child:not(:first-child) {
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 0;
+}
+.colab-style .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn {
+  border-radius: 0;
+}
+.colab-style .btn-group-vertical > .btn-group:first-child > .btn:last-child,
+.colab-style .btn-group-vertical > .btn-group:first-child > .dropdown-toggle {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.colab-style .btn-group-vertical > .btn-group:last-child > .btn:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .btn-group-justified {
+  display: table;
+  width: 100%;
+  border-collapse: separate;
+  table-layout: fixed;
+}
+.colab-style .btn-group-justified .btn {
+  display: table-cell;
+  float: none;
+  width: 1%;
+}
+.colab-style [data-toggle="buttons"] > .btn > input[type="radio"],
+.colab-style [data-toggle="buttons"] > .btn > input[type="checkbox"] {
+  display: none;
+}
+.colab-style .input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+.colab-style .input-group.col {
+  float: none;
+  padding-right: 0;
+  padding-left: 0;
+}
+.colab-style .input-group .form-control {
+  width: 100%;
+  margin-bottom: 0;
+}
+.colab-style .input-group-lg > .form-control,
+.colab-style .input-group-lg > .input-group-addon,
+.colab-style .input-group-lg > .input-group-btn > .btn {
+  height: 45px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 6px;
+}
+.colab-style select.input-group-lg > .form-control,
+.colab-style select.input-group-lg > .input-group-addon,
+.colab-style select.input-group-lg > .input-group-btn > .btn {
+  height: 45px;
+  line-height: 45px;
+}
+.colab-style textarea.input-group-lg > .form-control,
+.colab-style textarea.input-group-lg > .input-group-addon,
+.colab-style textarea.input-group-lg > .input-group-btn > .btn {
+  height: auto;
+}
+.colab-style .input-group-sm > .form-control,
+.colab-style .input-group-sm > .input-group-addon,
+.colab-style .input-group-sm > .input-group-btn > .btn {
+  height: 30px;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+.colab-style select.input-group-sm > .form-control,
+.colab-style select.input-group-sm > .input-group-addon,
+.colab-style select.input-group-sm > .input-group-btn > .btn {
+  height: 30px;
+  line-height: 30px;
+}
+.colab-style textarea.input-group-sm > .form-control,
+.colab-style textarea.input-group-sm > .input-group-addon,
+.colab-style textarea.input-group-sm > .input-group-btn > .btn {
+  height: auto;
+}
+.colab-style .input-group-addon,
+.colab-style .input-group-btn,
+.colab-style .input-group .form-control {
+  display: table-cell;
+}
+.colab-style .input-group-addon:not(:first-child):not(:last-child),
+.colab-style .input-group-btn:not(:first-child):not(:last-child),
+.colab-style .input-group .form-control:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+.colab-style .input-group-addon,
+.colab-style .input-group-btn {
+  width: 1%;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.colab-style .input-group-addon {
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.colab-style .input-group-addon.input-sm {
+  padding: 5px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+}
+.colab-style .input-group-addon.input-lg {
+  padding: 10px 16px;
+  font-size: 18px;
+  border-radius: 6px;
+}
+.colab-style .input-group-addon input[type="radio"],
+.colab-style .input-group-addon input[type="checkbox"] {
+  margin-top: 0;
+}
+.colab-style .input-group .form-control:first-child,
+.colab-style .input-group-addon:first-child,
+.colab-style .input-group-btn:first-child > .btn,
+.colab-style .input-group-btn:first-child > .dropdown-toggle,
+.colab-style .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.colab-style .input-group-addon:first-child {
+  border-right: 0;
+}
+.colab-style .input-group .form-control:last-child,
+.colab-style .input-group-addon:last-child,
+.colab-style .input-group-btn:last-child > .btn,
+.colab-style .input-group-btn:last-child > .dropdown-toggle,
+.colab-style .input-group-btn:first-child > .btn:not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .input-group-addon:last-child {
+  border-left: 0;
+}
+.colab-style .input-group-btn {
+  position: relative;
+  white-space: nowrap;
+}
+.colab-style .input-group-btn > .btn {
+  position: relative;
+}
+.colab-style .input-group-btn > .btn + .btn {
+  margin-left: -4px;
+}
+.colab-style .input-group-btn > .btn:hover,
+.colab-style .input-group-btn > .btn:active {
+  z-index: 2;
+}
+.colab-style .nav {
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+.colab-style .nav:before,
+.colab-style .nav:after {
+  display: table;
+  content: " ";
+}
+.colab-style .nav:after {
+  clear: both;
+}
+.colab-style .nav:before,
+.colab-style .nav:after {
+  display: table;
+  content: " ";
+}
+.colab-style .nav:after {
+  clear: both;
+}
+.colab-style .nav > li {
+  position: relative;
+  display: block;
+}
+.colab-style .nav > li > a {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+}
+.colab-style .nav > li > a:hover,
+.colab-style .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+.colab-style .nav > li.disabled > a {
+  color: #999999;
+}
+.colab-style .nav > li.disabled > a:hover,
+.colab-style .nav > li.disabled > a:focus {
+  color: #999;
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+}
+.colab-style .nav .open > a,
+.colab-style .nav .open > a:hover,
+.colab-style .nav .open > a:focus {
+  background-color: #eee;
+  border-color: #428bca;
+}
+.colab-style .nav .nav-divider {
+  height: 1px;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.colab-style .nav > li > a > img {
+  max-width: none;
+}
+.colab-style .nav-tabs {
+  border-bottom: 1px solid #dddddd;
+}
+.colab-style .nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+.colab-style .nav-tabs > li > a {
+  margin-right: 2px;
+  line-height: 1.428571429;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+}
+.colab-style .nav-tabs > li > a:hover {
+  border-color: #eeeeee #eeeeee #dddddd;
+}
+.colab-style .nav-tabs > li.active > a,
+.colab-style .nav-tabs > li.active > a:hover,
+.colab-style .nav-tabs > li.active > a:focus {
+  color: #555;
+  cursor: default;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+}
+.colab-style .nav-tabs.nav-justified {
+  width: 100%;
+  border-bottom: 0;
+}
+.colab-style .nav-tabs.nav-justified > li {
+  float: none;
+}
+.colab-style .nav-tabs.nav-justified > li > a {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .colab-style .nav-tabs.nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+}
+.colab-style .nav-tabs.nav-justified > li > a {
+  margin-right: 0;
+  border-bottom: 1px solid #dddddd;
+}
+.colab-style .nav-tabs.nav-justified > .active > a {
+  border-bottom-color: #ffffff;
+}
+.colab-style .nav-pills > li {
+  float: left;
+}
+.colab-style .nav-pills > li > a {
+  border-radius: 5px;
+}
+.colab-style .nav-pills > li + li {
+  margin-left: 2px;
+}
+.colab-style .nav-pills > li.active > a,
+.colab-style .nav-pills > li.active > a:hover,
+.colab-style .nav-pills > li.active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+.colab-style .nav-stacked > li {
+  float: none;
+}
+.colab-style .nav-stacked > li + li {
+  margin-top: 2px;
+  margin-left: 0;
+}
+.colab-style .nav-justified {
+  width: 100%;
+}
+.colab-style .nav-justified > li {
+  float: none;
+}
+.colab-style .nav-justified > li > a {
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .colab-style .nav-justified > li {
+    display: table-cell;
+    width: 1%;
+  }
+}
+.colab-style .nav-tabs-justified {
+  border-bottom: 0;
+}
+.colab-style .nav-tabs-justified > li > a {
+  margin-right: 0;
+  border-bottom: 1px solid #dddddd;
+}
+.colab-style .nav-tabs-justified > .active > a {
+  border-bottom-color: #ffffff;
+}
+.colab-style .tabbable:before,
+.colab-style .tabbable:after {
+  display: table;
+  content: " ";
+}
+.colab-style .tabbable:after {
+  clear: both;
+}
+.colab-style .tabbable:before,
+.colab-style .tabbable:after {
+  display: table;
+  content: " ";
+}
+.colab-style .tabbable:after {
+  clear: both;
+}
+.colab-style .tab-content > .tab-pane,
+.colab-style .pill-content > .pill-pane {
+  display: none;
+}
+.colab-style .tab-content > .active,
+.colab-style .pill-content > .active {
+  display: block;
+}
+.colab-style .nav .caret {
+  border-top-color: #428bca;
+  border-bottom-color: #428bca;
+}
+.colab-style .nav a:hover .caret {
+  border-top-color: #2a6496;
+  border-bottom-color: #2a6496;
+}
+.colab-style .nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .navbar {
+  position: relative;
+  z-index: 1000;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+}
+.colab-style .navbar:before,
+.colab-style .navbar:after {
+  display: table;
+  content: " ";
+}
+.colab-style .navbar:after {
+  clear: both;
+}
+.colab-style .navbar:before,
+.colab-style .navbar:after {
+  display: table;
+  content: " ";
+}
+.colab-style .navbar:after {
+  clear: both;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar {
+    border-radius: 4px;
+  }
+}
+.colab-style .navbar-header:before,
+.colab-style .navbar-header:after {
+  display: table;
+  content: " ";
+}
+.colab-style .navbar-header:after {
+  clear: both;
+}
+.colab-style .navbar-header:before,
+.colab-style .navbar-header:after {
+  display: table;
+  content: " ";
+}
+.colab-style .navbar-header:after {
+  clear: both;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-header {
+    float: left;
+  }
+}
+.colab-style .navbar-collapse {
+  max-height: 340px;
+  padding-right: 15px;
+  padding-left: 15px;
+  overflow-x: visible;
+  border-top: 1px solid transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-overflow-scrolling: touch;
+}
+.colab-style .navbar-collapse:before,
+.colab-style .navbar-collapse:after {
+  display: table;
+  content: " ";
+}
+.colab-style .navbar-collapse:after {
+  clear: both;
+}
+.colab-style .navbar-collapse:before,
+.colab-style .navbar-collapse:after {
+  display: table;
+  content: " ";
+}
+.colab-style .navbar-collapse:after {
+  clear: both;
+}
+.colab-style .navbar-collapse.in {
+  overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .colab-style .navbar-collapse.collapse {
+    display: block!important;
+    height: auto!important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .colab-style .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .colab-style .navbar-collapse .navbar-nav.navbar-left:first-child {
+    margin-left: -15px;
+  }
+  .colab-style .navbar-collapse .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+  .colab-style .navbar-collapse .navbar-text:last-child {
+    margin-right: 0;
+  }
+}
+.colab-style .container > .navbar-header,
+.colab-style .container > .navbar-collapse {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  .colab-style .container > .navbar-header,
+  .colab-style .container > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+.colab-style .navbar-static-top {
+  border-width: 0 0 1px;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-static-top {
+    border-radius: 0;
+  }
+}
+.colab-style .navbar-fixed-top,
+.colab-style .navbar-fixed-bottom {
+  position: fixed;
+  right: 0;
+  left: 0;
+  border-width: 0 0 1px;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-fixed-top,
+  .colab-style .navbar-fixed-bottom {
+    border-radius: 0;
+  }
+}
+.colab-style .navbar-fixed-top {
+  top: 0;
+  z-index: 1030;
+}
+.colab-style .navbar-fixed-bottom {
+  bottom: 0;
+  margin-bottom: 0;
+}
+.colab-style .navbar-brand {
+  float: left;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+.colab-style .navbar-brand:hover,
+.colab-style .navbar-brand:focus {
+  text-decoration: none;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar > .container .navbar-brand {
+    margin-left: -15px;
+  }
+}
+.colab-style .navbar-toggle {
+  position: relative;
+  float: right;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-right: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.colab-style .navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 1px;
+}
+.colab-style .navbar-toggle .icon-bar + .icon-bar {
+  margin-top: 4px;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-toggle {
+    display: none;
+  }
+}
+.colab-style .navbar-nav {
+  margin: 7.5px -15px;
+}
+.colab-style .navbar-nav > li > a {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 20px;
+}
+@media (max-width: 767px) {
+  .colab-style .navbar-nav .open .dropdown-menu {
+    position: static;
+    float: none;
+    width: auto;
+    margin-top: 0;
+    background-color: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .colab-style .navbar-nav .open .dropdown-menu > li > a,
+  .colab-style .navbar-nav .open .dropdown-menu .dropdown-header {
+    padding: 5px 15px 5px 25px;
+  }
+  .colab-style .navbar-nav .open .dropdown-menu > li > a {
+    line-height: 20px;
+  }
+  .colab-style .navbar-nav .open .dropdown-menu > li > a:hover,
+  .colab-style .navbar-nav .open .dropdown-menu > li > a:focus {
+    background-image: none;
+  }
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .colab-style .navbar-nav > li {
+    float: left;
+  }
+  .colab-style .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-left {
+    float: left !important;
+  }
+  .colab-style .navbar-right {
+    float: right !important;
+  }
+}
+.colab-style .navbar-form {
+  padding: 10px 15px;
+  margin-top: 8px;
+  margin-right: -15px;
+  margin-bottom: 8px;
+  margin-left: -15px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-form .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  .colab-style .navbar-form .form-control {
+    display: inline-block;
+  }
+  .colab-style .navbar-form .radio,
+  .colab-style .navbar-form .checkbox {
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .colab-style .navbar-form .radio input[type="radio"],
+  .colab-style .navbar-form .checkbox input[type="checkbox"] {
+    float: none;
+    margin-left: 0;
+  }
+}
+@media (max-width: 767px) {
+  .colab-style .navbar-form .form-group {
+    margin-bottom: 5px;
+  }
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-form {
+    width: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+    margin-left: 0;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+.colab-style .navbar-nav > li > .dropdown-menu {
+  margin-top: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .navbar-fixed-bottom .navbar-nav > li > .dropdown-menu {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.colab-style .navbar-nav.pull-right > li > .dropdown-menu,
+.colab-style .navbar-nav > li > .dropdown-menu.pull-right {
+  right: 0;
+  left: auto;
+}
+.colab-style .navbar-btn {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.colab-style .navbar-text {
+  float: left;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (min-width: 768px) {
+  .colab-style .navbar-text {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
+.colab-style .navbar-default {
+  background-color: #f8f8f8;
+  border-color: #e7e7e7;
+}
+.colab-style .navbar-default .navbar-brand {
+  color: #777777;
+}
+.colab-style .navbar-default .navbar-brand:hover,
+.colab-style .navbar-default .navbar-brand:focus {
+  color: #5e5e5e;
+  background-color: transparent;
+}
+.colab-style .navbar-default .navbar-text {
+  color: #777777;
+}
+.colab-style .navbar-default .navbar-nav > li > a {
+  color: #777777;
+}
+.colab-style .navbar-default .navbar-nav > li > a:hover,
+.colab-style .navbar-default .navbar-nav > li > a:focus {
+  color: #333;
+  background-color: transparent;
+}
+.colab-style .navbar-default .navbar-nav > .active > a,
+.colab-style .navbar-default .navbar-nav > .active > a:hover,
+.colab-style .navbar-default .navbar-nav > .active > a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+.colab-style .navbar-default .navbar-nav > .disabled > a,
+.colab-style .navbar-default .navbar-nav > .disabled > a:hover,
+.colab-style .navbar-default .navbar-nav > .disabled > a:focus {
+  color: #ccc;
+  background-color: transparent;
+}
+.colab-style .navbar-default .navbar-toggle {
+  border-color: #dddddd;
+}
+.colab-style .navbar-default .navbar-toggle:hover,
+.colab-style .navbar-default .navbar-toggle:focus {
+  background-color: #dddddd;
+}
+.colab-style .navbar-default .navbar-toggle .icon-bar {
+  background-color: #cccccc;
+}
+.colab-style .navbar-default .navbar-collapse,
+.colab-style .navbar-default .navbar-form {
+  border-color: #e6e6e6;
+}
+.colab-style .navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.colab-style .navbar-default .navbar-nav > .dropdown > a:focus .caret {
+  border-top-color: #333;
+  border-bottom-color: #333333;
+}
+.colab-style .navbar-default .navbar-nav > .open > a,
+.colab-style .navbar-default .navbar-nav > .open > a:hover,
+.colab-style .navbar-default .navbar-nav > .open > a:focus {
+  color: #555;
+  background-color: #e7e7e7;
+}
+.colab-style .navbar-default .navbar-nav > .open > a .caret,
+.colab-style .navbar-default .navbar-nav > .open > a:hover .caret,
+.colab-style .navbar-default .navbar-nav > .open > a:focus .caret {
+  border-top-color: #555;
+  border-bottom-color: #555555;
+}
+.colab-style .navbar-default .navbar-nav > .dropdown > a .caret {
+  border-top-color: #777;
+  border-bottom-color: #777777;
+}
+@media (max-width: 767px) {
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #777777;
+  }
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #333;
+    background-color: transparent;
+  }
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #555;
+    background-color: #e7e7e7;
+  }
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a,
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .colab-style .navbar-default .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #ccc;
+    background-color: transparent;
+  }
+}
+.colab-style .navbar-default .navbar-link {
+  color: #777777;
+}
+.colab-style .navbar-default .navbar-link:hover {
+  color: #333333;
+}
+.colab-style .navbar-inverse {
+  background-color: #222;
+  border-color: #080808;
+}
+.colab-style .navbar-inverse .navbar-brand {
+  color: #999999;
+}
+.colab-style .navbar-inverse .navbar-brand:hover,
+.colab-style .navbar-inverse .navbar-brand:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.colab-style .navbar-inverse .navbar-text {
+  color: #999999;
+}
+.colab-style .navbar-inverse .navbar-nav > li > a {
+  color: #999999;
+}
+.colab-style .navbar-inverse .navbar-nav > li > a:hover,
+.colab-style .navbar-inverse .navbar-nav > li > a:focus {
+  color: #fff;
+  background-color: transparent;
+}
+.colab-style .navbar-inverse .navbar-nav > .active > a,
+.colab-style .navbar-inverse .navbar-nav > .active > a:hover,
+.colab-style .navbar-inverse .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+.colab-style .navbar-inverse .navbar-nav > .disabled > a,
+.colab-style .navbar-inverse .navbar-nav > .disabled > a:hover,
+.colab-style .navbar-inverse .navbar-nav > .disabled > a:focus {
+  color: #444;
+  background-color: transparent;
+}
+.colab-style .navbar-inverse .navbar-toggle {
+  border-color: #333333;
+}
+.colab-style .navbar-inverse .navbar-toggle:hover,
+.colab-style .navbar-inverse .navbar-toggle:focus {
+  background-color: #333333;
+}
+.colab-style .navbar-inverse .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+.colab-style .navbar-inverse .navbar-collapse,
+.colab-style .navbar-inverse .navbar-form {
+  border-color: #101010;
+}
+.colab-style .navbar-inverse .navbar-nav > .open > a,
+.colab-style .navbar-inverse .navbar-nav > .open > a:hover,
+.colab-style .navbar-inverse .navbar-nav > .open > a:focus {
+  color: #fff;
+  background-color: #080808;
+}
+.colab-style .navbar-inverse .navbar-nav > .dropdown > a:hover .caret {
+  border-top-color: #fff;
+  border-bottom-color: #ffffff;
+}
+.colab-style .navbar-inverse .navbar-nav > .dropdown > a .caret {
+  border-top-color: #999;
+  border-bottom-color: #999999;
+}
+.colab-style .navbar-inverse .navbar-nav > .open > a .caret,
+.colab-style .navbar-inverse .navbar-nav > .open > a:hover .caret,
+.colab-style .navbar-inverse .navbar-nav > .open > a:focus .caret {
+  border-top-color: #fff;
+  border-bottom-color: #ffffff;
+}
+@media (max-width: 767px) {
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
+    border-color: #080808;
+  }
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
+    color: #999999;
+  }
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+  }
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #fff;
+    background-color: #080808;
+  }
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:hover,
+  .colab-style .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a:focus {
+    color: #444;
+    background-color: transparent;
+  }
+}
+.colab-style .navbar-inverse .navbar-link {
+  color: #999999;
+}
+.colab-style .navbar-inverse .navbar-link:hover {
+  color: #ffffff;
+}
+.colab-style .breadcrumb {
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+.colab-style .breadcrumb > li {
+  display: inline-block;
+}
+.colab-style .breadcrumb > li + li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+.colab-style .breadcrumb > .active {
+  color: #999999;
+}
+.colab-style .pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+.colab-style .pagination > li {
+  display: inline;
+}
+.colab-style .pagination > li > a,
+.colab-style .pagination > li > span {
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.428571429;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid #dddddd;
+}
+.colab-style .pagination > li:first-child > a,
+.colab-style .pagination > li:first-child > span {
+  margin-left: 0;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.colab-style .pagination > li:last-child > a,
+.colab-style .pagination > li:last-child > span {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.colab-style .pagination > li > a:hover,
+.colab-style .pagination > li > span:hover,
+.colab-style .pagination > li > a:focus,
+.colab-style .pagination > li > span:focus {
+  background-color: #eeeeee;
+}
+.colab-style .pagination > .active > a,
+.colab-style .pagination > .active > span,
+.colab-style .pagination > .active > a:hover,
+.colab-style .pagination > .active > span:hover,
+.colab-style .pagination > .active > a:focus,
+.colab-style .pagination > .active > span:focus {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+.colab-style .pagination > .disabled > span,
+.colab-style .pagination > .disabled > a,
+.colab-style .pagination > .disabled > a:hover,
+.colab-style .pagination > .disabled > a:focus {
+  color: #999;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #dddddd;
+}
+.colab-style .pagination-lg > li > a,
+.colab-style .pagination-lg > li > span {
+  padding: 10px 16px;
+  font-size: 18px;
+}
+.colab-style .pagination-lg > li:first-child > a,
+.colab-style .pagination-lg > li:first-child > span {
+  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px;
+}
+.colab-style .pagination-lg > li:last-child > a,
+.colab-style .pagination-lg > li:last-child > span {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.colab-style .pagination-sm > li > a,
+.colab-style .pagination-sm > li > span {
+  padding: 5px 10px;
+  font-size: 12px;
+}
+.colab-style .pagination-sm > li:first-child > a,
+.colab-style .pagination-sm > li:first-child > span {
+  border-bottom-left-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.colab-style .pagination-sm > li:last-child > a,
+.colab-style .pagination-sm > li:last-child > span {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+.colab-style .pager {
+  padding-left: 0;
+  margin: 20px 0;
+  text-align: center;
+  list-style: none;
+}
+.colab-style .pager:before,
+.colab-style .pager:after {
+  display: table;
+  content: " ";
+}
+.colab-style .pager:after {
+  clear: both;
+}
+.colab-style .pager:before,
+.colab-style .pager:after {
+  display: table;
+  content: " ";
+}
+.colab-style .pager:after {
+  clear: both;
+}
+.colab-style .pager li {
+  display: inline;
+}
+.colab-style .pager li > a,
+.colab-style .pager li > span {
+  display: inline-block;
+  padding: 5px 14px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 15px;
+}
+.colab-style .pager li > a:hover,
+.colab-style .pager li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee;
+}
+.colab-style .pager .next > a,
+.colab-style .pager .next > span {
+  float: right;
+}
+.colab-style .pager .previous > a,
+.colab-style .pager .previous > span {
+  float: left;
+}
+.colab-style .pager .disabled > a,
+.colab-style .pager .disabled > a:hover,
+.colab-style .pager .disabled > a:focus,
+.colab-style .pager .disabled > span {
+  color: #999;
+  cursor: not-allowed;
+  background-color: #ffffff;
+}
+.colab-style .label {
+  display: inline;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+}
+.colab-style .label[href]:hover,
+.colab-style .label[href]:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.colab-style .label:empty {
+  display: none;
+}
+.colab-style .label-default {
+  background-color: #999999;
+}
+.colab-style .label-default[href]:hover,
+.colab-style .label-default[href]:focus {
+  background-color: #808080;
+}
+.colab-style .label-primary {
+  background-color: #428bca;
+}
+.colab-style .label-primary[href]:hover,
+.colab-style .label-primary[href]:focus {
+  background-color: #3071a9;
+}
+.colab-style .label-success {
+  background-color: #5cb85c;
+}
+.colab-style .label-success[href]:hover,
+.colab-style .label-success[href]:focus {
+  background-color: #449d44;
+}
+.colab-style .label-info {
+  background-color: #5bc0de;
+}
+.colab-style .label-info[href]:hover,
+.colab-style .label-info[href]:focus {
+  background-color: #31b0d5;
+}
+.colab-style .label-warning {
+  background-color: #f0ad4e;
+}
+.colab-style .label-warning[href]:hover,
+.colab-style .label-warning[href]:focus {
+  background-color: #ec971f;
+}
+.colab-style .label-danger {
+  background-color: #d9534f;
+}
+.colab-style .label-danger[href]:hover,
+.colab-style .label-danger[href]:focus {
+  background-color: #c9302c;
+}
+.colab-style .badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #999;
+  border-radius: 10px;
+}
+.colab-style .badge:empty {
+  display: none;
+}
+.colab-style a.badge:hover,
+.colab-style a.badge:focus {
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.colab-style .btn .badge {
+  position: relative;
+  top: -1px;
+}
+.colab-style a.list-group-item.active > .badge,
+.colab-style .nav-pills > .active > a > .badge {
+  color: #428bca;
+  background-color: #ffffff;
+}
+.colab-style .nav-pills > li > a > .badge {
+  margin-left: 3px;
+}
+.colab-style .jumbotron {
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
+.colab-style .jumbotron h1 {
+  line-height: 1;
+  color: inherit;
+}
+.colab-style .jumbotron p {
+  line-height: 1.4;
+}
+.colab-style .container .jumbotron {
+  border-radius: 6px;
+}
+@media screen and (min-width: 768px) {
+  .colab-style .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .colab-style .container .jumbotron {
+    padding-right: 60px;
+    padding-left: 60px;
+  }
+  .colab-style .jumbotron h1 {
+    font-size: 63px;
+  }
+}
+.colab-style .thumbnail {
+  display: inline-block;
+  display: block;
+  height: auto;
+  max-width: 100%;
+  padding: 4px;
+  line-height: 1.428571429;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+.colab-style .thumbnail > img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+.colab-style a.thumbnail:hover,
+.colab-style a.thumbnail:focus {
+  border-color: #428bca;
+}
+.colab-style .thumbnail > img {
+  margin-right: auto;
+  margin-left: auto;
+}
+.colab-style .thumbnail .caption {
+  padding: 9px;
+  color: #333333;
+}
+.colab-style .alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.colab-style .alert h4 {
+  margin-top: 0;
+  color: inherit;
+}
+.colab-style .alert .alert-link {
+  font-weight: bold;
+}
+.colab-style .alert > p,
+.colab-style .alert > ul {
+  margin-bottom: 0;
+}
+.colab-style .alert > p + p {
+  margin-top: 5px;
+}
+.colab-style .alert-dismissable {
+  padding-right: 35px;
+}
+.colab-style .alert-dismissable .close {
+  position: relative;
+  top: -2px;
+  right: -21px;
+  color: inherit;
+}
+.colab-style .alert-success {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.colab-style .alert-success hr {
+  border-top-color: #c9e2b3;
+}
+.colab-style .alert-success .alert-link {
+  color: #356635;
+}
+.colab-style .alert-info {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.colab-style .alert-info hr {
+  border-top-color: #a6e1ec;
+}
+.colab-style .alert-info .alert-link {
+  color: #2d6987;
+}
+.colab-style .alert-warning {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+.colab-style .alert-warning hr {
+  border-top-color: #f8e5be;
+}
+.colab-style .alert-warning .alert-link {
+  color: #a47e3c;
+}
+.colab-style .alert-danger {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+.colab-style .alert-danger hr {
+  border-top-color: #e6c1c7;
+}
+.colab-style .alert-danger .alert-link {
+  color: #953b39;
+}
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+@-moz-keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+@-o-keyframes progress-bar-stripes {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 40px 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+.colab-style .progress {
+  height: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.colab-style .progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  background-color: #428bca;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+  -webkit-transition: width .6s ease;
+  transition: width 0.6s ease;
+}
+.colab-style .progress-striped .progress-bar {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px;
+}
+.colab-style .progress.active .progress-bar {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  -moz-animation: progress-bar-stripes 2s linear infinite;
+  -ms-animation: progress-bar-stripes 2s linear infinite;
+  -o-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+.colab-style .progress-bar-success {
+  background-color: #5cb85c;
+}
+.colab-style .progress-striped .progress-bar-success {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.colab-style .progress-bar-info {
+  background-color: #5bc0de;
+}
+.colab-style .progress-striped .progress-bar-info {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.colab-style .progress-bar-warning {
+  background-color: #f0ad4e;
+}
+.colab-style .progress-striped .progress-bar-warning {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.colab-style .progress-bar-danger {
+  background-color: #d9534f;
+}
+.colab-style .progress-striped .progress-bar-danger {
+  background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255, 255, 0.15)), color-stop(0.25, transparent), color-stop(0.5, transparent), color-stop(0.5, rgba(255, 255, 255, 0.15)), color-stop(0.75, rgba(255, 255, 255, 0.15)), color-stop(0.75, transparent), to(transparent));
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: -moz-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+}
+.colab-style .media,
+.colab-style .media-body {
+  overflow: hidden;
+  zoom: 1;
+}
+.colab-style .media,
+.colab-style .media .media {
+  margin-top: 15px;
+}
+.colab-style .media:first-child {
+  margin-top: 0;
+}
+.colab-style .media-object {
+  display: block;
+}
+.colab-style .media-heading {
+  margin: 0 0 5px;
+}
+.colab-style .media > .pull-left {
+  margin-right: 10px;
+}
+.colab-style .media > .pull-right {
+  margin-left: 10px;
+}
+.colab-style .media-list {
+  padding-left: 0;
+  list-style: none;
+}
+.colab-style .list-group {
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+.colab-style .list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #dddddd;
+}
+.colab-style .list-group-item:first-child {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+.colab-style .list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.colab-style .list-group-item > .badge {
+  float: right;
+}
+.colab-style .list-group-item > .badge + .badge {
+  margin-right: 5px;
+}
+.colab-style a.list-group-item {
+  color: #555555;
+}
+.colab-style a.list-group-item .list-group-item-heading {
+  color: #333333;
+}
+.colab-style a.list-group-item:hover,
+.colab-style a.list-group-item:focus {
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.colab-style .list-group-item.active,
+.colab-style .list-group-item.active:hover,
+.colab-style .list-group-item.active:focus {
+  z-index: 2;
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+.colab-style .list-group-item.active .list-group-item-heading,
+.colab-style .list-group-item.active:hover .list-group-item-heading,
+.colab-style .list-group-item.active:focus .list-group-item-heading {
+  color: inherit;
+}
+.colab-style .list-group-item.active .list-group-item-text,
+.colab-style .list-group-item.active:hover .list-group-item-text,
+.colab-style .list-group-item.active:focus .list-group-item-text {
+  color: #e1edf7;
+}
+.colab-style .list-group-item-heading {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.colab-style .list-group-item-text {
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+.colab-style .panel {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.colab-style .panel-body {
+  padding: 15px;
+}
+.colab-style .panel-body:before,
+.colab-style .panel-body:after {
+  display: table;
+  content: " ";
+}
+.colab-style .panel-body:after {
+  clear: both;
+}
+.colab-style .panel-body:before,
+.colab-style .panel-body:after {
+  display: table;
+  content: " ";
+}
+.colab-style .panel-body:after {
+  clear: both;
+}
+.colab-style .panel > .list-group {
+  margin-bottom: 0;
+}
+.colab-style .panel > .list-group .list-group-item {
+  border-width: 1px 0;
+}
+.colab-style .panel > .list-group .list-group-item:first-child {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+.colab-style .panel > .list-group .list-group-item:last-child {
+  border-bottom: 0;
+}
+.colab-style .panel-heading + .list-group .list-group-item:first-child {
+  border-top-width: 0;
+}
+.colab-style .panel > .table {
+  margin-bottom: 0;
+}
+.colab-style .panel > .panel-body + .table {
+  border-top: 1px solid #dddddd;
+}
+.colab-style .panel-heading {
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.colab-style .panel-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+.colab-style .panel-title > a {
+  color: inherit;
+}
+.colab-style .panel-footer {
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+.colab-style .panel-group .panel {
+  margin-bottom: 0;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.colab-style .panel-group .panel + .panel {
+  margin-top: 5px;
+}
+.colab-style .panel-group .panel-heading {
+  border-bottom: 0;
+}
+.colab-style .panel-group .panel-heading + .panel-collapse .panel-body {
+  border-top: 1px solid #dddddd;
+}
+.colab-style .panel-group .panel-footer {
+  border-top: 0;
+}
+.colab-style .panel-group .panel-footer + .panel-collapse .panel-body {
+  border-bottom: 1px solid #dddddd;
+}
+.colab-style .panel-default {
+  border-color: #dddddd;
+}
+.colab-style .panel-default > .panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+.colab-style .panel-default > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #dddddd;
+}
+.colab-style .panel-default > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #dddddd;
+}
+.colab-style .panel-primary {
+  border-color: #428bca;
+}
+.colab-style .panel-primary > .panel-heading {
+  color: #fff;
+  background-color: #428bca;
+  border-color: #428bca;
+}
+.colab-style .panel-primary > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #428bca;
+}
+.colab-style .panel-primary > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #428bca;
+}
+.colab-style .panel-success {
+  border-color: #d6e9c6;
+}
+.colab-style .panel-success > .panel-heading {
+  color: #468847;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+.colab-style .panel-success > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #d6e9c6;
+}
+.colab-style .panel-success > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #d6e9c6;
+}
+.colab-style .panel-warning {
+  border-color: #fbeed5;
+}
+.colab-style .panel-warning > .panel-heading {
+  color: #c09853;
+  background-color: #fcf8e3;
+  border-color: #fbeed5;
+}
+.colab-style .panel-warning > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #fbeed5;
+}
+.colab-style .panel-warning > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #fbeed5;
+}
+.colab-style .panel-danger {
+  border-color: #eed3d7;
+}
+.colab-style .panel-danger > .panel-heading {
+  color: #b94a48;
+  background-color: #f2dede;
+  border-color: #eed3d7;
+}
+.colab-style .panel-danger > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #eed3d7;
+}
+.colab-style .panel-danger > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #eed3d7;
+}
+.colab-style .panel-info {
+  border-color: #bce8f1;
+}
+.colab-style .panel-info > .panel-heading {
+  color: #3a87ad;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+.colab-style .panel-info > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #bce8f1;
+}
+.colab-style .panel-info > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #bce8f1;
+}
+.colab-style .well {
+  min-height: 20px;
+  padding: 19px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+.colab-style .well blockquote {
+  border-color: #ddd;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+.colab-style .well-lg {
+  padding: 24px;
+  border-radius: 6px;
+}
+.colab-style .well-sm {
+  padding: 9px;
+  border-radius: 3px;
+}
+.colab-style .close {
+  float: right;
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .2;
+  filter: alpha(opacity=20);
+}
+.colab-style .close:hover,
+.colab-style .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+.colab-style button.close {
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  -webkit-appearance: none;
+}
+.colab-style .modal-open {
+  overflow: hidden;
+}
+.colab-style.modal-open,
+.colab-style .modal-open .navbar-fixed-top,
+.colab-style .modal-open .navbar-fixed-bottom {
+  margin-right: 15px;
+}
+.colab-style .modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  display: none;
+  overflow: auto;
+  overflow-y: scroll;
+}
+.colab-style .modal.fade .modal-dialog {
+  -webkit-transform: translate(0, -25%);
+  -ms-transform: translate(0, -25%);
+  transform: translate(0, -25%);
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+.colab-style .modal.in .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+.colab-style .modal-dialog {
+  z-index: 1050;
+  width: auto;
+  padding: 10px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.colab-style .modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+}
+.colab-style .modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+  background-color: #000000;
+}
+.colab-style .modal-backdrop.fade {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+.colab-style .modal-backdrop.in {
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+.colab-style .modal-header {
+  min-height: 16.428571429px;
+  padding: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.colab-style .modal-header .close {
+  margin-top: -2px;
+}
+.colab-style .modal-title {
+  margin: 0;
+  line-height: 1.428571429;
+}
+.colab-style .modal-body {
+  position: relative;
+  padding: 20px;
+}
+.colab-style .modal-footer {
+  padding: 19px 20px 20px;
+  margin-top: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+}
+.colab-style .modal-footer:before,
+.colab-style .modal-footer:after {
+  display: table;
+  content: " ";
+}
+.colab-style .modal-footer:after {
+  clear: both;
+}
+.colab-style .modal-footer:before,
+.colab-style .modal-footer:after {
+  display: table;
+  content: " ";
+}
+.colab-style .modal-footer:after {
+  clear: both;
+}
+.colab-style .modal-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+.colab-style .modal-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+.colab-style .modal-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
+@media screen and (min-width: 768px) {
+  .colab-style .modal-dialog {
+    right: auto;
+    left: 50%;
+    width: 600px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .colab-style .modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+}
+.colab-style .tooltip {
+  position: absolute;
+  z-index: 1030;
+  display: block;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0;
+  filter: alpha(opacity=0);
+  visibility: visible;
+}
+.colab-style .tooltip.in {
+  opacity: .9;
+  filter: alpha(opacity=90);
+}
+.colab-style .tooltip.top {
+  padding: 5px 0;
+  margin-top: -3px;
+}
+.colab-style .tooltip.right {
+  padding: 0 5px;
+  margin-left: 3px;
+}
+.colab-style .tooltip.bottom {
+  padding: 5px 0;
+  margin-top: 3px;
+}
+.colab-style .tooltip.left {
+  padding: 0 5px;
+  margin-left: -3px;
+}
+.colab-style .tooltip-inner {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+  background-color: #000;
+  border-radius: 4px;
+}
+.colab-style .tooltip-arrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.colab-style .tooltip.top .tooltip-arrow {
+  bottom: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-top-color: #000;
+  border-width: 5px 5px 0;
+}
+.colab-style .tooltip.top-left .tooltip-arrow {
+  bottom: 0;
+  left: 5px;
+  border-top-color: #000;
+  border-width: 5px 5px 0;
+}
+.colab-style .tooltip.top-right .tooltip-arrow {
+  right: 5px;
+  bottom: 0;
+  border-top-color: #000;
+  border-width: 5px 5px 0;
+}
+.colab-style .tooltip.right .tooltip-arrow {
+  top: 50%;
+  left: 0;
+  margin-top: -5px;
+  border-right-color: #000;
+  border-width: 5px 5px 5px 0;
+}
+.colab-style .tooltip.left .tooltip-arrow {
+  top: 50%;
+  right: 0;
+  margin-top: -5px;
+  border-left-color: #000;
+  border-width: 5px 0 5px 5px;
+}
+.colab-style .tooltip.bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-bottom-color: #000;
+  border-width: 0 5px 5px;
+}
+.colab-style .tooltip.bottom-left .tooltip-arrow {
+  top: 0;
+  left: 5px;
+  border-bottom-color: #000;
+  border-width: 0 5px 5px;
+}
+.colab-style .tooltip.bottom-right .tooltip-arrow {
+  top: 0;
+  right: 5px;
+  border-bottom-color: #000;
+  border-width: 0 5px 5px;
+}
+.colab-style .popover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1010;
+  display: none;
+  max-width: 276px;
+  padding: 1px;
+  text-align: left;
+  white-space: normal;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  background-clip: padding-box;
+}
+.colab-style .popover.top {
+  margin-top: -10px;
+}
+.colab-style .popover.right {
+  margin-left: 10px;
+}
+.colab-style .popover.bottom {
+  margin-top: 10px;
+}
+.colab-style .popover.left {
+  margin-left: -10px;
+}
+.colab-style .popover-title {
+  padding: 8px 14px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 18px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ebebeb;
+  border-radius: 5px 5px 0 0;
+}
+.colab-style .popover-content {
+  padding: 9px 14px;
+}
+.colab-style .popover .arrow,
+.colab-style .popover .arrow:after {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+}
+.colab-style .popover .arrow {
+  border-width: 11px;
+}
+.colab-style .popover .arrow:after {
+  border-width: 10px;
+  content: "";
+}
+.colab-style .popover.top .arrow {
+  bottom: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-top-color: #999;
+  border-top-color: rgba(0, 0, 0, 0.25);
+  border-bottom-width: 0;
+}
+.colab-style .popover.top .arrow:after {
+  bottom: 1px;
+  margin-left: -10px;
+  border-top-color: #fff;
+  border-bottom-width: 0;
+  content: " ";
+}
+.colab-style .popover.right .arrow {
+  top: 50%;
+  left: -11px;
+  margin-top: -11px;
+  border-right-color: #999;
+  border-right-color: rgba(0, 0, 0, 0.25);
+  border-left-width: 0;
+}
+.colab-style .popover.right .arrow:after {
+  bottom: -10px;
+  left: 1px;
+  border-right-color: #fff;
+  border-left-width: 0;
+  content: " ";
+}
+.colab-style .popover.bottom .arrow {
+  top: -11px;
+  left: 50%;
+  margin-left: -11px;
+  border-bottom-color: #999;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-top-width: 0;
+}
+.colab-style .popover.bottom .arrow:after {
+  top: 1px;
+  margin-left: -10px;
+  border-bottom-color: #fff;
+  border-top-width: 0;
+  content: " ";
+}
+.colab-style .popover.left .arrow {
+  top: 50%;
+  right: -11px;
+  margin-top: -11px;
+  border-left-color: #999;
+  border-left-color: rgba(0, 0, 0, 0.25);
+  border-right-width: 0;
+}
+.colab-style .popover.left .arrow:after {
+  right: 1px;
+  bottom: -10px;
+  border-left-color: #fff;
+  border-right-width: 0;
+  content: " ";
+}
+.colab-style .carousel {
+  position: relative;
+}
+.colab-style .carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.colab-style .carousel-inner > .item {
+  position: relative;
+  display: none;
+  -webkit-transition: 0.6s ease-in-out left;
+  transition: 0.6s ease-in-out left;
+}
+.colab-style .carousel-inner > .item > img,
+.colab-style .carousel-inner > .item > a > img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+  line-height: 1;
+}
+.colab-style .carousel-inner > .active,
+.colab-style .carousel-inner > .next,
+.colab-style .carousel-inner > .prev {
+  display: block;
+}
+.colab-style .carousel-inner > .active {
+  left: 0;
+}
+.colab-style .carousel-inner > .next,
+.colab-style .carousel-inner > .prev {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.colab-style .carousel-inner > .next {
+  left: 100%;
+}
+.colab-style .carousel-inner > .prev {
+  left: -100%;
+}
+.colab-style .carousel-inner > .next.left,
+.colab-style .carousel-inner > .prev.right {
+  left: 0;
+}
+.colab-style .carousel-inner > .active.left {
+  left: -100%;
+}
+.colab-style .carousel-inner > .active.right {
+  left: 100%;
+}
+.colab-style .carousel-control {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  opacity: .5;
+  filter: alpha(opacity=50);
+}
+.colab-style .carousel-control.left {
+  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.5)), to(rgba(0, 0, 0, 0.0001)));
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.5) 0), color-stop(rgba(0, 0, 0, 0.0001) 100%));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+}
+.colab-style .carousel-control.right {
+  right: 0;
+  left: auto;
+  background-image: -webkit-gradient(linear, 0 top, 100% top, from(rgba(0, 0, 0, 0.0001)), to(rgba(0, 0, 0, 0.5)));
+  background-image: -webkit-linear-gradient(left, color-stop(rgba(0, 0, 0, 0.0001) 0), color-stop(rgba(0, 0, 0, 0.5) 100%));
+  background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+}
+.colab-style .carousel-control:hover,
+.colab-style .carousel-control:focus {
+  color: #fff;
+  text-decoration: none;
+  opacity: .9;
+  filter: alpha(opacity=90);
+}
+.colab-style .carousel-control .icon-prev,
+.colab-style .carousel-control .icon-next,
+.colab-style .carousel-control .glyphicon-chevron-left,
+.colab-style .carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  display: inline-block;
+}
+.colab-style .carousel-control .icon-prev,
+.colab-style .carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  margin-top: -10px;
+  margin-left: -10px;
+  font-family: serif;
+}
+.colab-style .carousel-control .icon-prev:before {
+  content: '\2039';
+}
+.colab-style .carousel-control .icon-next:before {
+  content: '\203a';
+}
+.colab-style .carousel-indicators {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  z-index: 15;
+  width: 60%;
+  padding-left: 0;
+  margin-left: -30%;
+  text-align: center;
+  list-style: none;
+}
+.colab-style .carousel-indicators li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  text-indent: -999px;
+  cursor: pointer;
+  border: 1px solid #fff;
+  border-radius: 10px;
+}
+.colab-style .carousel-indicators .active {
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  background-color: #ffffff;
+}
+.colab-style .carousel-caption {
+  position: absolute;
+  right: 15%;
+  bottom: 20px;
+  left: 15%;
+  z-index: 10;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+.colab-style .carousel-caption .btn {
+  text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+  .colab-style .carousel-control .icon-prev,
+  .colab-style .carousel-control .icon-next {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+    margin-left: -15px;
+    font-size: 30px;
+  }
+  .colab-style .carousel-caption {
+    right: 20%;
+    left: 20%;
+    padding-bottom: 30px;
+  }
+  .colab-style .carousel-indicators {
+    bottom: 20px;
+  }
+}
+.colab-style .clearfix:before,
+.colab-style .clearfix:after {
+  display: table;
+  content: " ";
+}
+.colab-style .clearfix:after {
+  clear: both;
+}
+.colab-style .pull-right {
+  float: right !important;
+}
+.colab-style .pull-left {
+  float: left !important;
+}
+.colab-style .hide {
+  display: none !important;
+}
+.colab-style .show {
+  display: block !important;
+}
+.colab-style .invisible {
+  visibility: hidden;
+}
+.colab-style .text-hide {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+.colab-style .affix {
+  position: fixed;
+}
+@-ms-viewport {
+  width: device-width;
+}
+@media screen and (max-width: 400px) {
+  @-ms-viewport {
+    width: 320px;
+  }
+}
+.colab-style .hidden {
+  display: none!important;
+  visibility: hidden !important;
+}
+.colab-style .visible-xs {
+  display: none !important;
+}
+.colab-style tr.visible-xs {
+  display: none !important;
+}
+.colab-style th.visible-xs,
+.colab-style td.visible-xs {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .colab-style .visible-xs {
+    display: block !important;
+  }
+  .colab-style tr.visible-xs {
+    display: table-row !important;
+  }
+  .colab-style th.visible-xs,
+  .colab-style td.visible-xs {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .visible-xs.visible-sm {
+    display: block !important;
+  }
+  .colab-style tr.visible-xs.visible-sm {
+    display: table-row !important;
+  }
+  .colab-style th.visible-xs.visible-sm,
+  .colab-style td.visible-xs.visible-sm {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .visible-xs.visible-md {
+    display: block !important;
+  }
+  .colab-style tr.visible-xs.visible-md {
+    display: table-row !important;
+  }
+  .colab-style th.visible-xs.visible-md,
+  .colab-style td.visible-xs.visible-md {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .visible-xs.visible-lg {
+    display: block !important;
+  }
+  .colab-style tr.visible-xs.visible-lg {
+    display: table-row !important;
+  }
+  .colab-style th.visible-xs.visible-lg,
+  .colab-style td.visible-xs.visible-lg {
+    display: table-cell !important;
+  }
+}
+.colab-style .visible-sm {
+  display: none !important;
+}
+.colab-style tr.visible-sm {
+  display: none !important;
+}
+.colab-style th.visible-sm,
+.colab-style td.visible-sm {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .colab-style .visible-sm.visible-xs {
+    display: block !important;
+  }
+  .colab-style tr.visible-sm.visible-xs {
+    display: table-row !important;
+  }
+  .colab-style th.visible-sm.visible-xs,
+  .colab-style td.visible-sm.visible-xs {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .visible-sm {
+    display: block !important;
+  }
+  .colab-style tr.visible-sm {
+    display: table-row !important;
+  }
+  .colab-style th.visible-sm,
+  .colab-style td.visible-sm {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .visible-sm.visible-md {
+    display: block !important;
+  }
+  .colab-style tr.visible-sm.visible-md {
+    display: table-row !important;
+  }
+  .colab-style th.visible-sm.visible-md,
+  .colab-style td.visible-sm.visible-md {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .visible-sm.visible-lg {
+    display: block !important;
+  }
+  .colab-style tr.visible-sm.visible-lg {
+    display: table-row !important;
+  }
+  .colab-style th.visible-sm.visible-lg,
+  .colab-style td.visible-sm.visible-lg {
+    display: table-cell !important;
+  }
+}
+.colab-style .visible-md {
+  display: none !important;
+}
+.colab-style tr.visible-md {
+  display: none !important;
+}
+.colab-style th.visible-md,
+.colab-style td.visible-md {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .colab-style .visible-md.visible-xs {
+    display: block !important;
+  }
+  .colab-style tr.visible-md.visible-xs {
+    display: table-row !important;
+  }
+  .colab-style th.visible-md.visible-xs,
+  .colab-style td.visible-md.visible-xs {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .visible-md.visible-sm {
+    display: block !important;
+  }
+  .colab-style tr.visible-md.visible-sm {
+    display: table-row !important;
+  }
+  .colab-style th.visible-md.visible-sm,
+  .colab-style td.visible-md.visible-sm {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .visible-md {
+    display: block !important;
+  }
+  .colab-style tr.visible-md {
+    display: table-row !important;
+  }
+  .colab-style th.visible-md,
+  .colab-style td.visible-md {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .visible-md.visible-lg {
+    display: block !important;
+  }
+  .colab-style tr.visible-md.visible-lg {
+    display: table-row !important;
+  }
+  .colab-style th.visible-md.visible-lg,
+  .colab-style td.visible-md.visible-lg {
+    display: table-cell !important;
+  }
+}
+.colab-style .visible-lg {
+  display: none !important;
+}
+.colab-style tr.visible-lg {
+  display: none !important;
+}
+.colab-style th.visible-lg,
+.colab-style td.visible-lg {
+  display: none !important;
+}
+@media (max-width: 767px) {
+  .colab-style .visible-lg.visible-xs {
+    display: block !important;
+  }
+  .colab-style tr.visible-lg.visible-xs {
+    display: table-row !important;
+  }
+  .colab-style th.visible-lg.visible-xs,
+  .colab-style td.visible-lg.visible-xs {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .visible-lg.visible-sm {
+    display: block !important;
+  }
+  .colab-style tr.visible-lg.visible-sm {
+    display: table-row !important;
+  }
+  .colab-style th.visible-lg.visible-sm,
+  .colab-style td.visible-lg.visible-sm {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .visible-lg.visible-md {
+    display: block !important;
+  }
+  .colab-style tr.visible-lg.visible-md {
+    display: table-row !important;
+  }
+  .colab-style th.visible-lg.visible-md,
+  .colab-style td.visible-lg.visible-md {
+    display: table-cell !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .visible-lg {
+    display: block !important;
+  }
+  .colab-style tr.visible-lg {
+    display: table-row !important;
+  }
+  .colab-style th.visible-lg,
+  .colab-style td.visible-lg {
+    display: table-cell !important;
+  }
+}
+.colab-style .hidden-xs {
+  display: block !important;
+}
+.colab-style tr.hidden-xs {
+  display: table-row !important;
+}
+.colab-style th.hidden-xs,
+.colab-style td.hidden-xs {
+  display: table-cell !important;
+}
+@media (max-width: 767px) {
+  .colab-style .hidden-xs {
+    display: none !important;
+  }
+  .colab-style tr.hidden-xs {
+    display: none !important;
+  }
+  .colab-style th.hidden-xs,
+  .colab-style td.hidden-xs {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .hidden-xs.hidden-sm {
+    display: none !important;
+  }
+  .colab-style tr.hidden-xs.hidden-sm {
+    display: none !important;
+  }
+  .colab-style th.hidden-xs.hidden-sm,
+  .colab-style td.hidden-xs.hidden-sm {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .hidden-xs.hidden-md {
+    display: none !important;
+  }
+  .colab-style tr.hidden-xs.hidden-md {
+    display: none !important;
+  }
+  .colab-style th.hidden-xs.hidden-md,
+  .colab-style td.hidden-xs.hidden-md {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .hidden-xs.hidden-lg {
+    display: none !important;
+  }
+  .colab-style tr.hidden-xs.hidden-lg {
+    display: none !important;
+  }
+  .colab-style th.hidden-xs.hidden-lg,
+  .colab-style td.hidden-xs.hidden-lg {
+    display: none !important;
+  }
+}
+.colab-style .hidden-sm {
+  display: block !important;
+}
+.colab-style tr.hidden-sm {
+  display: table-row !important;
+}
+.colab-style th.hidden-sm,
+.colab-style td.hidden-sm {
+  display: table-cell !important;
+}
+@media (max-width: 767px) {
+  .colab-style .hidden-sm.hidden-xs {
+    display: none !important;
+  }
+  .colab-style tr.hidden-sm.hidden-xs {
+    display: none !important;
+  }
+  .colab-style th.hidden-sm.hidden-xs,
+  .colab-style td.hidden-sm.hidden-xs {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .hidden-sm {
+    display: none !important;
+  }
+  .colab-style tr.hidden-sm {
+    display: none !important;
+  }
+  .colab-style th.hidden-sm,
+  .colab-style td.hidden-sm {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .hidden-sm.hidden-md {
+    display: none !important;
+  }
+  .colab-style tr.hidden-sm.hidden-md {
+    display: none !important;
+  }
+  .colab-style th.hidden-sm.hidden-md,
+  .colab-style td.hidden-sm.hidden-md {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .hidden-sm.hidden-lg {
+    display: none !important;
+  }
+  .colab-style tr.hidden-sm.hidden-lg {
+    display: none !important;
+  }
+  .colab-style th.hidden-sm.hidden-lg,
+  .colab-style td.hidden-sm.hidden-lg {
+    display: none !important;
+  }
+}
+.colab-style .hidden-md {
+  display: block !important;
+}
+.colab-style tr.hidden-md {
+  display: table-row !important;
+}
+.colab-style th.hidden-md,
+.colab-style td.hidden-md {
+  display: table-cell !important;
+}
+@media (max-width: 767px) {
+  .colab-style .hidden-md.hidden-xs {
+    display: none !important;
+  }
+  .colab-style tr.hidden-md.hidden-xs {
+    display: none !important;
+  }
+  .colab-style th.hidden-md.hidden-xs,
+  .colab-style td.hidden-md.hidden-xs {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .hidden-md.hidden-sm {
+    display: none !important;
+  }
+  .colab-style tr.hidden-md.hidden-sm {
+    display: none !important;
+  }
+  .colab-style th.hidden-md.hidden-sm,
+  .colab-style td.hidden-md.hidden-sm {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .hidden-md {
+    display: none !important;
+  }
+  .colab-style tr.hidden-md {
+    display: none !important;
+  }
+  .colab-style th.hidden-md,
+  .colab-style td.hidden-md {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .hidden-md.hidden-lg {
+    display: none !important;
+  }
+  .colab-style tr.hidden-md.hidden-lg {
+    display: none !important;
+  }
+  .colab-style th.hidden-md.hidden-lg,
+  .colab-style td.hidden-md.hidden-lg {
+    display: none !important;
+  }
+}
+.colab-style .hidden-lg {
+  display: block !important;
+}
+.colab-style tr.hidden-lg {
+  display: table-row !important;
+}
+.colab-style th.hidden-lg,
+.colab-style td.hidden-lg {
+  display: table-cell !important;
+}
+@media (max-width: 767px) {
+  .colab-style .hidden-lg.hidden-xs {
+    display: none !important;
+  }
+  .colab-style tr.hidden-lg.hidden-xs {
+    display: none !important;
+  }
+  .colab-style th.hidden-lg.hidden-xs,
+  .colab-style td.hidden-lg.hidden-xs {
+    display: none !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .colab-style .hidden-lg.hidden-sm {
+    display: none !important;
+  }
+  .colab-style tr.hidden-lg.hidden-sm {
+    display: none !important;
+  }
+  .colab-style th.hidden-lg.hidden-sm,
+  .colab-style td.hidden-lg.hidden-sm {
+    display: none !important;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .colab-style .hidden-lg.hidden-md {
+    display: none !important;
+  }
+  .colab-style tr.hidden-lg.hidden-md {
+    display: none !important;
+  }
+  .colab-style th.hidden-lg.hidden-md,
+  .colab-style td.hidden-lg.hidden-md {
+    display: none !important;
+  }
+}
+@media (min-width: 1200px) {
+  .colab-style .hidden-lg {
+    display: none !important;
+  }
+  .colab-style tr.hidden-lg {
+    display: none !important;
+  }
+  .colab-style th.hidden-lg,
+  .colab-style td.hidden-lg {
+    display: none !important;
+  }
+}
+.colab-style .visible-print {
+  display: none !important;
+}
+.colab-style tr.visible-print {
+  display: none !important;
+}
+.colab-style th.visible-print,
+.colab-style td.visible-print {
+  display: none !important;
+}
+@media print {
+  .colab-style .visible-print {
+    display: block !important;
+  }
+  .colab-style tr.visible-print {
+    display: table-row !important;
+  }
+  .colab-style th.visible-print,
+  .colab-style td.visible-print {
+    display: table-cell !important;
+  }
+  .colab-style .hidden-print {
+    display: none !important;
+  }
+  .colab-style tr.hidden-print {
+    display: none !important;
+  }
+  .colab-style th.hidden-print,
+  .colab-style td.hidden-print {
+    display: none !important;
+  }
+}

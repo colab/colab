@@ -46,6 +46,7 @@
   <body class="container" data-no-turbolink>
     {% browserid_info %}
 
+
     {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -90,6 +91,37 @@
                   {% endif %}
                 </ul>
               </li>
+            {% endif %}
+            {% if proxy.noosfero %}
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  {% trans "Social" %} <b class="caret"></b> 
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="/social/search/people">
+                      {% trans "Users" %} 
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/social/search/communities">
+                      {% trans "Communities" %} 
+                    </a>
+                  </li>
+                  {% if user.is_active %}
+                  <li>
+                    <a href="/social/profile/{{ user.username }}">
+                      {% trans "Profile" %} 
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/social/myprofile/{{ user.username }}">
+                      {% trans "Control panel" %} 
+                    </a>
+                  </li>
+                {% endif %}
+                </ul>
+            </li>
             {% endif %}
             {% if proxy.trac %}
               <li class="dropdown">
