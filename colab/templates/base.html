@@ -22,6 +22,12 @@
           href="{% static 'third-party/font-awesome/css/font-awesome.min.css' %}"
           type="text/css" media="screen" />
 
+    <!-- Fork me Ribbons -->
+    <link rel="stylesheet" href="{% static 'third-party/ribbon/gh-fork-ribbon.css' %}">
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" href="{% static 'third-party/ribbon/gh-fork-ribbon.ie.css' %}">
+    <![endif]-->
+
 
     <!-- JQuery 2+ won't work for IE < 9 -->
     <script type="text/javascript" src="{% static 'third-party/jquery-2.0.3.min.js' %}"></script>
@@ -46,6 +52,13 @@
   <body class="container" data-no-turbolink>
     {% browserid_info %}
 
+    {% block ribbon %}
+    <div class="github-fork-ribbon-wrapper left-bottom">
+      <div class="github-fork-ribbon">
+        <a href="http://beta.softwarepublico.gov.br/gitlab/softwarepublico/colab">{% trans 'Fork me!' %}</a>
+      </div>
+    </div>
+    {% endblock %}
 
     {% block navbar %}
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
