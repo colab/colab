@@ -2138,8 +2138,8 @@
 }
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
+  src: url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.eot');
+  src: url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.woff') format('woff'), url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../../third-party/bootstrap/fonts/glyphicons-halflings-regular.svg#glyphicons-halflingsregular') format('svg');
 }
 .colab-style .glyphicon {
   position: relative;
