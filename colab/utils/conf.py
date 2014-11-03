@@ -12,7 +12,7 @@ class InaccessibleYAMLSettings(ImproperlyConfigured):
 
 
 def load_yaml_settings():
-    yaml_path = os.getenv('COLAB_SETTINGS', '/etc/colab.yaml')
+    yaml_path = os.getenv('COLAB_SETTINGS', '/etc/colab/settings.yaml')
 
     if not os.path.exists(yaml_path):
         msg = "The yaml file {} does not exist".format(yaml_path)
