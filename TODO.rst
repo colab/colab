@@ -14,11 +14,6 @@ Emails
 * Permitir apenas que usuarios pertencentes a lista enviem mensagens 
 
 
-Updates
-======
-* Atualizar a versao do Django para 1.7
-* Remover South (django 1.7 ja implementa migrations)
-
 
 Async
 =====
@@ -42,7 +37,6 @@ Interface
 
 * Utilizar paginador do bootstrap 3 em todas as telas
 * Implementar breadcrumbs
-* Utilizar biblioteca de gráficos local (substituir google charts)
 * Melhorar filtros para interfaces móveis
 * Paginar discussoes
 * Paginar dashboard de discussoes
@@ -56,7 +50,6 @@ Outros
 * Contabilizar votos dentro do modelo de mensagem. Com a implementação atual ordenar uma thread por votos é uma operação muito cara.
 * Utilizar SOLR para listar documentos relevantes ao inves de thread.score
 * Escrever casos de teste
-* Criacao de repositorios distribuidos pela interface do colab
 * Fazer thread querysets ter um objeto (most_relevant_message)
 * BUG: alguns subjects comecam e terminam com [] fazendo com que a RE de limpeza apague todo o subject.
 * BUG: mensagens importadas por listas erradas
