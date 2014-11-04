@@ -93,6 +93,8 @@ MEDIA_ROOT = '/usr/share/nginx/colab/media/'
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+
 
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
