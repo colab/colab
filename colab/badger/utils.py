@@ -26,16 +26,16 @@ def get_ticket_counters():
 
 
 def get_users_counters():
-    wiki_counters = get_wiki_counters()
-    revision_counters = get_revision_counters()
-    ticket_counters = get_ticket_counters()
+    #wiki_counters = get_wiki_counters()
+    #revision_counters = get_revision_counters()
+    #ticket_counters = get_ticket_counters()
 
     users_counters = {}
     for user in User.objects.annotate(message_count=Count('emails__message')):
         users_counters[user.username] = {
             'messages': user.message_count,
-            'wikis': wiki_counters.get(user.username, 0),
-            'revisions': revision_counters.get(user.username, 0),
-            'tickets': ticket_counters.get(user.username, 0),
+            #'wikis': wiki_counters.get(user.username, 0),
+            #'revisions': revision_counters.get(user.username, 0),
+            #'tickets': ticket_counters.get(user.username, 0),
         }
     return users_counters

@@ -3,7 +3,7 @@
 from haystack import indexes
 from django.db.models import Count
 
-#from colab.badger.utils import get_users_counters
+from colab.badger.utils import get_users_counters
 from .models import User
 
 
@@ -34,11 +34,11 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     def get_model(self):
         return User
 
-    #@property
-    #def badge_counters(self):
-    #    if not hasattr(self, '_badge_counters'):
-    #        self._badge_counters = get_users_counters()
-    #    return self._badge_counters
+    @property
+    def badge_counters(self):
+        if not hasattr(self, '_badge_counters'):
+            self._badge_counters = get_users_counters()
+        return self._badge_counters
 
     def prepare(self, obj):
         prepared_data = super(UserIndex, self).prepare(obj)
