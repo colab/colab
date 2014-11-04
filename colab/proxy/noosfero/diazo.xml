@@ -8,10 +8,9 @@
 
     <merge attributes="class" css:theme="body" css:content="body" />
 
-    <drop css:theme="link[href='/static/third-party/font-awesome/css/font-awesome.min.css']" />
-    <drop css:theme="link[href='/static/converse.js/converse.min.css']" />
-    <drop css:theme="link[href='/static/third-party/bootstrap/css/bootstrap.min.css']" />
-    <drop css:theme="link[href='/static/css/screen.css']" />
+    <drop css:theme="link[href^='/static/third-party/bootstrap/css/bootstrap.min']" />
+    <drop css:theme="link[href^='/static/third-party/font-awesome/css/font-awesome.min']" />
+    <drop css:theme="link[href^='/static/css/screen']" />
     <drop theme="/html/head/script" />
     <drop css:content="#barra-brasil" />
     <drop css:content="#user" />
