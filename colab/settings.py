@@ -201,6 +201,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.super_archives.context_processors.mailarchive',
     'colab.proxy.context_processors.proxied_apps',
     'colab.home.context_processors.robots',
+    'colab.home.context_processors.ribbon',
 )
 
 MIDDLEWARE_CLASSES = (

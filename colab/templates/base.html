@@ -23,11 +23,13 @@
           href="{% static 'third-party/font-awesome/css/font-awesome.min.css' %}"
           type="text/css" media="screen" />
 
+    {% if ribbon %}
     <!-- Fork me Ribbons -->
     <link rel="stylesheet" href="{% static 'third-party/ribbon/gh-fork-ribbon.css' %}">
     <!--[if lt IE 9]>
       <link rel="stylesheet" href="{% static 'third-party/ribbon/gh-fork-ribbon.ie.css' %}">
     <![endif]-->
+    {% endif %}
 
 
     <!-- JQuery 2+ won't work for IE < 9 -->
@@ -54,11 +56,13 @@
     {% browserid_info %}
 
     {% block ribbon %}
+    {% if ribbon %}
     <div class="github-fork-ribbon-wrapper left-bottom">
       <div class="github-fork-ribbon">
-        <a href="http://beta.softwarepublico.gov.br/gitlab/softwarepublico/colab">{% trans 'Fork me!' %}</a>
+        <a href="{{ ribbon.url }}">{{ ribbon.text }}</a>
       </div>
     </div>
+    {% endif %}
     {% endblock %}
 
     {% block navbar %}

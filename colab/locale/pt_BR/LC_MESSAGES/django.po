@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-03 17:38-0200\n"
-"PO-Revision-Date: 2014-11-03 20:18+0000\n"
+"POT-Creation-Date: 2014-11-04 12:06-0200\n"
+"PO-Revision-Date: 2014-11-04 14:07+0000\n"
 "Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/colab/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -89,8 +89,8 @@ msgstr "Trocar senha"
 msgid "To login please click in the link below:"
 msgstr "Para acessar por favor clique no link abaixo:"
 
-#: accounts/templates/accounts/login.html:8 templates/base.html:165
-#: templates/base.html.py:170
+#: accounts/templates/accounts/login.html:8 templates/base.html:183
+#: templates/base.html.py:188
 msgid "Login"
 msgstr "Entrar"
 
@@ -123,7 +123,7 @@ msgid "Subscribe to groups"
 msgstr "Inscreva-se nos grupos"
 
 #: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:164 templates/base.html.py:169
+#: templates/base.html:182 templates/base.html.py:187
 msgid "Register"
 msgstr "Cadastre-se"
 
@@ -292,7 +292,7 @@ msgstr "Não conseguimos alterar sua senha. Por favor, tente novamente mais tard
 msgid "You've changed your password successfully!"
 msgstr "Senha alterada com sucesso!"
 
-#: badger/forms.py:19 badger/models.py:39 settings.py:162
+#: badger/forms.py:19 badger/models.py:39 settings.py:164
 msgid "Image"
 msgstr "Imagem"
 
@@ -373,6 +373,10 @@ msgstr "Ordem"
 msgid "Badge"
 msgstr "Medalha"
 
+#: home/context_processors.py:13
+msgid "Fork me!"
+msgstr "Fork me!"
+
 #: rss/feeds.py:13
 msgid "Latest Discussions"
 msgstr "Últimas discussões"
@@ -385,8 +389,8 @@ msgstr "Discussões Mais Relevantes"
 msgid "Latest collaborations"
 msgstr "Últimas colaborações"
 
-#: search/forms.py:16 search/templates/search/search.html:41
-#: templates/base.html:149
+#: search/forms.py:16 search/templates/search/search.html:42
+#: templates/base.html:167
 msgid "Search"
 msgstr "Busca"
 
@@ -434,7 +438,7 @@ msgstr "Palavras chaves"
 msgid "Collaborators"
 msgstr "Colaboradores"
 
-#: search/forms.py:37 templates/base.html:81
+#: search/forms.py:37 templates/base.html:99
 msgid "Repository"
 msgstr "Repositório"
 
@@ -526,32 +530,32 @@ msgstr "Anexo"
 msgid "Discussion"
 msgstr "Discussões"
 
-#: search/templates/search/search.html:4
+#: search/templates/search/search.html:5
 msgid "search"
 msgstr "busca"
 
-#: search/templates/search/search.html:46
+#: search/templates/search/search.html:47
 msgid "documents found"
 msgstr "documentos encontrados"
 
-#: search/templates/search/search.html:57
+#: search/templates/search/search.html:58
 msgid "Search here"
 msgstr "Pesquise aqui"
 
-#: search/templates/search/search.html:69
-#: search/templates/search/search.html:79
+#: search/templates/search/search.html:70
+#: search/templates/search/search.html:80
 msgid "Filters"
 msgstr "Filtros"
 
-#: search/templates/search/search.html:100
+#: search/templates/search/search.html:101
 msgid "No results for your search."
 msgstr "Não há resultados para sua busca."
 
-#: search/templates/search/search.html:102
+#: search/templates/search/search.html:103
 msgid "You are searching for"
 msgstr "Você está procurando por"
 
-#: search/utils.py:9 settings.py:159
+#: search/utils.py:9 settings.py:161
 msgid "Code"
 msgstr "Código"
 
@@ -563,71 +567,71 @@ msgstr "Tíquetes"
 msgid "Attachments"
 msgstr "Anexos"
 
-#: settings.py:117
+#: settings.py:119
 msgid "English"
 msgstr "Inglês"
 
-#: settings.py:118
+#: settings.py:120
 msgid "Portuguese"
 msgstr "Português"
 
-#: settings.py:119
+#: settings.py:121
 msgid "Spanish"
 msgstr "Espanhol"
 
-#: settings.py:142
+#: settings.py:144
 msgid "Recent activity"
 msgstr "Atividade recente"
 
-#: settings.py:146
+#: settings.py:148
 msgid "Relevance"
 msgstr "Relevância"
 
-#: settings.py:155
+#: settings.py:157
 msgid "Document"
 msgstr "Documento"
 
-#: settings.py:157
+#: settings.py:159
 msgid "Presentation"
 msgstr "Apresentação"
 
-#: settings.py:158
+#: settings.py:160
 msgid "Text"
 msgstr "Texto"
 
-#: settings.py:161
+#: settings.py:163
 msgid "Compressed"
 msgstr "Compactado"
 
-#: settings.py:164
+#: settings.py:166
 msgid "Spreadsheet"
 msgstr "Planilha"
 
-#: settings.py:249
+#: settings.py:252
 msgid "Planet Colab"
 msgstr "Planet Colab"
 
-#: settings.py:250
+#: settings.py:253
 msgid "Colab blog aggregator"
 msgstr "Agregador de blog Colab"
 
-#: settings.py:281
+#: settings.py:284
 msgid "One Time Snippet"
 msgstr "Uma única visualização"
 
-#: settings.py:282
+#: settings.py:285
 msgid "In one hour"
 msgstr "Em uma hora"
 
-#: settings.py:283
+#: settings.py:286
 msgid "In one week"
 msgstr "Em uma semana"
 
-#: settings.py:284
+#: settings.py:287
 msgid "In one month"
 msgstr "Em um mês"
 
-#: settings.py:285
+#: settings.py:288
 msgid "Never"
 msgstr "Nunca"
 
@@ -639,115 +643,115 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Opa... algo saiu errado!"
 
-#: templates/base.html:69
+#: templates/base.html:87
 msgid "Timeline"
 msgstr "Linha do Tempo"
 
-#: templates/base.html:74 templates/base.html.py:88
+#: templates/base.html:92 templates/base.html.py:106
 msgid "Groups"
 msgstr "Grupos"
 
-#: templates/base.html:77
+#: templates/base.html:95
 msgid "Blogs"
 msgstr "Blogs"
 
-#: templates/base.html:83
+#: templates/base.html:101
 msgid "Public Projects"
 msgstr "Projetos Públicos"
 
-#: templates/base.html:85 templates/base.html.py:114
+#: templates/base.html:103 templates/base.html.py:132
 msgid "Profile"
 msgstr "Perfil"
 
-#: templates/base.html:86
+#: templates/base.html:104
 msgid "New Project"
 msgstr "Novo Projeto"
 
-#: templates/base.html:87
+#: templates/base.html:105
 msgid "Projects"
 msgstr "Projetos"
 
-#: templates/base.html:89
+#: templates/base.html:107
 msgid "Issues"
 msgstr "Tiquetes"
 
-#: templates/base.html:90
+#: templates/base.html:108
 msgid "Merge Requests"
 msgstr "Merge Requests"
 
-#: templates/base.html:98
+#: templates/base.html:116
 msgid "Social"
 msgstr "Social"
 
-#: templates/base.html:103
+#: templates/base.html:121
 msgid "Users"
 msgstr "Usuários"
 
-#: templates/base.html:108
+#: templates/base.html:126
 msgid "Communities"
 msgstr "Comunidades"
 
-#: templates/base.html:119
+#: templates/base.html:137
 msgid "Control panel"
 msgstr "Painel de Controle"
 
-#: templates/base.html:128
+#: templates/base.html:146
 msgid "Contribute"
 msgstr "Contribua"
 
-#: templates/base.html:132
+#: templates/base.html:150
 msgid "New Wiki Page"
 msgstr "Nova Página Wiki"
 
-#: templates/base.html:134
+#: templates/base.html:152
 msgid "View Tickets"
 msgstr "Ver Tiquetes"
 
-#: templates/base.html:136
+#: templates/base.html:154
 msgid "New Ticket"
 msgstr "Novo Tíquete"
 
-#: templates/base.html:138
+#: templates/base.html:156
 msgid "Roadmap"
 msgstr "Planejamento"
 
-#: templates/base.html:141
+#: templates/base.html:159
 msgid "Browse Source"
 msgstr "Códigos Fontes"
 
-#: templates/base.html:143
+#: templates/base.html:161
 msgid "Continuous Integration"
 msgstr "Integração Contínua"
 
-#: templates/base.html:153
+#: templates/base.html:171
 msgid "Help"
 msgstr "Ajuda"
 
-#: templates/base.html:184
+#: templates/base.html:202
 msgid "My Profile"
 msgstr "Meu Perfil"
 
-#: templates/base.html:185
+#: templates/base.html:203
 msgid "Logout"
 msgstr "Sair"
 
-#: templates/base.html:197 templates/base.html.py:200
+#: templates/base.html:215 templates/base.html.py:218
 msgid "Search here..."
 msgstr "Pesquise aqui..."
 
-#: templates/base.html:214
+#: templates/base.html:232
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
-#: templates/base.html:239
+#: templates/base.html:257
 msgid "Last email imported at"
 msgstr "Último e-mail importado em"
 
-#: templates/base.html:246
+#: templates/base.html:264
 msgid "The contents of this site is published under license"
 msgstr "O conteúdo deste site está publicado sob a licença"
 
-#: templates/base.html:249
+#: templates/base.html:267
 msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 
