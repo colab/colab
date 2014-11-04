@@ -51,6 +51,7 @@ INSTALLED_APPS = (
     'i18n_model',
     'mptt',
     'dpaste',
+    'taggit',
 
     # Own apps
     'colab.home',
@@ -61,11 +62,6 @@ INSTALLED_APPS = (
     'colab.search',
     'colab.badger',
     'colab.tz',
-
-    # Feedzilla and deps
-    'feedzilla',
-    'taggit',
-    'common',
 )
 
 ROOT_URLCONF = 'colab.urls'
@@ -202,6 +198,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.proxy.context_processors.proxied_apps',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
+    'colab.planet.context_processors.feedzilla',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -252,6 +249,8 @@ FEEDZILLA_PAGE_SIZE = 5
 FEEDZILLA_SITE_TITLE = _(u'Planet Colab')
 FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
 
+FEEDZILLA_ENABLED = True
+
 # Mailman API settings
 MAILMAN_API_URL = 'http://localhost:9000'
 
@@ -300,6 +299,13 @@ if locals().get('RAVEN_DSN', False):
         'dsn': RAVEN_DSN + '?timeout=30',
     }
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
+
+if FEEDZILLA_ENABLED:
+    INSTALLED_APPS += (
+        # Feedzilla and deps
+        'feedzilla',
+        'common',
+    )
 
 proxied_apps = locals().get('PROXIED_APPS') or {}
 for app_label in proxied_apps.keys():
