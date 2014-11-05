@@ -1,0 +1,13 @@
+*   *   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin update_index --age=1 &> /dev/null
+
+34  2   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin rebuild_index --noinput &> /dev/null
+
+*   1   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin cleanup_snippets &> /dev/null
+
+*/5 *   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin update_badges &> /dev/null
+
+27  3   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin clearsessions &> /dev/null
+
+10  *   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin update_planet &> /dev/null
+
+*   *   *   *   *   colab   /home/colab/.virtualenvs/colab/bin/colab-admin import_emails --archives_path=/var/lib/mailman/archives/private/ &> /dev/null
