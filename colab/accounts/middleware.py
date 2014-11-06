@@ -22,8 +22,8 @@ class RemoteUserMiddleware(object):
 
         remote_user_data = {}
 
-        remote_user_data['EMAIL'] = user.email
-        remote_user_data['NAME'] = user.username
+        remote_user_data['email'] = user.email
+        remote_user_data['name'] = user.username
 
         request.META['REMOTE_USER_DATA'] = json_dumps(
             remote_user_data,
