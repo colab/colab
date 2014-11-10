@@ -7,6 +7,6 @@ def proxied_apps(request):
 
     for app in apps.get_app_configs():
         if getattr(app, 'colab_proxied_app', False):
-            proxied_apps[app.label] = True
+            proxied_apps[app.label] = app
 
     return {'proxy': proxied_apps}
