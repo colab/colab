@@ -7,7 +7,11 @@
 {% block head_js %}
 <script type="text/javascript" src="{% static 'third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
 {% if use_language %}
-  <script type="text/javascript" src="{% static 'third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js' %}"></script>
+{% comment %}
+We must use STATIC_URL because we have a language composing the URL
+    and the static template tag don't know how to use it. #}
+{% endcomment %}
+  <script type="text/javascript" src="{{ STATIC_URL }}third-party/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.{{ use_language }}.js"></script>
 {% endif %}
 
 <script type="text/javascript">
