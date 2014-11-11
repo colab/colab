@@ -100,11 +100,12 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Contribute" %} <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/paste">Paste</a></li>
                   <li><a href="/ci">{% trans "Continuous Integration" %}</a></li>
                 </ul>
               </li>
             {% endif %}
+
+            <li><a href="/paste">{% trans "Paste" %}</a></li>
 
             <li class="hidden-lg hidden-md">
               <a href="{% url 'haystack_search' %}?q=">{% trans "Search" %}</a>
