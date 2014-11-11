@@ -2,21 +2,9 @@
 from django.core.urlresolvers import reverse
 from django import template
 from django.core.cache import cache
+from django.template.loader import render_to_string
 
 register = template.Library()
-
-PROXY_MENU_TEMPLATE = """
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{title}
-                                                    <b class="caret"></b></a>
-  <ul class="dropdown-menu">
-    {items}
-  </ul>
-</li>"""
-
-PROXY_MENU_ITEM_TEMPLATE = """
-    <li><a href="{link}">{link_title}</a></li>
-"""
 
 
 @register.simple_tag(takes_context=True)
@@ -53,14 +41,8 @@ def proxy_menu(context):
             url = reverse(app.label, args=(link,))
             menu_links[title].append((text, url))
 
-    menu = ''
-
-    for title, links in menu_links.items():
-        items = ''
-        for text, link in links:
-            items += PROXY_MENU_ITEM_TEMPLATE.format(link=link,
-                                                     link_title=unicode(text))
-        menu += PROXY_MENU_TEMPLATE.format(title=unicode(title), items=items)
+    menu = render_to_string('proxy/menu_template.html',
+                            {'menu_links': menu_links})
 
     cache.set(cache_key, menu)
     return menu
