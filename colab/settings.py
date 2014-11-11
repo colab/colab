@@ -55,6 +55,7 @@ INSTALLED_APPS = (
 
     # Own apps
     'colab.home',
+    'colab.proxy',
     'colab.super_archives',
     'colab.api',
     'colab.rss',

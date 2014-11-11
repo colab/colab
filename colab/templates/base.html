@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load i18n browserid conversejs gravatar %}
+{% load i18n browserid conversejs gravatar proxy %}
 {% load static from staticfiles %}
 
 <html>
@@ -100,22 +100,8 @@
             </li>
             {% endif %}
 
-            {% if proxy.gitlab %}
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{% trans "Repository" %} <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/gitlab/public/projects">{% trans "Public Projects" %}</a></li>
-                  {% if user.is_active %}
-                    <li><a href="/gitlab/profile">{% trans "Profile" %}</a></li>
-                    <li><a href="/gitlab/projects/new">{% trans "New Project" %}</a></li>
-                    <li><a href="/gitlab/dashboard/projects">{% trans "Projects" %}</a></li>
-                    <li><a href="/gitlab/profile/groups">{% trans "Groups" %}</a></li>
-                    <li><a href="/gitlab/dashboard/issues">{% trans "Issues" %}</a></li>
-                    <li><a href="/gitlab/dashboard/merge_requests">{% trans "Merge Requests" %}</a></li>
-                  {% endif %}
-                </ul>
-              </li>
-            {% endif %}
+            {% proxy_menu %}
+
             {% if proxy.noosfero %}
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
