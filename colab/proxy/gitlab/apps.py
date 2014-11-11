@@ -9,7 +9,7 @@ class ProxyGitlabAppConfig(ColabProxiedAppConfig):
     verbose_name = 'Gitlab Proxy'
 
     menu = {
-        'title': _('Repository'),
+        'title': _('Code'),
         'links': (
             (_('Public Projects'), 'public/projects'),
         ),

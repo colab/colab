@@ -20,7 +20,7 @@ PROXY_MENU_ITEM_TEMPLATE = """
 
 @register.simple_tag(takes_context=True)
 def proxy_menu(context):
-    menu = ''
+    menu_links = {}
     proxied_apps = context.get('proxy', {})
 
     for app in proxied_apps.values():
@@ -35,11 +35,19 @@ def proxy_menu(context):
         if not links:
             continue
 
-        items = ''
+        if title not in menu_links:
+            menu_links[title] = []
 
         for text, link in links:
             url = reverse(app.label, args=(link,))
-            items += PROXY_MENU_ITEM_TEMPLATE.format(link=url,
+            menu_links[title].append((text, url))
+
+    menu = ''
+
+    for title, links in menu_links.items():
+        items = ''
+        for text, link in links:
+            items += PROXY_MENU_ITEM_TEMPLATE.format(link=link,
                                                      link_title=unicode(text))
         menu += PROXY_MENU_TEMPLATE.format(title=unicode(title), items=items)
 

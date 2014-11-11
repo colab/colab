@@ -9,7 +9,7 @@ class ProxyTracAppConfig(ColabProxiedAppConfig):
     verbose_name = 'Trac Proxy'
 
     menu = {
-        'title': _('Contribute'),
+        'title': _('Code'),
         'links': (
             (_('Timeline'), 'timeline'),
             (_('Wiki'), 'wiki'),
