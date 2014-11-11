@@ -6,5 +6,5 @@ from .views import NoosferoProxyView
 
 urlpatterns = patterns('',
     # Noosfero URLs
-    url(r'^(?P<path>.*)$', NoosferoProxyView.as_view()),
+    url(r'^(?P<path>.*)$', NoosferoProxyView.as_view(), name='noosfero'),
 )

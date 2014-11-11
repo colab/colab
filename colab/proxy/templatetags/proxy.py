@@ -14,7 +14,7 @@ PROXY_MENU_TEMPLATE = """
 </li>"""
 
 PROXY_MENU_ITEM_TEMPLATE = """
-      <li><a href="{link}">{link_title}</a></li>
+    <li><a href="{link}">{link_title}</a></li>
 """
 
 
