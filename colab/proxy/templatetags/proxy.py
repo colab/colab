@@ -1,6 +1,7 @@
 
 from django.core.urlresolvers import reverse
 from django import template
+from django.core.cache import cache
 
 register = template.Library()
 
@@ -20,6 +21,16 @@ PROXY_MENU_ITEM_TEMPLATE = """
 
 @register.simple_tag(takes_context=True)
 def proxy_menu(context):
+    if context['user'].is_authenticated():
+        cache_key = 'colab-proxy-menu-authenticated'
+    else:
+        cache_key = 'colab-proxy-menu-anonymous'
+
+    menu_from_cache = cache.get(cache_key)
+
+    if menu_from_cache:
+        return menu_from_cache
+
     menu_links = {}
     proxied_apps = context.get('proxy', {})
 
@@ -51,4 +62,5 @@ def proxy_menu(context):
                                                      link_title=unicode(text))
         menu += PROXY_MENU_TEMPLATE.format(title=unicode(title), items=items)
 
+    cache.set(cache_key, menu)
     return menu
