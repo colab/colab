@@ -27,6 +27,11 @@ class SocialAccountField(forms.Field):
 
 
 class UserForm(forms.ModelForm):
+    username = forms.CharField(
+
+        # Forces username to be lowercase always
+        widget=forms.TextInput(attrs={'style' : 'text-transform: lowercase;'}),
+    )
     required = ('first_name', 'last_name', 'email', 'username')
 
     class Meta:

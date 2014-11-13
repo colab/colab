@@ -49,6 +49,12 @@ class User(AbstractUser):
     def update_subscription(self, email, lists):
         mailman.update_subscription(email, lists)
 
+    def save(self, *args, **kwargs):
+
+        # Forces username to be lowercase always
+        self.username = self.username.lower()
+        super(User, self).save(*args, **kwargs)
+
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
@@ -60,7 +66,7 @@ User._meta.get_field('username').help_text = _(
     u'./+/-/_ only.'
 )
 User._meta.get_field('username').validators[0] = validators.RegexValidator(
-    r'^[\w.+-]+$',
+    r'^\w+$',
     _('Enter a valid username.'),
     'invalid'
 )

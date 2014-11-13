@@ -54,5 +54,8 @@ fi
 ### Create colab user in PostgreSQL
 echo "CREATE USER colab WITH PASSWORD 'colab';" | sudo -u postgres -i psql 2> /dev/null || echo
 
-#i## Create colab DB in PostgreSQL
+### Create colab DB in PostgreSQL
 sudo -u postgres -i createdb --owner=colab colab 2> /dev/null | echo
+
+### Forcing postgresql to start at boot
+sudo chkconfig postgresql on
