@@ -10,6 +10,7 @@ import mailbox
 import logging
 from optparse import make_option
 
+from django.conf import settings
 from django.db import transaction
 from django.template.defaultfilters import slugify
 from django.core.management.base import BaseCommand, CommandError
@@ -27,13 +28,12 @@ class Command(BaseCommand, object):
 
     help = __doc__
 
-    default_archives_path = '/var/lib/mailman/archives/private'
     RE_SUBJECT_CLEAN = re.compile('((re|res|fw|fwd|en|enc):)|\[.*?\]',
                                   re.IGNORECASE)
     THREAD_CACHE = {}
     EMAIL_ADDR_CACHE = {}
 
-    lock_file = '/var/lock/colab/import_emails.lock'
+    lock_file = settings.SUPER_ARCHIVES_LOCK_FILE
 
     # A new command line option to get the dump file to parse.
     option_list = BaseCommand.option_list + (
@@ -41,8 +41,8 @@ class Command(BaseCommand, object):
             '--archives_path',
             dest='archives_path',
             help=('Path of email archives to be imported. '
-                  '(default: {})').format(default_archives_path),
-            default=default_archives_path),
+                  '(default: {})').format(settings.SUPER_ARCHIVES_PATH),
+            default=settings.SUPER_ARCHIVES_PATH),
 
         make_option(
             '--exclude-list',
@@ -50,7 +50,7 @@ class Command(BaseCommand, object):
             help=("Mailing list that won't be imported. It can be used many"
                   "times for more than one list."),
             action='append',
-            default=None),
+            default=settings.SUPER_ARCHIVES_EXCLUDE),
 
         make_option(
             '--all',
