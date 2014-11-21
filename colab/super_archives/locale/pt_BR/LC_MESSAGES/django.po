@@ -1,225 +1,269 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
+# Sergio Oliveira <seocam@seocam.com>, 2014
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-18 21:53-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2014-11-21 17:05+0000\n"
+"PO-Revision-Date: 2014-11-21 17:38+0000\n"
+"Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/colab/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: forms.py:18
-msgid "Name"
-msgstr "Nome"
+#: super_archives/management/commands/import_emails.py:213
+msgid "[Colab] Warning - Email sent with a blank subject."
+msgstr "[Colab] Atenção - Email enviado sem assunto."
 
-#: forms.py:19
-msgid "Last name"
-msgstr "Sobrenome"
-
-#: forms.py:23
-msgid "Institution"
-msgstr "Instituição/Empresa"
-
-#: forms.py:25
-msgid "Role"
-msgstr "Função/Cargo"
-
-#: forms.py:26
-msgid "Twitter"
-msgstr "Twitter"
-
-#: forms.py:27
-msgid "Facebook"
-msgstr "Facebook"
-
-#: forms.py:28
-msgid "Google Talk"
-msgstr "Google Talk"
-
-#: forms.py:29
-msgid "Personal Website/Blog"
-msgstr "Website/Blog Pessoal"
-
-#: models.py:66
-msgid "User Profile"
-msgstr "Perfil do Usuário"
-
-#: models.py:67
-msgid "Users Profiles"
-msgstr "Perfis de Usuários"
-
-#: models.py:100
-msgid "Mailing List"
-msgstr "Lista de discussão"
-
-#: models.py:101
-msgid "The Mailing List where is the thread"
-msgstr "Lista de emails da discussão"
-
-#: models.py:104
-msgid "Latest message"
-msgstr "Última mensagem"
-
-#: models.py:105
-msgid "Latest message posted"
-msgstr "Última mensagem enviada"
-
-#: models.py:106
-msgid "Score"
-msgstr "Pontuação"
-
-#: models.py:106
-msgid "Thread score"
-msgstr "Pontuação da discussão"
-
-#: models.py:113
-msgid "Thread"
-msgstr "Discussão"
-
-#: models.py:114
-msgid "Threads"
-msgstr "Discussões"
-
-#: models.py:196
-msgid "Subject"
-msgstr "Assuntos"
-
-#: models.py:197
-msgid "Please enter a message subject"
-msgstr "Por favor digite um assunto de email"
-
-#: models.py:200
-msgid "Message body"
-msgstr "Corpo do email"
-
-#: models.py:201
-msgid "Please enter a message body"
-msgstr "Por favor digite o corpo do email"
-
-#: models.py:210
-msgid "Message"
-msgstr "Mensagem"
-
-#: models.py:211
-msgid "Messages"
-msgstr "Mensagens"
-
-#: templates/message-list.html:6
-msgid "Discussions"
-msgstr "Discussões"
-
-#: templates/message-list.html:10
-msgid "Filters"
-msgstr "Filtros"
-
-#: templates/message-list.html:12
-msgid "Sort by"
-msgstr "Ordenar por"
-
-#: templates/message-list.html:14 templates/message-list.html.py:17
-#: templates/message-list.html:27
-msgid "Remove filter"
-msgstr "Remover filtro"
-
-#: templates/message-list.html:16
-msgid "Relevance"
-msgstr "Relevância"
-
-#: templates/message-list.html:19
-msgid "Recent activity"
-msgstr "Atividade recente"
-
-#: templates/message-list.html:24
-msgid "Lists"
-msgstr "Listas"
-
-#: templates/message-list.html:41
-msgid "No discussion found"
-msgstr "Nenhuma discussão encontrada"
-
-#: templates/message-list.html:51
-msgid "Previous"
-msgstr "Anterior"
-
-#: templates/message-list.html:55
-msgid "Page"
-msgstr "Página"
-
-#: templates/message-list.html:55
-msgid "of"
-msgstr "de"
-
-#: templates/message-list.html:59
-msgid "Next"
-msgstr "Próxima"
-
-#: templates/message-preview.html:35
-msgid "by"
-msgstr "por"
-
-#: templates/message-preview.html:41
-msgid "anonymous"
-msgstr "Anônimo"
-
-#: templates/message-preview.html:47 templates/message-thread.html:59
-msgid "ago"
-msgstr "atrás"
-
-#: templates/message-thread.html:19
+#: super_archives/models.py:61
+#: super_archives/templates/message-preview.html:62
+#: super_archives/templates/message-thread.html:4
 msgid "Anonymous"
 msgstr "Anônimo"
 
-#: templates/message-thread.html:27
-msgid "Vote"
-msgstr "Votar"
+#: super_archives/models.py:111
+msgid "Mailing List"
+msgstr "Lista de discussão"
 
-#: templates/message-thread.html:31
-msgid "Remove votes"
-msgstr "Remover voto"
+#: super_archives/models.py:112
+msgid "The Mailing List where is the thread"
+msgstr "Lista de emails da discussão"
 
-#: templates/message-thread.html:47
+#: super_archives/models.py:115
+msgid "Latest message"
+msgstr "Última mensagem"
+
+#: super_archives/models.py:116
+msgid "Latest message posted"
+msgstr "Última mensagem enviada"
+
+#: super_archives/models.py:117
+msgid "Score"
+msgstr "Pontuação"
+
+#: super_archives/models.py:117
+msgid "Thread score"
+msgstr "Pontuação da discussão"
+
+#: super_archives/models.py:126
+msgid "Thread"
+msgstr "Discussão"
+
+#: super_archives/models.py:127
+msgid "Threads"
+msgstr "Discussões"
+
+#: super_archives/models.py:241
+msgid "Subject"
+msgstr "Assuntos"
+
+#: super_archives/models.py:242
+msgid "Please enter a message subject"
+msgstr "Por favor digite um assunto de email"
+
+#: super_archives/models.py:245
+msgid "Message body"
+msgstr "Corpo do email"
+
+#: super_archives/models.py:246
+msgid "Please enter a message body"
+msgstr "Por favor digite o corpo do email"
+
+#: super_archives/models.py:256
+msgid "Message"
+msgstr "Mensagem"
+
+#: super_archives/models.py:257
+msgid "Messages"
+msgstr "Mensagens"
+
+#: super_archives/templates/message-preview.html:42
+#: super_archives/templates/message-preview.html:62
+msgid "by"
+msgstr "por"
+
+#: super_archives/templates/message-preview.html:65
+#: super_archives/templates/message-thread.html:161
+msgid "ago"
+msgstr "atrás"
+
+#: super_archives/templates/message-thread.html:35
+msgid "You must login before voting."
+msgstr "Você deve logar antes de votar."
+
+#: super_archives/templates/message-thread.html:132
 msgid "Order by"
 msgstr "Ordenar por"
 
-#: templates/message-thread.html:49
+#: super_archives/templates/message-thread.html:136
 msgid "Votes"
 msgstr "Votos"
 
-#: templates/message-thread.html:50
+#: super_archives/templates/message-thread.html:140
 msgid "Date"
 msgstr "Data"
 
-#: templates/message-thread.html:55
+#: super_archives/templates/message-thread.html:145
+msgid "Related:"
+msgstr "Relacionado:"
+
+#: super_archives/templates/message-thread.html:156
 msgid "Statistics:"
 msgstr "Estatísticas:"
 
-#: templates/message-thread.html:58
+#: super_archives/templates/message-thread.html:160
 msgid "started at"
 msgstr "iniciada em"
 
-#: templates/message-thread.html:61
+#: super_archives/templates/message-thread.html:166
 msgid "viewed"
 msgstr "vizualizada"
 
-#: templates/message-thread.html:62 templates/message-thread.html.py:65
-#: templates/message-thread.html:68
+#: super_archives/templates/message-thread.html:167
+#: super_archives/templates/message-thread.html:172
+#: super_archives/templates/message-thread.html:177
 msgid "times"
 msgstr "vezes"
 
-#: templates/message-thread.html:64
+#: super_archives/templates/message-thread.html:171
 msgid "answered"
 msgstr "respondida"
 
-#: templates/message-thread.html:67
+#: super_archives/templates/message-thread.html:176
 msgid "voted"
 msgstr "votada"
+
+#: super_archives/templates/message-thread.html:182
+msgid "Tags:"
+msgstr "Tags:"
+
+#: super_archives/templates/superarchives/emails/email_blank_subject.txt:2
+msgid "Hello"
+msgstr "Olá"
+
+#: super_archives/templates/superarchives/emails/email_blank_subject.txt:3
+#, python-format
+msgid ""
+"\n"
+"You've sent an email to %(mailinglist)s with a blank subject and the following content:\n"
+"\n"
+"\"%(body)s\"\n"
+"\n"
+"Please, fill the subject in every email you send it.\n"
+"\n"
+"Thank you.\n"
+msgstr "\nVocê enviou um e-mail para a lista %(mailinglist)s com assunto em branco e com o seguinte conteúdo:\n\n\"%(body)s\"\n\nPor favor, preencha o assunto de seus e-mails antes de enviá-los.\n\nObrigado.\n"
+
+#: super_archives/templates/superarchives/emails/email_verification.txt:2
+#, python-format
+msgid ""
+"Hey, we want to verify that you are indeed \"%(fullname)s (%(username)s)\"."
+"  If that's the case, please follow the link below:"
+msgstr "Ei, nós queremos verificar que você é realmente \"%(fullname)s (%(username)s)\". Se este for o caso, por favor clique no link abaixo:"
+
+#: super_archives/templates/superarchives/emails/email_verification.txt:6
+#, python-format
+msgid ""
+"If you're not %(username)s or didn't request verification you can ignore "
+"this email."
+msgstr "Se você não é %(username)s ou não solicitou verificação apenas ignore este email."
+
+#: super_archives/templates/superarchives/includes/message.html:17
+#: super_archives/templates/superarchives/includes/message.html:18
+msgid "Link to this message"
+msgstr "Link para esta mensagem"
+
+#: super_archives/templates/superarchives/includes/message.html:46
+msgid "Reply"
+msgstr "Responder"
+
+#: super_archives/templates/superarchives/includes/message.html:63
+msgid "Send a message"
+msgstr "Enviar mensagem"
+
+#: super_archives/templates/superarchives/includes/message.html:66
+msgid ""
+"After sending a message it will take few minutes before it shows up in here."
+" Why don't you grab a coffee?"
+msgstr "Após enviar uma mensagem pode levar alguns minutos até que ela seja exibida aqui. Por que você não busca um café enquanto isso?"
+
+#: super_archives/templates/superarchives/includes/message.html:69
+msgid "Send"
+msgstr "Enviar"
+
+#: super_archives/templates/superarchives/thread-dashboard.html:4
+#: super_archives/templates/superarchives/thread-dashboard.html:7
+msgid "Groups"
+msgstr "Grupos"
+
+#: super_archives/templates/superarchives/thread-dashboard.html:14
+#, python-format
+msgid "%(number_of_users)s members"
+msgstr "%(number_of_users)s membros"
+
+#: super_archives/templates/superarchives/thread-dashboard.html:23
+msgid "latest"
+msgstr "última"
+
+#: super_archives/templates/superarchives/thread-dashboard.html:31
+#: super_archives/templates/superarchives/thread-dashboard.html:45
+msgid "more..."
+msgstr "mais..."
+
+#: super_archives/templates/superarchives/thread-dashboard.html:37
+msgid "most relevant"
+msgstr "Mais relevante"
+
+#: super_archives/utils/email.py:14
+msgid "Please verify your email "
+msgstr "Por favor verifique seu email"
+
+#: super_archives/views.py:92
+msgid "Error trying to connect to Mailman API"
+msgstr "Erro tentando conectar à API do Mailman"
+
+#: super_archives/views.py:95
+msgid "Timeout trying to connect to Mailman API"
+msgstr "Timeout tentando conectar à API do Mailman"
+
+#: super_archives/views.py:99
+msgid ""
+"Your message was sent to this topic. It may take some minutes before it's "
+"delivered by email to the group. Why don't you breath some fresh air in the "
+"meanwhile?"
+msgstr "Sua mensagem foi enviada para esta discussão. Pode ser que leve alguns minutos até que ela seja enviada por email para o grupo. Por que você não respira um ar fresco enquanto isso?"
+
+#: super_archives/views.py:108
+msgid "You cannot send an empty email"
+msgstr "Você não pode enviar um email vazio"
+
+#: super_archives/views.py:110
+msgid "Mailing list does not exist"
+msgstr "Lista de email inexistente"
+
+#: super_archives/views.py:112
+msgid "Unknown error trying to connect to Mailman API"
+msgstr "Erro desconhecido tentando conectar à API do Mailman"
+
+#: super_archives/views.py:152
+msgid ""
+"The email address you are trying to verify either has already been verified "
+"or does not exist."
+msgstr "O email que você está tentando verificar não existe ou já foi verificado anteriormente. "
+
+#: super_archives/views.py:163
+msgid ""
+"The email address you are trying to verify is already an active email "
+"address."
+msgstr "O email que você está tentando verificar já é um email ativo."
+
+#: super_archives/views.py:173
+msgid "Email address verified!"
+msgstr "Endereço de email verificado!"
