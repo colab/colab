@@ -1,0 +1,269 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-21 17:05+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: super_archives/management/commands/import_emails.py:213
+msgid "[Colab] Warning - Email sent with a blank subject."
+msgstr ""
+
+#: super_archives/models.py:61
+#: super_archives/templates/message-preview.html:62
+#: super_archives/templates/message-thread.html:4
+msgid "Anonymous"
+msgstr ""
+
+#: super_archives/models.py:111
+msgid "Mailing List"
+msgstr ""
+
+#: super_archives/models.py:112
+msgid "The Mailing List where is the thread"
+msgstr ""
+
+#: super_archives/models.py:115
+msgid "Latest message"
+msgstr ""
+
+#: super_archives/models.py:116
+msgid "Latest message posted"
+msgstr ""
+
+#: super_archives/models.py:117
+msgid "Score"
+msgstr ""
+
+#: super_archives/models.py:117
+msgid "Thread score"
+msgstr ""
+
+#: super_archives/models.py:126
+msgid "Thread"
+msgstr ""
+
+#: super_archives/models.py:127
+msgid "Threads"
+msgstr ""
+
+#: super_archives/models.py:241
+msgid "Subject"
+msgstr ""
+
+#: super_archives/models.py:242
+msgid "Please enter a message subject"
+msgstr ""
+
+#: super_archives/models.py:245
+msgid "Message body"
+msgstr ""
+
+#: super_archives/models.py:246
+msgid "Please enter a message body"
+msgstr ""
+
+#: super_archives/models.py:256
+msgid "Message"
+msgstr ""
+
+#: super_archives/models.py:257
+msgid "Messages"
+msgstr ""
+
+#: super_archives/templates/message-preview.html:42
+#: super_archives/templates/message-preview.html:62
+msgid "by"
+msgstr ""
+
+#: super_archives/templates/message-preview.html:65
+#: super_archives/templates/message-thread.html:161
+msgid "ago"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:35
+msgid "You must login before voting."
+msgstr ""
+
+#: super_archives/templates/message-thread.html:132
+msgid "Order by"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:136
+msgid "Votes"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:140
+msgid "Date"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:145
+msgid "Related:"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:156
+msgid "Statistics:"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:160
+msgid "started at"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:166
+msgid "viewed"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:167
+#: super_archives/templates/message-thread.html:172
+#: super_archives/templates/message-thread.html:177
+msgid "times"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:171
+msgid "answered"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:176
+msgid "voted"
+msgstr ""
+
+#: super_archives/templates/message-thread.html:182
+msgid "Tags:"
+msgstr ""
+
+#: super_archives/templates/superarchives/emails/email_blank_subject.txt:2
+msgid "Hello"
+msgstr ""
+
+#: super_archives/templates/superarchives/emails/email_blank_subject.txt:3
+#, python-format
+msgid ""
+"\n"
+"You've sent an email to %(mailinglist)s with a blank subject and the "
+"following content:\n"
+"\n"
+"\"%(body)s\"\n"
+"\n"
+"Please, fill the subject in every email you send it.\n"
+"\n"
+"Thank you.\n"
+msgstr ""
+
+#: super_archives/templates/superarchives/emails/email_verification.txt:2
+#, python-format
+msgid ""
+"Hey, we want to verify that you are indeed \"%(fullname)s (%(username)s)\".  "
+"If that's the case, please follow the link below:"
+msgstr ""
+
+#: super_archives/templates/superarchives/emails/email_verification.txt:6
+#, python-format
+msgid ""
+"If you're not %(username)s or didn't request verification you can ignore "
+"this email."
+msgstr ""
+
+#: super_archives/templates/superarchives/includes/message.html:17
+#: super_archives/templates/superarchives/includes/message.html:18
+msgid "Link to this message"
+msgstr ""
+
+#: super_archives/templates/superarchives/includes/message.html:46
+msgid "Reply"
+msgstr ""
+
+#: super_archives/templates/superarchives/includes/message.html:63
+msgid "Send a message"
+msgstr ""
+
+#: super_archives/templates/superarchives/includes/message.html:66
+msgid ""
+"After sending a message it will take few minutes before it shows up in here. "
+"Why don't you grab a coffee?"
+msgstr ""
+
+#: super_archives/templates/superarchives/includes/message.html:69
+msgid "Send"
+msgstr ""
+
+#: super_archives/templates/superarchives/thread-dashboard.html:4
+#: super_archives/templates/superarchives/thread-dashboard.html:7
+msgid "Groups"
+msgstr ""
+
+#: super_archives/templates/superarchives/thread-dashboard.html:14
+#, python-format
+msgid "%(number_of_users)s members"
+msgstr ""
+
+#: super_archives/templates/superarchives/thread-dashboard.html:23
+msgid "latest"
+msgstr ""
+
+#: super_archives/templates/superarchives/thread-dashboard.html:31
+#: super_archives/templates/superarchives/thread-dashboard.html:45
+msgid "more..."
+msgstr ""
+
+#: super_archives/templates/superarchives/thread-dashboard.html:37
+msgid "most relevant"
+msgstr ""
+
+#: super_archives/utils/email.py:14
+msgid "Please verify your email "
+msgstr ""
+
+#: super_archives/views.py:92
+msgid "Error trying to connect to Mailman API"
+msgstr ""
+
+#: super_archives/views.py:95
+msgid "Timeout trying to connect to Mailman API"
+msgstr ""
+
+#: super_archives/views.py:99
+msgid ""
+"Your message was sent to this topic. It may take some minutes before it's "
+"delivered by email to the group. Why don't you breath some fresh air in the "
+"meanwhile?"
+msgstr ""
+
+#: super_archives/views.py:108
+msgid "You cannot send an empty email"
+msgstr ""
+
+#: super_archives/views.py:110
+msgid "Mailing list does not exist"
+msgstr ""
+
+#: super_archives/views.py:112
+msgid "Unknown error trying to connect to Mailman API"
+msgstr ""
+
+#: super_archives/views.py:152
+msgid ""
+"The email address you are trying to verify either has already been verified "
+"or does not exist."
+msgstr ""
+
+#: super_archives/views.py:163
+msgid ""
+"The email address you are trying to verify is already an active email "
+"address."
+msgstr ""
+
+#: super_archives/views.py:173
+msgid "Email address verified!"
+msgstr ""

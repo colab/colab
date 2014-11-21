@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-04 12:06-0200\n"
+"POT-Creation-Date: 2014-11-21 17:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,31 +33,31 @@ msgstr ""
 msgid "Social account does not exist"
 msgstr ""
 
-#: accounts/forms.py:56 accounts/templates/accounts/user_detail.html:38
+#: accounts/forms.py:61 accounts/templates/accounts/user_detail.html:38
 msgid "Bio"
 msgstr ""
 
-#: accounts/forms.py:57
+#: accounts/forms.py:62
 msgid "Write something about you in 200 characters or less."
 msgstr ""
 
-#: accounts/forms.py:76
+#: accounts/forms.py:81
 msgid "Mailing lists"
 msgstr ""
 
-#: accounts/forms.py:83
+#: accounts/forms.py:88
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:85
+#: accounts/forms.py:90
 msgid "Password confirmation"
 msgstr ""
 
-#: accounts/forms.py:87
+#: accounts/forms.py:92
 msgid "Enter the same password as above, for verification."
 msgstr ""
 
-#: accounts/forms.py:105
+#: accounts/forms.py:110
 msgid "Password mismatch"
 msgstr ""
 
@@ -66,11 +66,11 @@ msgstr ""
 msgid "%(count)s users deleted."
 msgstr ""
 
-#: accounts/models.py:59
+#: accounts/models.py:65
 msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
 msgstr ""
 
-#: accounts/models.py:64
+#: accounts/models.py:70
 msgid "Enter a valid username."
 msgstr ""
 
@@ -88,8 +88,8 @@ msgstr ""
 msgid "To login please click in the link below:"
 msgstr ""
 
-#: accounts/templates/accounts/login.html:8 templates/base.html:183
-#: templates/base.html.py:188
+#: accounts/templates/accounts/login.html:8 templates/base.html:182
+#: templates/base.html.py:187
 msgid "Login"
 msgstr ""
 
@@ -122,7 +122,7 @@ msgid "Subscribe to groups"
 msgstr ""
 
 #: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:182 templates/base.html.py:187
+#: templates/base.html:181 templates/base.html.py:186
 msgid "Register"
 msgstr ""
 
@@ -291,7 +291,7 @@ msgstr ""
 msgid "You've changed your password successfully!"
 msgstr ""
 
-#: badger/forms.py:19 badger/models.py:39 settings.py:164
+#: badger/forms.py:19 badger/models.py:39 settings.py:160
 msgid "Image"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgstr ""
 msgid "Badge"
 msgstr ""
 
-#: home/context_processors.py:13
+#: home/context_processors.py:15
 msgid "Fork me!"
 msgstr ""
 
@@ -388,8 +388,8 @@ msgstr ""
 msgid "Latest collaborations"
 msgstr ""
 
-#: search/forms.py:16 search/templates/search/search.html:42
-#: templates/base.html:167
+#: search/forms.py:16 search/templates/search/search.html:46
+#: templates/base.html:171
 msgid "Search"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgstr ""
 msgid "Collaborators"
 msgstr ""
 
-#: search/forms.py:37 templates/base.html:99
+#: search/forms.py:37 templates/base.html:103
 msgid "Repository"
 msgstr ""
 
@@ -533,28 +533,28 @@ msgstr ""
 msgid "search"
 msgstr ""
 
-#: search/templates/search/search.html:47
+#: search/templates/search/search.html:51
 msgid "documents found"
 msgstr ""
 
-#: search/templates/search/search.html:58
+#: search/templates/search/search.html:62
 msgid "Search here"
 msgstr ""
 
-#: search/templates/search/search.html:70
-#: search/templates/search/search.html:80
+#: search/templates/search/search.html:74
+#: search/templates/search/search.html:84
 msgid "Filters"
 msgstr ""
 
-#: search/templates/search/search.html:101
+#: search/templates/search/search.html:105
 msgid "No results for your search."
 msgstr ""
 
-#: search/templates/search/search.html:103
+#: search/templates/search/search.html:107
 msgid "You are searching for"
 msgstr ""
 
-#: search/utils.py:9 settings.py:161
+#: search/utils.py:9 settings.py:157
 msgid "Code"
 msgstr ""
 
@@ -566,71 +566,71 @@ msgstr ""
 msgid "Attachments"
 msgstr ""
 
-#: settings.py:119
+#: settings.py:115
 msgid "English"
 msgstr ""
 
-#: settings.py:120
+#: settings.py:116
 msgid "Portuguese"
 msgstr ""
 
-#: settings.py:121
+#: settings.py:117
 msgid "Spanish"
 msgstr ""
 
-#: settings.py:144
+#: settings.py:140
 msgid "Recent activity"
 msgstr ""
 
-#: settings.py:148
+#: settings.py:144
 msgid "Relevance"
 msgstr ""
 
-#: settings.py:157
+#: settings.py:153
 msgid "Document"
 msgstr ""
 
-#: settings.py:159
+#: settings.py:155
 msgid "Presentation"
 msgstr ""
 
-#: settings.py:160
+#: settings.py:156
 msgid "Text"
 msgstr ""
 
-#: settings.py:163
+#: settings.py:159
 msgid "Compressed"
 msgstr ""
 
-#: settings.py:166
+#: settings.py:162
 msgid "Spreadsheet"
 msgstr ""
 
-#: settings.py:252
+#: settings.py:254
 msgid "Planet Colab"
 msgstr ""
 
-#: settings.py:253
+#: settings.py:255
 msgid "Colab blog aggregator"
 msgstr ""
 
-#: settings.py:284
+#: settings.py:288
 msgid "One Time Snippet"
 msgstr ""
 
-#: settings.py:285
+#: settings.py:289
 msgid "In one hour"
 msgstr ""
 
-#: settings.py:286
+#: settings.py:290
 msgid "In one week"
 msgstr ""
 
-#: settings.py:287
+#: settings.py:291
 msgid "In one month"
 msgstr ""
 
-#: settings.py:288
+#: settings.py:292
 msgid "Never"
 msgstr ""
 
@@ -646,111 +646,107 @@ msgstr ""
 msgid "Timeline"
 msgstr ""
 
-#: templates/base.html:92 templates/base.html.py:106
+#: templates/base.html:92 templates/base.html.py:110
 msgid "Groups"
 msgstr ""
 
-#: templates/base.html:95
+#: templates/base.html:97
 msgid "Blogs"
 msgstr ""
 
-#: templates/base.html:101
+#: templates/base.html:105
 msgid "Public Projects"
 msgstr ""
 
-#: templates/base.html:103 templates/base.html.py:132
+#: templates/base.html:107 templates/base.html.py:136
 msgid "Profile"
 msgstr ""
 
-#: templates/base.html:104
+#: templates/base.html:108
 msgid "New Project"
 msgstr ""
 
-#: templates/base.html:105
+#: templates/base.html:109
 msgid "Projects"
 msgstr ""
 
-#: templates/base.html:107
+#: templates/base.html:111
 msgid "Issues"
 msgstr ""
 
-#: templates/base.html:108
+#: templates/base.html:112
 msgid "Merge Requests"
 msgstr ""
 
-#: templates/base.html:116
+#: templates/base.html:120
 msgid "Social"
 msgstr ""
 
-#: templates/base.html:121
+#: templates/base.html:125
 msgid "Users"
 msgstr ""
 
-#: templates/base.html:126
+#: templates/base.html:130
 msgid "Communities"
 msgstr ""
 
-#: templates/base.html:137
+#: templates/base.html:141
 msgid "Control panel"
 msgstr ""
 
-#: templates/base.html:146
+#: templates/base.html:150
 msgid "Contribute"
 msgstr ""
 
-#: templates/base.html:150
+#: templates/base.html:154
 msgid "New Wiki Page"
 msgstr ""
 
-#: templates/base.html:152
+#: templates/base.html:156
 msgid "View Tickets"
 msgstr ""
 
-#: templates/base.html:154
+#: templates/base.html:158
 msgid "New Ticket"
 msgstr ""
 
-#: templates/base.html:156
+#: templates/base.html:160
 msgid "Roadmap"
 msgstr ""
 
-#: templates/base.html:159
+#: templates/base.html:163
 msgid "Browse Source"
 msgstr ""
 
-#: templates/base.html:161
+#: templates/base.html:165
 msgid "Continuous Integration"
 msgstr ""
 
-#: templates/base.html:171
-msgid "Help"
-msgstr ""
-
-#: templates/base.html:202
+#: templates/base.html:201
 msgid "My Profile"
 msgstr ""
 
-#: templates/base.html:203
+#: templates/base.html:202
 msgid "Logout"
 msgstr ""
 
-#: templates/base.html:215 templates/base.html.py:218
+#: templates/base.html:214 templates/base.html.py:217
 msgid "Search here..."
 msgstr ""
 
-#: templates/base.html:232
+#: templates/base.html:231
 msgid "The login has failed. Please, try again."
 msgstr ""
 
-#: templates/base.html:257
+#: templates/base.html:256
 msgid "Last email imported at"
 msgstr ""
 
-#: templates/base.html:264
+#: templates/base.html:263
 msgid "The contents of this site is published under license"
 msgstr ""
 
-#: templates/base.html:267
+#: templates/base.html:266
 msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 msgstr ""
 
