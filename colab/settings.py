@@ -243,6 +243,11 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# Super Archives
+SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/public'
+SUPER_ARCHIVES_EXCLUDE = []
+SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
+
 # Feedzilla  (planet)
 from feedzilla.settings import *  # noqa (flake8 ignore)
 FEEDZILLA_PAGE_SIZE = 5
