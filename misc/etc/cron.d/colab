@@ -10,4 +10,4 @@
 
 10  *   *   *   *   colab   colab-admin update_planet &> /dev/null
 
-*   *   *   *   *   colab   colab-admin import_emails --archives_path=/var/lib/mailman/archives/private/ &> /dev/null
+*   *   *   *   *   colab   colab-admin import_emails &> /dev/null
