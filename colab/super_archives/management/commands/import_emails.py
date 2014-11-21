@@ -17,10 +17,9 @@ from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
 from colab.super_archives.utils.email import colab_send_email
-from colab.super_archives.models import MailingList, Message, \
-                                  Thread, EmailAddress
-from colab.super_archives.management.commands.message import Message as \
-                                                       CustomMessage
+from colab.super_archives.models import (MailingList, Message,
+                                         Thread, EmailAddress)
+from message import Message as CustomMessage
 
 
 class Command(BaseCommand, object):
@@ -30,7 +29,7 @@ class Command(BaseCommand, object):
 
     default_archives_path = '/var/lib/mailman/archives/private'
     RE_SUBJECT_CLEAN = re.compile('((re|res|fw|fwd|en|enc):)|\[.*?\]',
-                                                                re.IGNORECASE)
+                                  re.IGNORECASE)
     THREAD_CACHE = {}
     EMAIL_ADDR_CACHE = {}
 
@@ -38,20 +37,23 @@ class Command(BaseCommand, object):
 
     # A new command line option to get the dump file to parse.
     option_list = BaseCommand.option_list + (
-        make_option('--archives_path',
+        make_option(
+            '--archives_path',
             dest='archives_path',
-            help='Path of email archives to be imported. (default: %s)' %
-                                                    default_archives_path,
+            help=('Path of email archives to be imported. '
+                  '(default: {})').format(default_archives_path),
             default=default_archives_path),
 
-        make_option('--exclude-list',
+        make_option(
+            '--exclude-list',
             dest='exclude_lists',
             help=("Mailing list that won't be imported. It can be used many"
                   "times for more than one list."),
             action='append',
             default=None),
 
-        make_option('--all',
+        make_option(
+            '--all',
             dest='all',
             help='Import all messages (default: False)',
             action="store_true",
@@ -88,11 +90,11 @@ class Command(BaseCommand, object):
         #   tuple (as represented in the code down here) was a valid
         #   option but its performance was too poor.
         #
-        #for message in tuple(mbox)[index:]:
-        #    yield message
+        # for message in tuple(mbox)[index:]:
+        #     yield message
         #
         key = index
-        while mbox.has_key(key):
+        while key in mbox:
             key += 1
             yield key-1, mbox[key-1]
 
@@ -127,7 +129,8 @@ class Command(BaseCommand, object):
             else:
                 try:
                     mailinglist = MailingList.objects.get(
-                                                    name=mailinglist_name)
+                        name=mailinglist_name
+                    )
                     n_msgs = mailinglist.last_imported_index
                 except MailingList.DoesNotExist:
                     n_msgs = 0
@@ -163,7 +166,9 @@ class Command(BaseCommand, object):
             return
 
         # Update last imported message into the DB
-        mailinglist, created = MailingList.objects.get_or_create(name=list_name)
+        mailinglist, created = MailingList.objects.get_or_create(
+            name=list_name
+        )
         mailinglist.last_imported_index = index
 
         if created:
@@ -174,7 +179,7 @@ class Command(BaseCommand, object):
         else:
             # If the message is already at the database don't do anything
             try:
-                messages = Message.all_objects.get(
+                Message.all_objects.get(
                     message_id=msg_id,
                     thread__mailinglist=mailinglist
                 )
@@ -260,11 +265,11 @@ class Command(BaseCommand, object):
     def handle(self, *args, **options):
         """Main command method."""
 
-
         # Already running, so quit
         if os.path.exists(self.lock_file):
-            self.log(("This script is already running. (If your are sure it's "
-                     "not please delete the lock file in %s')") % self.lock_file)
+            self.log(("This script is already running. "
+                      "(If your are sure it's not please "
+                      "delete the lock file in {}')").format(self.lock_file))
             sys.exit(0)
 
         if not os.path.exists(os.path.dirname(self.lock_file)):
@@ -274,17 +279,19 @@ class Command(BaseCommand, object):
         self.log('Using archives_path `%s`' % self.default_archives_path)
 
         if not os.path.exists(archives_path):
-            raise CommandError('archives_path (%s) does not exist' %
-                                                                archives_path)
+            msg = 'archives_path ({}) does not exist'.format(archives_path)
+            raise CommandError(msg)
         run_lock = file(self.lock_file, 'w')
         run_lock.close()
 
         try:
-            self.import_emails(archives_path,
-                           options.get('all'), options.get('exclude_lists'))
+            self.import_emails(
+                archives_path,
+                options.get('all'),
+                options.get('exclude_lists'),
+            )
         except Exception as e:
             logging.exception(e)
             raise
         finally:
             os.remove(self.lock_file)
-
