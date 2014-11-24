@@ -28,7 +28,7 @@ tornado==3.1.1
 
 # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
 django-browserid==0.11
-django-revproxy==0.3.0
+django-revproxy==0.3.1
 
 # Converse.js (XMPP client)
 django-conversejs==0.3.4
