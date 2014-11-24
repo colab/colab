@@ -7,4 +7,3 @@ from ..utils.views import ColabProxyView
 class GitlabProxyView(ColabProxyView):
     app_label = 'gitlab'
     diazo_theme_template = 'proxy/gitlab.html'
-    login_url = '/gitlab/users/sign_in'
