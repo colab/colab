@@ -213,6 +213,7 @@ MIDDLEWARE_CLASSES = (
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
+    'colab.accounts.middleware.RemoteUserMiddleware',
 )
 
 # Add the django_browserid authentication backend.
