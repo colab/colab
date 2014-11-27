@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url, static
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 from .accounts.models import User
 from .search.forms import ColabSearchForm
@@ -11,7 +12,6 @@ from .super_archives.models import Message
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'colab.home.views.index', name='home'),
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
 
     url(r'^open-data/$', TemplateView.as_view(template_name='open-data.html'),
@@ -44,4 +44,13 @@ if settings.DEBUG:
     urlpatterns += static.static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
+    )
+
+if settings.COLAB_HOME_URL:
+    urlpatterns += patterns('',
+        url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
+    )
+else:
+    urlpatterns += patterns('',
+        url(r'^$', 'colab.home.views.index', name='home'),
     )
