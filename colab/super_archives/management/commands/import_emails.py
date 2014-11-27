@@ -276,7 +276,7 @@ class Command(BaseCommand, object):
             os.mkdir(os.path.dirname(self.lock_file), 0755)
 
         archives_path = options.get('archives_path')
-        self.log('Using archives_path `%s`' % self.default_archives_path)
+        self.log('Using archives_path `%s`' % settings.SUPER_ARCHIVES_PATH)
 
         if not os.path.exists(archives_path):
             msg = 'archives_path ({}) does not exist'.format(archives_path)
