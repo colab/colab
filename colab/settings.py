@@ -243,6 +243,9 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+# Colab Settings
+COLAB_HOME_URL = '/dashboard'
+
 # Super Archives
 SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/public'
 SUPER_ARCHIVES_EXCLUDE = []
@@ -315,5 +318,3 @@ if FEEDZILLA_ENABLED:
 proxied_apps = locals().get('PROXIED_APPS') or {}
 for app_label in proxied_apps.keys():
     INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)
-
-COLAB_HOME_URL = '/dashboard'
