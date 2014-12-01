@@ -13,6 +13,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
+    url(r'^dashboard$', 'colab.home.views.index', name='dashboard'),
+    url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
 
     url(r'^open-data/$', TemplateView.as_view(template_name='open-data.html'),
         name='opendata'),
@@ -44,13 +46,4 @@ if settings.DEBUG:
     urlpatterns += static.static(
         settings.MEDIA_URL,
         document_root=settings.MEDIA_ROOT
-    )
-
-if settings.COLAB_HOME_URL:
-    urlpatterns += patterns('',
-        url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
-    )
-else:
-    urlpatterns += patterns('',
-        url(r'^$', 'colab.home.views.index', name='home'),
     )
