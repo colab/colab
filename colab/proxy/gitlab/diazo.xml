@@ -14,4 +14,5 @@
 
     <drop css:content="#top-panel" />
     <drop css:content=".navbar-gitlab" />
+    <drop css:content=".git-clone-holder .btn:contains('HTTPS')" />
 </rules>
