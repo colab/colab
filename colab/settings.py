@@ -198,6 +198,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.proxy.context_processors.proxied_apps',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
+    'colab.home.context_processors.google_analytics',
     'colab.planet.context_processors.feedzilla',
 )
 
