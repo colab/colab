@@ -13,7 +13,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
-    url(r'^dashboard$', 'colab.home.views.index', name='dashboard'),
+    url(r'^dashboard$', 'colab.home.views.dashboard', name='dashboard'),
     url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
 
     url(r'^open-data/$', TemplateView.as_view(template_name='open-data.html'),

@@ -13,8 +13,8 @@ from colab.search.utils import trans
 from colab.super_archives.models import Thread
 
 
-def index(request):
-    """Index page view"""
+def dashboard(request):
+    """Dashboard page"""
 
 
     latest_threads = Thread.objects.all()[:6]
