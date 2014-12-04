@@ -63,6 +63,11 @@ class UserUpdateForm(UserForm):
         required=False,
     )
 
+    def __init__(self, *args, **kwargs):
+        super (UserUpdateForm, self).__init__(*args, **kwargs)
+        self.fields.pop('username')
+
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name',
