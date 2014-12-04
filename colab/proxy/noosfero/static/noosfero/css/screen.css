@@ -13,7 +13,6 @@
 
 /* Fix lefter logo */
 .colab-style .navbar-brand img {
-    width: 192px;
     height: 40px;
 }
 
