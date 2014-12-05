@@ -7,8 +7,8 @@ from colab.super_archives.models import EmailAddress
 register = template.Library()
 
 
-@register.simple_tag
-def gravatar(email, size=80):
+@register.simple_tag(takes_context=True)
+def gravatar(context, email, size=80):
     if isinstance(email, basestring):
         try:
             email = EmailAddress.objects.get(address=email)
@@ -17,4 +17,12 @@ def gravatar(email, size=80):
 
     email_md5 = getattr(email, 'md5', 'anonymous')
 
-    return u'<img src="www.gravatar.com/avatar/{}?s={}&d=mm" height="{}px" width="{}px" />'.format(email_md5, size, size, size)
+    request = context.get('request')
+    if getattr(request, 'is_secure'):
+        protocol = 'https'
+    else:
+        protocol = 'http'
+
+    return (u'<img src="{}://www.gravatar.com/avatar/{}?s={}&d=mm"'
+            'height="{}px" width="{}px" />').format(protocol, email_md5,
+                                                    size, size, size)
