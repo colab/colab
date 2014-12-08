@@ -40,11 +40,9 @@
     // toggled 
     $('.hide').removeClass('hide').css('display', 'none');
 
-    // When there's clone buttons for HTTPS and SSH, hit SSH and make HTTPS disapear
-    if(jQuery('.git-clone-holder button'))
-    {
-      jQuery('.git-clone-holder button')[0].click();
-    }
+    // Hit the SSH clone button to select it by default
+    jQuery$(".git-clone-holder .btn:contains('SSH')").click()
+
   });
 </script>
 <script type="text/javascript" src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
