@@ -3,6 +3,7 @@
 
 from collections import OrderedDict
 
+from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
 from django.db.models import Count
@@ -51,6 +52,11 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
             raise PermissionDenied
 
         return obj
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProfileUpdateView, self).get_context_data(**kwargs)
+        context['CONVERSEJS_ENABLED'] = getattr(settings, 'CONVERSEJS_ENABLED')
+        return context
 
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
