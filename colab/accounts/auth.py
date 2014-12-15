@@ -13,6 +13,7 @@ class ColabBrowserIDBackend(BrowserIDBackend):
         extra_fields = {
             'first_name': "Colab",
             'last_name': "Colab",
+            'needs_update': True
             }
 
         user = self.User.objects.filter(emails__address=email)

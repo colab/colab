@@ -26,6 +26,7 @@ class User(AbstractUser):
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)
     bio = models.CharField(max_length=200, null=True, blank=True)
+    needs_update = models.BooleanField(default=False)
 
     def check_password(self, raw_password):
 
