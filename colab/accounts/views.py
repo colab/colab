@@ -123,6 +123,16 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
+    user = request.user
+
+    # If the user is not authenticated, redirect to login
+    if not user.is_authenticated():
+        return redirect('login')
+
+    # If the user doesn't need to update its main data, redirect to its profile
+    if not user.needs_update:
+        return redirect('user_profile', username=user.username)
+
     # If the request method is GET just return the form
     if request.method == 'GET':
         user_form = UserCreationForm()
