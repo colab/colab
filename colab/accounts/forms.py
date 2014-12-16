@@ -32,6 +32,11 @@ class UserForm(forms.ModelForm):
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style' : 'text-transform: lowercase;'}),
     )
+    email = forms.EmailField(
+
+        # Forces email to be a read-only field
+        widget=forms.TextInput(attrs={'readonly': 'readonly'})
+    )
     required = ('first_name', 'last_name', 'email', 'username')
 
     class Meta:
@@ -46,6 +51,7 @@ class UserForm(forms.ModelForm):
             # Set UserForm.required fields as required
             if field_name in UserForm.required:
                 field.required = True
+
 
 
 class UserCreationForm(UserForm):
