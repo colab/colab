@@ -137,17 +137,22 @@ def signup(request):
     if request.method == 'GET':
         user_form = UserCreationForm()
         lists_form = ListsForm()
+
+        user_form.fields['email'].initial = user.email
+
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user_form = UserCreationForm(request.POST)
+    user_form = UserCreationForm(request.POST, instance=user)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user = user_form.save()
+    user = user_form.save(commit=False)
+    user.needs_update = False
+    user.save()
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
