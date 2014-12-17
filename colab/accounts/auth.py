@@ -1,6 +1,6 @@
 import re
 
-from django_browserid.auth import BrowserIDBackend
+from django_browserid.auth import BrowserIDBackend, default_username_algo
 
 
 class ColabBrowserIDBackend(BrowserIDBackend):
@@ -8,11 +8,9 @@ class ColabBrowserIDBackend(BrowserIDBackend):
         return self.User.objects.filter(emails__address=email)
 
     def create_user(self, email):
-        username = "colab_" + re.split('@', email)[0]
+        username = default_username_algo(email)
         password = None
         extra_fields = {
-            'first_name': "Colab",
-            'last_name': "Colab",
             'needs_update': True
             }
 
