@@ -14,7 +14,7 @@ class ColabBrowserIDBackend(BrowserIDBackend):
 
         user = self.User.objects.filter(emails__address=email)
 
-        if len(user) is not 0:
+        if not user:
             return user
 
         return self.User.objects.create_user(

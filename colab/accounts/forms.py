@@ -58,7 +58,7 @@ class UserCreationForm(UserForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         username = username.strip()
-        if len(username) is 0:
+        if not username:
             raise forms.ValidationError('This field should not be blank.')
         return username
 
