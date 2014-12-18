@@ -278,6 +278,7 @@ REVPROXY_ADD_REMOTE_USER = True
 
 # Converse.js settings
 # This URL must use SSL in order to keep chat sessions secure
+CONVERSEJS_ENABLED = False
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
 CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
