@@ -55,6 +55,19 @@ class UserCreationForm(UserForm):
         widget=forms.TextInput(attrs={'readonly': 'readonly'})
     )
 
+    def __init__(self, *args, **kwargs):
+        self.original_email = kwargs.pop('email', None)
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+
+    def clean_email(self):
+        form_email = self.cleaned_data['email']
+
+        if form_email != self.original_email:
+            raise forms.ValidationError('This is not the original email.')
+
+        return form_email
+
+
     def clean_username(self):
         username = self.cleaned_data['username']
         username = username.strip()
