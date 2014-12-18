@@ -152,7 +152,8 @@ def signup(request):
 
     user = user_form.save(commit=False)
     user.needs_update = False
-    user.save()
+    update_fields = ['first_name', 'last_name', 'username', 'needs_update']
+    user.save(update_fields=update_fields)
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
