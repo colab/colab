@@ -167,8 +167,6 @@ def signup(request):
     mailman.update_subscription(user.email, mailing_lists)
 
     messages.success(request, _('Your profile has been created!'))
-    messages.warning(request, _('You must login to validated your profile. '
-                                'Profiles not validated are deleted in 24h.'))
 
     return redirect('user_profile', username=user.username)
 

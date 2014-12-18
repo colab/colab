@@ -1,5 +1,3 @@
-import re
-
 from django_browserid.auth import BrowserIDBackend, default_username_algo
 
 
