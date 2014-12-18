@@ -32,7 +32,7 @@ class UserForm(forms.ModelForm):
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style' : 'text-transform: lowercase;'}),
     )
-    required = ('first_name', 'last_name', 'email', 'username')
+    required = ('first_name', 'last_name', 'username')
 
     class Meta:
         model = User
@@ -49,35 +49,17 @@ class UserForm(forms.ModelForm):
 
 
 class UserCreationForm(UserForm):
-    email = forms.EmailField(
-
-        # Forces email to be a read-only field
-        widget=forms.TextInput(attrs={'readonly': 'readonly'})
-    )
-
-    def __init__(self, *args, **kwargs):
-        self.original_email = kwargs.pop('email', None)
-        super(UserCreationForm, self).__init__(*args, **kwargs)
-
-    def clean_email(self):
-        form_email = self.cleaned_data['email']
-
-        if form_email != self.original_email:
-            raise forms.ValidationError('This is not the original email.')
-
-        return form_email
-
 
     def clean_username(self):
         username = self.cleaned_data['username']
         username = username.strip()
         if not username:
-            raise forms.ValidationError('This field should not be blank.')
+            raise forms.ValidationError(_('This field should not be blank.'))
         return username
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'username')
+        fields = ('first_name', 'last_name', 'username')
 
 
 class UserUpdateForm(UserForm):

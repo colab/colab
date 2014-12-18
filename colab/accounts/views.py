@@ -138,8 +138,6 @@ def signup(request):
         user_form = UserCreationForm()
         lists_form = ListsForm()
 
-        user_form.fields['email'].initial = user.email
-
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
@@ -152,8 +150,7 @@ def signup(request):
 
     user = user_form.save(commit=False)
     user.needs_update = False
-    update_fields = ['first_name', 'last_name', 'username', 'needs_update']
-    user.save(update_fields=update_fields)
+    user.save()
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
