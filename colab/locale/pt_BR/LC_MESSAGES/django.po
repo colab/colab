@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Sergio Oliveira <seocam@seocam.com>, 2014
 msgid ""
@@ -39,6 +39,10 @@ msgid "Bio"
 msgstr "Bio"
 
 #: accounts/forms.py:62
+msgid "This field should not be blank."
+msgstr "Esse campo não pode ser branco"
+
+#: accounts/forms.py:75
 msgid "Write something about you in 200 characters or less."
 msgstr "Escreva algo sobre você em 200 caracteres ou menos."
 
