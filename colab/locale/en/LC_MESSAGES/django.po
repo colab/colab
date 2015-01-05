@@ -38,10 +38,6 @@ msgid "Bio"
 msgstr ""
 
 #: accounts/forms.py:62
-msgid "This field should not be blank."
-msgstr ""
-
-#: accounts/forms.py:75
 msgid "Write something about you in 200 characters or less."
 msgstr ""
 
