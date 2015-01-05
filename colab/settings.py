@@ -214,6 +214,7 @@ MIDDLEWARE_CLASSES = (
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
+    'colab.accounts.middleware.UserRegisterMiddleware',
 )
 
 # Add the django_browserid authentication backend.
@@ -272,12 +273,13 @@ LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/?bid_login_failed=true'
 LOGOUT_REDIRECT_URL = '/'
-BROWSERID_CREATE_USER = False
+BROWSERID_CREATE_USER = True
 
 REVPROXY_ADD_REMOTE_USER = True
 
 # Converse.js settings
 # This URL must use SSL in order to keep chat sessions secure
+CONVERSEJS_ENABLED = False
 CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 
 CONVERSEJS_ALLOW_CONTACT_REQUESTS = False

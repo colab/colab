@@ -32,7 +32,7 @@ class UserForm(forms.ModelForm):
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style' : 'text-transform: lowercase;'}),
     )
-    required = ('first_name', 'last_name', 'email', 'username')
+    required = ('first_name', 'last_name', 'username')
 
     class Meta:
         model = User
@@ -49,9 +49,17 @@ class UserForm(forms.ModelForm):
 
 
 class UserCreationForm(UserForm):
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        username = username.strip()
+        if not username:
+            raise forms.ValidationError(_('This field cannot be blank.'))
+        return username
+
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'email', 'username')
+        fields = ('first_name', 'last_name', 'username')
 
 
 class UserUpdateForm(UserForm):

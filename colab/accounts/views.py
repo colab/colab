@@ -123,21 +123,34 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
+    user = request.user
+
+    # If the user is not authenticated, redirect to login
+    if not user.is_authenticated():
+        return redirect('login')
+
+    # If the user doesn't need to update its main data, redirect to its profile
+    if not user.needs_update:
+        return redirect('user_profile', username=user.username)
+
     # If the request method is GET just return the form
     if request.method == 'GET':
         user_form = UserCreationForm()
         lists_form = ListsForm()
+
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user_form = UserCreationForm(request.POST)
+    user_form = UserCreationForm(request.POST, instance=user)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user = user_form.save()
+    user = user_form.save(commit=False)
+    user.needs_update = False
+    user.save()
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
@@ -152,8 +165,6 @@ def signup(request):
     mailman.update_subscription(user.email, mailing_lists)
 
     messages.success(request, _('Your profile has been created!'))
-    messages.warning(request, _('You must login to validated your profile. '
-                                'Profiles not validated are deleted in 24h.'))
 
     return redirect('user_profile', username=user.username)
 
