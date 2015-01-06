@@ -72,3 +72,19 @@ To run Colab with development server you will have to:
 
 **NOTE**: In case you want to keep the configuration file else where just set the 
 desired location in environment variable **COLAB_SETTINGS**.
+
+About test
+==========
+
+How to write a tests.
+--------------------
+Inside of each folder on /vagrant/colab/<folder> you can create a folder called
+"tests", and inside of it implements the code for test each file. 
+ 
+How to run a test
+-----------------
+
+Follow the steps below:
+
+* Go to vagrant/colab/
+* run: colab-admin test
