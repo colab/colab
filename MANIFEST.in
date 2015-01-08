@@ -1,7 +1,7 @@
 include README.rst
 include MANIFEST.in
 recursive-include colab/static *
-recursive-include colab *.html *.txt
+recursive-include colab *.html *.txt *.xml
 recursive-include misc *
 recursive-exclude * __pycache__
 recursive-exclude * *.py[co]
