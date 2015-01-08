@@ -88,3 +88,4 @@ Follow the steps below:
 
 * Go to vagrant/colab/
 * run: colab-admin test
+* colab-admin collectstatic
