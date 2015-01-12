@@ -2,7 +2,6 @@
 import json
 import urllib
 import urllib2
-import urlparse
 
 from dateutil.parser import parse
 
@@ -22,8 +21,10 @@ class GitlabDataAPI(ProxyDataAPI):
         kwargs['private_token'] = proxy_config.get('private_token')
         params = urllib.urlencode(kwargs)
 
-        url = u'{}?{}'.format(path, params)
-        return urlparse.urljoin(upstream, url)
+        if upstream[-1] == '/':
+            upstream = upstream[:-1]
+
+        return u'{}{}?{}'.format(upstream, path, params)
 
     def fetchProjects(self):
         page = 1
