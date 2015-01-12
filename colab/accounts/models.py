@@ -2,14 +2,11 @@
 
 import urlparse
 
-from django.db import models, DatabaseError
-from django.contrib.auth.hashers import check_password
+from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-
-from conversejs import xmpp
 
 from .utils import mailman
 
@@ -25,7 +22,7 @@ class User(AbstractUser):
     facebook = models.CharField(max_length=128, null=True, blank=True)
     google_talk = models.EmailField(null=True, blank=True)
     github = models.CharField(max_length=128, null=True, blank=True,
-                                 verbose_name=u'github')
+                              verbose_name=u'github')
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)

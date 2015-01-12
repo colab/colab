@@ -5,12 +5,8 @@ Objective: Test requests.
 
 from django.test import TestCase, Client
 from django.test.client import RequestFactory
-from django.contrib.messages.storage.fallback import FallbackStorage
-from colab.accounts.views import ManageUserSubscriptionsView
-from colab.accounts.views import UserProfileDetailView
 from colab.accounts.models import User
-from django.http.response import Http404
-from colab.accounts.views import signup
+
 
 class RequestTest(TestCase):
 
@@ -22,7 +18,7 @@ class RequestTest(TestCase):
         # TODO
         pass
 
-    def test_invalid_user_profile_url(self):            
+    def test_invalid_user_profile_url(self):
         response = self.client.get('/account/johndoe/')
         self.assertEqual(404, response.status_code)
 
