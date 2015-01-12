@@ -15,6 +15,10 @@ from .utils import mailman
 
 
 class User(AbstractUser):
+    """
+    For more information about AbstractUser
+    @see: https://docs.djangoproject.com/en/1.7/ref/contrib/auth/
+    """
     institution = models.CharField(max_length=128, null=True, blank=True)
     role = models.CharField(max_length=128, null=True, blank=True)
     twitter = models.CharField(max_length=128, null=True, blank=True)
