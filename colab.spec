@@ -1,6 +1,6 @@
 %define name colab
-%define version 2.0a1
-%define unmangled_version 2.0a1
+%define version 2.0a2
+%define unmangled_version 2.0a2
 %define release 1
 %define buildvenv /var/tmp/%{name}-%{version}
 
@@ -147,6 +147,10 @@ ALLOWED_HOSTS:
 
 ## Disable indexing
 ROBOTS_NOINDEX: false
+
+#PROXIED_APPS:
+#   gitlab:
+#     upstream: 'http://localhost:8080/gitlab/'
 EOF
     chown root:colab /etc/colab/settings.yaml
     chmod 0640 /etc/colab/settings.yaml
@@ -171,3 +175,12 @@ fi
 if [ -f /etc/colab/settings.yaml ]; then
   colab-admin migrate
 fi
+
+mkdir -p /var/lib/colab-assets
+chown colab:colab /var/lib/colab-assets
+
+mkdir -p /usr/share/nginx/
+
+ln -s /var/lib/colab-assets /usr/share/nginx/colab
+
+sudo colab-admin collectstatic
