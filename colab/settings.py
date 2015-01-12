@@ -320,7 +320,7 @@ if FEEDZILLA_ENABLED:
         'common',
     )
 
-proxied_apps = locals().get('PROXIED_APPS') or {}
+PROXIED_APPS = locals().get('PROXIED_APPS') or {}
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 
 for app_label in proxied_apps.keys():
