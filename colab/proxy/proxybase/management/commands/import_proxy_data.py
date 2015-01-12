@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-import colab
+import importlib
+
 from django.core.management.base import BaseCommand
-from colab.super_archives.models import Message
 from django.conf import settings
-modules = [ i for i in settings.INSTALLED_APPS if i.startswith("colab.proxy.") ]
-for module in modules:
-  module += ".data_api"
-  __import__(module, locals(), globals())
+
+from colab.proxy.proxybase.proxy_data_api import ProxyDataAPI
+
 
 class Command(BaseCommand):
     help = "Import proxy data into colab database"
@@ -15,7 +14,13 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         print "Executing extraction command..."
 
-        for module in modules:
-          extractionClassname = module + ".data_api." + module.split('.')[-1].title() + "DataAPI"
-          api = eval(extractionClassname)()
-          api.fetchData()
+        for module_name in settings.PROXIED_APPS.keys():
+            module_path = 'colab.proxy.{}.data_api'.format(module_name)
+            module = importlib.import_module(module_path)
+
+            for module_item_name in dir(module):
+                module_item = getattr(module, module_item_name)
+                if issubclass(module_item, ProxyDataAPI):
+                    if module_item != ProxyDataAPI:
+                        api = module_item()
+                        api.fetchData()
