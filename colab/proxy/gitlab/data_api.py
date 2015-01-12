@@ -9,7 +9,7 @@ from django.conf import settings
 from django.db.models.fields import DateTimeField
 
 from colab.proxy.gitlab.models import GitlabProject
-from colab.proxy.proxybase.proxy_data_api import ProxyDataAPI
+from colab.proxy.utils.proxy_data_api import ProxyDataAPI
 
 
 class GitlabDataAPI(ProxyDataAPI):

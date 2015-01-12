@@ -323,5 +323,5 @@ if FEEDZILLA_ENABLED:
 PROXIED_APPS = locals().get('PROXIED_APPS') or {}
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 
-for app_label in proxied_apps.keys():
+for app_label in PROXIED_APPS.keys():
     INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)
