@@ -1,51 +1,68 @@
-from colab.proxy.gitlab.models import *
-from colab.proxy.proxybase.proxy_data_api import ProxyDataAPI
-from django.db.models.fields import DateTimeField
-from dateutil.parser import parse
-import urllib2
+
 import json
+import urllib
+import urllib2
+import urlparse
+
+from dateutil.parser import parse
+
 from django.conf import settings
+from django.db.models.fields import DateTimeField
+
+from colab.proxy.gitlab.models import GitlabProject
+from colab.proxy.proxybase.proxy_data_api import ProxyDataAPI
+
 
 class GitlabDataAPI(ProxyDataAPI):
 
+    def get_request_url(self, path, **kwargs):
+        proxy_config = settings.PROXIED_APPS.get(self.app_label, {})
 
-  def fetchProjects(self):
-    page = 1
-    projects = []
+        upstream = proxy_config.get('upstream')
+        kwargs['private_token'] = proxy_config.get('private_token')
+        params = urllib.urlencode(kwargs)
 
-    proxy_config = settings.PROXIED_APPS.get(self.app_label, {})
-    admin_token = proxy_config.get('auth_token')
+        url = u'{}?{}'.format(path, params)
+        return urlparse.urljoin(upstream, url)
 
-    # Iterates throughout all projects pages
-    while(True):
-      data = urllib2.urlopen(proxy_config.get('upstream')+'api/v3/projects/all?private_token={}&per_page=100&page={}'.format(admin_token, page))
-      json_data = json.load(data)
+    def fetchProjects(self):
+        page = 1
+        projects = []
 
-      if len(json_data) == 0:
-        break
+        # Iterates throughout all projects pages
+        while(True):
+            url = self.get_request_url('/api/v3/projects/all',
+                                       per_page=100,
+                                       page=page)
+            data = urllib2.urlopen(url)
+            json_data = json.load(data)
 
-      page = page + 1
+            if len(json_data) == 0:
+                break
 
-      for element in json_data:
-        project = GitlabProject()
+            page = page + 1
 
-        for field in GitlabProject._meta.fields:
-          value = element[field.name]
-          value = parse(element[field.name]) if isinstance(field, DateTimeField) else value
-          setattr(project, field.name, value)
+            for element in json_data:
+                project = GitlabProject()
 
-        projects.append(project)
+                for field in GitlabProject._meta.fields:
+                    if isinstance(field, DateTimeField):
+                        value = parse(element[field.name])
+                    else:
+                        value = element[field.name]
 
-    return projects
+                    setattr(project, field.name, value)
 
+                projects.append(project)
 
-  def fetchData(self):
-    data = self.fetchProjects()
+        return projects
 
-    for datum in data:
-      datum.save()
+    def fetchData(self):
+        data = self.fetchProjects()
 
-  @property
-  def app_label(self):
-    return 'gitlab'
+        for datum in data:
+            datum.save()
 
+    @property
+    def app_label(self):
+        return 'gitlab'
