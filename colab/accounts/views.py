@@ -22,6 +22,7 @@ from haystack.query import SearchQuerySet
 
 from colab.super_archives.models import EmailAddress, Message, EmailAddressValidation
 from colab.search.utils import trans
+from colab.settings import BROWSERID_ENABLED
 # from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
@@ -160,7 +161,7 @@ def signup(request):
 
     user = user_form.save(commit=False)
     user.needs_update = False
-    if not browser_id:
+    if not browser_id_enabled:
         user.is_active = False
         EmailAddressValidation.create(user.email, user)
 

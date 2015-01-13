@@ -41,6 +41,9 @@ ALLOWED_HOSTS:
 #  - example.org
 #  - example.net
 
+### Uncomment to enable Broswer ID protocol for authentication
+# BROWSERID_ENABLED: True
+
 ### Uncomment to enable Converse.js
 # CONVERSEJS_ENABLED: True
 
