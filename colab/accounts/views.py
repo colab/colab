@@ -123,17 +123,22 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
+    # TODO: Refactor 
     user = request.user
 
-    # If the user is not authenticated, redirect to login
+    # If the user is not authenticated in Persona, and try to access url
+    # /account/register/ then he will be redirected to login page. 
     if not user.is_authenticated():
         return redirect('login')
 
-    # If the user doesn't need to update its main data, redirect to its profile
+    # If the user is authenticated in Persona, already register in Colab
+    # and try to access directly "/account/register/", then he will be redirect
+    # to user profile.
     if not user.needs_update:
         return redirect('user_profile', username=user.username)
 
-    # If the request method is GET just return the form
+    # If the user is authenticated in Persona, but not in the Colab then he 
+    # will be redirected to the register form.
     if request.method == 'GET':
         user_form = UserCreationForm()
         lists_form = ListsForm()
