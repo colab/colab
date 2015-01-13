@@ -4,7 +4,8 @@ This test related with accounts/views.py
 """
 
 from django.test import TestCase, Client
-from colab.accounts.models import User 
+from colab.accounts.models import User
+
 
 class TestSignUpView(TestCase):
 
@@ -17,7 +18,7 @@ class TestSignUpView(TestCase):
 
     def create_user_django(self):
         user = User.objects.create_user("USERtestCoLaB",
-                                        "usertest@colab.com.br", "123colab4") 
+                                        "usertest@colab.com.br", "123colab4")
         return user
 
     def test_user_authenticated_and_unregistered(self):
@@ -38,7 +39,6 @@ class TestSignUpView(TestCase):
 
     def test_user_not_authenticated(self):
         response = self.client.get("/account/register/")
-        self.assertEquals(302 , response.status_code)
+        self.assertEquals(302, response.status_code)
         url = "http://testserver/account/login"
         self.assertEquals(url, response.url)
-

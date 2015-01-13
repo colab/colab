@@ -123,11 +123,11 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
-    # TODO: Refactor 
-    user = request.user
+    # TODO: Refactor
 
+    user = request.user
     # If the user is not authenticated in Persona, and try to access url
-    # /account/register/ then he will be redirected to login page. 
+    # /account/register/ then he will be redirected to login page.
     if not user.is_authenticated():
         return redirect('login')
 
@@ -137,7 +137,7 @@ def signup(request):
     if not user.needs_update:
         return redirect('user_profile', username=user.username)
 
-    # If the user is authenticated in Persona, but not in the Colab then he 
+    # If the user is authenticated in Persona, but not in the Colab then he
     # will be redirected to the register form.
     if request.method == 'GET':
         user_form = UserCreationForm()
@@ -159,7 +159,8 @@ def signup(request):
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
-    email_addr, created = EmailAddress.objects.get_or_create(address=user.email)
+    email_addr, created = EmailAddress.objects.get_or_create(
+        address=user.email)
     if created:
         email_addr.real_name = user.get_full_name()
 
@@ -219,7 +220,8 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         context.update(kwargs)
 
-        return super(ManageUserSubscriptionsView, self).get_context_data(**context)
+        return super(ManageUserSubscriptionsView,
+                     self).get_context_data(**context)
 
 
 class ChangeXMPPPasswordView(UpdateView):
