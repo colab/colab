@@ -183,4 +183,7 @@ mkdir -p /usr/share/nginx/
 
 ln -s /var/lib/colab-assets /usr/share/nginx/colab
 
-sudo colab-admin collectstatic
+if [ -f /etc/colab/settings.yaml ]; then
+  yes yes | colab-admin collectstatic
+fi
+
