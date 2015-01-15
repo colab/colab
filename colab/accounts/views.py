@@ -22,7 +22,6 @@ from haystack.query import SearchQuerySet
 
 from colab.super_archives.models import EmailAddress, Message, EmailAddressValidation
 from colab.search.utils import trans
-from colab.settings import BROWSERID_ENABLED
 # from proxy.trac.models import WikiCollabCount, TicketCollabCount
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
@@ -129,19 +128,21 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
-    # TODO: Refactor
-
     user = request.user
-    # If the user is not authenticated in Persona, and try to access url
-    # /account/register/ then he will be redirected to login page.
-    if not user.is_authenticated():
-        return redirect('login')
+    BROWSERID_ENABLED = getattr(settings, 'BROWSERID_ENABLED', False)
 
-    # If the user is authenticated in Persona, already register in Colab
-    # and try to access directly "/account/register/", then he will be redirect
-    # to user profile.
-    if not user.needs_update:
-        return redirect('user_profile', username=user.username)
+    if BROWSERID_ENABLED:
+        # If the user is not authenticated, redirect to login
+        if not request.user.is_authenticated():
+            return redirect('login')
+
+    if request.user.is_authenticated():
+        # If the user doesn't need to update its main data,
+        #   redirect to its profile
+        # It happens when user is created by browserid
+        # and didn't set his/her main data
+        if not request.user.needs_update:
+            return redirect('user_profile', username=request.user.username)
 
     # If the user is authenticated in Persona, but not in the Colab then he
     # will be redirected to the register form.
@@ -152,7 +153,10 @@ def signup(request):
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user_form = UserCreationForm(request.POST, instance=user)
+    if BROWSERID_ENABLED:
+        user_form = UserCreationForm(request.POST, instance=request.user)
+    else:
+        user_form = UserCreationFormNoBrowserId(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
@@ -161,11 +165,13 @@ def signup(request):
 
     user = user_form.save(commit=False)
     user.needs_update = False
+
     if not BROWSERID_ENABLED:
         user.is_active = False
+        user.save()
         EmailAddressValidation.create(user.email, user)
-
-    user.save()
+    else:
+        user.save()
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
