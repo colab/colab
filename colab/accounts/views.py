@@ -3,6 +3,8 @@
 
 from collections import OrderedDict
 
+from haystack.exceptions import SearchBackendError
+
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
@@ -106,7 +108,10 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         for filter_or in fields_or_lookup:
             sqs = sqs.filter_or(**filter_or).exclude(type='thread')
 
-        context['results'] = sqs.order_by('-modified', '-created')[:10]
+        try:
+            context['results'] = sqs.order_by('-modified', '-created')[:10]
+        except SearchBackendError:
+            context['results'] = sqs.order_by('-modified')[:10]
 
         email_pks = [addr.pk for addr in user.emails.iterator()]
         query = Message.objects.filter(from_address__in=email_pks)
