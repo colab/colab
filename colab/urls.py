@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 from django.views.generic import RedirectView
 
-from .accounts.models import User
+from colab.accounts.models import User
 from .search.forms import ColabSearchForm
 from .super_archives.models import Message
 

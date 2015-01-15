@@ -161,7 +161,7 @@ def signup(request):
 
     user = user_form.save(commit=False)
     user.needs_update = False
-    if not browser_id_enabled:
+    if not BROWSERID_ENABLED:
         user.is_active = False
         EmailAddressValidation.create(user.email, user)
 

@@ -4,7 +4,7 @@ from django.conf.urls import patterns, url
 from .views import (UserProfileDetailView, UserProfileUpdateView, LoginView,
                     ManageUserSubscriptionsView, ChangeXMPPPasswordView)
 
-from accounts import views
+from colab.accounts import views
 from django.contrib.auth import views as auth_views
 
 from colab.settings import BROWSERID_ENABLED
@@ -30,12 +30,12 @@ if not BROWSERID_ENABLED:
     urlpatterns += patterns('',
         url(r'^login/?$', 'django.contrib.auth.views.login', name='login'),
 
-        url(r'^logout/?$',  'accounts.views.logoutColab', name='logout'),
+        url(r'^logout/?$',  'django.contrib.auth.views.logout', name='logout'),
 
-        url(r'^password-reset-done/?$', 'accounts.views.password_reset_done_custom',
+        url(r'^password-reset-done/?$', 'colab.accounts.views.password_reset_done_custom',
             name="password_reset_done"),
 
-        url(r'^password-reset-complete/$', 'accounts.views.password_reset_complete_custom',
+        url(r'^password-reset-complete/$', 'colab.accounts.views.password_reset_complete_custom',
             name="password_reset_complete"),
 
         url(r'^password-reset-confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
@@ -52,7 +52,7 @@ if not BROWSERID_ENABLED:
             name='password_change'),
 
         url(r'^change-password-done/?$',
-            'accounts.views.password_changed', name='password_change_done'),
+            'colab.accounts.views.password_changed', name='password_change_done'),
     )
 else:
     urlpatterns += patterns('',
