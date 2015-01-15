@@ -146,7 +146,10 @@ def signup(request):
     # If the user is authenticated in Persona, but not in the Colab then he
     # will be redirected to the register form.
     if request.method == 'GET':
-        user_form = UserCreationForm()
+        if BROWSERID_ENABLED:
+            user_form = UserCreationForm()
+        else:
+            user_form = UserCreationFormNoBrowserId()
         lists_form = ListsForm()
 
         return render(request, 'accounts/user_create_form.html',
@@ -186,6 +189,7 @@ def signup(request):
     mailman.update_subscription(user.email, mailing_lists)
 
     messages.success(request, _('Your profile has been created!'))
+
 
     return redirect('user_profile', username=user.username)
 

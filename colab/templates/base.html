@@ -55,7 +55,9 @@
 
   <!-- data-no-turbolink will disable Rails TurboLinks for all pages under Colab -->
   <body class="container" data-no-turbolink>
-    {% browserid_info %}
+    {% if BROWSERID_ENABLED %}
+      {% browserid_info %}
+    {% endif %}
 
     {% block ribbon %}
     {% if ribbon %}
@@ -110,11 +112,21 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Acesso <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   {% trans 'Login' as login_text %}
-                  <li>{% browserid_login text=login_text %}</li>
+                  {% if BROWSERID_ENABLED %}
+                    <li>{% browserid_login text=login_text %}</li>
+                  {% else %}
+                    <li><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
+                    <li><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+                  {% endif %}
                 </ul>
               </li>
               {% trans 'Login' as login_text %}
-              <li class="visible-xs hidden-sm hidden-md">{% browserid_login text=login_text %}</li>
+              {% if BROWSERID_ENABLED %}
+                <li class="visible-xs hidden-sm hidden-md">{% browserid_login text=login_text %}</li>
+              {% else %}
+                <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
+                <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+              {% endif %}
             {% else %}
               <li id="user-menu" class="dropdown">
                 <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>

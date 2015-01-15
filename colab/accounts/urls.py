@@ -9,32 +9,15 @@ from django.contrib.auth import views as auth_views
 
 from colab.settings import BROWSERID_ENABLED
 
-urlpatterns = patterns('',
-    url(r'^register/$', 'colab.accounts.views.signup', name='signup'),
-
-#FIXME Configure for XMPP
-#    url(r'^change-password/$',
-#        ChangeXMPPPasswordView.as_view(), name='change_password'),
-
-    url(r'^(?P<username>[\w@+.-]+)/?$',
-        UserProfileDetailView.as_view(), name='user_profile'),
-
-    url(r'^(?P<username>[\w@+.-]+)/edit/?$',
-        UserProfileUpdateView.as_view(), name='user_profile_update'),
-
-    url(r'^(?P<username>[\w@+.-]+)/subscriptions/?$',
-        ManageUserSubscriptionsView.as_view(), name='user_list_subscriptions'),
-)
 
 if not BROWSERID_ENABLED:
-    urlpatterns += patterns('',
+    urlpatterns = patterns('',
         url(r'^login/?$', 'django.contrib.auth.views.login', name='login'),
 
         url(r'^logout/?$',  'django.contrib.auth.views.logout', name='logout'),
 
         url(r'^password-reset-done/?$', 'colab.accounts.views.password_reset_done_custom',
             name="password_reset_done"),
-
         url(r'^password-reset-complete/$', 'colab.accounts.views.password_reset_complete_custom',
             name="password_reset_complete"),
 
@@ -55,6 +38,23 @@ if not BROWSERID_ENABLED:
             'colab.accounts.views.password_changed', name='password_change_done'),
     )
 else:
-    urlpatterns += patterns('',
-        url(r'^login/?$', LoginView.as_view(), name='login'),
+    urlpatterns = patterns('',
+        url(r'^login/?$', LoginView.as_view(), name='colab.login'),
     )
+
+urlpatterns += patterns('',
+    url(r'^register/?$', 'colab.accounts.views.signup', name='signup'),
+
+#FIXME Configure for XMPP
+#    url(r'^change-password/$',
+#        ChangeXMPPPasswordView.as_view(), name='change_password'),
+
+    url(r'^(?P<username>[\w@+.-]+)/?$',
+        UserProfileDetailView.as_view(), name='user_profile'),
+
+    url(r'^(?P<username>[\w@+.-]+)/edit/?$',
+        UserProfileUpdateView.as_view(), name='user_profile_update'),
+
+    url(r'^(?P<username>[\w@+.-]+)/subscriptions/?$',
+        ManageUserSubscriptionsView.as_view(), name='user_list_subscriptions'),
+)

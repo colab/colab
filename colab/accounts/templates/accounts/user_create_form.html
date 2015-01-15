@@ -17,7 +17,7 @@
   <label>{% trans "Required fields" %}</label>
 </p>
 
-<form action="." method="post" role="form" class="form-horizontal signup">
+<form action="{% url "signup" %}" method="post" role="form" class="form-horizontal signup">
   {% csrf_token %}
 
   <div class="row">
