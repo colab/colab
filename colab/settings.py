@@ -200,6 +200,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
+    'colab.home.context_processors.browserid_enabled',
     'colab.planet.context_processors.feedzilla',
 )
 
