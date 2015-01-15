@@ -23,7 +23,7 @@ from haystack.query import SearchQuerySet
 from colab.super_archives.models import EmailAddress, Message, EmailAddressValidation
 from colab.search.utils import trans
 # from proxy.trac.models import WikiCollabCount, TicketCollabCount
-from .forms import (UserCreationForm, ListsForm, UserUpdateForm,
+from .forms import (UserCreationForm, UserCreationFormNoBrowserId, ListsForm, UserUpdateForm,
                     ChangeXMPPPasswordForm)
 # from .errors import XMPPChangePwdException
 from .utils import mailman
@@ -128,7 +128,6 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
-    user = request.user
     BROWSERID_ENABLED = getattr(settings, 'BROWSERID_ENABLED', False)
 
     if BROWSERID_ENABLED:
