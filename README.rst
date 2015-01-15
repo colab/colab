@@ -87,5 +87,5 @@ How to run a test
 Follow the steps below:
 
 * Go to vagrant/colab/
-* run: colab-admin test
-* colab-admin collectstatic
+* Install the test dependencies with `pip install -r requirements_test.txt`
+* run: ./runtests.sh
