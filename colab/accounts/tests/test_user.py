@@ -36,8 +36,7 @@ class UserTest(TestCase):
                           password='123colab4')
 
     def validate_mandatory_fields(self, expected_first_name,
-                                  expected_last_name,
-                                  first_name, last_name):
+                                  expected_last_name, first_name, last_name):
         data = {'first_name': first_name,
                 'last_name': last_name}
         self.client.post('/account/usertestcolab/edit', data)
@@ -103,8 +102,8 @@ class UserTest(TestCase):
 
     def test_update_user_mandatory_max_leght_overflow(self):
         self.authenticate_user()
-        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', 'a' * 31,
-                                       'a' * 31)
+        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB',
+                                       'a'*31, 'a'*31)
         self.user.delete()
 
     def test_update_user_mandatory_invalid_empty_field(self):
