@@ -39,7 +39,7 @@ if not BROWSERID_ENABLED:
     )
 else:
     urlpatterns = patterns('',
-        url(r'^login/?$', LoginView.as_view(), name='colab.login'),
+        url(r'^login/?$', LoginView.as_view(), name='login'),
     )
 
 urlpatterns += patterns('',

@@ -141,7 +141,11 @@
                       <div>
                         <a class="btn btn-info pull-left" href="{% url 'user_profile' user.username %}">{% trans "My Profile" %}</a>
                         {% trans 'Logout' as logout_text %}
-                        {% browserid_logout text=logout_text link_class='btn btn-default pull-right' %}
+                        {% if BROWSERID_ENABLED %}
+                          {% browserid_logout text=logout_text link_class='btn btn-default pull-right' %}
+                        {% else %}
+                          <a class="btn btn-default pull-right" href="{% url 'logout' %}"> {% trans "Logout" %}</a>
+                        {% endif %}
                       </div>
                     </div>
                   </li>
