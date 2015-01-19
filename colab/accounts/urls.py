@@ -1,4 +1,5 @@
 
+from django.conf import settings
 from django.conf.urls import patterns, url
 
 from .views import (UserProfileDetailView, UserProfileUpdateView, LoginView,
@@ -7,7 +8,8 @@ from .views import (UserProfileDetailView, UserProfileUpdateView, LoginView,
 from colab.accounts import views
 from django.contrib.auth import views as auth_views
 
-from colab.settings import BROWSERID_ENABLED
+
+BROWSERID_ENABLED = getattr(settings, 'BROWSERID_ENABLED', False)
 
 
 if not BROWSERID_ENABLED:
