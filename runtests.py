@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import sys
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'colab.tests.settings'
 os.environ['COVERAGE_PROCESS_START'] = '.coveragerc'
@@ -22,5 +23,6 @@ def runtests():
 
 
 if __name__ == '__main__':
+    os.remove('.coverage')
     coverage.process_startup()
     runtests()
