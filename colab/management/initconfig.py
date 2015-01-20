@@ -28,7 +28,8 @@ EMAIL_SUBJECT_PREFIX: '[colab]'
 
 SECRET_KEY: '{secret_key}'
 
-SITE_URL: 'http://localhost:8000/'
+#  Must use it without trailing slash
+SITE_URL: 'http://localhost:8000'
 BROWSERID_AUDIENCES:
   - http://localhost:8000
 #  - http://example.com
