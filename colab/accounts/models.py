@@ -18,10 +18,12 @@ class User(AbstractUser):
     """
     institution = models.CharField(max_length=128, null=True, blank=True)
     role = models.CharField(max_length=128, null=True, blank=True)
-    twitter = models.CharField(max_length=128, null=True, blank=True)
-    facebook = models.CharField(max_length=128, null=True, blank=True)
+    # Twitter limits user name to 15 characters.
+    twitter = models.CharField(max_length=15, null=True, blank=True)
+    # Facebook limits user lenght to 15.
+    facebook = models.CharField(max_length=15, null=True, blank=True)
     google_talk = models.EmailField(null=True, blank=True)
-    github = models.CharField(max_length=128, null=True, blank=True,
+    github = models.CharField(max_length=39, null=True, blank=True,
                               verbose_name=u'github')
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)

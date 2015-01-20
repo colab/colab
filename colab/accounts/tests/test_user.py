@@ -8,11 +8,11 @@ from django.test import TestCase, Client
 
 class UserTest(TestCase):
 
-    def setUp(self):
+    def setup(self):
         self.user = self.create_user()
         self.client = Client()
 
-    def tearDown(self):
+    def teardown(self):
         pass
 
     def create_user(self):
@@ -35,9 +35,9 @@ class UserTest(TestCase):
         self.client.login(username=self.user.username,
                           password='123colab4')
 
-    def validate_mandatory_fields(self, expected_first_name, expected_last_name,
+    def validate_mandatory_fields(self, expected_first_name,
+                                  expected_last_name,
                                   first_name, last_name):
-        
         data = {'first_name': first_name,
                 'last_name': last_name}
         self.client.post('/account/usertestcolab/edit', data)
@@ -82,7 +82,7 @@ class UserTest(TestCase):
         username_test = "USERtestCoLaB"
 
         user_db = User.objects.get(id=1)
-        self.assertEqual(user_db.username, username_test.lower()) 
+        self.assertEqual(user_db.username, username_test.lower())
         self.user.delete()
 
     def test_update_user_mandatory_information(self):
@@ -93,32 +93,33 @@ class UserTest(TestCase):
 
     def test_update_user_mandatory_max_leght_limit(self):
         self.authenticate_user()
-        self.validate_mandatory_fields('a'*30, 'a'*30, 'a'*30, 'a'*30)
+        self.validate_mandatory_fields('a' * 30, 'a' * 30, 'a' * 30, 'a' * 30)
         self.user.delete()
 
     def test_update_user_mandatory_max_leght_limit_one_less(self):
         self.authenticate_user()
-        self.validate_mandatory_fields('a'*29, 'a'*29, 'a'*29, 'a'*29)
+        self.validate_mandatory_fields('a' * 29, 'a' * 29, 'a' * 29, 'a' * 29)
         self.user.delete()
 
     def test_update_user_mandatory_max_leght_overflow(self):
-        self.authenticate_user()                    
-        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', 'a'*31, 'a'*31)
+        self.authenticate_user()
+        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', 'a' * 31,
+                                       'a' * 31)
         self.user.delete()
 
     def test_update_user_mandatory_invalid_empty_field(self):
-        self.authenticate_user()                    
-        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', '' , '')
+        self.authenticate_user()
+        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', '', '')
         self.user.delete()
 
     def test_update_user_mandatory_invalid_whitespace(self):
-        self.authenticate_user()                    
-        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', ' ' , ' ')
+        self.authenticate_user()
+        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', ' ', ' ')
         self.user.delete()
 
     def test_update_user_mandatory_invalid_using_number(self):
-        self.authenticate_user()                    
-        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', '123' , '456')
+        self.authenticate_user()
+        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', '123', '456')
         self.user.delete()
 
     def test_update_user_institution(self):
@@ -126,42 +127,271 @@ class UserTest(TestCase):
         self.validate_non_mandatory_fields('institution', 'fga', 'fga')
         self.user.delete()
 
+    def test_update_user_institution_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('institution', 'a' * 128, 'a' * 128)
+        self.user.delete()
+
+    def test_update_user_institution_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('institution', 'a' * 127, 'a' * 127)
+        self.user.delete()
+
+    def test_update_user_institution_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('institution', None, 'a' * 129)
+        self.user.delete()
+
+    def test_update_user_institution_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('institution', '', '')
+        self.user.delete()
+
+    def test_update_user_institution_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('institution', None, ' ')
+
+    def test_update_user_institution_invalid_using_number(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('institution', None, '123')
+        self.user.delete()
+
     def test_update_user_role(self):
         self.authenticate_user()
+        self.validate_non_mandatory_fields('role', 'studenty', 'studenty')
         self.user.delete()
-    
+
+    def test_update_user_role_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('role', 'a' * 128, 'a' * 128)
+        self.user.delete()
+
+    def test_update_user_role_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('role', 'a' * 127, 'a' * 127)
+        self.user.delete()
+
+    def test_update_user_role_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('role', None, 'a' * 129)
+        self.user.delete()
+
+    def test_update_user_role_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('role', '', '')
+        self.user.delete()
+
+    def test_update_user_role_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('role', None, ' ')
+        self.user.delete()
+
+    def test_update_user_role_invalid_using_number(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('role', None, '123')
+        self.user.delete()
+
     def test_update_user_twitter(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('twitter', 'twitter', 'twitter')
         self.user.delete()
-    
+
+    '''
+    Max_lenght is the maximmum size accept by Twitter.
+    Tests related with twitter should have internet connection,
+    because it's need username authentication.
+    '''
+    def test_update_user_twitter_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('twitter', 't' * 15, 't' * 15)
+        self.user.delete()
+
+    def test_update_user_twitter_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('twitter', 't' * 14, 't' * 14)
+        self.user.delete()
+
+    def test_update_user_twitter_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('twitter', 'usertestcolab',
+                                           't' * 16)
+        self.user.delete()
+
+    def test_update_user_twitter_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('twitter', '', '')
+        self.user.delete()
+
+    def test_update_user_twitter_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('twitter', 'usertestcolab', ' ')
+        self.user.delete()
+
+    def test_update_user_twitter_invalid_using_number(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('twitter', 'usertestcolab', '123')
+        self.user.delete()
+
+    '''
+    Max_lenght is the maximmum size accept by Faceebook.
+    Tests related with twitter should have internet connection,
+    because it's need username authentication.
+    '''
     def test_update_user_facebook(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('facebook', 'facebook', 'facebook')
         self.user.delete()
-    
+
+    def test_update_user_facebook_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('facebook', 'f' * 15, 'f' * 15)
+        self.user.delete()
+
+    def test_update_user_facebook_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('facebook', 'f' * 14, 'f' * 14)
+        self.user.delete()
+
+    def test_update_user_facebook_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('facebook', 'usertestcolab',
+                                           'f' * 16)
+        self.user.delete()
+
+    def test_update_user_facebook_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('facebook', '', '')
+        self.user.delete()
+
+    def test_update_user_facebook_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('facebook', 'usertestcolab', ' ')
+        self.user.delete()
+
+    def test_update_user_facebook_invalid_using_number(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('facebook', 'usertestcolab', '123')
+        self.user.delete()
+
     def test_update_user_gtalk(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('google_talk', 'gtalk@colab.com.br',
                                            'gtalk@colab.com.br')
         self.user.delete()
-    
+
+    def test_update_user_gtalk_email_invalid_caracters(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('google_talk', None, '@@@')
+        self.user.delete()
+
+    def test_update_user_gtalk_email_without_arroba(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('google_talk', None,
+                                           'usercolab.hotmail.com')
+        self.user.delete()
+
+    def test_update_user_gtalk_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('google_talk', None,
+                                           'usercolab@hotmail')
+        self.user.delete()
+
+    def test_update_user_gtalk_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('google_talk', '', '')
+        self.user.delete()
+
+    def test_update_user_gtalk_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('google_talk', '', ' ')
+        self.user.delete()
+
     def test_update_user_github(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('github', 'github', 'github')
         self.user.delete()
-    
+
+    def test_update_user_github_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('github', 'a' * 39, 'a' * 39)
+        self.user.delete()
+
+    def test_update_user_github_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('github', 'a' * 38, 'a' * 38)
+        self.user.delete()
+
+    def test_update_user_github_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('github', None, 'a' * 40)
+        self.user.delete()
+
+    def test_update_user_github_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('github', '', '')
+        self.user.delete()
+
+    def test_update_user_github_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('github', None, ' ')
+        self.user.delete()
+
     def test_update_user_webpage(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('webpage', 'webpage', 'webpage')
+        self.user.delete()
+
+    def test_update_user_webpage_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('webpage', 'p' * 256, 'p' * 256)
+        self.user.delete()
+
+    def test_update_user_webpage_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('webpage', 'p' * 255, 'p' * 255)
+        self.user.delete()
+
+    def test_update_user_webpage_max_lenght_overflow(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('webpage', None, 'p' * 257)
+        self.user.delete()
+
+    def test_update_user_webpage_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('webpage', '', '')
+        self.user.delete()
+
+    def test_update_user_webpage_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('webpage', None, ' ')
         self.user.delete()
 
     def test_update_user_bio(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('bio', 'bio', 'bio')
         self.user.delete()
-        
-    def test_update_user_bio_max_length(self):
+
+    def test_update_user_bio_max_lenght_limit(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('bio', 'a' * 200, 'a' * 200)
+        self.user.delete()
+
+    def test_update_user_bio_max_lenght_limit_one_less(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('bio', 'a' * 199, 'a' * 199)
+        self.user.delete()
+
+    def test_update_user_bio_max_lenght_overflow(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('bio', None, 'a' * 201)
+        self.user.delete()
+
+    def test_update_user_bio_invalid_empty_field(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('bio', '', '')
+        self.user.delete()
+
+    def test_update_user_bio_invalid_whitespace(self):
+        self.authenticate_user()
+        self.validate_non_mandatory_fields('bio', None, ' ')
         self.user.delete()
