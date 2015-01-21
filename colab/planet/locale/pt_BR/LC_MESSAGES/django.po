@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-20 14:52-0300\n"
+"POT-Creation-Date: 2015-01-21 13:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,103 +17,85 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: templates/common/pagination.html:5 templates/common/pagination.html.py:7
-msgid "previous"
-msgstr "anterior"
-
-#: templates/common/pagination.html:31 templates/common/pagination.html:33
-msgid "next"
-msgstr "próxima"
-
-#: templates/feedzilla/_post_template.html:9
+#: colab/planet/templates/feedzilla/_post_template.html:8
 msgid "From"
 msgstr "De"
 
-#: templates/feedzilla/_post_template.html:9
+#: colab/planet/templates/feedzilla/_post_template.html:8
 msgid "on"
 msgstr "em"
 
-#: templates/feedzilla/_post_template.html:13
+#: colab/planet/templates/feedzilla/_post_template.html:12
 msgid "Read original"
 msgstr "Ler original"
 
-#: templates/feedzilla/base.html:6
-msgid "Planet"
-msgstr "Planet"
+#: colab/planet/templates/feedzilla/base.html:7
+msgid "Community Blogs"
+msgstr ""
 
-#: templates/feedzilla/base.html:14 templates/feedzilla/submit_blog.html:7
-msgid "Submit a blog"
-msgstr "Solicite a inclusão de um blog"
-
-#: templates/feedzilla/base.html:17
+#: colab/planet/templates/feedzilla/base.html:17
 msgid "Tags"
 msgstr "Tags"
 
-#: templates/feedzilla/base.html:21
+#: colab/planet/templates/feedzilla/base.html:21
 msgid "Source Blogs"
 msgstr "Blogs Fonte"
 
-#: templates/feedzilla/index.html:11
-msgid "There&#39;s no RSS registered"
+#: colab/planet/templates/feedzilla/base.html:25
+#: colab/planet/templates/feedzilla/submit_blog.html:5
+msgid "Submit a blog"
+msgstr "Solicite a inclusão de um blog"
+
+#: colab/planet/templates/feedzilla/index.html:10
+#, fuzzy
+#| msgid "There&#39;s no RSS registered"
+msgid "There is no RSS registered"
 msgstr "Não há RSS cadastrado"
 
-#: templates/feedzilla/index.html:12
+#: colab/planet/templates/feedzilla/index.html:12
 msgid "Please"
 msgstr "Por favor"
 
-#: templates/feedzilla/index.html:13
+#: colab/planet/templates/feedzilla/index.html:13
 msgid "click here"
 msgstr "clique aqui"
 
-#: templates/feedzilla/index.html:14
+#: colab/planet/templates/feedzilla/index.html:14
 msgid "to submit a blog"
 msgstr "para a inclusão de um blog"
 
-#: templates/feedzilla/submit_blog.html:11
+#: colab/planet/templates/feedzilla/submit_blog.html:8
 msgid ""
 "Thank you. Your application has been accepted and will be reviewed by admin "
 "in the near time."
 msgstr ""
 
-#: templates/feedzilla/submit_blog.html:13
-msgid "Required fields"
-msgstr ""
-
-#: templates/feedzilla/submit_blog.html:17
-msgid "Blog Information"
-msgstr "Informações do blog"
-
-#: templates/feedzilla/submit_blog.html:18
-msgid "Blog URL"
-msgstr ""
-
-#: templates/feedzilla/submit_blog.html:19
-#, fuzzy
-msgid "Blog name"
-msgstr "Blogs"
-
-#: templates/feedzilla/submit_blog.html:20
-msgid "Name of author of the blog"
-msgstr ""
-
-#: templates/feedzilla/submit_blog.html:21
-msgid "Feed URL"
-msgstr ""
-
-#: templates/feedzilla/submit_blog.html:21
-msgid "You can specify what exactly feed you want submit"
-msgstr ""
-
-#: templates/feedzilla/submit_blog.html:22
+#: colab/planet/templates/feedzilla/submit_blog.html:29
 #, fuzzy
 msgid "Submit"
 msgstr "Solicite a inclusão de um blog"
 
-#: templates/feedzilla/tag.html:7
+#: colab/planet/templates/feedzilla/tag.html:7
 #, python-format
 msgid "Posts with &laquo;%(tag)s&raquo; label"
 msgstr ""
 
-#: templates/feedzilla/tag.html:16
+#: colab/planet/templates/feedzilla/tag.html:16
 msgid "No posts with such label"
 msgstr ""
+
+#~ msgid "previous"
+#~ msgstr "anterior"
+
+#~ msgid "next"
+#~ msgstr "próxima"
+
+#~ msgid "Planet"
+#~ msgstr "Planet"
+
+#~ msgid "Blog Information"
+#~ msgstr "Informações do blog"
+
+#, fuzzy
+#~ msgid "Blog name"
+#~ msgstr "Blogs"

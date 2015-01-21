@@ -287,7 +287,6 @@ class ChangeXMPPPasswordView(UpdateView):
         return response
 
 def password_changed(request):
-    #FIXME: This message was not translated yet.
     messages.success(request, _('Your password was changed.'))
 
     user = request.user
@@ -300,7 +299,6 @@ def password_reset_done_custom(request):
     return redirect('home')
 
 def password_reset_complete_custom(request):
-    #FIXME: This message was not translated yet.
     messages.success(request, _('Your password has been set. You may go ahead and log in now.'))
 
     return redirect('home')

@@ -5,9 +5,15 @@
 
 <div class="row">
   {% if form.errors %}
-  <div class="alert alert-danger">
-    <b>{% trans "Please correct the errors below and try again" %}</b>
-  </div>
+    {% if form.errors.items|length == 1 %}
+      <div class="alert alert-danger">
+        <b>{% trans "Please correct the error below and try again." %}</b>
+      </div>
+    {% else %}
+      <div class="alert alert-danger">
+        <b>{% trans "Please correct the errors below and try again." %}</b>
+      </div>
+    {% endif %}
   {% endif %}
 
   {% for error in form.non_field_errors %}
