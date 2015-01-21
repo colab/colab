@@ -22,3 +22,5 @@ class ProxyTracAppConfig(ColabProxiedAppConfig):
             (_('New Wiki Page'), 'wiki/WikiNewPage'),
         ),
     }
+
+    collaboration_models = []

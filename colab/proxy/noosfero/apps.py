@@ -19,3 +19,5 @@ class ProxyNoosferoAppConfig(ColabProxiedAppConfig):
             (_('Control panel'), 'myprofile'),
         ),
     }
+
+    collaboration_models = []

@@ -14,3 +14,5 @@ class ProxyJenkinsAppConfig(ColabProxiedAppConfig):
             (_('Continuos Integration'), ''),
         ),
     }
+
+    collaboration_models = []
