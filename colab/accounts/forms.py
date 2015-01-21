@@ -66,6 +66,7 @@ class UserCreationFormNoBrowserId(UserCreationForm):
 
     password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Confirm Password "), widget=forms.PasswordInput)
+    email = forms.EmailField(label=_("Email address"), required=True)
 
     class Meta:
         model = User
@@ -77,7 +78,7 @@ class UserCreationFormNoBrowserId(UserCreationForm):
 
         if password1 and password2 and password1 != password2:
                 raise forms.ValidationError(_("The two password fields didn't match."))
-        return password2 
+        return password2
 
     def save(self, commit=True):
         """
