@@ -23,6 +23,7 @@ def runtests():
 
 
 if __name__ == '__main__':
-    os.remove('.coverage')
+    if os.path.exists('.coverage'):
+        os.remove('.coverage')
     coverage.process_startup()
     runtests()
