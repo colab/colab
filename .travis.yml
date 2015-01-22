@@ -17,5 +17,5 @@ install:
 script:
   runtests.py
 
-after_success:
-  coveralls
+#after_success:
+#  coveralls
