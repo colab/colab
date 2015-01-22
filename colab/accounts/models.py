@@ -3,12 +3,26 @@
 import urlparse
 
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.core import validators
 from django.core.urlresolvers import reverse
+from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from .utils import mailman
+
+
+class ColabUserManager(UserManager):
+
+    def create_user(self, username, email=None, password=None, **extra_fields):
+
+        # It creates a valid password for users
+        if not password:
+            password = get_random_string()
+
+        return super(ColabUserManager, self).create_user(username, email,
+                                                         password,
+                                                         **extra_fields)
 
 
 class User(AbstractUser):
@@ -30,6 +44,8 @@ class User(AbstractUser):
     modified = models.DateTimeField(auto_now=True)
     bio = models.CharField(max_length=200, null=True, blank=True)
     needs_update = models.BooleanField(default=True)
+
+    objects = ColabUserManager()
 
     def check_password(self, raw_password):
 
