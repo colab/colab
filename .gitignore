@@ -14,5 +14,11 @@ project_cfg.py
 
 ext/
 *.egg-info/
-
 dist/
+
+# Coverage
+.coverage
+coverage_report/
+
+# Whoosh Index
+colab/tests/whoosh_index/

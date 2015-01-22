@@ -2,26 +2,29 @@
 
 import urlparse
 
-from django.db import models, DatabaseError
-from django.contrib.auth.hashers import check_password
+from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core import validators
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from conversejs import xmpp
-
 from .utils import mailman
 
 
 class User(AbstractUser):
+    """
+    For more information about AbstractUser
+    @see: https://docs.djangoproject.com/en/1.7/ref/contrib/auth/
+    """
     institution = models.CharField(max_length=128, null=True, blank=True)
     role = models.CharField(max_length=128, null=True, blank=True)
-    twitter = models.CharField(max_length=128, null=True, blank=True)
-    facebook = models.CharField(max_length=128, null=True, blank=True)
+    # Twitter limits user name to 15 characters.
+    twitter = models.CharField(max_length=15, null=True, blank=True)
+    # Facebook limits user lenght to 15.
+    facebook = models.CharField(max_length=15, null=True, blank=True)
     google_talk = models.EmailField(null=True, blank=True)
-    github = models.CharField(max_length=128, null=True, blank=True,
-                                 verbose_name=u'github')
+    github = models.CharField(max_length=39, null=True, blank=True,
+                              verbose_name=u'github')
     webpage = models.CharField(max_length=256, null=True, blank=True)
     verification_hash = models.CharField(max_length=32, null=True, blank=True)
     modified = models.DateTimeField(auto_now=True)

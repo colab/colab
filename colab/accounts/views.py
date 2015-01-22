@@ -3,6 +3,8 @@
 
 from collections import OrderedDict
 
+from haystack.exceptions import SearchBackendError
+
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
@@ -106,7 +108,10 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         for filter_or in fields_or_lookup:
             sqs = sqs.filter_or(**filter_or).exclude(type='thread')
 
-        context['results'] = sqs.order_by('-modified', '-created')[:10]
+        try:
+            context['results'] = sqs.order_by('-modified', '-created')[:10]
+        except SearchBackendError:
+            context['results'] = sqs.order_by('-modified')[:10]
 
         email_pks = [addr.pk for addr in user.emails.iterator()]
         query = Message.objects.filter(from_address__in=email_pks)
@@ -123,17 +128,22 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
-    user = request.user
+    # TODO: Refactor
 
-    # If the user is not authenticated, redirect to login
+    user = request.user
+    # If the user is not authenticated in Persona, and try to access url
+    # /account/register/ then he will be redirected to login page.
     if not user.is_authenticated():
         return redirect('login')
 
-    # If the user doesn't need to update its main data, redirect to its profile
+    # If the user is authenticated in Persona, already register in Colab
+    # and try to access directly "/account/register/", then he will be redirect
+    # to user profile.
     if not user.needs_update:
         return redirect('user_profile', username=user.username)
 
-    # If the request method is GET just return the form
+    # If the user is authenticated in Persona, but not in the Colab then he
+    # will be redirected to the register form.
     if request.method == 'GET':
         user_form = UserCreationForm()
         lists_form = ListsForm()
@@ -154,7 +164,8 @@ def signup(request):
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
-    email_addr, created = EmailAddress.objects.get_or_create(address=user.email)
+    email_addr, created = EmailAddress.objects.get_or_create(
+        address=user.email)
     if created:
         email_addr.real_name = user.get_full_name()
 
@@ -214,7 +225,8 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         context.update(kwargs)
 
-        return super(ManageUserSubscriptionsView, self).get_context_data(**context)
+        return super(ManageUserSubscriptionsView,
+                     self).get_context_data(**context)
 
 
 class ChangeXMPPPasswordView(UpdateView):

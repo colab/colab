@@ -7,6 +7,8 @@ from django.conf import settings
 
 TIMEOUT = 1
 
+LOGGER = logging.getLogger('colab.mailman')
+
 
 def get_url(listname=None):
     if listname:
@@ -20,7 +22,7 @@ def subscribe(listname, address):
     try:
         requests.put(url, timeout=TIMEOUT, data={'address': address})
     except:
-        logging.exception('Unable to subscribe user')
+        LOGGER.exception('Unable to subscribe user')
         return False
     return True
 
@@ -30,7 +32,7 @@ def unsubscribe(listname, address):
     try:
         requests.delete(url, timeout=TIMEOUT, data={'address': address})
     except:
-        logging.exception('Unable to unsubscribe user')
+        LOGGER.exception('Unable to unsubscribe user')
         return False
     return True
 
@@ -56,7 +58,7 @@ def address_lists(address, description=''):
     try:
         lists = requests.get(url, timeout=TIMEOUT, params=params)
     except:
-        logging.exception('Unable to list mailing lists')
+        LOGGER.exception('Unable to list mailing lists')
         return []
 
     return lists.json()
