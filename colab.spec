@@ -1,7 +1,7 @@
 %define name colab
 %define version 2.0a2
 %define unmangled_version 2.0a2
-%define release 1
+%define release 2
 %define buildvenv /var/tmp/%{name}-%{version}
 
 Summary: Collaboration platform for communities
@@ -54,7 +54,7 @@ cat > %{buildroot}/%{_bindir}/colab-admin <<EOF
 #!/bin/sh
 set -e
 
-if [ "$USER" = colab ]; then
+if [ "\$USER" = colab ]; then
   exec /usr/lib/colab/bin/colab-admin "\$@"
 else
   exec sudo -u colab /usr/lib/colab/bin/colab-admin "\$@"

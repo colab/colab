@@ -251,7 +251,7 @@ MESSAGE_TAGS = {
 COLAB_HOME_URL = '/dashboard'
 
 # Super Archives
-SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/public'
+SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/private'
 SUPER_ARCHIVES_EXCLUDE = []
 SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 
