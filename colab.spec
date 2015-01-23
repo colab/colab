@@ -46,6 +46,9 @@ find %{buildvenv} -type d -empty -delete
 mkdir -p %{buildroot}/etc/colab
 mkdir -p %{buildroot}/usr/lib
 
+mkdir -p %{buildroot}/usr/share/nginx/
+ln -s /var/lib/colab-assets %{buildroot}/usr/share/nginx/colab
+
 # install virtualenv
 rm -rf %{buildroot}/usr/lib/colab
 cp -r %{buildvenv} %{buildroot}/usr/lib/colab
@@ -78,6 +81,7 @@ rm -rf %{buildvenv}
 %{_bindir}/*
 /etc/cron.d/colab
 /lib/systemd/system/colab.service
+/usr/share/nginx/colab
 
 %post
 groupadd colab || true
@@ -179,9 +183,8 @@ fi
 mkdir -p /var/lib/colab-assets
 chown colab:colab /var/lib/colab-assets
 
-mkdir -p /usr/share/nginx/
-
-ln -s /var/lib/colab-assets /usr/share/nginx/colab
+mkdir -p /var/lock/colab
+chown colab:colab /var/lock/colab
 
 if [ -f /etc/colab/settings.yaml ]; then
   yes yes | colab-admin collectstatic
