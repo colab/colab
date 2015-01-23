@@ -1,2 +1,0 @@
-Whoosh==2.5.7
-coverage==3.7.1
