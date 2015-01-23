@@ -1,20 +1,22 @@
 
 from django import forms
 from django.contrib import admin
+from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User
+User = get_user_model()
 
 
-class UserCreationForm(forms.ModelForm):
+class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'email')
+        fields = ("username", "email")
 
-    def __init__(self, *args, **kwargs):
-        super(UserCreationForm, self).__init__(*args, **kwargs)
-        self.fields['email'].required = True
+    #def __init__(self, *args, **kwargs):
+    #    super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+    #    self.fields['email'].required = True
 
 
 class UserChangeForm(forms.ModelForm):
@@ -33,10 +35,10 @@ class UserChangeForm(forms.ModelForm):
 
 class MyUserAdmin(UserAdmin):
     form = UserChangeForm
-    add_form = UserCreationForm
+    add_form = CustomUserCreationForm
 
     fieldsets = (
-        (None, {'fields': ('username', 'email')}),
+        (None, {'fields': ('username', 'email', 'password')}),
         (_('Personal info'), {'fields': ('first_name', 'last_name', 'twitter', 
                                          'facebook', 'google_talk', 'webpage',
                              )}),
@@ -48,8 +50,8 @@ class MyUserAdmin(UserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('username', 'email')}
-        ),
+            'fields': ('username', 'email', 'password1', 'password2'),
+        }),
     )
 
 
