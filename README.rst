@@ -76,16 +76,15 @@ desired location in environment variable **COLAB_SETTINGS**.
 About test
 ==========
 
-How to write a tests.
+How to write a test
 --------------------
 Inside of each folder on /vagrant/colab/<folder> you can create a folder called
 "tests", and inside of it implements the code for test each file. 
  
-How to run a test
------------------
+How to run the tests
+--------------------
 
 Follow the steps below:
 
 * Go to vagrant/colab/
-* Install the test dependencies with `pip install -r requirements_test.txt`
 * run: ./runtests.sh

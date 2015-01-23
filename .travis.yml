@@ -7,7 +7,7 @@ env:
   - DJANGO_VERSION=1.7.3
 
 install:
-  - pip install -r requirements_test.txt
+  - pip install -r requirements_dev.txt
   - pip install django==${DJANGO_VERSION}
   - pip install -e .
   - colab-init-config > settings.yaml
@@ -15,11 +15,11 @@ install:
   - sudo cp settings.yaml /etc/colab/
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
-#before_script:
-#  flake8 revproxy
+before_script:
+  flake8 colab
 
 script:
   ./runtests.py
 
-#after_success:
-#  coveralls
+after_success:
+  coveralls
