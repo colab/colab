@@ -8,6 +8,8 @@
 Colab, a Software for Communities
 =================================
 
+.. image:: https://travis-ci.org/colab/colab.svg?branch=master
+    :target: https://travis-ci.org/colab/colab
 
 
 What is Colab?
