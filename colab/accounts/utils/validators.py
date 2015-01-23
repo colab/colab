@@ -11,8 +11,10 @@ def validate_social_account(account, url):
     >>> validate_social_account('seocam', 'http://twitter.com')
     True
 
-    >>> validate_social_account('seocam-fake-should-fail', 'http://twitter.com')
+    >>> validate_social_account('seocam-fake-should-fail',
+                                'http://twitter.com')
     False
+
     """
 
     request = urllib2.Request(urlparse.urljoin(url, account))
