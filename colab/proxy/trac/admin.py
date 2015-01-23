@@ -1,3 +1,1 @@
-from django.contrib import admin
-
-from . import signals
+from . import signals  # noqa

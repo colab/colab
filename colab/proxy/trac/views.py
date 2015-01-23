@@ -1,6 +1,4 @@
 
-from django.conf import settings
-
 from hitcounter.views import HitCounterViewMixin
 
 from ..utils.views import ColabProxyView

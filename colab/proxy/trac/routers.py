@@ -11,7 +11,7 @@ class TracRouter(object):
 
     def allow_relation(self, obj1, obj2, **hints):
         if obj1._meta.app_label == 'proxy' or \
-            obj2._meta.app_label == 'proxy':
+           obj2._meta.app_label == 'proxy':
             return True
         return None
 
