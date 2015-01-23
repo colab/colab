@@ -3,8 +3,9 @@ from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import ugettext_lazy as _
+
+from .forms import UserCreationForm
 
 User = get_user_model()
 
@@ -39,7 +40,7 @@ class MyUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'twitter', 
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'twitter',
                                          'facebook', 'google_talk', 'webpage',
                              )}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
