@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 # encoding: utf-8
-import importlib
-import inspect
-
 from collections import OrderedDict
 
 from haystack.exceptions import SearchBackendError
@@ -17,19 +14,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, TemplateView
-from django.apps import apps
 
 from conversejs import xmpp
 from conversejs.models import XMPPAccount
-from haystack.query import SearchQuerySet
 
 from colab.super_archives.models import (EmailAddress, Message,
                                          EmailAddressValidation)
 from colab.search.utils import trans, getCollaborationData
-# from proxy.trac.models import WikiCollabCount, TicketCollabCount
+
 from .forms import (UserCreationForm, UserForm, ListsForm,
                     UserUpdateForm, ChangeXMPPPasswordForm)
-# from .errors import XMPPChangePwdException
 from .utils import mailman
 
 
@@ -81,7 +75,8 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         collaborations, count_types_extras = getCollaborationData(user)
         collaborations.extend(messages)
 
-        collaborations = sorted(collaborations, key=lambda elem : elem.modified, reverse=True)
+        collaborations = sorted(collaborations,
+                                key=lambda elem: elem.modified, reverse=True)
 
         count_types.update(count_types_extras)
 
@@ -100,6 +95,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
+
 
 def signup(request):
     BROWSERID_ENABLED = getattr(settings, 'BROWSERID_ENABLED', False)

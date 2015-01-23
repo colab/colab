@@ -1,22 +1,9 @@
-from collections import OrderedDict
-
 from django.conf import settings
-from django.core.cache import cache
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 
-from haystack.query import SearchQuerySet
-
-<<<<<<< HEAD
-# from proxy.trac.models import WikiCollabCount, TicketCollabCount
-from colab.search.utils import trans
-from colab.super_archives.models import Thread
-=======
 from colab.search.utils import trans, getCollaborationData
-from colab.super_archives.models import Thread, Message
-from colab.search.preview_block import PreviewBlock
-from colab.accounts.models import User
->>>>>>> Remove haystack search from dashboard an profile
+from colab.super_archives.models import Thread
 
 
 def dashboard(request):
@@ -37,7 +24,7 @@ def dashboard(request):
 
     latest_results.extend(messages)
     latest_results = sorted(latest_results,
-                            key=lambda elem : elem.modified, reverse=True)
+                            key=lambda elem: elem.modified, reverse=True)
 
     for key in count_types.keys():
         count_types[trans(key)] = count_types.pop(key)
@@ -49,6 +36,7 @@ def dashboard(request):
         'latest_results': latest_results[:6],
     }
     return render(request, 'home.html', context)
+
 
 def robots(request):
     if getattr(settings, 'ROBOTS_NOINDEX', False):

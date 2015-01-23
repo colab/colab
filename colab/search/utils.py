@@ -7,7 +7,7 @@ from django.core.cache import cache
 from django.utils.translation import ugettext as _
 from django.apps import apps
 from django.conf import settings
-from colab.super_archives.models import Thread, Message
+from colab.super_archives.models import Thread
 from colab.search.preview_block import PreviewBlock
 
 
@@ -23,16 +23,17 @@ def trans(key):
     app_names = settings.PROXIED_APPS.keys()
 
     for app_name in app_names:
-        collaboration_models = apps.get_app_config(app_name).collaboration_models
+        collaboration_models = \
+            apps.get_app_config(app_name).collaboration_models
 
         for collaboration in collaboration_models:
-            module = importlib.import_module('colab.proxy.{}.models'.format(app_name))
-            elements = eval("module." + collaboration['model']).objects.all()
-            translations[ collaboration['model'].lower() ] = collaboration['model_verbose']
+            translations[collaboration['model'].lower()] = \
+                collaboration['model_verbose']
 
     return translations.get(key, key)
 
-def getCollaborationData(filter_by_user = None):
+
+def getCollaborationData(filter_by_user=None):
 
     latest_results = []
     count_types = cache.get('home_chart')
@@ -46,11 +47,16 @@ def getCollaborationData(filter_by_user = None):
     app_names = settings.PROXIED_APPS.keys()
 
     for app_name in app_names:
-        collaboration_models = apps.get_app_config(app_name).collaboration_models
+        collaboration_models = \
+            apps.get_app_config(app_name).collaboration_models
 
         for collaboration in collaboration_models:
-            module = importlib.import_module('colab.proxy.{}.models'.format(app_name))
-            elements = eval("module." + collaboration['model']).objects
+            module = importlib
+            module = \
+                module.import_module('colab.proxy.{}.models'.format(app_name))
+
+            module = eval("module." + collaboration['model'])
+            elements = module.objects
 
             if filter_by_user:
                 dic = {}
@@ -62,15 +68,16 @@ def getCollaborationData(filter_by_user = None):
             latest_results.extend(parsePreviewBlock(elements, collaboration))
 
             if populate_count_types:
-                count_types[ collaboration['model'].lower() ] = elements.count()
+                count_types[collaboration['model'].lower()] = elements.count()
 
     if populate_count_types:
-        cache.set('home_chart', count_types)
+        cache.set('home_chart', count_types, 30)
 
     for key in count_types.keys():
         count_types[trans(key)] = count_types.pop(key)
 
     return latest_results, count_types
+
 
 def parsePreviewBlock(elements, collaboration):
     results = []
@@ -79,13 +86,14 @@ def parsePreviewBlock(elements, collaboration):
         attributes = collaboration.keys()
 
         for keyname in attributes:
-            if keyname == 'model' or keyname == 'model_verbose' or len(collaboration[keyname].strip()) == 0:
+            if keyname == 'model' or keyname == 'model_verbose' \
+                    or len(collaboration[keyname].strip()) == 0:
                 continue
             value = getattr(element, collaboration[keyname])
             if(inspect.ismethod(value)):
-                setattr(previewblock, keyname, value() )
+                setattr(previewblock, keyname, value())
             else:
-                setattr(previewblock, keyname, value )
+                setattr(previewblock, keyname, value)
 
         results.append(previewblock)
 

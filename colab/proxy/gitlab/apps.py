@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..utils.apps import ColabProxiedAppConfig
 
+
 class ProxyGitlabAppConfig(ColabProxiedAppConfig):
     '''
     You can define a collaboration_models list to tell colab which
@@ -12,9 +13,11 @@ class ProxyGitlabAppConfig(ColabProxiedAppConfig):
 
     Field model refers to the model to be displayed.
     Field model_verbose is the human name to be displayed in charts.
-    Field collaborator_username tells which user(username) is associated with this collaboration.
+    Field collaborator_username tells which user(username) is
+        associated with this collaboration.
 
-    The value of the hashes maps the attribute or method of the model to be put in those positions.
+    The value of the hashes maps the attribute or method of the model
+        to be put in those positions.
 
         collaboration_models = [
             {
@@ -53,3 +56,4 @@ class ProxyGitlabAppConfig(ColabProxiedAppConfig):
     }
 
     collaboration_models = []
+
