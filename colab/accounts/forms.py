@@ -36,13 +36,13 @@ class SocialAccountField(forms.Field):
 
 class UserForm(forms.ModelForm):
     username = forms.CharField(
-
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style': 'text-transform: lowercase;'}),
     )
     required = ('first_name', 'last_name', 'username')
 
     class Meta:
+        fields = ('first_name', 'last_name', 'username')
         model = User
 
     def __init__(self, *args, **kwargs):
@@ -54,6 +54,12 @@ class UserForm(forms.ModelForm):
             # Set UserForm.required fields as required
             if field_name in UserForm.required:
                 field.required = True
+
+    def clean_username(self):
+        username = self.cleaned_data["username"].strip()
+        if not username:
+            raise forms.ValidationError(_('This field cannot be blank.'))
+        return username
 
 
 class UserUpdateForm(UserForm):
@@ -127,7 +133,7 @@ class ChangeXMPPPasswordForm(forms.ModelForm):
         return self.instance
 
 
-class UserCreationForm(forms.ModelForm):
+class UserCreationForm(UserForm):
     """
     A form that creates a user, with no privileges, from the given username and
     password.
@@ -151,11 +157,14 @@ class UserCreationForm(forms.ModelForm):
                                 widget=forms.PasswordInput,
                                 help_text=_(("Enter the same password as above"
                                              ", for verification.")))
-    email = forms.EmailField(required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(UserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['email'].required = True
 
     class Meta:
         model = User
-        fields = ("username",)
+        fields = ("username", "first_name", "last_name", "email")
 
     def clean_username(self):
         # Since User.username is unique, this check is redundant,
@@ -225,37 +234,6 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
-
-
-class UserCreationFormNoBrowserId(UserCreationForm):
-
-    password1 = forms.CharField(label=_("Password"),
-                                widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Confirm Password "),
-                                widget=forms.PasswordInput)
-    email = forms.EmailField(label=_("Email address"), required=True)
-
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'email', 'username')
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-
-        if password1 and password2 and password1 != password2:
-                raise forms.ValidationError(
-                    _("The two password fields didn't match."))
-        return password2
-
-    def save(self, commit=True):
-        """
-        Saves the new password.
-        """
-        self.instance.set_password(self.cleaned_data["password1"])
-        if commit:
-            self.instance.save()
-        return self.instance
 
 
 class AuthenticationForm(forms.Form):

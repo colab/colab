@@ -20,11 +20,12 @@ from conversejs import xmpp
 from conversejs.models import XMPPAccount
 from haystack.query import SearchQuerySet
 
-from colab.super_archives.models import EmailAddress, Message, EmailAddressValidation
+from colab.super_archives.models import (EmailAddress, Message,
+                                         EmailAddressValidation)
 from colab.search.utils import trans
 # from proxy.trac.models import WikiCollabCount, TicketCollabCount
-from .forms import (UserCreationForm, UserCreationFormNoBrowserId, ListsForm, UserUpdateForm,
-                    ChangeXMPPPasswordForm)
+from .forms import (UserCreationForm, UserForm, ListsForm,
+                    UserUpdateForm, ChangeXMPPPasswordForm)
 # from .errors import XMPPChangePwdException
 from .utils import mailman
 
@@ -147,18 +148,18 @@ def signup(request):
     # will be redirected to the register form.
     if request.method == 'GET':
         if BROWSERID_ENABLED:
-            user_form = UserCreationForm()
+            user_form = UserForm()
         else:
-            user_form = UserCreationFormNoBrowserId()
+            user_form = UserCreationForm()
         lists_form = ListsForm()
 
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
     if BROWSERID_ENABLED:
-        user_form = UserCreationForm(request.POST, instance=request.user)
+        user_form = UserForm(request.POST, instance=request.user)
     else:
-        user_form = UserCreationFormNoBrowserId(request.POST)
+        user_form = UserCreationForm(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
@@ -189,7 +190,6 @@ def signup(request):
     mailman.update_subscription(user.email, mailing_lists)
 
     messages.success(request, _('Your profile has been created!'))
-
 
     return redirect('user_profile', username=user.username)
 
@@ -286,6 +286,7 @@ class ChangeXMPPPasswordView(UpdateView):
         )
         return response
 
+
 def password_changed(request):
     messages.success(request, _('Your password was changed.'))
 
@@ -293,14 +294,17 @@ def password_changed(request):
 
     return redirect('user_profile_update', username=user.username)
 
+
 def password_reset_done_custom(request):
-    messages.success(request, _('We\'ve emailed you instructions for setting your password. You should be receiving them shortly.'))
+    msg = _(("We've emailed you instructions for setting "
+             "your password. You should be receiving them shortly."))
+    messages.success(request, msg)
 
     return redirect('home')
+
 
 def password_reset_complete_custom(request):
-    messages.success(request, _('Your password has been set. You may go ahead and log in now.'))
+    msg = _('Your password has been set. You may go ahead and log in now.')
+    messages.success(request, msg)
 
     return redirect('home')
-
-
