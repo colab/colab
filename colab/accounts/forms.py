@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 
+from collections import OrderedDict
+
 from django import forms
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import OrderedDict, ReadOnlyPasswordHashField, \
-    default_token_generator
+from django.contrib.auth import authenticate, get_user_model
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
+from django.template import loader
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 
 from conversejs.models import XMPPAccount
 
-from ..super_archives.models import MailingList
 from .utils.validators import validate_social_account
 from .utils import mailman
 
@@ -32,7 +38,7 @@ class UserForm(forms.ModelForm):
     username = forms.CharField(
 
         # Forces username to be lowercase always
-        widget=forms.TextInput(attrs={'style' : 'text-transform: lowercase;'}),
+        widget=forms.TextInput(attrs={'style': 'text-transform: lowercase;'}),
     )
     required = ('first_name', 'last_name', 'username')
 
@@ -50,48 +56,6 @@ class UserForm(forms.ModelForm):
                 field.required = True
 
 
-class UserCreationForm(UserForm):
-
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name', 'username')
-
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        username = username.strip()
-        if not username:
-            raise forms.ValidationError(_('This field cannot be blank.'))
-        return username
-
-
-class UserCreationFormNoBrowserId(UserCreationForm):
-
-    password1 = forms.CharField(label=_("Password"), widget=forms.PasswordInput)
-    password2 = forms.CharField(label=_("Confirm Password "), widget=forms.PasswordInput)
-    email = forms.EmailField(label=_("Email address"), required=True)
-
-    class Meta:
-        model = User
-        fields = ('first_name', 'last_name','email', 'username')
-
-    def clean_password2(self):
-        password1 = self.cleaned_data.get('password1')
-        password2 = self.cleaned_data.get('password2')
-
-        if password1 and password2 and password1 != password2:
-                raise forms.ValidationError(_("The two password fields didn't match."))
-        return password2
-
-    def save(self, commit=True):
-        """
-	Saves the new password.
-	"""
-	self.instance.set_password(self.cleaned_data["password1"])
-	if commit:
-	    self.instance.save()
-	return self.instance
-
-
 class UserUpdateForm(UserForm):
     bio = forms.CharField(
         widget=forms.Textarea(attrs={'rows': '6', 'maxlength': '200'}),
@@ -102,9 +66,8 @@ class UserUpdateForm(UserForm):
     )
 
     def __init__(self, *args, **kwargs):
-        super (UserUpdateForm, self).__init__(*args, **kwargs)
+        super(UserUpdateForm, self).__init__(*args, **kwargs)
         self.fields.pop('username')
-
 
     class Meta:
         model = User
@@ -113,7 +76,8 @@ class UserUpdateForm(UserForm):
                   'google_talk', 'github', 'webpage', 'bio')
 
     twitter = SocialAccountField(url='https://twitter.com/', required=False)
-    facebook = SocialAccountField(url='https://graph.facebook.com/', required=False)
+    facebook = SocialAccountField(url='https://graph.facebook.com/',
+                                  required=False)
 
 
 class ListsForm(forms.Form):
@@ -129,10 +93,11 @@ class ListsForm(forms.Form):
 
 class ChangeXMPPPasswordForm(forms.ModelForm):
     password1 = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
+                                widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
+                                widget=forms.PasswordInput,
+                                help_text=_(("Enter the same password as above"
+                                             ", for verification.")))
 
     class Meta:
         model = XMPPAccount
@@ -161,6 +126,7 @@ class ChangeXMPPPasswordForm(forms.ModelForm):
             self.instance.save()
         return self.instance
 
+
 class UserCreationForm(forms.ModelForm):
     """
     A form that creates a user, with no privileges, from the given username and
@@ -171,17 +137,21 @@ class UserCreationForm(forms.ModelForm):
         'password_mismatch': _("The two password fields didn't match."),
     }
     username = forms.RegexField(label=_("Username"), max_length=30,
-        regex=r'^[\w.@+-]+$',
-        help_text=_("Required. 30 characters or fewer. Letters, digits and "
-                    "@/./+/-/_ only."),
-        error_messages={
-            'invalid': _("This value may contain only letters, numbers and "
-                         "@/./+/-/_ characters.")})
+                                regex=r'^[\w.@+-]+$',
+                                help_text=_(("Required. 30 characters or fewer"
+                                             ". Letters, digits and "
+                                             "@/./+/-/_ only.")),
+                                error_messages={
+                                    'invalid': _(("This value may contain only"
+                                                  " letters, numbers and "
+                                                  "@/./+/-/_ characters."))})
     password1 = forms.CharField(label=_("Password"),
-        widget=forms.PasswordInput)
+                                widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Password confirmation"),
-        widget=forms.PasswordInput,
-        help_text=_("Enter the same password as above, for verification."))
+                                widget=forms.PasswordInput,
+                                help_text=_(("Enter the same password as above"
+                                             ", for verification.")))
+    email = forms.EmailField(required=True)
 
     class Meta:
         model = User
@@ -190,7 +160,7 @@ class UserCreationForm(forms.ModelForm):
     def clean_username(self):
         # Since User.username is unique, this check is redundant,
         # but it sets a nicer error message than the ORM. See #13147.
-        username = self.cleaned_data["username"]
+        username = self.cleaned_data["username"].strip()
         try:
             User._default_manager.get(username=username)
         except User.DoesNotExist:
@@ -227,9 +197,15 @@ class UserChangeForm(forms.ModelForm):
             'invalid': _("This value may contain only letters, numbers and "
                          "@/./+/-/_ characters.")})
     password = ReadOnlyPasswordHashField(label=_("Password"),
-        help_text=_("Raw passwords are not stored, so there is no way to see "
-                    "this user's password, but you can change the password "
-                    "using <a href=\"password/\">this form</a>."))
+                                         help_text=_("Raw passwords are not"
+                                                     " stored, so there is no"
+                                                     " way to see "
+                                                     "this user's password, "
+                                                     "but you can change the "
+                                                     "password "
+                                                     "using <a "
+                                                     "href=\"password/\">this"
+                                                     " form</a>."))
 
     class Meta:
         model = User
@@ -241,11 +217,45 @@ class UserChangeForm(forms.ModelForm):
         if f is not None:
             f.queryset = f.queryset.select_related('content_type')
 
+        # Set email as required field
+        self.fields['email'].required = True
+
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class UserCreationFormNoBrowserId(UserCreationForm):
+
+    password1 = forms.CharField(label=_("Password"),
+                                widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_("Confirm Password "),
+                                widget=forms.PasswordInput)
+    email = forms.EmailField(label=_("Email address"), required=True)
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email', 'username')
+
+    def clean_password2(self):
+        password1 = self.cleaned_data.get('password1')
+        password2 = self.cleaned_data.get('password2')
+
+        if password1 and password2 and password1 != password2:
+                raise forms.ValidationError(
+                    _("The two password fields didn't match."))
+        return password2
+
+    def save(self, commit=True):
+        """
+        Saves the new password.
+        """
+        self.instance.set_password(self.cleaned_data["password1"])
+        if commit:
+            self.instance.save()
+        return self.instance
 
 
 class AuthenticationForm(forms.Form):
@@ -273,9 +283,11 @@ class AuthenticationForm(forms.Form):
 
         # Set the label for the "username" field.
         UserModel = get_user_model()
-        self.username_field = UserModel._meta.get_field(UserModel.USERNAME_FIELD)
+        self.username_field = UserModel._meta.get_field(
+            UserModel.USERNAME_FIELD)
         if self.fields['username'].label is None:
-            self.fields['username'].label = capfirst(self.username_field.verbose_name)
+            self.fields['username'].label = capfirst(
+                self.username_field.verbose_name)
 
     def clean(self):
         username = self.cleaned_data.get('username')
@@ -362,10 +374,12 @@ class PasswordResetForm(forms.Form):
             email = loader.render_to_string(email_template_name, c)
 
             if html_email_template_name:
-                html_email = loader.render_to_string(html_email_template_name, c)
+                html_email = loader.render_to_string(html_email_template_name,
+                                                     c)
             else:
                 html_email = None
-            send_mail(subject, email, from_email, [user.email], html_message=html_email)
+            send_mail(subject, email, from_email, [user.email],
+                      html_message=html_email)
 
 
 class SetPasswordForm(forms.Form):

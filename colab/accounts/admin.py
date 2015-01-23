@@ -1,49 +1,29 @@
 
-from django import forms
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from .forms import UserCreationForm
+from .forms import UserCreationForm, UserChangeForm
 
 User = get_user_model()
 
 
-class CustomUserCreationForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ("username", "email")
-
-    #def __init__(self, *args, **kwargs):
-    #    super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-    #    self.fields['email'].required = True
-
-
-class UserChangeForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'is_active',
-                  'is_staff', 'is_superuser', 'groups', 'last_login',
-                  'date_joined', 'twitter', 'facebook', 'google_talk',
-          'webpage')
-
-    def __init__(self, *args, **kwargs):
-        super(UserChangeForm, self).__init__(*args, **kwargs)
-        self.fields['email'].required = True
-
-
-
-class MyUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin):
     form = UserChangeForm
-    add_form = CustomUserCreationForm
+    add_form = UserCreationForm
 
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),
-        (_('Personal info'), {'fields': ('first_name', 'last_name', 'twitter',
-                                         'facebook', 'google_talk', 'webpage',
-                             )}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+        (_('Personal info'), {'fields': ('first_name',
+                                         'last_name',
+                                         'twitter',
+                                         'facebook',
+                                         'google_talk',
+                                         'webpage')}),
+        (_('Permissions'), {'fields': ('is_active',
+                                       'is_staff',
+                                       'is_superuser',
                                        'groups')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')})
     )
@@ -56,4 +36,4 @@ class MyUserAdmin(UserAdmin):
     )
 
 
-admin.site.register(User, MyUserAdmin)
+admin.site.register(User, CustomUserAdmin)
