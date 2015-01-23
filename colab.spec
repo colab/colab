@@ -89,6 +89,8 @@ if ! id colab; then
   useradd --system --gid colab  --home-dir /usr/lib/colab --no-create-home colab
 fi
 
+usermod --append --groups mailman colab
+
 # only applies if there is a local PostgreSQL server
 if [ -x /usr/bin/postgres ]; then
 
