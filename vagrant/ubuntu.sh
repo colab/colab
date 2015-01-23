@@ -14,7 +14,7 @@ chown vagrant:vagrant /etc/colab
 
 ### Create colab user in PostgreSQL
 echo "CREATE USER colab WITH PASSWORD 'colab';" | sudo -u postgres -i psql 2> /dev/null || echo
-echo "ALTER USER colab CREATEDB;"
+echo "ALTER USER colab CREATEDB;" | sudo -u postgres -i psql 2> /dev/null
 
 #i## Create colab DB in PostgreSQL
 sudo -u postgres -i createdb --owner=colab colab 2> /dev/null | echo
