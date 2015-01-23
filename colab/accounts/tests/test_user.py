@@ -8,11 +8,11 @@ from django.test import TestCase, Client
 
 class UserTest(TestCase):
 
-    def setup(self):
+    def setUp(self):
         self.user = self.create_user()
         self.client = Client()
 
-    def teardown(self):
+    def tearDown(self):
         pass
 
     def create_user(self):
