@@ -4,6 +4,7 @@ import os
 import sys
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
+os.environ['COLAB_SETTINGS'] = 'tests/settings.yaml'
 os.environ['COVERAGE_PROCESS_START'] = '.coveragerc'
 os.environ['REUSE_DB'] = '0'
 

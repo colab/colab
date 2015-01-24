@@ -10,9 +10,6 @@ install:
   - pip install -r requirements_dev.txt
   - pip install django==${DJANGO_VERSION}
   - pip install -e .
-  - colab-init-config > settings.yaml
-  - sudo mkdir -p /etc/colab/
-  - sudo cp settings.yaml /etc/colab/
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
 before_script:
