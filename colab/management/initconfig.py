@@ -70,6 +70,7 @@ ROBOTS_NOINDEX: false
 # PROXIED_APPS:
 #   gitlab:
 #     upstream: 'http://localhost:8090/gitlab/'
+#     private_token: ''
 #   trac:
 #     upstream: 'http://localhost:5000/trac/'
 

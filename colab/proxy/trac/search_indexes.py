@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import math
 import string
 
 from django.template import loader, Context
-from django.utils.text import slugify
 from haystack import indexes
 from haystack.utils import log as logging
 
@@ -15,7 +13,7 @@ from .models import Attachment, Ticket, Wiki, Revision
 logger = logging.getLogger('haystack')
 
 # the string maketrans always return a string encoded with latin1
-# http://stackoverflow.com/questions/1324067/how-do-i-get-str-translate-to-work-with-unicode-strings
+# http://stackoverflow.com/questions/1324067/how-do-i-get-str-translate-to-work-with-unicode-strings # noqa
 table = string.maketrans(
     string.punctuation,
     '.' * len(string.punctuation)
