@@ -26,6 +26,7 @@ setup(
     zip_safe=False,
     long_description=open('README.rst').read(),
     install_requires=reqs,
+    test_suite="tests.run.run_with_coverage",
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

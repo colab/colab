@@ -21,4 +21,4 @@ dist/
 coverage_report/
 
 # Whoosh Index
-colab/tests/whoosh_index/
+tests/whoosh_index/

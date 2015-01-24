@@ -3,7 +3,7 @@
 import os
 import sys
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'colab.tests.settings'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tests.settings'
 os.environ['COVERAGE_PROCESS_START'] = '.coveragerc'
 os.environ['REUSE_DB'] = '0'
 
@@ -22,8 +22,12 @@ def runtests():
     sys.exit(failures)
 
 
-if __name__ == '__main__':
+def run_with_coverage():
     if os.path.exists('.coverage'):
         os.remove('.coverage')
     coverage.process_startup()
     runtests()
+
+
+if __name__ == '__main__':
+    runtests_with_coverage()

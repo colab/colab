@@ -1,4 +1,4 @@
-from ..settings import *  # noqa
+from colab.settings import *  # noqa
 
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'

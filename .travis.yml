@@ -19,7 +19,7 @@ before_script:
   flake8 colab
 
 script:
-  ./runtests.py
+  python setup.py test
 
 after_success:
   coveralls
