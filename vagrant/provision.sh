@@ -24,7 +24,6 @@ for dir in /vagrant/colab /vagrant; do
         break
     fi
 done
-pip install -r $basedir/requirements_dev.txt
 pip install -e $basedir
 
 if [ ! -s /etc/colab/settings.yaml ]; then

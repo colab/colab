@@ -7,9 +7,8 @@ env:
   - DJANGO_VERSION=1.7.3
 
 install:
-  - pip install -r requirements_dev.txt
   - pip install django==${DJANGO_VERSION}
-  - pip install -e .
+  - pip install .
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
 before_script:
