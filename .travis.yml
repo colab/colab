@@ -11,11 +11,9 @@ install:
   - pip install .
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
-before_script:
-  flake8 colab
-
 script:
-  python setup.py test
+  - python setup.py test
+  - flake8 colab
 
 after_success:
   coveralls
