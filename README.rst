@@ -11,6 +11,9 @@ Colab, a Software for Communities
 .. image:: https://travis-ci.org/colab/colab.svg?branch=master
     :target: https://travis-ci.org/colab/colab
 
+.. image:: https://coveralls.io/repos/colab/colab/badge.png?branch=master
+          :target: https://coveralls.io/r/colab/colab?branch=master
+
 
 What is Colab?
 ==============
