@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse, Http404
 
-from colab.search.utils import trans, get_collaboration_data
+from colab.search.utils import get_collaboration_data
 from colab.super_archives.models import Thread
 
 
@@ -22,9 +22,6 @@ def dashboard(request):
 
     latest_results.extend(messages)
     latest_results.sort(key=lambda elem: elem.modified, reverse=True)
-
-    for key in count_types.keys():
-        count_types[trans(key)] = count_types.pop(key)
 
     context = {
         'hottest_threads': hottest_threads[:6],

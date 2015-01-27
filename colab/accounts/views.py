@@ -1,8 +1,5 @@
-#!/usr/bin/env python
 # encoding: utf-8
 from collections import OrderedDict
-
-from haystack.exceptions import SearchBackendError
 
 from django.conf import settings
 from django.contrib import messages
@@ -20,7 +17,7 @@ from conversejs.models import XMPPAccount
 
 from colab.super_archives.models import (EmailAddress, Message,
                                          EmailAddressValidation)
-from colab.search.utils import trans, get_collaboration_data
+from colab.search.utils import get_collaboration_data
 
 from .forms import (UserCreationForm, UserForm, ListsForm,
                     UserUpdateForm, ChangeXMPPPasswordForm)
@@ -70,7 +67,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         # TODO: remove when mailman becomes a proxied plugin
         messages = Message.objects.filter(from_address__user__pk=user.pk)
-        count_types[trans('thread')] = messages.count()
+        count_types[_('Emails')] = messages.count()
 
         collaborations, count_types_extras = get_collaboration_data(user)
         collaborations.extend(messages)
