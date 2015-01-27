@@ -116,11 +116,6 @@ class UserTest(TestCase):
         self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', ' ', ' ')
         self.user.delete()
 
-    def test_update_user_mandatory_invalid_using_number(self):
-        self.authenticate_user()
-        self.validate_mandatory_fields('USERtestCoLaB', 'COLAB', '123', '456')
-        self.user.delete()
-
     def test_update_user_institution(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('institution', 'fga', 'fga')
@@ -148,11 +143,7 @@ class UserTest(TestCase):
 
     def test_update_user_institution_invalid_whitespace(self):
         self.authenticate_user()
-        self.validate_non_mandatory_fields('institution', None, ' ')
-
-    def test_update_user_institution_invalid_using_number(self):
-        self.authenticate_user()
-        self.validate_non_mandatory_fields('institution', None, '123')
+        self.validate_non_mandatory_fields('institution', '', ' ')
         self.user.delete()
 
     def test_update_user_role(self):
@@ -182,12 +173,7 @@ class UserTest(TestCase):
 
     def test_update_user_role_invalid_whitespace(self):
         self.authenticate_user()
-        self.validate_non_mandatory_fields('role', None, ' ')
-        self.user.delete()
-
-    def test_update_user_role_invalid_using_number(self):
-        self.authenticate_user()
-        self.validate_non_mandatory_fields('role', None, '123')
+        self.validate_non_mandatory_fields('role', '', ' ')
         self.user.delete()
 
     def test_update_user_twitter(self):
@@ -226,11 +212,6 @@ class UserTest(TestCase):
         self.validate_non_mandatory_fields('twitter', 'usertestcolab', ' ')
         self.user.delete()
 
-    def test_update_user_twitter_invalid_using_number(self):
-        self.authenticate_user()
-        self.validate_non_mandatory_fields('twitter', 'usertestcolab', '123')
-        self.user.delete()
-
     '''
     Max_lenght is the maximmum size accept by Faceebook.
     Tests related with twitter should have internet connection,
@@ -265,11 +246,6 @@ class UserTest(TestCase):
     def test_update_user_facebook_invalid_whitespace(self):
         self.authenticate_user()
         self.validate_non_mandatory_fields('facebook', 'usertestcolab', ' ')
-        self.user.delete()
-
-    def test_update_user_facebook_invalid_using_number(self):
-        self.authenticate_user()
-        self.validate_non_mandatory_fields('facebook', 'usertestcolab', '123')
         self.user.delete()
 
     def test_update_user_gtalk(self):
@@ -332,7 +308,7 @@ class UserTest(TestCase):
 
     def test_update_user_github_invalid_whitespace(self):
         self.authenticate_user()
-        self.validate_non_mandatory_fields('github', None, ' ')
+        self.validate_non_mandatory_fields('github', '', ' ')
         self.user.delete()
 
     def test_update_user_webpage(self):
@@ -362,7 +338,7 @@ class UserTest(TestCase):
 
     def test_update_user_webpage_invalid_whitespace(self):
         self.authenticate_user()
-        self.validate_non_mandatory_fields('webpage', None, ' ')
+        self.validate_non_mandatory_fields('webpage', '', ' ')
         self.user.delete()
 
     def test_update_user_bio(self):
@@ -392,5 +368,5 @@ class UserTest(TestCase):
 
     def test_update_user_bio_invalid_whitespace(self):
         self.authenticate_user()
-        self.validate_non_mandatory_fields('bio', None, ' ')
+        self.validate_non_mandatory_fields('bio', '', ' ')
         self.user.delete()
