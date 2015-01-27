@@ -1,5 +1,6 @@
 
 from django.shortcuts import redirect
+from django.conf import settings
 
 VIEW_NAMES_ALLOWED = ('signup', 'Logout')
 
@@ -7,6 +8,8 @@ VIEW_NAMES_ALLOWED = ('signup', 'Logout')
 class UserRegisterMiddleware(object):
 
     def process_view(self, request, view_func, view_args, view_kwargs):
+        if not settings.BROWSERID_ENABLED:
+            return
 
         if request.is_ajax():
             return
