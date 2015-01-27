@@ -157,6 +157,9 @@ ROBOTS_NOINDEX: false
 #PROXIED_APPS:
 #   gitlab:
 #     upstream: 'http://localhost:8080/gitlab/'
+
+## Enabled BROWSER_ID protocol
+#  BROWSERID_ENABLED: True
 EOF
     chown root:colab /etc/colab/settings.yaml
     chmod 0640 /etc/colab/settings.yaml
