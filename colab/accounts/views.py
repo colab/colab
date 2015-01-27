@@ -20,7 +20,7 @@ from conversejs.models import XMPPAccount
 
 from colab.super_archives.models import (EmailAddress, Message,
                                          EmailAddressValidation)
-from colab.search.utils import trans, getCollaborationData
+from colab.search.utils import trans, get_collaboration_data
 
 from .forms import (UserCreationForm, UserForm, ListsForm,
                     UserUpdateForm, ChangeXMPPPasswordForm)
@@ -72,11 +72,10 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         messages = Message.objects.filter(from_address__user__pk=user.pk)
         count_types[trans('thread')] = messages.count()
 
-        collaborations, count_types_extras = getCollaborationData(user)
+        collaborations, count_types_extras = get_collaboration_data(user)
         collaborations.extend(messages)
 
-        collaborations = sorted(collaborations,
-                                key=lambda elem: elem.modified, reverse=True)
+        collaborations.sort(key=lambda elem: elem.modified, reverse=True)
 
         count_types.update(count_types_extras)
 

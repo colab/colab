@@ -57,7 +57,7 @@ class GitlabDataAPI(ProxyDataAPI):
 
         return projects
 
-    def fetchData(self):
+    def fetch_data(self):
         data = self.fetchProjects()
 
         for datum in data:

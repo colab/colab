@@ -1,6 +1,4 @@
 from django.db import models
-from django.conf import settings
-from colab.accounts.models import User
 
 
 class GitlabProject(models.Model):

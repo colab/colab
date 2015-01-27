@@ -33,7 +33,7 @@ def trans(key):
     return translations.get(key, key)
 
 
-def getCollaborationData(filter_by_user=None):
+def get_collaboration_data(filter_by_user=None):
 
     latest_results = []
     count_types = cache.get('home_chart')
