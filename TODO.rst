@@ -49,7 +49,6 @@ Outros
 
 * Contabilizar votos dentro do modelo de mensagem. Com a implementação atual ordenar uma thread por votos é uma operação muito cara.
 * Utilizar SOLR para listar documentos relevantes ao inves de thread.score
-* Escrever casos de teste
 * Fazer thread querysets ter um objeto (most_relevant_message)
 * BUG: alguns subjects comecam e terminam com [] fazendo com que a RE de limpeza apague todo o subject.
 * BUG: mensagens importadas por listas erradas
