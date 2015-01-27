@@ -5,7 +5,7 @@ This test related with accounts/views.py
 
 from django.test import TestCase, Client
 from colab.accounts.models import User
-from django.core.cache import cache
+
 
 class TestSignUpView(TestCase):
 
@@ -20,6 +20,13 @@ class TestSignUpView(TestCase):
         user = User.objects.create_user("USERtestCoLaB",
                                         "usertest@colab.com.br", "123colab4")
         return user
+
+    def test_user_not_authenticated(self):
+        with self.settings(BROWSERID_ENABLED=True):
+            response = self.client.get("/account/register")
+            self.assertEquals(302, response.status_code)
+            url = "http://testserver/account/login"
+            self.assertEquals(url, response.url)
 
     def test_user_authenticated_and_unregistered(self):
         self.client.login(username="usertestcolab", password="123colab4")
@@ -36,11 +43,3 @@ class TestSignUpView(TestCase):
         url = "http://testserver/account/usertestcolab"
         self.assertEquals(url, response.url)
         self.client.logout()
-
-    def test_user_not_authenticated(self):
-        with self.settings(BROWSERID_ENABLE=True):
-            cache.clear()
-            response = self.client.get("/account/register/")
-            self.assertEquals(302, response.status_code)
-            url = "http://testserver/account/login"
-            self.assertEquals(url, response.url)
