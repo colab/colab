@@ -65,12 +65,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         count_types = OrderedDict()
 
-        # TODO: remove when mailman becomes a proxied plugin
-        messages = Message.objects.filter(from_address__user__pk=user.pk)
-        count_types[_('Emails')] = messages.count()
-
         collaborations, count_types_extras = get_collaboration_data(user)
-        collaborations.extend(messages)
 
         collaborations.sort(key=lambda elem: elem.modified, reverse=True)
 
@@ -84,6 +79,7 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         query = query.order_by('-received_time')
         context['emails'] = query[:10]
 
+        messages = Message.objects.filter(from_address__user__pk=user.pk)
         count_by = 'thread__mailinglist__name'
         context['list_activity'] = dict(messages.values_list(count_by)
                                                 .annotate(Count(count_by))

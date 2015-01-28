@@ -14,12 +14,8 @@ def dashboard(request):
     hottest_threads = [t.latest_message for t in highest_score_threads]
 
     latest_threads = Thread.objects.all()[:6]
-    latest_results, count_types = get_collaboration_data()
 
-    # NOTE: This code will cease to exist when super_archives
-    #   become a plugin
-    messages = [t.latest_message for t in latest_threads]
-    latest_results.extend(messages)
+    latest_results, count_types = get_collaboration_data()
     latest_results.sort(key=lambda elem: elem.modified, reverse=True)
 
     context = {
