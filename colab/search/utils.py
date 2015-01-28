@@ -45,9 +45,15 @@ def get_collaboration_data(filter_by_user=None):
                 elements = elements.all()
 
             latest_results.extend(elements)
+            elements_count = elements.count()
+
+            if elements_count > 1:
+                verbose_name = module_item._meta.verbose_name_plural.title()
+            else:
+                verbose_name = module_item._meta.verbose_name_plural.title()
 
             if populate_count_types:
-                count_types[module_item().verbose_name] = elements.count()
+                count_types[verbose_name] = elements_count
 
     if populate_count_types:
         cache.set('home_chart', count_types, 30)

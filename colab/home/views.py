@@ -9,23 +9,22 @@ from colab.super_archives.models import Thread
 def dashboard(request):
     """Dashboard page"""
 
-    latest_threads = Thread.objects.all()
-    highest_score_threads = Thread.highest_score.all()
+    highest_score_threads = Thread.highest_score.all()[:6]
 
-    hottest_threads = []
-    for thread in highest_score_threads:
-        hottest_threads.append(thread.latest_message)
+    hottest_threads = [t.latest_message for t in highest_score_threads]
 
+    latest_threads = Thread.objects.all()[:6]
     latest_results, count_types = get_collaboration_data()
-    threads = Thread.objects.all()
-    messages = [t.latest_message for t in threads]
 
+    # NOTE: This code will cease to exist when super_archives
+    #   become a plugin
+    messages = [t.latest_message for t in latest_threads]
     latest_results.extend(messages)
     latest_results.sort(key=lambda elem: elem.modified, reverse=True)
 
     context = {
         'hottest_threads': hottest_threads[:6],
-        'latest_threads': latest_threads[:6],
+        'latest_threads': latest_threads,
         'type_count': count_types,
         'latest_results': latest_results[:6],
     }
