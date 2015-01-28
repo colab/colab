@@ -126,7 +126,7 @@ class ThreadDashboardView(View):
         all_lists = mailman.all_lists(description=True)
 
         context['lists'] = []
-        #lists = MailingList.objects.filter()
+        # lists = MailingList.objects.filter()
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,

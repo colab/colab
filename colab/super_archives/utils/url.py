@@ -14,7 +14,7 @@ def append_to_get(path, query=None, **kwargs):
 def pop_from_get(path, query=None, **kwargs):
     query_dict = dict(urlparse.parse_qsl(query))
     for key, value in kwargs.items():
-        if not query_dict in (key):
+        if query_dict not in (key):
             continue
         if query_dict[key] == value:
             del query_dict[key]

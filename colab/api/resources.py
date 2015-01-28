@@ -7,7 +7,7 @@ from tastypie.constants import ALL_WITH_RELATIONS, ALL
 from tastypie.resources import ModelResource
 
 from colab.super_archives.models import Message, EmailAddress
-#from proxy.trac.models import Revision, Ticket, Wiki
+# from proxy.trac.models import Revision, Ticket, Wiki
 
 User = get_user_model()
 
@@ -65,56 +65,56 @@ class MessageResource(ModelResource):
         }
 
 
-#class RevisionResource(ModelResource):
-#    class Meta:
-#        queryset = Revision.objects.all()
-#        resource_name = 'revision'
-#        excludes = ['collaborators', ]
-#        filtering = {
-#            'key': ALL,
-#            'rev': ALL,
-#            'author': ALL,
-#            'message': ALL,
-#            'repository_name': ALL,
-#            'created': ALL,
-#        }
+# class RevisionResource(ModelResource):
+#     class Meta:
+#         queryset = Revision.objects.all()
+#         resource_name = 'revision'
+#         excludes = ['collaborators', ]
+#         filtering = {
+#             'key': ALL,
+#             'rev': ALL,
+#             'author': ALL,
+#             'message': ALL,
+#             'repository_name': ALL,
+#             'created': ALL,
+#         }
 #
 #
-#class TicketResource(ModelResource):
-#    class Meta:
-#        queryset = Ticket.objects.all()
-#        resource_name = 'ticket'
-#        excludes = ['collaborators', ]
-#        filtering = {
-#            'id': ALL,
-#            'summary': ALL,
-#            'description': ALL,
-#            'milestone': ALL,
-#            'priority': ALL,
-#            'component': ALL,
-#            'version': ALL,
-#            'severity': ALL,
-#            'reporter': ALL,
-#            'author': ALL,
-#            'status': ALL,
-#            'keywords': ALL,
-#            'created': ALL,
-#            'modified': ALL,
-#            'modified_by': ALL,
-#        }
+# class TicketResource(ModelResource):
+#     class Meta:
+#         queryset = Ticket.objects.all()
+#         resource_name = 'ticket'
+#         excludes = ['collaborators', ]
+#         filtering = {
+#             'id': ALL,
+#             'summary': ALL,
+#             'description': ALL,
+#             'milestone': ALL,
+#             'priority': ALL,
+#             'component': ALL,
+#             'version': ALL,
+#             'severity': ALL,
+#             'reporter': ALL,
+#             'author': ALL,
+#             'status': ALL,
+#             'keywords': ALL,
+#             'created': ALL,
+#             'modified': ALL,
+#             'modified_by': ALL,
+#         }
 #
 #
-#class WikiResource(ModelResource):
-#    class Meta:
-#        queryset = Wiki.objects.all()
-#        resource_name = 'wiki'
-#        excludes = ['collaborators', ]
-#        filtering = {
-#            'name': ALL,
-#            'wiki_text': ALL,
-#            'author': ALL,
-#            'name': ALL,
-#            'created': ALL,
-#            'modified': ALL,
-#            'modified_by': ALL,
-#        }
+# class WikiResource(ModelResource):
+#     class Meta:
+#         queryset = Wiki.objects.all()
+#         resource_name = 'wiki'
+#         excludes = ['collaborators', ]
+#         filtering = {
+#             'name': ALL,
+#             'wiki_text': ALL,
+#             'author': ALL,
+#             'name': ALL,
+#             'created': ALL,
+#             'modified': ALL,
+#             'modified_by': ALL,
+#         }

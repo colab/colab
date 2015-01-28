@@ -57,7 +57,7 @@ class Message(mailbox.mboxMessage):
         """Get the body of the email message"""
 
         if self.is_multipart():
-            #get the plain text version only
+            # get the plain text version only
             text_parts = [part
                           for part in typed_subpart_iterator(self,
                                                              'text',
@@ -71,15 +71,15 @@ class Message(mailbox.mboxMessage):
 
             return u"\n".join(body).strip()
 
-        else:  # if it is not multipart, the payload will be a string
-               # representing the message body
+        else:   # if it is not multipart, the payload will be a string
+                # representing the message body
             body = unicode(self.get_payload(decode=True),
                            get_charset(self),
                            "replace")
             return body.strip()
 
     def get_received_datetime(self):
-        if not self in ('Received'):
+        if self not in ('Received'):
             return None
         # The time received should always be the last element
         #   in the `Received` attribute from the message headers
