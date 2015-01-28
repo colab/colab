@@ -2,7 +2,6 @@
 
 from collections import OrderedDict
 
-from django.http import HttpRequest
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
@@ -61,19 +60,19 @@ class UserForm(forms.ModelForm):
         if not username:
             raise forms.ValidationError(_('This field cannot be blank.'))
         return username
- 
+
     def clean_first_name(self):
-        first_name = self.cleaned_data["first_name"].strip() 
+        first_name = self.cleaned_data["first_name"].strip()
         if not first_name:
             raise forms.ValidationError(_('This field cannot be blank.'))
         return first_name
- 
+
     def clean_last_name(self):
         last_name = self.cleaned_data["last_name"].strip()
         if not last_name:
             raise forms.ValidationError(_('This field cannot be blank.'))
         return last_name
-   
+
     def clean_twitter(self):
         twitter = self.cleaned_data["twitter"]
         if twitter is not None and twitter.isspace():
@@ -89,11 +88,11 @@ class UserForm(forms.ModelForm):
     def clean_webpage(self):
         webpage = self.cleaned_data["webpage"].strip()
         return webpage
-   
+
     def clean_role(self):
         role = self.cleaned_data["role"].strip()
-        return role 
-    
+        return role
+
     def clean_institution(self):
         institution = self.cleaned_data["institution"].strip()
         return institution
@@ -101,11 +100,12 @@ class UserForm(forms.ModelForm):
     def clean_bio(self):
         bio = self.cleaned_data["bio"].strip()
         return bio
-    
+
     def clean_github(self):
         github = self.cleaned_data["github"].strip()
-        return github    
-    
+        return github
+
+
 class UserUpdateForm(UserForm):
     bio = forms.CharField(
         widget=forms.Textarea(attrs={'rows': '6', 'maxlength': '200'}),
