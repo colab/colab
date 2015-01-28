@@ -26,5 +26,6 @@ def ribbon(request):
         }
     }
 
+
 def browserid_enabled(request):
     return {'BROWSERID_ENABLED': getattr(settings, 'BROWSERID_ENABLED', False)}

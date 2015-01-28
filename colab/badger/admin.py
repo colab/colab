@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from django.contrib import admin
-from django.utils.translation import ugettext_lazy as _
 
 from .forms import BadgeForm
 from .models import Badge, BadgeI18N

@@ -1,7 +1,5 @@
 
 from django import template
-from django.conf import settings
-
 from colab.super_archives.utils import url
 
 
@@ -14,7 +12,7 @@ def display_message(email):
     if not email.blocks.count():
         email.update_blocks()
 
-    return { 'blocks': email.blocks.all }
+    return {'blocks': email.blocks.all}
 
 
 @register.simple_tag(takes_context=True)

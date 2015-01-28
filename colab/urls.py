@@ -4,14 +4,11 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 from django.views.generic import RedirectView
 
-from colab.accounts.models import User
-from .search.forms import ColabSearchForm
-from .super_archives.models import Message
-
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
     url(r'^dashboard$', 'colab.home.views.dashboard', name='dashboard'),
     url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
@@ -24,8 +21,12 @@ urlpatterns = patterns('',
     url(r'^api/', include('colab.api.urls')),
     url(r'^rss/', include('colab.rss.urls')),
 
-    url(r'^user/', include('colab.accounts.urls')),    # Kept for backwards compatibility
-    url(r'^signup/', include('colab.accounts.urls')),  # (same here) TODO: move to nginx
+    # Kept for backwards compatibility
+    url(r'^user/', include('colab.accounts.urls')),
+    # Kept for backwards compatibility
+    url(r'^user/', include('colab.accounts.urls')),
+    # (same here) TODO: move to nginx
+    url(r'^signup/', include('colab.accounts.urls')),
     url(r'^account/', include('colab.accounts.urls')),
 
     url(r'', include('django_browserid.urls')),

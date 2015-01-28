@@ -71,15 +71,15 @@ class Message(mailbox.mboxMessage):
 
             return u"\n".join(body).strip()
 
-        else: # if it is not multipart, the payload will be a string
-              # representing the message body
+        else:  # if it is not multipart, the payload will be a string
+               # representing the message body
             body = unicode(self.get_payload(decode=True),
                            get_charset(self),
                            "replace")
             return body.strip()
 
     def get_received_datetime(self):
-        if not self.has_key('Received'):
+        if not self in ('Received'):
             return None
         # The time received should always be the last element
         #   in the `Received` attribute from the message headers

@@ -15,8 +15,6 @@ from colab.super_archives.models import Thread
 
 def dashboard(request):
     """Dashboard page"""
-
-
     latest_threads = Thread.objects.all()[:6]
     hottest_threads = Thread.highest_score.from_haystack()[:6]
 
@@ -40,7 +38,7 @@ def dashboard(request):
         #    count_types['wiki'] = sum([
         #        wiki.count for wiki in WikiCollabCount.objects.all()
         #    ])
-        
+
         cache.set('home_chart', count_types)
 
     for key in count_types.keys():

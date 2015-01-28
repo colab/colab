@@ -39,7 +39,7 @@ class Badge(models.Model):
     image_base64 = models.TextField(_(u'Image'))
     type = models.CharField(_(u'Type'), max_length=200, choices=TYPE_CHOICES)
     user_attr = models.CharField(
-        _(u'User attribute'),max_length=100,
+        _(u'User attribute'), max_length=100,
         choices=USER_ATTR_CHOICES,
         blank=True,
         null=True,

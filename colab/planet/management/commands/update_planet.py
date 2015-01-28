@@ -1,5 +1,5 @@
 
-from django.conf import settings 
+from django.conf import settings
 
 from feedzilla.management.commands import feedzilla_update
 

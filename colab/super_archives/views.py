@@ -11,7 +11,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.db import IntegrityError
 from django.views.generic import View
-from django.core.paginator import Paginator, EmptyPage
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils.decorators import method_decorator
@@ -23,8 +22,8 @@ from haystack.query import SearchQuerySet
 from colab.accounts.utils import mailman
 from colab.accounts.models import User
 from .utils.email import send_verification_email
-from .models import MailingList, Thread, EmailAddress, \
-                    EmailAddressValidation, Message
+from .models import MailingList, Thread, EmailAddress
+from .models import EmailAddressValidation, Message
 
 
 class ThreadView(View):
@@ -83,7 +82,8 @@ class ThreadView(View):
             'body': request.POST.get('emailbody', '').strip(),
         }
 
-        url = urlparse.urljoin(settings.MAILMAN_API_URL, mailinglist + '/sendmail')
+        url = urlparse.urljoin(settings.MAILMAN_API_URL,
+                               mailinglist + '/sendmail')
 
         error_msg = None
         try:
@@ -110,7 +110,8 @@ class ThreadView(View):
                     elif resp.status_code == 404:
                         error_msg = _('Mailing list does not exist')
                 else:
-                    error_msg = _('Unknown error trying to connect to Mailman API')
+                    error_msg = _('Unknown error\
+                                   trying to connect to Mailman API')
             messages.error(request, error_msg)
 
         return self.get(request, mailinglist, thread_token)
@@ -125,7 +126,7 @@ class ThreadDashboardView(View):
         all_lists = mailman.all_lists(description=True)
 
         context['lists'] = []
-        lists = MailingList.objects.filter()
+        #lists = MailingList.objects.filter()
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,
@@ -134,7 +135,7 @@ class ThreadDashboardView(View):
                     '-latest_message__received_time'
                 )[:MAX],
                 SearchQuerySet().filter(type='thread', tag=list_.name)[:MAX],
-	        len(mailman.list_users(list_.name)),
+                len(mailman.list_users(list_.name)),
             ))
 
         return render(request, 'superarchives/thread-dashboard.html', context)
@@ -151,7 +152,7 @@ class EmailView(View):
             email_val = EmailAddressValidation.objects.get(validation_key=key)
         except EmailAddressValidation.DoesNotExist:
             messages.error(request, _('The email address you are trying to '
-                                      'verify either has already been verified '
+                                      'verify either has already been verified'
                                       'or does not exist.'))
             return redirect('/')
 
@@ -170,14 +171,12 @@ class EmailView(View):
         email.user = email_val.user
         email.save()
         email_val.delete()
-        
         user = User.objects.get(username=email.user.username)
         user.is_active = True
         user.save()
 
         messages.success(request, _('Email address verified!'))
         return redirect('user_profile', username=email_val.user.username)
-
 
     @method_decorator(login_required)
     def post(self, request, key):

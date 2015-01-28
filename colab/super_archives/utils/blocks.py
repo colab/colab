@@ -8,7 +8,7 @@ from html2text import html2text
 
 EXTENDED_PUNCTUATION = '!"#$%&\'()*+,-./:;=?@[\\]^_`{|}~ \t\n\r\x0b\x0c'
 RE_WRAPPED_BY_HTML = re.compile(r'^<[a-z]+[^>]*>.*</[a-z]+[^>]*>$',
-                                re.MULTILINE|re.IGNORECASE|re.DOTALL)
+                                re.MULTILINE | re.IGNORECASE | re.DOTALL)
 RE_LINKS = re.compile(r'(?P<link>https?://[^ \t\r\n\<]+)')
 LINK_MARKUP = u'<a target="_blank" href="\g<link>">\g<link></a>'
 
@@ -26,8 +26,8 @@ class EmailBlock(list):
     def _html2text(self, text):
         if RE_WRAPPED_BY_HTML.match(text.strip()):
             return html2text(text)
-            
-        text, n = RE_BR_TO_LINEBREAK.subn('\n', text) 
+
+        text, n = RE_BR_TO_LINEBREAK.subn('\n', text)
         text = strip_tags(text)
         return text
 
@@ -90,10 +90,11 @@ class EmailBlockParser(list):
             return True
 
         clean_line = RE_REPLY_LINE.subn('', stripped_line)[0]
-        queryset = self.thread_emails.filter(
-                        received_time__lt=self.email.received_time,
-                        body__contains=clean_line).order_by('-received_time')
-        
+        queryset = \
+            self.thread_emails.filter(
+                received_time__lt=self.email.received_time,
+                body__contains=clean_line).order_by('-received_time')
+
         if queryset[:1]:
             return True
 

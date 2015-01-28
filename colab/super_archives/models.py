@@ -38,11 +38,13 @@ class EmailAddressValidation(models.Model):
 
     @classmethod
     def create(cls, address, user):
-        email_address_validation = cls.objects.create(address=address, user=user)
-        email.send_verification_email(email_address_validation.address, 
-                email_address_validation.user, 
-                email_address_validation.validation_key)
+        email_address_validation = cls.objects.create(address=address,
+                                                      user=user)
+        email.send_verification_email(email_address_validation.address,
+                                      email_address_validation.user,
+                                      email_address_validation.validation_key)
         return email_address_validation
+
 
 class EmailAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
@@ -114,14 +116,17 @@ class Keyword(models.Model):
 class Thread(models.Model, HitCounterModelMixin):
 
     subject_token = models.CharField(max_length=512)
-    mailinglist = models.ForeignKey(MailingList,
-                                    verbose_name=_(u"Mailing List"),
-                                    help_text=_(u"The Mailing List where is the thread"))
-    latest_message = models.OneToOneField('Message', null=True,
-                                                     related_name='+',
-                                                     verbose_name=_(u"Latest message"),
-                                                     help_text=_(u"Latest message posted"))
-    score = models.IntegerField(default=0, verbose_name=_(u"Score"), help_text=_(u"Thread score"))
+    mailinglist = \
+        models.ForeignKey(
+            MailingList,
+            verbose_name=_(u"Mailing List"),
+            help_text=_(u"The Mailing List where is the thread"))
+    latest_message = \
+        models.OneToOneField('Message', null=True, related_name='+',
+                             verbose_name=_(u"Latest message"),
+                             help_text=_(u"Latest message posted"))
+    score = models.IntegerField(default=0, verbose_name=_(u"Score"),
+                                help_text=_(u"Thread score"))
     spam = models.BooleanField(default=False)
 
     highest_score = HighestScore()
@@ -204,8 +209,8 @@ class Thread(models.Model, HitCounterModelMixin):
         #   function N times in the loops below
         now = timezone.now()
         days_ago = lambda date: (now - date).days
-        get_score = lambda weight, created: \
-                                  max(weight - (days_ago(created) // 3), 5)
+        get_score = lambda weight, created: max(weight - (days_ago(created)
+                                                // 3), 5)
 
         vote_score = 0
         replies_score = 0
@@ -382,7 +387,6 @@ class MessageBlock(models.Model):
                                    message=message,
                                    order=order)
         return obj
-
 
 
 class MessageMetadata(models.Model):

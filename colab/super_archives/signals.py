@@ -13,7 +13,7 @@ def create_email_address(sender, instance, created, **kwargs):
 
     email, email_created = EmailAddress.objects.get_or_create(
         address=instance.email,
-        defaults= {
+        defaults={
             'real_name': instance.get_full_name(),
             'user': instance,
         }

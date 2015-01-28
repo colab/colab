@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from haystack.query import SearchQuerySet
 
 from colab.accounts.models import User
 from colab.badger.models import Badge
 
 import logging
+
 
 class Command(BaseCommand):
     help = "Update the user's badges"
@@ -23,7 +24,7 @@ class Command(BaseCommand):
                 continue
 
             comparison = u'__{}'.format(badge.comparison) if badge.comparison \
-                    is not 'equal' else u''
+                         is not 'equal' else u''
 
             key = u'{}{}'.format(
                 Badge.USER_ATTR_OPTS[badge.user_attr],

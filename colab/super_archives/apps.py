@@ -7,4 +7,5 @@ class SuperArchivesConfig(AppConfig):
     verbose_name = 'Super Archives'
 
     def ready(self):
-        from . import signals
+        pass
+        #from . import signals

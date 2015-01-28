@@ -8,8 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
 from haystack.inputs import AltParser
 
-from colab.accounts.models import User
-from colab.super_archives.models import Message, MailingList
+from colab.super_archives.models import MailingList
 
 
 class ColabSearchForm(SearchForm):
@@ -90,8 +89,8 @@ class ColabSearchForm(SearchForm):
                 sqs = sqs.filter_or(**filter_sizes_exp)
 
         if self.cleaned_data['used_by']:
-            sqs = sqs.filter_or(used_by__in=self.cleaned_data['used_by'].split())
-
+            sqs = sqs.filter_or(used_by__in=self.cleaned_data['used_by']
+                                                .split())
 
         if self.cleaned_data['q']:
             q = unicodedata.normalize(
@@ -103,7 +102,8 @@ class ColabSearchForm(SearchForm):
                 'pf': 'title^2.1 author^1.9 description^1.7',
                 'mm': '2<70%',
 
-                # Date boosting: http://wiki.apache.org/solr/FunctionQuery#Date_Boosting
+                # Date boosting:
+                # http://wiki.apache.org/solr/FunctionQuery#Date_Boosting
                 'bf': 'recip(ms(NOW/HOUR,modified),3.16e-11,1,1)^10',
             }
 
@@ -124,8 +124,9 @@ class ColabSearchForm(SearchForm):
             )
 
         if self.cleaned_data['modified_by']:
+            modified_by_data = self.cleaned_date['modified_by']
             sqs = sqs.filter(
-                fullname_and_username__contains=self.cleaned_data['modified_by']
+                fullname_and_username__contains=modified_by_data
             )
 
         if self.cleaned_data['milestone']:

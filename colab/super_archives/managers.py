@@ -1,7 +1,6 @@
 from django.db import models
 
 from haystack.query import SearchQuerySet
-import django
 
 
 class NotSpamManager(models.Manager):

@@ -1,6 +1,6 @@
 
 from setuptools import setup, find_packages
- 
+
 
 REQUIREMENTS = [
     'Django>=1.7',

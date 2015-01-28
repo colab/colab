@@ -11,13 +11,14 @@ class EmailAddressAdmin(admin.ModelAdmin):
         'user__last_name',
     )
 
+
 class MessageAdmin(admin.ModelAdmin):
     list_filter = ('spam', 'thread__mailinglist', 'received_time', )
     search_fields = (
         'id',
         'subject',
         'subject_clean',
-        'body', 
+        'body',
         'from_address__real_name',
         'from_address__address',
         'from_address__user__first_name',
@@ -40,14 +41,14 @@ class ThreadAdmin(admin.ModelAdmin):
         'message__from_address__user__last_name',
         'message__from_address__user__username',
     )
-    
+
     readonly_fields = (
         'mailinglist',
         'subject_token',
         'latest_message',
         'score',
     )
-    
+
     fields = (
         'mailinglist',
         'subject_token',
@@ -55,10 +56,9 @@ class ThreadAdmin(admin.ModelAdmin):
         'score',
         'spam',
     )
-    
+
 
 admin.site.register(MailingList)
 admin.site.register(Thread, ThreadAdmin)
 admin.site.register(Message, MessageAdmin)
 admin.site.register(EmailAddress, EmailAddressAdmin)
-

@@ -145,17 +145,19 @@ class ColabSearchView(SearchView):
         size_choices = ()
         used_by_choices = ()
 
-        if type_chosen == 'attachment':
-            mimetype_choices = [(type_, display) for type_, display, mimelist_ in settings.FILE_TYPE_GROUPINGS]
-            size_choices = [
-                ('<500KB', u'< 500 KB'),
-                ('500KB__10MB', u'>= 500 KB <= 10 MB'),
-                ('>10MB', u'> 10 MB'),
-            ]
-            used_by_choices = set([
-                (v, v) for v in Attachment.objects.values_list(
-                'used_by', flat=True)
-            ])
+        #if type_chosen == 'attachment':
+        #    mimetype_choices = [
+        #        (type_, display)
+        #        for type_, display, mimelist_ in settings.FILE_TYPE_GROUPINGS]
+        #    size_choices = [
+        #        ('<500KB', u'< 500 KB'),
+        #        ('500KB__10MB', u'>= 500 KB <= 10 MB'),
+        #        ('>10MB', u'> 10 MB'),
+        #    ]
+        #    used_by_choices = set([
+        #        (v, v) for v in Attachment.objects.values_list('used_by',
+        #                                                       flat=True)
+        #    ])
 
         mimetype_chosen = self.request.GET.get('mimetype')
         size_chosen = self.request.GET.get('size')
