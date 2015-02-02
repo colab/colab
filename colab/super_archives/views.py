@@ -17,13 +17,11 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
-from haystack.query import SearchQuerySet
-
 from colab.accounts.utils import mailman
 from colab.accounts.models import User
 from .utils.email import send_verification_email
-from .models import MailingList, Thread, EmailAddress
-from .models import EmailAddressValidation, Message
+from .models import (MailingList, Thread, EmailAddress,
+                     EmailAddressValidation, Message)
 
 
 class ThreadView(View):
@@ -110,8 +108,9 @@ class ThreadView(View):
                     elif resp.status_code == 404:
                         error_msg = _('Mailing list does not exist')
                 else:
-                    error_msg = _('Unknown error\
-                                   trying to connect to Mailman API')
+                    error_msg = \
+                        _('Unknown error trying to connect to Mailman API')
+
             messages.error(request, error_msg)
 
         return self.get(request, mailinglist, thread_token)
@@ -126,7 +125,7 @@ class ThreadDashboardView(View):
         all_lists = mailman.all_lists(description=True)
 
         context['lists'] = []
-        # lists = MailingList.objects.filter()
+
         for list_ in MailingList.objects.order_by('name'):
             context['lists'].append((
                 list_.name,
@@ -134,7 +133,8 @@ class ThreadDashboardView(View):
                 list_.thread_set.filter(spam=False).order_by(
                     '-latest_message__received_time'
                 )[:MAX],
-                SearchQuerySet().filter(type='thread', tag=list_.name)[:MAX],
+                [t.latest_message for t in Thread.highest_score.filter(
+                    mailinglist__name=list_.name)[:MAX]],
                 len(mailman.list_users(list_.name)),
             ))
 
@@ -171,6 +171,7 @@ class EmailView(View):
         email.user = email_val.user
         email.save()
         email_val.delete()
+
         user = User.objects.get(username=email.user.username)
         user.is_active = True
         user.save()

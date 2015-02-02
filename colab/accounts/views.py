@@ -1,9 +1,5 @@
-#!/usr/bin/env python
 # encoding: utf-8
-
 from collections import OrderedDict
-
-from haystack.exceptions import SearchBackendError
 
 from django.conf import settings
 from django.contrib import messages
@@ -18,15 +14,13 @@ from django.views.generic import DetailView, UpdateView, TemplateView
 
 from conversejs import xmpp
 from conversejs.models import XMPPAccount
-from haystack.query import SearchQuerySet
 
 from colab.super_archives.models import (EmailAddress, Message,
                                          EmailAddressValidation)
-from colab.search.utils import trans
-# from proxy.trac.models import WikiCollabCount, TicketCollabCount
+from colab.search.utils import get_collaboration_data
+
 from .forms import (UserCreationForm, UserForm, ListsForm,
                     UserUpdateForm, ChangeXMPPPasswordForm)
-# from .errors import XMPPChangePwdException
 from .utils import mailman
 
 
@@ -71,54 +65,21 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         count_types = OrderedDict()
 
-        fields_or_lookup = (
-            {'collaborators__contains': user.username},
-            {'fullname_and_username__contains': user.username},
-        )
+        collaborations, count_types_extras = get_collaboration_data(user)
 
-        counter_class = {}
-        # {
-        #     'wiki': WikiCollabCount,
-        #     'ticket': TicketCollabCount,
-        # }
+        collaborations.sort(key=lambda elem: elem.modified, reverse=True)
 
-        types = ['thread']
-        # types.extend(['ticket', 'wiki', 'changeset', 'attachment'])
-
-        messages = Message.objects.filter(from_address__user__pk=user.pk)
-        for type in types:
-            CounterClass = counter_class.get(type)
-            if CounterClass:
-                try:
-                    counter = CounterClass.objects.get(author=user.username)
-                except CounterClass.DoesNotExist:
-                    count_types[trans(type)] = 0
-                else:
-                    count_types[trans(type)] = counter.count
-            elif type == 'thread':
-                count_types[trans(type)] = messages.count()
-            else:
-                sqs = SearchQuerySet()
-                for filter_or in fields_or_lookup:
-                    sqs = sqs.filter_or(type=type, **filter_or)
-                count_types[trans(type)] = sqs.count()
+        count_types.update(count_types_extras)
 
         context['type_count'] = count_types
-
-        sqs = SearchQuerySet()
-        for filter_or in fields_or_lookup:
-            sqs = sqs.filter_or(**filter_or).exclude(type='thread')
-
-        try:
-            context['results'] = sqs.order_by('-modified', '-created')[:10]
-        except SearchBackendError:
-            context['results'] = sqs.order_by('-modified')[:10]
+        context['results'] = collaborations[:10]
 
         email_pks = [addr.pk for addr in user.emails.iterator()]
         query = Message.objects.filter(from_address__in=email_pks)
         query = query.order_by('-received_time')
         context['emails'] = query[:10]
 
+        messages = Message.objects.filter(from_address__user__pk=user.pk)
         count_by = 'thread__mailinglist__name'
         context['list_activity'] = dict(messages.values_list(count_by)
                                                 .annotate(Count(count_by))
