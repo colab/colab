@@ -21,7 +21,8 @@ def get_collaboration_data(filter_by_user=None):
         count_types[_('Emails')] = Thread.objects.count()
 
     if filter_by_user:
-        messages = Message.objects.filter(from_address__user__pk=filter_by_user.pk)
+        messages = Message.objects.filter(
+            from_address__user__pk=filter_by_user.pk)
     else:
         latest_threads = Thread.objects.all()[:6]
         messages = [t.latest_message for t in latest_threads]
