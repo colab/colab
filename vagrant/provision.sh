@@ -31,3 +31,4 @@ if [ ! -s /etc/colab/settings.yaml ]; then
 fi
 
 colab-admin migrate
+colab-admin loaddata /vagrant/tests/test_data.json

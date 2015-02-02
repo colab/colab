@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 
 class GitlabProject(models.Model):
@@ -10,3 +11,7 @@ class GitlabProject(models.Model):
     name_with_namespace = models.TextField()
     created_at = models.DateTimeField(blank=True)
     last_activity_at = models.DateTimeField(blank=True)
+
+    class Meta:
+        verbose_name = _('Gitlab Project')
+        verbose_name_plural = _('Gitlab Projects')
