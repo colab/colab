@@ -7,7 +7,7 @@ from dateutil.parser import parse
 from django.conf import settings
 from django.db.models.fields import DateTimeField
 
-from colab.proxy.gitlab.models import GitlabProject
+from colab.proxy.gitlab.models import GitlabProject, GitlabMergeRequest
 from colab.proxy.utils.proxy_data_api import ProxyDataAPI
 
 
@@ -25,14 +25,14 @@ class GitlabDataAPI(ProxyDataAPI):
 
         return u'{}{}?{}'.format(upstream, path, params)
 
-    def fetchProjects(self):
+    def fetch_projects(self):
         page = 1
         projects = []
 
         # Iterates throughout all projects pages
         while(True):
             url = self.get_request_url('/api/v3/projects/all',
-                                       per_page=100,
+                                       per_page=1000,
                                        page=page)
             data = urllib2.urlopen(url)
             json_data = json.load(data)
@@ -57,10 +57,59 @@ class GitlabDataAPI(ProxyDataAPI):
 
         return projects
 
+    def fetch_merge_request(self, projects):
+        page = 1
+        all_merge_request = []
+
+        # Iterate under all projects
+        for project in projects:
+            # Iterate under all MR inside project
+            while(True):
+                merge_request_url = \
+                    '/api/v3/projects/{}/merge_requests'.format(project.id)
+                url = self.get_request_url(merge_request_url,
+                                           per_page=1000,
+                                           page=page)
+
+                data = urllib2.urlopen(url)
+                json_data_mr = json.load(data)
+
+                if len(json_data_mr) == 0:
+                    break
+
+                page = page + 1
+                for element in json_data_mr:
+                    single_merge_request = GitlabMergeRequest()
+
+                    for field in GitlabMergeRequest._meta.fields:
+                        if field.name == "user":
+                            single_merge_request.update_user(
+                                element["author"]["username"])
+                            continue
+                        if field.name == "project":
+                            single_merge_request.project_id = \
+                                element["project_id"]
+                            continue
+
+                        if isinstance(field, DateTimeField):
+                            value = parse(element[field.name])
+                        else:
+                            value = element[field.name]
+
+                        setattr(single_merge_request, field.name, value)
+
+                    all_merge_request.append(single_merge_request)
+
+        return all_merge_request
+
     def fetch_data(self):
-        data = self.fetchProjects()
+        data = self.fetch_projects()
+        merge_request_list = self.fetch_merge_request(data)
 
         for datum in data:
+            datum.save()
+        for datum in merge_request_list:
+            print datum.__dict__
             datum.save()
 
     @property
