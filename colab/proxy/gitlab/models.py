@@ -37,7 +37,7 @@ class GitlabMergeRequest(Collaboration):
 class GitlabIssue(Collaboration):
 
     id = models.IntegerField(primary_key=True)
-    project_id = models.ForeignKey(GitlabProject, null=True,
+    project = models.ForeignKey(GitlabProject, null=True,
                                    on_delete=models.SET_NULL)
     title = models.TextField()
     description = models.TextField()
