@@ -53,8 +53,6 @@ class GitlabComment(Collaboration):
 
     id = models.IntegerField(primary_key=True)
     body = models.TextField()
-    author_email = models.EmailField(null=True, blank=True)
-    author_name = models.TextField()
     created_at = models.DateTimeField(blank=True)
 
     class Meta:
