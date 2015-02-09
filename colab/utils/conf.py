@@ -2,6 +2,8 @@
 import os
 import yaml
 
+import yamlordereddictloader
+
 from django.core.exceptions import ImproperlyConfigured
 
 
@@ -14,7 +16,8 @@ class InaccessibleYAMLSettings(ImproperlyConfigured):
 def _load_yaml_file(yaml_path):
     try:
         with open(yaml_path) as yaml_file:
-            yaml_settings = yaml.load(yaml_file.read())
+            yaml_settings = yaml.load(yaml_file.read(),
+                                      yamlordereddictloader.Loader)
     except IOError:
         msg = ('Could not open settings file {}. Please '
                'check if the file exists and if user '

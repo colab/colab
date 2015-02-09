@@ -7,8 +7,7 @@ from django.views.generic import RedirectView
 
 admin.autodiscover()
 
-urlpatterns = patterns(
-    '',
+urlpatterns = patterns('',
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
     url(r'^dashboard$', 'colab.home.views.dashboard', name='dashboard'),
     url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
@@ -35,8 +34,6 @@ urlpatterns = patterns(
 
     url(r'^planet/', include('feedzilla.urls')),
 
-    url(r'paste/', include('dpaste.urls.dpaste')),
-
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 
@@ -44,6 +41,8 @@ urlpatterns = patterns(
     url(r'^gitlab/', include('colab.proxy.gitlab.urls')),
     url(r'^social/', include('colab.proxy.noosfero.urls')),
     url(r'^ci/', include('colab.proxy.jenkins.urls')),
+
+    url(r'', include('colab.plugins.urls')),
 )
 
 if settings.DEBUG:

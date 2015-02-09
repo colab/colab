@@ -50,7 +50,6 @@ INSTALLED_APPS = (
     'hitcounter',
     'i18n_model',
     'mptt',
-    'dpaste',
     'taggit',
 
     # Own apps
@@ -292,19 +291,6 @@ CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
-# Dpaste settings
-DPASTE_EXPIRE_CHOICES = (
-    ('onetime', _(u'One Time Snippet')),
-    (3600, _(u'In one hour')),
-    (3600 * 24 * 7, _(u'In one week')),
-    (3600 * 24 * 30, _(u'In one month')),
-    ('never', _(u'Never')),
-)
-DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
-DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created from Colab DPaste'
-DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
-DPASTE_LEXER_DEFAULT = 'text'
-
 from .utils.conf import load_yaml_settings
 locals().update(load_yaml_settings())
 
@@ -328,3 +314,8 @@ PROXIED_APPS = locals().get('PROXIED_APPS') or {}
 
 for app_label in PROXIED_APPS.keys():
     INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)
+
+COLAB_APPS = locals().get('COLAB_APPS') or {}
+
+for app in COLAB_APPS:
+    INSTALLED_APPS += (app,)
