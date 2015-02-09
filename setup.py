@@ -48,8 +48,8 @@ REQUIREMENTS = [
     # Diazo
     'diazo==1.0.5',
 
-    # Dpaste
-    'dpaste==2.8',
+    # Mailman 2 REST API
+    'mailman-api==0.2.9',
 ]
 
 TEST_REQUIREMENTS = [
