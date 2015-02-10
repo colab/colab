@@ -59,7 +59,6 @@ class GitlabDataAPI(ProxyDataAPI):
 
     def fetch_merge_request(self, projects):
         all_merge_request = []
-
         # Iterate under all projects
         for project in projects:
             page = 1
@@ -92,7 +91,7 @@ class GitlabDataAPI(ProxyDataAPI):
                             continue
 
                         if isinstance(field, DateTimeField):
-                            value = parse(element[field.name])
+                            value = parse(element["created_at"])
                         else:
                             value = element[field.name]
 
@@ -135,7 +134,7 @@ class GitlabDataAPI(ProxyDataAPI):
                             continue
 
                         if isinstance(field, DateTimeField):
-                            value = parse(element[field.name])
+                            value = parse(element["created_at"])
                         else:
                             value = element[field.name]
 
@@ -184,9 +183,19 @@ class GitlabDataAPI(ProxyDataAPI):
                             single_comment.update_user(
                                 element["author"]["username"])
                             continue
+                        if field.name == "project":
+                            single_comment.project = \
+                                merge_request.project
+                            continue
+                        if field.name == "issue_comment":
+                            single_comment.issue_comment = False
+                            continue
+                        if field.name == "parent_id":
+                            single_comment.parent_id = merge_request.id
+                            continue
 
                         if isinstance(field, DateTimeField):
-                            value = parse(element[field.name])
+                            value = parse(element["created_at"])
                         else:
                             value = element[field.name]
 
@@ -227,9 +236,19 @@ class GitlabDataAPI(ProxyDataAPI):
                             single_comment.update_user(
                                 element["author"]["username"])
                             continue
+                        if field.name == "project":
+                            single_comment.project = \
+                                issue.project
+                            continue
+                        if field.name == "issue_comment":
+                            single_comment.issue_comment = True
+                            continue
+                        if field.name == "parent_id":
+                            single_comment.parent_id = issue.id
+                            continue
 
                         if isinstance(field, DateTimeField):
-                            value = parse(element[field.name])
+                            value = parse(element["created_at"])
                         else:
                             value = element[field.name]
 
@@ -240,18 +259,22 @@ class GitlabDataAPI(ProxyDataAPI):
         return all_comments
 
     def fetch_data(self):
+        print "projects"
         projects = self.fetch_projects()
         for datum in projects:
             datum.save()
 
-#        merge_request_list = self.fetch_merge_request(projects)
-#        for datum in merge_request_list:
-#            datum.save()
+        print "MR"
+        merge_request_list = self.fetch_merge_request(projects)
+        for datum in merge_request_list:
+            datum.save()
 
+        print "issues"
         issue_list = self.fetch_issue(projects)
         for datum in issue_list:
             datum.save()
 
+        print "comments"
         comments_list = self.fetch_comments()
         for datum in comments_list:
             datum.save()
