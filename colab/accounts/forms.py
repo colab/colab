@@ -15,7 +15,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from conversejs.models import XMPPAccount
 
-from colab import settings
+from django.conf import settings
 
 from .utils.validators import validate_social_account
 from .utils import mailman
