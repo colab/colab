@@ -25,34 +25,50 @@ class GitlabDataAPI(ProxyDataAPI):
 
         return u'{}{}?{}'.format(upstream, path, params)
 
+    def get_json_data(self, api_url, page=1, pages=1000):
+        url = self.get_request_url(api_url, per_page=pages,
+                                   page=page)
+        data = urllib2.urlopen(url)
+        json_data = json.load(data)
+
+        return json_data
+
+    def fill_object_data(self, element, _object):
+        for field in _object._meta.fields:
+            if field.name == "user":
+                _object.update_user(
+                    element["author"]["username"])
+                continue
+            if field.name == "project":
+                _object.project_id = \
+                    element["project_id"]
+                continue
+
+            if isinstance(field, DateTimeField):
+                value = parse(element["created_at"])
+            else:
+                value = element[field.name]
+
+            setattr(_object, field.name, value)
+
+        return _object
+
     def fetch_projects(self):
         page = 1
         projects = []
 
         # Iterates throughout all projects pages
-        while(True):
-            url = self.get_request_url('/api/v3/projects/all',
-                                       per_page=1000,
-                                       page=page)
-            data = urllib2.urlopen(url)
-            json_data = json.load(data)
+        while True:
+            json_data = self.get_json_data('/api/v3/projects/all', page)
 
-            if len(json_data) == 0:
+            if not len(json_data):
                 break
 
             page = page + 1
 
             for element in json_data:
                 project = GitlabProject()
-
-                for field in GitlabProject._meta.fields:
-                    if isinstance(field, DateTimeField):
-                        value = parse(element[field.name])
-                    else:
-                        value = element[field.name]
-
-                    setattr(project, field.name, value)
-
+                self.fill_object_data(element, project)
                 projects.append(project)
 
         return projects
@@ -66,12 +82,7 @@ class GitlabDataAPI(ProxyDataAPI):
             while(True):
                 merge_request_url = \
                     '/api/v3/projects/{}/merge_requests'.format(project.id)
-                url = self.get_request_url(merge_request_url,
-                                           per_page=1000,
-                                           page=page)
-
-                data = urllib2.urlopen(url)
-                json_data_mr = json.load(data)
+                json_data_mr = self.get_json_data(merge_request_url, page)
 
                 if len(json_data_mr) == 0:
                     break
@@ -79,24 +90,7 @@ class GitlabDataAPI(ProxyDataAPI):
                 page = page + 1
                 for element in json_data_mr:
                     single_merge_request = GitlabMergeRequest()
-
-                    for field in GitlabMergeRequest._meta.fields:
-                        if field.name == "user":
-                            single_merge_request.update_user(
-                                element["author"]["username"])
-                            continue
-                        if field.name == "project":
-                            single_merge_request.project_id = \
-                                element["project_id"]
-                            continue
-
-                        if isinstance(field, DateTimeField):
-                            value = parse(element["created_at"])
-                        else:
-                            value = element[field.name]
-
-                        setattr(single_merge_request, field.name, value)
-
+                    self.fill_object_data(element, single_merge_request)
                     all_merge_request.append(single_merge_request)
 
         return all_merge_request
@@ -111,11 +105,8 @@ class GitlabDataAPI(ProxyDataAPI):
             while(True):
                 issue_url = \
                     '/api/v3/projects/{}/issues'.format(project.id)
-                url = self.get_request_url(issue_url, per_page=1000,
-                                           page=page)
 
-                data = urllib2.urlopen(url)
-                json_data_issue = json.load(data)
+                json_data_issue = self.get_json_data(issue_url, page)
 
                 if len(json_data_issue) == 0:
                     break
@@ -123,30 +114,13 @@ class GitlabDataAPI(ProxyDataAPI):
                 page = page + 1
                 for element in json_data_issue:
                     single_issue = GitlabIssue()
-
-                    for field in GitlabIssue._meta.fields:
-                        if field.name == "project":
-                            single_issue.project_id = element["project_id"]
-                            continue
-                        if field.name == "user":
-                            single_issue.update_user(
-                                element["author"]["username"])
-                            continue
-
-                        if isinstance(field, DateTimeField):
-                            value = parse(element["created_at"])
-                        else:
-                            value = element[field.name]
-
-                        setattr(single_issue, field.name, value)
-
+                    self.fill_object_data(element, single_issue)
                     all_issues.append(single_issue)
 
         return all_issues
 
     def fetch_comments(self):
         all_comments = []
-
         all_comments.extend(self.fetch_comments_MR())
         all_comments.extend(self.fetch_comments_issues())
 
@@ -160,15 +134,9 @@ class GitlabDataAPI(ProxyDataAPI):
             page = 1
             # Iterate under all comments of MR inside project
             while(True):
-                merge_request_url = \
-                    '/api/v3/projects/{}/merge_requests/{}/notes' \
-                    .format(merge_request.project_id, merge_request.id)
-                url = self.get_request_url(merge_request_url,
-                                           per_page=1000,
-                                           page=page)
-
-                data = urllib2.urlopen(url)
-                json_data_mr = json.load(data)
+                mr_url = '/api/v3/projects/{}/merge_requests/{}/notes'.format(
+                    merge_request.project_id, merge_request.id)
+                json_data_mr = self.get_json_data(mr_url, page)
 
                 if len(json_data_mr) == 0:
                     break
@@ -217,12 +185,7 @@ class GitlabDataAPI(ProxyDataAPI):
                 issue_comments_request_url = \
                     '/api/v3/projects/{}/issues/{}/notes' \
                     .format(issue.project_id, issue.id)
-                url = self.get_request_url(issue_comments_request_url,
-                                           per_page=1000,
-                                           page=page)
-
-                data = urllib2.urlopen(url)
-                json_data_mr = json.load(data)
+                json_data_mr = self.get_json_data(issue_comments_request_url, page)
 
                 if len(json_data_mr) == 0:
                     break
