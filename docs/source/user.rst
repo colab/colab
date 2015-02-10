@@ -35,6 +35,15 @@ SVN
 +++
 .. TODO
 
+Social Networks
+++++
+.. attribute:: SOCIAL_NETWORK_ENABLED
+
+   :default: False
+
+   When this variable is True, the social networks fields, like Facebook and 
+   Twitter, are added in user profile. By default, this fields are disabled.
+
 Auth
 ++++
 .. attribute:: BROWSERID_ENABLED
