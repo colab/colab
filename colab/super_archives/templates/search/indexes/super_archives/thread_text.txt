@@ -2,6 +2,9 @@
 
 {% for message in object.message_set.iterator %}
   {{ message.title }}
+  {{ message.title|slugify }}
   {{ message.author }}
+  {{ message.author|slugify }}
+  {{ message.body }}
   {{ message.body|slugify }}
 {% endfor %}
