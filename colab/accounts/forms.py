@@ -15,10 +15,14 @@ from django.utils.translation import ugettext_lazy as _
 
 from conversejs.models import XMPPAccount
 
+from colab import settings
+
 from .utils.validators import validate_social_account
 from .utils import mailman
 
 User = get_user_model()
+
+SOCIAL_NETWORK_ENABLED = getattr(settings, 'SOCIAL_NETWORK_ENABLED')
 
 
 class SocialAccountField(forms.Field):
@@ -107,6 +111,7 @@ class UserForm(forms.ModelForm):
 
 
 class UserUpdateForm(UserForm):
+
     bio = forms.CharField(
         widget=forms.Textarea(attrs={'rows': '6', 'maxlength': '200'}),
         max_length=200,
@@ -122,12 +127,16 @@ class UserUpdateForm(UserForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name',
-                  'institution', 'role', 'twitter', 'facebook',
-                  'google_talk', 'github', 'webpage', 'bio')
+                  'institution', 'role')
+        if SOCIAL_NETWORK_ENABLED:
+            fields += ('twitter', 'facebook', 'google_talk', 'github')
+        fields += ('webpage', 'bio')
 
-    twitter = SocialAccountField(url='https://twitter.com/', required=False)
-    facebook = SocialAccountField(url='https://graph.facebook.com/',
-                                  required=False)
+    if SOCIAL_NETWORK_ENABLED:
+        twitter = SocialAccountField(url='https://twitter.com/',
+                                     required=False)
+        facebook = SocialAccountField(url='https://graph.facebook.com/',
+                                      required=False)
 
 
 class ListsForm(forms.Form):
