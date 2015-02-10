@@ -1,5 +1,7 @@
 {{ object.subject_token }}
 
 {% for message in object.message_set.iterator %}
+  {{ message.title }}
+  {{ message.author }}
   {{ message.body|slugify }}
 {% endfor %}
