@@ -1,7 +1,7 @@
 %define name colab
-%define version 2.0a2
-%define unmangled_version 2.0a2
-%define release 2
+%define version 2.0a3
+%define unmangled_version 2.0a3
+%define release 3
 %define buildvenv /var/tmp/%{name}-%{version}
 
 Summary: Collaboration platform for communities
@@ -91,6 +91,79 @@ fi
 
 usermod --append --groups mailman colab
 
+mkdir -p /etc/colab
+
+if [ ! -f /etc/colab/settings.yaml ]; then
+  SECRET_KEY=$(openssl rand -hex 32)
+  cat > /etc/colab/settings.yaml <<EOF
+## Set to false in production
+DEBUG: true
+TEMPLATE_DEBUG: true
+
+## System admins
+ADMINS: &admin
+-
+  - John Foo
+  - john@example.com
+-
+  - Mary Bar
+  - mary@example.com
+
+MANAGERS: *admin
+
+COLAB_FROM_ADDRESS: '"Colab" <noreply@example.com>'
+SERVER_EMAIL: '"Colab" <noreply@example.com>'
+
+EMAIL_HOST: localhost
+EMAIL_PORT: 25
+EMAIL_SUBJECT_PREFIX: '[colab]'
+
+SECRET_KEY: '$SECRET_KEY'
+
+SITE_URL: 'http://localhost:8000'
+BROWSERID_AUDIENCES:
+- http://localhost:8000
+#  - http://example.com
+#  - https://example.org
+#  - http://example.net
+
+ALLOWED_HOSTS:
+- localhost
+#  - example.com
+#  - example.org
+#  - example.net
+
+## Disable indexing
+ROBOTS_NOINDEX: false
+
+#PROXIED_APPS:
+#   gitlab:
+#     upstream: 'http://localhost:8080/gitlab/'
+
+## Enabled BROWSER_ID protocol
+#  BROWSERID_ENABLED: True
+EOF
+  chown root:colab /etc/colab/settings.yaml
+  chmod 0640 /etc/colab/settings.yaml
+fi
+
+mkdir -p /etc/colab/settings.d
+
+if [ ! -f /etc/colab/settings.d/00-database.yaml ]; then
+  cat > /etc/colab/settings.d/00-database.yaml <<EOF
+DATABASES:
+default:
+  ENGINE: django.db.backends.postgresql_psycopg2
+  NAME: colab
+  USER: colab
+  HOST: localhost
+  PORT: 5432
+EOF
+  chown root:colab /etc/colab/settings.d/00-database.yaml
+  chmod 0640 /etc/colab/settings.d/00-database.yaml
+fi
+
+
 # only applies if there is a local PostgreSQL server
 if [ -x /usr/bin/postgres ]; then
 
@@ -109,79 +182,6 @@ if [ -x /usr/bin/postgres ]; then
     sudo -u postgres -i createdb --owner=colab colab
   fi
 
-  mkdir -p /etc/colab
-
-  if [ ! -f /etc/colab/settings.yaml ]; then
-    SECRET_KEY=$(openssl rand -hex 32)
-    cat > /etc/colab/settings.yaml <<EOF
-## Set to false in production
-DEBUG: true
-TEMPLATE_DEBUG: true
-
-## System admins
-ADMINS: &admin
-  -
-    - John Foo
-    - john@example.com
-  -
-    - Mary Bar
-    - mary@example.com
-
-MANAGERS: *admin
-
-COLAB_FROM_ADDRESS: '"Colab" <noreply@example.com>'
-SERVER_EMAIL: '"Colab" <noreply@example.com>'
-
-EMAIL_HOST: localhost
-EMAIL_PORT: 25
-EMAIL_SUBJECT_PREFIX: '[colab]'
-
-SECRET_KEY: '$SECRET_KEY'
-
-SITE_URL: 'http://localhost:8000'
-BROWSERID_AUDIENCES:
-  - http://localhost:8000
-#  - http://example.com
-#  - https://example.org
-#  - http://example.net
-
-ALLOWED_HOSTS:
-  - localhost
-#  - example.com
-#  - example.org
-#  - example.net
-
-## Disable indexing
-ROBOTS_NOINDEX: false
-
-#PROXIED_APPS:
-#   gitlab:
-#     upstream: 'http://localhost:8080/gitlab/'
-
-## Enabled BROWSER_ID protocol
-#  BROWSERID_ENABLED: True
-EOF
-    chown root:colab /etc/colab/settings.yaml
-    chmod 0640 /etc/colab/settings.yaml
-  fi
-
-  mkdir -p /etc/colab/settings.d
-
-  if [ ! -f /etc/colab/settings.d/00-database.yaml ]; then
-    cat > /etc/colab/settings.d/00-database.yaml <<EOF
-DATABASES:
-  default:
-    ENGINE: django.db.backends.postgresql_psycopg2
-    NAME: colab
-    USER: colab
-EOF
-    chown root:colab /etc/colab/settings.d/00-database.yaml
-    chmod 0640 /etc/colab/settings.d/00-database.yaml
-  fi
-
-fi
-
-if [ -f /etc/colab/settings.yaml ]; then
   colab-admin migrate
 fi
 
