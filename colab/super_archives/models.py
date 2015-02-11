@@ -134,6 +134,10 @@ class Thread(models.Model, HitCounterModelMixin):
     objects = NotSpamManager()
     tags = TaggableManager()
 
+    # Save this pseudo now to avoid calling the
+    #   function N times in the loops below
+    now = timezone.now()
+
     class Meta:
         verbose_name = _(u"Thread")
         verbose_name_plural = _(u"Threads")
@@ -182,6 +186,12 @@ class Thread(models.Model, HitCounterModelMixin):
                                  self.subject_token,
                                  self.message_set.count())
 
+    def _days_ago(self, date):
+        return (self.now - date).days
+
+    def _get_score(self, weight, created):
+        return max(weight - (self.days_ago(created) // 3), 5)
+
     def update_score(self):
         """Update the relevance score for this thread.
 
@@ -205,22 +215,15 @@ class Thread(models.Model, HitCounterModelMixin):
         if not self.subject_token:
             return
 
-        # Save this pseudo now to avoid calling the
-        #   function N times in the loops below
-        now = timezone.now()
-        days_ago = lambda date: (now - date).days
-        get_score = lambda weight, created: max(weight - (days_ago(created)
-                                                // 3), 5)
-
         vote_score = 0
         replies_score = 0
         for msg in self.message_set.all():
             # Calculate replies_score
-            replies_score += get_score(300, msg.received_time)
+            replies_score += self._get_score(300, msg.received_time)
 
             # Calculate vote_score
             for vote in msg.vote_set.all():
-                vote_score += get_score(100, vote.created)
+                vote_score += self._get_score(100, vote.created)
 
         # Calculate page_view_score
         page_view_score = self.hits * 10
