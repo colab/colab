@@ -12,7 +12,7 @@ REQUIREMENTS = [
     'python-dateutil==1.5',
     'django-cliauth==0.9.1',
     'django-mobile==0.3.0',
-    'django-haystack==2.1',
+    'django-haystack==2.2',
     'pysolr==2.1',
     'poster==0.8.1',
     'etiquetando==0.1',
