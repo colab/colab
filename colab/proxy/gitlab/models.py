@@ -3,7 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from colab.proxy.utils.models import Collaboration
 from hitcounter.models import HitCounterModelMixin
 
-import datetime
 
 class GitlabProject(models.Model, HitCounterModelMixin):
 
@@ -35,7 +34,11 @@ class GitlabMergeRequest(Collaboration):
     description = models.TextField()
     title = models.TextField()
     state = models.TextField()
-    modified = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
+
+    @property
+    def modified(self):
+        return self.created_at
 
     @property
     def tag(self):
@@ -46,10 +49,11 @@ class GitlabMergeRequest(Collaboration):
 
     @property
     def url(self):
-        return u'/gitlab/{}/merge_requests/{}'.format(self.project.path_with_namespace, self.id)
+        return u'/gitlab/{}/merge_requests/{}'.format(
+            self.project.path_with_namespace, self.id)
 
     def get_author(self):
-        return user
+        return self.user
 
     class Meta:
         verbose_name = _('Gitlab Merge Request')
@@ -60,20 +64,24 @@ class GitlabIssue(Collaboration):
 
     id = models.IntegerField(primary_key=True)
     project = models.ForeignKey(GitlabProject, null=True,
-                                   on_delete=models.SET_NULL)
+                                on_delete=models.SET_NULL)
     title = models.TextField()
     description = models.TextField()
 
     state = models.TextField()
-    modified = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
 
     icon_name = u'align-right'
     type = u'gitlab_issue'
 
     @property
-    def url(self):
-        return u'/gitlab/{}/issues/{}'.format(self.project.path_with_namespace, self.id)
+    def modified(self):
+        return self.created_at
 
+    @property
+    def url(self):
+        return u'/gitlab/{}/issues/{}'.format(
+            self.project.path_with_namespace, self.id)
 
     class Meta:
         verbose_name = _('Gitlab Issue')
@@ -84,8 +92,7 @@ class GitlabComment(Collaboration):
 
     id = models.IntegerField(primary_key=True)
     body = models.TextField()
-    created_at = models.DateTimeField(blank=True)
-    modified = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(blank=True, null=True)
     issue_comment = models.BooleanField(default=True)
 
     project = models.ForeignKey(GitlabProject, null=True,
@@ -93,6 +100,10 @@ class GitlabComment(Collaboration):
 
     parent_id = models.IntegerField(null=True)
     type = u'comment'
+
+    @property
+    def modified(self):
+        return self.created_at
 
     @property
     def title(self):
@@ -126,7 +137,6 @@ class GitlabComment(Collaboration):
         else:
             return u'/gitlab/{}/merge_requests/{}#notes_{}'.format(
                 self.project.path_with_namespace, self.parent_id, self.id)
-
 
     class Meta:
         verbose_name = _('Gitlab Comments')

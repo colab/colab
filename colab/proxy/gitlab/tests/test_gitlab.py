@@ -41,13 +41,12 @@ class GitlabTest(TestCase):
                          '/gitlab/softwarepublico/colab/issues/1')
 
     def test_comment_on_mr_url(self):
-        self.assertEqual(GitlabComment.objects.get(id=1).url,
-                         '/gitlab/softwarepublico/colab/merge_requests/1#notes_1')
+        url = '/gitlab/softwarepublico/colab/merge_requests/1#notes_1'
+        self.assertEqual(GitlabComment.objects.get(id=1).url, url)
 
     def test_comment_on_issue_url(self):
         self.assertEqual(GitlabComment.objects.get(id=2).url,
                          '/gitlab/softwarepublico/colab/issues/1#notes_2')
-
 
     def create_gitlab_data(self):
         g = GitlabProject()
@@ -113,4 +112,3 @@ class GitlabTest(TestCase):
         user.save()
 
         return user
-

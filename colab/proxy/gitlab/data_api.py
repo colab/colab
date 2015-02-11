@@ -7,7 +7,8 @@ from dateutil.parser import parse
 from django.conf import settings
 from django.db.models.fields import DateTimeField
 
-from colab.proxy.gitlab.models import GitlabProject, GitlabMergeRequest, GitlabComment, GitlabIssue
+from colab.proxy.gitlab.models import (GitlabProject, GitlabMergeRequest,
+                                       GitlabComment, GitlabIssue)
 from colab.proxy.utils.proxy_data_api import ProxyDataAPI
 
 
@@ -25,31 +26,38 @@ class GitlabDataAPI(ProxyDataAPI):
 
         return u'{}{}?{}'.format(upstream, path, params)
 
-    def get_json_data(self, api_url, page=1, pages=1000):
+    def get_json_data(self, api_url, page, pages=1000):
         url = self.get_request_url(api_url, per_page=pages,
                                    page=page)
-        data = urllib2.urlopen(url)
-        json_data = json.load(data)
+
+        try:
+            data = urllib2.urlopen(url, timeout=10)
+            json_data = json.load(data)
+        except urllib2.URLError:
+            print "Connection timeout: " + url
+            json_data = []
 
         return json_data
 
     def fill_object_data(self, element, _object):
         for field in _object._meta.fields:
-            if field.name == "user":
-                _object.update_user(
-                    element["author"]["username"])
-                continue
-            if field.name == "project":
-                _object.project_id = \
-                    element["project_id"]
-                continue
+            try:
+                if field.name == "user":
+                    _object.update_user(
+                        element["author"]["username"])
+                    continue
+                if field.name == "project":
+                    _object.project_id = element["project_id"]
+                    continue
 
-            if isinstance(field, DateTimeField):
-                value = parse(element["created_at"])
-            else:
-                value = element[field.name]
+                if isinstance(field, DateTimeField):
+                    value = parse(element[field.name])
+                else:
+                    value = element[field.name]
 
-            setattr(_object, field.name, value)
+                setattr(_object, field.name, value)
+            except KeyError:
+                continue
 
         return _object
 
@@ -57,14 +65,12 @@ class GitlabDataAPI(ProxyDataAPI):
         page = 1
         projects = []
 
-        # Iterates throughout all projects pages
         while True:
             json_data = self.get_json_data('/api/v3/projects/all', page)
+            page = page + 1
 
             if not len(json_data):
                 break
-
-            page = page + 1
 
             for element in json_data:
                 project = GitlabProject()
@@ -75,19 +81,17 @@ class GitlabDataAPI(ProxyDataAPI):
 
     def fetch_merge_request(self, projects):
         all_merge_request = []
-        # Iterate under all projects
+
         for project in projects:
             page = 1
-            # Iterate under all MR inside project
-            while(True):
-                merge_request_url = \
-                    '/api/v3/projects/{}/merge_requests'.format(project.id)
-                json_data_mr = self.get_json_data(merge_request_url, page)
+            while True:
+                url = '/api/v3/projects/{}/merge_requests'.format(project.id)
+                json_data_mr = self.get_json_data(url, page)
+                page = page + 1
 
                 if len(json_data_mr) == 0:
                     break
 
-                page = page + 1
                 for element in json_data_mr:
                     single_merge_request = GitlabMergeRequest()
                     self.fill_object_data(element, single_merge_request)
@@ -98,20 +102,16 @@ class GitlabDataAPI(ProxyDataAPI):
     def fetch_issue(self, projects):
         all_issues = []
 
-        # Iterate under all projects
         for project in projects:
             page = 1
-            # Iterate under all Issues inside project
-            while(True):
-                issue_url = \
-                    '/api/v3/projects/{}/issues'.format(project.id)
-
-                json_data_issue = self.get_json_data(issue_url, page)
+            while True:
+                url = '/api/v3/projects/{}/issues'.format(project.id)
+                json_data_issue = self.get_json_data(url, page)
+                page = page + 1
 
                 if len(json_data_issue) == 0:
                     break
 
-                page = page + 1
                 for element in json_data_issue:
                     single_issue = GitlabIssue()
                     self.fill_object_data(element, single_issue)
@@ -132,47 +132,24 @@ class GitlabDataAPI(ProxyDataAPI):
 
         for merge_request in all_merge_requests:
             page = 1
-            # Iterate under all comments of MR inside project
-            while(True):
-                mr_url = '/api/v3/projects/{}/merge_requests/{}/notes'.format(
+            while True:
+                url = '/api/v3/projects/{}/merge_requests/{}/notes'.format(
                     merge_request.project_id, merge_request.id)
-                json_data_mr = self.get_json_data(mr_url, page)
+                json_data_mr = self.get_json_data(url, page)
+                page = page + 1
 
                 if len(json_data_mr) == 0:
                     break
 
-                page = page + 1
-
                 for element in json_data_mr:
                     single_comment = GitlabComment()
-
-                    for field in GitlabComment._meta.fields:
-                        if field.name == "user":
-                            single_comment.update_user(
-                                element["author"]["username"])
-                            continue
-                        if field.name == "project":
-                            single_comment.project = \
-                                merge_request.project
-                            continue
-                        if field.name == "issue_comment":
-                            single_comment.issue_comment = False
-                            continue
-                        if field.name == "parent_id":
-                            single_comment.parent_id = merge_request.id
-                            continue
-
-                        if isinstance(field, DateTimeField):
-                            value = parse(element["created_at"])
-                        else:
-                            value = element[field.name]
-
-                        setattr(single_comment, field.name, value)
-
+                    self.fill_object_data(element, single_comment)
+                    single_comment.project = merge_request.project
+                    single_comment.issue_comment = False
+                    single_comment.parent_id = merge_request.id
                     all_comments.append(single_comment)
 
         return all_comments
-
 
     def fetch_comments_issues(self):
         all_comments = []
@@ -180,43 +157,21 @@ class GitlabDataAPI(ProxyDataAPI):
 
         for issue in all_issues:
             page = 1
-            # Iterate under all comments of MR inside project
-            while(True):
-                issue_comments_request_url = \
-                    '/api/v3/projects/{}/issues/{}/notes' \
-                    .format(issue.project_id, issue.id)
-                json_data_mr = self.get_json_data(issue_comments_request_url, page)
+            while True:
+                url = '/api/v3/projects/{}/issues/{}/notes'.format(
+                    issue.project_id, issue.id)
+                json_data_mr = self.get_json_data(url, page)
+                page = page + 1
 
                 if len(json_data_mr) == 0:
                     break
 
-                page = page + 1
                 for element in json_data_mr:
                     single_comment = GitlabComment()
-
-                    for field in GitlabComment._meta.fields:
-                        if field.name == "user":
-                            single_comment.update_user(
-                                element["author"]["username"])
-                            continue
-                        if field.name == "project":
-                            single_comment.project = \
-                                issue.project
-                            continue
-                        if field.name == "issue_comment":
-                            single_comment.issue_comment = True
-                            continue
-                        if field.name == "parent_id":
-                            single_comment.parent_id = issue.id
-                            continue
-
-                        if isinstance(field, DateTimeField):
-                            value = parse(element["created_at"])
-                        else:
-                            value = element[field.name]
-
-                        setattr(single_comment, field.name, value)
-
+                    self.fill_object_data(element, single_comment)
+                    single_comment.project = issue.project
+                    single_comment.issue_comment = True
+                    single_comment.parent_id = issue.id
                     all_comments.append(single_comment)
 
         return all_comments
@@ -241,7 +196,6 @@ class GitlabDataAPI(ProxyDataAPI):
         comments_list = self.fetch_comments()
         for datum in comments_list:
             datum.save()
-
 
     @property
     def app_label(self):
