@@ -118,4 +118,3 @@ class GitlabCommentIndex(indexes.SearchIndex, indexes.Indexable):
 
     def prepare_tag(self, obj):
         return obj.tag
-

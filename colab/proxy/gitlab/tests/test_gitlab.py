@@ -2,12 +2,13 @@
 Test User class.
 Objective: Test parameters, and behavior.
 """
+from datetime import datetime
+
+
 from django.test import TestCase, Client
 from colab.accounts.models import User
 from colab.proxy.gitlab.models import GitlabProject, \
     GitlabIssue, GitlabComment, GitlabMergeRequest
-
-from datetime import datetime
 
 
 class GitlabTest(TestCase):
@@ -54,7 +55,6 @@ class GitlabTest(TestCase):
         g.name = "colab"
         g.name_with_namespace = "Software Public / Colab"
         g.path_with_namespace = "softwarepublico/colab"
-        g.modified = datetime.now()
         g.created_at = datetime.now()
         g.last_activity_at = datetime.now()
         g.save()
@@ -65,7 +65,7 @@ class GitlabTest(TestCase):
         mr.title = "Include plugin support"
         mr.description = "Merge request for plugin support"
         mr.state = "Closed"
-        mr.modified = datetime.now()
+        mr.created_at = datetime.now()
         mr.update_user(self.user.username)
         mr.save()
 
@@ -74,7 +74,7 @@ class GitlabTest(TestCase):
         i.project = g
         i.title = "Issue for colab"
         i.description = "Issue reported to colab"
-        i.modified = datetime.now()
+        i.created_at = datetime.now()
         i.state = "Open"
         i.update_user(self.user.username)
         i.save()
