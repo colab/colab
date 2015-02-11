@@ -1,6 +1,7 @@
 import json
 import urllib
 import urllib2
+import logging
 
 from dateutil.parser import parse
 
@@ -10,6 +11,8 @@ from django.db.models.fields import DateTimeField
 from colab.proxy.gitlab.models import (GitlabProject, GitlabMergeRequest,
                                        GitlabComment, GitlabIssue)
 from colab.proxy.utils.proxy_data_api import ProxyDataAPI
+
+LOGGER = logging.getLogger('colab.plugin.gitlab')
 
 
 class GitlabDataAPI(ProxyDataAPI):
@@ -34,7 +37,7 @@ class GitlabDataAPI(ProxyDataAPI):
             data = urllib2.urlopen(url, timeout=10)
             json_data = json.load(data)
         except urllib2.URLError:
-            print "Connection timeout: " + url
+            LOGGER.exception("Connection timeout: " + url)
             json_data = []
 
         return json_data
@@ -177,22 +180,22 @@ class GitlabDataAPI(ProxyDataAPI):
         return all_comments
 
     def fetch_data(self):
-        print "projects"
+        LOGGER.info("Importing Projects")
         projects = self.fetch_projects()
         for datum in projects:
             datum.save()
 
-        print "MR"
+        LOGGER.info("Importing Merge Requests")
         merge_request_list = self.fetch_merge_request(projects)
         for datum in merge_request_list:
             datum.save()
 
-        print "issues"
+        LOGGER.info("Importing Issues")
         issue_list = self.fetch_issue(projects)
         for datum in issue_list:
             datum.save()
 
-        print "comments"
+        LOGGER.info("Importing Comments")
         comments_list = self.fetch_comments()
         for datum in comments_list:
             datum.save()
