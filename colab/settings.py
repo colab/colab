@@ -322,6 +322,7 @@ if FEEDZILLA_ENABLED:
     )
 
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
+SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
 PROXIED_APPS = locals().get('PROXIED_APPS') or {}
 

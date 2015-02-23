@@ -1,6 +1,6 @@
 from colab.settings import *  # noqa
 
-
+SOCIAL_NETWORK_ENABLED = True
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 LOGGING = {

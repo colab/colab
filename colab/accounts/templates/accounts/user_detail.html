@@ -60,25 +60,27 @@
           </li>
         {% endif %}
         {% if request.user.is_active %}
-          <li>
-            {% if user_.twitter %}
-              <span class="icon-twitter icon-fixed-width" title="{% trans 'Twitter account' %}"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
+          {% if SOCIAL_NETWORK_ENABLED %}
+            <li>
+              {% if user_.twitter %}
+                <span class="icon-twitter icon-fixed-width" title="{% trans 'Twitter account' %}"></span> <a target="_blank" href="{{ user_.twitter_link }}" title="{% trans 'Twitter account' %}">{{ user_.twitter }}</a>
+              {% endif %}
+              {% if user_.facebook %}
+                <span class="icon-facebook icon-fixed-width" title="{% trans 'Facebook account' %}"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
+              {% endif %}
+            </li>
+
+            {% if user_.google_talk %}
+              <li><span class="icon-google-plus icon-fixed-width" title="{% trans 'Google talk account' %}"></span> {{ user_.google_talk }}</li>
             {% endif %}
-            {% if user_.facebook %}
-              <span class="icon-facebook icon-fixed-width" title="{% trans 'Facebook account' %}"></span> <a target="_blank" href="{{ user_.facebook_link }}" title="{% trans 'Facebook account' %}">{{ user_.facebook }}</a>
+
+            {% if user_.github %}
+              <li><span class="icon-github icon-fixed-width" title="{% trans 'Github account' %}"></span> <a target="_blank" href="https://github.com/{{ user_.github }}">{{ user_.github }}</a></li>
             {% endif %}
-          </li>
 
-          {% if user_.google_talk %}
-            <li><span class="icon-google-plus icon-fixed-width" title="{% trans 'Google talk account' %}"></span> {{ user_.google_talk }}</li>
-          {% endif %}
-
-          {% if user_.github %}
-            <li><span class="icon-github icon-fixed-width" title="{% trans 'Github account' %}"></span> <a target="_blank" href="https://github.com/{{ user_.github }}">{{ user_.github }}</a></li>
-          {% endif %}
-
-          {% if user_.webpage %}
-            <li><span class="icon-link icon-fixed-width" title="{% trans 'Personal webpage' %}"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
+            {% if user_.webpage %}
+              <li><span class="icon-link icon-fixed-width" title="{% trans 'Personal webpage' %}"></span> <a target="_blank" href="{{ user_.webpage }}" title="{% trans 'Personal webpage' %}">{{ user_.webpage }}</a></li>
+            {% endif %}
           {% endif %}
         {% endif %}
       </ul>

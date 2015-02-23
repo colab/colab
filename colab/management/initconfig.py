@@ -45,6 +45,9 @@ ALLOWED_HOSTS:
 ### Uncomment to enable Broswer ID protocol for authentication
 # BROWSERID_ENABLED: True
 
+### Uncomment to enable social networks fields profile
+# SOCIAL_NETWORK_ENABLED: True
+
 ### Uncomment to enable Converse.js
 # CONVERSEJS_ENABLED: True
 
