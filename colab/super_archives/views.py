@@ -123,20 +123,29 @@ class ThreadDashboardView(View):
         MAX = 6
         context = {}
         all_lists = mailman.all_lists(description=True)
+        all_privates = dict(mailman.all_lists(private=True))
+
 
         context['lists'] = []
 
+        user = User.objects.get(username=request.user)
+        emails = user.emails.values_list('address', flat=True)
+        lists_for_user = []
+        for email in emails:
+            lists_for_user.extend(mailman.address_lists(email))
+
         for list_ in MailingList.objects.order_by('name'):
-            context['lists'].append((
-                list_.name,
-                mailman.get_list_description(list_.name, all_lists),
-                list_.thread_set.filter(spam=False).order_by(
-                    '-latest_message__received_time'
-                )[:MAX],
-                [t.latest_message for t in Thread.highest_score.filter(
-                    mailinglist__name=list_.name)[:MAX]],
-                len(mailman.list_users(list_.name)),
-            ))
+            if not all_privates[list_.name] or list_.name in lists_for_user:
+                context['lists'].append((
+                    list_.name,
+                    mailman.get_list_description(list_.name),
+                    list_.thread_set.filter(spam=False).order_by(
+                        '-latest_message__received_time'
+                    )[:MAX],
+                    [t.latest_message for t in Thread.highest_score.filter(
+                        mailinglist__name=list_.name)[:MAX]],
+                    len(mailman.list_users(list_.name)),
+                ))
 
         return render(request, 'superarchives/thread-dashboard.html', context)
 
