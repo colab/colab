@@ -48,8 +48,10 @@ def update_subscription(address, lists):
         if maillist not in current_lists:
             subscribe(maillist, address)
 
+
 def address_lists(address):
     return mailing_lists(address=address)
+
 
 def mailing_lists(**kwargs):
     url = get_url()
@@ -62,8 +64,10 @@ def mailing_lists(**kwargs):
 
     return lists.json()
 
+
 def is_private_list(name):
     return dict(all_lists(private=True))[name]
+
 
 def all_lists(*args, **kwargs):
     return mailing_lists(*args, **kwargs)

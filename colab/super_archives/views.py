@@ -122,9 +122,7 @@ class ThreadDashboardView(View):
     def get(self, request):
         MAX = 6
         context = {}
-        all_lists = mailman.all_lists(description=True)
         all_privates = dict(mailman.all_lists(private=True))
-
 
         context['lists'] = []
 
