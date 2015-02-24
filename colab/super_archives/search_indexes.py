@@ -85,9 +85,11 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
         return u'thread'
 
     def index_queryset(self, using=None):
-        return self.get_model().objects.filter(
-            spam=False
+        elements = self.get_model().objects.filter(
+            spam=False, mailinglist__is_private=False
         ).exclude(subject_token='')
+
+        return elements
 
     def get_boost(self, obj):
         boost = super(ThreadIndex, self).get_boost(obj)
