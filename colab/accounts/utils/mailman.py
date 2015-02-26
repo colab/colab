@@ -102,3 +102,17 @@ def list_users(listname):
         return []
 
     return users.json()
+
+
+def get_user_mailinglists(user):
+    lists_for_user = []
+    emails = ''
+
+    if user:
+        emails = user.emails.values_list('address', flat=True)
+
+    lists_for_user = []
+    for email in emails:
+        lists_for_user.extend(address_lists(email))
+
+    return lists_for_user

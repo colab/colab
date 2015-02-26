@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.views.generic import View
 from django.utils.translation import ugettext as _
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -31,6 +31,18 @@ class ThreadView(View):
 
         thread = get_object_or_404(Thread, subject_token=thread_token,
                                    mailinglist__name=mailinglist)
+
+        all_privates = dict(mailman.all_lists(private=True))
+        if all_privates[thread.mailinglist.name]:
+            if not request.user.is_authenticated():
+                raise PermissionDenied
+            else:
+                user = User.objects.get(username=request.user)
+                emails = user.emails.values_list('address', flat=True)
+                lists_for_user = mailman.get_user_mailinglists(user)
+                if not thread.mailinglist.name in lists_for_user:
+                    raise PermissionDenied
+
         thread.hit(request)
 
         try:
@@ -126,11 +138,11 @@ class ThreadDashboardView(View):
 
         context['lists'] = []
 
-        user = User.objects.get(username=request.user)
-        emails = user.emails.values_list('address', flat=True)
         lists_for_user = []
-        for email in emails:
-            lists_for_user.extend(mailman.address_lists(email))
+        if request.user.is_authenticated():
+            user = User.objects.get(username=request.user)
+            emails = user.emails.values_list('address', flat=True)
+            lists_for_user = mailman.get_user_mailinglists(user)
 
         for list_ in MailingList.objects.order_by('name'):
             if not all_privates[list_.name] or list_.name in lists_for_user:

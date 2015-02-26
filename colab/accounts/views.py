@@ -17,7 +17,8 @@ from conversejs.models import XMPPAccount
 
 from colab.super_archives.models import (EmailAddress, Message,
                                          EmailAddressValidation)
-from colab.search.utils import get_collaboration_data
+from colab.search.utils import get_collaboration_data, get_visible_threads
+from colab.accounts.models import User
 
 from .forms import (UserCreationForm, UserForm, ListsForm,
                     UserUpdateForm, ChangeXMPPPasswordForm)
@@ -60,12 +61,17 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
     template_name = 'accounts/user_detail.html'
 
     def get_context_data(self, **kwargs):
-        user = self.object
+        profile_user = self.object
         context = {}
 
         count_types = OrderedDict()
 
-        collaborations, count_types_extras = get_collaboration_data(user)
+        logged_user = None
+        if self.request.user.is_authenticated():
+            logged_user = User.objects.get(username=self.request.user)
+
+        collaborations, count_types_extras = get_collaboration_data(
+            logged_user, profile_user)
 
         collaborations.sort(key=lambda elem: elem.modified, reverse=True)
 
@@ -74,12 +80,13 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context['type_count'] = count_types
         context['results'] = collaborations[:10]
 
-        email_pks = [addr.pk for addr in user.emails.iterator()]
-        query = Message.objects.filter(from_address__in=email_pks)
+        email_pks = [addr.pk for addr in profile_user.emails.iterator()]
+        query = get_visible_threads(logged_user, profile_user)
         query = query.order_by('-received_time')
         context['emails'] = query[:10]
 
-        messages = Message.objects.filter(from_address__user__pk=user.pk)
+        messages = get_visible_threads(logged_user, profile_user)
+
         count_by = 'thread__mailinglist__name'
         context['list_activity'] = dict(messages.values_list(count_by)
                                                 .annotate(Count(count_by))
