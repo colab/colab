@@ -4,7 +4,7 @@ from django.http import HttpResponse, Http404
 
 from colab.search.utils import get_collaboration_data
 from colab.super_archives.models import Thread
-from colab.accounts.utils import mailinglist
+from colab.accounts.utils import mailman
 from colab.accounts.models import User
 
 
@@ -20,7 +20,7 @@ def dashboard(request):
     user = None
     if request.user.is_authenticated():
         user = User.objects.get(username=request.user)
-        lists_for_user = mailinglist.get_user_mailinglists(user)
+        lists_for_user = mailman.get_user_mailinglists(user)
 
     for t in all_threads:
         if not t.mailinglist.is_private or \
