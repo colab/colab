@@ -40,7 +40,7 @@ class ThreadView(View):
                 user = User.objects.get(username=request.user)
                 emails = user.emails.values_list('address', flat=True)
                 lists_for_user = mailman.get_user_mailinglists(user)
-                if not thread.mailinglist.name in lists_for_user:
+                if thread.mailinglist.name not in lists_for_user:
                     raise PermissionDenied
 
         thread.hit(request)
@@ -141,7 +141,6 @@ class ThreadDashboardView(View):
         lists_for_user = []
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user)
-            emails = user.emails.values_list('address', flat=True)
             lists_for_user = mailman.get_user_mailinglists(user)
 
         for list_ in MailingList.objects.order_by('name'):

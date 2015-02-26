@@ -6,7 +6,6 @@ from collections import OrderedDict
 from django.core.cache import cache
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from django.db.models.query import QuerySet
 from django.db.models import Q
 
 from colab.super_archives.models import Thread, Message
@@ -26,6 +25,7 @@ def get_visible_threads_queryset(logged_user):
 
     return qs
 
+
 def get_visible_threads(logged_user, filter_by_user=None):
     thread_qs = get_visible_threads_queryset(logged_user)
     if filter_by_user:
@@ -38,9 +38,10 @@ def get_visible_threads(logged_user, filter_by_user=None):
 
     return messages
 
+
 def get_collaboration_data(logged_user, filter_by_user=None):
     latest_results = []
-    count_types = None#cache.get('home_chart')
+    count_types = cache.get('home_chart')
     populate_count_types = False
 
     if count_types is None:

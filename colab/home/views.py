@@ -7,6 +7,7 @@ from colab.super_archives.models import Thread
 from colab.accounts.utils import mailinglist
 from colab.accounts.models import User
 
+
 def dashboard(request):
     """Dashboard page"""
 
@@ -23,18 +24,17 @@ def dashboard(request):
 
     for t in all_threads:
         if not t.mailinglist.is_private or \
-            t.mailinglist.name in lists_for_user:
-            latest_threads.append(t)
+           t.mailinglist.name in lists_for_user:
+                latest_threads.append(t)
 
     hottest_threads = []
     for t in highest_score_threads:
         if not t.mailinglist.is_private or \
-            t.mailinglist.name in lists_for_user:
+           t.mailinglist.name in lists_for_user:
                 hottest_threads.append(t.latest_message)
 
     latest_results, count_types = get_collaboration_data(user)
     latest_results.sort(key=lambda elem: elem.modified, reverse=True)
-
 
     context = {
         'hottest_threads': hottest_threads[:6],

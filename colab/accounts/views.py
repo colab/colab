@@ -15,7 +15,7 @@ from django.views.generic import DetailView, UpdateView, TemplateView
 from conversejs import xmpp
 from conversejs.models import XMPPAccount
 
-from colab.super_archives.models import (EmailAddress, Message,
+from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
 from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
@@ -80,7 +80,6 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context['type_count'] = count_types
         context['results'] = collaborations[:10]
 
-        email_pks = [addr.pk for addr in profile_user.emails.iterator()]
         query = get_visible_threads(logged_user, profile_user)
         query = query.order_by('-received_time')
         context['emails'] = query[:10]
