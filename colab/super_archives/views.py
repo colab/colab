@@ -134,7 +134,11 @@ class ThreadDashboardView(View):
     def get(self, request):
         MAX = 6
         context = {}
-        all_privates = dict(mailman.all_lists(private=True))
+
+        all_privates = {}
+        private_mailinglist = MailingList.objects.filter(is_private=True)
+        for ml in private_mailinglist:
+            all_privates[ml.name] = True
 
         context['lists'] = []
 
@@ -144,7 +148,7 @@ class ThreadDashboardView(View):
             lists_for_user = mailman.get_user_mailinglists(user)
 
         for list_ in MailingList.objects.order_by('name'):
-            if not all_privates[list_.name] or list_.name in lists_for_user:
+            if list_.name not in all_privates or list_.name in lists_for_user:
                 context['lists'].append((
                     list_.name,
                     mailman.get_list_description(list_.name),
