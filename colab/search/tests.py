@@ -13,7 +13,7 @@ class SearchViewTest(TestCase):
         self.client = Client()
 
     def tearDown(self):
-        call_command('clear_index', interactive=False,verbosity=0)
+        call_command('clear_index', interactive=False, verbosity=0)
 
     def test_search_thread(self):
         request = self.client.get('/search/?q=thread')
