@@ -81,13 +81,10 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context['results'] = collaborations[:10]
 
         query = get_visible_threads(logged_user, profile_user)
-        query = query.order_by('-received_time')
-        context['emails'] = query[:10]
-
-        messages = get_visible_threads(logged_user, profile_user)
+        context['emails'] = query.order_by('-received_time')[:10]
 
         count_by = 'thread__mailinglist__name'
-        context['list_activity'] = dict(messages.values_list(count_by)
+        context['list_activity'] = dict(query.values_list(count_by)
                                                 .annotate(Count(count_by))
                                                 .order_by(count_by))
 
