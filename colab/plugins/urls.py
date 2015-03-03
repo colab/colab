@@ -17,5 +17,5 @@ for app_name, app in settings.COLAB_APPS.items():
         raise ImproperlyConfigured(undef_url_include_msg)
     urlpatterns += patterns('',
         url(urls.get('prefix', r''), include(urls['include'],
-                                             namespace=urls.get('namespace'))),
+            namespace=urls.get('namespace')), name=app_name),
     )

@@ -287,7 +287,6 @@ CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
 CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 
-
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
@@ -317,8 +316,8 @@ for app_label in PROXIED_APPS.keys():
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 
-for app in COLAB_APPS:
-    INSTALLED_APPS += (app,)
+for app_name, app in COLAB_APPS.items():
+    INSTALLED_APPS += (app_name,)
 
     if not app or 'templates' not in app:
         continue
@@ -326,6 +325,6 @@ for app in COLAB_APPS:
     template = app.get('templates')
 
     if template.get('staticdir'):
-        STATICFILES_DIRS += template.get('staticdir')
+        STATICFILES_DIRS += (template.get('staticdir'),)
     if template.get('templatesdir'):
-        TEMPLATE_DIRS += template.get('templatesdir')
+        TEMPLATE_DIRS += (template.get('templatesdir'),)

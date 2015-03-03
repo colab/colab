@@ -22,14 +22,16 @@ def proxy_menu(context):
     menu_links = {}
     proxied_apps = context.get('proxy', {})
 
-    for app in proxied_apps.values():
-        if not hasattr(app, 'menu'):
+    for app_name, app in proxied_apps.items():
+        print app
+        if not app.get('menu'):
             continue
 
-        title = app.menu.get('title', app.label.title())
-        links = app.menu.get('links', tuple())
+        menu = app.get('menu')
+        title = menu.get('title', app_name)
+        links = menu.get('links', tuple()).items()
         if context['user'].is_active:
-            links += app.menu.get('auth_links', tuple())
+            links += menu.get('auth_links', tuple()).items()
 
         if not links:
             continue
@@ -38,8 +40,7 @@ def proxy_menu(context):
             menu_links[title] = []
 
         for text, link in links:
-            url = reverse(app.label, args=(link,))
-            menu_links[title].append((text, url))
+            menu_links[title].append((text, link))
 
     menu = render_to_string('proxy/menu_template.html',
                             {'menu_links': menu_links})
