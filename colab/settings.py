@@ -328,6 +328,8 @@ for app_name, app in COLAB_APPS.items():
         STATICFILES_DIRS += (template.get('staticdir'),)
     if template.get('templatesdir'):
         TEMPLATE_DIRS += (template.get('templatesdir'),)
+    if template.get('localesdir'):
+        LOCALE_PATHS += (template.get('localesdir'),)
 
 import sys
 sys.path.insert(0, '/etc/colab/')
