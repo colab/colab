@@ -319,3 +319,13 @@ COLAB_APPS = locals().get('COLAB_APPS') or {}
 
 for app in COLAB_APPS:
     INSTALLED_APPS += (app,)
+
+    if not app or 'templates' not in app:
+        continue
+
+    template = app.get('templates')
+
+    if template.get('staticdir'):
+        STATICFILES_DIRS += template.get('staticdir')
+    if template.get('templatesdir'):
+        TEMPLATE_DIRS += template.get('templatesdir')
