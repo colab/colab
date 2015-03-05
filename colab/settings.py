@@ -292,11 +292,6 @@ if locals().get('RAVEN_DSN', False):
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
-PROXIED_APPS = locals().get('PROXIED_APPS') or {}
-
-for app_label in PROXIED_APPS.keys():
-    INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)
-
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 
 for app_name, app in COLAB_APPS.items():
@@ -328,6 +323,21 @@ for app_name, app in COLAB_APPS.items():
 import sys
 sys.path.insert(0, '/etc/colab/')
 try:
-    from plugin_configs import *
+    from plugin_configs import *  # noqa (flake8 ignore)
 except ImportError:
     pass
+
+from django.apps import apps
+import django
+django.setup()
+
+PROXIED_APPS = {}
+
+for app_name in COLAB_APPS:
+    try:
+        config = apps.get_app_config(app_name.split('.')[-1])
+    except:
+        config = None
+
+    if config and getattr(config, 'colab_proxied_app', False):
+        PROXIED_APPS[app_name.split('.')[-1]] = COLAB_APPS[app_name]

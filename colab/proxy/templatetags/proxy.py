@@ -1,6 +1,5 @@
 from collections import OrderedDict
 
-from django.core.urlresolvers import reverse
 from django import template
 from django.core.cache import cache
 from django.template.loader import render_to_string
