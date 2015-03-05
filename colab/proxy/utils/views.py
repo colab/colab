@@ -3,10 +3,10 @@ import json
 
 from django.conf import settings
 
-from revproxy.views import ProxyView
+from revproxy.views import DiazoProxyView
 
 
-class ColabProxyView(ProxyView):
+class ColabProxyView(DiazoProxyView):
     add_remote_user = settings.REVPROXY_ADD_REMOTE_USER
     diazo_theme_template = 'base.html'
     html5 = True
