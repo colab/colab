@@ -41,7 +41,8 @@ def proxy_menu(context):
             menu_links[title] = []
 
         for text, link in links:
-            menu_links[title].append((text, link))
+            url = link
+            menu_links[title].append((text, url))
 
     menu = render_to_string('proxy/menu_template.html',
                             {'menu_links': menu_links})

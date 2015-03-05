@@ -58,7 +58,6 @@ INSTALLED_APPS = (
     'colab.super_archives',
     'colab.api',
     'colab.rss',
-    'colab.planet',
     'colab.search',
     'colab.badger',
     'colab.tz',
@@ -201,7 +200,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
     'colab.home.context_processors.browserid_enabled',
-    'colab.planet.context_processors.feedzilla',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -255,14 +253,6 @@ SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/private'
 SUPER_ARCHIVES_EXCLUDE = []
 SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 
-# Feedzilla  (planet)
-from feedzilla.settings import *  # noqa (flake8 ignore)
-FEEDZILLA_PAGE_SIZE = 5
-FEEDZILLA_SITE_TITLE = _(u'Planet Colab')
-FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
-
-FEEDZILLA_ENABLED = True
-
 # Mailman API settings
 MAILMAN_API_URL = 'http://localhost:8124'
 
@@ -299,13 +289,6 @@ if locals().get('RAVEN_DSN', False):
     }
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
 
-if FEEDZILLA_ENABLED:
-    INSTALLED_APPS += (
-        # Feedzilla and deps
-        'feedzilla',
-        'common',
-    )
-
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
@@ -317,12 +300,23 @@ for app_label in PROXIED_APPS.keys():
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 
 for app_name, app in COLAB_APPS.items():
-    INSTALLED_APPS += (app_name,)
+    if 'dependencies' in app:
+        for dep in app.get('dependencies'):
+            if dep not in INSTALLED_APPS:
+                INSTALLED_APPS += (dep,)
+
+    if app_name not in INSTALLED_APPS:
+        INSTALLED_APPS += (app_name,)
 
     if not app or 'templates' not in app:
         continue
 
     template = app.get('templates')
+
+    if 'context_processors' in app:
+        for context_processor in app.get('context_processors'):
+            if context_processor not in TEMPLATE_CONTEXT_PROCESSORS:
+                TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
 
     if template.get('staticdir'):
         STATICFILES_DIRS += (template.get('staticdir'),)

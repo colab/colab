@@ -25,6 +25,7 @@ REQUIREMENTS = [
     'gunicorn==19.1.0',
     'eventlet==0.15.2',
     'PyYAML==3.11',
+    'yamlordereddictloader=0.1.1'
 
     # Deps for sentry client (raven)
     'raven==3.5.2',
@@ -38,7 +39,6 @@ REQUIREMENTS = [
     'django-conversejs==0.3.4',
 
     # Feedzilla (planet) and deps
-    'feedzilla==0.24',
     'django-common==0.1.51',
     'feedparser==5.1.3',
     'lxml==3.2.4',
