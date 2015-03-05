@@ -85,8 +85,8 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
         count_by = 'thread__mailinglist__name'
         context['list_activity'] = dict(query.values_list(count_by)
-                                                .annotate(Count(count_by))
-                                                .order_by(count_by))
+                                        .annotate(Count(count_by))
+                                        .order_by(count_by))
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
