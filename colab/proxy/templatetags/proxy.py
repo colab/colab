@@ -1,3 +1,4 @@
+from collections import OrderedDict
 
 from django.core.urlresolvers import reverse
 from django import template
@@ -19,7 +20,7 @@ def proxy_menu(context):
     if menu_from_cache:
         return menu_from_cache
 
-    menu_links = {}
+    menu_links = OrderedDict()
     proxied_apps = context.get('proxy', {})
 
     for app_name, app in proxied_apps.items():
