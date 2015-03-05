@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django import template
 from django.core.cache import cache
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
 register = template.Library()
 
@@ -24,7 +25,6 @@ def proxy_menu(context):
     proxied_apps = context.get('proxy', {})
 
     for app_name, app in proxied_apps.items():
-        print app
         if not app.get('menu'):
             continue
 
@@ -38,11 +38,11 @@ def proxy_menu(context):
             continue
 
         if title not in menu_links:
-            menu_links[title] = []
+            menu_links[_(title)] = []
 
         for text, link in links:
             url = link
-            menu_links[title].append((text, url))
+            menu_links[_(title)].append((_(text), url))
 
     menu = render_to_string('proxy/menu_template.html',
                             {'menu_links': menu_links})
