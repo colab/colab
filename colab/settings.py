@@ -293,6 +293,7 @@ BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
+PROXIED_APPS = {}
 
 for app_name, app in COLAB_APPS.items():
     if 'dependencies' in app:
@@ -302,6 +303,9 @@ for app_name, app in COLAB_APPS.items():
 
     if app_name not in INSTALLED_APPS:
         INSTALLED_APPS += (app_name,)
+
+    if app.get('upstream'):
+        PROXIED_APPS[app_name.split('.')[-1]] = app
 
     if not app or 'templates' not in app:
         continue
@@ -327,17 +331,3 @@ try:
 except ImportError:
     pass
 
-from django.apps import apps
-import django
-django.setup()
-
-PROXIED_APPS = {}
-
-for app_name in COLAB_APPS:
-    try:
-        config = apps.get_app_config(app_name.split('.')[-1])
-    except:
-        config = None
-
-    if config and getattr(config, 'colab_proxied_app', False):
-        PROXIED_APPS[app_name.split('.')[-1]] = COLAB_APPS[app_name]
