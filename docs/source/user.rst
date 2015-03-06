@@ -14,7 +14,63 @@ Install
 
 Plugins
 -------
-.. TODO
+.. attribute:: COLAB_APPS
+
+   :default: None
+
+   Describes the activated plugins and its configurations. It's necessary to describe
+   for each app its name as the variable. The apps described here can be devided into
+   two categories, that beeing, colab proxy apps and third-party apps.
+   The upstream variable is only needed to colab proxy apps.
+
+.. attribute:: upstream
+
+Declares the upstream server url of the proxy.
+
+menu
+++++++++++++
+
+.. attribute:: title
+
+    Declares the menu title.
+.. attribute:: links
+
+    Declares the menu items and its links.
+.. attribute:: auth_links
+
+    Declares the menu items and its links when the user authenticated.
+.. attribute:: dependecies
+
+Declares a list of the plugin dependecies.
+
+urls
+++++++++++++
+
+.. attribute:: include
+
+    Declares the include urls.
+.. attribute:: prefix
+
+    Declares the prefix for the url.
+.. attribute:: namespace
+
+    Declares the namespace for the url.
+
+templates
+++++++++++++
+
+.. attribute:: context_processors
+
+    Declares the plugin context processors.
+.. attribute:: templatesdir
+
+    Declares the path to templates directory.
+.. attribute:: staticdir
+
+    Declares the path to static directory.
+.. attribute:: localesdir
+
+    Declares the path to locales directory.
 
 Settings
 --------
