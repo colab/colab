@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 REQUIREMENTS = [
-    'Django>=1.7',
+    'Django==1.7.5',
     'South==1.0.0',
     'psycopg2==2.5.1',
     'django-piston==0.2.3',
