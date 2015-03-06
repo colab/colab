@@ -70,12 +70,54 @@ ROBOTS_NOINDEX: false
 # RAVEN_DSN: 'http://public:secret@example.com/1'
 
 ### Colab proxied apps
-# PROXIED_APPS:
-#   gitlab:
-#     upstream: 'http://localhost:8090/gitlab/'
-#     private_token: ''
-#   trac:
-#     upstream: 'http://localhost:5000/trac/'
+# COLAB_APPS:
+#  colab.proxy.gitlab:
+#    upstream: 'http://www.fga.unb.br/'
+#    menu:
+#      title: 'Code'
+#      links:
+#        { 'Public Projects' : '/gitlab/public/projects' }
+#      auth_links:
+#        { 'Profile' : 'gitlab/profile',
+#          'New Project' : 'gitlab/projects/new',
+#          'Projects' : 'gitlab/dashboard/projects',
+#          'Groups' : 'gitlab/pprofile/groups',
+#          'Issues' : 'gitlab/dashboard/issues',
+#          'Merge Requests' : 'gitlab/merge_requests' }
+#  dpaste:
+#    urls:
+#      include: 'dpaste.urls.dpaste'
+#      prefix:  '^paste/'
+#      namespace: 'dpaste'
+#    templates:
+#      templatesdir: '/vagrant/pluginfiles/dpaste/templates'
+#      staticdir:    '/vagrant/pluginfiles/dpaste/static'
+#    menu:
+#      title: 'Dpaste'
+#      links:
+#        { 'Public Projects':  '/paste' }
+#      auth_links:
+#        { 'Profile': '/projects',
+#          'New Project': '/projects/new' }
+#  feedzilla:
+#    dependencies: ['common']
+#    urls:
+#      include: 'feedzilla.urls'
+#      prefix:  '^planet/'
+#      namespace: 'planet'
+#    templates:
+#      context_processors: ['colab.planet.context_processors.feedzilla']
+#      templatesdir: '/vagrant/pluginfiles/feedzilla/templates'
+#      staticdir:    '/vagrant/pluginfiles/feedzilla/static'
+#      localesdir:      '/vagrant/pluginfiles/feedzilla/locales'
+#    menu:
+#      title: 'Planet'
+#      links:
+#        { 'Index' : '/planet' }
+#      auth_links:
+#        {}
+
+
 
 """
 
