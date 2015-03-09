@@ -295,3 +295,7 @@ class Command(BaseCommand, object):
             raise
         finally:
             os.remove(self.lock_file)
+
+        for mlist in MailingList.objects.all():
+            mlist.update_privacy()
+            mlist.save()

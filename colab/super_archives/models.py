@@ -19,6 +19,7 @@ from hitcounter.models import HitCounterModelMixin
 from .managers import NotSpamManager, MostVotedManager, HighestScore
 from .utils import blocks, email
 from .utils.etiquetador import etiquetador
+from colab.accounts.utils import mailman
 
 
 def get_validation_key():
@@ -79,6 +80,10 @@ class MailingList(models.Model):
     description = models.TextField()
     logo = models.FileField(upload_to='list_logo')  # TODO
     last_imported_index = models.IntegerField(default=0)
+    is_private = models.BooleanField(default=False)
+
+    def update_privacy(self):
+        self.is_private = mailman.is_private_list(self.name)
 
     def get_absolute_url(self):
         params = {

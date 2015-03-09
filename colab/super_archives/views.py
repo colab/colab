@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.db import IntegrityError
 from django.views.generic import View
 from django.utils.translation import ugettext as _
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
@@ -31,6 +31,18 @@ class ThreadView(View):
 
         thread = get_object_or_404(Thread, subject_token=thread_token,
                                    mailinglist__name=mailinglist)
+
+        all_privates = dict(mailman.all_lists(private=True))
+        if all_privates[thread.mailinglist.name]:
+            if not request.user.is_authenticated():
+                raise PermissionDenied
+            else:
+                user = User.objects.get(username=request.user)
+                emails = user.emails.values_list('address', flat=True)
+                lists_for_user = mailman.get_user_mailinglists(user)
+                if thread.mailinglist.name not in lists_for_user:
+                    raise PermissionDenied
+
         thread.hit(request)
 
         try:
@@ -122,21 +134,31 @@ class ThreadDashboardView(View):
     def get(self, request):
         MAX = 6
         context = {}
-        all_lists = mailman.all_lists(description=True)
+
+        all_privates = {}
+        private_mailinglist = MailingList.objects.filter(is_private=True)
+        for mailinglist in private_mailinglist:
+            all_privates[mailinglist.name] = True
 
         context['lists'] = []
 
+        lists_for_user = []
+        if request.user.is_authenticated():
+            user = User.objects.get(username=request.user)
+            lists_for_user = mailman.get_user_mailinglists(user)
+
         for list_ in MailingList.objects.order_by('name'):
-            context['lists'].append((
-                list_.name,
-                mailman.get_list_description(list_.name, all_lists),
-                list_.thread_set.filter(spam=False).order_by(
-                    '-latest_message__received_time'
-                )[:MAX],
-                [t.latest_message for t in Thread.highest_score.filter(
-                    mailinglist__name=list_.name)[:MAX]],
-                len(mailman.list_users(list_.name)),
-            ))
+            if list_.name not in all_privates or list_.name in lists_for_user:
+                context['lists'].append((
+                    list_.name,
+                    mailman.get_list_description(list_.name),
+                    list_.thread_set.filter(spam=False).order_by(
+                        '-latest_message__received_time'
+                    )[:MAX],
+                    [t.latest_message for t in Thread.highest_score.filter(
+                        mailinglist__name=list_.name)[:MAX]],
+                    len(mailman.list_users(list_.name)),
+                ))
 
         return render(request, 'superarchives/thread-dashboard.html', context)
 

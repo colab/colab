@@ -79,7 +79,7 @@ class Message(mailbox.mboxMessage):
             return body.strip()
 
     def get_received_datetime(self):
-        if self not in ('Received'):
+        if 'Received' not in self:
             return None
         # The time received should always be the last element
         #   in the `Received` attribute from the message headers

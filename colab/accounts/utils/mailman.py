@@ -38,7 +38,7 @@ def unsubscribe(listname, address):
 
 
 def update_subscription(address, lists):
-    current_lists = address_lists(address)
+    current_lists = mailing_lists(address=address)
 
     for maillist in current_lists:
         if maillist not in lists:
@@ -49,14 +49,11 @@ def update_subscription(address, lists):
             subscribe(maillist, address)
 
 
-def address_lists(address, description=''):
+def mailing_lists(**kwargs):
     url = get_url()
 
-    params = {'address': address,
-              'description': description}
-
     try:
-        lists = requests.get(url, timeout=TIMEOUT, params=params)
+        lists = requests.get(url, timeout=TIMEOUT, params=kwargs)
     except:
         LOGGER.exception('Unable to list mailing lists')
         return []
@@ -64,15 +61,22 @@ def address_lists(address, description=''):
     return lists.json()
 
 
-def all_lists(*args, **kwargs):
-    return address_lists('', *args, **kwargs)
+def is_private_list(name):
+    try:
+        return dict(all_lists(private=True))[name]
+    except KeyError:
+        return []
+
+
+def all_lists(**kwargs):
+    return mailing_lists(**kwargs)
 
 
 def user_lists(user):
     list_set = set()
 
     for email in user.emails.values_list('address', flat=True):
-        list_set.update(address_lists(email))
+        list_set.update(mailing_lists(address=email))
 
     return tuple(list_set)
 
@@ -97,3 +101,16 @@ def list_users(listname):
         return []
 
     return users.json()
+
+
+def get_user_mailinglists(user):
+    lists_for_user = []
+    emails = ''
+
+    if user:
+        emails = user.emails.values_list('address', flat=True)
+
+    for email in emails:
+        lists_for_user.extend(mailing_lists(address=email))
+
+    return lists_for_user
