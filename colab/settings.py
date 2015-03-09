@@ -285,7 +285,7 @@ locals().update(load_yaml_settings())
 
 if locals().get('RAVEN_DSN', False):
     RAVEN_CONFIG = {
-        'dsn': RAVEN_DSN + '?timeout=30',
+        'dsn': RAVEN_DSN + '?timeout=30',  # noqa
     }
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
 
@@ -330,4 +330,3 @@ try:
     from plugin_configs import *  # noqa (flake8 ignore)
 except ImportError:
     pass
-
