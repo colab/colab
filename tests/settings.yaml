@@ -63,10 +63,10 @@ ROBOTS_NOINDEX: false
 # RAVEN_DSN: 'http://public:secret@example.com/1'
 
 ### Colab proxied apps
-# PROXIED_APPS:
-#   gitlab:
-#     upstream: 'http://localhost:8090/gitlab/'
-#     private_token: ''
+PROXIED_APPS:
+  gitlab:
+    upstream: 'http://localhost:8090/gitlab/'
+    private_token: ''
 #   trac:
 #     upstream: 'http://localhost:5000/trac/'
 
