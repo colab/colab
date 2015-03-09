@@ -49,10 +49,6 @@ def update_subscription(address, lists):
             subscribe(maillist, address)
 
 
-def address_lists(address):
-    return mailing_lists(address=address)
-
-
 def mailing_lists(**kwargs):
     url = get_url()
 
@@ -66,11 +62,14 @@ def mailing_lists(**kwargs):
 
 
 def is_private_list(name):
-    return dict(all_lists(private=True))[name]
+    try:
+        return dict(all_lists(private=True))[name]
+    except KeyError:
+        return []
 
 
-def all_lists(*args, **kwargs):
-    return mailing_lists(*args, **kwargs)
+def all_lists(**kwargs):
+    return mailing_lists(**kwargs)
 
 
 def user_lists(user):
@@ -111,8 +110,7 @@ def get_user_mailinglists(user):
     if user:
         emails = user.emails.values_list('address', flat=True)
 
-    lists_for_user = []
     for email in emails:
-        lists_for_user.extend(address_lists(email))
+        lists_for_user.extend(mailing_lists(address=email))
 
     return lists_for_user

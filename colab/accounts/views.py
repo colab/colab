@@ -188,7 +188,7 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         for email in emails:
             lists = []
-            lists_for_address = mailman.address_lists(email)
+            lists_for_address = mailman.mailing_lists(address=email)
             for listname, description in all_lists:
                 if listname in lists_for_address:
                     checked = True

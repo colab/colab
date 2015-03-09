@@ -137,8 +137,8 @@ class ThreadDashboardView(View):
 
         all_privates = {}
         private_mailinglist = MailingList.objects.filter(is_private=True)
-        for ml in private_mailinglist:
-            all_privates[ml.name] = True
+        for mailinglist in private_mailinglist:
+            all_privates[mailinglist.name] = True
 
         context['lists'] = []
 

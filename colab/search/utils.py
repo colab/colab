@@ -6,7 +6,7 @@ from collections import OrderedDict
 from django.core.cache import cache
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from django.db.models import Q
+from django.db.models import Q as Condition
 
 from colab.super_archives.models import Thread, Message
 from colab.proxy.utils.models import Collaboration
@@ -14,16 +14,16 @@ from colab.accounts.utils import mailman
 
 
 def get_visible_threads_queryset(logged_user):
-    qs = Thread.objects
+    queryset = Thread.objects
     lists_for_user = []
     if logged_user:
         lists_for_user = mailman.get_user_mailinglists(logged_user)
 
-    q1 = Q(mailinglist__name__in=lists_for_user)
-    q2 = Q(mailinglist__is_private=False)
-    qs = Thread.objects.filter(q1 | q2)
+    user_lists = Condition(mailinglist__name__in=lists_for_user)
+    public_lists = Condition(mailinglist__is_private=False)
+    queryset = Thread.objects.filter(user_lists | public_lists)
 
-    return qs
+    return queryset
 
 
 def get_visible_threads(logged_user, filter_by_user=None):
