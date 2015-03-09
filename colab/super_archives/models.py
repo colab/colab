@@ -190,7 +190,7 @@ class Thread(models.Model, HitCounterModelMixin):
         return (self.now - date).days
 
     def _get_score(self, weight, created):
-        return max(weight - (self.days_ago(created) // 3), 5)
+        return max(weight - (self._days_ago(created) // 3), 5)
 
     def update_score(self):
         """Update the relevance score for this thread.
