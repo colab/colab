@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, TemplateView
+from django.http import Http404
 
 from conversejs import xmpp
 from conversejs.models import XMPPAccount
@@ -272,3 +273,13 @@ def password_reset_complete_custom(request):
     messages.success(request, msg)
 
     return redirect('home')
+
+
+def myaccount_redirect(request, route):
+    if not request.user.is_authenticated():
+        raise Http404()
+
+    username = request.user.username
+    url = "/account/" + username + "/" + route
+
+    return redirect(url)
