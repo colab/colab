@@ -1,8 +1,9 @@
 #!/bin/bash
 
-which -s osc || { echo "osc must be installed"; exit 1; }
+which osc || { echo "osc must be installed"; exit 1; }
 
 VERSION=`python setup.py --version`
+PLATFORM=`uname`
 
 pull_obs () {
     if [ -d .obs ]
@@ -31,7 +32,12 @@ add_to_obs () {
 
 
 update_spec_versions () {
-    sed -i '' -E "s/(\%define (unmangled_)?version).*/\1 $VERSION/;" colab.spec
+    regex="s/(\%define (unmangled_)?version).*/\1 $VERSION/;"
+    if [[ "$PLATFORM" == 'Darwin' ]]; then
+        sed -i '' -E "$regex" colab.spec
+    else
+        sed -i -E "$regex" colab.spec
+    fi
 }
 
 
