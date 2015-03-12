@@ -15,7 +15,9 @@ class ProxyNoosferoAppConfig(ColabProxiedAppConfig):
             (_('Communities'), 'search/communities'),
         ),
         'auth_links': (
-            (_('Profile'), 'profile'),
-            (_('Control panel'), 'myprofile'),
+            (_('Profile'), 'profile/{0}'),
+            (_('Control panel'), 'myprofile/{0}'),
         ),
     }
+
+    arguments = ["context['user']"]

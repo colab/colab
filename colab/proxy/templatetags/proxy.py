@@ -37,8 +37,17 @@ def proxy_menu(context):
         if title not in menu_links:
             menu_links[title] = []
 
+        is_authenticated = context['request'].user.is_authenticated()
+        if hasattr(app, 'arguments') and is_authenticated:
+            arguments = app.arguments
+        else:
+            arguments = []
+
+        for i, _ in enumerate(arguments):
+            arguments[i] = eval(arguments[i])
+
         for text, link in links:
-            url = reverse(app.label, args=(link,))
+            url = reverse(app.label, args=(link.format(*arguments),))
             menu_links[title].append((text, url))
 
     menu = render_to_string('proxy/menu_template.html',
