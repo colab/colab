@@ -36,7 +36,7 @@ update_spec_versions () {
 
 
 push_to_obs () {
-    echo
+    osc checkin .obs/ -m "Updated version $VERSION"
 }
 
 update_sdist
