@@ -1,7 +1,6 @@
 %define name colab
-%define version 2.0a3
-%define unmangled_version 2.0a3
-%define release 3
+%define version 1.9
+%define unmangled_version 1.9
 %define buildvenv /var/tmp/%{name}-%{version}
 
 Summary: Collaboration platform for communities
@@ -46,9 +45,6 @@ find %{buildvenv} -type d -empty -delete
 mkdir -p %{buildroot}/etc/colab
 mkdir -p %{buildroot}/usr/lib
 
-mkdir -p %{buildroot}/usr/share/nginx/
-ln -s /var/lib/colab-assets %{buildroot}/usr/share/nginx/colab
-
 # install virtualenv
 rm -rf %{buildroot}/usr/lib/colab
 cp -r %{buildvenv} %{buildroot}/usr/lib/colab
@@ -81,15 +77,12 @@ rm -rf %{buildvenv}
 %{_bindir}/*
 /etc/cron.d/colab
 /lib/systemd/system/colab.service
-/usr/share/nginx/colab
 
 %post
 groupadd colab || true
 if ! id colab; then
   useradd --system --gid colab  --home-dir /usr/lib/colab --no-create-home colab
 fi
-
-usermod --append --groups mailman colab
 
 mkdir -p /etc/colab
 
@@ -102,12 +95,12 @@ TEMPLATE_DEBUG: true
 
 ## System admins
 ADMINS: &admin
--
-  - John Foo
-  - john@example.com
--
-  - Mary Bar
-  - mary@example.com
+  -
+    - John Foo
+    - john@example.com
+  -
+    - Mary Bar
+    - mary@example.com
 
 MANAGERS: *admin
 
@@ -120,15 +113,15 @@ EMAIL_SUBJECT_PREFIX: '[colab]'
 
 SECRET_KEY: '$SECRET_KEY'
 
-SITE_URL: 'http://localhost:8000'
+SITE_URL: 'http://localhost:8001/'
 BROWSERID_AUDIENCES:
-- http://localhost:8000
+  - http://localhost:8001
 #  - http://example.com
 #  - https://example.org
 #  - http://example.net
 
 ALLOWED_HOSTS:
-- localhost
+  - localhost
 #  - example.com
 #  - example.org
 #  - example.net
@@ -136,12 +129,8 @@ ALLOWED_HOSTS:
 ## Disable indexing
 ROBOTS_NOINDEX: false
 
-#PROXIED_APPS:
-#   gitlab:
-#     upstream: 'http://localhost:8080/gitlab/'
-
-## Enabled BROWSER_ID protocol
-#  BROWSERID_ENABLED: True
+## Disable browser id authentication
+#  BROWSERID_ENABLED: true
 EOF
   chown root:colab /etc/colab/settings.yaml
   chmod 0640 /etc/colab/settings.yaml
@@ -152,17 +141,16 @@ mkdir -p /etc/colab/settings.d
 if [ ! -f /etc/colab/settings.d/00-database.yaml ]; then
   cat > /etc/colab/settings.d/00-database.yaml <<EOF
 DATABASES:
-default:
-  ENGINE: django.db.backends.postgresql_psycopg2
-  NAME: colab
-  USER: colab
-  HOST: localhost
-  PORT: 5432
+  default:
+    ENGINE: django.db.backends.postgresql_psycopg2
+    NAME: colab
+    USER: colab
+    HOST: localhost
+    PORT: 5432
 EOF
   chown root:colab /etc/colab/settings.d/00-database.yaml
   chmod 0640 /etc/colab/settings.d/00-database.yaml
 fi
-
 
 # only applies if there is a local PostgreSQL server
 if [ -x /usr/bin/postgres ]; then
@@ -188,10 +176,9 @@ fi
 mkdir -p /var/lib/colab-assets
 chown colab:colab /var/lib/colab-assets
 
-mkdir -p /var/lock/colab
-chown colab:colab /var/lock/colab
+mkdir -p /usr/share/nginx/
 
-if [ -f /etc/colab/settings.yaml ]; then
-  yes yes | colab-admin collectstatic
-fi
+ln -s /var/lib/colab-assets /usr/share/nginx/colab
+
+yes yes | colab-admin collectstatic
 

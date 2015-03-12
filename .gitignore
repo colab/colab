@@ -22,3 +22,6 @@ coverage_report/
 
 # Whoosh Index
 tests/whoosh_index/
+
+# Open Build System
+.obs/
