@@ -10,10 +10,11 @@ sudo mkdir -p /tmp/centos-7/root/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
 sudo cp dist/colab-*.tar.gz /tmp/centos-7/root/rpmbuild/SOURCES/
 sudo cp colab.spec /tmp/centos-7/root/rpmbuild/SPECS/
 sudo cp ci/colab.repo /tmp/centos-7/etc/yum.repos.d/
-sudo cp ci/softwarepublico.key/tmp/centos-7/etc/yum.repos.d/
+sudo cp ci/softwarepublico.key /tmp/centos-7/etc/yum.repos.d/
 
-sudo chroot /tmp/centos-7
+# Commands on chroot
 
-yum install rpm-build
-yum install python-virtualenv colab-deps
-HOME=/root rpmbuild -ba /root/rpmbuild/SPECS/colab.spec
+sudo chroot /tmp/centos-7/ yum install rpm-build
+sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps
+sudo chroot /tmp/centos-7/ HOME=/root rpmbuild -ba /root/rpmbuild/SPECS/colab.spec
+
