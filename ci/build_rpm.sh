@@ -6,7 +6,7 @@ fi
 
 python setup.py sdist
 
-sudo apt-get install rinse
+sudo apt-get install rinse > /dev/null
 
 sudo rinse --arch="amd64" --distribution="centos-7" --directory="/tmp/centos-7" --config="ci/rinse.conf" --pkgs-dir="ci/"
 
@@ -18,8 +18,8 @@ sudo cp ci/softwarepublico.key /tmp/centos-7/etc/yum.repos.d/
 
 # Commands on chroot
 
-sudo chroot /tmp/centos-7/ yum install rpm-build -y
-sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps -y
+sudo chroot /tmp/centos-7/ yum install rpm-build -y > /dev/null
+sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps -y /dev/null
 sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec
 
 # Send to packagecloud
