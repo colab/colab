@@ -21,9 +21,10 @@ sudo cp ci/softwarepublico.key /tmp/centos-7/etc/yum.repos.d/
 sudo chroot /tmp/centos-7/ yum install rpm-build -y > /dev/null
 sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps -y /dev/null
 sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec > /dev/null
+PACKAGE_PATH=`sudo find /tmp/centos-7/root/rpmbuild/RPMS/noarch/ -name "colab*.rpm"`
+sudo cp $PACKAGE_PATH /tmp/
 
 # Send to packagecloud
 
 gem install package_cloud
-PACKAGE_PATH=`sudo find /tmp/centos-7/root/rpmbuild/RPMS/noarch/ -name "colab*.rpm"`
-sudo package_cloud push seocam/colab-$TRAVIS_BRANCH/el/7 $PACKAGE_PATH
+package_cloud push seocam/colab-$TRAVIS_BRANCH/el/7 /tmp/*.rpm
