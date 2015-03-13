@@ -1,8 +1,8 @@
 [isv_spb_colab]
 name=Colab (CentOS_7)
 type=rpm-md
-#baseurl=http://download.opensuse.org/repositories/isv:/spb:/colab/CentOS_7/
-mirrorlist=https://gitlab.com/softwarepublico/softwarepublico/raw/master/rpm_mirrors/colab
+baseurl=http://download.opensuse.org/repositories/isv:/spb:/colab/CentOS_7/
+#mirrorlist=https://gitlab.com/softwarepublico/softwarepublico/raw/master/rpm_mirrors/colab
 gpgcheck=1
 gpgkey=file:///etc/yum.repos.d/softwarepublico.key
 enabled=1

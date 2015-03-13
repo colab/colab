@@ -14,7 +14,8 @@ sudo cp ci/softwarepublico.key /tmp/centos-7/etc/yum.repos.d/
 
 # Commands on chroot
 
+set -e
+
 sudo chroot /tmp/centos-7/ yum install rpm-build
 sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps
 sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec
-

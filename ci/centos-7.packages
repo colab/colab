@@ -1,6 +1,6 @@
 #
 #  packages which we will need to download for a minimal installation for
-#  CentOS 6.x
+#  CentOS 7.x
 #
 
 audit-libs
