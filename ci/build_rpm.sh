@@ -1,6 +1,12 @@
 #!/bin/bash
 
-if [ "$TRAVIS_BRANCH" != "ci-package" ]; then
+if [ "$TRAVIS_BRANCH" == "master" ]; then
+  REPO="colab-unstable"
+elif [ "$TRAVIS_BRANCH" == "stable" ]; then
+  REPO="colab-stable"
+elif [ "$TRAVIS_BRANCH" == "test" ]; then
+  REPO="colab-testing"
+else
   exit 0;
 fi
 
@@ -27,4 +33,4 @@ sudo cp $PACKAGE_PATH /tmp/
 # Send to packagecloud
 
 gem install package_cloud
-package_cloud push seocam/colab-$TRAVIS_BRANCH/el/7 /tmp/*.rpm
+package_cloud push seocam/$REPO/el/7 /tmp/*.rpm
