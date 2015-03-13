@@ -20,7 +20,7 @@ sudo cp ci/softwarepublico.key /tmp/centos-7/etc/yum.repos.d/
 
 sudo chroot /tmp/centos-7/ yum install rpm-build -y > /dev/null
 sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps -y /dev/null
-sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec
+sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec > /dev/null
 
 # Send to packagecloud
 
