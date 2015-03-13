@@ -26,4 +26,4 @@ sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.sp
 
 gem install package_cloud
 PACKAGE_PATH=`sudo find /tmp/centos-7/root/rpmbuild/RPMS/noarch/ -name "colab*.rpm"`
-package_cloud push seocam/colab-$TRAVIS_BRANCH/el/7 $PACKAGE_PATH
+sudo package_cloud push seocam/colab-$TRAVIS_BRANCH/el/7 $PACKAGE_PATH
