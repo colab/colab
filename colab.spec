@@ -1,7 +1,8 @@
 %define name colab
 %define version 1.9
 %define unmangled_version 1.9
-%define release 1
+%define default_release 1
+%{!?release: %define release %{default_release}}
 %define buildvenv /var/tmp/%{name}-%{version}
 
 Summary: Collaboration platform for communities
