@@ -1,15 +1,18 @@
 #!/bin/bash
 
 if [ "$TRAVIS_BRANCH" == "master" ]; then
-  REPO="colab-unstable"
+  repo="colab-unstable"
 elif [ "$TRAVIS_BRANCH" == "stable" ]; then
-  REPO="colab-stable"
+  repo="colab-stable"
 elif [ "$TRAVIS_BRANCH" == "test" ]; then
-  REPO="colab-testing"
+  repo="colab-testing"
 else
   exit 0;
 fi
 
+repo_url="https://packagecloud.io/seocam/$repo/el/7/x86_64"
+
+version=`python setup.py --version`
 python setup.py sdist
 
 sudo apt-get install rinse > /dev/null
@@ -26,11 +29,24 @@ sudo cp ci/softwarepublico.key /tmp/centos-7/etc/yum.repos.d/
 
 sudo chroot /tmp/centos-7/ yum install rpm-build -y > /dev/null
 sudo chroot /tmp/centos-7/ yum install python-virtualenv colab-deps -y /dev/null
-sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec > /dev/null
-PACKAGE_PATH=`sudo find /tmp/centos-7/root/rpmbuild/RPMS/noarch/ -name "colab*.rpm"`
-sudo cp $PACKAGE_PATH /tmp/
 
-# Send to packagecloud
+sudo chroot /tmp/centos-7/ repoquery --repofrompath="$repo,$repo_url" --repoid=$repo colab --info > /tmp/colab-latest-info
+
+latest_version=`grep -i version /tmp/colab-latest-info | awk '{ print $3 }'`
+latest_release=`grep -i release /tmp/colab-latest-info | awk '{ print $3 }'`
+
+if [ "$version" == "$latest_version" ]; then
+    release=$((latest_release + 1))
+else
+    release=1
+fi
+
+echo "Building package: $version-$release"
+
+sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec --define="release ${release}"
+sudo cp /tmp/centos-7/root/rpmbuild/RPMS/noarch/colab-$version-$release.noarch.rpm .
+
+## Send to packagecloud
 
 gem install package_cloud
-package_cloud push seocam/$REPO/el/7 /tmp/*.rpm
+package_cloud push seocam/$repo/el/7 *.rpm
