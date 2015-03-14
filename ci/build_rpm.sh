@@ -46,7 +46,9 @@ echo "Building package: $version-$release"
 sudo HOME=/root chroot /tmp/centos-7/ rpmbuild -ba /root/rpmbuild/SPECS/colab.spec --define="release ${release}"
 sudo cp /tmp/centos-7/root/rpmbuild/RPMS/noarch/colab-$version-$release.noarch.rpm .
 
+
 ## Send to packagecloud
 
 gem install package_cloud
-package_cloud push seocam/$repo/el/7 *.rpm
+package_cloud yank seocam/$repo/el/7 colab-$latest_version-$latest_release.noarch.rpm
+package_cloud push seocam/$repo/el/7 colab-$version-$release.noarch.rpm
