@@ -51,5 +51,5 @@ sudo cp /tmp/centos-7/root/rpmbuild/RPMS/noarch/colab-$version-$release.noarch.r
 ## Send to packagecloud
 
 gem install package_cloud
+package_cloud push seocam/$repo/el/7 colab-$version-$release.noarch.rpm && \
 package_cloud yank seocam/$repo/el/7 colab-$latest_version-$latest_release.noarch.rpm
-package_cloud push seocam/$repo/el/7 colab-$version-$release.noarch.rpm
