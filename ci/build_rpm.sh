@@ -36,7 +36,8 @@ latest_version=`grep -i version /tmp/colab-latest-info | awk '{ print $3 }'`
 latest_release=`grep -i release /tmp/colab-latest-info | awk '{ print $3 }'`
 
 if [ "$version" == "$latest_version" ]; then
-    release=$((latest_release + 1))
+    # Using awk because it can deal with floating points
+    release=`echo $latest_release | awk '{ $1++; print $1 }'`
 else
     release=1
 fi
