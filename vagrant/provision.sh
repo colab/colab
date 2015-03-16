@@ -34,6 +34,11 @@ fi
 colab-admin migrate
 colab-admin loaddata /vagrant/tests/test_data.json
 
+
 ### Install solr
+
 colab-admin build_solr_schema -f /tmp/schema.xml
-curl -sSL https://raw.githubusercontent.com/moliware/travis-solr/master/travis-solr.sh | SOLR_VERSION=4.10.3 SOLR_CONFS="/tmp/schema.xml /vagrant/vagrant/solr-config/stopwords.txt" bash
+
+SOLR_VERSION=4.10.3 SOLR_CONFS="/tmp/schema.xml" exec $basedir/ci/install_solr.sh
+
+colab-admin rebuild_index --noinput

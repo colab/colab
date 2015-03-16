@@ -183,11 +183,7 @@ download_and_run() {
     # copies custom configurations
     for file in $SOLR_CONFS
     do
-        if [ -d $file ]
-        then
-            cp $file/* $dir_name/example/solr/$dir_conf
-            echo "Copied directory $file into solr conf directory."
-        elif [ -f $file ]
+        if [ -f $file ]
         then
             cp $file $dir_name/example/solr/$dir_conf
             echo "Copied $file into solr conf directory."
