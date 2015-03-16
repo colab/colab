@@ -5,13 +5,9 @@ cache: apt
 python:
   - "2.7"
 
-env:
-  - DJANGO_VERSION=1.7.3
-
 install:
   - pip install coveralls flake8
   - pip install .
-  - pip install django==${DJANGO_VERSION}
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
 script:
