@@ -1,0 +1,9 @@
+[Unit]
+Description=Solr
+
+[Service]
+Type=oneshot
+ExecStart=/etc/solr-4.10.2/bin/solr start -p 8983
+ExecStop=/etc/solr-4.10.2/bin/solr stop -p 8983
+RemainAfterExit=yes
+
