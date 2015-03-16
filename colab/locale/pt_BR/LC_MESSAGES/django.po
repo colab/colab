@@ -327,10 +327,9 @@ msgid "Setting New password"
 msgstr "Trocar senha"
 
 #: colab/accounts/templates/registration/password_reset_form_custom.html:23
-msgid ""
-"Forgotten your password? Enter your email address below, and we'll email "
+msgid "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr ""
+msgstr "Esqueceu sua senha? Entre com seu endereço de email abaixo e nós iremos lhe enviar instruções para configurar uma nova senha"
 
 #: colab/accounts/templates/registration/password_reset_form_custom.html:26
 #, fuzzy
@@ -348,8 +347,7 @@ msgstr "Seu perfil foi criado!"
 
 #: colab/accounts/views.py:264
 msgid "Could not change your password. Please, try again later."
-msgstr ""
-"Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
+msgstr "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
 
 #: colab/accounts/views.py:273
 msgid "You've changed your password successfully!"
@@ -357,13 +355,11 @@ msgstr "Senha alterada com sucesso!"
 
 #: colab/accounts/views.py:279
 msgid "Your password was changed."
-msgstr ""
+msgstr "Sua senha foi alterada"
 
 #: colab/accounts/views.py:286
-msgid ""
-"We've emailed you instructions for setting your password. You should be "
-"receiving them shortly."
-msgstr ""
+msgid "We've emailed you instructions for setting your password. You should be receiving them shortly."
+msgstr "Nos enviamos o email com as intruções para mudança de senha. Em breve você deve recebê-lo."
 
 #: colab/accounts/views.py:292
 msgid "Your password has been set. You may go ahead and log in now."
@@ -840,11 +836,11 @@ msgstr "Comparação"
 #: colab/templates/dpaste/snippet_details.html:47
 #, python-format
 msgid "Expires in: %(date)s"
-msgstr ""
+msgstr "Expira em: %(date)s"
 
 #: colab/templates/dpaste/snippet_details.html:49
 msgid "Snippet never expires"
-msgstr ""
+msgstr "Snippet nunca expira"
 
 #: colab/templates/dpaste/snippet_details.html:51
 #, fuzzy
@@ -854,7 +850,7 @@ msgstr "Uma única visualização"
 
 #: colab/templates/dpaste/snippet_details.html:56
 msgid "Really delete this snippet?"
-msgstr ""
+msgstr "Deseja realmente deletar esse snippet?"
 
 #: colab/templates/dpaste/snippet_details.html:58
 #, fuzzy
@@ -872,31 +868,31 @@ msgstr "Uma única visualização"
 #: colab/templates/dpaste/snippet_details.html:69
 #: colab/templates/dpaste/snippet_details.html:71
 msgid "View Raw"
-msgstr ""
+msgstr "Ver código"
 
 #: colab/templates/dpaste/snippet_details.html:75
 msgid "Gist"
-msgstr ""
+msgstr "Gist"
 
 #: colab/templates/dpaste/snippet_details.html:88
 msgid "This is a one-time snippet."
-msgstr ""
+msgstr "Esste é um snippet que será usado apenas uma vez."
 
 #: colab/templates/dpaste/snippet_details.html:90
 msgid "It will automatically get deleted after {{ remaining }} further views."
-msgstr ""
+msgstr "Isso será automaticamente deletado depois de {{ remaining }} visualizações."
 
 #: colab/templates/dpaste/snippet_details.html:92
 msgid "It will automatically get deleted after the next view."
-msgstr ""
+msgstr "Isso será automaticamente deletado após a próxima visualização."
 
 #: colab/templates/dpaste/snippet_details.html:94
 msgid "It cannot be viewed again."
-msgstr ""
+msgstr "Isso não pode ser visto novamente."
 
 #: colab/templates/dpaste/snippet_details.html:109
 msgid "Reply to this snippet"
-msgstr ""
+msgstr "Responda esse snippet"
 
 #: colab/templates/dpaste/snippet_diff.html:5
 #, python-format
@@ -906,10 +902,14 @@ msgid ""
 "\"%(fileb_url)s\">#%(fileb_id)s</a>\n"
 "    "
 msgstr ""
+"\n"
+    "    Diferença entre <a href=\"%(filea_url)s\">#%(filea_id)s</a> e <a href="
+    "\"%(fileb_url)s\">#%(fileb_id)s</a>\n"
+    "    "
 
 #: colab/templates/dpaste/snippet_form.html:28
 msgid "Paste it"
-msgstr ""
+msgstr "Cole aqui"
 
 #: colab/templates/home.html:17
 msgid "Latest Collaborations"
