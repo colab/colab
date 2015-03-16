@@ -8,17 +8,16 @@ python:
 env:
   - DJANGO_VERSION=1.7.3
 
-#install:
-#  - pip install coveralls flake8
-#  - pip install .
-#  - pip install django==${DJANGO_VERSION}
-#  - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
+install:
+  - pip install coveralls flake8
+  - pip install .
+  - pip install django==${DJANGO_VERSION}
+  - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
 script:
- # - python setup.py test
- # - flake8 colab
-   - echo "Success!! =)"
+  - python setup.py test
+  - flake8 colab
 
 after_success:
-#  coveralls
+  - coveralls
   - ci/build_rpm.sh
