@@ -19,7 +19,7 @@ fi
 
 yum -y groupinstall "Development tools"
 
-yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python-devel postgresql-server
+yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python-devel postgresql-server java
 
 ### Install Virtualenvwrapper
 which pip2.7 > /dev/null ||

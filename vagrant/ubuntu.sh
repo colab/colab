@@ -5,7 +5,7 @@ set -ex
 ### Install dependencies
 apt-get update
 
-apt-get install curl git unzip mercurial build-essential libev-dev gettext libxml2-dev libxslt1-dev libssl-dev libffi-dev libjpeg-dev zlib1g-dev libfreetype6-dev libpq-dev python-dev postgresql virtualenvwrapper python-pip -y
+apt-get install curl git unzip mercurial build-essential libev-dev gettext libxml2-dev libxslt1-dev libssl-dev libffi-dev libjpeg-dev zlib1g-dev libfreetype6-dev libpq-dev python-dev postgresql virtualenvwrapper python-pip java -y
 
 
 ### Create conf directory

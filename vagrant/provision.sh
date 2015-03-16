@@ -2,6 +2,16 @@
 
 set -x
 
+### Install solr
+
+curl http://archive.apache.org/dist/lucene/solr/4.10.2/solr-4.10.2.tgz > solr-4.10.2.tgz
+tar xf solr-4.10.2.tgz
+mv solr-4.10.2 /etc/solr-4.10.2
+rm -r solr-4.10.2.tgz
+cp /etc/solr-4.10.2/example/solr/collection1/conf/lang/stopwords_en.txt /etc/solr-4.10.2/example/solr/collection1/conf/stopwords_en.txt
+chown vagrant:vagrant /etc/solr-4.10.2
+
+### Configure Colab
 export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python2.7"
 
 set +e
