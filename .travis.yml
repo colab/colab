@@ -10,13 +10,15 @@ install:
   - pip install .
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
+before_script: 
+  - colab-init-config > /etc/colab/settings.yaml
+  - colab-admin build_solr_schema > solr_confs/schema.xml
+  - SOLR_VERSION=4.10.3 SOLR_CONFS="solr_confs" exec  `pwd`/ci/install_solr.sh
+  - colab-admin rebuild_index
+
 script:
   - python setup.py test
   - flake8 colab
-
-before_script: 
-  - colab-admin build_solr_schema > schema.xml 
-  - curl -sSL https://raw.githubusercontent.com/moliware/travis-solr/master/travis-solr.sh | SOLR_VERSION=4.10.2 bash 
 
 after_success:
   - coveralls
