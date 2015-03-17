@@ -6,7 +6,9 @@ python:
   - "2.7"
 
 env:
-  - DJANGO_SETTINGS_MODULE=tests.settings COLAB_SETTINGS=tests/settings.yaml
+  global:
+    - DJANGO_SETTINGS_MODULE=tests.settings 
+    - COLAB_SETTINGS=tests/settings.yaml
 
 install:
   - pip install coveralls flake8
@@ -14,10 +16,8 @@ install:
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
 before_script: 
-  - colab-init-config > /etc/colab/settings.yaml
   - colab-admin build_solr_schema > solr_confs/schema.xml
-  - SOLR_VERSION=4.10.3 SOLR_CONFS="solr_confs" exec  `pwd`/ci/install_solr.sh
-  - colab-admin rebuild_index
+  - cat ci/install_solr.sh | SOLR_VERSION=4.10.3  SOLR_CONFS="solr_confs" bash
 
 script:
   - python setup.py test
