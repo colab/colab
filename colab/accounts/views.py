@@ -279,7 +279,6 @@ def myaccount_redirect(request, route):
     if not request.user.is_authenticated():
         raise Http404()
 
-    username = request.user.username
-    url = "/account/" + username + "/" + route
+    url = '/'.join(('/account', request.user.username, route))
 
     return redirect(url)

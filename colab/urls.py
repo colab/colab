@@ -28,8 +28,8 @@ urlpatterns = patterns(
     # (same here) TODO: move to nginx
     url(r'^signup/', include('colab.accounts.urls')),
     url(r'^account/', include('colab.accounts.urls')),
-    url(r'^myaccount/(?P<route>[\w@+.-/?]*)$',
-        'colab.accounts.views.myaccount_redirect',name='myaccount' ),
+    url(r'^myaccount/(?P<route>.*)$',
+        'colab.accounts.views.myaccount_redirect', name='myaccount'),
 
     url(r'', include('django_browserid.urls')),
 
