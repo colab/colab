@@ -8,14 +8,14 @@ download() {
     FILE="$2.tgz"
     if [ -f $FILE ];
     then
-        echo "File $FILE exists."
-        tar -zxf $FILE
+       echo "File $FILE exists."
+       tar -zxf $FILE
     else
-        echo "Downloading solr from $1..."
-        curl -O $1
-        tar -zxf $FILE
+       echo "File $FILE does not exist. Downloading solr from $1..."
+       curl -O $1
+       tar -zxf $FILE
     fi
-    echo "Downloaded"
+    echo "Downloaded!"
 }
 
 is_solr_up(){
