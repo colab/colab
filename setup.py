@@ -53,7 +53,6 @@ REQUIREMENTS = [
 ]
 
 TEST_REQUIREMENTS = [
-    'Whoosh==2.5.7',
     'coverage==3.7.1',
     'coveralls==0.5',
     'flake8==2.3.0',
