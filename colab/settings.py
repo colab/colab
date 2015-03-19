@@ -307,26 +307,19 @@ for app_name, app in COLAB_APPS.items():
     if app.get('upstream'):
         PROXIED_APPS[app_name.split('.')[-1]] = app
 
-    if not app or 'templates' not in app:
-        continue
-
-    template = app.get('templates')
+    if 'middlewares' in app:
+        for middleware in app.get('middlewares'):
+            if middleware not in MIDDLEWARE_CLASSES:
+                MIDDLEWARE_CLASSES += (middleware,)
 
     if 'context_processors' in app:
         for context_processor in app.get('context_processors'):
             if context_processor not in TEMPLATE_CONTEXT_PROCESSORS:
                 TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
 
-    if template.get('staticdir'):
-        STATICFILES_DIRS += (template.get('staticdir'),)
-    if template.get('templatesdir'):
-        TEMPLATE_DIRS += (template.get('templatesdir'),)
-    if template.get('localesdir'):
-        LOCALE_PATHS += (template.get('localesdir'),)
+colab_templates = locals().get('COLAB_TEMPLATES') or {}
+colab_statics    = locals().get('COLAB_STATICS') or {}
 
-import sys
-sys.path.insert(0, '/etc/colab/')
-try:
-    from plugin_configs import *  # noqa (flake8 ignore)
-except ImportError:
-    pass
+TEMPLATE_DIRS += tuple(colab_templates)
+STATICFILES_DIRS += tuple(colab_statics)
+

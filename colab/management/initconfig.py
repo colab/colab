@@ -69,6 +69,13 @@ ROBOTS_NOINDEX: false
 ### Log errors to Sentry instance
 # RAVEN_DSN: 'http://public:secret@example.com/1'
 
+COLAB_TEMPLATES:
+
+COLAB_STATICS:
+
+# FEEDZILLA_SITE_TITLE: 'Planet Colab'
+# FEEDZILLA_SITE_DESCRIPTION: 'Colab blog aggregator'
+
 ### Colab proxied apps
 # COLAB_APPS:
 #  colab.proxy.gitlab:
@@ -76,44 +83,40 @@ ROBOTS_NOINDEX: false
 #    menu:
 #      title: 'Code'
 #      links:
-#        { 'Public Projects' : '/gitlab/public/projects' }
+#        Public Projects: '/gitlab/public/projects'
 #      auth_links:
-#        { 'Profile' : 'gitlab/profile',
-#          'New Project' : 'gitlab/projects/new',
-#          'Projects' : 'gitlab/dashboard/projects',
-#          'Groups' : 'gitlab/pprofile/groups',
-#          'Issues' : 'gitlab/dashboard/issues',
-#          'Merge Requests' : 'gitlab/merge_requests' }
+#        Profile: 'gitlab/profile'
+#        New Project: 'gitlab/projects/new'
+#        Projects: 'gitlab/dashboard/projects'
+#        Groups: 'gitlab/pprofile/groups'
+#        Issues: 'gitlab/dashboard/issues'
+#        Merge Requests: 'gitlab/merge_requests'
 #  dpaste:
 #    urls:
 #      include: 'dpaste.urls.dpaste'
 #      prefix:  '^paste/'
 #      namespace: 'dpaste'
-#    templates:
-#      templatesdir: '/vagrant/pluginfiles/dpaste/templates'
-#      staticdir:    '/vagrant/pluginfiles/dpaste/static'
 #    menu:
 #      title: 'Dpaste'
 #      links:
-#        { 'Public Projects':  '/paste' }
+#        Public Projects:  '/paste'
 #      auth_links:
-#        { 'Profile': '/projects',
-#          'New Project': '/projects/new' }
+#        Profile: '/projects'
+#        New Project: '/projects/new'
 #  feedzilla:
-#    dependencies: ['common']
+#    dependencies:
+#      - 'common'
 #    urls:
 #      include: 'feedzilla.urls'
 #      prefix:  '^planet/'
 #      namespace: 'planet'
 #    templates:
-#      context_processors: ['colab.planet.context_processors.feedzilla']
-#      templatesdir: '/vagrant/pluginfiles/feedzilla/templates'
-#      staticdir:    '/vagrant/pluginfiles/feedzilla/static'
-#      localesdir:      '/vagrant/pluginfiles/feedzilla/locales'
+#      context_processors:
+#        - 'colab.planet.context_processors.feedzilla'
 #    menu:
 #      title: 'Planet'
 #      links:
-#        { 'Index' : '/planet' }
+#        Index: '/planet'
 #      auth_links:
 #        {}
 

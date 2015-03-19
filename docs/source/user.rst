@@ -56,21 +56,14 @@ urls
 
     Declares the namespace for the url.
 
-templates
+context_processors
 ++++++++++++
 
-.. attribute:: context_processors
-
     Declares the plugin context processors.
-.. attribute:: templatesdir
 
-    Declares the path to templates directory.
-.. attribute:: staticdir
-
-    Declares the path to static directory.
-.. attribute:: localesdir
-
-    Declares the path to locales directory.
+middlewares
+++++++++++++
+    Declares the plugin middlewares.
 
 Settings
 --------
