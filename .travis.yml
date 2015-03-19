@@ -16,8 +16,8 @@ install:
   - psql -c "CREATE USER colab WITH PASSWORD 'colab' CREATEDB;" -U postgres
 
 before_script: 
-  - colab-admin build_solr_schema > ci/solr_confs/schema.xml
-  - cat ci/install_solr.sh | SOLR_VERSION=4.10.3  SOLR_CONFS="ci/solr_confs" bash
+  - colab-admin build_solr_schema > /tmp/schema.xml
+  - cat ci/install_solr.sh | SOLR_VERSION=4.10.3  SOLR_CONFS="/tmp/schema.xml" bash
 
 script:
   - python setup.py test
