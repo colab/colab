@@ -4,7 +4,7 @@
 SOLR_HOME=/home/vagrant/solr-4.10.3/example
 
 # Java options for Solr
-OPTIONS="-Xmx1024m"
+OPTIONS="-Xmx128m"
 
 # Path to pid file
 PIDFILE=/var/run/solr.pid
