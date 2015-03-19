@@ -5,6 +5,7 @@ Objective: Test parameters, and behavior.
 from colab.accounts.models import User
 from django.test import TestCase, Client
 
+
 class UserTest(TestCase):
 
     def setUp(self):
