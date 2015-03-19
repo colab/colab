@@ -7,7 +7,7 @@ from datetime import datetime
 
 from django.test import TestCase, Client
 from colab.accounts.models import User
-from colab.proxy.gitlab.models import GitlabProject, \
+from colab.plugins.gitlab.models import GitlabProject, \
     GitlabIssue, GitlabComment, GitlabMergeRequest
 
 

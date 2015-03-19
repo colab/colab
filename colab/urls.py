@@ -32,15 +32,13 @@ urlpatterns = patterns('',
 
     url(r'', include('django_browserid.urls')),
 
-    url(r'^planet/', include('feedzilla.urls')),
-
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 
-    url(r'^trac/', include('colab.proxy.trac.urls')),
-    url(r'^gitlab/', include('colab.proxy.gitlab.urls')),
-    url(r'^social/', include('colab.proxy.noosfero.urls')),
-    url(r'^ci/', include('colab.proxy.jenkins.urls')),
+    url(r'^trac/', include('colab.plugins.trac.urls')),
+    url(r'^gitlab/', include('colab.plugins.gitlab.urls')),
+    url(r'^social/', include('colab.plugins.noosfero.urls')),
+    url(r'^ci/', include('colab.plugins.jenkins.urls')),
 
     url(r'', include('colab.plugins.urls')),
 )

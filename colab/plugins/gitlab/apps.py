@@ -5,7 +5,7 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyGitlabAppConfig(ColabProxiedAppConfig):
-    name = 'colab.proxy.gitlab'
+    name = 'colab.plugins.gitlab'
     verbose_name = 'Gitlab Proxy'
 
     menu = {

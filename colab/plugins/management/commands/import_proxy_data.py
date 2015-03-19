@@ -6,7 +6,7 @@ import inspect
 from django.core.management.base import BaseCommand
 from django.conf import settings
 
-from colab.proxy.utils.proxy_data_api import ProxyDataAPI
+from colab.plugins.utils.proxy_data_api import ProxyDataAPI
 
 
 class Command(BaseCommand):
@@ -16,7 +16,7 @@ class Command(BaseCommand):
         print "Executing extraction command..."
 
         for module_name in settings.PROXIED_APPS.keys():
-            module_path = 'colab.proxy.{}.data_api'.format(module_name)
+            module_path = 'colab.plugins.{}.data_api'.format(module_name.split('.')[-1])
             module = importlib.import_module(module_path)
 
             for module_item_name in dir(module):

@@ -5,7 +5,7 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyNoosferoAppConfig(ColabProxiedAppConfig):
-    name = 'colab.proxy.noosfero'
+    name = 'colab.plugins.noosfero'
     verbose_name = 'Noosfero Proxy'
 
     menu = {

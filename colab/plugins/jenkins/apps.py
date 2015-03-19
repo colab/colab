@@ -5,7 +5,7 @@ from ..utils.apps import ColabProxiedAppConfig
 
 
 class ProxyJenkinsAppConfig(ColabProxiedAppConfig):
-    name = 'colab.proxy.jenkins'
+    name = 'colab.plugins.jenkins'
     verbose_name = 'Jenkins Proxy'
 
     menu = {

@@ -3,6 +3,7 @@
 *.pot
 *.pyc
 *.pyo
+*.egg
 local_settings.py
 project_cfg.py
 
@@ -25,3 +26,6 @@ tests/whoosh_index/
 
 # Open Build System
 .obs/
+
+# Documentation build
+docs/build

@@ -75,10 +75,11 @@ COLAB_STATICS:
 
 # FEEDZILLA_SITE_TITLE: 'Planet Colab'
 # FEEDZILLA_SITE_DESCRIPTION: 'Colab blog aggregator'
+# FEEDZILLA_PAGE_SIZE: 10
 
 ### Colab proxied apps
 # COLAB_APPS:
-#  colab.proxy.gitlab:
+#  colab.plugins.gitlab:
 #    upstream: 'http://www.fga.unb.br/'
 #    menu:
 #      title: 'Code'

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load i18n browserid conversejs gravatar proxy %}
+{% load i18n browserid conversejs gravatar plugins %}
 {% load static from staticfiles %}
 
 <html>
@@ -90,7 +90,7 @@
               <a href="{% url 'thread_list' %}">{% trans "Groups" %}</a>
             </li>
 
-            {% proxy_menu %}
+            {% plugins_menu %}
 
             <li class="hidden-lg hidden-md">
               <a href="{% url 'haystack_search' %}?q=">{% trans "Search" %}</a>

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from colab.proxy.utils.models import Collaboration
+from colab.plugins.utils.models import Collaboration
 from hitcounter.models import HitCounterModelMixin
 
 

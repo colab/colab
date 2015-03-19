@@ -54,7 +54,7 @@ INSTALLED_APPS = (
 
     # Own apps
     'colab.home',
-    'colab.proxy',
+    'colab.plugins',
     'colab.super_archives',
     'colab.api',
     'colab.rss',
@@ -195,7 +195,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_mobile.context_processors.is_mobile',
     'colab.super_archives.context_processors.mailarchive',
-    'colab.proxy.context_processors.proxied_apps',
+    'colab.plugins.context_processors.proxied_apps',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
@@ -322,4 +322,3 @@ colab_statics    = locals().get('COLAB_STATICS') or {}
 
 TEMPLATE_DIRS += tuple(colab_templates)
 STATICFILES_DIRS += tuple(colab_statics)
-

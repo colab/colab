@@ -1,4 +1,4 @@
-from colab.proxy.utils.proxy_data_api import ProxyDataAPI
+from colab.plugins.utils.proxy_data_api import ProxyDataAPI
 
 
 class JenkinsDataAPI(ProxyDataAPI):

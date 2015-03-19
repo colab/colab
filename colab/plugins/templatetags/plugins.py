@@ -9,7 +9,7 @@ register = template.Library()
 
 
 @register.simple_tag(takes_context=True)
-def proxy_menu(context):
+def plugins_menu(context):
     if context['user'].is_authenticated():
         cache_key = 'colab-proxy-menu-authenticated'
     else:
@@ -43,7 +43,7 @@ def proxy_menu(context):
             url = link
             menu_links[_(title)].append((_(text), url))
 
-    menu = render_to_string('proxy/menu_template.html',
+    menu = render_to_string('plugins/menu_template.html',
                             {'menu_links': menu_links})
 
     cache.set(cache_key, menu)
