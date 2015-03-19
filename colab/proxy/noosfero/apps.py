@@ -15,7 +15,7 @@ class ProxyNoosferoAppConfig(ColabProxiedAppConfig):
             (_('Communities'), 'search/communities'),
         ),
         'auth_links': (
-            (_('Profile'), 'profile'),
-            (_('Control panel'), 'myprofile'),
+            (_('Profile'), 'profile/~/'),
+            (_('Control panel'), 'myprofile/~/'),
         ),
     }
