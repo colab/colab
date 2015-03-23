@@ -25,7 +25,7 @@ Plugins
 
 .. attribute:: upstream
 
-Declares the upstream server url of the proxy.
+Declares the upstream server url of the proxy. Only declare if the plugin is a proxy.
 
 menu
 ++++++++++++
@@ -63,7 +63,28 @@ context_processors
 
 middlewares
 ++++++++++++
+
     Declares the plugin middlewares.
+
+
+Extra Template Folders
+++++++++++++
+
+.. attribute:: COLAB_TEMPLATES
+
+   :default: None
+
+   Colab's extra template folders. Use it to add plugins template files.
+
+
+Extra Static Folders
+++++++++++++
+
+.. attribute:: COLAB_STATIC
+
+   :default: None
+
+   Colab's extra static folders. Use it to add plugins static files.
 
 Settings
 --------
