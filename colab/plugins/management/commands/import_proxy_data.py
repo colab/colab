@@ -16,7 +16,8 @@ class Command(BaseCommand):
         print "Executing extraction command..."
 
         for module_name in settings.PROXIED_APPS.keys():
-            module_path = 'colab.plugins.{}.data_api'.format(module_name.split('.')[-1])
+            module_path = \
+                'colab.plugins.{}.data_api'.format(module_name.split('.')[-1])
             module = importlib.import_module(module_path)
 
             for module_item_name in dir(module):

@@ -317,7 +317,7 @@ for app_name, app in COLAB_APPS.items():
                 TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
 
 colab_templates = locals().get('COLAB_TEMPLATES') or {}
-colab_statics    = locals().get('COLAB_STATICS') or {}
+colab_statics = locals().get('COLAB_STATICS') or {}
 
 TEMPLATE_DIRS += tuple(colab_templates)
 STATICFILES_DIRS += tuple(colab_statics)
