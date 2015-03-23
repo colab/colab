@@ -357,35 +357,6 @@ ul.unstyled-list .glyphicon-chevron-right {
 /* End of Converse JS*/
 
 
-/* Feedzilla */
-
-#planet .well h3 {
-    margin-top: 0;
-}
-
-.tag-cloud {
-    text-align: justify;
-    margin-top: 6px;
-}
-
-.tag-cloud .size-1 {
-    font-size: 0.9em;
-}
-
-.tag-cloud .size-2 {
-    font-size: 1.2em;
-}
-
-.tag-cloud .size-3 {
-    font-size: 1.4em;
-}
-
-.tag-cloud .size-4 {
-    font-size: 1.6em;
-}
-
-/* end Feedzilla */
-
 /* user profile update */
 
 .btn.delete-email:not(:hover) {

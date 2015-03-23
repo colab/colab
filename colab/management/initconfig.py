@@ -69,13 +69,61 @@ ROBOTS_NOINDEX: false
 ### Log errors to Sentry instance
 # RAVEN_DSN: 'http://public:secret@example.com/1'
 
+COLAB_TEMPLATES:
+
+COLAB_STATICS:
+
+# FEEDZILLA_SITE_TITLE: 'Planet Colab'
+# FEEDZILLA_SITE_DESCRIPTION: 'Colab blog aggregator'
+# FEEDZILLA_PAGE_SIZE: 10
+
 ### Colab proxied apps
-# PROXIED_APPS:
-#   gitlab:
-#     upstream: 'http://localhost:8090/gitlab/'
-#     private_token: ''
-#   trac:
-#     upstream: 'http://localhost:5000/trac/'
+# COLAB_APPS:
+#  colab.plugins.gitlab:
+#    upstream: 'http://www.fga.unb.br/'
+#    menu:
+#      title: 'Code'
+#      links:
+#        Public Projects: '/gitlab/public/projects'
+#      auth_links:
+#        Profile: 'gitlab/profile'
+#        New Project: 'gitlab/projects/new'
+#        Projects: 'gitlab/dashboard/projects'
+#        Groups: 'gitlab/pprofile/groups'
+#        Issues: 'gitlab/dashboard/issues'
+#        Merge Requests: 'gitlab/merge_requests'
+#  dpaste:
+#    dependencies:
+#      - 'mptt'
+#    urls:
+#      include: 'dpaste.urls.dpaste'
+#      prefix:  '^paste/'
+#      namespace: 'dpaste'
+#    menu:
+#      title: 'Dpaste'
+#      links:
+#        Public Projects:  '/paste'
+#      auth_links:
+#        Profile: '/projects'
+#        New Project: '/projects/new'
+#  feedzilla:
+#    dependencies:
+#      - 'common'
+#    urls:
+#      include: 'feedzilla.urls'
+#      prefix:  '^planet/'
+#      namespace: 'planet'
+#    templates:
+#      context_processors:
+#        - 'colab.planet.context_processors.feedzilla'
+#    menu:
+#      title: 'Planet'
+#      links:
+#        Index: '/planet'
+#      auth_links:
+#        {}
+
+
 
 """
 

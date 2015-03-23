@@ -9,7 +9,7 @@ from django.conf import settings
 from django.db.models import Q as Condition
 
 from colab.super_archives.models import Thread, Message
-from colab.proxy.utils.models import Collaboration
+from colab.plugins.utils.models import Collaboration
 from colab.accounts.utils import mailman
 
 
@@ -58,7 +58,7 @@ def get_collaboration_data(logged_user, filter_by_user=None):
 
     for app_name in app_names:
         module = importlib \
-            .import_module('colab.proxy.{}.models'.format(app_name))
+            .import_module('colab.plugins.{}.models'.format(app_name))
 
         for module_item_name in dir(module):
             module_item = getattr(module, module_item_name)

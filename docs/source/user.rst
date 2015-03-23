@@ -14,7 +14,84 @@ Install
 
 Plugins
 -------
-.. TODO
+.. attribute:: COLAB_APPS
+
+   :default: None
+
+   Describes the activated plugins and its configurations. It's necessary to describe
+   for each app its name as the variable. The apps described here can be devided into
+   two categories, that beeing, colab proxy apps and third-party apps.
+   The upstream variable is only needed to colab proxy apps.
+
+.. attribute:: upstream
+
+Declares the upstream server url of the proxy. Only declare if the plugin is a proxy.
+
+dependecies
++++++++++++
+
+    A list of the plugin dependecies that will be added to INSTALLED_APPS.
+    This doesn't automatically install the python dependecies, only add to django apps.
+
+
+menu
+++++
+
+.. attribute:: title
+
+    Declares the menu title.
+.. attribute:: links
+
+    Declares the menu items and its links.
+.. attribute:: auth_links
+
+    Declares the menu items and its links when the user authenticated.
+.. attribute:: dependecies
+
+Declares a list of the plugin dependecies.
+
+urls
+++++
+
+.. attribute:: include
+
+    Declares the include urls.
+.. attribute:: prefix
+
+    Declares the prefix for the url.
+.. attribute:: namespace
+
+    Declares the namespace for the url.
+
+context_processors
+++++++++++++++++++
+
+    Declares the plugin context processors.
+
+middlewares
++++++++++++
+
+    Declares the plugin middlewares.
+
+
+Extra Template Folders
+++++++++++++++++++++++
+
+.. attribute:: COLAB_TEMPLATES
+
+   :default: None
+
+   Colab's extra template folders. Use it to add plugins template files.
+
+
+Extra Static Folders
+++++++++++++++++++++
+
+.. attribute:: COLAB_STATIC
+
+   :default: None
+
+   Colab's extra static folders. Use it to add plugins static files.
 
 Settings
 --------

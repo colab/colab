@@ -49,17 +49,14 @@ INSTALLED_APPS = (
     'haystack',
     'hitcounter',
     'i18n_model',
-    'mptt',
-    'dpaste',
     'taggit',
 
     # Own apps
     'colab.home',
-    'colab.proxy',
+    'colab.plugins',
     'colab.super_archives',
     'colab.api',
     'colab.rss',
-    'colab.planet',
     'colab.search',
     'colab.badger',
     'colab.tz',
@@ -197,12 +194,11 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_mobile.context_processors.is_mobile',
     'colab.super_archives.context_processors.mailarchive',
-    'colab.proxy.context_processors.proxied_apps',
+    'colab.plugins.context_processors.proxied_apps',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
     'colab.home.context_processors.browserid_enabled',
-    'colab.planet.context_processors.feedzilla',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -256,14 +252,6 @@ SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/private'
 SUPER_ARCHIVES_EXCLUDE = []
 SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 
-# Feedzilla  (planet)
-from feedzilla.settings import *  # noqa (flake8 ignore)
-FEEDZILLA_PAGE_SIZE = 5
-FEEDZILLA_SITE_TITLE = _(u'Planet Colab')
-FEEDZILLA_SITE_DESCRIPTION = _(u'Colab blog aggregator')
-
-FEEDZILLA_ENABLED = True
-
 # Mailman API settings
 MAILMAN_API_URL = 'http://localhost:8124'
 
@@ -288,43 +276,48 @@ CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
 CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
 CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 
-
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
-
-# Dpaste settings
-DPASTE_EXPIRE_CHOICES = (
-    ('onetime', _(u'One Time Snippet')),
-    (3600, _(u'In one hour')),
-    (3600 * 24 * 7, _(u'In one week')),
-    (3600 * 24 * 30, _(u'In one month')),
-    ('never', _(u'Never')),
-)
-DPASTE_EXPIRE_DEFAULT = DPASTE_EXPIRE_CHOICES[4][0]
-DPASTE_DEFAULT_GIST_DESCRIPTION = 'Gist created from Colab DPaste'
-DPASTE_DEFAULT_GIST_NAME = 'colab_paste'
-DPASTE_LEXER_DEFAULT = 'text'
 
 from .utils.conf import load_yaml_settings
 locals().update(load_yaml_settings())
 
 if locals().get('RAVEN_DSN', False):
     RAVEN_CONFIG = {
-        'dsn': RAVEN_DSN + '?timeout=30',
+        'dsn': RAVEN_DSN + '?timeout=30',  # noqa
     }
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
-
-if FEEDZILLA_ENABLED:
-    INSTALLED_APPS += (
-        # Feedzilla and deps
-        'feedzilla',
-        'common',
-    )
 
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
-PROXIED_APPS = locals().get('PROXIED_APPS') or {}
+COLAB_APPS = locals().get('COLAB_APPS') or {}
+PROXIED_APPS = {}
 
-for app_label in PROXIED_APPS.keys():
-    INSTALLED_APPS += ('colab.proxy.{}'.format(app_label),)
+for app_name, app in COLAB_APPS.items():
+    if 'dependencies' in app:
+        for dep in app.get('dependencies'):
+            if dep not in INSTALLED_APPS:
+                INSTALLED_APPS += (dep,)
+
+    if app_name not in INSTALLED_APPS:
+        INSTALLED_APPS += (app_name,)
+
+    if app.get('upstream'):
+        PROXIED_APPS[app_name.split('.')[-1]] = app
+
+    if 'middlewares' in app:
+        for middleware in app.get('middlewares'):
+            if middleware not in MIDDLEWARE_CLASSES:
+                MIDDLEWARE_CLASSES += (middleware,)
+
+    if 'context_processors' in app:
+        for context_processor in app.get('context_processors'):
+            if context_processor not in TEMPLATE_CONTEXT_PROCESSORS:
+                TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
+
+colab_templates = locals().get('COLAB_TEMPLATES') or {}
+colab_statics = locals().get('COLAB_STATICS') or {}
+
+TEMPLATE_DIRS += tuple(colab_templates)
+STATICFILES_DIRS += tuple(colab_statics)
