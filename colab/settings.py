@@ -280,7 +280,11 @@ CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
 from .utils.conf import load_yaml_settings
+from .utils.conf import load_py_settings
+
 locals().update(load_yaml_settings())
+
+locals().update(load_py_settings())
 
 if locals().get('RAVEN_DSN', False):
     RAVEN_CONFIG = {
