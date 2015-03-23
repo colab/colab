@@ -3,7 +3,7 @@
 *.pot
 *.pyc
 *.pyo
-*.egg
+*.egg*
 local_settings.py
 project_cfg.py
 
