@@ -93,6 +93,8 @@ COLAB_STATICS:
 #        Issues: 'gitlab/dashboard/issues'
 #        Merge Requests: 'gitlab/merge_requests'
 #  dpaste:
+#    dependencies:
+#      - 'mptt'
 #    urls:
 #      include: 'dpaste.urls.dpaste'
 #      prefix:  '^paste/'

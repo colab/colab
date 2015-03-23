@@ -27,8 +27,15 @@ Plugins
 
 Declares the upstream server url of the proxy. Only declare if the plugin is a proxy.
 
+dependecies
++++++++++++
+
+    A list of the plugin dependecies that will be added to INSTALLED_APPS.
+    This doesn't automatically install the python dependecies, only add to django apps.
+
+
 menu
-++++++++++++
+++++
 
 .. attribute:: title
 
@@ -44,7 +51,7 @@ menu
 Declares a list of the plugin dependecies.
 
 urls
-++++++++++++
+++++
 
 .. attribute:: include
 
@@ -57,18 +64,18 @@ urls
     Declares the namespace for the url.
 
 context_processors
-++++++++++++
+++++++++++++++++++
 
     Declares the plugin context processors.
 
 middlewares
-++++++++++++
++++++++++++
 
     Declares the plugin middlewares.
 
 
 Extra Template Folders
-++++++++++++
+++++++++++++++++++++++
 
 .. attribute:: COLAB_TEMPLATES
 
@@ -78,7 +85,7 @@ Extra Template Folders
 
 
 Extra Static Folders
-++++++++++++
+++++++++++++++++++++
 
 .. attribute:: COLAB_STATIC
 

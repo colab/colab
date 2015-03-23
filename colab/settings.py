@@ -49,7 +49,6 @@ INSTALLED_APPS = (
     'haystack',
     'hitcounter',
     'i18n_model',
-    'mptt',
     'taggit',
 
     # Own apps
