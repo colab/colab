@@ -49,12 +49,17 @@ def load_yaml_settings():
 
     yaml_settings = _load_yaml_file(yaml_path)
 
+    parse_yml_menus(yaml_settings)
+
     # Try to read settings from settings.d
     if os.path.exists(settings_dir):
         for file_name in os.listdir(settings_dir):
             if file_name.endswith('.yaml') or file_name.endswith('yml'):
                 file_path = os.path.join(settings_dir, file_name)
                 yaml_settings_d = _load_yaml_file(file_path)
+
+                parse_yml_menus(yaml_settings_d)
+
                 yaml_settings.update(yaml_settings_d)
 
     return yaml_settings or {}
@@ -131,17 +136,37 @@ def load_colab_apps():
                 fields = ['urls', 'menu', 'upstream', 'middlewares',
                           'dependencies', 'context_processors']
 
-                app_name = getattr(py_settings_d, 'name', None)
+                app_name = py_settings_d.get('name')
                 if not app_name:
                     warnings.warn("Plugin missing name variable")
                     continue
 
                 COLAB_APPS[app_name] = {}
                 for key in fields:
-                    value = getattr(py_settings_d, key, None)
+                    value = py_settings_d.get(key)
                     if value:
                         COLAB_APPS[app_name][key] = value
 
     sys.path.remove(plugins_dir)
 
     return {'COLAB_APPS': COLAB_APPS}
+
+
+def parse_yml_menus(yaml_settings):
+    if 'COLAB_APPS' in yaml_settings:
+        for key, plugin in yaml_settings['COLAB_APPS'].items():
+            if 'menu' in plugin:
+                parse_yml_tuples(yaml_settings['COLAB_APPS'][key]['menu'])
+
+
+def parse_yml_tuples(menu):
+    dict_links = menu['links']
+    dict_auth_links = menu['auth_links']
+    menu['links'] = tuple()
+    menu['auth_links'] = tuple()
+
+    for key, value in dict_links.items():
+        menu['links'] += ((key, value),)
+
+    for key, value in dict_auth_links.items():
+        menu['auth_links'] += ((key, value),)
