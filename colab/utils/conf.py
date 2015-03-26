@@ -76,7 +76,7 @@ def _load_py_file(py_path):
                'has read rights.').format(py_path)
         raise InaccessiblePySettings(msg)
 
-    return py_settings.__dict__
+    return py_settings
 
 
 def load_py_settings():
@@ -95,17 +95,53 @@ def load_py_settings():
     sys.path.insert(0, '/etc/colab/')
     sys.path.insert(0, settings_dir)
 
-    py_settings = _load_py_file(settings_module)
+    py_settings = _load_py_file(settings_module).__dict__
 
     # Try to read settings from settings.d
     if os.path.exists(settings_dir):
         for file_name in os.listdir(settings_dir):
             if file_name.endswith('.py'):
                 file_module = file_name.split('.')[0]
-                py_settings_d = _load_py_file(file_module)
+                py_settings_d = _load_py_file(file_module).__dict__
                 py_settings.update(py_settings_d)
 
     sys.path.remove('/etc/colab/')
     sys.path.remove(settings_dir)
 
     return py_settings or {}
+
+
+def load_colab_apps():
+    plugins_dir = '/etc/colab/plugins.d/'
+
+    global USING_YAML_SETTINGS
+    if USING_YAML_SETTINGS:
+        return {}
+
+    sys.path.insert(0, plugins_dir)
+
+    COLAB_APPS = {}
+
+    # Try to read settings from plugins.d
+    if os.path.exists(plugins_dir):
+        for file_name in os.listdir(plugins_dir):
+            if file_name.endswith('.py'):
+                file_module = file_name.split('.')[0]
+                py_settings_d = _load_py_file(file_module)
+                fields = ['urls', 'menu', 'upstream', 'middlewares',
+                          'dependencies', 'context_processors']
+
+                app_name = getattr(py_settings_d, 'name', None)
+                if not app_name:
+                    warnings.warn("Plugin missing name variable")
+                    continue
+
+                COLAB_APPS[app_name] = {}
+                for key in fields:
+                    value = getattr(py_settings_d, key, None)
+                    if value:
+                        COLAB_APPS[app_name][key] = value
+
+    sys.path.remove(plugins_dir)
+
+    return {'COLAB_APPS': COLAB_APPS}

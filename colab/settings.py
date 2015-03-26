@@ -281,6 +281,7 @@ TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
 from .utils.conf import load_yaml_settings
 from .utils.conf import load_py_settings
+from .utils.conf import load_colab_apps
 
 locals().update(load_yaml_settings())
 
@@ -294,6 +295,8 @@ if locals().get('RAVEN_DSN', False):
 
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
+
+locals().update(load_colab_apps())
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 PROXIED_APPS = {}

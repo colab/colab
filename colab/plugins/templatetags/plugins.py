@@ -29,9 +29,9 @@ def plugins_menu(context):
 
         menu = app.get('menu')
         title = menu.get('title', app_name)
-        links = menu.get('links', tuple()).items()
+        links = menu.get('links', tuple())
         if context['user'].is_active:
-            links += menu.get('auth_links', tuple()).items()
+            links += menu.get('auth_links', tuple())
 
         if not links:
             continue
