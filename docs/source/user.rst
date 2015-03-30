@@ -14,41 +14,33 @@ Install
 
 Plugins
 -------
-.. attribute:: COLAB_APPS
+.. attribute:: name
 
-   :default: None
+Declares the absolute name of the plugin app as a python import path. Example:
+directory.something.someplugin
 
-   Describes the activated plugins and its configurations. It's necessary to describe
-   for each app its name as the variable. The apps described here can be devided into
-   two categories, that beeing, colab proxy apps and third-party apps.
-   The upstream variable is only needed to colab proxy apps.
+.. attribute:: verbose_name
+
+Delclare the description name of the plugin.
 
 .. attribute:: upstream
 
-Declares the upstream server url of the proxy. Only declare if the plugin is a proxy.
+Declares the upstream server url of the proxy. Only declare if the plugin is a
+proxy.
 
-dependecies
-+++++++++++
+.. attribute:: middlewares
 
-    A list of the plugin dependecies that will be added to INSTALLED_APPS.
-    This doesn't automatically install the python dependecies, only add to django apps.
+Declares the middlewares of the plugin in a list format.
 
+.. attribute:: context_processors
 
-menu
-++++
+Declares the context processors of the plugin in a list format too.
 
-.. attribute:: title
+.. attribute:: dependency
 
-    Declares the menu title.
-.. attribute:: links
-
-    Declares the menu items and its links.
-.. attribute:: auth_links
-
-    Declares the menu items and its links when the user authenticated.
-.. attribute:: dependecies
-
-Declares a list of the plugin dependecies.
+Declares the additional installed apps that this plugin depends on.
+This doesn't automatically install the python dependecies, only add to django
+apps.
 
 urls
 ++++
@@ -63,15 +55,38 @@ urls
 
     Declares the namespace for the url.
 
-context_processors
-++++++++++++++++++
+menu
+++++
 
-    Declares the plugin context processors.
+Declares the menu structure of the app, if it exists. It is a dictionary with
+the folowing keys.
 
-middlewares
-+++++++++++
+.. attribute:: title
 
-    Declares the plugin middlewares.
+    Declares the menu title. It's has a string value.
+.. attribute:: links
+
+    Declares the menu items and its links.
+.. attribute:: auth_links
+
+    Declares the menu items and its links when the user authenticated.
+.. attribute:: dependecies
+
+Example:
+
+.. code-block:: python
+
+   menu = {
+      'title': _('Code'),
+      'links': (
+          (_('Public Projects'), 'public/projects'),
+      ),
+      'auth_links': (
+          (_('Profile'), 'profile'),
+          (_('New Project'), 'projects/new'),
+          (_('Projects'), 'dashboard/projects'),
+      ),
+   }
 
 
 Extra Template Folders
@@ -113,12 +128,12 @@ SVN
 .. TODO
 
 Social Networks
-++++
++++++++++++++++
 .. attribute:: SOCIAL_NETWORK_ENABLED
 
    :default: False
 
-   When this variable is True, the social networks fields, like Facebook and 
+   When this variable is True, the social networks fields, like Facebook and
    Twitter, are added in user profile. By default, this fields are disabled.
 
 Auth
