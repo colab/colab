@@ -25,10 +25,9 @@ def plugins_menu(context):
         return menu_from_cache
 
     menu_links = OrderedDict()
-    proxied_apps = context.get('proxy', {})
+    colab_apps = context.get('plugins', {})
 
-    # TODO: change name from proxied_apps to something with plugins =)
-    for app_name, app in proxied_apps.items():
+    for app_name, app in colab_apps.items():
         if not app.get('menu_urls'):
             continue
 

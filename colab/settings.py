@@ -194,7 +194,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_mobile.context_processors.is_mobile',
     'colab.super_archives.context_processors.mailarchive',
-    'colab.plugins.context_processors.proxied_apps',
+    'colab.plugins.context_processors.colab_apps',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
