@@ -58,36 +58,32 @@ urls
 menu
 ++++
 
-Declares the menu structure of the app, if it exists. It is a dictionary with
-the folowing keys.
+These variables defines the menu title and links of the plugin.
 
-.. attribute:: title
+.. attribute:: menu_title
 
-    Declares the menu title. It's has a string value.
-.. attribute:: links
+    Declares the menu title.
+.. attribute:: menu_links
 
     Declares the menu items and its links.
-.. attribute:: auth_links
-
-    Declares the menu items and its links when the user authenticated.
-.. attribute:: dependecies
+    This should be a tuple object with several colab_url elements.
+    The colab_url_factory creates a factory for your links along with your
+    namespace.
+    The auth parameter indicates wether the link should only be displayed when
+    the user is logged in.
 
 Example:
 
 .. code-block:: python
 
-   menu = {
-      'title': _('Code'),
-      'links': (
-          (_('Public Projects'), 'public/projects'),
-      ),
-      'auth_links': (
-          (_('Profile'), 'profile'),
-          (_('New Project'), 'projects/new'),
-          (_('Projects'), 'dashboard/projects'),
-      ),
-   }
+    from colab.plugins.utils.menu import colab_url_factory
 
+    url = colab_url_factory('plugin_app_name')
+
+    menu_urls = (
+       url(display=_('Profile'), viewname='profile', kwargs={'path': '/profile/'}, auth=True),
+       url(display=_('Profile Two'), viewname='profile2', kwargs={'path': '/profile/2'}, auth=True),
+    )
 
 Extra Template Folders
 ++++++++++++++++++++++
