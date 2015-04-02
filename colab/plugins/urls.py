@@ -14,8 +14,8 @@ for app_name, app in settings.COLAB_APPS.items():
     urls = app.get('urls')
     if not urls.get('include'):
         raise ImproperlyConfigured(undef_url_include_msg)
-    print urls['include']
     urlpatterns += patterns('',
         url(urls.get('prefix', r''), include(urls['include'],
             namespace=urls.get('namespace'))),
     )
+

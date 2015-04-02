@@ -140,8 +140,9 @@ def load_colab_apps():
             if file_name.endswith('.py'):
                 file_module = file_name.split('.')[0]
                 py_settings_d = _load_py_file(file_module, plugins_dir)
-                fields = ['urls', 'menu', 'upstream', 'middlewares',
-                          'dependencies', 'context_processors']
+                fields = ['verbose_name', 'upstream', 'urls',
+                          'menu_urls', 'middlewares', 'dependencies',
+                          'context_processors']
 
                 app_name = py_settings_d.get('name')
                 if not app_name:
@@ -149,6 +150,9 @@ def load_colab_apps():
                     continue
 
                 COLAB_APPS[app_name] = {}
+                COLAB_APPS[app_name]['menu_title'] = \
+                    py_settings_d.get('menu_title')
+
                 for key in fields:
                     value = py_settings_d.get(key)
                     if value:
