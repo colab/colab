@@ -46,10 +46,10 @@ class UserForm(forms.ModelForm):
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style': 'text-transform: lowercase;'}),
     )
-    required = ('first_name', 'last_name', 'username')
+    required = ('first_name', 'last_name', 'username', 'email')
 
     class Meta:
-        fields = ('first_name', 'last_name', 'username')
+        fields = ('first_name', 'last_name', 'username', 'email')
         model = User
 
     def __init__(self, *args, **kwargs):
