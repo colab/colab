@@ -3,19 +3,21 @@
 from collections import OrderedDict
 
 from django import forms
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.urlresolvers import reverse
 from django.template import loader
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
+from django.utils.safestring import mark_safe
 
 from conversejs.models import XMPPAccount
 
-from django.conf import settings
 
 from .utils.validators import validate_social_account
 from .utils import mailman
@@ -43,10 +45,10 @@ class UserForm(forms.ModelForm):
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style': 'text-transform: lowercase;'}),
     )
-    required = ('first_name', 'last_name', 'username')
+    required = ('first_name', 'last_name', 'username', 'email')
 
     class Meta:
-        fields = ('first_name', 'last_name', 'username')
+        fields = ('first_name', 'last_name', 'username', 'email')
         model = User
 
     def __init__(self, *args, **kwargs):
@@ -58,6 +60,20 @@ class UserForm(forms.ModelForm):
             # Set UserForm.required fields as required
             if field_name in UserForm.required:
                 field.required = True
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+
+        user_qs = User.objects.filter(email=email).exclude(username=username)
+
+        if email and user_qs.exists():
+            url = reverse('login')
+            msg = ("Email already used. Is it you?"
+                   " Please <a href='{}'>login<a/>").format(url)
+            raise forms.ValidationError(mark_safe(msg))
+
+        return email
 
     def clean_username(self):
         username = self.cleaned_data["username"].strip()
