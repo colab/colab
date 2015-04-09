@@ -2,7 +2,6 @@
 Test Form class.
 Objective: Test parameters, and behavior.
 """
-from re import search
 
 from django.test import TestCase
 from django.core.urlresolvers import reverse
