@@ -2,10 +2,10 @@
 from django.conf import settings
 
 
-def proxied_apps(request):
-    proxied_apps = {}
+def colab_apps(request):
+    colab_apps = {}
 
     for app_name, app in settings.COLAB_APPS.items():
-        proxied_apps[app_name] = app
+        colab_apps[app_name] = app
 
-    return {'proxy': proxied_apps}
+    return {'plugins': colab_apps}

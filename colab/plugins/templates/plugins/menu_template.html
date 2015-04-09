@@ -1,16 +1,16 @@
 {% for title, links in menu_links.items %}
   {% if links|length == 1 %}
-    {% for text, link in links %}
+    {% for colab_url in links %}
       <li>
-        <a href="{{ link }}">{{ title }}</a>
+        <a href="{{ colab_url.url }}">{{ title }}</a>
       </li>
     {% endfor %}
   {% else %}
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ title }} <b class="caret"></b></a>
       <ul class="dropdown-menu">
-        {% for text, link in links %}
-          <li><a href="{{ link }}">{{ text }}</a></li>
+        {% for colab_url in links %}
+          <li><a href="{{ colab_url.url }}">{{ colab_url.display }}</a></li>
         {% endfor %}
       </ul>
     </li>

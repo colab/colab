@@ -194,7 +194,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django_mobile.context_processors.is_mobile',
     'colab.super_archives.context_processors.mailarchive',
-    'colab.plugins.context_processors.proxied_apps',
+    'colab.plugins.context_processors.colab_apps',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
@@ -280,7 +280,12 @@ CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
 from .utils.conf import load_yaml_settings
+from .utils.conf import load_py_settings
+from .utils.conf import load_colab_apps
+
 locals().update(load_yaml_settings())
+
+locals().update(load_py_settings())
 
 if locals().get('RAVEN_DSN', False):
     RAVEN_CONFIG = {
@@ -290,6 +295,8 @@ if locals().get('RAVEN_DSN', False):
 
 BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
+
+locals().update(load_colab_apps())
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 PROXIED_APPS = {}
