@@ -12,8 +12,6 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
 from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 
 from conversejs.models import XMPPAccount
@@ -66,10 +64,12 @@ class UserForm(forms.ModelForm):
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
 
-        if email and User.objects.filter(email=email).exclude(
-                                                    username=username).count():
-            raise forms.ValidationError(
-                        mark_safe("Try login in: <a href='login'>sign in<a/>"))
+        user_qs = User.objects.filter(email=email).exclude(username=username)
+
+        if email and user_qs.exists():
+            msg = mark_safe("Try login in: <a href='login'>sign in<a/>")
+            raise forms.ValidationError(msg)
+
         return email
 
     def clean_username(self):

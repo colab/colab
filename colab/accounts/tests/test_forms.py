@@ -2,12 +2,13 @@
 Test Form class.
 Objective: Test parameters, and behavior.
 """
+from re import search
+
+from django.test import TestCase
+
 from colab.accounts.forms import UserForm
 from colab.accounts.models import User
-from django.test import TestCase, Client
-from django import forms
-from django.core.exceptions import ValidationError
-from re import search
+
 
 class FormTest(TestCase):
 
@@ -24,12 +25,12 @@ class FormTest(TestCase):
         user.save()
 
     def create_form_data(self):
-        form_data = {'email': 'usertest@colab.com.br', 
-                    'first_name': 'colabName', 
-                    'last_name': 'secondName', 
-                    'username': 'colab',
-                    'password1': '123colab4',
-                    'password2': '123colab4'}
+        form_data = {'email': 'usertest@colab.com.br',
+                     'first_name': 'colabName',
+                     'last_name': 'secondName',
+                     'username': 'colab',
+                     'password1': '123colab4',
+                     'password2': '123colab4'}
         form = UserForm(data=form_data)
         return form
 
