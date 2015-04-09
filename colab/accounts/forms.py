@@ -3,10 +3,12 @@
 from collections import OrderedDict
 
 from django import forms
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
+from django.core.urlresolvers import reverse
 from django.template import loader
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
@@ -16,7 +18,6 @@ from django.utils.safestring import mark_safe
 
 from conversejs.models import XMPPAccount
 
-from django.conf import settings
 
 from .utils.validators import validate_social_account
 from .utils import mailman
@@ -67,8 +68,10 @@ class UserForm(forms.ModelForm):
         user_qs = User.objects.filter(email=email).exclude(username=username)
 
         if email and user_qs.exists():
-            msg = mark_safe("Try login in: <a href='login'>sign in<a/>")
-            raise forms.ValidationError(msg)
+            url = reverse('login')
+            msg = ("Email already used. Is it you?"
+                   " Please <a href='{}'>login<a/>").format(url)
+            raise forms.ValidationError(mark_safe(msg))
 
         return email
 
