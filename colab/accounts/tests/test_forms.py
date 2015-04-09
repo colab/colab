@@ -5,8 +5,9 @@ Objective: Test parameters, and behavior.
 from re import search
 
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
-from colab.accounts.forms import UserForm
+from colab.accounts.forms import UserCreationForm
 from colab.accounts.models import User
 
 
@@ -31,7 +32,7 @@ class FormTest(TestCase):
                      'username': 'colab',
                      'password1': '123colab4',
                      'password2': '123colab4'}
-        form = UserForm(data=form_data)
+        form = UserCreationForm(data=form_data)
         return form
 
     def test_already_registered_email(self):
@@ -39,10 +40,11 @@ class FormTest(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_registered_email_message(self):
-        tryToFind = r"<a href='login'>sign in<a/>"
         form = self.create_form_data()
-        matched = search(tryToFind, str(form))
-        self.assertIsNotNone(matched)
+        msg = form.error_messages.get('duplicate_email') % {
+            'url': reverse('login')
+        }
+        self.assertIn(msg, str(form))
 
     def tearDown(self):
         pass

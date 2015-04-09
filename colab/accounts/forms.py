@@ -45,10 +45,10 @@ class UserForm(forms.ModelForm):
         # Forces username to be lowercase always
         widget=forms.TextInput(attrs={'style': 'text-transform: lowercase;'}),
     )
-    required = ('first_name', 'last_name', 'username', 'email')
+    required = ('first_name', 'last_name', 'username')
 
     class Meta:
-        fields = ('first_name', 'last_name', 'username', 'email')
+        fields = ('first_name', 'last_name', 'username')
         model = User
 
     def __init__(self, *args, **kwargs):
@@ -60,20 +60,6 @@ class UserForm(forms.ModelForm):
             # Set UserForm.required fields as required
             if field_name in UserForm.required:
                 field.required = True
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        username = self.cleaned_data.get('username')
-
-        user_qs = User.objects.filter(email=email).exclude(username=username)
-
-        if email and user_qs.exists():
-            url = reverse('login')
-            msg = ("Email already used. Is it you?"
-                   " Please <a href='{}'>login<a/>").format(url)
-            raise forms.ValidationError(mark_safe(msg))
-
-        return email
 
     def clean_username(self):
         username = self.cleaned_data["username"].strip()
@@ -207,7 +193,10 @@ class UserCreationForm(UserForm):
     A form that creates a user, with no privileges, from the given username and
     password.
     """
+
     error_messages = {
+        'duplicate_email': _("Email already used. Is it you? "
+                             " Please <a href='%(url)s'>login</a>"),
         'duplicate_username': _("A user with that username already exists."),
         'password_mismatch': _("The two password fields didn't match."),
     }
@@ -234,6 +223,21 @@ class UserCreationForm(UserForm):
     class Meta:
         model = User
         fields = ("username", "first_name", "last_name", "email")
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+
+        user_qs = User.objects.filter(email=email).exclude(username=username)
+
+        if email and user_qs.exists():
+            msg = self.error_messages.get('duplicate_email') % {
+                'url': reverse('login')
+            }
+
+            raise forms.ValidationError(mark_safe(msg))
+
+        return email
 
     def clean_username(self):
         # Since User.username is unique, this check is redundant,

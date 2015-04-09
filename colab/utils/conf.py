@@ -1,12 +1,10 @@
 
 import os
 import sys
-
+import importlib
 import warnings
 
 from django.core.exceptions import ImproperlyConfigured
-
-import importlib
 
 
 class InaccessibleSettings(ImproperlyConfigured):
