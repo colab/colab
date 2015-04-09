@@ -24,8 +24,6 @@ REQUIREMENTS = [
     'django-tastypie==0.11.0',
     'gunicorn==19.1.0',
     'eventlet==0.15.2',
-    'PyYAML==3.11',
-    'yamlordereddictloader==0.1.1',
 
     # Deps for sentry client (raven)
     'raven==3.5.2',

@@ -7,8 +7,7 @@ python:
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=tests.settings 
-    - COLAB_SETTINGS=tests/settings.yaml
+    - DJANGO_SETTINGS_MODULE=tests.settings
 
 install:
   - pip install coveralls flake8

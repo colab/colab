@@ -32,8 +32,19 @@ LOGGING = {
 import os
 HAYSTACK_CONNECTIONS = {
     'default': {
-	'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://127.0.0.1:8983/solr'
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr',
     },
 }
 
+SECRET_KEY = 'not-a-secret'
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'localhost',
+        'NAME': 'colab',
+        'USER': 'colab',
+        'PASSWORD': 'colab',
+    }
+}
