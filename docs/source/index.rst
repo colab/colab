@@ -3,24 +3,35 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to colab's documentation!
-=================================
+Colab - Integration Server for Web Applications
+===============================================
 
-Colab is a framework meant to help integration of web applications in three
-different ways:
+Colab is an integration server  meant to help develpers to unify the **User Experience** in Web applications.
 
-* Authentication
-* Visual
-* Data
+Colab provides ways to integrate:
 
-Colab also comes with the following features:
+* Authentication or Single Sign-On (SSO)
+* User Interface (UI)
+* Data  
 
-* Mailman native integration
-* Webchat (XMPP)
-* Planet (feed aggregation)
-* Code paste
-* Login with Persona
+To accomplish that Colab is placed in front of integrated Web applications. All user requests and responses are proxied (as in the image :ref:`image-reverse-proxy`) and therefore can have content and headers modified. Also, due to it's architecture, Colab can grant or deny access to systems under it.
 
+.. _image-reverse-proxy:
+
+.. figure:: static/colab-basics.jpg
+   :width: 400 px
+   :align: center
+
+   *Colab Reverse Proxy model*
+
+Plugins are used in order to integrate new Web applications. Currently the following plugins are available and maintained by core developers:
+
+* Mailman
+* Gitlab
+* Trac
+* Jenkins
+
+If you need to integrate a diffirent tool please refer to :ref:`plugin-dev`.
 
 Contents:
 
