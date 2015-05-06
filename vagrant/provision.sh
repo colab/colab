@@ -27,8 +27,8 @@ for dir in /vagrant/colab /vagrant; do
 done
 pip install -e $basedir
 
-if [ ! -s /etc/colab/settings.yaml ]; then
-    colab-init-config > /etc/colab/settings.yaml
+if [ ! -s /etc/colab/settings.py ]; then
+    colab-init-config > /etc/colab/settings.py
 fi
 
 colab-admin migrate
