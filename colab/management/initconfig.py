@@ -114,13 +114,21 @@ LOGGING = {{
 # url = colab_url_factory('gitlab')
 #
 # menu_urls = (
-#     url(display=_('Public Projects'), viewname='gitlab', kwargs={{'path': '/public/projects'}}, auth=False),
-#     url(display=_('Profile'), viewname='gitlab', kwargs={{'path': '/profile'}}, auth=True),
-#     url(display=_('New Project'), viewname='gitlab', kwargs={{'path': '/projects/new'}}, auth=True),
-#     url(display=_('Projects'), viewname='gitlab', kwargs={{'path': '/dashboard/projects'}}, auth=True),
-#     url(display=_('Groups'), viewname='gitlab', kwargs={{'path': '/profile/groups'}}, auth=True),
-#     url(display=_('Issues'), viewname='gitlab', kwargs={{'path': '/dashboard/issues'}}, auth=True),
-#     url(display=_('Merge Requests'), viewname='gitlab', kwargs={{'path': '/merge_requests'}}, auth=True),
+#     url(display=_('Public Projects'), viewname='gitlab',
+#         kwargs={{'path': '/public/projects'}}, auth=False),
+#     url(display=_('Profile'), viewname='gitlab',
+#         kwargs={{'path': '/profile'}}, auth=True),
+#     url(display=_('New Project'), viewname='gitlab',
+#         kwargs={{'path': '/projects/new'}}, auth=True),
+#     url(display=_('Projects'), viewname='gitlab',
+#         kwargs={{'path': '/dashboard/projects'}}, auth=True),
+#     url(display=_('Groups'), viewname='gitlab',
+#         kwargs={{'path': '/profile/groups'}}, auth=True),
+#     url(display=_('Issues'), viewname='gitlab',
+#         kwargs={{'path': '/dashboard/issues'}}, auth=True),
+#     url(display=_('Merge Requests'), viewname='gitlab',
+#         kwargs={{'path': '/merge_requests'}}, auth=True),
+#
 # )
 """
 
