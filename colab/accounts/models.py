@@ -82,8 +82,7 @@ class User(AbstractUser):
 #   without having to rewrite all AbstractUser here
 User._meta.get_field('email')._unique = True
 User._meta.get_field('username').help_text = _(
-    u'Required. 30 characters or fewer. Letters, digits and '
-    u'./+/-/_ only.'
+    u'Required. 30 characters or fewer. Letters and digits.'
 )
 User._meta.get_field('username').validators[0] = validators.RegexValidator(
     r'^\w+$',

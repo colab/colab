@@ -1281,6 +1281,11 @@ msgstr ""
 "Outro exemplo de uso com relacionamento. Usado para recuperar todos as "
 "mensagem de um dado usuário usando o campo username ou email"
 
+
+#: colab/accounts/forms.py:276
+msgid "This value may contain only letters and numbers."
+msgstr "Esse campo só pode conter letras e/ou numeros."
+
 #~ msgid "Please correct the errors below and try again"
 #~ msgstr "Por favor, corrija os erros abaixo e tente novamente"
 
