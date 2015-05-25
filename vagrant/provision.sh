@@ -8,6 +8,8 @@ export VIRTUALENVWRAPPER_PYTHON="/usr/bin/python2.7"
 set +e
 if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
+elif [ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]; then
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 else
     source /usr/bin/virtualenvwrapper.sh
 fi
