@@ -3,128 +3,133 @@ from django.utils.crypto import get_random_string
 
 
 CONFIG_TEMPLATE = """
-
 ## Set to false in production
-DEBUG: true
-TEMPLATE_DEBUG: true
+DEBUG = True
+TEMPLATE_DEBUG = True
 
 ## System admins
-ADMINS: &admin
-  -
-    - John Foo
-    - john@example.com
-  -
-    - Mary Bar
-    - mary@example.com
+ADMINS = [['John Foo', 'john@example.com'], ['Mary Bar', 'mary@example.com']]
 
-MANAGERS: *admin
+MANAGERS = ADMINS
 
-COLAB_FROM_ADDRESS: '"Colab" <noreply@example.com>'
-SERVER_EMAIL: '"Colab" <noreply@example.com>'
+COLAB_FROM_ADDRESS = '"Colab" <noreply@example.com>'
+SERVER_EMAIL = '"Colab" <noreply@example.com>'
 
-EMAIL_HOST: localhost
-EMAIL_PORT: 25
-EMAIL_SUBJECT_PREFIX: '[colab]'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_SUBJECT_PREFIX = '[colab]'
 
-SECRET_KEY: '{secret_key}'
+SECRET_KEY = '{secret_key}'
 
 #  Must use it without trailing slash
-SITE_URL: 'http://localhost:8000'
-BROWSERID_AUDIENCES:
-  - http://localhost:8000
-#  - http://example.com
-#  - https://example.org
-#  - http://example.net
+SITE_URL = 'http://localhost:8000'
+BROWSERID_AUDIENCES = [
+    'http://localhost:8000',
+#    'http://example.com',
+#    'https://example.org',
+#    'http://example.net',
+]
 
-ALLOWED_HOSTS:
-  - localhost
-#  - example.com
-#  - example.org
-#  - example.net
+ALLOWED_HOSTS = [
+    'localhost',
+#    'example.com',
+#    'example.org',
+#    'example.net',
+]
 
 ### Uncomment to enable Broswer ID protocol for authentication
-# BROWSERID_ENABLED: True
+# BROWSERID_ENABLED = True
 
 ### Uncomment to enable social networks fields profile
-# SOCIAL_NETWORK_ENABLED: True
+# SOCIAL_NETWORK_ENABLED = True
 
 ### Uncomment to enable Converse.js
-# CONVERSEJS_ENABLED: True
+# CONVERSEJS_ENABLED = True
 
 ### Uncomment to enable auto-registration
-# CONVERSEJS_AUTO_REGISTER: 'xmpp.example.com'
+# CONVERSEJS_AUTO_REGISTER = 'xmpp.example.com'
 
 ## Database settings
-DATABASES:
-  default:
-    ENGINE: django.db.backends.postgresql_psycopg2
-    HOST: localhost
-    NAME: colab
-    USER: colab
-    PASSWORD: colab
+DATABASES = {{
+    'default': {{
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'localhost',
+        'NAME': 'colab',
+        'USER': 'colab',
+        'PASSWORD': 'colab',
+    }}
+}}
 
 ## Disable indexing
-ROBOTS_NOINDEX: false
+ROBOTS_NOINDEX = False
 
 ### Log errors to Sentry instance
-# RAVEN_DSN: 'http://public:secret@example.com/1'
+# RAVEN_DSN = 'http://public:secret@example.com/1'
 
-COLAB_TEMPLATES:
+LOGGING = {{
+    'version': 1,
 
-COLAB_STATICS:
+    'handlers': {{
+        'null': {{
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        }},
+    }},
 
-# FEEDZILLA_SITE_TITLE: 'Planet Colab'
-# FEEDZILLA_SITE_DESCRIPTION: 'Colab blog aggregator'
-# FEEDZILLA_PAGE_SIZE: 10
-
-### Colab proxied apps
-# COLAB_APPS:
-#  colab.plugins.gitlab:
-#    upstream: 'http://www.fga.unb.br/'
-#    menu:
-#      title: 'Code'
-#      links:
-#        Public Projects: '/gitlab/public/projects'
-#      auth_links:
-#        Profile: 'gitlab/profile'
-#        New Project: 'gitlab/projects/new'
-#        Projects: 'gitlab/dashboard/projects'
-#        Groups: 'gitlab/pprofile/groups'
-#        Issues: 'gitlab/dashboard/issues'
-#        Merge Requests: 'gitlab/merge_requests'
-#  dpaste:
-#    dependencies:
-#      - 'mptt'
-#    urls:
-#      include: 'dpaste.urls.dpaste'
-#      prefix:  '^paste/'
-#      namespace: 'dpaste'
-#    menu:
-#      title: 'Dpaste'
-#      links:
-#        Public Projects:  '/paste'
-#      auth_links:
-#        Profile: '/projects'
-#        New Project: '/projects/new'
-#  feedzilla:
-#    dependencies:
-#      - 'common'
-#    urls:
-#      include: 'feedzilla.urls'
-#      prefix:  '^planet/'
-#      namespace: 'planet'
-#    templates:
-#      context_processors:
-#        - 'colab.planet.context_processors.feedzilla'
-#    menu:
-#      title: 'Planet'
-#      links:
-#        Index: '/planet'
-#      auth_links:
-#        {}
+    'loggers': {{
+        'colab.mailman': {{
+            'handlers': ['null'],
+            'propagate': False,
+        }},
+        'haystack': {{
+            'handlers': ['null'],
+            'propagate': False,
+        }},
+        'pysolr': {{
+            'handlers': ['null'],
+            'propagate': False,
+        }},
+    }},
+}}
 
 
-
+## Gitlab plugin - Put this in plugins.d/gitlab.py to actiate ##
+# from django.utils.translation import ugettext_lazy as _
+# from colab.plugins.utils.menu import colab_url_factory
+#
+# name = 'colab.plugins.gitlab'
+# verbose_name = 'Gitlab Proxy'
+#
+# upstream = 'localhost'
+# #middlewares = []
+#
+# urls = {{
+#     'include': 'colab.plugins.gitlab.urls',
+#     'namespace': 'gitlab',
+#     'prefix': 'gitlab',
+# }}
+#
+# menu_title = _('Code')
+#
+# url = colab_url_factory('gitlab')
+#
+# menu_urls = (
+#     url(display=_('Public Projects'), viewname='gitlab',
+#         kwargs={{'path': '/public/projects'}}, auth=False),
+#     url(display=_('Profile'), viewname='gitlab',
+#         kwargs={{'path': '/profile'}}, auth=True),
+#     url(display=_('New Project'), viewname='gitlab',
+#         kwargs={{'path': '/projects/new'}}, auth=True),
+#     url(display=_('Projects'), viewname='gitlab',
+#         kwargs={{'path': '/dashboard/projects'}}, auth=True),
+#     url(display=_('Groups'), viewname='gitlab',
+#         kwargs={{'path': '/profile/groups'}}, auth=True),
+#     url(display=_('Issues'), viewname='gitlab',
+#         kwargs={{'path': '/dashboard/issues'}}, auth=True),
+#     url(display=_('Merge Requests'), viewname='gitlab',
+#         kwargs={{'path': '/merge_requests'}}, auth=True),
+#
+# )
 """
 
 
