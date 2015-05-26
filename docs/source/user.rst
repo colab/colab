@@ -90,19 +90,26 @@ Extra Template Folders
 
 .. attribute:: COLAB_TEMPLATES
 
-   :default: None
+   :default: () (Empty tuple)
 
-   Colab's extra template folders. Use it to add plugins template files.
-
+   Colab's extra template folders. Use it to add plugins template files, and
+   remember to use the app hierarchy, e.g if your app name is example, then
+   you should put your templates inside ``COLAB_TEMPLATES/example``.
+   You can also use it to overwrite the default templates, e.g. if you want
+   to overwrite the default footer, you simply need to add a file named
+   ``footer.html`` to the folder where ``COLAB_TEMPLATES`` points to.
 
 Extra Static Folders
 ++++++++++++++++++++
 
 .. attribute:: COLAB_STATIC
 
-   :default: None
+   :default: [] (Empty list)
 
-   Colab's extra static folders. Use it to add plugins static files.
+   Colab's extra static folders. Use it to add plugins static files. It's used
+   the same way COLAB_TEMPLATES is. Use it to overwrite or add your own static
+   files, such as CSS/JS files and/or images.
+
 
 Settings
 --------
