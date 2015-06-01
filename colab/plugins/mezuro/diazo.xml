@@ -1,0 +1,18 @@
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <before theme-children="/html/head" content-children="/html/head" />
+    <before css:theme-children="#main-content" css:content-children="body" />
+
+    <merge attributes="class" css:theme="body" css:content="body" />
+    
+    <!-- Add gitlab properties -->
+    <merge attributes="data-page" css:theme="body" css:content="body" />
+    <merge attributes="data-project-id" css:theme="body" css:content="body" />
+
+    <drop css:content="#top-panel" />
+    <drop css:content=".navbar-gitlab" />
+    <drop css:content=".git-clone-holder .btn:contains('HTTPS')" />
+</rules>
