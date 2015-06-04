@@ -222,14 +222,6 @@ AUTHENTICATION_BACKENDS = (
     'colab.accounts.auth.ColabBrowserIDBackend',
 )
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
-)
-
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
@@ -317,8 +309,16 @@ for app_name, app in COLAB_APPS.items():
             if context_processor not in TEMPLATE_CONTEXT_PROCESSORS:
                 TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
 
-colab_templates = locals().get('COLAB_TEMPLATES') or {}
-colab_statics = locals().get('COLAB_STATICS') or {}
+colab_templates = locals().get('COLAB_TEMPLATES') or ()
+colab_statics = locals().get('COLAB_STATICS') or []
 
-TEMPLATE_DIRS += tuple(colab_templates)
-STATICFILES_DIRS += tuple(colab_statics)
+TEMPLATE_DIRS = tuple(colab_templates)
+STATICFILES_DIRS = list(colab_statics)
+
+STATICFILES_DIRS += [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+TEMPLATE_DIRS += (
+    os.path.join(BASE_DIR, 'templates'),
+)
