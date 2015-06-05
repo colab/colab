@@ -13,6 +13,6 @@
     <merge attributes="data-project-id" css:theme="body" css:content="body" />
 
     <drop css:content=".navbar" />
-    <!--<drop css:theme="script[src^='/static/third-party/bootstrap/css/bootstrap.min']" />
-    <drop css:theme="script[src^='/static/third-party/jquery-2.0.3.min.js']" /> -->
+    <drop css:theme="script[src^='/static/third-party/bootstrap/js/bootstrap.min.js']" /> <!-- Fixes top menu -->
+    <drop css:theme="script[src^='/static/third-party/jquery-2.0.3.min.js']" /> <!-- Fixes accordion conflict --> <!--FIXME: if colab updates its jquery version this will break -->
 </rules>
