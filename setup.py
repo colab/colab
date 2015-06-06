@@ -10,7 +10,6 @@ REQUIREMENTS = [
     'django-mobile==0.3.0',
     'django-haystack==2.2',
     'pysolr==2.1',
-    'poster==0.8.1',
     'etiquetando==0.1',
     'html2text==3.200.3',
     'django-taggit==0.12.1',
