@@ -10,8 +10,6 @@ REQUIREMENTS = [
     'pysolr==2.1',
     'django-hitcounter==0.1.1',
     'django-tastypie==0.11.0',
-    'gunicorn==19.1.0',
-    'eventlet==0.15.2',
 
     # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
     'django-browserid==0.11',
