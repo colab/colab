@@ -1,6 +1,7 @@
 include README.rst
 include MANIFEST.in
 recursive-include colab/static *
+recursive-include colab/locale *
 recursive-include colab/proxy/noosfero/static *
 recursive-include colab *.html *.txt *.xml
 recursive-include misc *
