@@ -12,7 +12,7 @@
     <merge attributes="data-page" css:theme="body" css:content="body" />
     <merge attributes="data-project-id" css:theme="body" css:content="body" />
 
-    <drop css:content=".navbar" />
-    <drop css:theme="script[src^='/static/third-party/bootstrap/js/bootstrap.min.js']" /> <!-- Fixes top menu -->
-    <drop css:theme="script[src^='/static/third-party/jquery-2.0.3.min.js']" /> <!-- Fixes accordion conflict --> <!--FIXME: if colab updates its jquery version this will break -->
+    <drop css:content=".navbar" /> <!-- Mezuro's navbar links are part of Colab's menu -->
+    <drop css:theme="script[src$='bootstrap.min.js']" /> <!-- Fixes top menu dropdown by removing Colab's bootstrap JS -->
+    <drop css:theme="script[src*='jquery']:not([src*='cookie']):not([src*='debouncedresize'])" /> <!-- Fixes accordion conflict by removing Colab's JQuery. But keeps the JS for cookie and debouncedresize -->
 </rules>
