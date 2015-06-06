@@ -6,7 +6,7 @@ REQUIREMENTS = [
     'Django==1.7.7',
     'django-piston==0.2.3',
     'pytz==2011n',
-    'chardet==1.0.1',
+    'chardet==2.3.0',
     'python-dateutil==1.5',
     'django-cliauth==0.9.1',
     'django-mobile==0.3.0',
