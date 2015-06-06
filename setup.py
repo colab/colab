@@ -13,7 +13,6 @@ REQUIREMENTS = [
     'etiquetando==0.1',
     'html2text==3.200.3',
     'django-taggit==0.12.1',
-    'python-memcached==1.53',
     'django-hitcounter==0.1.1',
     'Pillow==2.5.1',
     'django-i18n-model==0.0.7',
