@@ -45,9 +45,6 @@ DATABASES = {{
 ## Disable indexing
 ROBOTS_NOINDEX = False
 
-### Log errors to Sentry instance
-# RAVEN_DSN = 'http://public:secret@example.com/1'
-
 LOGGING = {{
     'version': 1,
 

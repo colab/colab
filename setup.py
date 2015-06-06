@@ -25,11 +25,19 @@ REQUIREMENTS = [
     'gunicorn==19.1.0',
     'eventlet==0.15.2',
 
-    # Deps for sentry client (raven)
-    'raven==3.5.2',
-    'tornado==3.1.1',
+    # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
+    'django-browserid==0.11',
+    'django-revproxy==0.9.0',
 
-    'django-revproxy==0.9.3',
+    # Converse.js (XMPP client)
+    'django-conversejs==0.3.4',
+
+    # Feedzilla (planet) and deps
+    'django-common==0.1.51',
+    'feedparser==5.1.3',
+    'lxml==3.2.4',
+    'grab==0.4.13',
+    'transliterate==1.5',
 
     # Diazo
     'diazo==1.0.5',

@@ -252,12 +252,7 @@ TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
 from .utils.conf import load_colab_apps, load_py_settings
 
-if locals().get('RAVEN_DSN', False):
-    RAVEN_CONFIG = {
-        'dsn': RAVEN_DSN + '?timeout=30',  # noqa
-    }
-    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
-
+BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
 locals().update(load_colab_apps())
