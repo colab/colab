@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 REQUIREMENTS = [
     'Django==1.7.7',
     'pytz>=2011n',
-    'chardet==2.3.0',
+    'chardet>=1.0.1',
     'python-dateutil==1.5',
     'django-cliauth==0.9.1',
     'django-mobile==0.3.0',
