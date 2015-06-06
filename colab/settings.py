@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'colab.accounts',
 
     # Not standard apps
-    'cliauth',
     'django_mobile',
     'haystack',
     'hitcounter',

@@ -7,7 +7,6 @@ REQUIREMENTS = [
     'pytz>=2011n',
     'chardet>=1.0.1',
     'python-dateutil==1.5',
-    'django-cliauth==0.9.1',
     'django-mobile==0.3.0',
     'django-haystack==2.2',
     'pysolr==2.1',
