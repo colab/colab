@@ -9,10 +9,10 @@ REQUIREMENTS = [
     'django-haystack>=2.2',
     'django-hitcounter>=0.1.1',
     'django-tastypie>=0.12.1',
-
-    # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
-    'django-browserid>=0.11',
     'django-revproxy>=0.9.0',
+
+    # Deps for Single SignOn (SSO)
+    'django-browserid>=0.11',
 
     # Diazo
     'diazo>=1.0.5',
@@ -28,15 +28,13 @@ REQUIREMENTS = [
     'django-taggit>=0.12.1',
     'html2text>=3.200.3',
     'chardet>=1.0.1',
+    'mailman-api>=0.2.9',
 
     # Deps for gitlab plugin
     'python-dateutil>=1.5',
 
     # Converse.js (XMPP client)
     'django-conversejs>=0.3.4',
-
-    # Mailman 2 REST API
-    'mailman-api>=0.2.9',
 ]
 
 TEST_REQUIREMENTS = [
