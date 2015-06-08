@@ -5,17 +5,17 @@ from setuptools import setup, find_packages
 REQUIREMENTS = [
     'Django>=1.7.8',
     'pytz>=2011n',
-    'django-mobile>=0.3.0',
-    'django-haystack>=2.2',
     'django-hitcounter>=0.1.1',
     'django-tastypie>=0.12.1',
     'django-revproxy>=0.9.0',
-
-    # Deps for Single SignOn (SSO)
-    'django-browserid>=0.11',
+    'django-haystack>=2.2',
+    'Whoosh>=2.7.0',
 
     # Diazo
     'diazo>=1.0.5',
+
+    # Deps for Single SignOn (SSO)
+    'django-browserid>=0.11',
 
     ### Move out of colab (as plugins):
 
@@ -28,13 +28,13 @@ REQUIREMENTS = [
     'django-taggit>=0.12.1',
     'html2text>=3.200.3',
     'chardet>=1.0.1',
-    'mailman-api>=0.2.9',
 
     # Deps for gitlab plugin
     'python-dateutil>=1.5',
 
     # Converse.js (XMPP client)
     'django-conversejs>=0.3.4',
+    'django-mobile>=0.3.0',
 ]
 
 TEST_REQUIREMENTS = [
