@@ -165,8 +165,7 @@ HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://localhost:8983/solr/',
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
     }
 }
 

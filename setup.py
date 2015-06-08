@@ -7,7 +7,6 @@ REQUIREMENTS = [
     'pytz>=2011n',
     'django-mobile>=0.3.0',
     'django-haystack>=2.2',
-    'pysolr>=2.1',
     'django-hitcounter>=0.1.1',
     'django-tastypie>=0.12.1',
 
