@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 REQUIREMENTS = [
-    'Django>=1.7.8',
+    'Django>=1.7.8,<1.8',
     'pytz>=2011n',
     'django-hitcounter>=0.1.1',
     'django-tastypie>=0.12.1',
