@@ -2,7 +2,10 @@
 Test User class.
 Objective: Test parameters, and behavior.
 """
+import mock
+
 from colab.accounts.models import User
+from colab.accounts import forms as accounts_forms
 from django.test import TestCase, Client
 
 
@@ -11,6 +14,7 @@ class UserTest(TestCase):
     def setUp(self):
         self.user = self.create_user()
         self.client = Client()
+        accounts_forms.validate_social_account = mock.Mock(return_value=True)
 
     def tearDown(self):
         pass
