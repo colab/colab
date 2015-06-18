@@ -33,9 +33,6 @@ REQUIREMENTS = [
     'django-browserid==0.11',
     'django-revproxy==0.9.0',
 
-    # Converse.js (XMPP client)
-    'django-conversejs==0.3.4',
-
     # Feedzilla (planet) and deps
     'django-common==0.1.51',
     'feedparser==5.1.3',

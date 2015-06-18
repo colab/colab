@@ -43,12 +43,6 @@ ALLOWED_HOSTS = [
 ### Uncomment to enable social networks fields profile
 # SOCIAL_NETWORK_ENABLED = True
 
-### Uncomment to enable Converse.js
-# CONVERSEJS_ENABLED = True
-
-### Uncomment to enable auto-registration
-# CONVERSEJS_AUTO_REGISTER = 'xmpp.example.com'
-
 ## Database settings
 DATABASES = {{
     'default': {{

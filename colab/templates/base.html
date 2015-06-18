@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load i18n browserid conversejs gravatar %}
+{% load i18n browserid gravatar plugins %}
 {% load static from staticfiles %}
 
 <html>
@@ -42,10 +42,6 @@
 
     {% block head_js %}{% endblock %}
     {% block head_css %}{% endblock %}
-
-    {% if not is_mobile %}
-      {% conversejs_static %}
-    {% endif %}
 
     <link rel="stylesheet" href="{% static 'css/screen.css' %}"
         type="text/css" media="screen" />
@@ -106,11 +102,6 @@
       {% include "footer.html" %}
 
     {% endblock %}
-
-  {% if not is_mobile %}
-    {% conversejs_chatpanel %}
-    {% conversejs_initialize %}
-  {% endif %}
 
   {% include "tz/set_utc_offset.html" %}
 

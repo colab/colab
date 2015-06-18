@@ -45,7 +45,6 @@ INSTALLED_APPS = (
     'cliauth',
     'django_mobile',
     'django_browserid',
-    'conversejs',
     'haystack',
     'hitcounter',
     'i18n_model',
@@ -259,14 +258,6 @@ LOGOUT_REDIRECT_URL = '/'
 BROWSERID_CREATE_USER = True
 
 REVPROXY_ADD_REMOTE_USER = True
-
-# Converse.js settings
-# This URL must use SSL in order to keep chat sessions secure
-CONVERSEJS_ENABLED = False
-CONVERSEJS_BOSH_SERVICE_URL = SITE_URL + '/http-bind'
-
-CONVERSEJS_ALLOW_CONTACT_REQUESTS = False
-CONVERSEJS_SHOW_ONLY_ONLINE_USERS = True
 
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]

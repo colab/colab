@@ -13,16 +13,13 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, TemplateView
 from django.http import Http404
 
-from conversejs import xmpp
-from conversejs.models import XMPPAccount
-
 from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
 from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
 
 from .forms import (UserCreationForm, UserForm, ListsForm,
-                    UserUpdateForm, ChangeXMPPPasswordForm)
+                    UserUpdateForm)
 from .utils import mailman
 
 
@@ -51,11 +48,6 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
             raise PermissionDenied
 
         return obj
-
-    def get_context_data(self, **kwargs):
-        context = super(UserProfileUpdateView, self).get_context_data(**kwargs)
-        context['CONVERSEJS_ENABLED'] = getattr(settings, 'CONVERSEJS_ENABLED')
-        return context
 
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
@@ -206,50 +198,6 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         return super(ManageUserSubscriptionsView,
                      self).get_context_data(**context)
-
-
-class ChangeXMPPPasswordView(UpdateView):
-    model = XMPPAccount
-    form_class = ChangeXMPPPasswordForm
-    fields = ['password', ]
-    template_name = 'accounts/change_password.html'
-
-    def get_success_url(self):
-        return reverse('user_profile', kwargs={
-            'username': self.request.user.username
-        })
-
-    def get_object(self, queryset=None):
-        obj = get_object_or_404(XMPPAccount, user=self.request.user.pk)
-        self.old_password = obj.password
-        return obj
-
-    def form_valid(self, form):
-        transaction.set_autocommit(False)
-
-        response = super(ChangeXMPPPasswordView, self).form_valid(form)
-
-        changed = xmpp.change_password(
-            self.object.jid,
-            self.old_password,
-            form.cleaned_data['password1']
-        )
-
-        if not changed:
-            messages.error(
-                self.request,
-                _(u'Could not change your password. Please, try again later.')
-            )
-            transaction.rollback()
-            return response
-        else:
-            transaction.commit()
-
-        messages.success(
-            self.request,
-            _("You've changed your password successfully!")
-        )
-        return response
 
 
 def password_changed(request):

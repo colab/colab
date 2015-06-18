@@ -47,13 +47,6 @@ class User(AbstractUser):
 
     objects = ColabUserManager()
 
-    def check_password(self, raw_password):
-
-        if self.xmpp.exists() and raw_password == self.xmpp.first().password:
-            return True
-
-        return super(User, self).check_password(raw_password)
-
     def get_absolute_url(self):
         return reverse('user_profile', kwargs={'username': self.username})
 

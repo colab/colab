@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls import patterns, url
 
 from .views import (UserProfileDetailView, UserProfileUpdateView, LoginView,
-                    ManageUserSubscriptionsView, ChangeXMPPPasswordView)
+                    ManageUserSubscriptionsView)
 
 from colab.accounts import views
 from django.contrib.auth import views as auth_views
@@ -47,10 +47,6 @@ else:
 
 urlpatterns += patterns('',
     url(r'^register/?$', 'colab.accounts.views.signup', name='signup'),
-
-#FIXME Configure for XMPP
-#    url(r'^change-password/$',
-#        ChangeXMPPPasswordView.as_view(), name='change_password'),
 
     url(r'^(?P<username>[\w@+.-]+)/?$',
         UserProfileDetailView.as_view(), name='user_profile'),
