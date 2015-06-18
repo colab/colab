@@ -1,9 +1,0 @@
-{{ object.author }}
-{{ object.get_author.get_full_name }}
-{{ object.get_author.get_full_name|slugify }}
-{{ object.name }}
-{{ object.name|slugify }}
-{{ object.collaborators }}
-{{ object.collaborators|slugify }}
-{{ object.wiki_text }}
-{{ object.wiki_text|slugify }}

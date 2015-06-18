@@ -35,7 +35,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 
-    url(r'^trac/', include('colab.plugins.trac.urls')),
     url(r'^gitlab/', include('colab.plugins.gitlab.urls')),
     url(r'^mezuro/', include('colab.plugins.mezuro.urls')),
     url(r'^social/', include('colab.plugins.noosfero.urls')),
