@@ -23,10 +23,6 @@ from .forms import (UserCreationForm, UserForm, ListsForm,
 from .utils import mailman
 
 
-class LoginView(TemplateView):
-    template_name = "accounts/login.html"
-
-
 class UserProfileBaseMixin(object):
     model = get_user_model()
     slug_field = 'username'
@@ -86,37 +82,19 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
-    BROWSERID_ENABLED = getattr(settings, 'BROWSERID_ENABLED', False)
-
-    if BROWSERID_ENABLED:
-        # If the user is not authenticated, redirect to login
-        if not request.user.is_authenticated():
-            return redirect('login')
 
     if request.user.is_authenticated():
-        # If the user doesn't need to update its main data,
-        #   redirect to its profile
-        # It happens when user is created by browserid
-        # and didn't set his/her main data
         if not request.user.needs_update:
             return redirect('user_profile', username=request.user.username)
 
-    # If the user is authenticated in Persona, but not in the Colab then he
-    # will be redirected to the register form.
     if request.method == 'GET':
-        if BROWSERID_ENABLED:
-            user_form = UserForm()
-        else:
-            user_form = UserCreationForm()
+        user_form = UserCreationForm()
         lists_form = ListsForm()
 
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    if BROWSERID_ENABLED:
-        user_form = UserForm(request.POST, instance=request.user)
-    else:
-        user_form = UserCreationForm(request.POST)
+    user_form = UserCreationForm(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
@@ -126,12 +104,9 @@ def signup(request):
     user = user_form.save(commit=False)
     user.needs_update = False
 
-    if not BROWSERID_ENABLED:
-        user.is_active = False
-        user.save()
-        EmailAddressValidation.create(user.email, user)
-    else:
-        user.save()
+    user.is_active = False
+    user.save()
+    EmailAddressValidation.create(user.email, user)
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages

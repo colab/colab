@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     # Not standard apps
     'cliauth',
     'django_mobile',
-    'django_browserid',
     'haystack',
     'hitcounter',
     'i18n_model',
@@ -196,7 +195,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
-    'colab.home.context_processors.browserid_enabled',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -211,13 +209,10 @@ MIDDLEWARE_CLASSES = (
     'django_mobile.middleware.MobileDetectionMiddleware',
     'django_mobile.middleware.SetFlavourMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
-    'colab.accounts.middleware.UserRegisterMiddleware',
 )
 
-# Add the django_browserid authentication backend.
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'colab.accounts.auth.ColabBrowserIDBackend',
 )
 
 LOCALE_PATHS = (
@@ -245,16 +240,10 @@ SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 # Mailman API settings
 MAILMAN_API_URL = 'http://localhost:8124'
 
-# BrowserID / Persona
-SITE_URL = 'http://localhost:8000'
-BROWSERID_AUDIENCES = [SITE_URL, SITE_URL.replace('https', 'http')]
-
-
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL_FAILURE = '/?bid_login_failed=true'
 LOGOUT_REDIRECT_URL = '/'
-BROWSERID_CREATE_USER = True
 
 REVPROXY_ADD_REMOTE_USER = True
 
@@ -269,7 +258,6 @@ if locals().get('RAVEN_DSN', False):
     }
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
 
-BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
 locals().update(load_colab_apps())

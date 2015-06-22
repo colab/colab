@@ -131,8 +131,6 @@ ALLOWED_HOSTS:
 ## Disable indexing
 ROBOTS_NOINDEX: false
 
-## Disable browser id authentication
-#  BROWSERID_ENABLED: true
 EOF
   chown root:colab /etc/colab/settings.yaml
   chmod 0640 /etc/colab/settings.yaml

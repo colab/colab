@@ -21,13 +21,6 @@ class TestSignUpView(TestCase):
                                         "usertest@colab.com.br", "123colab4")
         return user
 
-    def test_user_not_authenticated(self):
-        with self.settings(BROWSERID_ENABLED=True):
-            response = self.client.get("/account/register")
-            self.assertEquals(302, response.status_code)
-            url = "http://testserver/account/login"
-            self.assertEquals(url, response.url)
-
     def test_user_authenticated_and_unregistered(self):
         self.client.login(username="usertestcolab", password="123colab4")
         response = self.client.get("/account/register/")

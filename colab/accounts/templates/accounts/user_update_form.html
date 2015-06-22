@@ -178,20 +178,18 @@ $(function() {
           </div>
         </div>
       </div>
-    {% if not BROWSERID_ENABLED %}
-        <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                {% trans 'Change Password' %}
-              </h3>
-            </div>
-            <div class="panel-body">
-              <a href="{% url 'password_change' %}" class="btn btn-default btn-primary pull-right btn-block">{% trans "Change Password" %}</a>
-            </div>
+      <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              {% trans 'Change Password' %}
+            </h3>
+          </div>
+          <div class="panel-body">
+            <a href="{% url 'password_change' %}" class="btn btn-default btn-primary pull-right btn-block">{% trans "Change Password" %}</a>
           </div>
         </div>
-    {% endif %}
+      </div>
     </div>
     <div class="row">
       <div class="submit">

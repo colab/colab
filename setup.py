@@ -29,8 +29,6 @@ REQUIREMENTS = [
     'raven==3.5.2',
     'tornado==3.1.1',
 
-    # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
-    'django-browserid==0.11',
     'django-revproxy==0.9.0',
 
     # Feedzilla (planet) and deps

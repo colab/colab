@@ -30,8 +30,6 @@ urlpatterns = patterns('',
     url(r'^myaccount/(?P<route>.*)$',
         'colab.accounts.views.myaccount_redirect', name='myaccount'),
 
-    url(r'', include('django_browserid.urls')),
-
     # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 
