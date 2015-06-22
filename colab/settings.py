@@ -57,7 +57,6 @@ INSTALLED_APPS = (
     'colab.api',
     'colab.rss',
     'colab.search',
-    'colab.badger',
     'colab.tz',
 )
 

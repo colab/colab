@@ -149,12 +149,11 @@ msgid "Register"
 msgstr "Cadastre-se"
 
 #: colab/accounts/templates/accounts/user_detail.html:8
-#: colab/badger/models.py:21
 msgid "Messages"
 msgstr "Mensagens"
 
 #: colab/accounts/templates/accounts/user_detail.html:9
-#: colab/badger/models.py:22 colab/templates/home.html:7
+#: colab/templates/home.html:7
 msgid "Contributions"
 msgstr "Contribuições"
 
@@ -199,7 +198,6 @@ msgid "Participation by Group"
 msgstr "Participação por grupo"
 
 #: colab/accounts/templates/accounts/user_detail.html:132
-#: colab/badger/models.py:69
 msgid "Badges"
 msgstr "Medalhas"
 
@@ -365,86 +363,17 @@ msgstr "Nos enviamos o email com as intruções para mudança de senha. Em breve
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Sua senha foi redefinida. Você pode prosseguir e autenticar agora."
 
-#: colab/badger/forms.py:19 colab/badger/models.py:39 colab/settings.py:160
+#: colab/settings.py:160
 msgid "Image"
 msgstr "Imagem"
 
-#: colab/badger/forms.py:30
-msgid "You must add an Image"
-msgstr "Você deve adicionar uma imagem"
-
-#: colab/badger/models.py:11
-msgid "Greater than or equal"
-msgstr "Maior que ou igual"
-
-#: colab/badger/models.py:12
-msgid "less than or equal"
-msgstr "menor que ou igual"
-
-#: colab/badger/models.py:13
-msgid "Equal"
-msgstr "Igual"
-
-#: colab/badger/models.py:14
-msgid "Biggest"
-msgstr "Maior"
-
-#: colab/badger/models.py:17
-msgid "Automatically"
-msgstr "Automaticamente"
-
-#: colab/badger/models.py:18
-msgid "Manual"
-msgstr "Manual"
-
-#: colab/badger/models.py:23
-msgid "Wikis"
-msgstr "Wikis"
-
-#: colab/badger/models.py:24
-msgid "Revisions"
-msgstr "Conjunto de mudanças"
-
-#: colab/badger/models.py:25
 #: colab/search/templates/search/includes/search_filters.html:122
 msgid "Ticket"
 msgstr "Tíquetes"
 
-#: colab/badger/models.py:35
-msgid "Title"
-msgstr "Título"
-
-#: colab/badger/models.py:37
-msgid "Description"
-msgstr "Descrição"
-
-#: colab/badger/models.py:40 colab/search/forms.py:18
+#: colab/search/forms.py:18
 msgid "Type"
 msgstr "Tipo"
-
-#: colab/badger/models.py:42
-msgid "User attribute"
-msgstr "Atributo do usuário"
-
-#: colab/badger/models.py:48
-msgid "Comparison"
-msgstr "Comparação"
-
-#: colab/badger/models.py:55
-msgid "Value"
-msgstr "Valor"
-
-#: colab/badger/models.py:61
-msgid "Awardees"
-msgstr "Premiados"
-
-#: colab/badger/models.py:65
-msgid "Order"
-msgstr "Ordem"
-
-#: colab/badger/models.py:68
-msgid "Badge"
-msgstr "Medalha"
 
 #: colab/home/context_processors.py:20
 msgid "Fork me!"
