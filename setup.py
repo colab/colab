@@ -31,7 +31,7 @@ REQUIREMENTS = [
 
     # Deps for Single SignOn (SSO) - Replaced with django-browserid==0.9
     'django-browserid==0.11',
-    'django-revproxy==0.9.0',
+    'django-revproxy==0.9.3',
 
     # Converse.js (XMPP client)
     'django-conversejs==0.3.4',
