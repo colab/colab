@@ -9,7 +9,7 @@ class SearchViewTest(TestCase):
     fixtures = ['test_data.json']
 
     def setUp(self):
-        call_command('update_index', interactive=False, verbosity=0)
+        call_command('rebuild_index', interactive=False, verbosity=0)
         self.client = Client()
 
     def tearDown(self):
@@ -21,12 +21,12 @@ class SearchViewTest(TestCase):
 
         self.assertEqual(3,  len(thread_list))
 
-        self.assertIn('This is a repply to Thread 1 on list A',
-                      thread_list[0].description)
-        self.assertIn('This is a repply to Thread 1 on list C',
-                      thread_list[1].description)
-        self.assertIn('This is a repply to Thread 1 on list B',
-                      thread_list[2].description)
+        condition = any('This is a repply to Thread 1 on list A' in t.description for t in thread_list)
+        self.assertTrue(condition)
+        condition = any('This is a repply to Thread 1 on list B' in t.description for t in thread_list)
+        self.assertTrue(condition)
+        condition = any('This is a repply to Thread 1 on list C' in t.description for t in thread_list)
+        self.assertTrue(condition)
 
     def test_search_account_by_firstName(self):
         request = self.client.get('/search/?q=Chuck')
