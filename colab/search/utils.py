@@ -40,8 +40,11 @@ def get_visible_threads(logged_user, filter_by_user=None):
 
 
 def get_collaboration_data(logged_user, filter_by_user=None):
+    username = getattr(filter_by_user, 'username', '')
+    cache_key = 'home_chart-{}'.format(username)
+    count_types = cache.get(cache_key)
+
     latest_results = []
-    count_types = cache.get('home_chart'+getattr(filter_by_user, "username", ""))
     populate_count_types = False
 
     if count_types is None:
@@ -89,6 +92,6 @@ def get_collaboration_data(logged_user, filter_by_user=None):
                 count_types[verbose_name] = elements_count
 
     if populate_count_types:
-        cache.set('home_chart'+getattr(filter_by_user, "username", ""), count_types, 30)
+        cache.set(cache_key, count_types, 30)
 
     return latest_results, count_types
