@@ -24,4 +24,3 @@ script:
 
 after_success:
   - coveralls
-  - ci/build_rpm.sh
