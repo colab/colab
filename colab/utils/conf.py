@@ -77,7 +77,7 @@ def load_colab_apps():
                 py_settings_d = _load_py_file(file_module, plugins_dir)
                 fields = ['verbose_name', 'upstream', 'urls',
                           'menu_urls', 'middlewares', 'dependencies',
-                          'context_processors']
+                          'context_processors', 'private_token']
 
                 app_name = py_settings_d.get('name')
                 if not app_name:
