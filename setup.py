@@ -31,13 +31,6 @@ REQUIREMENTS = [
 
     'django-revproxy==0.9.0',
 
-    # Feedzilla (planet) and deps
-    'django-common==0.1.51',
-    'feedparser==5.1.3',
-    'lxml==3.2.4',
-    'grab==0.4.13',
-    'transliterate==1.5',
-
     # Diazo
     'diazo==1.0.5',
 
