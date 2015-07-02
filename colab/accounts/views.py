@@ -13,21 +13,14 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, TemplateView
 from django.http import Http404
 
-from conversejs import xmpp
-from conversejs.models import XMPPAccount
-
 from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
 from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
 
 from .forms import (UserCreationForm, UserForm, ListsForm,
-                    UserUpdateForm, ChangeXMPPPasswordForm)
+                    UserUpdateForm)
 from .utils import mailman
-
-
-class LoginView(TemplateView):
-    template_name = "accounts/login.html"
 
 
 class UserProfileBaseMixin(object):
@@ -51,11 +44,6 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
             raise PermissionDenied
 
         return obj
-
-    def get_context_data(self, **kwargs):
-        context = super(UserProfileUpdateView, self).get_context_data(**kwargs)
-        context['CONVERSEJS_ENABLED'] = getattr(settings, 'CONVERSEJS_ENABLED')
-        return context
 
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
@@ -94,37 +82,19 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
 
 
 def signup(request):
-    BROWSERID_ENABLED = getattr(settings, 'BROWSERID_ENABLED', False)
-
-    if BROWSERID_ENABLED:
-        # If the user is not authenticated, redirect to login
-        if not request.user.is_authenticated():
-            return redirect('login')
 
     if request.user.is_authenticated():
-        # If the user doesn't need to update its main data,
-        #   redirect to its profile
-        # It happens when user is created by browserid
-        # and didn't set his/her main data
         if not request.user.needs_update:
             return redirect('user_profile', username=request.user.username)
 
-    # If the user is authenticated in Persona, but not in the Colab then he
-    # will be redirected to the register form.
     if request.method == 'GET':
-        if BROWSERID_ENABLED:
-            user_form = UserForm()
-        else:
-            user_form = UserCreationForm()
+        user_form = UserCreationForm()
         lists_form = ListsForm()
 
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    if BROWSERID_ENABLED:
-        user_form = UserForm(request.POST, instance=request.user)
-    else:
-        user_form = UserCreationForm(request.POST)
+    user_form = UserCreationForm(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():
@@ -134,12 +104,9 @@ def signup(request):
     user = user_form.save(commit=False)
     user.needs_update = False
 
-    if not BROWSERID_ENABLED:
-        user.is_active = False
-        user.save()
-        EmailAddressValidation.create(user.email, user)
-    else:
-        user.save()
+    user.is_active = False
+    user.save()
+    EmailAddressValidation.create(user.email, user)
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages
@@ -206,50 +173,6 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         return super(ManageUserSubscriptionsView,
                      self).get_context_data(**context)
-
-
-class ChangeXMPPPasswordView(UpdateView):
-    model = XMPPAccount
-    form_class = ChangeXMPPPasswordForm
-    fields = ['password', ]
-    template_name = 'accounts/change_password.html'
-
-    def get_success_url(self):
-        return reverse('user_profile', kwargs={
-            'username': self.request.user.username
-        })
-
-    def get_object(self, queryset=None):
-        obj = get_object_or_404(XMPPAccount, user=self.request.user.pk)
-        self.old_password = obj.password
-        return obj
-
-    def form_valid(self, form):
-        transaction.set_autocommit(False)
-
-        response = super(ChangeXMPPPasswordView, self).form_valid(form)
-
-        changed = xmpp.change_password(
-            self.object.jid,
-            self.old_password,
-            form.cleaned_data['password1']
-        )
-
-        if not changed:
-            messages.error(
-                self.request,
-                _(u'Could not change your password. Please, try again later.')
-            )
-            transaction.rollback()
-            return response
-        else:
-            transaction.commit()
-
-        messages.success(
-            self.request,
-            _("You've changed your password successfully!")
-        )
-        return response
 
 
 def password_changed(request):

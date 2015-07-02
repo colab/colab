@@ -126,12 +126,11 @@ msgstr ""
 msgid "Register"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:8 badger/models.py:21
+#: accounts/templates/accounts/user_detail.html:8
 msgid "Messages"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:9 badger/models.py:22
-#: templates/home.html:7
+#: accounts/templates/accounts/user_detail.html:9
 msgid "Contributions"
 msgstr ""
 
@@ -175,7 +174,7 @@ msgstr ""
 msgid "Participation by Group"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:132 badger/models.py:69
+#: accounts/templates/accounts/user_detail.html:132
 msgid "Badges"
 msgstr ""
 
@@ -291,85 +290,16 @@ msgstr ""
 msgid "You've changed your password successfully!"
 msgstr ""
 
-#: badger/forms.py:19 badger/models.py:39 settings.py:160
+#: settings.py:160
 msgid "Image"
 msgstr ""
 
-#: badger/forms.py:30
-msgid "You must add an Image"
-msgstr ""
-
-#: badger/models.py:11
-msgid "Greater than or equal"
-msgstr ""
-
-#: badger/models.py:12
-msgid "less than or equal"
-msgstr ""
-
-#: badger/models.py:13
-msgid "Equal"
-msgstr ""
-
-#: badger/models.py:14
-msgid "Biggest"
-msgstr ""
-
-#: badger/models.py:17
-msgid "Automatically"
-msgstr ""
-
-#: badger/models.py:18
-msgid "Manual"
-msgstr ""
-
-#: badger/models.py:23
-msgid "Wikis"
-msgstr ""
-
-#: badger/models.py:24
-msgid "Revisions"
-msgstr ""
-
-#: badger/models.py:25
 #: search/templates/search/includes/search_filters.html:122
 msgid "Ticket"
 msgstr ""
 
-#: badger/models.py:35
-msgid "Title"
-msgstr ""
-
-#: badger/models.py:37
-msgid "Description"
-msgstr ""
-
-#: badger/models.py:40 search/forms.py:18
+#: search/forms.py:18
 msgid "Type"
-msgstr ""
-
-#: badger/models.py:42
-msgid "User attribute"
-msgstr ""
-
-#: badger/models.py:48
-msgid "Comparison"
-msgstr ""
-
-#: badger/models.py:55
-msgid "Value"
-msgstr ""
-
-#: badger/models.py:61
-msgid "Awardees"
-msgstr ""
-
-#: badger/models.py:65
-msgid "Order"
-msgstr ""
-
-#: badger/models.py:68
-msgid "Badge"
 msgstr ""
 
 #: home/context_processors.py:15

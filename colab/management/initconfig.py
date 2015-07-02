@@ -21,15 +21,6 @@ EMAIL_SUBJECT_PREFIX = '[colab]'
 
 SECRET_KEY = '{secret_key}'
 
-#  Must use it without trailing slash
-SITE_URL = 'http://localhost:8000'
-BROWSERID_AUDIENCES = [
-    'http://localhost:8000',
-#    'http://example.com',
-#    'https://example.org',
-#    'http://example.net',
-]
-
 ALLOWED_HOSTS = [
     'localhost',
 #    'example.com',
@@ -37,17 +28,8 @@ ALLOWED_HOSTS = [
 #    'example.net',
 ]
 
-### Uncomment to enable Broswer ID protocol for authentication
-# BROWSERID_ENABLED = True
-
 ### Uncomment to enable social networks fields profile
 # SOCIAL_NETWORK_ENABLED = True
-
-### Uncomment to enable Converse.js
-# CONVERSEJS_ENABLED = True
-
-### Uncomment to enable auto-registration
-# CONVERSEJS_AUTO_REGISTER = 'xmpp.example.com'
 
 ## Database settings
 DATABASES = {{

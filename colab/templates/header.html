@@ -1,4 +1,4 @@
-{% load i18n browserid conversejs gravatar plugins %}
+{% load i18n gravatar plugins %}
 {% load static from staticfiles %}
 
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -20,12 +20,6 @@
         <li>
           <a href="{% url 'thread_list' %}">{% trans "Groups" %}</a>
         </li>
-
-        {% if feedzilla %}
-        <li>
-          <a href="{% url "feedzilla_index" %}">{% trans "Blogs" %}</a>
-        </li>
-        {% endif %}
 
         {% plugins_menu %}
 
