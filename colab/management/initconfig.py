@@ -34,19 +34,13 @@ ALLOWED_HOSTS = [
 ## Database settings
 DATABASES = {{
     'default': {{
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': 'localhost',
-        'NAME': 'colab',
-        'USER': 'colab',
-        'PASSWORD': 'colab',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'colab.sqlite3',
     }}
 }}
 
 ## Disable indexing
 ROBOTS_NOINDEX = False
-
-### Log errors to Sentry instance
-# RAVEN_DSN = 'http://public:secret@example.com/1'
 
 LOGGING = {{
     'version': 1,

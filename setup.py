@@ -3,46 +3,45 @@ from setuptools import setup, find_packages
 
 
 REQUIREMENTS = [
-    'Django==1.7.7',
-    'psycopg2==2.5.1',
-    'django-piston==0.2.3',
-    'pytz==2011n',
-    'chardet==1.0.1',
-    'python-dateutil==1.5',
-    'django-cliauth==0.9.1',
-    'django-mobile==0.3.0',
-    'django-haystack==2.2',
-    'pysolr==2.1',
-    'poster==0.8.1',
-    'etiquetando==0.1',
-    'html2text==3.200.3',
-    'django-taggit==0.12.1',
-    'python-memcached==1.53',
-    'django-hitcounter==0.1.1',
-    'Pillow==2.5.1',
-    'django-i18n-model==0.0.7',
-    'django-tastypie==0.11.0',
-    'gunicorn==19.1.0',
-    'eventlet==0.15.2',
-
-    # Deps for sentry client (raven)
-    'raven==3.5.2',
-    'tornado==3.1.1',
-
-    'django-revproxy==0.9.3',
+    'Django>=1.7.8,<1.8',
+    'pytz>=2011n',
+    'django-hitcounter>=0.1.1',
+    'django-tastypie>=0.12.1',
+    'django-revproxy>=0.9.0',
+    'django-haystack>=2.2',
+    'Whoosh>=2.7.0',
 
     # Diazo
-    'diazo==1.0.5',
+    'diazo>=1.0.5',
 
-    # Mailman 2 REST API
-    'mailman-api==0.2.9',
+    # Deps for Single SignOn (SSO)
+    'django-browserid>=0.11',
+
+    ### Move out of colab (as plugins):
+
+    # Deps for badger
+    'Pillow==2.8.1',
+    'django-i18n-model>=0.0.7',
+
+    # Deps for super_archives
+    'etiquetando==0.1',
+    'django-taggit>=0.12.1',
+    'html2text>=3.200.3',
+    'chardet>=1.0.1',
+
+    # Deps for gitlab plugin
+    'python-dateutil>=1.5',
+
+    # Converse.js (XMPP client)
+    'django-conversejs>=0.3.4',
+    'django-mobile>=0.3.0',
 ]
 
 TEST_REQUIREMENTS = [
-    'coverage==3.7.1',
-    'coveralls==0.5',
-    'flake8==2.3.0',
-    'mock==1.0.1',
+    'coverage>=3.7.1',
+    'coveralls>=0.5',
+    'flake8>=2.3.0',
+    'mock>=1.0.1',
 ]
 
 

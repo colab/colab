@@ -7,6 +7,7 @@ from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm
 from haystack.inputs import AltParser
+from haystack.inputs import AutoQuery
 
 from colab.super_archives.models import MailingList
 
@@ -107,7 +108,11 @@ class ColabSearchForm(SearchForm):
                 'bf': 'recip(ms(NOW/HOUR,modified),3.16e-11,1,1)^10',
             }
 
-            sqs = sqs.filter(content=AltParser('edismax', q, **dismax_opts))
+            if settings.HAYSTACK_CONNECTIONS['default']['ENGINE'] != \
+            'haystack.backends.whoosh_backend.WhooshEngine':
+                sqs = sqs.filter(content=AltParser('edismax', q, **dismax_opts))
+            else:
+                sqs = sqs.filter(content=AutoQuery(q))
 
         if self.cleaned_data['type']:
             sqs = sqs.filter(type=self.cleaned_data['type'])

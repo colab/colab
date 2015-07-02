@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'colab.accounts',
 
     # Not standard apps
-    'cliauth',
     'django_mobile',
     'haystack',
     'hitcounter',
@@ -166,15 +165,8 @@ HAYSTACK_CUSTOM_HIGHLIGHTER = 'colab.utils.highlighting.ColabHighlighter'
 
 HAYSTACK_CONNECTIONS = {
     'default': {
-        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'http://localhost:8983/solr/',
-    }
-}
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
     }
 }
 
@@ -252,12 +244,7 @@ TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
 from .utils.conf import load_colab_apps, load_py_settings
 
-if locals().get('RAVEN_DSN', False):
-    RAVEN_CONFIG = {
-        'dsn': RAVEN_DSN + '?timeout=30',  # noqa
-    }
-    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
-
+BROWSERID_ENABLED = locals().get('BROWSERID_ENABLED') or False
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
 locals().update(load_colab_apps())

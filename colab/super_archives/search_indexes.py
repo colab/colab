@@ -28,7 +28,7 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     latest_message_pk = indexes.IntegerField(
         model_attr='latest_message__pk', indexed=False
     )
-    score = indexes.IntegerField(model_attr='score')
+    rating = indexes.IntegerField(model_attr='score')
 
     def get_model(self):
         return Thread
