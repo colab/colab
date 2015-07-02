@@ -14,6 +14,9 @@ REQUIREMENTS = [
     # Diazo
     'diazo>=1.0.5',
 
+    # Celery
+    'django-celery==3.1.16',
+
     ### Move out of colab (as plugins):
 
     # Deps for badger
