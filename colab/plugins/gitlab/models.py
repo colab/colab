@@ -134,11 +134,12 @@ class GitlabComment(Collaboration):
     @property
     def url(self):
         if self.issue_comment:
-            return u'/gitlab/{}/issues/{}#notes_{}'.format(
-                self.project.path_with_namespace, self.parent_id, self.iid)
+            url_str = u'/gitlab/{}/issues/{}#notes_{}'
         else:
-            return u'/gitlab/{}/merge_requests/{}#notes_{}'.format(
-                self.project.path_with_namespace, self.parent_id, self.iid)
+            url_str = u'/gitlab/{}/merge_requests/{}#notes_{}'
+
+        return url_str.format(self.project.path_with_namespace,
+            self.parent_id, self.iid)
 
     class Meta:
         verbose_name = _('Gitlab Comments')
