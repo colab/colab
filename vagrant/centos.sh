@@ -19,7 +19,7 @@ fi
 
 yum -y groupinstall "Development tools"
 
-yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python-devel postgresql-server java
+yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python-devel postgresql-server java epel-release
 
 ### Install Virtualenvwrapper
 which pip2.7 > /dev/null ||
@@ -60,3 +60,4 @@ sudo -u postgres -i createdb --owner=colab colab 2> /dev/null | echo
 
 ### Forcing postgresql to start at boot
 sudo chkconfig postgresql on
+
