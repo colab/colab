@@ -4,13 +4,16 @@ Objective: Test parameters, and behavior.
 """
 
 from django.test import TestCase
-from colab.signals.signals import *
+from django.apps import apps
+import django
+from colab.signals.tasks import *
 from mock import patch
 
 
 class SignalsTest(TestCase):
 
     def setUp(self):
+       django.setup()
        self.list_signal = ['a', 'b', 'c']
        self.plugin_name = 'test_signal'
 
@@ -21,8 +24,7 @@ class SignalsTest(TestCase):
        signal_name ='a'
        signal_list = ['test_signal']
        self.assertEqual(len(registered_signals[signal_name]), 1)
-       self.assertEqual(registered_signals[signal_name],
-               signal_list)
+       self.assertEqual(registered_signals[signal_name], signal_list)
 
    
     def test_register_signal_already_registered(self):
@@ -34,8 +36,7 @@ class SignalsTest(TestCase):
 
        register_signal(self.plugin_name, self.list_signal)
        self.assertEqual(len(registered_signals[signal_name]), 1)
-       self.assertEqual(registered_signals[signal_name],
-               signal_list)
+       self.assertEqual(registered_signals[signal_name], signal_list)
 
     
     def test_connect_non_registered_signal(self):
