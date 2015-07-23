@@ -51,3 +51,23 @@ def plugins_menu(context):
 
     cache.set(cache_key, menu)
     return menu
+
+import requests
+from  django.conf import settings
+from colab.plugins.gitlab.views import GitlabProfileProxyView
+@register.simple_tag(takes_context=True)
+def content_xpto(context):
+    request = context['request']
+    requested_url = request.GET.get('code', '/gitlab/profile/account')
+    print "requested_url1 = " + requested_url
+
+    g = GitlabProfileProxyView()
+    r = g.dispatch(request, requested_url)
+    if r.status_code == 302:
+        location = r.get('Location')
+        requested_url = location[location.find('/gitlab/'):]
+        request.method = 'GET'
+        print "requested_url2 = " + requested_url
+        r = g.dispatch(request, requested_url)
+
+    return "<div>" + r.content + "</div>"

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from django.contrib import admin
 from django.views.generic import RedirectView
-
+from accounts.views import UserProfileUpdateView
 
 admin.autodiscover()
 

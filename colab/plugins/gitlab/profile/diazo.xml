@@ -1,0 +1,36 @@
+<rules
+    xmlns="http://namespaces.plone.org/diazo"
+    xmlns:css="http://namespaces.plone.org/diazo/css"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+    <xsl:variable name="username" select="str:replace(//a/@href[(contains(., '/gitlab/u/'))], '/gitlab/u/', '')" />
+    <xsl:template match="a/@href[(contains(., '/profile/'))]">
+        <xsl:attribute name="href">/account/<xsl:value-of select="$username"/>/edit?code=<xsl:value-of select="."/>/</xsl:attribute>
+    </xsl:template>
+    <xsl:template match="form/@action[(contains(., '/gitlab/'))]">
+        <xsl:attribute name="action">/account/<xsl:value-of select="$username"/>/edit?code=<xsl:value-of select="."/>/</xsl:attribute>
+    </xsl:template>
+
+    <!-- Drop colab stuff -->
+    <drop css:theme="nav.navbar-fixed-top" />
+    <drop css:theme="div.footer" />
+
+    <!-- Drop unused tabs on gitlab -->
+    <drop content="div[@class='container']/ul/li[1]" />
+    <drop content="div[@class='container']/ul/li[3]" />
+    <drop content="div[@class='container']/ul/li[4]" />
+    <drop content="div[@class='container']/ul/li[7]" />
+    <drop content="fieldset[@class='update-username']" />
+
+    <before theme-children="/html/head" content-children="/html/head" />
+    <before css:theme-children="#main-content" css:content-children="body" />
+
+    <merge attributes="class" css:theme="body" css:content="body" /> 
+
+    <!-- Add gitlab properties -->
+    <merge attributes="data-page" css:theme="body" css:content="body" />
+    <merge attributes="data-project-id" css:theme="body" css:content="body" />
+
+    <drop css:content="#top-panel" />
+    <drop css:content=".navbar-gitlab" />
+</rules>
