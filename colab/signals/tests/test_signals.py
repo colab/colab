@@ -4,7 +4,7 @@ Objective: Test parameters, and behavior.
 """
 
 from django.test import TestCase
-from colab.signals.signals import Signals
+from colab.signals.signals import *
 from mock import patch
 
 
@@ -13,16 +13,15 @@ class SignalsTest(TestCase):
     def setUp(self):
        self.list_signal = ['a', 'b', 'c']
        self.plugin_name = 'test_signal'
-       self.signals = Signals()
 
 
     def test_register_signal_(self):
-       self.signals.register_signal(self.plugin_name, self.list_signal)
+       register_signal(self.plugin_name, self.list_signal)
 
        signal_name ='a'
        signal_list = ['test_signal']
-       self.assertEqual(len(self.signals.registered_signals[signal_name]), 1)
-       self.assertEqual(self.signals.registered_signals[signal_name],
+       self.assertEqual(len(registered_signals[signal_name]), 1)
+       self.assertEqual(registered_signals[signal_name],
                signal_list)
 
    
@@ -30,12 +29,12 @@ class SignalsTest(TestCase):
        signal_name ='a'
        signal_list = ['test_signal']
 
-       self.signals.register_signal(self.plugin_name, self.list_signal)
-       self.assertEqual(len(self.signals.registered_signals[signal_name]), 1)
+       register_signal(self.plugin_name, self.list_signal)
+       self.assertEqual(len(registered_signals[signal_name]), 1)
 
-       self.signals.register_signal(self.plugin_name, self.list_signal)
-       self.assertEqual(len(self.signals.registered_signals[signal_name]), 1)
-       self.assertEqual(self.signals.registered_signals[signal_name],
+       register_signal(self.plugin_name, self.list_signal)
+       self.assertEqual(len(registered_signals[signal_name]), 1)
+       self.assertEqual(registered_signals[signal_name],
                signal_list)
 
     
@@ -44,7 +43,7 @@ class SignalsTest(TestCase):
         handling_method = 'Test'
         signal_name = 'Test'
         
-        self.assertRaises(Exception, self.signals.connect_signal, signal_name,
+        self.assertRaises(Exception, connect_signal, signal_name,
                 sender, handling_method) 
 
 
@@ -54,9 +53,9 @@ class SignalsTest(TestCase):
         handling_method = 'Test'
         signal_name = 'a'
         
-        self.signals.register_signal(self.plugin_name, self.list_signal)
+        register_signal(self.plugin_name, self.list_signal)
 
-        self.signals.connect_signal(signal_name, sender, handling_method)
+        connect_signal(signal_name, sender, handling_method)
         args, kwargs = mock.call_args
         
         self.assertEqual(args[0], handling_method)
@@ -70,8 +69,8 @@ class SignalsTest(TestCase):
         handling_method = 'Test'
         signal_name = 'a'
         
-        self.signals.register_signal(self.plugin_name, self.list_signal)
-        self.signals.send(signal_name, sender)
+        register_signal(self.plugin_name, self.list_signal)
+        send(signal_name, sender)
 
         args, kwargs = mock.call_args
 
@@ -80,4 +79,4 @@ class SignalsTest(TestCase):
         
 
     def test_send_signal_not_registered(self):
-        self.assertRaises(Exception, self.signals.send, 'test_signal', 'test')
+        self.assertRaises(Exception, send, 'test_signal', 'test')
