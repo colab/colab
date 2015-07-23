@@ -79,4 +79,5 @@ class SignalsTest(TestCase):
         self.assertTrue(mock.is_called)
         
 
-
+    def test_send_signal_not_registered(self):
+        self.assertRaises(Exception, self.signals.send, 'test_signal', 'test')

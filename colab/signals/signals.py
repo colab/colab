@@ -29,3 +29,5 @@ class Signals():
     def send(self, signal_name, sender, **kwargs):
         if signal_name in self.signal_instances:
             self.signal_instances[signal_name].send(sender=sender)
+        else:
+            raise Exception("Signal does not exist!")
