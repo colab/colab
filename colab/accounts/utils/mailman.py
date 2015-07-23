@@ -22,39 +22,35 @@ def subscribe(listname, address):
     url = get_url(listname)
     try:
         result = requests.put(url, timeout=TIMEOUT, data={'address': address})
-        if result.status_code is not 200:
-            return False, '%s: %s' % (listname, result.json())
+        return True, '%s: %s' % (listname, result.json())
     except:
         LOGGER.exception('Unable to subscribe user')
-        return False, 'Unable to subscribe user'
-    return True, 'Success'
+        return False, 'Error: Unable to subscribe user'
 
 
 def unsubscribe(listname, address):
     url = get_url(listname)
     try:
-        requests.delete(url, timeout=TIMEOUT, data={'address': address})
+        result = requests.delete(url, timeout=TIMEOUT, data={'address': address})
+        return True, '%s: %s' % (listname, result.json())
     except:
         LOGGER.exception('Unable to unsubscribe user')
-        return False
-    return True
+        return False, 'Error: Unable to unsubscribe user'
 
 
 def update_subscription(address, lists):
     current_lists = mailing_lists(address=address)
-    error_messages = []
+    info_messages = []
 
     for maillist in current_lists:
         if maillist not in lists:
-            unsubscribe(maillist, address)
+            info_messages.append(unsubscribe(maillist, address))
 
     for maillist in lists:
         if maillist not in current_lists:
-            subscribed, message = subscribe(maillist, address)
-            if not subscribed:
-                error_messages.append(message)
+            info_messages.append(subscribe(maillist, address))
 
-    return error_messages
+    return info_messages
 
 
 def mailing_lists(**kwargs):
