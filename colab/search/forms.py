@@ -107,10 +107,11 @@ class ColabSearchForm(SearchForm):
                 # http://wiki.apache.org/solr/FunctionQuery#Date_Boosting
                 'bf': 'recip(ms(NOW/HOUR,modified),3.16e-11,1,1)^10',
             }
+            hayString = 'haystack.backends.whoosh_backend.WhooshEngine'
+            if settings.HAYSTACK_CONNECTIONS['default']['ENGINE'] != hayString:
+                        sqs = sqs.filter(content=AltParser(
+                                         'edismax', q, **dismax_opts))
 
-            if settings.HAYSTACK_CONNECTIONS['default']['ENGINE'] != \
-            'haystack.backends.whoosh_backend.WhooshEngine':
-                sqs = sqs.filter(content=AltParser('edismax', q, **dismax_opts))
             else:
                 sqs = sqs.filter(content=AutoQuery(q))
 

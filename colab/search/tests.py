@@ -21,11 +21,14 @@ class SearchViewTest(TestCase):
 
         self.assertEqual(3,  len(thread_list))
 
-        condition = any('This is a repply to Thread 1 on list A' in t.description for t in thread_list)
+        condition = any('This is a repply to Thread 1 on list A' in
+                        t.description for t in thread_list)
         self.assertTrue(condition)
-        condition = any('This is a repply to Thread 1 on list B' in t.description for t in thread_list)
+        condition = any('This is a repply to Thread 1 on list B' in
+                        t.description for t in thread_list)
         self.assertTrue(condition)
-        condition = any('This is a repply to Thread 1 on list C' in t.description for t in thread_list)
+        condition = any('This is a repply to Thread 1 on list C' in
+                        t.description for t in thread_list)
         self.assertTrue(condition)
 
     def test_search_account_by_firstName(self):

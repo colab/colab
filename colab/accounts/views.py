@@ -1,16 +1,14 @@
 # encoding: utf-8
 from collections import OrderedDict
 
-from django.conf import settings
 from django.contrib import messages
-from django.db import transaction
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
-from django.views.generic import DetailView, UpdateView, TemplateView
+from django.views.generic import DetailView, UpdateView
 from django.http import Http404
 
 from colab.super_archives.models import (EmailAddress,
@@ -18,8 +16,7 @@ from colab.super_archives.models import (EmailAddress,
 from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
 
-from .forms import (UserCreationForm, UserForm, ListsForm,
-                    UserUpdateForm)
+from .forms import (UserCreationForm, ListsForm, UserUpdateForm)
 from .utils import mailman
 
 

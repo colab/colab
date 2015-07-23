@@ -25,4 +25,3 @@ def ribbon(request):
             'url': getattr(settings, 'RIBBON_URL', url),
         }
     }
-
