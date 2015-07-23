@@ -4,6 +4,7 @@ import requests
 import logging
 
 from django.conf import settings
+from django.contrib import messages
 
 TIMEOUT = 1
 
@@ -20,11 +21,13 @@ def get_url(listname=None):
 def subscribe(listname, address):
     url = get_url(listname)
     try:
-        requests.put(url, timeout=TIMEOUT, data={'address': address})
+        result = requests.put(url, timeout=TIMEOUT, data={'address': address})
+        if result.status_code is not 200:
+            return False, '%s: %s' % (listname, result.json())
     except:
         LOGGER.exception('Unable to subscribe user')
-        return False
-    return True
+        return False, 'Unable to subscribe user'
+    return True, 'Success'
 
 
 def unsubscribe(listname, address):
@@ -39,6 +42,7 @@ def unsubscribe(listname, address):
 
 def update_subscription(address, lists):
     current_lists = mailing_lists(address=address)
+    error_messages = []
 
     for maillist in current_lists:
         if maillist not in lists:
@@ -46,7 +50,11 @@ def update_subscription(address, lists):
 
     for maillist in lists:
         if maillist not in current_lists:
-            subscribe(maillist, address)
+            subscribed, message = subscribe(maillist, address)
+            if not subscribed:
+                error_messages.append(message)
+
+    return error_messages
 
 
 def mailing_lists(**kwargs):
