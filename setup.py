@@ -7,15 +7,12 @@ REQUIREMENTS = [
     'pytz>=2011n',
     'django-hitcounter>=0.1.1',
     'django-tastypie>=0.12.1',
-    'django-revproxy>=0.9.0',
+    'django-revproxy>=0.9.3',
     'django-haystack>=2.2',
     'Whoosh>=2.7.0',
 
     # Diazo
     'diazo>=1.0.5',
-
-    # Deps for Single SignOn (SSO)
-    'django-browserid>=0.11',
 
     ### Move out of colab (as plugins):
 
@@ -31,6 +28,7 @@ REQUIREMENTS = [
 
     # Deps for gitlab plugin
     'python-dateutil>=1.5',
+    'requests',
 
     # Converse.js (XMPP client)
     'django-conversejs>=0.3.4',
