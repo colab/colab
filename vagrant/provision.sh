@@ -19,6 +19,8 @@ if [ ! -d /home/vagrant/.virtualenvs/colab ]; then
 fi
 
 workon colab
+pip install --upgrade setuptools
+
 set -e
 
 for dir in /vagrant/colab /vagrant; do
