@@ -209,6 +209,7 @@ AUTHENTICATION_BACKENDS = (
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, 'super_archives/locale'),
 )
 
 AUTH_USER_MODEL = 'accounts.User'
