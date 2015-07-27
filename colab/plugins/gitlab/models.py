@@ -27,6 +27,7 @@ class GitlabProject(models.Model, HitCounterModelMixin):
 class GitlabMergeRequest(Collaboration):
 
     id = models.IntegerField(primary_key=True)
+    iid = models.IntegerField(null=True)
     target_branch = models.TextField()
     source_branch = models.TextField()
     project = models.ForeignKey(GitlabProject, null=True,
@@ -50,7 +51,7 @@ class GitlabMergeRequest(Collaboration):
     @property
     def url(self):
         return u'/gitlab/{}/merge_requests/{}'.format(
-            self.project.path_with_namespace, self.id)
+            self.project.path_with_namespace, self.iid)
 
     def get_author(self):
         return self.user
@@ -91,6 +92,7 @@ class GitlabIssue(Collaboration):
 class GitlabComment(Collaboration):
 
     id = models.IntegerField(primary_key=True)
+    iid = models.IntegerField(null=True)
     body = models.TextField()
     created_at = models.DateTimeField(blank=True, null=True)
     issue_comment = models.BooleanField(default=True)
@@ -132,11 +134,12 @@ class GitlabComment(Collaboration):
     @property
     def url(self):
         if self.issue_comment:
-            return u'/gitlab/{}/issues/{}#notes_{}'.format(
-                self.project.path_with_namespace, self.parent_id, self.id)
+            url_str = u'/gitlab/{}/issues/{}#notes_{}'
         else:
-            return u'/gitlab/{}/merge_requests/{}#notes_{}'.format(
-                self.project.path_with_namespace, self.parent_id, self.id)
+            url_str = u'/gitlab/{}/merge_requests/{}#notes_{}'
+
+        return url_str.format(self.project.path_with_namespace,
+            self.parent_id, self.iid)
 
     class Meta:
         verbose_name = _('Gitlab Comments')
