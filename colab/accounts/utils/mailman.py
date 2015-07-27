@@ -49,10 +49,11 @@ def unsubscribe(listname, address):
     url = get_url(listname)
     try:
         result = requests.delete(url, timeout=TIMEOUT, data={'address': address})
-        return True, '%s: %s' % (listname, result.json())
+        msg_type, message = MAILMAN_MSGS[result.json()]
+        return msg_type, message % listname
     except:
         LOGGER.exception('Unable to unsubscribe user')
-        return False, 'Error: Unable to unsubscribe user'
+        return E, 'Error: Unable to subscribe user'
 
 
 def update_subscription(address, lists):
