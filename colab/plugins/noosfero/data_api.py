@@ -68,26 +68,21 @@ class NoosferoDataAPI(ProxyDataAPI):
         return _object
 
     def fetch_communities(self):
-        communities = []
-
         json_data = self.get_json_data('/api/v1/communities', 1)
 
         json_data = json_data['communities']
         for element in json_data:
             community = NoosferoCommunity()
             self.fill_object_data(element, community)
+            community.save()
+
             if element.has_key('categories'):
                 for category_json in element["categories"]:
                     category = NoosferoCategory.objects.get_or_create(
                         id=category_json["id"], name=category_json["name"])[0]
                     community.categories.add(category.id)
-            communities.append(community)
-
-        return communities
 
     def fetch_articles(self):
-        articles = []
-
         json_data = self.get_json_data('/api/v1/articles', 1)
 
         json_data = json_data['articles']
@@ -95,26 +90,19 @@ class NoosferoDataAPI(ProxyDataAPI):
         for element in json_data:
             article = NoosferoArticle()
             self.fill_object_data(element, article)
+            article.save()
 
             for category_json in element["categories"]:
                 category = NoosferoCategory.objects.get_or_create(
                     id=category_json["id"], name=category_json["name"])[0]
                 article.categories.add(category.id)
 
-            articles.append(article)
-
-        return articles
-
     def fetch_data(self):
         LOGGER.info("Importing Communities")
-        communities = self.fetch_communities()
-        for datum in communities:
-            datum.save()
+        self.fetch_communities()
 
         LOGGER.info("Importing Articles")
-        articles = self.fetch_articles()
-        for datum in articles:
-            datum.save()
+        self.fetch_articles()
 
     @property
     def app_label(self):
