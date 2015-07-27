@@ -139,7 +139,7 @@ class GitlabComment(Collaboration):
             url_str = u'/gitlab/{}/merge_requests/{}#notes_{}'
 
         return url_str.format(self.project.path_with_namespace,
-            self.parent_id, self.iid)
+                              self.parent_id, self.iid)
 
     class Meta:
         verbose_name = _('Gitlab Comments')
