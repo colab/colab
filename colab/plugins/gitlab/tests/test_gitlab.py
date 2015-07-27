@@ -34,7 +34,7 @@ class GitlabTest(TestCase):
                          '/gitlab/softwarepublico/colab')
 
     def test_merge_request_url(self):
-        self.assertEqual(GitlabMergeRequest.objects.get(id=1).url,
+        self.assertEqual(GitlabMergeRequest.objects.get(iid=1).url,
                          '/gitlab/softwarepublico/colab/merge_requests/1')
 
     def test_issue_url(self):
@@ -43,7 +43,7 @@ class GitlabTest(TestCase):
 
     def test_comment_on_mr_url(self):
         url = '/gitlab/softwarepublico/colab/merge_requests/1#notes_1'
-        self.assertEqual(GitlabComment.objects.get(id=1).url, url)
+        self.assertEqual(GitlabComment.objects.get(iid=1).url, url)
 
     def test_comment_on_issue_url(self):
         self.assertEqual(GitlabComment.objects.get(id=2).url,
@@ -60,7 +60,7 @@ class GitlabTest(TestCase):
         g.save()
 
         mr = GitlabMergeRequest()
-        mr.id = 1
+        mr.iid = 1
         mr.project = g
         mr.title = "Include plugin support"
         mr.description = "Merge request for plugin support"
@@ -80,8 +80,8 @@ class GitlabTest(TestCase):
         i.save()
 
         c1 = GitlabComment()
-        c1.id = 1
-        c1.parent_id = mr.id
+        c1.iid = 1
+        c1.parent_id = mr.iid
         c1.project = g
         c1.body = "Comment to merge request"
         c1.created_at = datetime.now()
@@ -90,7 +90,7 @@ class GitlabTest(TestCase):
         c1.save()
 
         c2 = GitlabComment()
-        c2.id = 2
+        c2.iid = 2
         c2.parent_id = i.id
         c2.project = g
         c2.body = "Comment to issue"
