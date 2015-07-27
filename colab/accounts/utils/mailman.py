@@ -13,7 +13,7 @@ LOGGER = logging.getLogger('colab.mailman')
 
 def get_url(listname=None):
     if listname:
-        return urlparse.urljoin(settings.MAILMAN_API_URL, '/' + listname)
+        return urlparse.urljoin(settings.MAILMAN_API_URL, listname)
 
     return settings.MAILMAN_API_URL
 
