@@ -33,6 +33,6 @@ def connect_signal(signal_name, sender, handling_method):
 
 def send(signal_name, sender, **kwargs):
     if signal_name in signal_instances:
-        signal_instances[signal_name].send(sender=sender)
+        signal_instances[signal_name].send(sender=sender, **kwargs)
     else:
         raise Exception("Signal does not exist!")

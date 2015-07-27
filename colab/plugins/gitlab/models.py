@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from colab.plugins.utils.models import Collaboration
 from hitcounter.models import HitCounterModelMixin
+from colab.signals.tasks import send
 
 
 class GitlabProject(models.Model, HitCounterModelMixin):
@@ -17,6 +18,7 @@ class GitlabProject(models.Model, HitCounterModelMixin):
 
     @property
     def url(self):
+        send('gitlab_create_project', 'colab.plugins.gitlab')
         return u'/gitlab/{}'.format(self.path_with_namespace)
 
     class Meta:
