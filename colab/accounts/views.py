@@ -145,11 +145,9 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
         for email in user.emails.values_list('address', flat=True):
             lists = self.request.POST.getlist(email)
             info_messages = user.update_subscription(email, lists)
-            for operation_status, message in info_messages:
-                if operation_status:
-                    messages.success(request, _(message))
-                else:
-                    messages.error(request, _(message))
+            for msg_type, message in info_messages:
+                show_message = getattr(messages, msg_type)
+                show_message(request, _(message))
 
 
         return redirect('user_profile', username=user.username)

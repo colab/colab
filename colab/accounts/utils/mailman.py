@@ -10,6 +10,22 @@ TIMEOUT = 1
 
 LOGGER = logging.getLogger('colab.mailman')
 
+S = 'success'
+I = 'info'
+E = 'error'
+
+MAILMAN_MSGS = {
+    0: (S, '%s: Success!'),
+    1: (S, '%s: An email confirmation was sent to you, please check your inbox.'),
+    2: (I, '%s: Your subscription was sent successfully! Please wait for the list\'s admin approval.'),
+    3: (I, '%s: You are already a member of this list.'),
+    4: (E, '%s: You are banned from this list!'),
+    5: (E, '%s: You appear to have an invalid email address.'),
+    6: (E, '%s: Your email address is considered to be hostile.'),
+    7: (E, '%s: You are not a member of this list.'),
+    8: (E, 'Missing information: `email_from`, `subject` and `body` are mandatory.'),
+}
+
 
 def get_url(listname=None):
     if listname:
@@ -22,10 +38,11 @@ def subscribe(listname, address):
     url = get_url(listname)
     try:
         result = requests.put(url, timeout=TIMEOUT, data={'address': address})
-        return True, '%s: %s' % (listname, result.json())
+        msg_type, message = MAILMAN_MSGS[result.json()]
+        return msg_type, message % listname
     except:
         LOGGER.exception('Unable to subscribe user')
-        return False, 'Error: Unable to subscribe user'
+        return E, 'Error: Unable to subscribe user'
 
 
 def unsubscribe(listname, address):
