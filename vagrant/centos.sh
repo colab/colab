@@ -21,6 +21,10 @@ yum -y groupinstall "Development tools"
 
 yum install -y git unzip mercurial libev-devel gettext libxml2-devel libxslt-devel openssl-devel libffi-devel libjpeg-turbo-devel zlib-devel freetype-devel postgresql-devel python-devel postgresql-server java epel-release
 
+### Install Rabbitmq
+yum install -y rabbitmq-server
+systemctl start rabbitmq-server
+
 ### Install Virtualenvwrapper
 which pip2.7 > /dev/null ||
     curl -s -L https://raw.githubusercontent.com/pypa/pip/1.5.6/contrib/get-pip.py |

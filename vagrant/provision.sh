@@ -36,3 +36,7 @@ fi
 colab-admin migrate
 colab-admin loaddata /vagrant/tests/test_data.json
 
+# Init.d Celery files
+sudo cp $basedir/vagrant/misc/etc/init.d/celeryd /etc/init.d/
+sudo cp $basedir/vagrant/misc/etc/default/celeryd /etc/default/
+sudo systemctl start celeryd

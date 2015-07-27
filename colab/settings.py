@@ -8,6 +8,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
+BROKER_URL = 'amqp://guest:guest@localhost:5672/'
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(__file__)
@@ -47,6 +48,7 @@ INSTALLED_APPS = (
     'hitcounter',
     'i18n_model',
     'taggit',
+    'djcelery',
 
     # Own apps
     'colab.home',
