@@ -1,7 +1,5 @@
 language: python
 
-cache: apt
-
 python:
   - "2.7"
 
