@@ -3,18 +3,19 @@ from setuptools import setup, find_packages
 
 
 REQUIREMENTS = [
-    'Django>=1.7.8,<1.8',
+    'Django>=1.7.9,<1.8',
     'pytz>=2011n',
     'django-hitcounter>=0.1.1',
-    'django-tastypie>=0.12.1',
-    'django-revproxy>=0.9.3',
+
+    # Search
     'django-haystack>=2.2',
     'Whoosh>=2.7.0',
 
-    # Diazo
+    # revproxy
+    'django-revproxy>=0.9.3',
     'diazo>=1.0.5',
 
-    # Celery
+    # Async Signals
     'django-celery==3.1.16',
 
     ### Move out of colab (as plugins):
