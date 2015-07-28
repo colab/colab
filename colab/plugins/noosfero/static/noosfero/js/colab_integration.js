@@ -1,20 +1,14 @@
 
-window.onload=transform_tag_Welcome();
+window.onload=transform_tags();
 
-function httpGet(theUrl)
+function  transform_tags()
 {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false );
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
+       var tag = $('.software-community-dashboard');  
+       var url = $(location).attr('pathname'); 
+       var regex = new RegExp(/\/social\/(.+)\//g);
+       var community = regex.exec(url)[1];
+       var MAX = '7'
+       var request_path = '/spb/get_list/'+'?list_name='+community+'&'+'MAX='+MAX;
 
-
-function  transform_tag_Welcome()
-{
-   var tag = document.getElementsByClassName('foswikiToc');
-   var text = httpGet('http://localhost:8000/spb/get_list/?list_name=ListB&MAX=5');
-   tag[0].innerHTML= text;
-
-   var current = url = window.location.href 
+       tag.load(request_path)
 }
