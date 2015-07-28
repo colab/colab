@@ -28,10 +28,6 @@ REQUIREMENTS = [
     # Deps for gitlab plugin
     'python-dateutil>=1.5',
     'requests',
-
-    # Converse.js (XMPP client)
-    'django-conversejs>=0.3.4',
-    'django-mobile>=0.3.0',
 ]
 
 TEST_REQUIREMENTS = [
