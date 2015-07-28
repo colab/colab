@@ -19,10 +19,6 @@ REQUIREMENTS = [
 
     ### Move out of colab (as plugins):
 
-    # Deps for badger
-    'Pillow==2.8.1',
-    'django-i18n-model>=0.0.7',
-
     # Deps for super_archives
     'etiquetando==0.1',
     'django-taggit>=0.12.1',
