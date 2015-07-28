@@ -32,6 +32,11 @@ ALLOWED_HOSTS = [
 # SOCIAL_NETWORK_ENABLED = True
 
 ## Database settings
+##
+##     When DEBUG is True colab will create the DB on
+##     the repository root. In case of production settings
+##     (DEBUG False) the DB settings must be set.
+##
 # DATABASES = {{
 #     'default': {{
 #         'ENGINE': 'django.db.backends.sqlite3',

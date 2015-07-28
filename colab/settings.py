@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(__file__)
@@ -172,10 +173,11 @@ HAYSTACK_CONNECTIONS = {
     }
 }
 
+DEFAULT_DATABASE = os.path.join(BASE_DIR, 'colab.sqlite3')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'colab.sqlite3'),
+        'NAME': DEFAULT_DATABASE,
     }
 }
 
@@ -252,12 +254,12 @@ REVPROXY_ADD_REMOTE_USER = True
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
-from .utils.conf import load_colab_apps, load_py_settings
+from .utils import conf
 
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
-locals().update(load_colab_apps())
-locals().update(load_py_settings())
+locals().update(conf.load_colab_apps())
+locals().update(conf.load_py_settings())
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 PROXIED_APPS = {}
@@ -297,3 +299,5 @@ STATICFILES_DIRS += [
 TEMPLATE_DIRS += (
     os.path.join(BASE_DIR, 'templates'),
 )
+
+conf.validate_database(DATABASES, DEFAULT_DATABASE, DEBUG)
