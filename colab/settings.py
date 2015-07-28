@@ -46,7 +46,6 @@ INSTALLED_APPS = (
     'django_mobile',
     'haystack',
     'hitcounter',
-    'i18n_model',
     'taggit',
     'djcelery',
 
