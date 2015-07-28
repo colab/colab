@@ -1,6 +1,6 @@
 
 ## Set to false in production
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 
 ## System admins
@@ -25,15 +25,7 @@ ALLOWED_HOSTS = [
 ]
 
 ### Uncomment to enable social networks fields profile
-# SOCIAL_NETWORK_ENABLED = True
-
-## Database settings
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'colab.sqlite3',
-    }
-}
+SOCIAL_NETWORK_ENABLED = True
 
 ## Disable indexing
 ROBOTS_NOINDEX = True
@@ -59,3 +51,5 @@ LOGGING = {
         },
     },
 }
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'

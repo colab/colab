@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'colab.rss',
     'colab.search',
     'colab.tz',
+    'colab.utils',
 )
 
 ROOT_URLCONF = 'colab.urls'

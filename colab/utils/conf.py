@@ -5,7 +5,6 @@ import importlib
 import warnings
 
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import ugettext as _
 
 
 class InaccessibleSettings(ImproperlyConfigured):
@@ -108,6 +107,6 @@ def load_colab_apps():
 def validate_database(database_dict, default_db, debug):
     db_name = database_dict.get('default', {}).get('NAME')
     if not debug and db_name == default_db:
-        msg = _('Since DEBUG is set to False DATABASE must be set on '
-                'colab settings')
+        msg = ('Since DEBUG is set to False DATABASE must be set on '
+               'Colab settings')
         raise DatabaseUndefined(msg)
