@@ -8,31 +8,20 @@ from django.views.generic import RedirectView
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
     url(r'^dashboard$', 'colab.home.views.dashboard', name='dashboard'),
-    url(r'^$', RedirectView.as_view(url=settings.COLAB_HOME_URL), name='home'),
-
-    url(r'^open-data/$', TemplateView.as_view(template_name='open-data.html'),
-        name='opendata'),
-
     url(r'^search/', include('colab.search.urls')),
-    url(r'^archives/', include('colab.super_archives.urls')),
     url(r'^api/', include('colab.api.urls')),
     url(r'^rss/', include('colab.rss.urls')),
 
-    # Kept for backwards compatibility
-    url(r'^user/', include('colab.accounts.urls')),
-    # Kept for backwards compatibility
-    url(r'^user/', include('colab.accounts.urls')),
-    # (same here) TODO: move to nginx
-    url(r'^signup/', include('colab.accounts.urls')),
     url(r'^account/', include('colab.accounts.urls')),
     url(r'^myaccount/(?P<route>.*)$',
         'colab.accounts.views.myaccount_redirect', name='myaccount'),
 
-    # Uncomment the next line to enable the admin:
     url(r'^colab/admin/', include(admin.site.urls)),
 
+    url(r'^archives/', include('colab.super_archives.urls')),
     url(r'^gitlab/', include('colab.plugins.gitlab.urls')),
     url(r'^mezuro/', include('colab.plugins.mezuro.urls')),
     url(r'^social/', include('colab.plugins.noosfero.urls')),
