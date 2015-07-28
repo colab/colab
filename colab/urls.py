@@ -12,7 +12,6 @@ urlpatterns = patterns('',
     url(r'^robots.txt$', 'colab.home.views.robots', name='robots'),
     url(r'^dashboard$', 'colab.home.views.dashboard', name='dashboard'),
     url(r'^search/', include('colab.search.urls')),
-    url(r'^api/', include('colab.api.urls')),
     url(r'^rss/', include('colab.rss.urls')),
 
     url(r'^account/', include('colab.accounts.urls')),

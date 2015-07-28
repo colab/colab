@@ -59,7 +59,7 @@
     console.debug('trying to vote');
     $btn.button('loading');
     $ajax = $.ajax({
-      url: "/api/message/" + msg_id + "/vote",
+      url: "archives/message/" + msg_id + "/vote",
       type: method,
       context: $btn.get(0),
       beforeSend: function(xhr, settings) {
