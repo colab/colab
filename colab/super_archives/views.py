@@ -32,6 +32,8 @@ class ThreadView(View):
         thread = get_object_or_404(Thread, subject_token=thread_token,
                                    mailinglist__name=mailinglist)
 
+        # TODO: Refactor this code
+        # Use local flag is_private instead of always check the API!!
         all_privates = dict(mailman.all_lists(private=True))
         if all_privates[thread.mailinglist.name]:
             if not request.user.is_authenticated():
