@@ -6,10 +6,10 @@
 # - trusty64
 # - chef/centos-7.0
 
-default_box = "precise64"
+default_box = "trusty64"
 if $stdin.isatty
   if Dir.glob(File.join(File.dirname("__FILE__"), '.vagrant/**/id')).empty?
-    options = ["precise64", "trusty64", "chef/centos-7.0"]
+    options = ["trusty64", "chef/centos-7.0"]
 
     puts "Bases boxes available locally:"
     puts '------------------------------'
