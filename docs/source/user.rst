@@ -4,13 +4,110 @@ User Documentation
 Getting Started
 ---------------
 
-Dependencies
-++++++++++++
-.. TODO
+Install Requirements with Vagrant
++++++++++++++++++++++++++++++++++
 
-Install
-+++++++
-.. TODO
+Need VirtualBox and Vagrant installed
+
+Run the following command to create and up the colab virtual machine
+
+.. code-block:: shell
+
+    $ vagrant up
+
+Run the following command to access colab virtual machine
+
+.. code-block:: shell
+
+      $ vagrant ssh
+
+Install Requirements without Vagrant
+++++++++++++++++++++
+
+Install virtualenvwrapper
+
+Use this link to configure the virtualenvwreapper: https://virtualenvwrapper.readthedocs.org
+
+Run the following command
+
+.. code-block:: shell
+
+    $ mkvirtualenv colab
+
+Install Development
++++++++++++++++++++
+
+On the colab folder use the following commands, or in the colab vagrant ("$ vagrant ssh")
+
+.. code-block:: shell
+
+    $ workon colab
+    $ pip install -e . #(dont need this command if use vagrant)
+    $ colab-admin migrate #(dont need this command if use vagrant)
+    $ colab-admin runserver 0.0.0.0:8000
+
+
+Colab settings
++++++++++++++++++
+
+View the following file:
+
+.. code-block:: shell
+
+    $ cat /etc/colab/settings.py
+
+The file /etc/colab/settings.py have the configurations of colab, this configurations overrides the django settings.py
+
+
+Add a new plugin
+----------------
+- Atention: replace the brackets, [], for the content presented in the brackets
+
+- Make sure the application has the following requirements
+
+  - Suport for remote user authentication
+
+  - A relative url root
+
+  - A relative static url root, for change url's of css and javascript
+
+- Create the plugin configuration for the application
+
+  - create file: [plugin_name].py
+
+  - on folder: /etc/colab/plugins.d/
+
+Use this template for the plugin configuration file
+
+.. code-block:: python
+
+    from colab.plugins.utils.menu import colab_url_factory
+    from django.utils.translation import ugettext_lazy as _
+
+    name = 'colab.plugins.[plugin_name]'
+
+    upstream = 'http://[host_of_application]/[relative_url_root]/'
+    private_token = '[plugin_private_token_for_data_import]'
+
+    urls = {
+        'include': 'colab.plugins.[plugin_name].urls',
+        'namespace': '[plugin_name]',
+        'prefix': '[application_prefix]',
+    }
+
+    menu_title = '[menu_title_of_html]'
+
+    url = colab_url_factory('[plugin_name]')
+
+    menu_urls = {
+        url(display=_('[name_of_link_page]'), viewname='[name_of_view_in_the_application]', kwargs={'path': '/[page_appication_path]/' }, auth=True),
+
+        # You can have more than one url
+        url(display=_('[name_of_link_page]'), viewname='[another_name_of_view_in_the_application]', kwargs={'path': '/[another_page_appication_path]/' }, auth=True),
+    }
+
+
+
 
 Plugins
 -------
