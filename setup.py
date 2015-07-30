@@ -3,25 +3,22 @@ from setuptools import setup, find_packages
 
 
 REQUIREMENTS = [
-    'Django>=1.7.8,<1.8',
+    'Django>=1.7.9,<1.8',
     'pytz>=2011n',
     'django-hitcounter>=0.1.1',
-    'django-tastypie>=0.12.1',
-    'django-revproxy>=0.9.3',
+
+    # Search
     'django-haystack>=2.2',
     'Whoosh>=2.7.0',
 
-    # Diazo
+    # revproxy
+    'django-revproxy>=0.9.3',
     'diazo>=1.0.5',
 
-    # Celery
+    # Async Signals
     'django-celery==3.1.16',
 
     ### Move out of colab (as plugins):
-
-    # Deps for badger
-    'Pillow==2.8.1',
-    'django-i18n-model>=0.0.7',
 
     # Deps for super_archives
     'etiquetando==0.1',
@@ -32,10 +29,6 @@ REQUIREMENTS = [
     # Deps for gitlab plugin
     'python-dateutil>=1.5',
     'requests',
-
-    # Converse.js (XMPP client)
-    'django-conversejs>=0.3.4',
-    'django-mobile>=0.3.0',
 ]
 
 TEST_REQUIREMENTS = [

@@ -2,14 +2,8 @@
 
 34  2   *   *   *   colab   colab-admin rebuild_index --noinput &> /dev/null
 
-0   *   *   *   *   colab   colab-admin cleanup_snippets &> /dev/null
-
-*/5 *   *   *   *   colab   colab-admin update_badges &> /dev/null
-
 *   *   *   *   *   colab   colab-admin import_proxy_data &> /dev/null
 
 27  3   *   *   *   colab   colab-admin clearsessions &> /dev/null
-
-10  *   *   *   *   colab   colab-admin update_planet &> /dev/null
 
 *   *   *   *   *   colab   colab-admin import_emails &> /dev/null

@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
-from .views import EmailView, EmailValidationView, ThreadView
-from .views import ThreadDashboardView
+from .views import (EmailView, EmailValidationView, ThreadView,
+                    ThreadDashboardView, VoteView)
 
 
 urlpatterns = patterns(
@@ -13,4 +13,5 @@ urlpatterns = patterns(
         name="archive_email_validation_view"),
     url(r'manage/email/(?P<key>[0-9a-z]{32})?', EmailView.as_view(),
         name="archive_email_view"),
+    url(r'message/(?P<msg_id>\d+)/vote$', VoteView.as_view()),
 )

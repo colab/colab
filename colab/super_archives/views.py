@@ -32,6 +32,8 @@ class ThreadView(View):
         thread = get_object_or_404(Thread, subject_token=thread_token,
                                    mailinglist__name=mailinglist)
 
+        # TODO: Refactor this code
+        # Use local flag is_private instead of always check the API!!
         all_privates = dict(mailman.all_lists(private=True))
         if all_privates[thread.mailinglist.name]:
             if not request.user.is_authenticated():
@@ -293,4 +295,41 @@ class EmailValidationView(View):
             logging.exception('Error sending validation email')
             return http.HttpResponseServerError()
 
+        return http.HttpResponse(status=204)
+
+
+class VoteView(View):
+
+    http_method_names = [u'get', u'put', u'delete', u'head']
+
+    def put(self, request, msg_id):
+        if not request.user.is_authenticated():
+            return http.HttpResponseForbidden()
+
+        try:
+            Message.objects.get(id=msg_id).vote(request.user)
+        except IntegrityError:
+            # 409 Conflict
+            #   used for duplicated entries
+            return http.HttpResponse(status=409)
+
+        # 201 Created
+        return http.HttpResponse(status=201)
+
+    def get(self, request, msg_id):
+        votes = Message.objects.get(id=msg_id).votes_count()
+        return http.HttpResponse(votes, content_type='application/json')
+
+    def delete(self, request, msg_id):
+        if not request.user.is_authenticated():
+            return http.HttpResponseForbidden()
+
+        try:
+            Message.objects.get(id=msg_id).unvote(request.user)
+        except ObjectDoesNotExist:
+            return http.HttpResponseGone()
+
+        # 204 No Content
+        #   empty body, as per RFC2616.
+        #   object deleted
         return http.HttpResponse(status=204)

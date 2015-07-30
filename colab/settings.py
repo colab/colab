@@ -44,10 +44,8 @@ INSTALLED_APPS = (
     'colab.accounts',
 
     # Not standard apps
-    'django_mobile',
     'haystack',
     'hitcounter',
-    'i18n_model',
     'taggit',
     'djcelery',
 
@@ -55,7 +53,6 @@ INSTALLED_APPS = (
     'colab.home',
     'colab.plugins',
     'colab.super_archives',
-    'colab.api',
     'colab.rss',
     'colab.search',
     'colab.tz',
@@ -193,7 +190,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'django_mobile.context_processors.is_mobile',
     'colab.super_archives.context_processors.mailarchive',
     'colab.plugins.context_processors.colab_apps',
     'colab.home.context_processors.robots',
@@ -210,8 +206,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_mobile.middleware.MobileDetectionMiddleware',
-    'django_mobile.middleware.SetFlavourMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
 )
 
