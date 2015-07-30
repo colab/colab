@@ -10,7 +10,7 @@ class ColabProxiedAppConfig(AppConfig):
 
     def __init__(self, app_name, app_module):
         super(ColabProxiedAppConfig, self).__init__(app_name, app_module)
-        self.__import_signals(app_name)
+        self._import_signals(app_name)
         self.signals.register_signal()
 
 

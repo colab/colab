@@ -6,8 +6,8 @@ Objective: Test parameters, and behavior.
 from django.test import TestCase
 from django.apps import apps
 import django
-from colab.signals.tasks import *
-from mock import patch
+from colab.signals.signals import *
+from mock import patch, MagicMock, PropertyMock
 
 
 class SignalsTest(TestCase):
@@ -51,12 +51,13 @@ class SignalsTest(TestCase):
     @patch('colab.signals.signals.Signal.connect')
     def test_connect_already_registered_signal(self, mock):
         sender = 'Test'
-        handling_method = 'Test'
+        handling_method = MagicMock
+        type(handling_method).delay = PropertyMock(return_value='Test')
         signal_name = 'a'
         
         register_signal(self.plugin_name, self.list_signal)
 
-        connect_signal(signal_name, sender, handling_method)
+        connect_signal(signal_name, sender, handling_method.delay)
         args, kwargs = mock.call_args
         
         self.assertEqual(args[0], handling_method)
