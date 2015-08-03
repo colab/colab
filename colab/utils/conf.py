@@ -13,6 +13,14 @@ class InaccessibleSettings(ImproperlyConfigured):
     Check if the file exists and if you have read permissions."""
 
 
+class DatabaseUndefined(ImproperlyConfigured):
+    """Default database is not set.
+
+    When DEBUG is set to True a local sqlite database can be used for
+    developement porposes but otherwise the `default` database must
+    be set."""
+
+
 def _load_py_file(py_path, path):
     original_path = sys.path
 
@@ -94,3 +102,11 @@ def load_colab_apps():
                         COLAB_APPS[app_name][key] = value
 
     return {'COLAB_APPS': COLAB_APPS}
+
+
+def validate_database(database_dict, default_db, debug):
+    db_name = database_dict.get('default', {}).get('NAME')
+    if not debug and db_name == default_db:
+        msg = ('Since DEBUG is set to False DATABASE must be set on '
+               'Colab settings')
+        raise DatabaseUndefined(msg)

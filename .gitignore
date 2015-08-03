@@ -23,6 +23,7 @@ coverage_report/
 
 # Whoosh Index
 tests/whoosh_index/
+colab/whoosh_index/
 
 # Open Build System
 .obs/

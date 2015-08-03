@@ -32,12 +32,17 @@ ALLOWED_HOSTS = [
 # SOCIAL_NETWORK_ENABLED = True
 
 ## Database settings
-DATABASES = {{
-    'default': {{
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'colab.sqlite3',
-    }}
-}}
+##
+##     When DEBUG is True colab will create the DB on
+##     the repository root. In case of production settings
+##     (DEBUG False) the DB settings must be set.
+##
+# DATABASES = {{
+#     'default': {{
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': '/path/to/colab.sqlite3',
+#     }}
+# }}
 
 ## Disable indexing
 ROBOTS_NOINDEX = False
