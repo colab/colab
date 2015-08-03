@@ -9,7 +9,7 @@ from django.conf import settings
 from django.db.models.fields import DateTimeField
 
 from colab.plugins.noosfero.models import (NoosferoArticle, NoosferoCommunity,
-                                          NoosferoCategory)
+                                           NoosferoCategory)
 from colab.plugins.utils.proxy_data_api import ProxyDataAPI
 
 LOGGER = logging.getLogger('colab.plugin.debug')
@@ -76,7 +76,7 @@ class NoosferoDataAPI(ProxyDataAPI):
             self.fill_object_data(element, community)
             community.save()
 
-            if element.has_key('categories'):
+            if 'categories' in element:
                 for category_json in element["categories"]:
                     category = NoosferoCategory.objects.get_or_create(
                         id=category_json["id"], name=category_json["name"])[0]

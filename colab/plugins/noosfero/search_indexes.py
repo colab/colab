@@ -30,8 +30,7 @@ class NoosferoCommunityIndex(indexes.SearchIndex, indexes.Indexable):
     category = indexes.MultiValueField()
 
     def prepare_category(self, obj):
-        return [category.name for category in \
-                obj.categories.all()]
+        return obj.categories.values_list('name', flat=True)
 
     def prepare_icon_name(self, obj):
         return u'file'
@@ -62,8 +61,7 @@ class NoosferoArticleIndex(indexes.SearchIndex, indexes.Indexable):
         return NoosferoArticle
 
     def prepare_category(self, obj):
-        return [category.name for category in \
-                obj.categories.all()]
+        return obj.categories.values_list('name', flat=True)
 
     def prepare_icon_name(self, obj):
         return u'file'
