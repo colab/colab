@@ -53,3 +53,7 @@ LOGGING = {
 }
 
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+from colab.settings import INSTALLED_APPS
+
+INSTALLED_APPS += ('behave_django', )
