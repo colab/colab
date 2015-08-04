@@ -7,8 +7,15 @@ registered_signals = {}
 signal_instances = {}
 
 
-# Fix celery serialization for signal
 def reducer(self):
+    '''
+        In order to send a signal to a celery task, it is necessary to pickle
+        the objects that will be used as parameters. However,
+        django.dispatch.Signal has an instance of threading.Lock, which is an
+        object that cannot be pickled. Therefore, this function changes the
+        pickle behaviour of Signal, making that only the providind_args of
+        Signal to be pickled.
+    '''
     return (Signal, (self.providing_args,))
 Signal.__reduce__ = reducer
 
