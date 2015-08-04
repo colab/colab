@@ -49,16 +49,16 @@ class SignalsTest(TestCase):
     @patch('colab.signals.signals.Signal.connect')
     def test_connect_already_registered_signal(self, mock):
         sender = 'Test'
-        handling_method = MagicMock
+        handling_method = MagicMock()
         type(handling_method).delay = PropertyMock(return_value='Test')
         signal_name = 'a'
 
         register_signal(self.plugin_name, self.list_signal)
 
-        connect_signal(signal_name, sender, handling_method.delay)
+        connect_signal(signal_name, sender, handling_method)
         args, kwargs = mock.call_args
 
-        self.assertEqual(args[0], handling_method)
+        self.assertEqual(args[0], handling_method.delay)
         self.assertEqual(kwargs['sender'], sender)
         self.assertTrue(mock.is_called)
 
