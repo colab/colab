@@ -7,17 +7,18 @@ registered_signals = {}
 signal_instances = {}
 
 
-def reducer(self):
-    '''
+class ColabSignal(Signal):
+    def __reduce__(self):
+        """
+
         In order to send a signal to a celery task, it is necessary to pickle
         the objects that will be used as parameters. However,
         django.dispatch.Signal has an instance of threading.Lock, which is an
         object that cannot be pickled. Therefore, this function changes the
         pickle behaviour of Signal, making that only the providind_args of
-        Signal to be pickled.
-    '''
-    return (Signal, (self.providing_args,))
-Signal.__reduce__ = reducer
+        Signal to be pickled."""
+
+        return (ColabSignal, (self.providing_args,))
 
 
 def register_signal(plugin_name, list_signals):
@@ -28,7 +29,7 @@ def register_signal(plugin_name, list_signals):
         else:
             registered_signals[signal] = []
             registered_signals[signal].append(plugin_name)
-            signal_instances[signal] = Signal()
+            signal_instances[signal] = ColabSignal()
 
 
 def connect_signal(signal_name, sender, handling_method):
