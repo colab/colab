@@ -9,8 +9,8 @@ from django.test import TestCase
 
 from mock import patch, MagicMock, PropertyMock
 
-from colab.signals.signals import (registered_signals, register_signal,
-                                   connect_signal, send)
+from ..signals import registered_signals, register_signal, connect_signal, send
+from ..exceptions import SignalDoesNotExist
 
 
 class SignalsTest(TestCase):
@@ -43,7 +43,7 @@ class SignalsTest(TestCase):
         handling_method = 'Test'
         signal_name = 'Test'
 
-        self.assertRaises(Exception, connect_signal, signal_name,
+        self.assertRaises(SignalDoesNotExist, connect_signal, signal_name,
                           sender, handling_method)
 
     @patch('colab.signals.signals.Signal.connect')
@@ -76,4 +76,4 @@ class SignalsTest(TestCase):
         self.assertTrue(mock.is_called)
 
     def test_send_signal_not_registered(self):
-        self.assertRaises(Exception, send, 'test_signal', 'test')
+        self.assertRaises(SignalDoesNotExist, send, 'test_signal', 'test')

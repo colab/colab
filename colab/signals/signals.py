@@ -1,6 +1,8 @@
 from django.dispatch import Signal
 from colab.signals.celery import app
 
+from .exceptions import SignalDoesNotExist
+
 
 registered_signals = {}
 signal_instances = {}
@@ -28,11 +30,11 @@ def connect_signal(signal_name, sender, handling_method):
         signal_instances[signal_name].connect(handling_method.delay,
                 sender=sender)
     else:
-        raise Exception("Signal does not exist!")
+        raise SignalDoesNotExist
 
 
 def send(signal_name, sender, **kwargs):
     if signal_name in signal_instances:
         signal_instances[signal_name].send(sender=sender, **kwargs)
     else:
-        raise Exception("Signal does not exist!")
+        raise SignalDoesNotExist
