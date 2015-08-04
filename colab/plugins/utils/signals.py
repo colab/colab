@@ -2,7 +2,7 @@
 from abc import abstractmethod
 
 
-class AbstractSignal(object)
+class AbstractSignal(object):
 
     @abstractmethod
     def register_signal(self):

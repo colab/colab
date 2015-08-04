@@ -1,8 +1,7 @@
+
 from django.dispatch import Signal
-from colab.signals.celery import app
 
 from .exceptions import SignalDoesNotExist
-
 
 registered_signals = {}
 signal_instances = {}
@@ -17,7 +16,7 @@ Signal.__reduce__ = reducer
 def register_signal(plugin_name, list_signals):
     for signal in list_signals:
         if signal in registered_signals:
-            if not plugin_name in registered_signals[signal]:
+            if plugin_name not in registered_signals[signal]:
                 registered_signals[signal].append(plugin_name)
         else:
             registered_signals[signal] = []
@@ -28,7 +27,7 @@ def register_signal(plugin_name, list_signals):
 def connect_signal(signal_name, sender, handling_method):
     if signal_name in signal_instances:
         signal_instances[signal_name].connect(handling_method.delay,
-                sender=sender)
+                                              sender=sender)
     else:
         raise SignalDoesNotExist
 

@@ -13,7 +13,6 @@ class ColabProxiedAppConfig(AppConfig):
         self._import_signals(app_name)
         self.signals.register_signal()
 
-
     def _import_signals(self, app_name):
         self.module_path = app_name + '.signals'
         self.module = importlib.import_module(self.module_path)
@@ -26,7 +25,6 @@ class ColabProxiedAppConfig(AppConfig):
                 if module_item != AbstractSignal:
                     self.signals = module_item()
                     break
-
 
     def ready(self):
         self.signals.connect_signal()
