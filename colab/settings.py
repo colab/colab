@@ -47,7 +47,6 @@ INSTALLED_APPS = (
     'haystack',
     'hitcounter',
     'taggit',
-    'djcelery',
 
     # Own apps
     'colab.home',
