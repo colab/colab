@@ -253,8 +253,8 @@ from .utils import conf
 
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
-locals().update(conf.load_colab_apps())
 locals().update(conf.load_py_settings())
+locals().update(conf.load_colab_apps())
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 PROXIED_APPS = {}
