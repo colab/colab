@@ -1,8 +1,13 @@
+
+from abc import abstractmethod
+
+
 class AbstractSignal():
 
+    @abstractmethod
     def register_signal(self):
-        raise(Exception, 'NOT IMPLEMENTED')
+        raise NotImplementedError
 
-
+    @abstractmethod
     def connect_signal(self):
-        raise(Exception, 'NOT IMPLEMENTED')
+        raise NotImplementedError
