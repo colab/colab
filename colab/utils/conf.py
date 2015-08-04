@@ -62,7 +62,6 @@ def load_py_settings():
     # Try to read settings from settings.d
 
     if os.path.exists(settings_dir):
-        return py_settings
         for file_name in os.listdir(settings_dir):
             if file_name.endswith('.py'):
                 file_module = file_name.split('.')[0]
