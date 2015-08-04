@@ -1,4 +1,5 @@
-from colab.plugins.gitlab.celery import app
+
+from colab.celery import app
 
 
 @app.task(bind=True)

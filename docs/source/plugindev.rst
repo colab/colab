@@ -1,5 +1,5 @@
 
-.. _plugin-dev: 
+.. _plugin-dev:
 
 Plugin Developer Documentation
 ====================================
@@ -12,38 +12,6 @@ Signals
 
 In order to configure a plugin to able to listen and send signals using Colab
 signals structure, some steps are required:
-
-* Every plugin that needs to handle signals in colab need to use celery in order
-  to run taks asynchronously. This is due the fact that every time a handling
-  method for a signal is executed, it will be executed as a asynchronously
-  celery tasks, in order to not block other colab tasks. To use celery in the
-  plugin,  file named celery.py needs to be created on the root directory of the
-  plugin. An example file can be seen below:
-
-.. code-block:: python
-
-    m __future__ import absolute_import
-
-    import os
-
-    from celery import Celery
-
-    # set the default Django settings module for the 'celery' program.
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'colab.settings')
-
-    from django.conf import settings
-
-    app = Celery('colab')
-
-    app.config_from_object('django.conf:settings')
-    app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
-
-    app.conf.update(
-        CELERY_RESULT_BACKEND='djcelery.backends.database:DatabaseBackend',
-    )
-    app.conf.update(
-        CELERY_RESULT_BACKEND='djcelery.backends.cache:CacheBackend',
-    )
 
 * You must create signals.py in plugin root directory to implement both,
   registered signals and connect signals.
@@ -66,7 +34,7 @@ signals structure, some steps are required:
   be seen below:
 
 .. code-block:: python
-   # import app from celery.py
+   from colab.celery import app
 
    @app.task(bind=True)
    def handling_method(self, **kwargs):
