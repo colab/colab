@@ -10,11 +10,12 @@ env:
     - DJANGO_SETTINGS_MODULE=tests.settings
 
 install:
-  - pip install coveralls flake8
+  - pip install coveralls flake8 behave behave_django
   - pip install .
 
 script:
   - python setup.py test
+  - colab-admin behave
   - flake8 colab
 
 after_success:

@@ -13,7 +13,6 @@ import django
 import coverage
 
 from django.conf import settings
-from django.core.management import execute_from_command_line
 from django.test.utils import get_runner
 
 
@@ -23,7 +22,6 @@ def runtests():
 
     test_runner = get_runner(settings)
     failures = test_runner(interactive=False, failfast=False).run_tests([])
-    execute_from_command_line(['colab-admin', 'behave'])
     sys.exit(failures)
 
 
