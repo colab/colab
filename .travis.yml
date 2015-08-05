@@ -7,7 +7,7 @@ python:
 
 env:
   global:
-    - DJANGO_SETTINGS_MODULE=tests.settings
+    - COLAB_SETTINGS=tests/colab_settings.py
 
 install:
   - pip install coveralls flake8 behave behave_django
