@@ -24,9 +24,9 @@ class GitlabTest(TestCase):
         pass
 
     def test_data_integrity(self):
-        self.assertEqual(GitlabProject.objects.all().count(), 1)
-        self.assertEqual(GitlabMergeRequest.objects.all().count(), 1)
-        self.assertEqual(GitlabIssue.objects.all().count(), 1)
+        self.assertEqual(GitlabProject.objects.all().count(), 2)
+        self.assertEqual(GitlabMergeRequest.objects.all().count(), 2)
+        self.assertEqual(GitlabIssue.objects.all().count(), 2)
         self.assertEqual(GitlabComment.objects.all().count(), 2)
 
     def test_project_url(self):
@@ -62,9 +62,9 @@ class GitlabTest(TestCase):
         g1.created_at = datetime.now()
         g1.last_activity_at = datetime.now()
         g1.save()
-        
+
         g2 = GitlabProject()
-        g2.id = 1
+        g2.id = 2
         g2.name = "colabinc"
         g2.name_with_namespace = "Software Public / ColabInc"
         g2.path_with_namespace = "softwarepublico/colabinc"
@@ -107,7 +107,7 @@ class GitlabTest(TestCase):
 
         i2 = GitlabIssue()
         i2.id = 2
-        i2.iid = 2
+        i2.iid = 1
         i2.project = g2
         i2.title = "Issue for colab"
         i2.description = "Issue reported to colab"
@@ -115,10 +115,10 @@ class GitlabTest(TestCase):
         i2.state = "Open"
         i2.update_user(self.user.username)
         i2.save()
-        
+
         c1 = GitlabComment()
         c1.id = 1
-        c1.parent_id = mr.iid
+        c1.parent_id = mr1.iid
         c1.project = g1
         c1.body = "Comment to merge request"
         c1.created_at = datetime.now()
