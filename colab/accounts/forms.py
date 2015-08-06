@@ -141,8 +141,9 @@ class UserUpdateForm(UserForm):
 
 class ListsForm(forms.Form):
     LISTS_NAMES = ((
-        listname, u'{} ({})'.format(listname, description)
-    ) for listname, description in mailman.all_lists(description=True))
+        mlist.get('listname'), u'{} ({})'.format(mlist.get('listname'),
+                                                 mlist.get('description'))
+    ) for mlist in mailman.all_lists())
 
     lists = forms.MultipleChoiceField(label=_(u'Mailing lists'),
                                       required=False,

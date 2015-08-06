@@ -73,9 +73,10 @@ def update_subscription(address, lists):
 
 def mailing_lists(**kwargs):
     url = get_url()
+    path = 'lists/'
 
     try:
-        lists = requests.get(url, timeout=TIMEOUT, params=kwargs)
+        lists = requests.get(url + path, timeout=TIMEOUT, params=kwargs)
     except:
         LOGGER.exception('Unable to list mailing lists')
         return []
@@ -98,7 +99,8 @@ def user_lists(user):
     list_set = set()
 
     for email in user.emails.values_list('address', flat=True):
-        list_set.update(mailing_lists(address=email))
+        mlists = mailing_lists(address=email)
+        list_set.update(mlist.get('listname') for mlist in mlists)
 
     return tuple(list_set)
 
