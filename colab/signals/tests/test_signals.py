@@ -3,8 +3,6 @@ Test Signals class.
 Objective: Test parameters, and behavior.
 """
 
-import django
-
 from django.test import TestCase
 
 from mock import patch, MagicMock, PropertyMock
