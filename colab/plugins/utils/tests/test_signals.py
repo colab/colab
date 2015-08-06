@@ -15,6 +15,6 @@ class SignalsTest(TestCase):
         mock_app.return_value = apps_list
         signals._init_signals(method_name)
 
-        app_mock.test.assert_called_with(app_mock)
+        app_mock.test.assert_called_with()
         self.assertEqual(1, app_mock.test.call_count)
         self.assertTrue(app_mock.test.called)

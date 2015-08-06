@@ -11,7 +11,7 @@ def _init_signals(method_name):
         #   won't send it explicitly.
         # If the method doesn't exist we return a dummy function that
         #   won't do anything.
-        getattr(app, method_name, lambda x: None)(app)
+        getattr(app, method_name, lambda: None)()
 
 
 def register_signal():
