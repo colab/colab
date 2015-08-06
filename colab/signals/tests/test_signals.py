@@ -16,7 +16,6 @@ from ..exceptions import SignalDoesNotExist
 class SignalsTest(TestCase):
 
     def setUp(self):
-        django.setup()
         self.list_signal = ['a', 'b', 'c']
         self.plugin_name = 'test_signal'
 
