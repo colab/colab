@@ -9,6 +9,8 @@ Getting Started
 
 Signals
 ----------
+Implement signals in plugins is optional! You may follow this steps only if you
+want to communicate with another plugins.
 
 In order to configure a plugin to able to listen and send signals using Colab
 signals structure, some steps are required:
@@ -42,15 +44,17 @@ signals structure, some steps are required:
 
 * With signals registered and handling method defined you must connect them.
   To do it you must call connect_signal passing signal name, sender and handling
-  method as arguments. This calling must be into ready function in apps.py.
+  method as arguments. These should be implemented on plugin's apps.py. It must
+  be said that the plugin app class must extend ColabProxiedAppConfig. An
+  example of this configuration can be seen below:
 
 
 .. code-block:: python
-   from colab.plugins.utils.signals import AbstractSignal
+   from colab.plugins.utils.apps import ColabProxiedAppConfig
    from colab.signals.signals import register_signal, connect_signal
    from colab.plugins.PLUGIN.tasks import HANDLING_METHOD
 
-   class PluginSignals(AbstractSignal):
+   class PluginApps(ColabProxiedAppConfig):
         short_name = PLUGIN_NAME
         signals_list = [SIGNAL1, SIGNAL2]
 
@@ -69,6 +73,8 @@ signals structure, some steps are required:
   \*\*kwargs. As you can see below:
 
 .. code-block:: python
+   from colab.signals.signals import send
+
    send(signal_name, sender)
 
 * If you want to run celery manually to make some tests, you should execute:
