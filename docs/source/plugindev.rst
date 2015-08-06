@@ -15,20 +15,18 @@ want to communicate with another plugins.
 In order to configure a plugin to able to listen and send signals using Colab
 signals structure, some steps are required:
 
-* You must create signals.py in plugin root directory to implement both,
-  registered signals and connect signals.
-* In the signals.py file it is necessary to declare a list variable containing all the
-  signals that the plugin will dispatch. It is suggested to name the variable
-  "registered_signals", but that nomenclature not strictly necessary.
+* In the apps.py file it is necessary to declare a list variable containing all
+  the signals that the plugin will dispatch. It is suggested to name the
+  variable "registered_signals", but that nomenclature not strictly necessary.
 * It is also necessary to declare a variable containing the name of the plugin
   that will send the signal. It must be said that the name of the plugin cannot
   contain any special character, such as dot or comma. It is suggested to name
   the variable "short_name", but that nomenclature is not strictly
   necessary.
-* In order to actually register the signals, it is necessary to implement the method
-  register_signal, which require the name of the plugin that is registering the
-  signals and a list of signals to be registered as parameters. You must not
-  call this method nowhere.
+* In order to actually register the signals, it is necessary to implement the
+  method register_signal, which require the name of the plugin that is
+  registering the signals and a list of signals to be registered as parameters.
+  You must not call this method nowhere.
 * In order to listen for a given signal, it is required to create a handling
   method. This method should be located at a file named tasks.py in the same
   directory as the plugins files. It also must be said that this method need to
@@ -68,8 +66,8 @@ signals structure, some steps are required:
               HANDLING_METHOD)
 
 
-* To send a broadcast signal you must call send method anywhere passing signal name
-  and sender as arguments. If necessary you can pass another parameters in
+* To send a broadcast signal you must call send method anywhere passing signal
+  name and sender as arguments. If necessary you can pass another parameters in
   \*\*kwargs. As you can see below:
 
 .. code-block:: python
