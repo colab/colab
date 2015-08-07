@@ -27,15 +27,15 @@ MAILMAN_MSGS = {
 }
 
 
-def get_url(listname=None):
+def get_url(path, listname=None):
+    url = urlparse.urljoin(settings.MAILMAN_API_URL, path)
     if listname:
-        return urlparse.urljoin(settings.MAILMAN_API_URL, listname)
-
-    return settings.MAILMAN_API_URL
+        return urlparse.urljoin(url, listname)
+    return url
 
 
 def subscribe(listname, address):
-    url = get_url(listname)
+    url = get_url('subscribe/', listname=listname)
     try:
         result = requests.put(url, timeout=TIMEOUT, data={'address': address})
         msg_type, message = MAILMAN_MSGS[result.json()]
@@ -46,7 +46,7 @@ def subscribe(listname, address):
 
 
 def unsubscribe(listname, address):
-    url = get_url(listname)
+    url = get_url('subscribe/', listname)
     try:
         result = requests.delete(url, timeout=TIMEOUT, data={'address': address})
         msg_type, message = MAILMAN_MSGS[result.json()]
@@ -57,7 +57,7 @@ def unsubscribe(listname, address):
 
 
 def update_subscription(address, lists):
-    current_lists = mailing_lists(address=address)
+    current_lists = mailing_lists(address=address, names_only=True)
     info_messages = []
 
     for maillist in current_lists:
@@ -72,16 +72,21 @@ def update_subscription(address, lists):
 
 
 def mailing_lists(**kwargs):
-    url = get_url()
-    path = 'lists/'
+    url = get_url('lists/')
 
     try:
-        lists = requests.get(url + path, timeout=TIMEOUT, params=kwargs)
+        lists = requests.get(url, timeout=TIMEOUT, params=kwargs)
     except:
         LOGGER.exception('Unable to list mailing lists')
         return []
 
-    return lists.json()
+    if 'names_only' in kwargs and kwargs['names_only']:
+        names_only = []
+        for l in lists.json():
+            names_only.append(l['listname'])
+        return names_only
+    else:
+        return lists.json()
 
 
 def is_private_list(name):
@@ -115,7 +120,7 @@ def get_list_description(listname, lists=None):
 
 
 def list_users(listname):
-    url = get_url(listname)
+    url = get_url('members/', listname)
 
     params = {}
 
