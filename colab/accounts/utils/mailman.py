@@ -80,7 +80,7 @@ def mailing_lists(**kwargs):
         LOGGER.exception('Unable to list mailing lists')
         return []
 
-    if 'names_only' in kwargs and kwargs['names_only']:
+    if kwargs.get('names_only'):
         names_only = []
         for l in lists.json():
             names_only.append(l['listname'])
