@@ -73,9 +73,9 @@ Add a new plugin
 
 - Create the plugin configuration for the application
 
-  - create file: [plugin_name].py
-
   - on folder: /etc/colab/plugins.d/
+
+  - create file: [plugin_name].py
 
 Use this template for the plugin configuration file
 
@@ -87,12 +87,16 @@ Use this template for the plugin configuration file
     name = 'colab.plugins.[plugin_name]'
 
     upstream = 'http://[host_of_application]/[relative_url_root]/'
+
+    # The private_token is optional
+    # It is used to access the application data being coupled to colab
+    # It is recommended to use the provate_token an admin of the application
     private_token = '[plugin_private_token_for_data_import]'
 
     urls = {
-        'include': 'colab.plugins.[plugin_name].urls',
+        'include': '[plugin_module_path].urls',
         'namespace': '[plugin_name]',
-        'prefix': '[application_prefix]',
+        'prefix': '[application_prefix]/', # Exemple: http://site.com/[application_prefix]/
     }
 
     menu_title = '[menu_title_of_html]'
