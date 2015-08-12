@@ -112,11 +112,12 @@ def user_lists(user):
 
 def get_list_description(listname, lists=None):
     if not lists:
-        lists = dict(all_lists(description=True))
-    elif not isinstance(lists, dict):
-        lists = dict(lists)
+        lists = all_lists()
 
-    return lists.get(listname)
+    desc = "".join(mlist.get('description') for mlist in lists\
+            if isinstance(mlist, dict) and mlist.get('listname') == listname)
+
+    return desc
 
 
 def list_users(listname):
