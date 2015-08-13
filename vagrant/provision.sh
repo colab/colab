@@ -36,7 +36,7 @@ sudo mkdir -p /etc/colab
 sudo chown vagrant:vagrant /etc/colab
 
 if [ ! -s /etc/colab/settings.py ]; then
-    colab-init-config > /etc/colab/settings.py
+    colab-admin initconfig > /etc/colab/settings.py
 fi
 
 colab-admin migrate

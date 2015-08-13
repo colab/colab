@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'taggit',
 
     # Own apps
+    'colab',
     'colab.home',
     'colab.plugins',
     'colab.super_archives',
