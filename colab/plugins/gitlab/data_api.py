@@ -5,23 +5,22 @@ import logging
 
 from dateutil.parser import parse
 
-from django.conf import settings
 from django.db.models.fields import DateTimeField
 
 from colab.plugins.gitlab.models import (GitlabProject, GitlabMergeRequest,
                                          GitlabComment, GitlabIssue)
 from colab.plugins.utils.proxy_data_api import ProxyDataAPI
 
+
 LOGGER = logging.getLogger('colab.plugin.gitlab')
 
 
-class GitlabDataAPI(ProxyDataAPI):
+class GitlabDataImporter(ProxyDataAPI):
+    app_label = 'gitlab'
 
     def get_request_url(self, path, **kwargs):
-        proxy_config = settings.COLAB_APPS.get(self.app_label, {})
-
-        upstream = proxy_config.get('upstream')
-        kwargs['private_token'] = proxy_config.get('private_token')
+        upstream = self.config.get('upstream')
+        kwargs['private_token'] = self.config.get('private_token')
         params = urllib.urlencode(kwargs)
 
         if upstream[-1] == '/':
@@ -179,27 +178,38 @@ class GitlabDataAPI(ProxyDataAPI):
 
         return all_comments
 
+
+class GitlabProjectImporter(GitlabDataImporter):
+
     def fetch_data(self):
         LOGGER.info("Importing Projects")
         projects = self.fetch_projects()
         for datum in projects:
             datum.save()
 
+
+class GitlabMergeRequestImporter(GitlabDataImporter):
+
+    def fetch_data(self):
         LOGGER.info("Importing Merge Requests")
         merge_request_list = self.fetch_merge_request(projects)
         for datum in merge_request_list:
             datum.save()
 
+
+class GitlabIssueImporter(GitlabDataImporter):
+
+    def fetch_data(self):
         LOGGER.info("Importing Issues")
         issue_list = self.fetch_issue(projects)
         for datum in issue_list:
             datum.save()
 
+
+class GitlabCommentImporter(GitlabDataImporter):
+
+    def fetch_data(self):
         LOGGER.info("Importing Comments")
         comments_list = self.fetch_comments()
         for datum in comments_list:
             datum.save()
-
-    @property
-    def app_label(self):
-        return 'gitlab'
