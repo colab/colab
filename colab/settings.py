@@ -258,7 +258,6 @@ locals().update(conf.load_py_settings())
 locals().update(conf.load_colab_apps())
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
-PROXIED_APPS = {}
 
 for app_name, app in COLAB_APPS.items():
     if 'dependencies' in app:
@@ -268,9 +267,6 @@ for app_name, app in COLAB_APPS.items():
 
     if app_name not in INSTALLED_APPS:
         INSTALLED_APPS += (app_name,)
-
-    if app.get('upstream'):
-        PROXIED_APPS[app_name.split('.')[-1]] = app
 
     if 'middlewares' in app:
         for middleware in app.get('middlewares'):

@@ -18,7 +18,7 @@ LOGGER = logging.getLogger('colab.plugin.debug')
 class NoosferoDataAPI(ProxyDataAPI):
 
     def get_request_url(self, path, **kwargs):
-        proxy_config = settings.PROXIED_APPS.get(self.app_label, {})
+        proxy_config = settings.COLAB_APPS.get(self.app_label, {})
 
         upstream = proxy_config.get('upstream')
         kwargs['private_token'] = proxy_config.get('private_token')

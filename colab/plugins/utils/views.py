@@ -13,7 +13,7 @@ class ColabProxyView(DiazoProxyView):
 
     @property
     def upstream(self):
-        proxy_config = settings.PROXIED_APPS.get(self.app_label, {})
+        proxy_config = settings.COLAB_APPS.get(self.app_label, {})
         return proxy_config.get('upstream')
 
     @property
