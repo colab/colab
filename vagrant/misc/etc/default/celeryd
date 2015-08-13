@@ -5,7 +5,7 @@ CELERYD_NODES="worker1"
 CELERY_BIN="/home/vagrant/.virtualenvs/colab/bin/celery"
 
 # comment out this line if you don't use an app
-CELERY_APP="colab"
+CELERY_APP="colab.celery:app"
 
 # Where to chdir at start.
 CELERYD_CHDIR="/vagrant/"
