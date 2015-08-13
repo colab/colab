@@ -29,7 +29,8 @@ def register_tasks():
 
             if callable(getattr(item, 'fetch_data', None)):
                 instance = item()
-                task = app.task(bind=True)(instance.fetch_data)
+                task_name = '{}.{}'.format(module.__name__, item_name)
+                task = app.task(name=task_name, bind=True)(instance.fetch_data)
                 TASKS.add(task)
 
     return TASKS
