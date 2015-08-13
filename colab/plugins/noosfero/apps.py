@@ -1,7 +1,7 @@
 
-from ..utils.apps import ColabProxiedAppConfig
+from ..utils.apps import ColabPluginAppConfig
 
 
-class ProxyNoosferoAppConfig(ColabProxiedAppConfig):
+class ProxyNoosferoAppConfig(ColabPluginAppConfig):
     name = 'colab.plugins.noosfero'
     verbose_name = 'Noosfero Proxy'

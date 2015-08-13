@@ -43,16 +43,16 @@ signals structure, some steps are required:
 * With signals registered and handling method defined you must connect them.
   To do it you must call connect_signal passing signal name, sender and handling
   method as arguments. These should be implemented on plugin's apps.py. It must
-  be said that the plugin app class must extend ColabProxiedAppConfig. An
+  be said that the plugin app class must extend ColabPluginAppConfig. An
   example of this configuration can be seen below:
 
 
 .. code-block:: python
-   from colab.plugins.utils.apps import ColabProxiedAppConfig
+   from colab.plugins.utils.apps import ColabPluginAppConfig
    from colab.signals.signals import register_signal, connect_signal
    from colab.plugins.PLUGIN.tasks import HANDLING_METHOD
 
-   class PluginApps(ColabProxiedAppConfig):
+   class PluginApps(ColabPluginAppConfig):
         short_name = PLUGIN_NAME
         signals_list = [SIGNAL1, SIGNAL2]
 
