@@ -19,7 +19,7 @@ def register_tasks():
 
         try:
             module = importlib.import_module('{}.data_api'.format(app_name))
-        except ImportError as e:
+        except ImportError:
             continue
 
         for item_name in dir(module):

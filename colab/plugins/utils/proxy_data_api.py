@@ -1,6 +1,7 @@
 
 import abc
 
+
 class ProxyDataAPI(object):
 
     @abc.abstractmethod
