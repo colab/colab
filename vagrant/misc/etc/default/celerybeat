@@ -15,7 +15,7 @@ CELERTBEAT_LOG_FILE="/var/log/celery/beat.log"
 CELERYBEAT_PID_FILE="/var/run/celery/beat.pid"
 
 CELERYBEAT_USER="vagrant"
-CELERYBEAT_GROUP="CELERYBEAT_GROUP"
+CELERYBEAT_GROUP="vagrant"
 
 # If enabled pid and log directories will be created if missing,
 # and owned by the userid/group configured.

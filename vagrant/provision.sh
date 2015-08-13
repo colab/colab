@@ -45,6 +45,9 @@ colab-admin loaddata /vagrant/tests/test_data.json
 # Init.d Celery files
 sudo cp $basedir/vagrant/misc/etc/init.d/celery* /etc/init.d/
 sudo cp $basedir/vagrant/misc/etc/default/celery* /etc/default/
+sudo service celeryd stop || echo
+sudo service celerybeat stop || echo
+sleep 2
 sudo service celeryd start
 sudo service celerybeat start
 
