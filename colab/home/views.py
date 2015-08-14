@@ -10,9 +10,10 @@ from colab.accounts.models import User
 
 def get_user_threads(threads, lists_for_user, key):
     visible_threads = []
+    listnames_for_user = mailman.extract_listname_from_list(lists_for_user)
     for t in threads:
         if not t.mailinglist.is_private or \
-           t.mailinglist.name in lists_for_user:
+           t.mailinglist.name in listnames_for_user:
                 visible_threads.append(key(t))
 
     return visible_threads

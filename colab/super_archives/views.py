@@ -47,8 +47,8 @@ class ThreadView(View):
                 user = User.objects.get(username=request.user)
                 emails = user.emails.values_list('address', flat=True)
                 lists_for_user = mailman.get_user_mailinglists(user)
-                listnames_for_user = [mlist.get("listname")
-                                      for mlist in lists_for_user]
+                listnames_for_user = mailman.extract_listname_from_list(
+                    lists_for_user)
                 if thread.mailinglist.name not in listnames_for_user:
                     raise PermissionDenied
 
@@ -151,13 +151,16 @@ class ThreadDashboardView(View):
 
         context['lists'] = []
 
-        lists_for_user = []
+        listnames_for_user = []
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user)
             lists_for_user = mailman.get_user_mailinglists(user)
+            listnames_for_user = mailman.extract_listname_from_list(
+                lists_for_user)
 
         for list_ in MailingList.objects.order_by('name'):
-            if list_.name not in all_privates or list_.name in lists_for_user:
+            if list_.name not in all_privates\
+                    or list_.name in listnames_for_user:
                 context['lists'].append((
                     list_.name,
                     mailman.get_list_description(list_.name),

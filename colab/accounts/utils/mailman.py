@@ -117,8 +117,9 @@ def get_list_description(listname, lists=None):
     if not lists:
         lists = all_lists()
 
-    desc = "".join(mlist.get('description') for mlist in lists\
-            if isinstance(mlist, dict) and mlist.get('listname') == listname)
+    desc = "".join(mlist.get('description') for mlist in lists
+                   if isinstance(mlist, dict) and
+                   mlist.get('listname') == listname)
 
     return desc
 
@@ -147,3 +148,10 @@ def get_user_mailinglists(user):
         lists_for_user.extend(mailing_lists(address=email))
 
     return lists_for_user
+
+
+def extract_listname_from_list(lists):
+    try:
+        return [mlist.get('listname') for mlist in lists]
+    except ValueError:
+        return []
