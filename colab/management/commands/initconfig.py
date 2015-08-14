@@ -80,7 +80,7 @@ LOGGING = {{
 # from colab.plugins.utils.menu import colab_url_factory
 #
 # name = 'colab.plugins.gitlab'
-# verbose_name = 'Gitlab Proxy'
+# verbose_name = 'Gitlab Plugin'
 #
 # upstream = 'localhost'
 # #middlewares = []

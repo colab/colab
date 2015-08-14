@@ -4,7 +4,7 @@ import abc
 from django.conf import settings
 
 
-class ProxyDataAPI(object):
+class PluginDataImporter(object):
 
     def __init__(self):
         self.config = settings.COLAB_APPS.get(self.app_label, {})

@@ -4,7 +4,7 @@ from colab.plugins.gitlab.tasks import handling_method
 from colab.signals.signals import register_signal, connect_signal
 
 
-class ProxyGitlabAppConfig(ColabPluginAppConfig):
+class GitlabPluginAppConfig(ColabPluginAppConfig):
     name = 'colab.plugins.gitlab'
     verbose_name = 'Gitlab Plugin'
     short_name = 'gitlab'

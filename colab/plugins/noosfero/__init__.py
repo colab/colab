@@ -1,3 +1,3 @@
 
 
-default_app_config = 'colab.plugins.noosfero.apps.ProxyNoosferoAppConfig'
+default_app_config = 'colab.plugins.noosfero.apps.NoosferoPluginAppConfig'

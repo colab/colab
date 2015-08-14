@@ -1,7 +1,7 @@
 
 from django.conf import settings
 
-from ..utils.views import ColabProxyView
+from colab.plugins.views import ColabProxyView
 
 
 class NoosferoProxyView(ColabProxyView):

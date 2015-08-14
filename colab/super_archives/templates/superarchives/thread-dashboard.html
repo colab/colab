@@ -12,9 +12,6 @@
       <h3><b>{{ listname|title|lower }} {% if description %} ({{ description }}){% endif %}</b></h3>
       <div class="btn-group btn-group-sm">
         <a href="#" class="btn btn-default" disabled="disabled">{% blocktrans %}{{ number_of_users }} members{% endblocktrans %}</a>
-        {% if proxy.trac %}
-          <a href="/wiki/grupos/{{ listname }}" class="btn btn-default">Wiki</a>
-        {% endif %}
       </div>
       <hr/>
 

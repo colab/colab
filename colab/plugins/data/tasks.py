@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 
 import importlib
+import logging
 
 from django.conf import settings
 
 from colab.celery import app
-from proxy_data_api import ProxyDataAPI
 
+from . import PluginDataImporter
 
+LOGGER = logging.getLogger('colab.plugins.data')
 TASKS = set()
 
 
@@ -17,14 +19,15 @@ def register_tasks():
 
     for app_name in settings.INSTALLED_APPS:
 
+        module_name = '{}.data_importer'.format(app_name)
         try:
-            module = importlib.import_module('{}.data_api'.format(app_name))
+            module = importlib.import_module(module_name)
         except ImportError:
             continue
 
         for item_name in dir(module):
             item = getattr(module, item_name)
-            if item is ProxyDataAPI:
+            if item is PluginDataImporter:
                 continue
 
             if callable(getattr(item, 'fetch_data', None)):
@@ -32,7 +35,9 @@ def register_tasks():
                 task_name = '{}.{}'.format(module.__name__, item_name)
                 task = app.task(name=task_name, bind=True)(instance.fetch_data)
                 TASKS.add(task)
+                LOGGER.debug('Registered task: %s', task_name)
 
+    LOGGER.debug(TASKS)
     return TASKS
 
 

@@ -6,16 +6,16 @@ import logging
 from dateutil.parser import parse
 
 from django.db.models.fields import DateTimeField
+from colab.plugins.data import PluginDataImporter
 
-from colab.plugins.gitlab.models import (GitlabProject, GitlabMergeRequest,
-                                         GitlabComment, GitlabIssue)
-from colab.plugins.utils.proxy_data_api import ProxyDataAPI
+from .models import (GitlabProject, GitlabMergeRequest,
+                     GitlabComment, GitlabIssue)
 
 
 LOGGER = logging.getLogger('colab.plugin.gitlab')
 
 
-class GitlabDataImporter(ProxyDataAPI):
+class GitlabDataImporter(PluginDataImporter):
     app_label = 'gitlab'
 
     def get_request_url(self, path, **kwargs):
@@ -192,6 +192,7 @@ class GitlabMergeRequestImporter(GitlabDataImporter):
 
     def fetch_data(self):
         LOGGER.info("Importing Merge Requests")
+        projects = GitlabProject.objects.all()
         merge_request_list = self.fetch_merge_request(projects)
         for datum in merge_request_list:
             datum.save()
@@ -201,6 +202,7 @@ class GitlabIssueImporter(GitlabDataImporter):
 
     def fetch_data(self):
         LOGGER.info("Importing Issues")
+        projects = GitlabProject.objects.all()
         issue_list = self.fetch_issue(projects)
         for datum in issue_list:
             datum.save()

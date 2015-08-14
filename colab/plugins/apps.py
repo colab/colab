@@ -1,7 +1,7 @@
 
 from django.apps import AppConfig
 
-from .utils.data import register_tasks
+from .data import register_tasks
 from .utils.signals import connect_signal, register_signal
 
 

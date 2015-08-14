@@ -5,23 +5,20 @@ import logging
 
 from dateutil.parser import parse
 
-from django.conf import settings
 from django.db.models.fields import DateTimeField
 
-from colab.plugins.noosfero.models import (NoosferoArticle, NoosferoCommunity,
-                                           NoosferoCategory)
-from colab.plugins.utils.proxy_data_api import ProxyDataAPI
+from colab.plugins.data import PluginDataImporter
+
+from .models import NoosferoArticle, NoosferoCommunity, NoosferoCategory
 
 LOGGER = logging.getLogger('colab.plugin.debug')
 
 
-class NoosferoDataAPI(ProxyDataAPI):
+class NoosferoDataImporter(PluginDataImporter):
 
     def get_request_url(self, path, **kwargs):
-        proxy_config = settings.COLAB_APPS.get(self.app_label, {})
-
-        upstream = proxy_config.get('upstream')
-        kwargs['private_token'] = proxy_config.get('private_token')
+        upstream = self.config.get('upstream')
+        kwargs['private_token'] = self.config.get('private_token')
         params = urllib.urlencode(kwargs)
 
         if upstream[-1] == '/':

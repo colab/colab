@@ -11,10 +11,11 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def plugins_menu(context):
 
+    # TODO: Cache has to take language into account
     if context['user'].is_authenticated():
-        cache_key = 'colab-proxy-menu-authenticated'
+        cache_key = 'colab-plugin-menu-authenticated'
     else:
-        cache_key = 'colab-proxy-menu-anonymous'
+        cache_key = 'colab-plugin-menu-anonymous'
 
     lang = get_language()
     cache_key += '-{}'.format(lang)
