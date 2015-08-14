@@ -7,8 +7,6 @@ from django.conf import settings
 
 from colab.celery import app
 
-from . import PluginDataImporter
-
 LOGGER = logging.getLogger('colab.plugins.data')
 TASKS = set()
 
