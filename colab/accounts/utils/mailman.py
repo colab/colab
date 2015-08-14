@@ -91,7 +91,10 @@ def mailing_lists(**kwargs):
 
 def is_private_list(name):
     try:
-        return dict(all_lists(private=True))[name]
+        privacy = {}
+        privacy.update({mlist.get('listname'): mlist.get('archive_private')
+                        for mlist in all_lists()})
+        return privacy[name]
     except KeyError:
         return []
 
