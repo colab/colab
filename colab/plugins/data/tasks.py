@@ -27,10 +27,10 @@ def register_tasks():
 
         for item_name in dir(module):
             item = getattr(module, item_name)
-            if item is PluginDataImporter:
-                continue
 
             if callable(getattr(item, 'fetch_data', None)):
+                if getattr(item.fetch_data, 'is_abstract', False):
+                    continue
                 instance = item()
                 task_name = '{}.{}'.format(module.__name__, item_name)
                 task = app.task(name=task_name, bind=True)(instance.fetch_data)

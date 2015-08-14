@@ -11,4 +11,9 @@ class PluginDataImporter(object):
 
     @abc.abstractmethod
     def fetch_data(self):
-        raise NotImplementedError('fetchData not yet implemented')
+        raise NotImplementedError
+    fetch_data.is_abstract = True
+
+    @abc.abstractmethod
+    def app_label(self):
+        raise NotImplementedError
