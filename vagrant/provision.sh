@@ -46,3 +46,5 @@ colab-admin loaddata /vagrant/tests/test_data.json
 sudo cp $basedir/vagrant/misc/etc/init.d/celeryd /etc/init.d/
 sudo cp $basedir/vagrant/misc/etc/default/celeryd /etc/default/
 sudo service celeryd start
+
+colab-admin rebuild_index --noinput
