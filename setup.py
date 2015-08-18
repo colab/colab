@@ -16,7 +16,7 @@ REQUIREMENTS = [
     'diazo>=1.0.5',
 
     # Async Signals
-    'django-celery==3.1.16',
+    'celery>=3.1',
 
     ### Move out of colab (as plugins):
 

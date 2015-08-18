@@ -1,10 +1,16 @@
 
 import os
 import sys
+import logging
 import importlib
 import warnings
 
 from django.core.exceptions import ImproperlyConfigured
+
+logger = logging.getLogger('colab.init')
+if os.environ.get('COLAB_DEBUG'):
+    logger.addHandler(logging.StreamHandler())
+    logger.setLevel(logging.INFO)
 
 
 class InaccessibleSettings(ImproperlyConfigured):
@@ -48,10 +54,11 @@ def _load_py_file(py_path, path):
 
 
 def load_py_settings():
-    settings_dir = '/etc/colab/settings.d'
     settings_file = os.getenv('COLAB_SETTINGS', '/etc/colab/settings.py')
     settings_module = settings_file.split('.')[-2].split('/')[-1]
     py_path = "/".join(settings_file.split('/')[:-1])
+
+    logger.info('Settings file: %s', settings_file)
 
     if not os.path.exists(py_path):
         msg = "The py file {} does not exist".format(py_path)
@@ -59,46 +66,59 @@ def load_py_settings():
 
     py_settings = _load_py_file(settings_module, py_path)
 
-    # Try to read settings from settings.d
+    # Read settings from settings.d
+    settings_dir = '/etc/colab/settings.d'
+    logger.info('Settings directory: %s', settings_dir)
 
-    if os.path.exists(settings_dir):
-        for file_name in os.listdir(settings_dir):
-            if file_name.endswith('.py'):
-                file_module = file_name.split('.')[0]
-                py_settings_d = _load_py_file(file_module, settings_dir)
-                py_settings.update(py_settings_d)
+    if not os.path.exists(settings_dir):
+        return py_settings
+
+    for file_name in os.listdir(settings_dir):
+        if not file_name.endswith('.py'):
+            continue
+
+        file_module = file_name.split('.')[0]
+        py_settings_d = _load_py_file(file_module, settings_dir)
+        py_settings.update(py_settings_d)
+        logger.info('Loaded %s/%s', settings_dir, file_name)
 
     return py_settings
 
 
 def load_colab_apps():
     plugins_dir = os.getenv('COLAB_PLUGINS', '/etc/colab/plugins.d/')
+    logger.info('Plugin settings directory: %s', plugins_dir)
 
     COLAB_APPS = {}
 
     # Try to read settings from plugins.d
-    if os.path.exists(plugins_dir):
-        for file_name in os.listdir(plugins_dir):
-            if file_name.endswith('.py'):
-                file_module = file_name.split('.')[0]
-                py_settings_d = _load_py_file(file_module, plugins_dir)
-                fields = ['verbose_name', 'upstream', 'urls',
-                          'menu_urls', 'middlewares', 'dependencies',
-                          'context_processors', 'private_token']
+    if not os.path.exists(plugins_dir):
+        return {'COLAB_APPS': COLAB_APPS}
 
-                app_name = py_settings_d.get('name')
-                if not app_name:
-                    warnings.warn("Plugin missing name variable")
-                    continue
+    for file_name in os.listdir(plugins_dir):
+        if not file_name.endswith('.py'):
+            continue
 
-                COLAB_APPS[app_name] = {}
-                COLAB_APPS[app_name]['menu_title'] = \
-                    py_settings_d.get('menu_title')
+        file_module = file_name.split('.')[0]
+        py_settings_d = _load_py_file(file_module, plugins_dir)
+        logger.info('Loaded plugin settings: %s/%s', plugins_dir, file_name)
 
-                for key in fields:
-                    value = py_settings_d.get(key)
-                    if value:
-                        COLAB_APPS[app_name][key] = value
+        app_name = py_settings_d.get('name')
+        if not app_name:
+            warnings.warn("Plugin missing name variable")
+            continue
+
+        COLAB_APPS[app_name] = {}
+        COLAB_APPS[app_name]['menu_title'] = py_settings_d.get('menu_title')
+
+        fields = ['verbose_name', 'upstream', 'urls',
+                  'menu_urls', 'middlewares', 'dependencies',
+                  'context_processors', 'private_token']
+
+        for key in fields:
+            value = py_settings_d.get(key)
+            if value:
+                COLAB_APPS[app_name][key] = value
 
     return {'COLAB_APPS': COLAB_APPS}
 
