@@ -22,9 +22,9 @@ yum install -y epel-release
 
 yum -y groupinstall "Development tools"
 
-yum install -y git unzip gettext libxml2-devel libxslt-devel openssl-devel libffi-devel python-devel python-pip python-virtualenvwrapper rabbitmq-server
+yum install -y git unzip gettext libxml2-devel libxslt-devel openssl-devel libffi-devel python-devel python-pip python-virtualenvwrapper redis-server
 
 
 ### Init Rabbitmq
-chkconfig rabbitmq-server on
-systemctl start rabbitmq-server
+chkconfig redis-server on
+systemctl start redis-server

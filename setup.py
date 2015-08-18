@@ -16,7 +16,7 @@ REQUIREMENTS = [
     'diazo>=1.0.5',
 
     # Async Signals
-    'celery>=3.1',
+    'celery[redis]>=3.1',
 
     ### Move out of colab (as plugins):
 
