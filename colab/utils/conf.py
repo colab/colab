@@ -10,7 +10,7 @@ from django.core.exceptions import ImproperlyConfigured
 logger = logging.getLogger('colab.init')
 if os.environ.get('COLAB_DEBUG'):
     logger.addHandler(logging.StreamHandler())
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)
 
 
 class InaccessibleSettings(ImproperlyConfigured):
@@ -106,6 +106,11 @@ def load_colab_apps():
         app_name = py_settings_d.get('name')
         if not app_name:
             warnings.warn("Plugin missing name variable")
+            continue
+        try:
+            importlib.import_module(app_name)
+        except ImportError:
+            logger.warning("Cannot import plugin %s (%s)", app_name, file_name)
             continue
 
         COLAB_APPS[app_name] = {}
