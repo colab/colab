@@ -75,18 +75,20 @@ def mailing_lists(**kwargs):
     url = get_url('lists/')
 
     try:
-        lists = requests.get(url, timeout=TIMEOUT, params=kwargs)
+        lists = requests.get(url, timeout=TIMEOUT, params=kwargs).json()
+        if not isinstance(lists, (list, tuple)):
+            raise
     except:
         LOGGER.exception('Unable to list mailing lists')
         return []
 
     if kwargs.get('names_only'):
         names_only = []
-        for l in lists.json():
+        for l in lists:
             names_only.append(l['listname'])
         return names_only
     else:
-        return lists.json()
+        return lists
 
 
 def is_private_list(name):
