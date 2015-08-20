@@ -41,10 +41,14 @@ class EmailAddressValidation(models.Model):
     def create(cls, address, user):
         email_address_validation = cls.objects.create(address=address,
                                                       user=user)
+        return email_address_validation
+
+    @classmethod
+    def verify_email(cls, email_address_validation, verification_url):
         email.send_verification_email(email_address_validation.address,
                                       email_address_validation.user,
-                                      email_address_validation.validation_key)
-        return email_address_validation
+                                      email_address_validation.validation_key,
+                                      verification_url)
 
 
 class EmailAddress(models.Model):

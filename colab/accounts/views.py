@@ -103,7 +103,12 @@ def signup(request):
 
     user.is_active = False
     user.save()
-    EmailAddressValidation.create(user.email, user)
+    email = EmailAddressValidation.create(user.email, user)
+
+    location = reverse('archive_email_view',
+                       kwargs={'key': email.validation_key})
+    verification_url = request.build_absolute_uri(location)
+    EmailAddressValidation.verify_email(email, verification_url)
 
     # Check if the user's email have been used previously
     #   in the mainling lists to link the user to old messages

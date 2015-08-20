@@ -9,6 +9,7 @@ import requests
 from django import http
 from django.conf import settings
 from django.contrib import messages
+from django.core.urlresolvers import reverse
 from django.db import IntegrityError
 from django.views.generic import View
 from django.utils.translation import ugettext as _
@@ -177,7 +178,7 @@ class EmailView(View):
         except EmailAddressValidation.DoesNotExist:
             messages.error(request, _('The email address you are trying to '
                                       'verify either has already been verified'
-                                      'or does not exist.'))
+                                      ' or does not exist.'))
             return redirect('/')
 
         try:
@@ -289,8 +290,11 @@ class EmailValidationView(View):
             raise http.Http404
 
         try:
-            send_verification_email(email_addr, email.user,
-                                    email.validation_key)
+            location = reverse('archive_email_view',
+                               kwargs={'key': email.validation_key})
+            verification_url = request.build_absolute_uri(location)
+            send_verification_email(request, email_addr, email.user,
+                                    email.validation_key, verification_url)
         except smtplib.SMTPException:
             logging.exception('Error sending validation email')
             return http.HttpResponseServerError()
