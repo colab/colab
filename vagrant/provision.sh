@@ -36,15 +36,19 @@ sudo mkdir -p /etc/colab
 sudo chown vagrant:vagrant /etc/colab
 
 if [ ! -s /etc/colab/settings.py ]; then
-    colab-init-config > /etc/colab/settings.py
+    colab-admin initconfig > /etc/colab/settings.py
 fi
 
 colab-admin migrate
 colab-admin loaddata /vagrant/tests/test_data.json
 
 # Init.d Celery files
-sudo cp $basedir/vagrant/misc/etc/init.d/celeryd /etc/init.d/
-sudo cp $basedir/vagrant/misc/etc/default/celeryd /etc/default/
+sudo cp $basedir/vagrant/misc/etc/init.d/celery* /etc/init.d/
+sudo cp $basedir/vagrant/misc/etc/default/celery* /etc/default/
+sudo service celeryd stop || echo
+sudo service celerybeat stop || echo
+sleep 2
 sudo service celeryd start
+sudo service celerybeat start
 
 colab-admin rebuild_index --noinput

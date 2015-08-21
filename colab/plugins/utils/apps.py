@@ -2,7 +2,7 @@
 from django.apps import AppConfig
 
 
-class ColabProxiedAppConfig(AppConfig):
+class ColabPluginAppConfig(AppConfig):
     colab_proxied_app = True
 
     def register_signals(self):

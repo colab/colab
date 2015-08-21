@@ -3,7 +3,6 @@ import os
 import sys
 import logging
 import importlib
-import warnings
 
 from django.core.exceptions import ImproperlyConfigured
 
@@ -96,17 +95,21 @@ def load_colab_apps():
         return {'COLAB_APPS': COLAB_APPS}
 
     for file_name in os.listdir(plugins_dir):
-        if not file_name.endswith('.py'):
-            continue
-
         file_module = file_name.split('.')[0]
-        py_settings_d = _load_py_file(file_module, plugins_dir)
-        logger.info('Loaded plugin settings: %s/%s', plugins_dir, file_name)
 
-        app_name = py_settings_d.get('name')
+        logger.info('Loaded plugin settings: %s%s', plugins_dir, file_name)
+        py_settings_d = _load_py_file(file_module, plugins_dir)
+
+        if os.path.isdir(os.path.join(plugins_dir, file_name)):
+            app_name = file_name
+
+        elif file_name.endswith('.py'):
+            app_name = py_settings_d.get('name')
+
         if not app_name:
-            warnings.warn("Plugin missing name variable")
+            logger.warning("Plugin missing name variable (%s)", file_name)
             continue
+
         try:
             importlib.import_module(app_name)
         except ImportError:

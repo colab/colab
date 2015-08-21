@@ -8,7 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-BROKER_URL = 'amqp://guest:guest@localhost:5672/'
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -49,6 +50,7 @@ INSTALLED_APPS = (
     'taggit',
 
     # Own apps
+    'colab',
     'colab.home',
     'colab.plugins',
     'colab.super_archives',
@@ -257,7 +259,6 @@ locals().update(conf.load_py_settings())
 locals().update(conf.load_colab_apps())
 
 COLAB_APPS = locals().get('COLAB_APPS') or {}
-PROXIED_APPS = {}
 
 for app_name, app in COLAB_APPS.items():
     if 'dependencies' in app:
@@ -267,9 +268,6 @@ for app_name, app in COLAB_APPS.items():
 
     if app_name not in INSTALLED_APPS:
         INSTALLED_APPS += (app_name,)
-
-    if app.get('upstream'):
-        PROXIED_APPS[app_name.split('.')[-1]] = app
 
     if 'middlewares' in app:
         for middleware in app.get('middlewares'):

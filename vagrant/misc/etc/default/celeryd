@@ -5,13 +5,13 @@ CELERYD_NODES="worker1"
 CELERY_BIN="/home/vagrant/.virtualenvs/colab/bin/celery"
 
 # comment out this line if you don't use an app
-CELERY_APP="colab"
+CELERY_APP="colab.celery:app"
 
 # Where to chdir at start.
 CELERYD_CHDIR="/vagrant/"
 
 # Extra command-line arguments to the worker
-CELERYD_OPTS="--time-limit=300 --concurrency=8"
+CELERYD_OPTS="--time-limit=300 --concurrency=2"
 
 # %N will be replaced with the first part of the nodename.
 CELERYD_LOG_FILE="/var/log/celery/%N.log"

@@ -1,7 +1,7 @@
 
-from ..utils.apps import ColabProxiedAppConfig
+from ..utils.apps import ColabPluginAppConfig
 
 
-class ProxyMezuroAppConfig(ColabProxiedAppConfig):
+class MezuroPluginAppConfig(ColabPluginAppConfig):
     name = 'colab.plugins.mezuro'
-    verbose_name = 'Mezuro Proxy'
+    verbose_name = 'Mezuro Plugin'

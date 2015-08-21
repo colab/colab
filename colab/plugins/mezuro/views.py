@@ -1,4 +1,5 @@
-from ..utils.views import ColabProxyView
+
+from colab.plugins.views import ColabProxyView
 
 
 class MezuroProxyView(ColabProxyView):

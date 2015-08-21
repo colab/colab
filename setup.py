@@ -16,7 +16,7 @@ REQUIREMENTS = [
     'diazo>=1.0.5',
 
     # Async Signals
-    'celery>=3.1',
+    'celery[redis]>=3.1',
 
     ### Move out of colab (as plugins):
 
@@ -55,8 +55,7 @@ setup(
     packages=find_packages(exclude=EXCLUDE_FROM_PACKAGES),
     include_package_data=True,
     entry_points={'console_scripts': [
-        'colab-admin = colab.management:execute_from_command_line',
-        'colab-init-config = colab.management:initconfig',
+        'colab-admin = colab.utils.runner:execute_from_command_line',
     ]},
     zip_safe=False,
     long_description=open('README.rst').read(),

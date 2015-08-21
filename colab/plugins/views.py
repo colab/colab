@@ -5,6 +5,8 @@ from django.conf import settings
 
 from revproxy.views import DiazoProxyView
 
+from .conf import get_plugin_config
+
 
 class ColabProxyView(DiazoProxyView):
     add_remote_user = settings.REVPROXY_ADD_REMOTE_USER
@@ -13,8 +15,8 @@ class ColabProxyView(DiazoProxyView):
 
     @property
     def upstream(self):
-        proxy_config = settings.PROXIED_APPS.get(self.app_label, {})
-        return proxy_config.get('upstream')
+        config = get_plugin_config(self.app_label)
+        return config.get('upstream')
 
     @property
     def app_label(self):

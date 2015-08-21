@@ -1,4 +1,5 @@
 
+from django.core.management.base import BaseCommand
 from django.utils.crypto import get_random_string
 
 
@@ -79,7 +80,7 @@ LOGGING = {{
 # from colab.plugins.utils.menu import colab_url_factory
 #
 # name = 'colab.plugins.gitlab'
-# verbose_name = 'Gitlab Proxy'
+# verbose_name = 'Gitlab Plugin'
 #
 # upstream = 'localhost'
 # #middlewares = []
@@ -114,7 +115,10 @@ LOGGING = {{
 """
 
 
-def initconfig():
-    chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
-    secret_key = get_random_string(50, chars)
-    print(CONFIG_TEMPLATE.format(secret_key=secret_key))
+class Command(BaseCommand):
+    help = 'Returns an example config file for Colab'
+
+    def handle(self, *args, **kwargs):
+        chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+        secret_key = get_random_string(50, chars)
+        print(CONFIG_TEMPLATE.format(secret_key=secret_key))
