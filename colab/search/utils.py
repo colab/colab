@@ -57,10 +57,8 @@ def get_collaboration_data(logged_user, filter_by_user=None):
 
     latest_results.extend(messages)
 
-    app_names = settings.COLAB_APPS.keys()
-
-    for app_name in app_names:
-        module = importlib.import_module('{}.models'.format(app_name))
+    for app in settings.COLAB_APPS.values():
+        module = importlib.import_module('{}.models'.format(app.get('name')))
 
         for module_item_name in dir(module):
             module_item = getattr(module, module_item_name)
