@@ -24,6 +24,24 @@ class GitlabProject(models.Model, HitCounterModelMixin):
         verbose_name_plural = _('Gitlab Projects')
 
 
+class GitlabGroup(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    path = models.CharField(max_length=100)
+    owner_id = models.IntegerField(null=True)
+
+    def __unicode__(self):
+        return u'{}'.format(self.path)
+
+    @property
+    def url(self):
+        return u'/gitlab/groups/{}'.format(self.id)
+
+    class Meta:
+        verbose_name = _('Gitlab Group')
+        verbose_name_plural = _('Gitlab Groups')
+
+
 class GitlabMergeRequest(Collaboration):
 
     id = models.IntegerField(primary_key=True)
