@@ -9,7 +9,7 @@ from django.db.models.fields import DateTimeField
 from colab.plugins.data import PluginDataImporter
 
 from .models import (GitlabProject, GitlabMergeRequest,
-                     GitlabComment, GitlabIssue)
+                     GitlabComment, GitlabIssue, GitlabGroup)
 
 
 LOGGER = logging.getLogger('colab.plugin.gitlab')
@@ -63,120 +63,82 @@ class GitlabDataImporter(PluginDataImporter):
 
         return _object
 
-    def fetch_projects(self):
+    def fetch(self, url, gitlab_class):
         page = 1
-        projects = []
+        obj_list = []
 
         while True:
-            json_data = self.get_json_data('/api/v3/projects/all', page)
+            json_data = self.get_json_data(url, page)
             page = page + 1
 
             if not len(json_data):
                 break
 
             for element in json_data:
-                project = GitlabProject()
-                self.fill_object_data(element, project)
-                projects.append(project)
+                obj = gitlab_class()
+                self.fill_object_data(element, obj)
+                obj_list.append(obj)
 
-        return projects
+        return obj_list
+
+    def fetch_comments(self, url, parent_class, issue_comment):
+        all_comments = []
+        all_parent_objects = parent_class.objects.all()
+
+        for parent_obj in all_parent_objects:
+            page = 1
+            while True:
+                formated_url = url.format(parent_obj.project_id, parent_obj.id)
+                json_data = self.get_json_data(formated_url, page)
+                page = page + 1
+
+                if len(json_data) == 0:
+                    break
+
+                for element in json_data:
+                    single_comment = GitlabComment()
+                    self.fill_object_data(element, single_comment)
+                    single_comment.project = parent_obj.project
+                    single_comment.issue_comment = issue_comment
+                    single_comment.parent_id = parent_obj.id
+                    all_comments.append(single_comment)
+
+        return all_comments
+
+    def fetch_projects(self):
+        return self.fetch('/api/v3/projects/all', GitlabProject)
+
+    def fetch_groups(self):
+        return self.fetch('/api/v3/groups', GitlabGroup)
 
     def fetch_merge_request(self, projects):
-        all_merge_request = []
-
+        merge_requests = []
         for project in projects:
-            page = 1
-            while True:
-                url = '/api/v3/projects/{}/merge_requests'.format(project.id)
-                json_data_mr = self.get_json_data(url, page)
-                page = page + 1
-
-                if len(json_data_mr) == 0:
-                    break
-
-                for element in json_data_mr:
-                    single_merge_request = GitlabMergeRequest()
-                    self.fill_object_data(element, single_merge_request)
-                    all_merge_request.append(single_merge_request)
-
-        return all_merge_request
+            url = '/api/v3/projects/{}/merge_requests'.format(project.id)
+            merge_requests.extend(self.fetch(url, GitlabMergeRequest))
+        return merge_requests
 
     def fetch_issue(self, projects):
-        all_issues = []
-
+        issues = []
         for project in projects:
-            page = 1
-            while True:
-                url = '/api/v3/projects/{}/issues'.format(project.id)
-                json_data_issue = self.get_json_data(url, page)
-                page = page + 1
+            url = '/api/v3/projects/{}/issues'.format(project.id)
+            issues.extend(self.fetch(url, GitlabIssue))
+        return issues
 
-                if len(json_data_issue) == 0:
-                    break
-
-                for element in json_data_issue:
-                    single_issue = GitlabIssue()
-                    self.fill_object_data(element, single_issue)
-                    all_issues.append(single_issue)
-
-        return all_issues
-
-    def fetch_comments(self):
+    def fetch_all_comments(self):
         all_comments = []
-        all_comments.extend(self.fetch_comments_MR())
+        all_comments.extend(self.fetch_comments_mr())
         all_comments.extend(self.fetch_comments_issues())
 
         return all_comments
 
-    def fetch_comments_MR(self):
-        all_comments = []
-        all_merge_requests = GitlabMergeRequest.objects.all()
-
-        for merge_request in all_merge_requests:
-            page = 1
-            while True:
-                url = '/api/v3/projects/{}/merge_requests/{}/notes'.format(
-                    merge_request.project_id, merge_request.id)
-                json_data_mr = self.get_json_data(url, page)
-                page = page + 1
-
-                if len(json_data_mr) == 0:
-                    break
-
-                for element in json_data_mr:
-                    single_comment = GitlabComment()
-                    self.fill_object_data(element, single_comment)
-                    single_comment.project = merge_request.project
-                    single_comment.issue_comment = False
-                    single_comment.parent_id = merge_request.id
-                    all_comments.append(single_comment)
-
-        return all_comments
+    def fetch_comments_mr(self):
+        url = '/api/v3/projects/{}/merge_requests/{}/notes'
+        return self.fetch_comments(url, GitlabMergeRequest, False)
 
     def fetch_comments_issues(self):
-        all_comments = []
-        all_issues = GitlabIssue.objects.all()
-
-        for issue in all_issues:
-            page = 1
-            while True:
-                url = '/api/v3/projects/{}/issues/{}/notes'.format(
-                    issue.project_id, issue.id)
-                json_data_mr = self.get_json_data(url, page)
-                page = page + 1
-
-                if len(json_data_mr) == 0:
-                    break
-
-                for element in json_data_mr:
-                    single_comment = GitlabComment()
-                    self.fill_object_data(element, single_comment)
-                    single_comment.project = issue.project
-                    single_comment.issue_comment = True
-                    single_comment.parent_id = issue.id
-                    all_comments.append(single_comment)
-
-        return all_comments
+        url = '/api/v3/projects/{}/issues/{}/notes'
+        return self.fetch_comments(url, GitlabIssue, True)
 
 
 class GitlabProjectImporter(GitlabDataImporter):
@@ -212,6 +174,6 @@ class GitlabCommentImporter(GitlabDataImporter):
 
     def fetch_data(self):
         LOGGER.info("Importing Comments")
-        comments_list = self.fetch_comments()
+        comments_list = self.fetch_all_comments()
         for datum in comments_list:
             datum.save()
