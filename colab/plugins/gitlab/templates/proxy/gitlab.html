@@ -38,7 +38,12 @@
     // gitlab .hide elements NEVER have a display:block, so
     // instead of editing bootstrap.css, we just removed '.hide' css class and
     // toggled 
-    jQuery('.hide').removeClass('hide').css('display', 'none');
+    jQuery('.hide').each(function(){
+      display_status = this.style.display;
+      jQuery(this).removeClass('hide');
+      if(display_status != 'block')
+        this.style.display = 'none';
+    })
 
     // Hit the SSH clone button to select it by default
     jQuery(".git-clone-holder .btn:contains('SSH')").click()
