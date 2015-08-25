@@ -3,7 +3,7 @@ Description=Colab
 
 [Service]
 User=colab
-ExecStart=/usr/lib/colab/bin/gunicorn colab.wsgi:application --bind=127.0.0.1:8001 --workers=3
+ExecStart=/usr/lib/colab/bin/gunicorn colab.wsgi:application --bind=127.0.0.1:8001 --workers=12 --log-syslog --log-syslog-prefix="[gunicorn colab]"
 Restart=on-failure
 
 [Install]
