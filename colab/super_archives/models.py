@@ -45,10 +45,12 @@ class EmailAddressValidation(models.Model):
 
     @classmethod
     def verify_email(cls, email_address_validation, verification_url):
-        email.send_verification_email(email_address_validation.address,
-                                      email_address_validation.user,
-                                      email_address_validation.validation_key,
-                                      verification_url)
+        return email.send_verification_email(
+            email_address_validation.address,
+            email_address_validation.user,
+            email_address_validation.validation_key,
+            verification_url
+            )
 
 
 class EmailAddress(models.Model):
