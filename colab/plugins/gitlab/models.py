@@ -16,6 +16,10 @@ class GitlabProject(models.Model, HitCounterModelMixin):
     path_with_namespace = models.TextField(blank=True, null=True)
 
     @property
+    def group(self):
+        return self.path_with_namespace.split('/')[0]
+
+    @property
     def url(self):
         return u'/gitlab/{}'.format(self.path_with_namespace)
 
