@@ -95,6 +95,7 @@ def load_colab_apps():
         return {'COLAB_APPS': COLAB_APPS}
 
     for file_name in os.listdir(plugins_dir):
+        app_name = ""
         file_module = file_name.split('.')[0]
 
         logger.info('Loaded plugin settings: %s%s', plugins_dir, file_name)
