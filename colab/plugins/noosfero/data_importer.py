@@ -67,6 +67,9 @@ class NoosferoDataImporter(PluginDataImporter):
     def fetch_communities(self):
         json_data = self.get_json_data('/api/v1/communities', 1)
 
+        if len(json_data) == 0:
+            return
+
         json_data = json_data['communities']
         for element in json_data:
             community = NoosferoCommunity()
@@ -81,6 +84,9 @@ class NoosferoDataImporter(PluginDataImporter):
 
     def fetch_articles(self):
         json_data = self.get_json_data('/api/v1/articles', 1)
+
+        if len(json_data) == 0:
+            return
 
         json_data = json_data['articles']
 
