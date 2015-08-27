@@ -239,7 +239,7 @@ SUPER_ARCHIVES_EXCLUDE = []
 SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 
 # Mailman API settings
-MAILMAN_API_URL = 'http://localhost:8124'
+MAILMAN_API_URL = 'http://localhost:8124/v2/'
 
 LOGIN_URL = '/user/login'
 LOGIN_REDIRECT_URL = '/'
@@ -266,8 +266,8 @@ for app_name, app in COLAB_APPS.items():
             if dep not in INSTALLED_APPS:
                 INSTALLED_APPS += (dep,)
 
-    if app_name not in INSTALLED_APPS:
-        INSTALLED_APPS += (app_name,)
+    if app.get('name') not in INSTALLED_APPS:
+        INSTALLED_APPS += (app.get('name'),)
 
     if 'middlewares' in app:
         for middleware in app.get('middlewares'):

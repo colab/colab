@@ -15,11 +15,12 @@ from colab.accounts.utils import mailman
 
 def get_visible_threads_queryset(logged_user):
     queryset = Thread.objects
-    lists_for_user = []
+    listnames_for_user = []
     if logged_user:
         lists_for_user = mailman.get_user_mailinglists(logged_user)
+        listnames_for_user = mailman.extract_listname_from_list(lists_for_user)
 
-    user_lists = Condition(mailinglist__name__in=lists_for_user)
+    user_lists = Condition(mailinglist__name__in=listnames_for_user)
     public_lists = Condition(mailinglist__is_private=False)
     queryset = Thread.objects.filter(user_lists | public_lists)
 
@@ -28,6 +29,7 @@ def get_visible_threads_queryset(logged_user):
 
 def get_visible_threads(logged_user, filter_by_user=None):
     thread_qs = get_visible_threads_queryset(logged_user)
+
     if filter_by_user:
         message_qs = Message.objects.filter(thread__in=thread_qs)
         messages = message_qs.filter(
@@ -57,10 +59,8 @@ def get_collaboration_data(logged_user, filter_by_user=None):
 
     latest_results.extend(messages)
 
-    app_names = settings.COLAB_APPS.keys()
-
-    for app_name in app_names:
-        module = importlib.import_module('{}.models'.format(app_name))
+    for app in settings.COLAB_APPS.values():
+        module = importlib.import_module('{}.models'.format(app.get('name')))
 
         for module_item_name in dir(module):
             module_item = getattr(module, module_item_name)

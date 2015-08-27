@@ -64,6 +64,7 @@ class GitlabMergeRequest(Collaboration):
 class GitlabIssue(Collaboration):
 
     id = models.IntegerField(primary_key=True)
+    iid = models.IntegerField(null=True)
     project = models.ForeignKey(GitlabProject, null=True,
                                 on_delete=models.SET_NULL)
     title = models.TextField()
@@ -82,7 +83,7 @@ class GitlabIssue(Collaboration):
     @property
     def url(self):
         return u'/gitlab/{}/issues/{}'.format(
-            self.project.path_with_namespace, self.id)
+            self.project.path_with_namespace, self.iid)
 
     class Meta:
         verbose_name = _('Gitlab Issue')
@@ -92,7 +93,6 @@ class GitlabIssue(Collaboration):
 class GitlabComment(Collaboration):
 
     id = models.IntegerField(primary_key=True)
-    iid = models.IntegerField(null=True)
     body = models.TextField()
     created_at = models.DateTimeField(blank=True, null=True)
     issue_comment = models.BooleanField(default=True)
@@ -139,7 +139,7 @@ class GitlabComment(Collaboration):
             url_str = u'/gitlab/{}/merge_requests/{}#notes_{}'
 
         return url_str.format(self.project.path_with_namespace,
-                              self.parent_id, self.iid)
+                              self.parent_id, self.id)
 
     class Meta:
         verbose_name = _('Gitlab Comments')
