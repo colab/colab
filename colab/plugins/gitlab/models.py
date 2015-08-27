@@ -34,8 +34,17 @@ class GitlabGroup(models.Model):
         return u'{}'.format(self.path)
 
     @property
+    def projects(self):
+        projects = GitlabProject.objects.all()
+        result = list()
+        for project in projects:
+            if self.path in project.group:
+               result.append(project)
+        return result
+
+    @property
     def url(self):
-        return u'/gitlab/groups/{}'.format(self.id)
+        return u'/gitlab/groups/{}'.format(self.path)
 
     class Meta:
         verbose_name = _('Gitlab Group')
