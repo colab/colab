@@ -149,7 +149,6 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
                 show_message = getattr(messages, msg_type)
                 show_message(request, _(message))
 
-
         return redirect('user_profile', username=user.username)
 
     def get_context_data(self, **kwargs):
@@ -162,7 +161,8 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         for email in emails:
             lists = []
-            lists_for_address = mailman.mailing_lists(address=email, names_only=True)
+            lists_for_address = mailman.mailing_lists(address=email,
+                                                      names_only=True)
             for mlist in all_lists:
                 if mlist.get('listname') in lists_for_address:
                     checked = True
@@ -170,7 +170,7 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
                     checked = False
                 lists.append((
                     {'listname': mlist.get('listname'),
-                      'description': mlist.get('description')},
+                     'description': mlist.get('description')},
                     checked
                 ))
 

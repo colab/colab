@@ -93,7 +93,7 @@ class GitlabTest(TestCase):
         mr2.created_at = datetime.now()
         mr2.update_user(self.user.username)
         mr2.save()
-        
+
         i1 = GitlabIssue()
         i1.id = 1
         i1.iid = 1
