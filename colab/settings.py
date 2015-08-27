@@ -266,8 +266,8 @@ for app_name, app in COLAB_APPS.items():
             if dep not in INSTALLED_APPS:
                 INSTALLED_APPS += (dep,)
 
-    if app_name not in INSTALLED_APPS:
-        INSTALLED_APPS += (app_name,)
+    if app.get('name') not in INSTALLED_APPS:
+        INSTALLED_APPS += (app.get('name'),)
 
     if 'middlewares' in app:
         for middleware in app.get('middlewares'):

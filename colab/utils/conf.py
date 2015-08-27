@@ -104,7 +104,7 @@ def load_colab_apps():
             app_name = file_name
 
         elif file_name.endswith('.py'):
-            app_name = py_settings_d.get('name')
+            app_name = py_settings_d.get('name').split('.')[-1]
 
         if not app_name:
             logger.warning("Plugin missing name variable (%s)", file_name)
@@ -121,7 +121,7 @@ def load_colab_apps():
 
         fields = ['verbose_name', 'upstream', 'urls',
                   'menu_urls', 'middlewares', 'dependencies',
-                  'context_processors', 'private_token']
+                  'context_processors', 'private_token', 'name']
 
         for key in fields:
             value = py_settings_d.get(key)
