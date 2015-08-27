@@ -6,23 +6,23 @@
       "twitter": null,
       "is_staff": false,
       "user_permissions": [
-        
+
       ],
       "date_joined": "2015-02-24T21:10:35.004Z",
       "google_talk": null,
-      "first_name": "Gust",
+      "first_name": "John",
       "is_superuser": false,
       "last_login": "2015-02-26T17:56:13.378Z",
       "verification_hash": null,
       "role": null,
-      "email": "gustmax@hotmail.com",
-      "username": "gustmax",
+      "email": "johndoe@example.com",
+      "username": "johndoe",
       "bio": null,
       "needs_update": false,
       "is_active": true,
       "facebook": null,
       "groups": [
-        
+
       ],
       "password": "pbkdf2_sha256$12000$ez83ccNOUQZk$vYT/QcYMukXZ7D7L1qQPyYlzCUEEEF20J7/Xjef0Rqg=",
       "institution": null,
@@ -37,7 +37,7 @@
       "real_name": "",
       "user": 1,
       "md5": "ed8f47ae6048f8d4456c0554578f53ff",
-      "address": "gustmax@hotmail.com"
+      "address": "johndoe@example.com"
     },
     "model": "super_archives.emailaddress",
     "pk": 1

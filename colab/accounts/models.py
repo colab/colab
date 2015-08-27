@@ -60,7 +60,7 @@ class User(AbstractUser):
         return mailman.user_lists(self)
 
     def update_subscription(self, email, lists):
-        mailman.update_subscription(email, lists)
+        return mailman.update_subscription(email, lists)
 
     def save(self, *args, **kwargs):
 

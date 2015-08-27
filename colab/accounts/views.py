@@ -144,7 +144,11 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
         user = self.get_object()
         for email in user.emails.values_list('address', flat=True):
             lists = self.request.POST.getlist(email)
-            user.update_subscription(email, lists)
+            info_messages = user.update_subscription(email, lists)
+            for msg_type, message in info_messages:
+                show_message = getattr(messages, msg_type)
+                show_message(request, _(message))
+
 
         return redirect('user_profile', username=user.username)
 
@@ -154,18 +158,19 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
 
         user = self.get_object()
         emails = user.emails.values_list('address', flat=True)
-        all_lists = mailman.all_lists(description=True)
+        all_lists = mailman.all_lists()
 
         for email in emails:
             lists = []
-            lists_for_address = mailman.mailing_lists(address=email)
-            for listname, description in all_lists:
-                if listname in lists_for_address:
+            lists_for_address = mailman.mailing_lists(address=email, names_only=True)
+            for mlist in all_lists:
+                if mlist.get('listname') in lists_for_address:
                     checked = True
                 else:
                     checked = False
                 lists.append((
-                    {'listname': listname, 'description': description},
+                    {'listname': mlist.get('listname'),
+                      'description': mlist.get('description')},
                     checked
                 ))
 

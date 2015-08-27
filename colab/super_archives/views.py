@@ -33,17 +33,23 @@ class ThreadView(View):
         thread = get_object_or_404(Thread, subject_token=thread_token,
                                    mailinglist__name=mailinglist)
 
-        # TODO: Refactor this code
-        # Use local flag is_private instead of always check the API!!
-        all_privates = dict(mailman.all_lists(private=True))
-        if all_privates[thread.mailinglist.name]:
+        all_privates = []
+        all_privates.extend(
+            [mlist.get('listname')
+                for mlist in mailman.all_lists()
+                if mlist.get('archive_private')]
+        )
+
+        if all_privates.count(thread.mailinglist.name):
             if not request.user.is_authenticated():
                 raise PermissionDenied
             else:
                 user = User.objects.get(username=request.user)
                 emails = user.emails.values_list('address', flat=True)
                 lists_for_user = mailman.get_user_mailinglists(user)
-                if thread.mailinglist.name not in lists_for_user:
+                listnames_for_user = mailman.extract_listname_from_list(
+                    lists_for_user)
+                if thread.mailinglist.name not in listnames_for_user:
                     raise PermissionDenied
 
         thread.hit(request)
@@ -145,13 +151,16 @@ class ThreadDashboardView(View):
 
         context['lists'] = []
 
-        lists_for_user = []
+        listnames_for_user = []
         if request.user.is_authenticated():
             user = User.objects.get(username=request.user)
             lists_for_user = mailman.get_user_mailinglists(user)
+            listnames_for_user = mailman.extract_listname_from_list(
+                lists_for_user)
 
         for list_ in MailingList.objects.order_by('name'):
-            if list_.name not in all_privates or list_.name in lists_for_user:
+            if list_.name not in all_privates\
+                    or list_.name in listnames_for_user:
                 context['lists'].append((
                     list_.name,
                     mailman.get_list_description(list_.name),
