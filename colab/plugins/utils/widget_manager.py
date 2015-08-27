@@ -1,23 +1,32 @@
+from django.utils.safestring import mark_safe
 
 class Widget:
     identifier = None
     name = None
     default_url = None
-    content = None
+    content = ''
 
     def get_body(self):
         # avoiding regex in favor of performance
-        start = content.find('<body>')
-        end = content.find('</body>')
-        head = content[start + len('<body>'):end]
-        return head
+        start = self.content.find('<body>')
+        end = self.content.find('</body>')
+
+        if -1 in [start, end]:
+            return ''
+
+        body = self.content[start + len('<body>'):end]
+        return mark_safe(body)
 
     def get_header(self):
         # avoiding regex in favor of performance
-        start = content.find('<head>')
-        end = content.find('</head>')
-        head = content[start + len('<head>'):end]
-        return head
+        start = self.content.find('<head>')
+        end = self.content.find('</head>')
+
+        if -1 in [start, end]:
+            return ''
+
+        head = self.content[start + len('<head>'):end]
+        return mark_safe(head)
 
     def generate_content(self, request=None):
         self.content = ''

@@ -121,7 +121,7 @@ $(function() {
     <h3>{% gravatar user_.email 50 %} {{ user_.get_full_name }} ({{ user_.username }})</h3>
     <a href="https://gravatar.com" target="_blank">
       {% trans "Change your avatar at Gravatar.com" %}
-    </a>{{ lala }}
+    </a>
   </div>
   <br>
   <br>
@@ -148,7 +148,7 @@ $(function() {
     }
   </style>
   <div class="tab-content">
-    <div id="profile" class="tab-pane fade">
+    <div id="profile" class="tab-pane fade in active">
       <form method="post">
         {% csrf_token %}
 
@@ -229,15 +229,12 @@ $(function() {
         </div>
       </form>
     </div>
-    <div id="code" class="tab-pane fade in active">
-      {% content_xpto %}
-    </div>
-    <div id="social" class="tab-pane fade">
-      <p>Some content in menu 2.</p>
-    </div>
+    {% for widget in widgets %}
+      <div id="{{ widget.identifier }}" class="tab-pane fade">
+        <h2>{{ widget.name }}</h2>
+        {{ widget.get_body }}
+      </div>
+    {% endfor %}
   </div>
-
-
-
 
 {% endblock %}

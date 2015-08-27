@@ -46,7 +46,6 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = {}
         context['widgets'] = WidgetManager.get_widgets('profile', self.request)
-        context['lala'] = 'lala123'
         context.update(kwargs)
         return super(UserProfileUpdateView, self).get_context_data(**context)
 
