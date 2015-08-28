@@ -16,7 +16,7 @@ class GitlabProject(models.Model, HitCounterModelMixin):
     path_with_namespace = models.TextField(blank=True, null=True)
 
     @property
-    def group(self):
+    def namespace(self):
         return self.path_with_namespace.split('/')[0]
 
     @property
@@ -42,7 +42,7 @@ class GitlabGroup(models.Model):
         projects = GitlabProject.objects.all()
         result = list()
         for project in projects:
-            if self.path in project.group:
+            if self.path in project.namespace:
                result.append(project)
         return result
 

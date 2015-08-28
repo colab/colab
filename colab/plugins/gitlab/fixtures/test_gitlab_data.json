@@ -6,34 +6,34 @@
     "twitter": "usertestcolab",
     "is_staff": false,
     "user_permissions": [],
-    "date_joined": "2015-08-26T21:53:25.638Z",
+    "date_joined": "2015-08-28T18:00:59.753Z",
     "google_talk": null,
     "first_name": "USERtestCoLaB",
     "is_superuser": false,
-    "last_login": "2015-08-26T21:53:25.638Z",
+    "last_login": "2015-08-28T18:00:59.753Z",
     "verification_hash": null,
     "role": null,
     "email": "usertest@colab.com.br",
-    "username": "",
+    "username": "usertestcolab",
     "bio": null,
     "needs_update": true,
     "is_active": true,
     "facebook": "usertestcolab",
     "groups": [],
-    "password": "pbkdf2_sha256$15000$d4aHrZW0B4vI$gQImAx0W62PIl/uFtR8/XW2n9R9wC2qgbfb1dKIfkFA=",
+    "password": "pbkdf2_sha256$15000$unxhDDCB1vsw$Esdx3tQ2ayPW08/SImQzbBeRiK8Hoa6fBZhw3dMQga8=",
     "institution": null,
     "github": null,
-    "modified": "2015-08-26T21:54:38.592Z"
+    "modified": "2015-08-28T18:00:59.996Z"
   },
   "model": "accounts.user",
   "pk": 1
 },
 {
   "fields": {
-    "last_activity_at": "2015-08-26T22:01:46.401Z",
+    "last_activity_at": "2015-08-28T18:01:28.469Z",
     "description": "",
     "name_with_namespace": "Software Public / Colab",
-    "created_at": "2015-08-26T22:01:42.569Z",
+    "created_at": "2015-08-28T18:01:28.467Z",
     "path_with_namespace": "softwarepublico/colab",
     "public": true,
     "name": "colab"
@@ -43,8 +43,21 @@
 },
 {
   "fields": {
+    "last_activity_at": "2015-08-28T18:01:28.491Z",
+    "description": "",
+    "name_with_namespace": "Software Public / ColabInc",
+    "created_at": "2015-08-28T18:01:28.489Z",
+    "path_with_namespace": "softwarepublico/colabinc",
+    "public": true,
+    "name": "colabinc"
+  },
+  "model": "gitlab.gitlabproject",
+  "pk": 2
+},
+{
+  "fields": {
     "path": "softwarepublico",
-    "name": "softwarepublico",
+    "name": "Software Public",
     "owner_id": 1
   },
   "model": "gitlab.gitlabgroup",
@@ -55,7 +68,7 @@
     "target_branch": "",
     "description": "Merge request for plugin support",
     "source_branch": "",
-    "created_at": "2015-08-26T22:02:22.960Z",
+    "created_at": "2015-08-28T18:01:28.512Z",
     "title": "Include plugin support",
     "project": 1,
     "iid": 1,
@@ -67,10 +80,26 @@
 },
 {
   "fields": {
+    "target_branch": "",
+    "description": "Merge request for test support",
+    "source_branch": "",
+    "created_at": "2015-08-28T18:01:28.561Z",
+    "title": "Include test support",
+    "project": 2,
+    "iid": 1,
+    "state": "Closed",
+    "user": 1
+  },
+  "model": "gitlab.gitlabmergerequest",
+  "pk": 2
+},
+{
+  "fields": {
     "description": "Issue reported to colab",
     "title": "Issue for colab",
-    "created_at": "2015-08-26T22:03:09.410Z",
+    "created_at": "2015-08-28T18:01:28.590Z",
     "project": 1,
+    "iid": 1,
     "state": "Open",
     "user": 1
   },
@@ -79,12 +108,24 @@
 },
 {
   "fields": {
+    "description": "Issue reported to colab",
+    "title": "Issue for colab",
+    "created_at": "2015-08-28T18:01:28.628Z",
+    "project": 2,
+    "iid": 1,
+    "state": "Open",
+    "user": 1
+  },
+  "model": "gitlab.gitlabissue",
+  "pk": 2
+},
+{
+  "fields": {
     "body": "Comment to merge request",
-    "parent_id": 1,
-    "created_at": "2015-08-26T22:03:50.590Z",
+    "created_at": "2015-08-28T18:01:28.663Z",
     "issue_comment": false,
     "project": 1,
-    "iid": 1,
+    "parent_id": 1,
     "user": 1
   },
   "model": "gitlab.gitlabcomment",
@@ -93,11 +134,10 @@
 {
   "fields": {
     "body": "Comment to issue",
-    "parent_id": 1,
-    "created_at": "2015-08-26T22:04:33.063Z",
+    "created_at": "2015-08-28T18:01:28.693Z",
     "issue_comment": true,
     "project": 1,
-    "iid": 2,
+    "parent_id": 1,
     "user": 1
   },
   "model": "gitlab.gitlabcomment",
