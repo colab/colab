@@ -43,7 +43,7 @@ class GitlabGroup(models.Model):
         result = list()
         for project in projects:
             if self.path in project.namespace:
-               result.append(project)
+                result.append(project)
         return result
 
     @property
