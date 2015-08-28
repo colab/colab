@@ -1,0 +1,100 @@
+[
+{
+    "fields": {
+        "last_name": "Administrator",
+        "webpage": "",
+        "twitter": "",
+        "is_staff": true,
+        "user_permissions": [],
+        "date_joined": "2015-01-28T12:34:58.770Z",
+        "google_talk": "",
+        "first_name": "Admin",
+        "is_superuser": true,
+        "last_login": "2015-08-24T14:33:28.802Z",
+        "verification_hash": null,
+        "role": "",
+        "email": "admin@mail.com",
+        "username": "admin",
+        "bio": "",
+        "needs_update": true,
+        "is_active": true,
+        "facebook": "",
+        "groups": [],
+        "password": "pbkdf2_sha256$15000$sWnvfYpB8ec4$7dEFg6vSSGPnpEmfRelJ12zkiwacGx9aXx8/8ZFWBSI=",
+        "institution": "",
+        "github": "",
+        "modified": "2015-01-28T12:45:27.375Z"
+    },
+    "model": "accounts.user",
+    "pk": 1
+},
+{
+    "fields": {
+        "last_name": "user",
+        "webpage": null,
+        "twitter": null,
+        "is_staff": false,
+        "user_permissions": [],
+        "date_joined": "2015-08-24T14:33:55.827Z",
+        "google_talk": null,
+        "first_name": "user",
+        "is_superuser": false,
+        "last_login": "2015-08-24T14:33:55.827Z",
+        "verification_hash": null,
+        "role": null,
+        "email": "user@teste.com",
+        "username": "user",
+        "bio": null,
+        "needs_update": true,
+        "is_active": true,
+        "facebook": null,
+        "groups": [],
+        "password": "pbkdf2_sha256$15000$9ew6EvFvAIhI$147annuMjzt7em5IRh+3k7wcl7rZ0xjBPSmbUZDdxFo=",
+        "institution": null,
+        "github": null,
+        "modified": "2015-08-24T14:33:55.893Z"
+    },
+    "model": "accounts.user",
+    "pk": 2
+},
+{
+    "fields": {
+        "last_activity_at": "2015-06-08T19:28:27.148Z",
+        "description": "Colab source code",
+        "name_with_namespace": "Software Publico / Colab",
+        "created_at": "2014-09-26T14:58:52.491Z",
+        "path_with_namespace": "softwarepublico/colab",
+        "public": true,
+        "name": "Colab"
+      },
+    "model": "gitlab.gitlabproject",
+    "pk": 14
+},
+{
+    "fields": {
+        "target_branch": "master",
+        "description": "",
+        "source_branch": "settings_fix",
+        "created_at": "2014-10-24T12:05:55.659Z",
+        "title": "Settings fix",
+        "project": 14,
+        "iid": 1,
+        "state": "merged",
+        "user": null
+    },
+    "model": "gitlab.gitlabmergerequest",
+    "pk": 7
+},
+{
+    "fields": {
+        "description": "Remove the main SPB logo from the homepage",
+        "title": "Remove the  SPB central logo",
+        "created_at": "2014-10-07T17:40:27.625Z",
+        "project": 14,
+        "state": "closed",
+        "user": null
+    },
+    "model": "gitlab.gitlabissue",
+    "pk": 2
+}
+]

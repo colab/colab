@@ -16,12 +16,43 @@ class GitlabProject(models.Model, HitCounterModelMixin):
     path_with_namespace = models.TextField(blank=True, null=True)
 
     @property
+    def namespace(self):
+        return self.path_with_namespace.split('/')[0]
+
+    @property
     def url(self):
         return u'/gitlab/{}'.format(self.path_with_namespace)
 
     class Meta:
         verbose_name = _('Gitlab Project')
         verbose_name_plural = _('Gitlab Projects')
+
+
+class GitlabGroup(models.Model):
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=100)
+    path = models.CharField(max_length=100)
+    owner_id = models.IntegerField(null=True)
+
+    def __unicode__(self):
+        return u'{}'.format(self.path)
+
+    @property
+    def projects(self):
+        projects = GitlabProject.objects.all()
+        result = list()
+        for project in projects:
+            if self.path in project.namespace:
+               result.append(project)
+        return result
+
+    @property
+    def url(self):
+        return u'/gitlab/groups/{}'.format(self.path)
+
+    class Meta:
+        verbose_name = _('Gitlab Group')
+        verbose_name_plural = _('Gitlab Groups')
 
 
 class GitlabMergeRequest(Collaboration):
