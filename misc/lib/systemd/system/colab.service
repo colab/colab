@@ -6,7 +6,7 @@ User=colab
 PermissionsStartOnly=true
 ExecStartPre=/usr/bin/mkdir -p /var/lock/colab
 ExecStartPre=/usr/bin/chown -R colab:colab /var/lock/colab
-ExecStart=/usr/lib/colab/bin/gunicorn colab.wsgi:application --bind=127.0.0.1:8001 --workers=3 --log-syslog --log-syslog-prefix="[gunicorn colab]"
+ExecStart=/usr/lib/colab/bin/gunicorn colab.wsgi:application --config="/etc/colab/gunicorn.py"
 Restart=on-failure
 
 [Install]
