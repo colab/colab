@@ -5,6 +5,7 @@ import sys
 from django.core.management import ManagementUtility
 from colab.management.commands import initconfig
 
+
 def execute_from_command_line(argv=None):
     """
     A simple method that runs a ManagementUtility.
