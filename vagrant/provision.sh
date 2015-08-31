@@ -37,6 +37,7 @@ sudo chown vagrant:vagrant /etc/colab
 
 if [ ! -s /etc/colab/settings.py ]; then
     colab-admin initconfig > /etc/colab/settings.py
+    rm -f /etc/colab/settings.pyc  # remove pyc if exists
 fi
 
 colab-admin migrate
