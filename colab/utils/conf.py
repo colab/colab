@@ -98,14 +98,19 @@ def load_colab_apps():
         app_name = ""
         file_module = file_name.split('.')[0]
 
-        logger.info('Loaded plugin settings: %s%s', plugins_dir, file_name)
-        py_settings_d = _load_py_file(file_module, plugins_dir)
+        logger.info('Loading plugin settings: %s%s', plugins_dir, file_name)
 
         if os.path.isdir(os.path.join(plugins_dir, file_name)):
+            py_settings_d = _load_py_file(file_module, plugins_dir)
             app_name = file_name
 
         elif file_name.endswith('.py'):
+            py_settings_d = _load_py_file(file_module, plugins_dir)
             app_name = py_settings_d.get('name', '').split('.')[-1]
+
+        else:
+            logger.info("Not a plugin config: %s", file_name)
+            continue
 
         if not app_name:
             logger.warning("Plugin missing name variable (%s)", file_name)
