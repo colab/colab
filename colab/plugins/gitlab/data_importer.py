@@ -150,7 +150,8 @@ class GitlabProjectImporter(GitlabDataImporter):
             datum.save()
 
 
-class GitlabGroupImport(GitlabDataImporter):
+class GitlabGroupImporter(GitlabDataImporter):
+
     def fetch_data(self):
         LOGGER.info("Importing Group")
         groups_list = self.fetch_groups()
