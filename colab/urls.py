@@ -21,7 +21,6 @@ urlpatterns = patterns('',
     url(r'^colab/admin/', include(admin.site.urls)),
 
     url(r'^archives/', include('colab.super_archives.urls')),
-    url(r'^gitlab/', include('colab.plugins.gitlab.urls')),
     url(r'^mezuro/', include('colab.plugins.mezuro.urls')),
     url(r'^social/', include('colab.plugins.noosfero.urls')),
 
