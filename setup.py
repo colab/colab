@@ -24,10 +24,6 @@ REQUIREMENTS = [
     'django-taggit>=0.12.1',
     'html2text>=3.200.3',
     'chardet>=2.3.0',
-
-    # Deps for gitlab plugin
-    'python-dateutil>=1.5',
-    'requests',
 ]
 
 TEST_REQUIREMENTS = [
