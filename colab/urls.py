@@ -22,7 +22,6 @@ urlpatterns = patterns('',
 
     url(r'^archives/', include('colab.super_archives.urls')),
     url(r'^mezuro/', include('colab.plugins.mezuro.urls')),
-    url(r'^social/', include('colab.plugins.noosfero.urls')),
 
     url(r'', include('colab.plugins.urls')),
 )
