@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 REQUIREMENTS = [
-    'Django>=1.7.9,<1.8',
+    'Django>=1.7.10,<1.8',
     'pytz>=2011n',
     'django-hitcounter>=0.1.1',
 
@@ -12,8 +12,7 @@ REQUIREMENTS = [
     'Whoosh>=2.7.0',
 
     # revproxy
-    'django-revproxy>=0.9.3',
-    'diazo>=1.0.5',
+    'django-revproxy[diazo]>=0.9.5',
 
     # Async Signals
     'celery[redis]>=3.1',
@@ -24,7 +23,7 @@ REQUIREMENTS = [
     'etiquetando==0.1',
     'django-taggit>=0.12.1',
     'html2text>=3.200.3',
-    'chardet>=1.0.1',
+    'chardet>=2.3.0',
 
     # Deps for gitlab plugin
     'python-dateutil>=1.5',
