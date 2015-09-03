@@ -23,8 +23,6 @@
 
         {% plugins_menu %}
 
-        <li><a href="/paste">{% trans "Paste" %}</a></li>
-
         <li class="hidden-lg hidden-md">
           <a href="{% url 'haystack_search' %}?q=">{% trans "Search" %}</a>
         </li>
@@ -42,8 +40,8 @@
             </ul>
           </li>
           {% trans 'Login' as login_text %}
-          <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
-          <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
+            <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'signup' %}">{% trans "Register" %}</a></li>
+            <li class="visible-xs hidden-sm hidden-md"><a href="{% url 'login' %}">{% trans "Login" %}</a></li>
         {% else %}
           <li id="user-menu" class="dropdown">
             <a href="#" class="dropdown-toggle user" data-toggle="dropdown">{% gravatar user.email 40 %} <b class="caret"></b>&nbsp;&nbsp;</a>
@@ -71,8 +69,8 @@
         <div class="form-group">
           <label class="sr-only" for="header-searchbox">{% trans 'Search here...' %}</label>
           <input name="q" id="header-searchbox"
-                  class="form-control" value="{{ request.GET.q }}"
-                  type="search" placeholder="{% trans 'Search here...' %}" />
+                 class="form-control" value="{{ request.GET.q }}"
+                 type="search" placeholder="{% trans 'Search here...' %}" />
         </div>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
       </form>
