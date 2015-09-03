@@ -24,6 +24,7 @@ REQUIREMENTS = [
     'django-taggit>=0.12.1',
     'html2text>=3.200.3',
     'chardet>=2.3.0',
+    'requests>=2.7.0'
 ]
 
 TEST_REQUIREMENTS = [
