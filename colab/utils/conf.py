@@ -141,6 +141,35 @@ def load_colab_apps():
     return {'COLAB_APPS': COLAB_APPS}
 
 
+def load_widgets_settings():
+    settings_file = os.getenv('COLAB_WIDGETS_SETTINGS',
+                              '/etc/colab/widgets_settings.py')
+    settings_module = settings_file.split('.')[-2].split('/')[-1]
+    py_path = "/".join(settings_file.split('/')[:-1])
+
+    logger.info('Widgets Settings file: %s', settings_file)
+
+    if not os.path.exists(py_path):
+        msg = "The py file {} does not exist".format(py_path)
+        raise InaccessibleSettings(msg)
+
+    py_settings = _load_py_file(settings_module, py_path)
+
+    # Read settings from settings.d
+    settings_dir = '/etc/colab/widgets.d'
+    logger.info('Widgets Settings directory: %s', settings_dir)
+
+    if not os.path.exists(settings_dir):
+        return py_settings
+
+    for file_name in os.listdir(settings_dir):
+        if not file_name.endswith('.py'):
+            continue
+
+        file_module = file_name.split('.')[0]
+        _load_py_file(file_module, settings_dir)
+        logger.info('Loaded %s/%s', settings_dir, file_name)
+
 def validate_database(database_dict, default_db, debug):
     db_name = database_dict.get('default', {}).get('NAME')
     if not debug and db_name == default_db:
