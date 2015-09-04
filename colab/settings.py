@@ -241,10 +241,8 @@ SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 # Mailman API settings
 MAILMAN_API_URL = 'http://localhost:8124/v2/'
 
-LOGIN_URL = '/user/login'
-LOGIN_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL_FAILURE = '/?bid_login_failed=true'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/account/login'
+LOGOUT_URL = '/account/logout'
 
 REVPROXY_ADD_REMOTE_USER = True
 
