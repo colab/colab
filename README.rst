@@ -50,8 +50,18 @@ First install the dependencies and than the project it self:
 
 .. code-block::
 
-  pip install -r requirements.txt
-  pip install .
+  pip install -e .
+
+Development environment
+-----------------------
+
+You must install vagrant to set up the development environment. With vagrant available you should run:
+
+.. code-block::
+
+  vagrant up
+
+During the process you should choose the vagrant box that you want to use. In the end you should have a virtual machine with development environment set up.
 
 
 
@@ -60,13 +70,17 @@ Running Colab
 
 To run Colab with development server you will have to:
 
-1- Create the example configuration file:
+1- Log in virtual machine:
 
 .. code-block::
 
-  colab-admin initconfig > /etc/colab/settings.py
+  vagrant ssh
   
-2- Edit the configuration file. Make sure you set everything you need including **database** credentials.
+2- Use colab virtualenv:
+
+.. code-block::
+
+  workon colab
   
 3- Run the development server: 
 
@@ -74,6 +88,7 @@ To run Colab with development server you will have to:
 
   colab-admin runserver 0.0.0.0:8000
 
+Now you can access colab in your browser via http://localhost:8000
 
 **NOTE**: In case you want to keep the configuration file else where just set the 
 desired location in environment variable **COLAB_SETTINGS**.
@@ -84,12 +99,33 @@ About test
 How to write a test
 --------------------
 Inside of each folder on /vagrant/colab/<folder> you can create a folder called
-"tests", and inside of it implements the code for test each file. 
+"tests" and inside of it implements the code for test each file. Remember that you should create __init__.py file.
  
 How to run the tests
 --------------------
 
 Follow the steps below:
 
-* Go to vagrant/colab/
-* run: ./runtests.sh
+1- Log in virtual machine:
+
+.. code-block::
+
+  vagrant ssh
+
+2- Use colab virtualenv:
+
+.. code-block::
+
+  workon colab
+
+3- Enter into colab source code directory:
+
+.. code-block::
+
+  cd /vagrant
+
+4- Run tests with setup.py:
+
+.. code-block::
+
+  python setup.py test
