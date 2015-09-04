@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-21 17:05+0000\n"
+"POT-Creation-Date: 2015-09-01 13:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,65 +21,65 @@ msgstr ""
 msgid "[Colab] Warning - Email sent with a blank subject."
 msgstr ""
 
-#: super_archives/models.py:61
+#: super_archives/models.py:77
 #: super_archives/templates/message-preview.html:62
 #: super_archives/templates/message-thread.html:4
 msgid "Anonymous"
 msgstr ""
 
-#: super_archives/models.py:111
+#: super_archives/models.py:133
 msgid "Mailing List"
 msgstr ""
 
-#: super_archives/models.py:112
+#: super_archives/models.py:134
 msgid "The Mailing List where is the thread"
 msgstr ""
 
-#: super_archives/models.py:115
+#: super_archives/models.py:137
 msgid "Latest message"
 msgstr ""
 
-#: super_archives/models.py:116
+#: super_archives/models.py:138
 msgid "Latest message posted"
 msgstr ""
 
-#: super_archives/models.py:117
+#: super_archives/models.py:139
 msgid "Score"
 msgstr ""
 
-#: super_archives/models.py:117
+#: super_archives/models.py:140
 msgid "Thread score"
 msgstr ""
 
-#: super_archives/models.py:126
+#: super_archives/models.py:153
 msgid "Thread"
 msgstr ""
 
-#: super_archives/models.py:127
+#: super_archives/models.py:154
 msgid "Threads"
 msgstr ""
 
-#: super_archives/models.py:241
+#: super_archives/models.py:267
 msgid "Subject"
 msgstr ""
 
-#: super_archives/models.py:242
+#: super_archives/models.py:268
 msgid "Please enter a message subject"
 msgstr ""
 
-#: super_archives/models.py:245
+#: super_archives/models.py:271
 msgid "Message body"
 msgstr ""
 
-#: super_archives/models.py:246
+#: super_archives/models.py:272
 msgid "Please enter a message body"
 msgstr ""
 
-#: super_archives/models.py:256
+#: super_archives/models.py:282
 msgid "Message"
 msgstr ""
 
-#: super_archives/models.py:257
+#: super_archives/models.py:283
 msgid "Messages"
 msgstr ""
 
@@ -208,16 +208,16 @@ msgstr ""
 msgid "%(number_of_users)s members"
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:23
+#: super_archives/templates/superarchives/thread-dashboard.html:20
 msgid "latest"
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:31
-#: super_archives/templates/superarchives/thread-dashboard.html:45
+#: super_archives/templates/superarchives/thread-dashboard.html:28
+#: super_archives/templates/superarchives/thread-dashboard.html:42
 msgid "more..."
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:37
+#: super_archives/templates/superarchives/thread-dashboard.html:34
 msgid "most relevant"
 msgstr ""
 
@@ -225,45 +225,45 @@ msgstr ""
 msgid "Please verify your email "
 msgstr ""
 
-#: super_archives/views.py:92
+#: super_archives/views.py:112
 msgid "Error trying to connect to Mailman API"
 msgstr ""
 
-#: super_archives/views.py:95
+#: super_archives/views.py:115
 msgid "Timeout trying to connect to Mailman API"
 msgstr ""
 
-#: super_archives/views.py:99
+#: super_archives/views.py:119
 msgid ""
 "Your message was sent to this topic. It may take some minutes before it's "
 "delivered by email to the group. Why don't you breath some fresh air in the "
 "meanwhile?"
 msgstr ""
 
-#: super_archives/views.py:108
+#: super_archives/views.py:128
 msgid "You cannot send an empty email"
 msgstr ""
 
-#: super_archives/views.py:110
+#: super_archives/views.py:130
 msgid "Mailing list does not exist"
 msgstr ""
 
-#: super_archives/views.py:112
+#: super_archives/views.py:133
 msgid "Unknown error trying to connect to Mailman API"
 msgstr ""
 
-#: super_archives/views.py:152
+#: super_archives/views.py:188
 msgid ""
 "The email address you are trying to verify either has already been verified "
 "or does not exist."
 msgstr ""
 
-#: super_archives/views.py:163
+#: super_archives/views.py:199
 msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
 msgstr ""
 
-#: super_archives/views.py:173
+#: super_archives/views.py:213
 msgid "Email address verified!"
 msgstr ""

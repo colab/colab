@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-11-21 17:05+0000\n"
+"POT-Creation-Date: 2015-09-01 13:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,80 +17,116 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/admin.py:40
+#: accounts/admin.py:18
 msgid "Personal info"
 msgstr ""
 
-#: accounts/admin.py:43
+#: accounts/admin.py:24
 msgid "Permissions"
 msgstr ""
 
-#: accounts/admin.py:45
+#: accounts/admin.py:28
 msgid "Important dates"
 msgstr ""
 
-#: accounts/forms.py:25
+#: accounts/forms.py:37
 msgid "Social account does not exist"
 msgstr ""
 
-#: accounts/forms.py:61 accounts/templates/accounts/user_detail.html:38
+#: accounts/forms.py:65 accounts/forms.py:71 accounts/forms.py:77
+msgid "This field cannot be blank."
+msgstr ""
+
+#: accounts/forms.py:118 accounts/templates/accounts/user_detail.html:38
 msgid "Bio"
 msgstr ""
 
-#: accounts/forms.py:62
+#: accounts/forms.py:119
 msgid "Write something about you in 200 characters or less."
 msgstr ""
 
-#: accounts/forms.py:81
+#: accounts/forms.py:148
 msgid "Mailing lists"
 msgstr ""
 
-#: accounts/forms.py:88
+#: accounts/forms.py:161
+#, python-format
+msgid "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
+msgstr ""
+
+#: accounts/forms.py:163
+msgid "A user with that username already exists."
+msgstr ""
+
+#: accounts/forms.py:164 accounts/forms.py:401 accounts/forms.py:465
+msgid "The two password fields didn't match."
+msgstr ""
+
+#: accounts/forms.py:166 accounts/forms.py:236 search/forms.py:38
+msgid "Username"
+msgstr ""
+
+#: accounts/forms.py:173 accounts/forms.py:240 accounts/forms.py:277
+#: accounts/forms.py:467
 msgid "Password"
 msgstr ""
 
-#: accounts/forms.py:90
+#: accounts/forms.py:175
 msgid "Password confirmation"
 msgstr ""
 
-#: accounts/forms.py:92
-msgid "Enter the same password as above, for verification."
+#: accounts/forms.py:237 accounts/models.py:78
+msgid "Required. 30 characters or fewer. Letters and digits."
 msgstr ""
 
-#: accounts/forms.py:110
-msgid "Password mismatch"
+#: accounts/forms.py:239
+msgid "This value may contain only letters and numbers."
 msgstr ""
 
-#: accounts/management/commands/delete_invalid.py:42
+#: accounts/forms.py:241
+msgid ""
+"Raw passwords are not stored, so there is no way to see this user's "
+"password, but you can change the password using <a href=\"password/\">this "
+"form</a>."
+msgstr ""
+
+#: accounts/forms.py:280
 #, python-format
-msgid "%(count)s users deleted."
+msgid ""
+"Please enter a correct %(username)s and password. Note that both fields may "
+"be case-sensitive."
 msgstr ""
 
-#: accounts/models.py:65
-msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
+#: accounts/forms.py:282
+msgid "This account is inactive."
 msgstr ""
 
-#: accounts/models.py:70
+#: accounts/forms.py:345
+msgid "Email"
+msgstr ""
+
+#: accounts/forms.py:403
+msgid "New password"
+msgstr ""
+
+#: accounts/forms.py:405
+msgid "New password confirmation"
+msgstr ""
+
+#: accounts/forms.py:436
+msgid "Your old password was entered incorrectly. Please enter it again."
+msgstr ""
+
+#: accounts/forms.py:439
+msgid "Old password"
+msgstr ""
+
+#: accounts/forms.py:469
+msgid "Password (again)"
+msgstr ""
+
+#: accounts/models.py:82
 msgid "Enter a valid username."
-msgstr ""
-
-#: accounts/templates/accounts/change_password.html:8
-msgid "Change XMPP Client and SVN Password"
-msgstr ""
-
-#: accounts/templates/accounts/change_password.html:17
-#: accounts/templates/accounts/user_update_form.html:188
-#: accounts/templates/accounts/user_update_form.html:195
-msgid "Change Password"
-msgstr ""
-
-#: accounts/templates/accounts/login.html:7
-msgid "To login please click in the link below:"
-msgstr ""
-
-#: accounts/templates/accounts/login.html:8 templates/base.html:182
-#: templates/base.html.py:187
-msgid "Login"
 msgstr ""
 
 #: accounts/templates/accounts/manage_subscriptions.html:6
@@ -106,7 +142,11 @@ msgid "Sign up"
 msgstr ""
 
 #: accounts/templates/accounts/user_create_form.html:10
-msgid "Please correct the errors below and try again"
+#: accounts/templates/registration/login.html:14
+#: accounts/templates/registration/password_change_form_custom.html:12
+#: accounts/templates/registration/password_reset_confirm_custom.html:14
+#: accounts/templates/registration/password_reset_form_custom.html:9
+msgid "Please correct the errors below and try again."
 msgstr ""
 
 #: accounts/templates/accounts/user_create_form.html:17
@@ -122,7 +162,8 @@ msgid "Subscribe to groups"
 msgstr ""
 
 #: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:181 templates/base.html.py:186
+#: templates/base.html:100 templates/base.html.py:105 templates/header.html:40
+#: templates/header.html.py:45
 msgid "Register"
 msgstr ""
 
@@ -130,7 +171,7 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:9
+#: accounts/templates/accounts/user_detail.html:9 templates/home.html:7
 msgid "Contributions"
 msgstr ""
 
@@ -142,63 +183,59 @@ msgstr ""
 msgid "group membership"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:65
+#: accounts/templates/accounts/user_detail.html:66
 msgid "Twitter account"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:68
+#: accounts/templates/accounts/user_detail.html:69
 msgid "Facebook account"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:73
+#: accounts/templates/accounts/user_detail.html:74
 msgid "Google talk account"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:77
+#: accounts/templates/accounts/user_detail.html:78
 msgid "Github account"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:81
+#: accounts/templates/accounts/user_detail.html:82
 msgid "Personal webpage"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:87
+#: accounts/templates/accounts/user_detail.html:88
 msgid "Groups: "
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:100
+#: accounts/templates/accounts/user_detail.html:101
 msgid "Collaborations by Type"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:116
+#: accounts/templates/accounts/user_detail.html:117
 msgid "Participation by Group"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:132
-msgid "Badges"
-msgstr ""
-
-#: accounts/templates/accounts/user_detail.html:151
+#: accounts/templates/accounts/user_detail.html:133
 msgid "Latest posted"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:156
+#: accounts/templates/accounts/user_detail.html:138
 msgid "There are no posts by this user so far."
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:160
+#: accounts/templates/accounts/user_detail.html:142
 msgid "View more posts..."
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:166
+#: accounts/templates/accounts/user_detail.html:148
 msgid "Latest contributions"
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:171
+#: accounts/templates/accounts/user_detail.html:153
 msgid "No contributions of this user so far."
 msgstr ""
 
-#: accounts/templates/accounts/user_detail.html:175
+#: accounts/templates/accounts/user_detail.html:157
 msgid "View more contributions..."
 msgstr ""
 
@@ -218,7 +255,7 @@ msgstr ""
 msgid "Change your avatar at Gravatar.com"
 msgstr ""
 
-#: accounts/templates/accounts/user_update_form.html:142 search/utils.py:8
+#: accounts/templates/accounts/user_update_form.html:142 search/utils.py:56
 msgid "Emails"
 msgstr ""
 
@@ -259,51 +296,125 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
-#: accounts/templates/accounts/user_update_form.html:193
-msgid ""
-"This feature is available only for those who need to change the password for "
-"some reason as having an old user with the same username, forgot your "
-"password to commit, usage of other XMPP Client for connection. Usually, you "
-"won't need to change this password. Only change it if you are sure about "
-"what you are doing."
+#: accounts/templates/accounts/user_update_form.html:185
+#: accounts/templates/accounts/user_update_form.html:189
+#: accounts/templates/registration/password_change_form_custom.html:26
+#: accounts/templates/registration/password_reset_confirm_custom.html:28
+msgid "Change Password"
 msgstr ""
 
-#: accounts/templates/accounts/user_update_form.html:203
+#: accounts/templates/accounts/user_update_form.html:196
 msgid "Update"
 msgstr ""
 
-#: accounts/views.py:148
+#: accounts/templates/registration/login.html:10
+#: accounts/templates/registration/password_change_form_custom.html:10
+#: accounts/templates/registration/password_reset_confirm_custom.html:12
+msgid "Please correct the error below and try again."
+msgstr ""
+
+#: accounts/templates/registration/login.html:34
+#: accounts/templates/registration/login.html:54 templates/base.html:99
+#: templates/base.html.py:101 templates/base.html:104
+#: templates/base.html.py:106 templates/header.html:39
+#: templates/header.html.py:41 templates/header.html:44
+#: templates/header.html.py:46
+msgid "Login"
+msgstr ""
+
+#: accounts/templates/registration/login.html:56
+msgid "Forgot Password?"
+msgstr ""
+
+#: accounts/templates/registration/password_change_form_custom.html:54
+#: accounts/templates/registration/password_reset_confirm_custom.html:51
+msgid "Change my password"
+msgstr ""
+
+#: accounts/templates/registration/password_reset_confirm_custom.html:3
+msgid "Setting New password"
+msgstr ""
+
+#: accounts/templates/registration/password_reset_form_custom.html:23
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll email "
+"instructions for setting a new one."
+msgstr ""
+
+#: accounts/templates/registration/password_reset_form_custom.html:26
+msgid "Email address:"
+msgstr ""
+
+#: accounts/templates/registration/password_reset_form_custom.html:37
+msgid "Reset password"
+msgstr ""
+
+#: accounts/views.py:126
 msgid "Your profile has been created!"
 msgstr ""
 
-#: accounts/views.py:149
-msgid ""
-"You must login to validated your profile. Profiles not validated are deleted "
-"in 24h."
+#: accounts/views.py:186
+msgid "Your password was changed."
 msgstr ""
 
-#: accounts/views.py:233
-msgid "Could not change your password. Please, try again later."
+#: accounts/views.py:202
+msgid "Your password has been set. You may go ahead and log in now."
 msgstr ""
 
-#: accounts/views.py:242
-msgid "You've changed your password successfully!"
-msgstr ""
-
-#: settings.py:160
-msgid "Image"
-msgstr ""
-
-#: search/templates/search/includes/search_filters.html:122
-msgid "Ticket"
-msgstr ""
-
-#: search/forms.py:18
-msgid "Type"
-msgstr ""
-
-#: home/context_processors.py:15
+#: home/context_processors.py:20
 msgid "Fork me!"
+msgstr ""
+
+#: plugins/gitlab/models.py:27
+msgid "Gitlab Project"
+msgstr ""
+
+#: plugins/gitlab/models.py:28
+msgid "Gitlab Projects"
+msgstr ""
+
+#: plugins/gitlab/models.py:54
+msgid "Gitlab Group"
+msgstr ""
+
+#: plugins/gitlab/models.py:55
+msgid "Gitlab Groups"
+msgstr ""
+
+#: plugins/gitlab/models.py:91
+msgid "Gitlab Merge Request"
+msgstr ""
+
+#: plugins/gitlab/models.py:92
+msgid "Gitlab Merge Requests"
+msgstr ""
+
+#: plugins/gitlab/models.py:120
+msgid "Gitlab Issue"
+msgstr ""
+
+#: plugins/gitlab/models.py:121
+msgid "Gitlab Issues"
+msgstr ""
+
+#: plugins/gitlab/models.py:176 plugins/gitlab/models.py:177
+msgid "Gitlab Comments"
+msgstr ""
+
+#: plugins/noosfero/models.py:39
+msgid "Community"
+msgstr ""
+
+#: plugins/noosfero/models.py:40
+msgid "Communities"
+msgstr ""
+
+#: plugins/noosfero/models.py:67
+msgid "Article"
+msgstr ""
+
+#: plugins/noosfero/models.py:68
+msgid "Articles"
 msgstr ""
 
 #: rss/feeds.py:13
@@ -319,11 +430,15 @@ msgid "Latest collaborations"
 msgstr ""
 
 #: search/forms.py:16 search/templates/search/search.html:46
-#: templates/base.html:171
+#: templates/base.html:89 templates/header.html:29
 msgid "Search"
 msgstr ""
 
-#: search/forms.py:19 search/views.py:22
+#: search/forms.py:18
+msgid "Type"
+msgstr ""
+
+#: search/forms.py:19 search/views.py:20
 msgid "Author"
 msgstr ""
 
@@ -335,7 +450,7 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: search/forms.py:26 search/views.py:25
+#: search/forms.py:26 search/views.py:23
 msgid "Mailinglist"
 msgstr ""
 
@@ -367,12 +482,8 @@ msgstr ""
 msgid "Collaborators"
 msgstr ""
 
-#: search/forms.py:37 templates/base.html:103
+#: search/forms.py:37
 msgid "Repository"
-msgstr ""
-
-#: search/forms.py:38
-msgid "Username"
 msgstr ""
 
 #: search/forms.py:39
@@ -387,17 +498,17 @@ msgstr ""
 msgid "Role"
 msgstr ""
 
-#: search/forms.py:42 search/templates/search/includes/search_filters.html:154
-#: search/templates/search/includes/search_filters.html:156
-#: search/templates/search/includes/search_filters.html:188
-#: search/templates/search/includes/search_filters.html:189
+#: search/forms.py:42 search/templates/search/includes/search_filters.html:132
+#: search/templates/search/includes/search_filters.html:134
+#: search/templates/search/includes/search_filters.html:166
+#: search/templates/search/includes/search_filters.html:167
 msgid "Since"
 msgstr ""
 
-#: search/forms.py:43 search/templates/search/includes/search_filters.html:163
-#: search/templates/search/includes/search_filters.html:165
-#: search/templates/search/includes/search_filters.html:192
-#: search/templates/search/includes/search_filters.html:193
+#: search/forms.py:43 search/templates/search/includes/search_filters.html:141
+#: search/templates/search/includes/search_filters.html:143
+#: search/templates/search/includes/search_filters.html:170
+#: search/templates/search/includes/search_filters.html:171
 msgid "Until"
 msgstr ""
 
@@ -425,8 +536,8 @@ msgid "Remove filter"
 msgstr ""
 
 #: search/templates/search/includes/search_filters.html:88
-#: search/templates/search/includes/search_filters.html:174
-#: search/templates/search/includes/search_filters.html:198
+#: search/templates/search/includes/search_filters.html:152
+#: search/templates/search/includes/search_filters.html:176
 msgid "Filter"
 msgstr ""
 
@@ -438,24 +549,7 @@ msgstr ""
 msgid "Types"
 msgstr ""
 
-#: search/templates/search/includes/search_filters.html:118 search/utils.py:7
-#: templates/open-data.html:130
-msgid "Wiki"
-msgstr ""
-
-#: search/templates/search/includes/search_filters.html:126
-msgid "Changeset"
-msgstr ""
-
-#: search/templates/search/includes/search_filters.html:130
-msgid "User"
-msgstr ""
-
-#: search/templates/search/includes/search_filters.html:134
-msgid "Attachment"
-msgstr ""
-
-#: search/templates/search/includes/search_filters.html:139 search/views.py:20
+#: search/templates/search/includes/search_filters.html:117 search/views.py:18
 msgid "Discussion"
 msgstr ""
 
@@ -484,84 +578,52 @@ msgstr ""
 msgid "You are searching for"
 msgstr ""
 
-#: search/utils.py:9 settings.py:157
-msgid "Code"
-msgstr ""
-
-#: search/utils.py:10
-msgid "Tickets"
-msgstr ""
-
-#: search/utils.py:11
-msgid "Attachments"
-msgstr ""
-
-#: settings.py:115
+#: settings.py:113
 msgid "English"
 msgstr ""
 
-#: settings.py:116
+#: settings.py:114
 msgid "Portuguese"
 msgstr ""
 
-#: settings.py:117
+#: settings.py:115
 msgid "Spanish"
 msgstr ""
 
-#: settings.py:140
+#: settings.py:138
 msgid "Recent activity"
 msgstr ""
 
-#: settings.py:144
+#: settings.py:142
 msgid "Relevance"
 msgstr ""
 
-#: settings.py:153
+#: settings.py:151
 msgid "Document"
 msgstr ""
 
-#: settings.py:155
+#: settings.py:153
 msgid "Presentation"
 msgstr ""
 
-#: settings.py:156
+#: settings.py:154
 msgid "Text"
 msgstr ""
 
-#: settings.py:159
+#: settings.py:155
+msgid "Code"
+msgstr ""
+
+#: settings.py:157
 msgid "Compressed"
 msgstr ""
 
-#: settings.py:162
+#: settings.py:158
+msgid "Image"
+msgstr ""
+
+#: settings.py:160
 msgid "Spreadsheet"
-msgstr ""
-
-#: settings.py:254
-msgid "Planet Colab"
-msgstr ""
-
-#: settings.py:255
-msgid "Colab blog aggregator"
-msgstr ""
-
-#: settings.py:288
-msgid "One Time Snippet"
-msgstr ""
-
-#: settings.py:289
-msgid "In one hour"
-msgstr ""
-
-#: settings.py:290
-msgid "In one week"
-msgstr ""
-
-#: settings.py:291
-msgid "In one month"
-msgstr ""
-
-#: settings.py:292
-msgid "Never"
 msgstr ""
 
 #: templates/404.html:5
@@ -572,112 +634,42 @@ msgstr ""
 msgid "Ooopz... something went wrong!"
 msgstr ""
 
-#: templates/base.html:87
-msgid "Timeline"
-msgstr ""
-
-#: templates/base.html:92 templates/base.html.py:110
+#: templates/base.html:83 templates/header.html:21
 msgid "Groups"
 msgstr ""
 
-#: templates/base.html:97
-msgid "Blogs"
-msgstr ""
-
-#: templates/base.html:105
-msgid "Public Projects"
-msgstr ""
-
-#: templates/base.html:107 templates/base.html.py:136
-msgid "Profile"
-msgstr ""
-
-#: templates/base.html:108
-msgid "New Project"
-msgstr ""
-
-#: templates/base.html:109
-msgid "Projects"
-msgstr ""
-
-#: templates/base.html:111
-msgid "Issues"
-msgstr ""
-
-#: templates/base.html:112
-msgid "Merge Requests"
-msgstr ""
-
-#: templates/base.html:120
-msgid "Social"
-msgstr ""
-
-#: templates/base.html:125
-msgid "Users"
-msgstr ""
-
-#: templates/base.html:130
-msgid "Communities"
-msgstr ""
-
-#: templates/base.html:141
-msgid "Control panel"
-msgstr ""
-
-#: templates/base.html:150
-msgid "Contribute"
-msgstr ""
-
-#: templates/base.html:154
-msgid "New Wiki Page"
-msgstr ""
-
-#: templates/base.html:156
-msgid "View Tickets"
-msgstr ""
-
-#: templates/base.html:158
-msgid "New Ticket"
-msgstr ""
-
-#: templates/base.html:160
-msgid "Roadmap"
-msgstr ""
-
-#: templates/base.html:163
-msgid "Browse Source"
-msgstr ""
-
-#: templates/base.html:165
-msgid "Continuous Integration"
-msgstr ""
-
-#: templates/base.html:201
+#: templates/base.html:119 templates/header.html:59
 msgid "My Profile"
 msgstr ""
 
-#: templates/base.html:202
+#: templates/base.html:120 templates/base.html.py:121 templates/header.html:60
+#: templates/header.html.py:61
 msgid "Logout"
 msgstr ""
 
-#: templates/base.html:214 templates/base.html.py:217
+#: templates/base.html:132 templates/base.html.py:135 templates/header.html:72
+#: templates/header.html.py:75
 msgid "Search here..."
 msgstr ""
 
-#: templates/base.html:231
+#: templates/base.html:149
 msgid "The login has failed. Please, try again."
 msgstr ""
 
-#: templates/base.html:256
+#: templates/footer.html:6
 msgid "Last email imported at"
 msgstr ""
 
-#: templates/base.html:263
+#: templates/footer.html:12
 msgid "The contents of this site is published under license"
 msgstr ""
 
-#: templates/base.html:266
+#: templates/footer.html:15
 msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
+msgstr ""
+
+#: templates/header.html:26
+msgid "Paste"
 msgstr ""
 
 #: templates/home.html:17
@@ -714,309 +706,4 @@ msgstr ""
 
 #: templates/home.html:71
 msgid "RSS - Latest Threads"
-msgstr ""
-
-#: templates/open-data.html:6
-msgid "OpenData - Communities"
-msgstr ""
-
-#: templates/open-data.html:7
-msgid ""
-"If you are interested in any other data that is not provided by this API, "
-"please contact us via the ticketing system (you must be registered in order "
-"to create a ticket)."
-msgstr ""
-
-#: templates/open-data.html:9
-msgid "Retrieving data via API"
-msgstr ""
-
-#: templates/open-data.html:10
-msgid "Colab API works through HTTP/REST, always returning JSON objects."
-msgstr ""
-
-#: templates/open-data.html:12
-msgid "The base API URL is"
-msgstr ""
-
-#: templates/open-data.html:19
-msgid ""
-"Each model listed below has a resource_uri field available, which is the "
-"object's data URI."
-msgstr ""
-
-#: templates/open-data.html:20
-msgid ""
-"The following list contains the available models to retrieve data and its "
-"fields available for filtering"
-msgstr ""
-
-#: templates/open-data.html:24 templates/open-data.html.py:39
-#: templates/open-data.html:50 templates/open-data.html.py:62
-#: templates/open-data.html:74 templates/open-data.html.py:95
-msgid "Fields"
-msgstr ""
-
-#: templates/open-data.html:25
-msgid ""
-"The email field is not shown for user's privacy, but you can use it to filter"
-msgstr ""
-
-#: templates/open-data.html:27
-msgid "The user's username"
-msgstr ""
-
-#: templates/open-data.html:28
-msgid "The user's email address"
-msgstr ""
-
-#: templates/open-data.html:29
-msgid "What is the user's institution"
-msgstr ""
-
-#: templates/open-data.html:30
-msgid "What is the user's role"
-msgstr ""
-
-#: templates/open-data.html:31
-msgid "The user's first name"
-msgstr ""
-
-#: templates/open-data.html:32
-msgid "The user's last name"
-msgstr ""
-
-#: templates/open-data.html:33
-msgid "A mini bio of the user"
-msgstr ""
-
-#: templates/open-data.html:40
-msgid ""
-"The address field is not shown for user's privacy, but you can use it to "
-"filter"
-msgstr ""
-
-#: templates/open-data.html:42
-msgid "It has a relationshop with the user described above"
-msgstr ""
-
-#: templates/open-data.html:43
-msgid "An email address"
-msgstr ""
-
-#: templates/open-data.html:44
-msgid "The user's real name"
-msgstr ""
-
-#: templates/open-data.html:52
-msgid "It has a relationship with the emailaddress described above"
-msgstr ""
-
-#: templates/open-data.html:53
-msgid "The message's body"
-msgstr ""
-
-#: templates/open-data.html:54
-msgid "The message's subject"
-msgstr ""
-
-#: templates/open-data.html:55
-msgid "The message's id"
-msgstr ""
-
-#: templates/open-data.html:56
-msgid "The message's received time"
-msgstr ""
-
-#: templates/open-data.html:64
-msgid "The revision's author username"
-msgstr ""
-
-#: templates/open-data.html:65
-msgid "When the revision's were created"
-msgstr ""
-
-#: templates/open-data.html:66
-msgid "The revision's key"
-msgstr ""
-
-#: templates/open-data.html:67
-msgid "The revision's message"
-msgstr ""
-
-#: templates/open-data.html:68
-msgid "The revision's repository name"
-msgstr ""
-
-#: templates/open-data.html:76
-msgid "The ticket's author username"
-msgstr ""
-
-#: templates/open-data.html:77
-msgid "The ticket's component"
-msgstr ""
-
-#: templates/open-data.html:78
-msgid "When the ticket's were created"
-msgstr ""
-
-#: templates/open-data.html:79
-msgid "The ticket's description"
-msgstr ""
-
-#: templates/open-data.html:80
-msgid "The ticket's id"
-msgstr ""
-
-#: templates/open-data.html:81
-msgid "The ticket's keywords"
-msgstr ""
-
-#: templates/open-data.html:82
-msgid "The ticket's milestone"
-msgstr ""
-
-#: templates/open-data.html:83 templates/open-data.html.py:99
-msgid "The time of the last modification"
-msgstr ""
-
-#: templates/open-data.html:84
-msgid "The username of the last user who modified the ticket"
-msgstr ""
-
-#: templates/open-data.html:85
-msgid "The ticket's priority"
-msgstr ""
-
-#: templates/open-data.html:86
-msgid "The ticket's severity"
-msgstr ""
-
-#: templates/open-data.html:87
-msgid "The ticket's status"
-msgstr ""
-
-#: templates/open-data.html:88
-msgid "The ticket's summary"
-msgstr ""
-
-#: templates/open-data.html:89
-msgid "The ticket's version"
-msgstr ""
-
-#: templates/open-data.html:97
-msgid "The wiki's author username"
-msgstr ""
-
-#: templates/open-data.html:98
-msgid "When the wiki's were created"
-msgstr ""
-
-#: templates/open-data.html:100
-msgid "The username of the last user who modified the wiki"
-msgstr ""
-
-#: templates/open-data.html:101
-msgid "The wiki's name"
-msgstr ""
-
-#: templates/open-data.html:102
-msgid "the wiki's content"
-msgstr ""
-
-#: templates/open-data.html:109
-msgid "Parameters"
-msgstr ""
-
-#: templates/open-data.html:112
-msgid "Results per page"
-msgstr ""
-
-#: templates/open-data.html:113
-msgid "Number of results to be displayed per page."
-msgstr ""
-
-#: templates/open-data.html:114
-msgid "Default: 20"
-msgstr ""
-
-#: templates/open-data.html:118
-msgid "Starts of n element"
-msgstr ""
-
-#: templates/open-data.html:119
-msgid "Where n is the index of the first result to appear in the page."
-msgstr ""
-
-#: templates/open-data.html:120
-msgid "Default: 0"
-msgstr ""
-
-#: templates/open-data.html:122
-msgid "Filtering"
-msgstr ""
-
-#: templates/open-data.html:124
-msgid "The field name"
-msgstr ""
-
-#: templates/open-data.html:125
-msgid ""
-"If you are looking for a specific wiki, and you know the wiki's name, you "
-"can filter it as below"
-msgstr ""
-
-#: templates/open-data.html:126
-msgid "WikiName"
-msgstr ""
-
-#: templates/open-data.html:127
-msgid ""
-"Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the "
-"value you want to filter."
-msgstr ""
-
-#: templates/open-data.html:128
-msgid "Usage"
-msgstr ""
-
-#: templates/open-data.html:129
-msgid ""
-"You can also filter using Django lookup fields with the double underscores, "
-"just as below"
-msgstr ""
-
-#: templates/open-data.html:131 templates/open-data.html.py:132
-msgid "test"
-msgstr ""
-
-#: templates/open-data.html:133
-msgid "Usage with relationships"
-msgstr ""
-
-#: templates/open-data.html:134
-msgid ""
-"You can use related fields to filter too. So, you can filter by any field of "
-"emailaddress using the 'from_address' field of message, which has a relation "
-"to emailaddress. You will achieve the related fields by using double "
-"underscore and the field's name. See the example below"
-msgstr ""
-
-#: templates/open-data.html:136
-msgid ""
-"So, real_name is a field of emailaddress, and you had access to this field "
-"by a message field called from_address and using double underscore to say "
-"you want to use a field of that relationship"
-msgstr ""
-
-#: templates/open-data.html:137
-msgid ""
-"Note: email filters must be exact. Which means that __contains, "
-"__startswith, __endswith and others won't work"
-msgstr ""
-
-#: templates/open-data.html:138
-msgid ""
-"Another example of usage with relations. Used to retrieve all messages of a "
-"given user, using the username or the email field"
 msgstr ""
