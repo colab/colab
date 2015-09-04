@@ -243,6 +243,7 @@ MAILMAN_API_URL = 'http://localhost:8124/v2/'
 
 LOGIN_URL = '/account/login'
 LOGOUT_URL = '/account/logout'
+LOGIN_REDIRECT_URL = '/'
 
 REVPROXY_ADD_REMOTE_USER = True
 
