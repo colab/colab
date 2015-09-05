@@ -127,7 +127,7 @@ def load_colab_apps():
 
         fields = ['verbose_name', 'upstream', 'urls',
                   'menu_urls', 'middlewares', 'dependencies',
-                  'context_processors', 'private_token', 'name']
+                  'context_processors', 'private_token', 'name', 'extra']
 
         for key in fields:
             value = py_settings_d.get(key)
