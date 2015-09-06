@@ -23,10 +23,10 @@ extra = {}
 
 menu_urls = (
 # Example of menu URL:
-#    url(display=_('Public Projects'), viewname='gitlab',
+#    url(display=_('Public Projects'), viewname='{{ app_name }}',
 #        kwargs={'path': 'public/projects'}, auth=False),
 
 # Example of authenticated user menu URL:
-#    url(display=_('Profile'), viewname='gitlab',
+#    url(display=_('Profile'), viewname='{{ app_name }}',
 #        kwargs={'path': 'profile'}, auth=True),
 )
