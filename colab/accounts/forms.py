@@ -237,6 +237,7 @@ class UserChangeForm(forms.ModelForm):
         help_text=_("Required. 30 characters or fewer. Letters and digits."),
         error_messages={
             'invalid': _("This value may contain only letters and numbers.")})
+    # TODO: remove this hardcoded URL from here
     password = ReadOnlyPasswordHashField(label=_("Password"),
                                          help_text=_("Raw passwords are not"
                                                      " stored, so there is no"
