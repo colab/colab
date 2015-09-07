@@ -1,22 +1,23 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#
+# 
 # Translators:
+# Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>, 2015
+# macártur de sousa carvalho <macartur.sc@gmail.com>, 2015
 # Sergio Oliveira <seocam@seocam.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-01 13:15+0000\n"
-"PO-Revision-Date: 2014-11-21 17:31+0000\n"
-"Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
-"colab/language/pt_BR/)\n"
-"Language: pt_BR\n"
+"PO-Revision-Date: 2015-09-07 19:13+0000\n"
+"Last-Translator: Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/colab/colab/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: accounts/admin.py:18
@@ -33,11 +34,11 @@ msgstr "Datas importantes"
 
 #: accounts/forms.py:37
 msgid "Social account does not exist"
-msgstr "Conta não existente"
+msgstr "Conta social não existe"
 
 #: accounts/forms.py:65 accounts/forms.py:71 accounts/forms.py:77
 msgid "This field cannot be blank."
-msgstr "Este campo não deve ficar em branco."
+msgstr "Este campo não pode ficar em branco."
 
 #: accounts/forms.py:118 accounts/templates/accounts/user_detail.html:38
 msgid "Bio"
@@ -54,15 +55,15 @@ msgstr "Listas de e-mail"
 #: accounts/forms.py:161
 #, python-format
 msgid "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
-msgstr "E-mail já está sendo utilizado. Deseja fazer <a href='%(url)s'>login</a> ?"
+msgstr "Este email ja está sendo utilizado.Caso seja o seu efetue o <a href='%(url)s'>login</a>"
 
 #: accounts/forms.py:163
 msgid "A user with that username already exists."
-msgstr "Nome de usuário já cadastrado"
+msgstr "Já existe um usuário com este nome."
 
 #: accounts/forms.py:164 accounts/forms.py:401 accounts/forms.py:465
 msgid "The two password fields didn't match."
-msgstr "Os campos de senhas não coincidem."
+msgstr "Os dois campos de senha não conferem."
 
 #: accounts/forms.py:166 accounts/forms.py:236 search/forms.py:38
 msgid "Username"
@@ -78,70 +79,52 @@ msgid "Password confirmation"
 msgstr "Confirmação de senha"
 
 #: accounts/forms.py:237 accounts/models.py:78
-#, fuzzy
-#| msgid "Required. 30 characters or fewer. Letters, digits and ./+/-/_ only."
 msgid "Required. 30 characters or fewer. Letters and digits."
-msgstr ""
-"Obrigatório. 30 caracteres ou menos. Letras, números e ./+/-/_ somente."
+msgstr "Obrigatório. 30 caracteres ou menos. Letras ou digitos."
 
 #: accounts/forms.py:239
 msgid "This value may contain only letters and numbers."
-msgstr "Esse campo só pode conter letras e/ou numeros."
+msgstr "Este campo pode conter apenas letras e números."
 
 #: accounts/forms.py:241
 msgid ""
 "Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=\"password/\">this "
 "form</a>."
-msgstr ""
-"Este campo não será armazenado, então não será possível visualizar sua "
-"senha, no entanto você poderá modificar sua senha utilizando"
-"<a href=\"password/\">este formulário</a>."
+msgstr "Senhas em claro não são armazenadas, então não será possível visualizar sua senha, no entanto você poderá modificar sua senha utilizando <a href=\\\"password/\\\">este formulário</a>."
 
 #: accounts/forms.py:280
 #, python-format
 msgid ""
 "Please enter a correct %(username)s and password. Note that both fields may "
 "be case-sensitive."
-msgstr ""
-"Por favor, entre com um %(username)s e senha corretos. Note que ambos "
-"os campos diferenciam maiúsculas e minúsculas."
+msgstr "Por favor entre com um %(username)s e senha. Note que ambos os campos diferenciam letras maiúsculas de minúsculas"
 
 #: accounts/forms.py:282
 msgid "This account is inactive."
 msgstr "Esta conta está inativa."
 
 #: accounts/forms.py:345
-#, fuzzy
-#| msgid "Emails"
 msgid "Email"
-msgstr "E-mails"
+msgstr "Email"
 
 #: accounts/forms.py:403
-#, fuzzy
-#| msgid "Reset password"
 msgid "New password"
-msgstr "Redefinir senha"
+msgstr "Nova senha"
 
 #: accounts/forms.py:405
-#, fuzzy
-#| msgid "Password confirmation"
 msgid "New password confirmation"
-msgstr "Confirmação de senha"
+msgstr "Confirmar nova senha"
 
 #: accounts/forms.py:436
 msgid "Your old password was entered incorrectly. Please enter it again."
-msgstr "Sua senha atual foi digitada errada. Por favor, tente novamente."
+msgstr "Sua senha atual está incorreta. Por favor tente novamente."
 
 #: accounts/forms.py:439
-#, fuzzy
-#| msgid "Password"
 msgid "Old password"
 msgstr "Senha atual"
 
 #: accounts/forms.py:469
-#, fuzzy
-#| msgid "Password"
 msgid "Password (again)"
 msgstr "Senha (novamente)"
 
@@ -167,7 +150,7 @@ msgstr "Cadastrar"
 #: accounts/templates/registration/password_reset_confirm_custom.html:14
 #: accounts/templates/registration/password_reset_form_custom.html:9
 msgid "Please correct the errors below and try again."
-msgstr "Por favor, corrija os erros abaixo e tente novamente."
+msgstr "Por favor corrija os erros abaixo e tente novamente."
 
 #: accounts/templates/accounts/user_create_form.html:17
 msgid "Required fields"
@@ -201,7 +184,7 @@ msgstr "editar perfil"
 
 #: accounts/templates/accounts/user_detail.html:30
 msgid "group membership"
-msgstr "inscrições nos grupos"
+msgstr "Inscrições nos grupos"
 
 #: accounts/templates/accounts/user_detail.html:66
 msgid "Twitter account"
@@ -213,7 +196,7 @@ msgstr "Conta Facebook"
 
 #: accounts/templates/accounts/user_detail.html:74
 msgid "Google talk account"
-msgstr "Conta Google"
+msgstr "Conta Google talk"
 
 #: accounts/templates/accounts/user_detail.html:78
 msgid "Github account"
@@ -221,7 +204,7 @@ msgstr "Conta Github"
 
 #: accounts/templates/accounts/user_detail.html:82
 msgid "Personal webpage"
-msgstr "Página pessoal"
+msgstr "Página web pessoal"
 
 #: accounts/templates/accounts/user_detail.html:88
 msgid "Groups: "
@@ -241,7 +224,7 @@ msgstr "Últimas postagens"
 
 #: accounts/templates/accounts/user_detail.html:138
 msgid "There are no posts by this user so far."
-msgstr "Não há postagens deste usuário até agora."
+msgstr "Não há posts deste usuário até agora."
 
 #: accounts/templates/accounts/user_detail.html:142
 msgid "View more posts..."
@@ -277,7 +260,7 @@ msgstr "Troque seu avatar em Gravatar.com"
 
 #: accounts/templates/accounts/user_update_form.html:142 search/utils.py:56
 msgid "Emails"
-msgstr "E-mails"
+msgstr "Emails"
 
 #: accounts/templates/accounts/user_update_form.html:151
 msgid "Primary"
@@ -293,7 +276,7 @@ msgstr "Definir como Primário"
 
 #: accounts/templates/accounts/user_update_form.html:155
 msgid "Deleting..."
-msgstr "Deletando..."
+msgstr "Apagando..."
 
 #: accounts/templates/accounts/user_update_form.html:155
 #: accounts/templates/accounts/user_update_form.html:167
@@ -310,7 +293,7 @@ msgstr "Verificar"
 
 #: accounts/templates/accounts/user_update_form.html:174
 msgid "Add another email address:"
-msgstr "Adicionar outro endereço de e-mail"
+msgstr "Adicionar outro endereço de email"
 
 #: accounts/templates/accounts/user_update_form.html:177
 msgid "Add"
@@ -331,7 +314,7 @@ msgstr "Atualizar"
 #: accounts/templates/registration/password_change_form_custom.html:10
 #: accounts/templates/registration/password_reset_confirm_custom.html:12
 msgid "Please correct the error below and try again."
-msgstr "Por favor, corrija o erro abaixo e tente novamente."
+msgstr "Por favor corrija o erro abaixo e tente novamente."
 
 #: accounts/templates/registration/login.html:34
 #: accounts/templates/registration/login.html:54 templates/base.html:99
@@ -344,34 +327,26 @@ msgstr "Entrar"
 
 #: accounts/templates/registration/login.html:56
 msgid "Forgot Password?"
-msgstr "Esqueceu sua senha?"
+msgstr "Esqueci minha Senha?"
 
 #: accounts/templates/registration/password_change_form_custom.html:54
 #: accounts/templates/registration/password_reset_confirm_custom.html:51
-#, fuzzy
-#| msgid "Change Password"
 msgid "Change my password"
-msgstr "Trocar senha"
+msgstr "Alterar minha senha"
 
 #: accounts/templates/registration/password_reset_confirm_custom.html:3
-#, fuzzy
-#| msgid "Change Password"
 msgid "Setting New password"
-msgstr "Nova senha"
+msgstr "Definir Nova Senha"
 
 #: accounts/templates/registration/password_reset_form_custom.html:23
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr ""
-"Esqueceu sua senha? Entre com seu endereço de email abaixo e nós iremos lhe "
-"enviar instruções para configurar uma nova senha"
+msgstr "Esqueceu sua senha? Digite seu email abaixo, e enviaremos instruções para redefinir sua senha."
 
 #: accounts/templates/registration/password_reset_form_custom.html:26
-#, fuzzy
-#| msgid "An email address"
 msgid "Email address:"
-msgstr "Endereço de e-mail:"
+msgstr "Endereço de email: "
 
 #: accounts/templates/registration/password_reset_form_custom.html:37
 msgid "Reset password"
@@ -383,67 +358,53 @@ msgstr "Seu perfil foi criado!"
 
 #: accounts/views.py:186
 msgid "Your password was changed."
-msgstr "Sua senha foi alterada"
+msgstr "Sua senha foi modificada."
 
 #: accounts/views.py:202
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Sua senha foi redefinida. Você pode prosseguir e autenticar agora."
+msgstr "Sua senha foi modificada. Você já pode efetuar o login agora."
 
 #: home/context_processors.py:20
 msgid "Fork me!"
 msgstr "Fork me!"
 
 #: plugins/gitlab/models.py:27
-#, fuzzy
-#| msgid "New Project"
 msgid "Gitlab Project"
-msgstr "Novo Projeto"
+msgstr "Projeto no Gitlab"
 
 #: plugins/gitlab/models.py:28
-#, fuzzy
-#| msgid "Projects"
 msgid "Gitlab Projects"
-msgstr "Projetos"
+msgstr "Projetos no Gitlab"
 
 #: plugins/gitlab/models.py:54
 msgid "Gitlab Group"
-msgstr "Grupo"
+msgstr "Grupo no Gitlab"
 
 #: plugins/gitlab/models.py:55
-#, fuzzy
-#| msgid "Groups"
 msgid "Gitlab Groups"
-msgstr "Grupos"
+msgstr "Grupos no Gitlab"
 
 #: plugins/gitlab/models.py:91
-#, fuzzy
-#| msgid "Merge Requests"
 msgid "Gitlab Merge Request"
-msgstr "Merge Request"
+msgstr "Envio de Contribuição no Gitlab"
 
 #: plugins/gitlab/models.py:92
-#, fuzzy
-#| msgid "Merge Requests"
 msgid "Gitlab Merge Requests"
-msgstr "Merge Requests"
+msgstr "Envio de Contribuições no Gitlab"
 
 #: plugins/gitlab/models.py:120
 msgid "Gitlab Issue"
-msgstr "Issue"
+msgstr "Tíquete no Gitlab"
 
 #: plugins/gitlab/models.py:121
-#, fuzzy
-#| msgid "Issues"
 msgid "Gitlab Issues"
-msgstr "Issues"
+msgstr "Tíquetes no Gitlab"
 
 #: plugins/gitlab/models.py:176 plugins/gitlab/models.py:177
 msgid "Gitlab Comments"
-msgstr "Comentários"
+msgstr "Comentários no Gitlab"
 
 #: plugins/noosfero/models.py:39
-#, fuzzy
-#| msgid "Communities"
 msgid "Community"
 msgstr "Comunidade"
 
@@ -494,7 +455,7 @@ msgstr "Status"
 
 #: search/forms.py:26 search/views.py:23
 msgid "Mailinglist"
-msgstr "Lista de E-mail"
+msgstr "Lista de discussão"
 
 #: search/forms.py:30
 msgid "Milestone"
@@ -510,7 +471,7 @@ msgstr "Componente"
 
 #: search/forms.py:33
 msgid "Severity"
-msgstr "Seriedade"
+msgstr "Severidade"
 
 #: search/forms.py:34
 msgid "Reporter"
@@ -538,7 +499,7 @@ msgstr "Instituição"
 
 #: search/forms.py:41
 msgid "Role"
-msgstr "Cargo"
+msgstr "Papel"
 
 #: search/forms.py:42 search/templates/search/includes/search_filters.html:132
 #: search/templates/search/includes/search_filters.html:134
@@ -593,7 +554,7 @@ msgstr "Tipos"
 
 #: search/templates/search/includes/search_filters.html:117 search/views.py:18
 msgid "Discussion"
-msgstr "Discussões"
+msgstr "Discussão"
 
 #: search/templates/search/search.html:5
 msgid "search"
@@ -674,7 +635,7 @@ msgstr "Não encontrado. Continue procurando! :)"
 
 #: templates/500.html:2
 msgid "Ooopz... something went wrong!"
-msgstr "Opa... algo saiu errado!"
+msgstr "Ooopa... algo saiu errado!"
 
 #: templates/base.html:83 templates/header.html:21
 msgid "Groups"
@@ -700,7 +661,7 @@ msgstr "O login falhou. Por favor, tente novamente."
 
 #: templates/footer.html:6
 msgid "Last email imported at"
-msgstr "Último e-mail importado em"
+msgstr "Último email importado em"
 
 #: templates/footer.html:12
 msgid "The contents of this site is published under license"
@@ -711,8 +672,6 @@ msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 
 #: templates/header.html:26
-#, fuzzy
-#| msgid "Paste it"
 msgid "Paste"
 msgstr "Cole aqui"
 
@@ -751,481 +710,3 @@ msgstr "Últimas Discussões"
 #: templates/home.html:71
 msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
-
-#~ msgid "Confirm Password "
-#~ msgstr "Confirmar senha"
-
-#~ msgid "Enter the same password as above, for verification."
-#~ msgstr "Digite a mesma senha que acima, para verificação."
-
-#~ msgid "Password mismatch"
-#~ msgstr "Senhas diferentes"
-
-#~ msgid "Change XMPP Client and SVN Password"
-#~ msgstr "Trocar senha do Repositório e do Mensageiro"
-
-#~ msgid "To login please click in the link below:"
-#~ msgstr "Para acessar por favor clique no link abaixo:"
-
-#~ msgid "Badges"
-#~ msgstr "Medalhas"
-
-#~ msgid ""
-#~ "This feature is available only for those who need to change the password "
-#~ "for some reason as having an old user with the same username, forgot your "
-#~ "password to commit, usage of other XMPP Client for connection. Usually, "
-#~ "you won't need to change this password. Only change it if you are sure "
-#~ "about what you are doing."
-#~ msgstr ""
-#~ "Este recurso está disponível para quem precisa trocar a senha por algum "
-#~ "motivo como ter um usuário antigo com mesmo nome de usuário, esqueceu da "
-#~ "senha antiga para commit, uso de outro cliente XMPP para conexão. "
-#~ "Normalmente, você não terá que trocar essa senha. Somente troque essa "
-#~ "senha se tiver certeza do que está fazendo."
-
-#~ msgid "Could not change your password. Please, try again later."
-#~ msgstr ""
-#~ "Não conseguimos alterar sua senha. Por favor, tente novamente mais tarde."
-
-#~ msgid "You've changed your password successfully!"
-#~ msgstr "Senha alterada com sucesso!"
-
-#~ msgid ""
-#~ "We've emailed you instructions for setting your password. You should be "
-#~ "receiving them shortly."
-#~ msgstr ""
-#~ "Nos enviamos o email com as intruções para mudança de senha. Em breve "
-#~ "você deve recebê-lo."
-
-#~ msgid "Ticket"
-#~ msgstr "Tíquetes"
-
-#~ msgid "Wiki"
-#~ msgstr "Wiki"
-
-#~ msgid "Changeset"
-#~ msgstr "Conjunto de Mudanças"
-
-#~ msgid "User"
-#~ msgstr "Usuário"
-
-#~ msgid "Attachment"
-#~ msgstr "Anexo"
-
-#~ msgid "Tickets"
-#~ msgstr "Tíquetes"
-
-#~ msgid "Attachments"
-#~ msgstr "Anexos"
-
-#~ msgid "Planet Colab"
-#~ msgstr "Planet Colab"
-
-#~ msgid "Colab blog aggregator"
-#~ msgstr "Agregador de blog Colab"
-
-#~ msgid "One Time Snippet"
-#~ msgstr "Uma única visualização"
-
-#~ msgid "In one hour"
-#~ msgstr "Em uma hora"
-
-#~ msgid "In one week"
-#~ msgstr "Em uma semana"
-
-#~ msgid "In one month"
-#~ msgstr "Em um mês"
-
-#~ msgid "Never"
-#~ msgstr "Nunca"
-
-#~ msgid "Timeline"
-#~ msgstr "Linha do Tempo"
-
-#~ msgid "Blogs"
-#~ msgstr "Blogs"
-
-#~ msgid "Public Projects"
-#~ msgstr "Projetos Públicos"
-
-#~ msgid "Profile"
-#~ msgstr "Perfil"
-
-#~ msgid "Social"
-#~ msgstr "Social"
-
-#~ msgid "Users"
-#~ msgstr "Usuários"
-
-#~ msgid "Control panel"
-#~ msgstr "Painel de Controle"
-
-#~ msgid "Contribute"
-#~ msgstr "Contribua"
-
-#~ msgid "New Wiki Page"
-#~ msgstr "Nova Página Wiki"
-
-#~ msgid "View Tickets"
-#~ msgstr "Ver Tiquetes"
-
-#~ msgid "New Ticket"
-#~ msgstr "Novo Tíquete"
-
-#~ msgid "Roadmap"
-#~ msgstr "Planejamento"
-
-#~ msgid "Browse Source"
-#~ msgstr "Códigos Fontes"
-
-#~ msgid "Continuous Integration"
-#~ msgstr "Integração Contínua"
-
-#, fuzzy
-#~| msgid "Comparison"
-#~ msgid "Compare"
-#~ msgstr "Comparação"
-
-#~ msgid "Expires in: %(date)s"
-#~ msgstr "Expira em: %(date)s"
-
-#~ msgid "Snippet never expires"
-#~ msgstr "Snippet nunca expira"
-
-#, fuzzy
-#~| msgid "One Time Snippet"
-#~ msgid "One-time snippet"
-#~ msgstr "Uma única visualização"
-
-#~ msgid "Really delete this snippet?"
-#~ msgstr "Deseja realmente deletar esse snippet?"
-
-#, fuzzy
-#~| msgid "Delete"
-#~ msgid "Delete Now"
-#~ msgstr "Apagar"
-
-#, fuzzy
-#~| msgid "One Time Snippet"
-#~ msgid "Compare Snippets"
-#~ msgstr "Uma única visualização"
-
-#~ msgid "View Raw"
-#~ msgstr "Ver código"
-
-#~ msgid "Gist"
-#~ msgstr "Gist"
-
-#~ msgid "This is a one-time snippet."
-#~ msgstr "Esste é um snippet que será usado apenas uma vez."
-
-#~ msgid ""
-#~ "It will automatically get deleted after {{ remaining }} further views."
-#~ msgstr ""
-#~ "Isso será automaticamente deletado depois de {{ remaining }} "
-#~ "visualizações."
-
-#~ msgid "It will automatically get deleted after the next view."
-#~ msgstr "Isso será automaticamente deletado após a próxima visualização."
-
-#~ msgid "It cannot be viewed again."
-#~ msgstr "Isso não pode ser visto novamente."
-
-#~ msgid "Reply to this snippet"
-#~ msgstr "Responda esse snippet"
-
-#~ msgid ""
-#~ "\n"
-#~ "    Diff between <a href=\"%(filea_url)s\">#%(filea_id)s</a> and <a href="
-#~ "\"%(fileb_url)s\">#%(fileb_id)s</a>\n"
-#~ "    "
-#~ msgstr ""
-#~ "\n"
-#~ "    Diferença entre <a href=\"%(filea_url)s\">#%(filea_id)s</a> e <a href="
-#~ "\"%(fileb_url)s\">#%(fileb_id)s</a>\n"
-#~ "    "
-
-#~ msgid "OpenData - Communities"
-#~ msgstr "OpenData - Comunidades"
-
-#~ msgid ""
-#~ "If you are interested in any other data that is not provided by this API, "
-#~ "please contact us via the ticketing system (you must be registered in "
-#~ "order to create a ticket)."
-#~ msgstr ""
-#~ "Se você estiver interessado por qualquer outra informação não provida por "
-#~ "esta API, por favor nos contacte através do nosso sistema de tíquetes "
-#~ "(você deve estar logado para conseguir criar um tíquete). "
-
-#~ msgid "Retrieving data via API"
-#~ msgstr "Recuperando informação através da API"
-
-#~ msgid "Colab API works through HTTP/REST, always returning JSON objects."
-#~ msgstr ""
-#~ "A API do Colab funciona com a utilização de HTTP/REST e sempre retorna "
-#~ "objetos JSON."
-
-#~ msgid "The base API URL is"
-#~ msgstr "A URL base da API é"
-
-#~ msgid ""
-#~ "Each model listed below has a resource_uri field available, which is the "
-#~ "object's data URI."
-#~ msgstr ""
-#~ "Cada modelo listado abaixo tem um resource_uri que representa a URI do "
-#~ "objeto"
-
-#~ msgid ""
-#~ "The following list contains the available models to retrieve data and its "
-#~ "fields available for filtering"
-#~ msgstr ""
-#~ "A lista abaixo contém a lista de modelo disponíveis para pesquisa e os "
-#~ "campos disponíveis para filtro"
-
-#~ msgid "Fields"
-#~ msgstr "Campos"
-
-#~ msgid ""
-#~ "The email field is not shown for user's privacy, but you can use it to "
-#~ "filter"
-#~ msgstr ""
-#~ "O campo email não é exibido por uma questão de privacidade do usuário, "
-#~ "por outro lado ele poderá ser utilizado em filtros"
-
-#~ msgid "The user's username"
-#~ msgstr "O username do usuário"
-
-#~ msgid "The user's email address"
-#~ msgstr "O endereço e-mail do usuário"
-
-#~ msgid "What is the user's institution"
-#~ msgstr "Instituição do usuário"
-
-#~ msgid "What is the user's role"
-#~ msgstr "Posição do usuário"
-
-#~ msgid "The user's first name"
-#~ msgstr "Primeiro nome do usuário"
-
-#~ msgid "The user's last name"
-#~ msgstr "Último nome do usuário"
-
-#~ msgid "A mini bio of the user"
-#~ msgstr "O mini bio do usuário"
-
-#~ msgid ""
-#~ "The address field is not shown for user's privacy, but you can use it to "
-#~ "filter"
-#~ msgstr ""
-#~ "O campo email não é exibido por uma questão de privacidade do usuário, "
-#~ "por outro lado ele poderá ser utilizado em filtros"
-
-#~ msgid "It has a relationshop with the user described above"
-#~ msgstr "Tem um relacionamento com usuário como descrito acima"
-
-#~ msgid "An email address"
-#~ msgstr "Um endereço de e-mail"
-
-#~ msgid "The user's real name"
-#~ msgstr "O nome real do usuário"
-
-#~ msgid "It has a relationship with the emailaddress described above"
-#~ msgstr "Tem um relacionamento com emailaddress como descrito acima"
-
-#~ msgid "The message's body"
-#~ msgstr "O corpo da mensagem"
-
-#~ msgid "The message's subject"
-#~ msgstr "O título da mensagem"
-
-#~ msgid "The message's id"
-#~ msgstr "O ID da mensagem"
-
-#~ msgid "The message's received time"
-#~ msgstr "A hora que a mensagem foi recebida"
-
-#~ msgid "The revision's author username"
-#~ msgstr "O username do autor da revisão"
-
-#~ msgid "When the revision's were created"
-#~ msgstr "Quando a revisão foi criada"
-
-#~ msgid "The revision's key"
-#~ msgstr "A chave da revisão"
-
-#~ msgid "The revision's message"
-#~ msgstr "A mensagem da revisão"
-
-#~ msgid "The revision's repository name"
-#~ msgstr "O nome do repositório da revisão"
-
-#~ msgid "The ticket's author username"
-#~ msgstr "O nome do autor do tíquete"
-
-#~ msgid "The ticket's component"
-#~ msgstr "O componente do tíquete"
-
-#~ msgid "When the ticket's were created"
-#~ msgstr "Quando o tíquete foi criado"
-
-#~ msgid "The ticket's description"
-#~ msgstr "A descrição do tíquete"
-
-#~ msgid "The ticket's id"
-#~ msgstr "O ID do tíquete"
-
-#~ msgid "The ticket's keywords"
-#~ msgstr "As keywords do tíquete"
-
-#~ msgid "The ticket's milestone"
-#~ msgstr "O milestone do tíquete"
-
-#~ msgid "The time of the last modification"
-#~ msgstr "A hora da última modificação"
-
-#~ msgid "The username of the last user who modified the ticket"
-#~ msgstr "O username do último usuário que modificou o tíquete"
-
-#~ msgid "The ticket's priority"
-#~ msgstr "A prioridade do tíquete"
-
-#~ msgid "The ticket's severity"
-#~ msgstr "A gravidade do tíquete"
-
-#~ msgid "The ticket's status"
-#~ msgstr "O status do tíquete"
-
-#~ msgid "The ticket's summary"
-#~ msgstr "O resumo do tíquete"
-
-#~ msgid "The ticket's version"
-#~ msgstr "A versão do tíquete"
-
-#~ msgid "The wiki's author username"
-#~ msgstr "O username do autor da wiki"
-
-#~ msgid "When the wiki's were created"
-#~ msgstr "Quando a wiki foi criada"
-
-#~ msgid "The username of the last user who modified the wiki"
-#~ msgstr "O username do último usuário a modificar a wiki"
-
-#~ msgid "The wiki's name"
-#~ msgstr "O nome da wiki"
-
-#~ msgid "the wiki's content"
-#~ msgstr "O conteúdo da wiki"
-
-#~ msgid "Parameters"
-#~ msgstr "Parâmetros"
-
-#~ msgid "Results per page"
-#~ msgstr "Resultados por página"
-
-#~ msgid "Number of results to be displayed per page."
-#~ msgstr "Número de resultados a serem exibidos por página."
-
-#~ msgid "Default: 20"
-#~ msgstr "Padrão: 20"
-
-#~ msgid "Starts of n element"
-#~ msgstr "Inicia pelo n-ésimo elemento"
-
-#~ msgid "Where n is the index of the first result to appear in the page."
-#~ msgstr "Onde n é o índice do primeiro resultado a ser exibido na página."
-
-#~ msgid "Default: 0"
-#~ msgstr "Padrão: 0"
-
-#~ msgid "Filtering"
-#~ msgstr "Filtrando"
-
-#~ msgid "The field name"
-#~ msgstr "O nome do campo"
-
-#~ msgid ""
-#~ "If you are looking for a specific wiki, and you know the wiki's name, you "
-#~ "can filter it as below"
-#~ msgstr ""
-#~ "Se você está buscando especificamente por uma wiki e você sabe o nome da "
-#~ "wiki, você pode utilizar o filtro abaixo"
-
-#~ msgid "WikiName"
-#~ msgstr "WikiName"
-
-#~ msgid ""
-#~ "Where &quot;name&quot; is the fieldname and &quot;WikiName&quot; is the "
-#~ "value you want to filter."
-#~ msgstr ""
-#~ "Onde  &quot;name&quot; é o fieldname e &quot;WikiName&quot; é o value que "
-#~ "você quer filtrar."
-
-#~ msgid "Usage"
-#~ msgstr "Uso"
-
-#~ msgid ""
-#~ "You can also filter using Django lookup fields with the double "
-#~ "underscores, just as below"
-#~ msgstr ""
-#~ "Você também pode filtrar usando lookup fields do Django com underscores "
-#~ "duplos, como demonstrado abaixo"
-
-#~ msgid "test"
-#~ msgstr "test"
-
-#~ msgid "Usage with relationships"
-#~ msgstr "Uso com relacionamentos"
-
-#~ msgid ""
-#~ "You can use related fields to filter too. So, you can filter by any field "
-#~ "of emailaddress using the 'from_address' field of message, which has a "
-#~ "relation to emailaddress. You will achieve the related fields by using "
-#~ "double underscore and the field's name. See the example below"
-#~ msgstr ""
-#~ "Você pode também pode utilizar campos relacionados para filtrar. Você "
-#~ "pode filtrar por qualquer campo de emailaddress utilizando o "
-#~ "'from_address' da mensagem, que tem relação com emailaddress. Para tal "
-#~ "você precisará utilizar os underscores duplos e o nome do campo desejado. "
-#~ "Veja o exemplo abaixo"
-
-#~ msgid ""
-#~ "So, real_name is a field of emailaddress, and you had access to this "
-#~ "field by a message field called from_address and using double underscore "
-#~ "to say you want to use a field of that relationship"
-#~ msgstr ""
-#~ "real_name é um campo de emailaddress e você pode acessá-lo através de um "
-#~ "campo do do objeto message, from_address, e underscores duplos para "
-#~ "referenciar que este campo pertence ao modelo relacionado"
-
-#~ msgid ""
-#~ "Note: email filters must be exact. Which means that __contains, "
-#~ "__startswith, __endswith and others won't work"
-#~ msgstr ""
-#~ "Nota: os filtros de email devem ser exatos. Isso significa que "
-#~ "__contains, __startswith, __endswith e outros métodos de busca parcial "
-#~ "não funcionarão"
-
-#~ msgid ""
-#~ "Another example of usage with relations. Used to retrieve all messages of "
-#~ "a given user, using the username or the email field"
-#~ msgstr ""
-#~ "Outro exemplo de uso com relacionamento. Usado para recuperar todos as "
-#~ "mensagem de um dado usuário usando o campo username ou email"
-
-#~ msgid "Please correct the errors below and try again"
-#~ msgstr "Por favor, corrija os erros abaixo e tente novamente"
-
-#, fuzzy
-#~| msgid "Please correct the error below and try again"
-#~ msgid "Please correct the error below and try again"
-#~ msgstr "Por favor, corrija o erro abaixo e tente novamente"
-
-#~ msgid "%(count)s users deleted."
-#~ msgstr "%(count)s usuários deletados."
-
-#~ msgid ""
-#~ "You must login to validated your profile. Profiles not validated are "
-#~ "deleted in 24h."
-#~ msgstr ""
-#~ "Você deve se logar para validar seu perfil. Perfis não validados serão "
-#~ "deletados em 24h."
