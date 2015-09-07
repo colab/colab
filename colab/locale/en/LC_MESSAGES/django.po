@@ -1,145 +1,145 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
+# 
+# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-01 13:15+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2015-09-04 19:21+0000\n"
+"Last-Translator: Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>\n"
+"Language-Team: English (http://www.transifex.com/colab/colab/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: accounts/admin.py:18
 msgid "Personal info"
-msgstr ""
+msgstr "Personal info"
 
 #: accounts/admin.py:24
 msgid "Permissions"
-msgstr ""
+msgstr "Permissions"
 
 #: accounts/admin.py:28
 msgid "Important dates"
-msgstr ""
+msgstr "Important dates"
 
 #: accounts/forms.py:37
 msgid "Social account does not exist"
-msgstr ""
+msgstr "Social account does not exist"
 
 #: accounts/forms.py:65 accounts/forms.py:71 accounts/forms.py:77
 msgid "This field cannot be blank."
-msgstr ""
+msgstr "This field cannot be blank."
 
 #: accounts/forms.py:118 accounts/templates/accounts/user_detail.html:38
 msgid "Bio"
-msgstr ""
+msgstr "Bio"
 
 #: accounts/forms.py:119
 msgid "Write something about you in 200 characters or less."
-msgstr ""
+msgstr "Write something about you in 200 characters or less."
 
 #: accounts/forms.py:148
 msgid "Mailing lists"
-msgstr ""
+msgstr "Mailing lists"
 
 #: accounts/forms.py:161
 #, python-format
 msgid "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
-msgstr ""
+msgstr "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
 
 #: accounts/forms.py:163
 msgid "A user with that username already exists."
-msgstr ""
+msgstr "A user with that username already exists."
 
 #: accounts/forms.py:164 accounts/forms.py:401 accounts/forms.py:465
 msgid "The two password fields didn't match."
-msgstr ""
+msgstr "The two password fields didn't match."
 
 #: accounts/forms.py:166 accounts/forms.py:236 search/forms.py:38
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 #: accounts/forms.py:173 accounts/forms.py:240 accounts/forms.py:277
 #: accounts/forms.py:467
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 #: accounts/forms.py:175
 msgid "Password confirmation"
-msgstr ""
+msgstr "Password confirmation"
 
 #: accounts/forms.py:237 accounts/models.py:78
 msgid "Required. 30 characters or fewer. Letters and digits."
-msgstr ""
+msgstr "Required. 30 characters or fewer. Letters and digits."
 
 #: accounts/forms.py:239
 msgid "This value may contain only letters and numbers."
-msgstr ""
+msgstr "This value may contain only letters and numbers."
 
 #: accounts/forms.py:241
 msgid ""
 "Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=\"password/\">this "
 "form</a>."
-msgstr ""
+msgstr "Raw passwords are not stored, so there is no way to see this user's password, but you can change the password using <a href=\"password/\">this form</a>."
 
 #: accounts/forms.py:280
 #, python-format
 msgid ""
 "Please enter a correct %(username)s and password. Note that both fields may "
 "be case-sensitive."
-msgstr ""
+msgstr "Please enter a correct %(username)s and password. Note that both fields may be case-sensitive."
 
 #: accounts/forms.py:282
 msgid "This account is inactive."
-msgstr ""
+msgstr "This account is inactive."
 
 #: accounts/forms.py:345
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 #: accounts/forms.py:403
 msgid "New password"
-msgstr ""
+msgstr "New password"
 
 #: accounts/forms.py:405
 msgid "New password confirmation"
-msgstr ""
+msgstr "New password confirmation"
 
 #: accounts/forms.py:436
 msgid "Your old password was entered incorrectly. Please enter it again."
-msgstr ""
+msgstr "Your old password was entered incorrectly. Please enter it again."
 
 #: accounts/forms.py:439
 msgid "Old password"
-msgstr ""
+msgstr "Old password"
 
 #: accounts/forms.py:469
 msgid "Password (again)"
-msgstr ""
+msgstr "Password (again)"
 
 #: accounts/models.py:82
 msgid "Enter a valid username."
-msgstr ""
+msgstr "Enter a valid username."
 
 #: accounts/templates/accounts/manage_subscriptions.html:6
 msgid "Group Subscriptions"
-msgstr ""
+msgstr "Group Subscriptions"
 
 #: accounts/templates/accounts/manage_subscriptions.html:36
 msgid "Update subscriptions"
-msgstr ""
+msgstr "Update subscriptions"
 
 #: accounts/templates/accounts/user_create_form.html:5
 msgid "Sign up"
-msgstr ""
+msgstr "Sign up"
 
 #: accounts/templates/accounts/user_create_form.html:10
 #: accounts/templates/registration/login.html:14
@@ -147,171 +147,171 @@ msgstr ""
 #: accounts/templates/registration/password_reset_confirm_custom.html:14
 #: accounts/templates/registration/password_reset_form_custom.html:9
 msgid "Please correct the errors below and try again."
-msgstr ""
+msgstr "Please correct the errors below and try again."
 
 #: accounts/templates/accounts/user_create_form.html:17
 msgid "Required fields"
-msgstr ""
+msgstr "Required fields"
 
 #: accounts/templates/accounts/user_create_form.html:29
 msgid "Personal Information"
-msgstr ""
+msgstr "Personal Information"
 
 #: accounts/templates/accounts/user_create_form.html:46
 msgid "Subscribe to groups"
-msgstr ""
+msgstr "Subscribe to groups"
 
 #: accounts/templates/accounts/user_create_form.html:60
 #: templates/base.html:100 templates/base.html.py:105 templates/header.html:40
 #: templates/header.html.py:45
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 #: accounts/templates/accounts/user_detail.html:8
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 #: accounts/templates/accounts/user_detail.html:9 templates/home.html:7
 msgid "Contributions"
-msgstr ""
+msgstr "Contributions"
 
 #: accounts/templates/accounts/user_detail.html:29
 msgid "edit profile"
-msgstr ""
+msgstr "edit profile"
 
 #: accounts/templates/accounts/user_detail.html:30
 msgid "group membership"
-msgstr ""
+msgstr "group membership"
 
 #: accounts/templates/accounts/user_detail.html:66
 msgid "Twitter account"
-msgstr ""
+msgstr "Twitter account"
 
 #: accounts/templates/accounts/user_detail.html:69
 msgid "Facebook account"
-msgstr ""
+msgstr "Facebook account"
 
 #: accounts/templates/accounts/user_detail.html:74
 msgid "Google talk account"
-msgstr ""
+msgstr "Google talk account"
 
 #: accounts/templates/accounts/user_detail.html:78
 msgid "Github account"
-msgstr ""
+msgstr "Github account"
 
 #: accounts/templates/accounts/user_detail.html:82
 msgid "Personal webpage"
-msgstr ""
+msgstr "Personal webpage"
 
 #: accounts/templates/accounts/user_detail.html:88
 msgid "Groups: "
-msgstr ""
+msgstr "Groups: "
 
 #: accounts/templates/accounts/user_detail.html:101
 msgid "Collaborations by Type"
-msgstr ""
+msgstr "Collaborations by Type"
 
 #: accounts/templates/accounts/user_detail.html:117
 msgid "Participation by Group"
-msgstr ""
+msgstr "Participation by Group"
 
 #: accounts/templates/accounts/user_detail.html:133
 msgid "Latest posted"
-msgstr ""
+msgstr "Latest posted"
 
 #: accounts/templates/accounts/user_detail.html:138
 msgid "There are no posts by this user so far."
-msgstr ""
+msgstr "There are no posts by this user so far."
 
 #: accounts/templates/accounts/user_detail.html:142
 msgid "View more posts..."
-msgstr ""
+msgstr "View more posts..."
 
 #: accounts/templates/accounts/user_detail.html:148
 msgid "Latest contributions"
-msgstr ""
+msgstr "Latest contributions"
 
 #: accounts/templates/accounts/user_detail.html:153
 msgid "No contributions of this user so far."
-msgstr ""
+msgstr "No contributions of this user so far."
 
 #: accounts/templates/accounts/user_detail.html:157
 msgid "View more contributions..."
-msgstr ""
+msgstr "View more contributions..."
 
 #: accounts/templates/accounts/user_update_form.html:65
 msgid "We sent a verification email to "
-msgstr ""
+msgstr "We sent a verification email to "
 
 #: accounts/templates/accounts/user_update_form.html:66
 msgid "Please follow the instructions in it."
-msgstr ""
+msgstr "Please follow the instructions in it."
 
 #: accounts/templates/accounts/user_update_form.html:110
 msgid "profile information"
-msgstr ""
+msgstr "profile information"
 
 #: accounts/templates/accounts/user_update_form.html:115
 msgid "Change your avatar at Gravatar.com"
-msgstr ""
+msgstr "Change your avatar at Gravatar.com"
 
 #: accounts/templates/accounts/user_update_form.html:142 search/utils.py:56
 msgid "Emails"
-msgstr ""
+msgstr "Emails"
 
 #: accounts/templates/accounts/user_update_form.html:151
 msgid "Primary"
-msgstr ""
+msgstr "Primary"
 
 #: accounts/templates/accounts/user_update_form.html:154
 msgid "Setting..."
-msgstr ""
+msgstr "Setting..."
 
 #: accounts/templates/accounts/user_update_form.html:154
 msgid "Set as Primary"
-msgstr ""
+msgstr "Set as Primary"
 
 #: accounts/templates/accounts/user_update_form.html:155
 msgid "Deleting..."
-msgstr ""
+msgstr "Deleting..."
 
 #: accounts/templates/accounts/user_update_form.html:155
 #: accounts/templates/accounts/user_update_form.html:167
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 #: accounts/templates/accounts/user_update_form.html:166
 msgid "Sending verification..."
-msgstr ""
+msgstr "Sending verification..."
 
 #: accounts/templates/accounts/user_update_form.html:166
 msgid "Verify"
-msgstr ""
+msgstr "Verify"
 
 #: accounts/templates/accounts/user_update_form.html:174
 msgid "Add another email address:"
-msgstr ""
+msgstr "Add another email address:"
 
 #: accounts/templates/accounts/user_update_form.html:177
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 #: accounts/templates/accounts/user_update_form.html:185
 #: accounts/templates/accounts/user_update_form.html:189
 #: accounts/templates/registration/password_change_form_custom.html:26
 #: accounts/templates/registration/password_reset_confirm_custom.html:28
 msgid "Change Password"
-msgstr ""
+msgstr "Change Password"
 
 #: accounts/templates/accounts/user_update_form.html:196
 msgid "Update"
-msgstr ""
+msgstr "Update"
 
 #: accounts/templates/registration/login.html:10
 #: accounts/templates/registration/password_change_form_custom.html:10
 #: accounts/templates/registration/password_reset_confirm_custom.html:12
 msgid "Please correct the error below and try again."
-msgstr ""
+msgstr "Please correct the error below and try again."
 
 #: accounts/templates/registration/login.html:34
 #: accounts/templates/registration/login.html:54 templates/base.html:99
@@ -320,390 +320,390 @@ msgstr ""
 #: templates/header.html.py:41 templates/header.html:44
 #: templates/header.html.py:46
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: accounts/templates/registration/login.html:56
 msgid "Forgot Password?"
-msgstr ""
+msgstr "Forgot Password?"
 
 #: accounts/templates/registration/password_change_form_custom.html:54
 #: accounts/templates/registration/password_reset_confirm_custom.html:51
 msgid "Change my password"
-msgstr ""
+msgstr "Change my password"
 
 #: accounts/templates/registration/password_reset_confirm_custom.html:3
 msgid "Setting New password"
-msgstr ""
+msgstr "Setting New password"
 
 #: accounts/templates/registration/password_reset_form_custom.html:23
 msgid ""
 "Forgotten your password? Enter your email address below, and we'll email "
 "instructions for setting a new one."
-msgstr ""
+msgstr "Forgotten your password? Enter your email address below, and we'll email instructions for setting a new one."
 
 #: accounts/templates/registration/password_reset_form_custom.html:26
 msgid "Email address:"
-msgstr ""
+msgstr "Email address:"
 
 #: accounts/templates/registration/password_reset_form_custom.html:37
 msgid "Reset password"
-msgstr ""
+msgstr "Reset password"
 
 #: accounts/views.py:126
 msgid "Your profile has been created!"
-msgstr ""
+msgstr "Your profile has been created!"
 
 #: accounts/views.py:186
 msgid "Your password was changed."
-msgstr ""
+msgstr "Your password was changed."
 
 #: accounts/views.py:202
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr ""
+msgstr "Your password has been set. You may go ahead and log in now."
 
 #: home/context_processors.py:20
 msgid "Fork me!"
-msgstr ""
+msgstr "Fork me!"
 
 #: plugins/gitlab/models.py:27
 msgid "Gitlab Project"
-msgstr ""
+msgstr "Gitlab Project"
 
 #: plugins/gitlab/models.py:28
 msgid "Gitlab Projects"
-msgstr ""
+msgstr "Gitlab Projects"
 
 #: plugins/gitlab/models.py:54
 msgid "Gitlab Group"
-msgstr ""
+msgstr "Gitlab Group"
 
 #: plugins/gitlab/models.py:55
 msgid "Gitlab Groups"
-msgstr ""
+msgstr "Gitlab Groups"
 
 #: plugins/gitlab/models.py:91
 msgid "Gitlab Merge Request"
-msgstr ""
+msgstr "Gitlab Merge Request"
 
 #: plugins/gitlab/models.py:92
 msgid "Gitlab Merge Requests"
-msgstr ""
+msgstr "Gitlab Merge Requests"
 
 #: plugins/gitlab/models.py:120
 msgid "Gitlab Issue"
-msgstr ""
+msgstr "Gitlab Issue"
 
 #: plugins/gitlab/models.py:121
 msgid "Gitlab Issues"
-msgstr ""
+msgstr "Gitlab Issues"
 
 #: plugins/gitlab/models.py:176 plugins/gitlab/models.py:177
 msgid "Gitlab Comments"
-msgstr ""
+msgstr "Gitlab Comments"
 
 #: plugins/noosfero/models.py:39
 msgid "Community"
-msgstr ""
+msgstr "Community"
 
 #: plugins/noosfero/models.py:40
 msgid "Communities"
-msgstr ""
+msgstr "Communities"
 
 #: plugins/noosfero/models.py:67
 msgid "Article"
-msgstr ""
+msgstr "Article"
 
 #: plugins/noosfero/models.py:68
 msgid "Articles"
-msgstr ""
+msgstr "Articles"
 
 #: rss/feeds.py:13
 msgid "Latest Discussions"
-msgstr ""
+msgstr "Latest Discussions"
 
 #: rss/feeds.py:32
 msgid "Discussions Most Relevance"
-msgstr ""
+msgstr "Discussions Most Relevance"
 
 #: rss/feeds.py:51
 msgid "Latest collaborations"
-msgstr ""
+msgstr "Latest collaborations"
 
 #: search/forms.py:16 search/templates/search/search.html:46
 #: templates/base.html:89 templates/header.html:29
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: search/forms.py:18
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: search/forms.py:19 search/views.py:20
 msgid "Author"
-msgstr ""
+msgstr "Author"
 
 #: search/forms.py:20
 msgid "Modified by"
-msgstr ""
+msgstr "Modified by"
 
 #: search/forms.py:22
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: search/forms.py:26 search/views.py:23
 msgid "Mailinglist"
-msgstr ""
+msgstr "Mailinglist"
 
 #: search/forms.py:30
 msgid "Milestone"
-msgstr ""
+msgstr "Milestone"
 
 #: search/forms.py:31
 msgid "Priority"
-msgstr ""
+msgstr "Priority"
 
 #: search/forms.py:32
 msgid "Component"
-msgstr ""
+msgstr "Component"
 
 #: search/forms.py:33
 msgid "Severity"
-msgstr ""
+msgstr "Severity"
 
 #: search/forms.py:34
 msgid "Reporter"
-msgstr ""
+msgstr "Reporter"
 
 #: search/forms.py:35
 msgid "Keywords"
-msgstr ""
+msgstr "Keywords"
 
 #: search/forms.py:36
 msgid "Collaborators"
-msgstr ""
+msgstr "Collaborators"
 
 #: search/forms.py:37
 msgid "Repository"
-msgstr ""
+msgstr "Repository"
 
 #: search/forms.py:39
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: search/forms.py:40
 msgid "Institution"
-msgstr ""
+msgstr "Institution"
 
 #: search/forms.py:41
 msgid "Role"
-msgstr ""
+msgstr "Role"
 
 #: search/forms.py:42 search/templates/search/includes/search_filters.html:132
 #: search/templates/search/includes/search_filters.html:134
 #: search/templates/search/includes/search_filters.html:166
 #: search/templates/search/includes/search_filters.html:167
 msgid "Since"
-msgstr ""
+msgstr "Since"
 
 #: search/forms.py:43 search/templates/search/includes/search_filters.html:141
 #: search/templates/search/includes/search_filters.html:143
 #: search/templates/search/includes/search_filters.html:170
 #: search/templates/search/includes/search_filters.html:171
 msgid "Until"
-msgstr ""
+msgstr "Until"
 
 #: search/forms.py:44
 msgid "Filename"
-msgstr ""
+msgstr "Filename"
 
 #: search/forms.py:45
 msgid "Used by"
-msgstr ""
+msgstr "Used by"
 
 #: search/forms.py:46
 msgid "File type"
-msgstr ""
+msgstr "File type"
 
 #: search/forms.py:47
 msgid "Size"
-msgstr ""
+msgstr "Size"
 
 #: search/templates/search/includes/search_filters.html:5
 #: search/templates/search/includes/search_filters.html:33
 #: search/templates/search/includes/search_filters.html:51
 #: search/templates/search/includes/search_filters.html:69
 msgid "Remove filter"
-msgstr ""
+msgstr "Remove filter"
 
 #: search/templates/search/includes/search_filters.html:88
 #: search/templates/search/includes/search_filters.html:152
 #: search/templates/search/includes/search_filters.html:176
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: search/templates/search/includes/search_filters.html:94
 msgid "Sort by"
-msgstr ""
+msgstr "Sort by"
 
 #: search/templates/search/includes/search_filters.html:111
 msgid "Types"
-msgstr ""
+msgstr "Types"
 
 #: search/templates/search/includes/search_filters.html:117 search/views.py:18
 msgid "Discussion"
-msgstr ""
+msgstr "Discussion"
 
 #: search/templates/search/search.html:5
 msgid "search"
-msgstr ""
+msgstr "search"
 
 #: search/templates/search/search.html:51
 msgid "documents found"
-msgstr ""
+msgstr "documents found"
 
 #: search/templates/search/search.html:62
 msgid "Search here"
-msgstr ""
+msgstr "Search here"
 
 #: search/templates/search/search.html:74
 #: search/templates/search/search.html:84
 msgid "Filters"
-msgstr ""
+msgstr "Filters"
 
 #: search/templates/search/search.html:105
 msgid "No results for your search."
-msgstr ""
+msgstr "No results for your search."
 
 #: search/templates/search/search.html:107
 msgid "You are searching for"
-msgstr ""
+msgstr "You are searching for"
 
 #: settings.py:113
 msgid "English"
-msgstr ""
+msgstr "English"
 
 #: settings.py:114
 msgid "Portuguese"
-msgstr ""
+msgstr "Portuguese"
 
 #: settings.py:115
 msgid "Spanish"
-msgstr ""
+msgstr "Spanish"
 
 #: settings.py:138
 msgid "Recent activity"
-msgstr ""
+msgstr "Recent activity"
 
 #: settings.py:142
 msgid "Relevance"
-msgstr ""
+msgstr "Relevance"
 
 #: settings.py:151
 msgid "Document"
-msgstr ""
+msgstr "Document"
 
 #: settings.py:153
 msgid "Presentation"
-msgstr ""
+msgstr "Presentation"
 
 #: settings.py:154
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 #: settings.py:155
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: settings.py:157
 msgid "Compressed"
-msgstr ""
+msgstr "Compressed"
 
 #: settings.py:158
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: settings.py:160
 msgid "Spreadsheet"
-msgstr ""
+msgstr "Spreadsheet"
 
 #: templates/404.html:5
 msgid "Not found. Keep searching! :)"
-msgstr ""
+msgstr "Not found. Keep searching! :)"
 
 #: templates/500.html:2
 msgid "Ooopz... something went wrong!"
-msgstr ""
+msgstr "Ooopz... something went wrong!"
 
 #: templates/base.html:83 templates/header.html:21
 msgid "Groups"
-msgstr ""
+msgstr "Groups"
 
 #: templates/base.html:119 templates/header.html:59
 msgid "My Profile"
-msgstr ""
+msgstr "My Profile"
 
 #: templates/base.html:120 templates/base.html.py:121 templates/header.html:60
 #: templates/header.html.py:61
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 #: templates/base.html:132 templates/base.html.py:135 templates/header.html:72
 #: templates/header.html.py:75
 msgid "Search here..."
-msgstr ""
+msgstr "Search here..."
 
 #: templates/base.html:149
 msgid "The login has failed. Please, try again."
-msgstr ""
+msgstr "The login has failed. Please, try again."
 
 #: templates/footer.html:6
 msgid "Last email imported at"
-msgstr ""
+msgstr "Last email imported at"
 
 #: templates/footer.html:12
 msgid "The contents of this site is published under license"
-msgstr ""
+msgstr "The contents of this site is published under license"
 
 #: templates/footer.html:15
 msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
-msgstr ""
+msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
 
 #: templates/header.html:26
 msgid "Paste"
-msgstr ""
+msgstr "Paste"
 
 #: templates/home.html:17
 msgid "Latest Collaborations"
-msgstr ""
+msgstr "Latest Collaborations"
 
 #: templates/home.html:21
 msgid "RSS - Latest collaborations"
-msgstr ""
+msgstr "RSS - Latest collaborations"
 
 #: templates/home.html:30
 msgid "View more collaborations..."
-msgstr ""
+msgstr "View more collaborations..."
 
 #: templates/home.html:37
 msgid "Collaboration Graph"
-msgstr ""
+msgstr "Collaboration Graph"
 
 #: templates/home.html:48
 msgid "Most Relevant Threads"
-msgstr ""
+msgstr "Most Relevant Threads"
 
 #: templates/home.html:52
 msgid "RSS - Most Relevant Threads"
-msgstr ""
+msgstr "RSS - Most Relevant Threads"
 
 #: templates/home.html:60 templates/home.html.py:79
 msgid "View more discussions..."
-msgstr ""
+msgstr "View more discussions..."
 
 #: templates/home.html:67
 msgid "Latest Threads"
-msgstr ""
+msgstr "Latest Threads"
 
 #: templates/home.html:71
 msgid "RSS - Latest Threads"
-msgstr ""
+msgstr "RSS - Latest Threads"
