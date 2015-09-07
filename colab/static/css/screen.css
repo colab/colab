@@ -135,16 +135,16 @@ div.submit {
 
 /* User profile */
 
-.vcard {
+.colab-vcard {
     min-height: 400px;
 }
 
-.vcard .thumbnail {
+.colab-vcard .thumbnail {
     width: 200px;
     height: 200px;
 }
 
-.vcard h1 {
+.colab-vcard h1 {
     margin: 0;
     padding: 0;
     font-size: 26px;
@@ -152,8 +152,8 @@ div.submit {
     letter-spacing: -1px;
 }
 
-.vcard h1 span,
-.vcard h1 em {
+.colab-vcard h1 span,
+.colab-vcard h1 em {
     display: inline-block;
     overflow-x: hidden;
     text-overflow: ellipsis;
@@ -162,14 +162,14 @@ div.submit {
     vertical-align: bottom;
 }
 
-.vcard h1 em {
+.colab-vcard h1 em {
     font-weight: 300;
     font-size: 20px;
     font-size: 20px;
     letter-spacing: 1px;
 }
 
-.vcard .divider {
+.colab-vcard .divider {
     border-bottom: 1px solid #EEE;
     margin-top: 10px;
 }
@@ -303,7 +303,7 @@ span.highlighted {
 }
 
 /* Subscribe list */
-.vcard .label {
+.colab-vcard .label {
     line-height: 2;
 }
 
