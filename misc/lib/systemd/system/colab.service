@@ -3,6 +3,7 @@ Description=Colab
 
 [Service]
 User=colab
+EnvironmentFile=-/etc/sysconfig/colab
 PermissionsStartOnly=true
 ExecStartPre=/usr/bin/mkdir -p /var/lock/colab
 ExecStartPre=/usr/bin/chown -R colab:colab /var/lock/colab
