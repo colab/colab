@@ -15,7 +15,7 @@ from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
 from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
-from colab.plugins.utils.widget_manager import WidgetManager
+from colab.widgets.widget_manager import WidgetManager
 
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm)
 from .utils import mailman

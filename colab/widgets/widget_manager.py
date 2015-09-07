@@ -1,6 +1,6 @@
 from django.utils.safestring import mark_safe
 
-class Widget:
+class Widget(object):
     identifier = None
     name = None
     default_url = None
