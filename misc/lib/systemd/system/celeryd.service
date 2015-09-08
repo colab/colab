@@ -1,5 +1,6 @@
 [Unit]
 Description=Celery workers
+PartOf=colab.service
 
 [Service]
 EnvironmentFile=-/etc/default/celeryd

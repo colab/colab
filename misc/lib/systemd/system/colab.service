@@ -1,5 +1,7 @@
 [Unit]
 Description=Colab
+Before=celeryd.service
+Requires=celeryd.service
 
 [Service]
 User=colab
