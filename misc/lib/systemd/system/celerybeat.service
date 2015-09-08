@@ -1,0 +1,13 @@
+[Unit]
+Description=Celery workers
+PartOf=colab.service
+
+[Service]
+User=colab
+ExecStartPre=/usr/bin/mkdir -p /var/run/colab
+ExecStartPre=/usr/bin/chown -R colab:colab /var/lock/colab
+ExecStart=/usr/lib/colab/bin/colab-admin celery beat --pidfile=/var/lock/colab/celerybeat.pid
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
