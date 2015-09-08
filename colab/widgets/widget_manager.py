@@ -1,5 +1,6 @@
 from django.utils.safestring import mark_safe
 
+
 class Widget(object):
     identifier = None
     name = None
@@ -36,21 +37,21 @@ class WidgetManager(object):
 
     @staticmethod
     def register_widget(category, widget):
-        if not WidgetManager.widget_categories.has_key(category):
+        if category not in WidgetManager.widget_categories:
             WidgetManager.widget_categories[category] = []
 
         WidgetManager.widget_categories[category].append(widget)
 
     @staticmethod
     def unregister_widget(category, widget_identifier):
-        if WidgetManager.widget_categories.has_key(category):
+        if category in WidgetManager.widget_categories:
             for widget in WidgetManager.widget_categories[category]:
                 if widget.identifier == widget_identifier:
                     WidgetManager.widget_categories[category].remove(widget)
 
     @staticmethod
     def get_widgets(category, request=None):
-        if not WidgetManager.widget_categories.has_key(category):
+        if category not in WidgetManager.widget_categories:
             return []
 
         widgets = WidgetManager.widget_categories[category]

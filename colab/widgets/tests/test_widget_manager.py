@@ -2,22 +2,25 @@ from django.test import TestCase
 
 from colab.widgets.widget_manager import WidgetManager, Widget
 
+
 class WidgetManagerTest(TestCase):
 
-    html_content = "<head><meta charset='UTF-8'></head><body><p>test</p></body>"
+    html_content = "<head><meta charset='UTF-8'></head><body><p>T</p></body>"
     widget_area = 'profile'
     widget_id = 'widget_id'
 
     def custom_widget_instance(self, content):
+
         class CustomWidget(Widget):
             identifier = 'widget_id'
+
             def generate_content(self, request=None):
                 self.content = content
         return CustomWidget()
 
     def setUp(self):
-        WidgetManager.register_widget(self.widget_area, \
-                self.custom_widget_instance(self.html_content))
+        custom_widget = self.custom_widget_instance(self.html_content)
+        WidgetManager.register_widget(self.widget_area, custom_widget)
 
     def tearDown(self):
         WidgetManager.unregister_widget(self.widget_area, self.widget_id)
@@ -38,7 +41,7 @@ class WidgetManagerTest(TestCase):
         customWidget = self.custom_widget_instance(self.html_content)
 
         customWidget.generate_content()
-        self.assertEqual(customWidget.get_body(), "<p>test</p>")
+        self.assertEqual(customWidget.get_body(), "<p>T</p>")
 
     def test_get_header(self):
         customWidget = self.custom_widget_instance(self.html_content)

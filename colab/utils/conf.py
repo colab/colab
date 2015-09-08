@@ -156,8 +156,7 @@ def load_widgets_settings():
     importlib.import_module(settings_module)
 
     # Read settings from widgets.d
-    settings_dir = os.getenv('COLAB_WIDGETS',
-                              '/etc/colab/widgets.d')
+    settings_dir = os.getenv('COLAB_WIDGETS', '/etc/colab/widgets.d')
     logger.info('Widgets Settings directory: %s', settings_dir)
     sys.path = original_path
 
