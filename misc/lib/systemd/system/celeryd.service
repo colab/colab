@@ -1,5 +1,5 @@
 [Unit]
-Description=Celery workers
+Description=Celery worker
 PartOf=colab.service
 
 [Service]
