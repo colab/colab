@@ -15,7 +15,7 @@ REQUIREMENTS = [
     'django-revproxy[diazo]>=0.9.5',
 
     # Async Signals
-    'celery[redis]>=3.1',
+    'celery[redis]>=3.1.2',
 
     ### Move out of colab (as plugins):
 
@@ -42,7 +42,7 @@ EXCLUDE_FROM_PACKAGES = []
 
 setup(
     name='colab',
-    version='1.11',
+    version='1.11.0',
     url='https://github.com/colab-community/colab',
     author='Sergio Oliveira',
     author_email='sergio@tracy.com.br',
