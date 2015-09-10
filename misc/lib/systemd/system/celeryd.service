@@ -1,0 +1,12 @@
+[Unit]
+Description=Celery worker
+PartOf=colab.service
+
+[Service]
+EnvironmentFile=-/etc/default/celeryd
+User=colab
+ExecStart=/usr/lib/colab/bin/colab-admin celery worker $CELERYD_OPTS
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

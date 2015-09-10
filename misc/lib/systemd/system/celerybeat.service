@@ -1,0 +1,12 @@
+[Unit]
+Description=Celery beat
+PartOf=colab.service
+
+[Service]
+User=colab
+ExecStartPre=/usr/bin/install -d -m 0700 -o colab /var/run/colab
+ExecStart=/usr/lib/colab/bin/colab-admin celery beat --pidfile=/var/run/colab/celerybeat.pid --schedule=/var/lib/colab/celery/celereybeat-schedule
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
