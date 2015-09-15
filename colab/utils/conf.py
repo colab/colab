@@ -102,13 +102,14 @@ def load_colab_apps():
 
         logger.info('Loading plugin settings: %s%s', plugins_dir, file_name)
 
+        # FIXME Drop plugins in plugins.d directory
         if os.path.isdir(os.path.join(plugins_dir, file_name)):
             py_settings_d = _load_py_file(file_module, plugins_dir)
             app_name = file_name
 
         elif file_name.endswith('.py'):
             py_settings_d = _load_py_file(file_module, plugins_dir)
-            app_name = py_settings_d.get('name', '').split('.')[-1]
+            app_name = py_settings_d.get('name', '')
 
         else:
             logger.info("Not a plugin config: %s", file_name)
@@ -124,8 +125,9 @@ def load_colab_apps():
             logger.warning("Cannot import plugin %s (%s)", app_name, file_name)
             continue
 
-        COLAB_APPS[app_name] = {}
-        COLAB_APPS[app_name]['menu_title'] = py_settings_d.get('menu_title')
+        app_label = app_name.split('.')[-1]
+        COLAB_APPS[app_label] = {}
+        COLAB_APPS[app_label]['menu_title'] = py_settings_d.get('menu_title')
 
         fields = ['verbose_name', 'upstream', 'urls',
                   'menu_urls', 'middlewares', 'dependencies',
@@ -134,7 +136,7 @@ def load_colab_apps():
         for key in fields:
             value = py_settings_d.get(key)
             if value:
-                COLAB_APPS[app_name][key] = value
+                COLAB_APPS[app_label][key] = value
 
     return {'COLAB_APPS': COLAB_APPS}
 
