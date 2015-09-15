@@ -27,9 +27,8 @@ class DatabaseUndefined(ImproperlyConfigured):
 
 
 def _load_py_file(py_path, path):
-    original_path = sys.path
 
-    sys.path = [path]
+    sys.path.insert(0, path)
     try:
         py_settings = importlib.import_module(py_path)
 
@@ -44,7 +43,10 @@ def _load_py_file(py_path, path):
         raise InaccessibleSettings(msg)
 
     finally:
-        sys.path = original_path
+        # We did not catch the ValueError on purpose
+        #   If the imported module change the path
+        #   we want to raise ValueError
+        sys.path.remove(path)
 
     py_setting = {var: getattr(py_settings, var) for var in dir(py_settings)
                   if not var.startswith('__')}
