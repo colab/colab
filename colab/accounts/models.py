@@ -4,7 +4,6 @@ import urlparse
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.core import validators
 from django.core.urlresolvers import reverse
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
@@ -76,9 +75,4 @@ class User(AbstractUser):
 User._meta.get_field('email')._unique = True
 User._meta.get_field('username').help_text = _(
     u'Required. 30 characters or fewer. Letters and digits.'
-)
-User._meta.get_field('username').validators[0] = validators.RegexValidator(
-    r'^\w+$',
-    _('Enter a valid username.'),
-    'invalid'
 )

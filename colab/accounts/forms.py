@@ -187,6 +187,7 @@ class UserCreationForm(UserForm):
                                 error_messages={
                                     'invalid': _(("This value may contain only"
                                                   " letters and numbers."))})
+
     password1 = forms.CharField(label=_("Password"),
                                 widget=forms.PasswordInput)
     password2 = forms.CharField(label=_("Password confirmation"),
@@ -250,7 +251,7 @@ class UserCreationForm(UserForm):
 
 class UserChangeForm(forms.ModelForm):
     username = forms.RegexField(
-        label=_("Username"), max_length=30, regex=r"^[\w*]",
+        label=_("Username"), max_length=30, regex=r'^[\w.@+-]+$',
         help_text=_("Required. 30 characters or fewer. Letters and digits."),
         error_messages={
             'invalid': _("This value may contain only letters and numbers.")})
