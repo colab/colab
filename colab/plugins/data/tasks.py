@@ -16,7 +16,7 @@ TASKS = set()
 def lock(method, name):
     def wrapped_method(self, *args, **kwargs):
         lock_id = 'colab-data-importer-{}'.format(name)
-        lock = redis.Redis().lock(lock_id)
+        lock = app.backend.client.lock(lock_id)
 
         if lock.acquire(blocking=False):
             try:
