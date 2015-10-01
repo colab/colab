@@ -139,7 +139,12 @@ def list_users(listname):
     except requests.exceptions.RequestException:
         return []
 
-    return users.json()
+    result = users.json()
+    if isinstance(result, int):
+        LOGGER.error('Error number %s', result)
+        return []
+
+    return result
 
 
 def get_user_mailinglists(user):
