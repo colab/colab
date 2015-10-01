@@ -1,6 +1,0 @@
-{% load i18n %}
-{% blocktrans with fullname=user.get_full_name|title username=user.username|lower %}Hey, we want to verify that you are indeed "{{ fullname }} ({{ username }})".  If that's the case, please follow the link below:{% endblocktrans %}
-
-{{ verification_url }}
-
-{% blocktrans with username=user.username %}If you're not {{ username }} or didn't request verification you can ignore this email.{% endblocktrans %}

@@ -1,3 +1,0 @@
-{% for message in object.message_set.iterator %}
-  {{ message.body }}
-{% endfor %}
