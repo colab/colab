@@ -42,7 +42,5 @@ urlpatterns += patterns(
 
     url(r'^colab/admin/', include(admin.site.urls)),
 
-    url(r'^archives/', include('colab.super_archives.urls')),
-
     url(r'', include('colab.plugins.urls')),
 )

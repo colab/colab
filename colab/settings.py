@@ -199,7 +199,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'django.core.context_processors.request',
-    'colab.super_archives.context_processors.mailarchive',
     'colab.plugins.context_processors.colab_apps',
     'colab.plugins.context_processors.change_header',
     'colab.home.context_processors.robots',
@@ -230,7 +229,6 @@ AUTHENTICATION_BACKENDS = (
 
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
-    os.path.join(BASE_DIR, 'super_archives/locale'),
 )
 
 AUTH_USER_MODEL = 'accounts.User'
@@ -244,11 +242,6 @@ MESSAGE_TAGS = {
 
 # Colab Settings
 COLAB_HOME_URL = '/dashboard'
-
-# Super Archives
-SUPER_ARCHIVES_PATH = '/var/lib/mailman/archives/private'
-SUPER_ARCHIVES_EXCLUDE = []
-SUPER_ARCHIVES_LOCK_FILE = '/var/lock/colab/import_emails.lock'
 
 # Mailman API settings
 MAILMAN_API_URL = 'http://localhost:8124/v2/'

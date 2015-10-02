@@ -11,10 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView
 from django.http import Http404
 
-from colab.super_archives.models import (EmailAddress,
-                                         EmailAddressValidation)
-from colab.plugins.utils.collaborations import (get_collaboration_data,
-                                                get_visible_threads)
+from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
 
 from .forms import (ColabSetUsernameForm, ListsForm, UserUpdateForm)
@@ -124,22 +121,6 @@ resend an email</a>")
 
     user.is_active = False
     user.save()
-    email = EmailAddressValidation.create(user.email, user)
-
-    location = reverse('archive_email_view',
-                       kwargs={'key': email.validation_key})
-    verification_url = request.build_absolute_uri(location)
-    EmailAddressValidation.verify_email(email, verification_url)
-
-    # Check if the user's email have been used previously
-    #   in the mainling lists to link the user to old messages
-    email_addr, created = EmailAddress.objects.get_or_create(
-        address=user.email)
-    if created:
-        email_addr.real_name = user.get_full_name()
-
-    email_addr.user = user
-    email_addr.save()
 
     mailing_lists = lists_form.cleaned_data.get('lists')
     mailman.update_subscription(user.email, mailing_lists)
