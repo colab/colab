@@ -3,8 +3,6 @@
 import importlib
 import logging
 
-import redis
-
 from django.conf import settings
 
 from colab.celery import app
