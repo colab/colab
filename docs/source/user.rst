@@ -65,7 +65,7 @@ Add a new plugin
 
 - Make sure the application has the following requirements
 
-  - Suport for remote user authentication
+  - Support for remote user authentication
 
   - A relative url root
 
@@ -76,6 +76,8 @@ Add a new plugin
   - on folder: /etc/colab/plugins.d/
 
   - create file: [plugin_name].py
+
+- Atention: Any URL used in the plugins' settings should not be preceded by "/"
 
 Use this template for the plugin configuration file
 
@@ -104,10 +106,10 @@ Use this template for the plugin configuration file
     url = colab_url_factory('[plugin_name]')
 
     menu_urls = {
-        url(display=_('[name_of_link_page]'), viewname='[name_of_view_in_the_application]', kwargs={'path': '/[page_appication_path]/' }, auth=True),
+        url(display=_('[name_of_link_page]'), viewname='[name_of_view_in_the_application]', kwargs={'path': '[page_appication_path]/' }, auth=True),
 
         # You can have more than one url
-        url(display=_('[name_of_link_page]'), viewname='[another_name_of_view_in_the_application]', kwargs={'path': '/[another_page_appication_path]/' }, auth=True),
+        url(display=_('[name_of_link_page]'), viewname='[another_name_of_view_in_the_application]', kwargs={'path': '[another_page_appication_path]/' }, auth=True),
     }
 
 
@@ -152,6 +154,8 @@ urls
 .. attribute:: prefix
 
     Declares the prefix for the url.
+
+    - Atention: Any URL used in the plugins' settings should not be preceded by "/"
 .. attribute:: namespace
 
     Declares the namespace for the url.
@@ -164,7 +168,7 @@ These variables defines the menu title and links of the plugin.
 .. attribute:: menu_title
 
     Declares the menu title.
-.. attribute:: menu_links
+.. attribute:: menu_urls
 
     Declares the menu items and its links.
     This should be a tuple object with several colab_url elements.
@@ -172,6 +176,9 @@ These variables defines the menu title and links of the plugin.
     namespace.
     The auth parameter indicates wether the link should only be displayed when
     the user is logged in.
+    The ``kwargs`` parameter receives a dict, where the key ``path`` should be
+    a path URL to the page. Remember that this path is a URL, therefore it
+    should never be preceded by "/".
 
 Example:
 
@@ -182,8 +189,8 @@ Example:
     url = colab_url_factory('plugin_app_name')
 
     menu_urls = (
-       url(display=_('Profile'), viewname='profile', kwargs={'path': '/profile/'}, auth=True),
-       url(display=_('Profile Two'), viewname='profile2', kwargs={'path': '/profile/2'}, auth=True),
+       url(display=_('Profile'), viewname='profile', kwargs={'path': 'profile/'}, auth=True),
+       url(display=_('Profile Two'), viewname='profile2', kwargs={'path': 'profile/2'}, auth=True),
     )
 
 Extra Template Folders
