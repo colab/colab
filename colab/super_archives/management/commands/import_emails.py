@@ -117,7 +117,7 @@ class Command(BaseCommand, object):
         # Get messages from each mbox
         for mbox in mailing_lists_mboxes:
             mbox_path = os.path.join(mailinglist_dir, mbox, mbox)
-            mailinglist_name = mbox.split('.')[0]
+            mailinglist_name = os.path.splitext(mbox)[0]
 
             # Check if the mailinglist is set not to be imported
             if exclude_lists and mailinglist_name in exclude_lists:
