@@ -64,7 +64,7 @@ class FormTest(TestCase):
 
     def test_valid_username(self):
         form = self.create_form_data('user@email.com',
-                                     'colab123@colab-spb.com')
+                                     'colab123')
         self.assertTrue(form.is_valid())
 
     def test_not_valid_username(self):
@@ -73,7 +73,7 @@ class FormTest(TestCase):
         self.assertFalse(form.is_valid())
 
     def test_update_valid_username(self):
-        form = self.create_change_form_data('colab123@colab-spb.com')
+        form = self.create_change_form_data('colab123')
         self.assertTrue(form.is_valid())
 
     def test_update_not_valid_username(self):

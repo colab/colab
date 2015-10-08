@@ -181,7 +181,7 @@ class UserCreationForm(UserForm):
         'password_mismatch': _("The two password fields didn't match."),
     }
     username = forms.RegexField(label=_("Username"), max_length=30,
-                                regex=r'^[\w.@+-]+$',
+                                regex=r'^[\w]+$',
                                 help_text=_(("Required. 30 characters or fewer"
                                              ". Letter and digits.")),
                                 error_messages={
@@ -251,7 +251,7 @@ class UserCreationForm(UserForm):
 
 class UserChangeForm(forms.ModelForm):
     username = forms.RegexField(
-        label=_("Username"), max_length=30, regex=r'^[\w.@+-]+$',
+        label=_("Username"), max_length=30, regex=r'^[\w]+$',
         help_text=_("Required. 30 characters or fewer. Letters and digits."),
         error_messages={
             'invalid': _("This value may contain only letters and numbers.")})
