@@ -88,6 +88,8 @@ class MailingList(models.Model):
     last_imported_index = models.IntegerField(default=0)
     is_private = models.BooleanField(default=False)
 
+    _max_latest_threads = 6
+
     def update_privacy(self):
         self.is_private = mailman.is_private_list(self.name)
 
@@ -99,6 +101,20 @@ class MailingList(models.Model):
         }
         return u'{}?{}'.format(reverse('haystack_search'),
                                urllib.urlencode(params))
+
+    def get_latest(self):
+        not_spam_latest = self.thread_set.filter(spam=False)
+        ordered_latest = not_spam_latest.order_by(
+            '-latest_message__received_time')
+        return ordered_latest[:self._max_latest_threads]
+
+    def get_most_relevant(self):
+        all_most_relevant = Thread.highest_score.filter(
+            mailinglist__name=self.name)[:self._max_latest_threads]
+        return [thread.latest_message for thread in all_most_relevant]
+
+    def get_number_of_users(self):
+        return len(mailman.list_users(self.name))
 
     def __unicode__(self):
         return self.name

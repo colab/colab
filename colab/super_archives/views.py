@@ -144,9 +144,6 @@ class ThreadDashboardView(ListView):
     template_name = 'superarchives/thread-dashboard.html'
 
     def get_queryset(self):
-        MAX = 6
-        queryset = []
-
         listnames_for_user = []
         if self.request.user.is_authenticated():
             user = User.objects.get(username=self.request.user)
@@ -155,19 +152,8 @@ class ThreadDashboardView(ListView):
                 lists_for_user)
 
         query = Q(is_private=False) | Q(name__in=listnames_for_user)
-        for list_ in MailingList.objects.filter(query).order_by('name'):
-            queryset.append((
-                list_.name,
-                mailman.get_list_description(list_.name),
-                list_.thread_set.filter(spam=False).order_by(
-                    '-latest_message__received_time'
-                )[:MAX],
-                [t.latest_message for t in Thread.highest_score.filter(
-                    mailinglist__name=list_.name)[:MAX]],
-                len(mailman.list_users(list_.name)),
-            ))
 
-        return queryset
+        return MailingList.objects.filter(query).order_by('name')
 
 
 class EmailView(View):

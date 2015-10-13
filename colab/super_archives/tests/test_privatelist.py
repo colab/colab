@@ -27,8 +27,8 @@ class ArchivesViewTest(TestCase):
 
         list_data = request.context['lists']
 
-        self.assertEqual('lista', list_data[0][0])
-        self.assertEqual('privatelist', list_data[1][0])
+        self.assertEqual('lista', list_data[0].name)
+        self.assertEqual('privatelist', list_data[1].name)
         self.assertEqual(2, len(list_data))
 
     def test_see_only_public_if_not_logged_in(self):
@@ -36,7 +36,7 @@ class ArchivesViewTest(TestCase):
 
         list_data = request.context['lists']
 
-        self.assertEqual('lista', list_data[0][0])
+        self.assertEqual('lista', list_data[0].name)
         self.assertEqual(1, len(list_data))
 
     def test_see_private_thread_in_dashboard_if_member(self):
