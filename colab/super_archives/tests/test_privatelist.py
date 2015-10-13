@@ -17,10 +17,10 @@ class ArchivesViewTest(TestCase):
 
     def test_see_only_private_list_if_member(self):
         mailman.get_user_mailinglists = mock.Mock(
-            return_value="[{'listname': 'privatelist'}]")
+            return_value=[{'listname': 'privatelist'}])
         mailman.extract_listname_from_list = mock.Mock(
-            return_value="['privatelist']")
-        mailman.list_users = mock.Mock(return_value="['johndoe@example.com']")
+            return_value=['privatelist'])
+        mailman.list_users = mock.Mock(return_value=['johndoe@example.com'])
 
         self.authenticate_user()
         request = self.client.get('/archives/thread/')
