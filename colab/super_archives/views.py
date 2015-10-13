@@ -11,7 +11,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.db import IntegrityError
-from django.views.generic import View
+from django.db.models import Q
+from django.views.generic import View, ListView
 from django.utils.translation import ugettext as _
 from django.core.exceptions import ObjectDoesNotExist, PermissionDenied
 from django.utils.decorators import method_decorator
@@ -137,42 +138,23 @@ class ThreadView(View):
         return self.get(request, mailinglist, thread_token)
 
 
-class ThreadDashboardView(View):
+class ThreadDashboardView(ListView):
     http_method_names = ['get']
+    context_object_name = 'lists'
+    template_name = 'superarchives/thread-dashboard.html'
+    paginate_by = 10
 
-    def get(self, request):
-        MAX = 6
-        context = {}
-
-        all_privates = {}
-        private_mailinglist = MailingList.objects.filter(is_private=True)
-        for mailinglist in private_mailinglist:
-            all_privates[mailinglist.name] = True
-
-        context['lists'] = []
-
+    def get_queryset(self):
         listnames_for_user = []
-        if request.user.is_authenticated():
-            user = User.objects.get(username=request.user)
+        if self.request.user.is_authenticated():
+            user = User.objects.get(username=self.request.user)
             lists_for_user = mailman.get_user_mailinglists(user)
             listnames_for_user = mailman.extract_listname_from_list(
                 lists_for_user)
 
-        for list_ in MailingList.objects.order_by('name'):
-            if list_.name not in all_privates\
-                    or list_.name in listnames_for_user:
-                context['lists'].append((
-                    list_.name,
-                    mailman.get_list_description(list_.name),
-                    list_.thread_set.filter(spam=False).order_by(
-                        '-latest_message__received_time'
-                    )[:MAX],
-                    [t.latest_message for t in Thread.highest_score.filter(
-                        mailinglist__name=list_.name)[:MAX]],
-                    len(mailman.list_users(list_.name)),
-                ))
+        query = Q(is_private=False) | Q(name__in=listnames_for_user)
 
-        return render(request, 'superarchives/thread-dashboard.html', context)
+        return MailingList.objects.filter(query).order_by('name')
 
 
 class EmailView(View):
