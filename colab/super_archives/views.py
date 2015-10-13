@@ -142,6 +142,7 @@ class ThreadDashboardView(ListView):
     http_method_names = ['get']
     context_object_name = 'lists'
     template_name = 'superarchives/thread-dashboard.html'
+    paginate_by = 10
 
     def get_queryset(self):
         listnames_for_user = []
