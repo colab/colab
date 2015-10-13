@@ -164,4 +164,5 @@ def extract_listname_from_list(lists):
     try:
         return [mlist.get('listname') for mlist in lists]
     except ValueError:
+        LOGGER.exception('listname not available')
         return []
