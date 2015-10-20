@@ -112,10 +112,12 @@
 
   <ul class="unstyled-list">
 
-    <li>
-      <span class="glyphicon glyphicon-envelope"></span>
-      <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
-    </li>
+      {% for type, name, icon in filters_options %}
+      <li>
+        <span class="glyphicon glyphicon-{{icon}}"></span>
+        <a href="{% append_to_get type=type %}">{% trans name %}</a>
+      </li>
+      {% endfor %}
   </ul>
 {% endif %}
 <hr />
