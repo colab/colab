@@ -1,0 +1,9 @@
+{% load i18n tz highlight %}
+
+<div>
+<h3> {{ thread.title }}</h3>
+{{ thread.latest_description }}
+<br>
+{{ thread.modified_by }} - {{ thread.modified |date:"d \d\e F \d\e Y" }}
+<br>
+</div>
