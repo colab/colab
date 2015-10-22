@@ -35,6 +35,10 @@ class ColabSearchForm(SearchForm):
     keywords = forms.CharField(required=False, label=_(u'Keywords'))
     collaborators = forms.CharField(required=False, label=_(u'Collaborators'))
     repository_name = forms.CharField(required=False, label=_(u'Repository'))
+    body = forms.CharField(required=False, label=_(u'Content'))
+    description = forms.CharField(required=False, label=_(u'Description'))
+    category = forms.CharField(required=False, label=_(u'Category'))
+    title = forms.CharField(required=False, label=_(u'Title'))
     username = forms.CharField(required=False, label=_(u'Username'))
     name = forms.CharField(required=False, label=_(u'Name'))
     institution = forms.CharField(required=False, label=_(u'Institution'))
@@ -151,6 +155,14 @@ class ColabSearchForm(SearchForm):
             sqs = sqs.filter(
                 repository_name=self.cleaned_data['repository_name']
             )
+        if self.cleaned_data['body']:
+            sqs = sqs.filter(body=self.cleaned_data['body'])
+        if self.cleaned_data['description']:
+            sqs = sqs.filter(description=self.cleaned_data['description'])
+        if self.cleaned_data['category']:
+            sqs = sqs.filter(category=self.cleaned_data['category'])
+        if self.cleaned_data['title']:
+            sqs = sqs.filter(title=self.cleaned_data['title'])
         if self.cleaned_data['username']:
             sqs = sqs.filter(username=self.cleaned_data['username'])
         if self.cleaned_data['name']:
