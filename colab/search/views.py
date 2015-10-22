@@ -5,6 +5,7 @@ from django.utils.translation import ugettext as _
 
 from haystack.views import SearchView
 from colab.plugins.utils import filters_importer
+from colab.super_archives.models import MailingList
 
 class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
@@ -22,7 +23,10 @@ class ColabSearchView(SearchView):
                     (
                         'list',
                         _(u'Mailinglist'),
-                        self.request.GET.getlist('list')
+                        self.request.GET.getlist('list'),
+                        'list',
+                        [(v, v) for v in MailingList.objects.values_list(
+                            'name', flat=True)]
                     ),
                 ),
             },
