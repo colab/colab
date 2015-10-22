@@ -7,6 +7,7 @@ from haystack.views import SearchView
 from colab.plugins.utils import filters_importer
 from colab.super_archives.models import MailingList
 
+
 class ColabSearchView(SearchView):
     def extra_context(self, *args, **kwargs):
 
@@ -66,8 +67,8 @@ class ColabSearchView(SearchView):
 
         types.update(filters_importer.import_plugin_filters(self.request))
 
-        filters_options = [(k, v['name'], v['icon']) \
-                for (k,v) in types.iteritems()]
+        filters_options = [(k, v['name'], v['icon'])
+                           for (k, v) in types.iteritems()]
         return dict(
             filters=types.get(type_chosen),
             filters_options=filters_options,

@@ -4,6 +4,7 @@ import importlib
 
 from django.conf import settings
 
+
 def import_plugin_filters(request):
     plugin_filters = {}
     for app_name in settings.INSTALLED_APPS:
@@ -17,6 +18,5 @@ def import_plugin_filters(request):
         get_filters = getattr(module, 'get_filters', None)
         if get_filters:
             plugin_filters.update(get_filters(request))
-
 
     return plugin_filters
