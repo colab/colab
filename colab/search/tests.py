@@ -1,5 +1,8 @@
 # -*- coding:utf-8 -*-
 
+import mock
+
+from colab.plugins.utils import filters_importer
 from django.test import TestCase,  Client
 from django.core.management import call_command
 
@@ -57,3 +60,27 @@ class SearchViewTest(TestCase):
         self.assertIn('Chuck',  user_list[0].object.first_name)
         self.assertIn('Norris',  user_list[0].object.last_name)
         self.assertIn('chucknorris',  user_list[0].object.username)
+
+    def test_search_plugin_filters(self):
+        plugin_filter = {
+            'plugin_name': {
+                'name': 'PluginData',
+                'icon': 'plugin_icon',
+                'fields': (
+                    ('field_1', 'Field1', ''),
+                    ('field_2', 'Field2', ''),
+                ),
+            },
+        }
+        filters_importer.import_plugin_filters = mock.Mock(
+            return_value=plugin_filter)
+
+        request = self.client.get('/search/?q=')
+
+        value = [
+            ('plugin_name', 'PluginData', 'plugin_icon'),
+            ('user', u'User', 'user'),
+            ('thread', u'Discussion', 'envelope')
+            ]
+
+        self.assertEqual(request.context['filters_options'], value)
