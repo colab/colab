@@ -1,9 +1,9 @@
 {% load i18n tz highlight %}
 
 <div>
-<h3> {{ thread.title }}</h3>
-{{ thread.latest_description }}
+<h3> {{ result.title }}</h3>
+{{ result.latest_description|truncatewords:"85" }}
 <br>
-{{ thread.modified_by }} - {{ thread.modified |date:"d \d\e F \d\e Y" }}
+{{ result.modified_by }} - {{ result.modified |date:"d \d\e F \d\e Y" }}
 <br>
 </div>

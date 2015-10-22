@@ -1,7 +1,7 @@
 {% load i18n tz highlight gravatar %}
 
-<div > {% gravatar user.email 50 %} {{ user.name  }} 
-Data joined: {{ user.date_joined }}
-Registred in: <a href='#'>link</a><br>
+<div >
+{% gravatar result.email 50 %} {{ result.name  }}
+Data joined: {{ result.date_joined }}<br>
+Registred in: <a href='#'>User</a><br>
 </div>
-
