@@ -77,10 +77,6 @@ class SearchViewTest(TestCase):
 
         request = self.client.get('/search/?q=')
 
-        value = [
-            ('plugin_name', 'PluginData', 'plugin_icon'),
-            ('user', u'User', 'user'),
-            ('thread', u'Discussion', 'envelope')
-            ]
+        value = [('plugin_name', 'PluginData', 'plugin_icon')]
 
         self.assertEqual(request.context['filters_options'], value)

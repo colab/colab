@@ -1,11 +1,9 @@
 # -*- coding:utf-8 -*-
 
 from django.conf import settings
-from django.utils.translation import ugettext as _
 
 from haystack.views import SearchView
 from colab.plugins.utils import filters_importer
-from colab.super_archives.models import MailingList
 
 
 class ColabSearchView(SearchView):
@@ -14,43 +12,6 @@ class ColabSearchView(SearchView):
         use_language, date_format = settings.DJANGO_DATE_FORMAT_TO_JS.get(
             self.request.LANGUAGE_CODE, (None, None)
         )
-
-        types = {
-            'thread': {
-                'name': _(u'Discussion'),
-                'icon': 'envelope',
-                'fields': (
-                    ('author', _(u'Author'), self.request.GET.get('author')),
-                    (
-                        'list',
-                        _(u'Mailinglist'),
-                        self.request.GET.getlist('list'),
-                        'list',
-                        [(v, v) for v in MailingList.objects.values_list(
-                            'name', flat=True)]
-                    ),
-                ),
-            },
-        }
-
-        types['user'] = {
-            'name': _(u'User'),
-            'icon': 'user',
-            'fields': (
-                (
-                    'username',
-                    _(u'Username'),
-                    self.request.GET.get('username'),
-                ),
-                ('name', _(u'Name'), self.request.GET.get('name')),
-                (
-                    'institution',
-                    _(u'Institution'),
-                    self.request.GET.get('institution'),
-                ),
-                ('role', _(u'Role'), self.request.GET.get('role'))
-            ),
-        }
 
         try:
             type_chosen = self.form.cleaned_data.get('type')
@@ -65,7 +26,7 @@ class ColabSearchView(SearchView):
         size_chosen = self.request.GET.get('size')
         used_by_chosen = self.request.GET.get('used_by')
 
-        types.update(filters_importer.import_plugin_filters(self.request))
+        types = filters_importer.import_plugin_filters(self.request.GET)
 
         filters_options = [(k, v['name'], v['icon'])
                            for (k, v) in types.iteritems()]
