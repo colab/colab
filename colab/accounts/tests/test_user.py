@@ -7,6 +7,7 @@ import mock
 from colab.accounts.models import User
 from colab.accounts import forms as accounts_forms
 from django.test import TestCase, Client
+from colab.accounts.views import UserProfileUpdateView
 
 
 class UserTest(TestCase):
@@ -374,3 +375,32 @@ class UserTest(TestCase):
         self.authenticate_user()
         self.validate_non_mandatory_fields('bio', '', ' ')
         self.user.delete()
+
+    def test_user_without_login(self):
+        response = self.client.get("/account/" + self.user.username + "/edit")
+        self.assertEqual(response.status_code, 403)
+
+    def test_signup_with_post_not_success(self):
+        data_user = {
+        'username': 'username',
+        'password1': 'safepassword',
+        'password2': 'safepassword',
+        }
+        before = User.objects.count()
+        responses = self.client.post('/account/register', data=data_user)
+        after = User.objects.count()
+        self.assertEqual(before, after)
+
+    def test_signup_with_post_with_success(self):
+        data_user = {
+        'username': 'username',
+        'first_name': 'first name',
+        'last_name': 'last name',
+        'email':'mail@mail.com',
+        'password1': 'safepassword',
+        'password2': 'safepassword',
+        }
+        before = User.objects.count()
+        responses = self.client.post('/account/register', data=data_user)
+        after = User.objects.count()
+        self.assertEqual(before + 1, after)
