@@ -131,7 +131,7 @@ ATTACHMENTS_FOLDER_PATH = '/mnt/trac/attachments/'
 # the indexes
 
 ORDERING_DATA = {
-    'latest':  {
+    'latest': {
         'name': _(u'Recent activity'),
         'fields': ('-modified', '-created'),
     },
