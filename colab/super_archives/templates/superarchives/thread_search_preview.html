@@ -1,9 +1,8 @@
-{% load i18n tz highlight %}
+{% load i18n tz highlight date_format %}
 
-<div>
-<h3> {{ result.title }}</h3>
-{{ result.latest_description|truncatewords:"85" }}
-<br>
-{{ result.modified_by }} - {{ result.modified |date:"d \d\e F \d\e Y" }}
-<br>
+<div class="row">
+  {% datetime_format result.modified %} - <a href="{{result.modified_by_url}}">{{ result.modified_by }}</a><br>
+  <h4> {{ result.title }}</h4>
+
+  {{ result.latest_description|truncatewords:"85" }} <br>
 </div>
