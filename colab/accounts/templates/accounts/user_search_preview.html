@@ -1,12 +1,15 @@
 {% load i18n tz highlight gravatar date_format %}
 
 <div class="row">
-  <div class="col-md-1">
-    {% gravatar result.email 50 %}
+  <div class="col-md-2">
+    <a href="{% url 'user_profile' username=result.username %}">{% gravatar result.email 150 %}</a>
   </div>
-  <div class="col-md-11">
-    <strong>{{ result.name  }}</strong><br>
+  <div class="col-md-10">
+    <strong><a href="{% url 'user_profile' username=result.username %}">{{ result.name  }}</a></strong><br>
     <strong>{% trans "Date joined" %}: {% date_format result.date_joined %}</strong><br>
     {% trans "Registred in" %}: <strong>{% trans "User" %}</strong><br>
   </div>
+</div>
+<div class="row">
+  <hr>
 </div>
