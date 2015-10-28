@@ -7,7 +7,6 @@ import mock
 from colab.accounts.models import User
 from colab.accounts import forms as accounts_forms
 from django.test import TestCase, Client
-from colab.accounts.views import UserProfileUpdateView
 
 
 class UserTest(TestCase):
@@ -382,25 +381,25 @@ class UserTest(TestCase):
 
     def test_signup_with_post_not_success(self):
         data_user = {
-        'username': 'username',
-        'password1': 'safepassword',
-        'password2': 'safepassword',
+            'username': 'username',
+            'password1': 'safepassword',
+            'password2': 'safepassword',
         }
         before = User.objects.count()
-        responses = self.client.post('/account/register', data=data_user)
+        self.client.post('/account/register', data=data_user)
         after = User.objects.count()
         self.assertEqual(before, after)
 
     def test_signup_with_post_with_success(self):
         data_user = {
-        'username': 'username',
-        'first_name': 'first name',
-        'last_name': 'last name',
-        'email':'mail@mail.com',
-        'password1': 'safepassword',
-        'password2': 'safepassword',
+            'username': 'username',
+            'first_name': 'first name',
+            'last_name': 'last name',
+            'email': 'mail@mail.com',
+            'password1': 'safepassword',
+            'password2': 'safepassword',
         }
         before = User.objects.count()
-        responses = self.client.post('/account/register', data=data_user)
+        self.client.post('/account/register', data=data_user)
         after = User.objects.count()
         self.assertEqual(before + 1, after)
