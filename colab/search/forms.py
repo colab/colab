@@ -9,7 +9,7 @@ from haystack.forms import SearchForm
 from haystack.inputs import AltParser
 from haystack.inputs import AutoQuery
 
-from colab.plugins.utils.filters_importer import import_plugin_filters
+from colab.plugins.utils import filters_importer
 
 
 class ColabSearchForm(SearchForm):
@@ -23,7 +23,7 @@ class ColabSearchForm(SearchForm):
 
     def __init__(self, *args, **kwargs):
         super(ColabSearchForm, self).__init__(*args, **kwargs)
-        extra = import_plugin_filters({})
+        extra = filters_importer.import_plugin_filters({})
         for filter_types in extra.values():
             for field in filter_types['fields']:
                 self.fields[field[0]] = forms.CharField(required=False,
