@@ -10,9 +10,9 @@ def get_filters(request):
             'fields': (
                 ('author', _(u'Author'), request.get('author')),
                 (
-                    'list',
+                    'tag',
                     _(u'Mailinglist'),
-                    request.get('list'),
+                    request.get('tag'),
                     'list',
                     [(v, v) for v in MailingList.objects.values_list(
                         'name', flat=True)]
