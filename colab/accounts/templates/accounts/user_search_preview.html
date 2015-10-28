@@ -1,8 +1,10 @@
 {% load i18n tz highlight gravatar date_format %}
 
 <div class="row">
-  <div class="col-md-2">
-    <a href="{% url 'user_profile' username=result.username %}">{% gravatar result.email 150 %}</a>
+  <div class="col-md-2 center">
+    <a href="{% url 'user_profile' username=result.username %}">
+      {% block gravatar_img %}{% gravatar result.email 100 %}{% endblock gravatar_img %}
+    </a>
   </div>
   <div class="col-md-10">
     <strong><a href="{% url 'user_profile' username=result.username %}">{{ result.name  }}</a></strong><br>
