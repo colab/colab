@@ -11,7 +11,7 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView
 from django.http import Http404
 
-from colab.search.utils import get_collaboration_data, get_visible_threads
+from colab.search.utils import get_collaboration_data
 from colab.accounts.models import User
 
 from .forms import (ColabSetUsernameForm, ListsForm, UserUpdateForm)
@@ -74,13 +74,14 @@ class UserProfileDetailView(UserProfileBaseMixin, DetailView):
         context['type_count'] = count_types
         context['results'] = collaborations[:10]
 
-        query = get_visible_threads(logged_user, profile_user)
-        context['emails'] = query.order_by('-received_time')[:10]
+		# TODO: implement these with superarchives
+        #query = get_visible_threads(logged_user, profile_user)
+        #context['emails'] = query.order_by('-received_time')[:10]
 
-        count_by = 'thread__mailinglist__name'
-        context['list_activity'] = dict(query.values_list(count_by)
-                                        .annotate(Count(count_by))
-                                        .order_by(count_by))
+        #count_by = 'thread__mailinglist__name'
+        #context['list_activity'] = dict(query.values_list(count_by)
+        #                                .annotate(Count(count_by))
+        #                                .order_by(count_by))
 
         context.update(kwargs)
         return super(UserProfileDetailView, self).get_context_data(**context)
