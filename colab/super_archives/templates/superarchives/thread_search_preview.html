@@ -3,7 +3,9 @@
 <div class="row">
   {% datetime_format result.modified %} - <a href="{{result.modified_by_url}}">{{ result.modified_by }}</a><br>
   <h4><a href="{{result.url}}">{{ result.title }}</a></h4>
-  {{ result.latest_description|truncatewords:"85" }} <br>
+  {% with description as result.latest_description|truncatewords:"85" %}
+      {{description | default_if_none:"a"}}<br>
+  {% endwith %}
   {% trans "Registred in" %}: <strong>{% trans "Discussion" %}</strong>
   <hr>
 </div>
