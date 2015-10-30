@@ -75,10 +75,6 @@ class UserTest(TestCase):
         self.assertEqual('https://www.facebook.com/usertestcolab',
                          link_facebook)
 
-    def test_mailinglists(self):
-        empty_list = ()
-        self.assertEqual(empty_list, self.user.mailinglists())
-
     def test_save(self):
         username_test = "USERtestCoLaB"
 
