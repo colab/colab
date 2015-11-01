@@ -162,3 +162,27 @@ created in this tutorial. Inside this directory, create a txt file for each
 model that can be queried. Each of this files must contain the model fields that
 will be search if no filter is applied. If there is any doubts to create these
 files, please check the `Guide to create a SearchIndexesFiles`_.
+
+Storing TimeStamp
+---------------
+TimeStamp is a parameter to control the last time a model was updated, you should use it
+when you want the data updated after a given time. To do that the colab's model (colab.plugins.models) have a
+TimeStampPlugin class, used to store all last updates from timestamp from all plugins.
+
+Class Methods:
+   update_timestamp(cls,class_name): allow store a current datetime.
+
+   get_last_updated_timestamp(cls,class_name): allow get a datetime with last timestamp stored from class_name.
+
+Example Usage:
+
+.. code-block:: python
+   from colab.plugins.models import TimeStampPlugin
+
+   class TestPlugin():
+
+       def update_timestamp(self):
+          TimeStampPlugin.update_timestamp('TestPlugin')
+
+       def get_last_updated_timestamp(self):
+          return TimeStampPlugin.get_last_updated_timestamp('TestPlugin')
