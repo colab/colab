@@ -5,6 +5,7 @@ import mock
 from colab.plugins.utils import filters_importer
 from django.test import TestCase,  Client
 from django.core.management import call_command
+from colab.search.forms import ColabSearchForm
 
 
 class SearchViewTest(TestCase):
@@ -80,3 +81,50 @@ class SearchViewTest(TestCase):
         value = [('plugin_name', 'PluginData', 'plugin_icon')]
 
         self.assertEqual(request.context['filters_options'], value)
+
+    def test_search_dynamic_form_fields(self):
+        plugin_filter = {
+            'plugin_name': {
+                'name': 'PluginData',
+                'icon': 'plugin_icon',
+                'fields': (
+                    ('field_1', 'Field1', ''),
+                    ('field_2', 'Field2', ''),
+                ),
+            },
+        }
+        filters_importer.import_plugin_filters = mock.Mock(
+            return_value=plugin_filter)
+
+        form = ColabSearchForm()
+
+        self.assertIn('field_1', form.fields.keys())
+        self.assertIn('field_2', form.fields.keys())
+
+    def test_search_multiple_filters(self):
+        request = self.client.get('/search/?q=&type=thread+user')
+        user_list = request.context['page'].object_list
+
+        self.assertEqual(6, len(user_list))
+
+        self.assertIn('admin@mail.com',  user_list[0].object.email)
+        self.assertIn('admin',  user_list[0].object.username)
+
+        self.assertIn('chucknorris@mail.com',  user_list[1].object.email)
+        self.assertIn('Chuck',  user_list[1].object.first_name)
+        self.assertIn('Norris',  user_list[1].object.last_name)
+        self.assertIn('chucknorris',  user_list[1].object.username)
+
+        self.assertIn('heisenberg@mail.com',  user_list[2].object.email)
+        self.assertIn('Heisenberg',  user_list[2].object.first_name)
+        self.assertIn('Norris',  user_list[2].object.last_name)
+        self.assertIn('heisenbergnorris',  user_list[2].object.username)
+
+        self.assertIn('Admin Administrator',  user_list[3].author)
+        self.assertIn('Response to Thread 1A',  user_list[3].title)
+
+        self.assertIn('Admin Administrator',  user_list[4].author)
+        self.assertIn('Message 1 on Thread 1B',  user_list[4].title)
+
+        self.assertIn('Admin Administrator',  user_list[5].author)
+        self.assertIn('Message 1 on Thread 1C',  user_list[5].title)
