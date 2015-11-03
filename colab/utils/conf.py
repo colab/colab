@@ -152,7 +152,7 @@ def load_widgets_settings():
         return
 
     if not os.path.exists(settings_file):
-	return
+        return
 
     original_path = sys.path
     sys.path.append(py_path)
