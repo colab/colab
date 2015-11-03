@@ -25,13 +25,6 @@ We must use STATIC_URL because we have a language composing the URL
       {% endif %}
     });
 
-    $('#collapseFilters').on('hide.bs.collapse', function() {
-      $('.collapse-icon-controller').toggleClass('glyphicon-collapse-down glyphicon-collapse-up');
-    });
-    $('#collapseFilters').on('show.bs.collapse', function() {
-      $('.collapse-icon-controller').toggleClass('glyphicon-collapse-down glyphicon-collapse-up');
-    });
-
   });
 </script>
 {% endblock %}
@@ -74,28 +67,6 @@ We must use STATIC_URL because we have a language composing the URL
       <h3>{% trans "Filters" %}</h3>
       {% include "search/includes/search_filters.html" %}
     </div>
-
-    <div class="col-xs-12 col-sm-12 hidden-md hidden-lg">
-      <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
-          <div class="panel-heading subject">
-            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFilters">
-              <h4 class="panel-title">
-                {% trans "Filters" %}
-                <span class="glyphicon glyphicon-collapse-down pull-right collapse-icon-controller"></span>
-              </h4>
-            </a>
-          </div>
-          <div id="collapseFilters" class="panel-collapse collapse">
-            <div class="panel-body">
-              {% include "search/includes/search_filters.html" %}
-            </div>
-          </div>
-        </div>
-      </div>
-      <hr />
-    </div>
-  
     <div class="col-md-10 col-lg-10">
       <ul class="list-unstyled">
       {% for result in page.object_list  %}
