@@ -151,6 +151,9 @@ def load_widgets_settings():
     if not os.path.exists(py_path):
         return
 
+    if not os.path.exists(settings_file):
+	return
+
     original_path = sys.path
     sys.path.append(py_path)
     importlib.import_module(settings_module)
