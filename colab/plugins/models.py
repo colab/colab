@@ -1,13 +1,14 @@
 from django.db import models
 from datetime import datetime
 
+
 class TimeStampPlugin(models.Model):
     '''
         Class used to store timestamps from plugins
     '''
-    id = models.IntegerField(primary_key= True)
-    name = models.CharField(max_length=255,unique=True,null=False)
-    timestamp = models.DateTimeField(default=datetime.min,blank=True)
+    id = models.IntegerField(primary_key=True)
+    name = models.CharField(max_length=255, unique=True, null=False)
+    timestamp = models.DateTimeField(default=datetime.min, blank=True)
 
     @classmethod
     def update_timestamp(cls, class_name):
