@@ -7,9 +7,9 @@
     </a>
   </div>
   <div class="col-md-10">
-    <strong><a href="{% url 'user_profile' username=result.username %}">{{ result.name  }}</a></strong><br>
-    <strong>{% trans "Date joined" %}: {% date_format result.date_joined %}</strong><br>
-    {% trans "Registred in" %}: <strong>{% trans "User" %}</strong><br>
+    <strong><a href="{% url 'user_profile' username=result.username %}"><h4>{{ result.name  }}</h4></a></strong>
+    <small><strong>{% trans "Since" %}: {% date_format result.date_joined %}</strong></small><br>
+    <small>{% trans "Registered in" %}: <strong>{% trans "User" %}</strong></small><br>
   </div>
 </div>
 <div class="row">
