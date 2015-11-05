@@ -43,7 +43,7 @@ class UserTest(TestCase):
                                   expected_last_name, first_name, last_name):
         data = {'first_name': first_name,
                 'last_name': last_name}
-        self.client.post('/account/usertestcolab/edit', data)
+        self.client.post('/account/' + self.user.username + '/edit', data)
         user = User.objects.get(id=1)
         self.assertEqual(expected_first_name, user.first_name)
         self.assertEqual(expected_last_name, user.last_name)
@@ -52,7 +52,7 @@ class UserTest(TestCase):
         data = {'first_name': 'usertestcolab',
                 'last_name': 'colab',
                 field_name: value}
-        self.client.post('/account/usertestcolab/edit', data)
+        self.client.post('/account/' + self.user.username + '/edit', data)
         user = User.objects.get(id=1)
         self.assertEqual(expected_value, getattr(user, field_name))
 
