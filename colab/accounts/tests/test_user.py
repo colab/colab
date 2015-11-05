@@ -77,10 +77,6 @@ class UserTest(TestCase):
         empty_list = ()
         self.assertEqual(empty_list, self.user.mailinglists())
 
-    def test_update_subscription(self):
-        pass
-        # TODO: You should have mailman connection.
-
     def test_save(self):
         username_test = "USERtestCoLaB"
 
@@ -403,3 +399,30 @@ class UserTest(TestCase):
         self.client.post('/account/register', data=data_user)
         after = User.objects.count()
         self.assertEqual(before + 1, after)
+
+    def test_user_logged_in_profile(self):
+        self.authenticate_user()
+        self.client.get("/account/" + self.user.username)
+        self.assertEqual(self.client.session['_auth_user_id'], self.user.id)
+
+    def test_user_not_logged_in_profile(self):
+        self.client.get("/account/" + self.user.username)
+        self.assertEqual(self.client.session, {})
+
+    def test_password_changed_message(self):
+        self.message_test('Your password was changed.',
+                          "/account/change-password-done")
+
+    def test_password_reset_done_custom_message(self):
+        self.message_test("We&#39;ve emailed you instructions for setting " +
+                          "your password. You should be receiving them " +
+                          "shortly.", "/account/password-reset-done/")
+
+    def test_password_rest_complete_message(self):
+        self.message_test("Your password has been set. You may go ahead and " +
+                          "log in now.", "/account/password-reset-complete/")
+
+    def message_test(self, message, url):
+        self.authenticate_user()
+        response = self.client.get(url, follow=True)
+        self.assertIn(message, response.content)
