@@ -18,17 +18,17 @@ class SearchTemplateTagsTest(TestCase):
     def test_get_search_preview_templates_with_user(self):
         self.set_mock_value("user")
         include_path = get_search_preview_templates(self.model_indexed_mock)
-        self.assertEqual(include_path, self.template_path.format("accounts",
+        self.assertEqual(include_path, self.template_path.format("search",
                                                                  "user"))
 
     def test_get_search_preview_templates_with_thread(self):
         self.set_mock_value("thread")
         include_path = get_search_preview_templates(self.model_indexed_mock)
         self.assertEqual(include_path,
-                         self.template_path.format("superarchives", "thread"))
+                         self.template_path.format("search", "thread"))
 
     def test_get_search_preview_templates_with_plugin(self):
         self.set_mock_value("plugin_model")
         include_path = get_search_preview_templates(self.model_indexed_mock)
-        self.assertEqual(include_path, self.template_path.format("plugin",
-                                                                 "model"))
+        self.assertEqual(include_path,
+                         self.template_path.format("search", "plugin_model"))
