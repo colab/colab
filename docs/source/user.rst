@@ -118,7 +118,6 @@ Use this template for the plugin configuration file
 
     urls = {
         'include': '[plugin_module_path].urls',
-        'namespace': '[plugin_name]',
         'prefix': '[application_prefix]/', # Exemple: http://site.com/[application_prefix]/
     }
 
@@ -177,9 +176,6 @@ urls
     Declares the prefix for the url.
 
     - Atention: Any URL used in the plugins' settings should not be preceded by "/"
-.. attribute:: namespace
-
-    Declares the namespace for the url.
 
 menu
 ++++
