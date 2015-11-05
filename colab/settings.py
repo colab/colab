@@ -290,3 +290,5 @@ TEMPLATE_DIRS += (
 )
 
 conf.validate_database(DATABASES, DEFAULT_DATABASE, DEBUG)
+
+conf.load_widgets_settings()

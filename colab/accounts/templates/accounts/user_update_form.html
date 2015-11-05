@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n gravatar %}
+{% load i18n gravatar plugins %}
 
 {% block head_js %}
 <script>
@@ -102,6 +102,14 @@ $(function() {
 </script>
 {% endblock %}
 
+{% block head %}
+  {{ block.super }}
+
+  {% for widget in widgets %}
+    {{ widget.get_header }}
+  {% endfor %}
+
+{% endblock %}
 
 {% block main-content %}
 
@@ -118,83 +126,115 @@ $(function() {
   <br>
   <br>
 
-  <form method="post">
-    {% csrf_token %}
+  <!-- Start of navs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="pill" href="#profile">Profile</a></li>
+    {% for widget in widgets %}
+      <li>
+        <a data-toggle="pill" href="#{{ widget.identifier }}">{{ widget.name }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <!-- End of navs -->
+  <style type="text/css">
+    .tab-pane{
+      border: 1px solid #DDD;
+      border-top: none;
+      padding: 10px;
+    }
 
-    <div class="row">
-      <div class="col-lg-8 col-md-7 col-sm-12 col-xm-12">
-        {% for field in form %}
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xm-12">
-          <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
-            <label for="{{ field.name }}" class="control-label">
-              {{ field.label }}
-            </label>
-            {{ field }}
-            {{ field.errors }}
-          </div>
-        </div>
-        {% endfor %}
-      </div>
+    .nav-tabs a:focus {
+       outline: none;
+    }
+  </style>
+  <div class="tab-content">
+    <div id="profile" class="tab-pane fade in active">
+      <form method="post">
+        {% csrf_token %}
 
-      <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">{% trans "Emails" %}</h3>
-          </div>
-          <div class="panel-body">
-            <ul class="unstyled-list emails">
-            {% for email in user_.emails.iterator %}
-              <li>
-                {% gravatar user_.email 30 %}
-                <span class="email-address">{{ email.address }}</span>
-                {% if email.address == user_.email %}
-                  <span class="label label-success">{% trans "Primary" %}</span>
-                {% else %}
-                  <div class="text-right">
-                    <button class="btn btn-default set-primary" data-loading-text="{% trans 'Setting...' %}">{% trans "Set as Primary" %}</button>
-                    <button class="btn btn-danger delete-email" data-loading-text="{% trans 'Deleting...' %}">{% trans "Delete" %}</button>
-                  </div>
-                {% endif %}
-                <hr />
-              </li>
-            {% endfor %}
-            {% for email in user_.emails_not_validated.iterator %}
-              <li>
-                {% gravatar user_.email 30 %}
-                <span class="email-address">{{ email.address }}</span>
-                <div class="text-right">
-                  <button class="btn btn-default verify-email" data-loading-text="{% trans 'Sending verification...' %}"><span class="icon-warning-sign"></span> {% trans "Verify" %}</button>
-                  <button class="btn btn-danger delete-email">{% trans "Delete" %}</button>
-                </div>
-                <hr />
-              </li>
-            {% endfor %}
-            </ul>
-            <div class="form-group">
-              <label for="new_email">{% trans "Add another email address:" %}</label>
-              <input id="new_email" name="new_email" class="form-control" autocomplete="off" />
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-12 col-xm-12">
+            {% for field in form %}
+            <div class="col-lg-6 col-md-6 col-sm-12 col-xm-12">
+              <div class="form-group{% if field.field.required %} required{% endif %}{% if field.errors %} alert alert-danger has-error{% endif %}">
+                <label for="{{ field.name }}" class="control-label">
+                  {{ field.label }}
+                </label>
+                {{ field }}
+                {{ field.errors }}
+              </div>
             </div>
-            <button class="btn btn-primary pull-right" id="add-email">{% trans "Add" %}</button>
+            {% endfor %}
+          </div>
+
+          <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">{% trans "Emails" %}</h3>
+              </div>
+              <div class="panel-body">
+                <ul class="unstyled-list emails">
+                {% for email in user_.emails.iterator %}
+                  <li>
+                    {% gravatar user_.email 30 %}
+                    <span class="email-address">{{ email.address }}</span>
+                    {% if email.address == user_.email %}
+                      <span class="label label-success">{% trans "Primary" %}</span>
+                    {% else %}
+                      <div class="text-right">
+                        <button class="btn btn-default set-primary" data-loading-text="{% trans 'Setting...' %}">{% trans "Set as Primary" %}</button>
+                        <button class="btn btn-danger delete-email" data-loading-text="{% trans 'Deleting...' %}">{% trans "Delete" %}</button>
+                      </div>
+                    {% endif %}
+                    <hr />
+                  </li>
+                {% endfor %}
+                {% for email in user_.emails_not_validated.iterator %}
+                  <li>
+                    {% gravatar user_.email 30 %}
+                    <span class="email-address">{{ email.address }}</span>
+                    <div class="text-right">
+                      <button class="btn btn-default verify-email" data-loading-text="{% trans 'Sending verification...' %}"><span class="icon-warning-sign"></span> {% trans "Verify" %}</button>
+                      <button class="btn btn-danger delete-email">{% trans "Delete" %}</button>
+                    </div>
+                    <hr />
+                  </li>
+                {% endfor %}
+                </ul>
+                <div class="form-group">
+                  <label for="new_email">{% trans "Add another email address:" %}</label>
+                  <input id="new_email" name="new_email" class="form-control" autocomplete="off" />
+                </div>
+                <button class="btn btn-primary pull-right" id="add-email">{% trans "Add" %}</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">
+                  {% trans 'Change Password' %}
+                </h3>
+              </div>
+              <div class="panel-body">
+                <a href="{% url 'password_change' %}" class="btn btn-default btn-primary pull-right btn-block">{% trans "Change Password" %}</a>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              {% trans 'Change Password' %}
-            </h3>
-          </div>
-          <div class="panel-body">
-            <a href="{% url 'password_change' %}" class="btn btn-default btn-primary pull-right btn-block">{% trans "Change Password" %}</a>
+        <div class="row">
+          <div class="submit">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Update" %}</button>
           </div>
         </div>
-      </div>
+      </form>
     </div>
-    <div class="row">
-      <div class="submit">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Update" %}</button>
+    {% for widget in widgets %}
+      <div id="{{ widget.identifier }}" class="tab-pane fade">
+        <h2>{{ widget.name }}</h2>
+        {{ widget.get_body }}
       </div>
-    </div>
-  </form>
+    {% endfor %}
+  </div>
+
 {% endblock %}

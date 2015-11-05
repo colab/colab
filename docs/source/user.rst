@@ -58,6 +58,27 @@ View the following file:
 
 The file /etc/colab/settings.py have the configurations of colab, this configurations overrides the django settings.py
 
+Widgets
+-------
+
+A widget is a piece of HTML that will be inserted in a specific spot in a page to render some view.
+
+To configure the widgets you have to edit, or create, the file ``/etc/colab/widgets_settings.py``. Or you can create a py file inside the folder ``/etc/colab/widgets.d``.
+
+Example:
+
+.. code-block:: python
+
+   # Widget Manager handles all widgets and must be imported to register them
+   from colab.widgets.widget_manager import WidgetManager
+
+   # Specific code for Gitlab's Widget
+   from colab_gitlab.widgets import GitlabProfileWidget
+
+   WidgetManager.register_widget('profile', GitlabProfileWidget())
+
+
+In this example the Gitlab's widget is added in a new tab inside the user profile.
 
 Add a new plugin
 ----------------

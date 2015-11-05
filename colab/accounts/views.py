@@ -15,6 +15,7 @@ from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
 from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
+from colab.widgets.widget_manager import WidgetManager
 
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm)
 from .utils import mailman
@@ -41,6 +42,12 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
             raise PermissionDenied
 
         return obj
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        context['widgets'] = WidgetManager.get_widgets('profile', self.request)
+        context.update(kwargs)
+        return super(UserProfileUpdateView, self).get_context_data(**context)
 
 
 class UserProfileDetailView(UserProfileBaseMixin, DetailView):
