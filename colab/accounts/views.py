@@ -18,6 +18,7 @@ from .forms import (ColabSetUsernameForm, ListsForm, UserUpdateForm)
 from .utils import mailman
 
 
+
 class UserProfileBaseMixin(object):
     model = get_user_model()
     slug_field = 'username'
