@@ -40,17 +40,19 @@
         </div>
       </div>
 
+	  <!-- TODO: implement with widget from superarchive plugin
       <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12" style="display: inline-block; vertical-align:top;">
         <div class="well">
           <fieldset>
-            <legend>{% trans 'Subscribe to groups' %}</legend>
-            {% for choice in lists_form.lists %}
-              <div class="checkbox">{{ choice }}</div>
-            {% endfor %}
-            {{ lists_form.errors }}
+            <legend>{ % trans 'Subscribe to groups' % }</legend>
+            { % for choice in lists_form.lists % }
+              <div class="checkbox">{ { choice } }</div>
+            { % endfor % }
+            { { lists_form.errors } }
           </fieldset>
         </div>
       </div>
+	  -->
 
     </div>
   </div>

@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
 
 import urlparse
+from hashlib import md5
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
-from .signals import (user_created, user_password_changed,
-                      user_basic_info_updated)
-# from .signals import delete_user
-
-from .utils import mailman
+from .signals import user_created, user_password_changed
+from colab.accounts.utils import email
 
 
 class ColabUserManager(UserManager):
 
     def _create_user(self, username, email, password,
                      is_staff, is_superuser, **kwargs):
-        args = (username.lower(), email, password, is_staff, is_superuser)
+        args = (username, email, password, is_staff, is_superuser)
         user = super(ColabUserManager, self)._create_user(*args, **kwargs)
 
         user_created.send(user.__class__, user=user, password=password)
@@ -34,6 +33,60 @@ class ColabUserManager(UserManager):
         return super(ColabUserManager, self).create_user(username, email,
                                                          password,
                                                          **extra_fields)
+
+
+class EmailAddressValidation(models.Model):
+    address = models.EmailField(unique=True)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                             related_name='emails_not_validated')
+    validation_key = models.CharField(max_length=32, null=True,
+                                      default=email.get_validation_key)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'address')
+
+    @classmethod
+    def create(cls, address, user):
+        email_address_validation = cls.objects.create(address=address,
+                                                      user=user)
+        return email_address_validation
+
+    @classmethod
+    def verify_email(cls, email_address_validation, verification_url):
+        return email.send_verification_email(
+            email_address_validation.address,
+            email_address_validation.user,
+            email_address_validation.validation_key,
+            verification_url
+        )
+
+
+class EmailAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True,
+                             related_name='emails', on_delete=models.SET_NULL)
+    address = models.EmailField(unique=True)
+    real_name = models.CharField(max_length=64, blank=True, db_index=True)
+    md5 = models.CharField(max_length=32, null=True)
+
+    class Meta:
+        ordering = ('id', )
+
+    def save(self, *args, **kwargs):
+        self.md5 = md5(self.address).hexdigest()
+        super(EmailAddress, self).save(*args, **kwargs)
+
+    def get_full_name(self):
+        if self.user and self.user.get_full_name():
+            return self.user.get_full_name()
+        else:
+            return self.real_name
+
+    def get_full_name_or_anonymous(self):
+        return self.get_full_name() or _('Anonymous')
+
+    def __unicode__(self):
+        return '"%s" <%s>' % (self.get_full_name(), self.address)
 
 
 class User(AbstractUser):
@@ -67,45 +120,17 @@ class User(AbstractUser):
     def facebook_link(self):
         return urlparse.urljoin('https://www.facebook.com', self.facebook)
 
-    #def mailinglists(self):
-    #    return mailman.user_lists(self)
-
-    #def update_subscription(self, email, lists):
-    #    return mailman.update_subscription(email, lists)
-
     def save(self, *args, **kwargs):
-
-        # verify if primary email was updated
-        current_user = User.objects.filter(pk=self.pk).first()
-        update_email = False
-
-        if current_user and current_user.email != self.email:
-            update_email = True
 
         # Forces username to be lowercase always
         self.username = self.username.lower()
-
         super(User, self).save(*args, **kwargs)
-
-        user_basic_info_updated.send(User, user=self,
-                                     update_email=update_email)
 
     def set_password(self, raw_password):
         super(User, self).set_password(raw_password)
         if self.pk:
             user_password_changed.send(User, user=self, password=raw_password)
 
-    def delete(self, using=None):
-        # TODO:
-        # To maintain to integrity of the database we should deactive the user
-        # instead of delete. Or we will lose some data.
-
-        # emails = " ".join(self.emails.values_list('address', flat=True))
-        super(User, self).delete(using)
-
-        # user = User.objects.filter(id=self.id)
-        # if not user:
-        #     delete_user.send(User, user=self, emails=emails)
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
