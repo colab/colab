@@ -103,7 +103,7 @@ class ThreadView(View):
         }
 
         url = urlparse.urljoin(settings.MAILMAN_API_URL,
-                               mailinglist + '/sendmail')
+                               'sendmail/' + mailinglist)
 
         error_msg = None
         try:
