@@ -48,3 +48,32 @@ Example Widget:
                 self.content = processed_content
 
 To add the widget in a view check the Widgets section in User Documentation.
+To use a widget in the templates, you have to use the ``import_widget`` tag inside the ``html`` block.
+You can also set the variable that the widgets of an area will be imported.
+Or you can use the default name, which is ``widgets_area_name``.
+For example, in the ``profile`` area the variable name is ``widgets_profile``.
+This variable will be inserted directly in the page ``context``.
+
+.. code-block:: python
+
+    {% load widgets_tag %}
+
+    {% block html %}
+       {% import_widgets 'profile' %}
+       {{ block.super }}
+    {% endblock %}
+
+    {# example of how to use #}
+    {% block head %}
+      {{ block.super }}
+
+      {% for widget in widgets_profile %}
+        {{ widget.get_header }}
+      {% endfor %}
+
+    {% endblock %}
+
+
+.. warning::
+
+    Warning! Remember to use the tag ``{{ block.super }}`` inside the html block. Otherwise, the page will appear blank.
