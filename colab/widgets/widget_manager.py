@@ -54,7 +54,7 @@ class WidgetManager(object):
         if category not in WidgetManager.widget_categories:
             return []
 
-        widgets = WidgetManager.widget_categories[category]
+        widgets = WidgetManager.widget_categories[category][:]
         for widget in widgets:
             widget.generate_content(request)
         return widgets
