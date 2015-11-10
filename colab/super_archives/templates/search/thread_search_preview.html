@@ -4,7 +4,7 @@
   <div class="col-md-12">
     <small>{% datetime_format result.modified %} - <a href="{{result.modified_by_url}}">{{ result.modified_by }}</a></small><br>
     <h4><a href="{{result.url}}">{{ result.title }}</a></h4>
-    {% with description as result.latest_description|truncatewords:"85" %}
+    {% with result.latest_description|truncatewords:"85" as description %}
         {{description | default_if_none:"a"}}<br>
     {% endwith %}
     <small>{% trans "Registred in" %}: <strong>{% trans "Discussion" %}</strong></small>
