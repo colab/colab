@@ -43,7 +43,7 @@ class UserTest(TestCase):
                                   expected_last_name, first_name, last_name):
         data = {'first_name': first_name,
                 'last_name': last_name}
-        self.client.post('/account/usertestcolab/edit', data)
+        self.client.post('/account/' + self.user.username + '/edit', data)
         user = User.objects.get(id=1)
         self.assertEqual(expected_first_name, user.first_name)
         self.assertEqual(expected_last_name, user.last_name)
@@ -52,7 +52,7 @@ class UserTest(TestCase):
         data = {'first_name': 'usertestcolab',
                 'last_name': 'colab',
                 field_name: value}
-        self.client.post('/account/usertestcolab/edit', data)
+        self.client.post('/account/' + self.user.username + '/edit', data)
         user = User.objects.get(id=1)
         self.assertEqual(expected_value, getattr(user, field_name))
 
@@ -76,10 +76,6 @@ class UserTest(TestCase):
     def test_mailinglists(self):
         empty_list = ()
         self.assertEqual(empty_list, self.user.mailinglists())
-
-    def test_update_subscription(self):
-        pass
-        # TODO: You should have mailman connection.
 
     def test_save(self):
         username_test = "USERtestCoLaB"
@@ -374,3 +370,59 @@ class UserTest(TestCase):
         self.authenticate_user()
         self.validate_non_mandatory_fields('bio', '', ' ')
         self.user.delete()
+
+    def test_user_without_login(self):
+        response = self.client.get("/account/" + self.user.username + "/edit")
+        self.assertEqual(response.status_code, 403)
+
+    def test_signup_with_post_not_success(self):
+        data_user = {
+            'username': 'username',
+            'password1': 'safepassword',
+            'password2': 'safepassword',
+        }
+        before = User.objects.count()
+        self.client.post('/account/register', data=data_user)
+        after = User.objects.count()
+        self.assertEqual(before, after)
+
+    def test_signup_with_post_with_success(self):
+        data_user = {
+            'username': 'username',
+            'first_name': 'first name',
+            'last_name': 'last name',
+            'email': 'mail@mail.com',
+            'password1': 'safepassword',
+            'password2': 'safepassword',
+        }
+        before = User.objects.count()
+        self.client.post('/account/register', data=data_user)
+        after = User.objects.count()
+        self.assertEqual(before + 1, after)
+
+    def test_user_logged_in_profile(self):
+        self.authenticate_user()
+        self.client.get("/account/" + self.user.username)
+        self.assertEqual(self.client.session['_auth_user_id'], self.user.id)
+
+    def test_user_not_logged_in_profile(self):
+        self.client.get("/account/" + self.user.username)
+        self.assertEqual(self.client.session, {})
+
+    def test_password_changed_message(self):
+        self.message_test('Your password was changed.',
+                          "/account/change-password-done")
+
+    def test_password_reset_done_custom_message(self):
+        self.message_test("We&#39;ve emailed you instructions for setting " +
+                          "your password. You should be receiving them " +
+                          "shortly.", "/account/password-reset-done/")
+
+    def test_password_rest_complete_message(self):
+        self.message_test("Your password has been set. You may go ahead and " +
+                          "log in now.", "/account/password-reset-complete/")
+
+    def message_test(self, message, url):
+        self.authenticate_user()
+        response = self.client.get(url, follow=True)
+        self.assertIn(message, response.content)

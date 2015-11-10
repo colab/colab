@@ -6,6 +6,8 @@ Objective: Test requests.
 from django.test import TestCase, Client
 from django.test.client import RequestFactory
 from colab.accounts.models import User
+from colab.accounts.context_processors import social_network_enabled
+from django.conf import settings
 
 
 class RequestTest(TestCase):
@@ -65,3 +67,26 @@ class RequestTest(TestCase):
         self.assertEqual(302, response.status_code)
         self.assertEqual("http://testserver/account/usertest/subscriptions",
                          response.url)
+
+
+class SocialNetworkTest(TestCase):
+    """docstring for SocialNetworkTest"""
+
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.client = Client()
+
+    def create_user(self):
+        self.user_test = User()
+        self.user_test.username = "usertest"
+        self.user_test.email = "usertest@colab.com.br"
+        self.user_test.set_password("1234colab")
+        self.user_test.save()
+
+    def test_social_network(self):
+        self.create_user()
+        self.client.login(username="usertest", password='1234colab')
+        response = self.client.get('/myaccount/')
+        result = social_network_enabled(response)['SOCIAL_NETWORK_ENABLED']
+        self.assertTrue(result)
+        self.assertTrue(settings.SOCIAL_NETWORK_ENABLED)
