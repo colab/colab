@@ -1,7 +1,7 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Translators:
 # Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>, 2015
 # macártur de sousa carvalho <macartur.sc@gmail.com>, 2015
@@ -10,703 +10,564 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 13:15+0000\n"
+"POT-Creation-Date: 2015-10-27 13:48+0000\n"
 "PO-Revision-Date: 2015-09-07 19:13+0000\n"
 "Last-Translator: Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/colab/colab/language/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/colab/colab/"
+"language/pt_BR/)\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: accounts/admin.py:18
-msgid "Personal info"
-msgstr "Informações Pessoais"
-
-#: accounts/admin.py:24
-msgid "Permissions"
-msgstr "Permissões"
-
-#: accounts/admin.py:28
-msgid "Important dates"
-msgstr "Datas importantes"
-
-#: accounts/forms.py:37
-msgid "Social account does not exist"
-msgstr "Conta social não existe"
-
-#: accounts/forms.py:65 accounts/forms.py:71 accounts/forms.py:77
-msgid "This field cannot be blank."
-msgstr "Este campo não pode ficar em branco."
-
-#: accounts/forms.py:118 accounts/templates/accounts/user_detail.html:38
-msgid "Bio"
-msgstr "Bio"
-
-#: accounts/forms.py:119
-msgid "Write something about you in 200 characters or less."
-msgstr "Escreva algo sobre você em 200 caracteres ou menos."
-
-#: accounts/forms.py:148
-msgid "Mailing lists"
-msgstr "Listas de e-mail"
-
-#: accounts/forms.py:161
-#, python-format
-msgid "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
-msgstr "Este email ja está sendo utilizado.Caso seja o seu efetue o <a href='%(url)s'>login</a>"
-
-#: accounts/forms.py:163
-msgid "A user with that username already exists."
-msgstr "Já existe um usuário com este nome."
-
-#: accounts/forms.py:164 accounts/forms.py:401 accounts/forms.py:465
-msgid "The two password fields didn't match."
-msgstr "Os dois campos de senha não conferem."
-
-#: accounts/forms.py:166 accounts/forms.py:236 search/forms.py:38
-msgid "Username"
-msgstr "Usuário"
-
-#: accounts/forms.py:173 accounts/forms.py:240 accounts/forms.py:277
-#: accounts/forms.py:467
-msgid "Password"
-msgstr "Senha"
-
-#: accounts/forms.py:175
-msgid "Password confirmation"
-msgstr "Confirmação de senha"
-
-#: accounts/forms.py:237 accounts/models.py:78
-msgid "Required. 30 characters or fewer. Letters and digits."
-msgstr "Obrigatório. 30 caracteres ou menos. Letras ou digitos."
-
-#: accounts/forms.py:239
-msgid "This value may contain only letters and numbers."
-msgstr "Este campo pode conter apenas letras e números."
-
-#: accounts/forms.py:241
-msgid ""
-"Raw passwords are not stored, so there is no way to see this user's "
-"password, but you can change the password using <a href=\"password/\">this "
-"form</a>."
-msgstr "Senhas em claro não são armazenadas, então não será possível visualizar sua senha, no entanto você poderá modificar sua senha utilizando <a href=\\\"password/\\\">este formulário</a>."
-
-#: accounts/forms.py:280
-#, python-format
-msgid ""
-"Please enter a correct %(username)s and password. Note that both fields may "
-"be case-sensitive."
-msgstr "Por favor entre com um %(username)s e senha. Note que ambos os campos diferenciam letras maiúsculas de minúsculas"
-
-#: accounts/forms.py:282
-msgid "This account is inactive."
-msgstr "Esta conta está inativa."
-
-#: accounts/forms.py:345
-msgid "Email"
-msgstr "Email"
-
-#: accounts/forms.py:403
-msgid "New password"
-msgstr "Nova senha"
-
-#: accounts/forms.py:405
-msgid "New password confirmation"
-msgstr "Confirmar nova senha"
-
-#: accounts/forms.py:436
-msgid "Your old password was entered incorrectly. Please enter it again."
-msgstr "Sua senha atual está incorreta. Por favor tente novamente."
-
-#: accounts/forms.py:439
-msgid "Old password"
-msgstr "Senha atual"
-
-#: accounts/forms.py:469
-msgid "Password (again)"
-msgstr "Senha (novamente)"
-
-#: accounts/models.py:82
-msgid "Enter a valid username."
-msgstr "Insira um nome de usuário válido."
-
-#: accounts/templates/accounts/manage_subscriptions.html:6
-msgid "Group Subscriptions"
-msgstr "Inscrições em grupos"
-
-#: accounts/templates/accounts/manage_subscriptions.html:36
-msgid "Update subscriptions"
-msgstr "Atualizar inscrições"
-
-#: accounts/templates/accounts/user_create_form.html:5
-msgid "Sign up"
-msgstr "Cadastrar"
-
-#: accounts/templates/accounts/user_create_form.html:10
-#: accounts/templates/registration/login.html:14
-#: accounts/templates/registration/password_change_form_custom.html:12
-#: accounts/templates/registration/password_reset_confirm_custom.html:14
-#: accounts/templates/registration/password_reset_form_custom.html:9
-msgid "Please correct the errors below and try again."
-msgstr "Por favor corrija os erros abaixo e tente novamente."
-
-#: accounts/templates/accounts/user_create_form.html:17
-msgid "Required fields"
-msgstr "Campos obrigatórios"
-
-#: accounts/templates/accounts/user_create_form.html:29
-msgid "Personal Information"
-msgstr "Informações pessoais"
-
-#: accounts/templates/accounts/user_create_form.html:46
-msgid "Subscribe to groups"
-msgstr "Inscreva-se nos grupos"
-
-#: accounts/templates/accounts/user_create_form.html:60
-#: templates/base.html:100 templates/base.html.py:105 templates/header.html:40
-#: templates/header.html.py:45
-msgid "Register"
-msgstr "Cadastre-se"
-
-#: accounts/templates/accounts/user_detail.html:8
-msgid "Messages"
-msgstr "Mensagens"
-
-#: accounts/templates/accounts/user_detail.html:9 templates/home.html:7
-msgid "Contributions"
-msgstr "Contribuições"
-
-#: accounts/templates/accounts/user_detail.html:29
-msgid "edit profile"
-msgstr "editar perfil"
-
-#: accounts/templates/accounts/user_detail.html:30
-msgid "group membership"
-msgstr "Inscrições nos grupos"
-
-#: accounts/templates/accounts/user_detail.html:66
-msgid "Twitter account"
-msgstr "Conta Twitter"
-
-#: accounts/templates/accounts/user_detail.html:69
-msgid "Facebook account"
-msgstr "Conta Facebook"
-
-#: accounts/templates/accounts/user_detail.html:74
-msgid "Google talk account"
-msgstr "Conta Google talk"
-
-#: accounts/templates/accounts/user_detail.html:78
-msgid "Github account"
-msgstr "Conta Github"
-
-#: accounts/templates/accounts/user_detail.html:82
-msgid "Personal webpage"
-msgstr "Página web pessoal"
-
-#: accounts/templates/accounts/user_detail.html:88
-msgid "Groups: "
-msgstr "Grupos: "
-
-#: accounts/templates/accounts/user_detail.html:101
-msgid "Collaborations by Type"
-msgstr "Colaborações por tipo"
-
-#: accounts/templates/accounts/user_detail.html:117
-msgid "Participation by Group"
-msgstr "Participação por grupo"
-
-#: accounts/templates/accounts/user_detail.html:133
-msgid "Latest posted"
-msgstr "Últimas postagens"
-
-#: accounts/templates/accounts/user_detail.html:138
-msgid "There are no posts by this user so far."
-msgstr "Não há posts deste usuário até agora."
-
-#: accounts/templates/accounts/user_detail.html:142
-msgid "View more posts..."
-msgstr "Ver mais postagens..."
-
-#: accounts/templates/accounts/user_detail.html:148
-msgid "Latest contributions"
-msgstr "Últimas colaborações"
-
-#: accounts/templates/accounts/user_detail.html:153
-msgid "No contributions of this user so far."
-msgstr "Não há contribuições deste usuário até agora."
-
-#: accounts/templates/accounts/user_detail.html:157
-msgid "View more contributions..."
-msgstr "Ver mais colaborações..."
-
-#: accounts/templates/accounts/user_update_form.html:65
-msgid "We sent a verification email to "
-msgstr "Enviamos um email de verificação para "
-
-#: accounts/templates/accounts/user_update_form.html:66
-msgid "Please follow the instructions in it."
-msgstr "Por favor, siga as instruções."
-
-#: accounts/templates/accounts/user_update_form.html:110
-msgid "profile information"
-msgstr "informações do perfil"
-
-#: accounts/templates/accounts/user_update_form.html:115
-msgid "Change your avatar at Gravatar.com"
-msgstr "Troque seu avatar em Gravatar.com"
-
-#: accounts/templates/accounts/user_update_form.html:142 search/utils.py:56
-msgid "Emails"
-msgstr "Emails"
-
-#: accounts/templates/accounts/user_update_form.html:151
-msgid "Primary"
-msgstr "Primário"
-
-#: accounts/templates/accounts/user_update_form.html:154
-msgid "Setting..."
-msgstr "Definindo..."
-
-#: accounts/templates/accounts/user_update_form.html:154
-msgid "Set as Primary"
-msgstr "Definir como Primário"
-
-#: accounts/templates/accounts/user_update_form.html:155
-msgid "Deleting..."
-msgstr "Apagando..."
-
-#: accounts/templates/accounts/user_update_form.html:155
-#: accounts/templates/accounts/user_update_form.html:167
-msgid "Delete"
-msgstr "Apagar"
-
-#: accounts/templates/accounts/user_update_form.html:166
-msgid "Sending verification..."
-msgstr "Enviando verificação..."
-
-#: accounts/templates/accounts/user_update_form.html:166
-msgid "Verify"
-msgstr "Verificar"
-
-#: accounts/templates/accounts/user_update_form.html:174
-msgid "Add another email address:"
-msgstr "Adicionar outro endereço de email"
-
-#: accounts/templates/accounts/user_update_form.html:177
-msgid "Add"
-msgstr "Adicionar"
-
-#: accounts/templates/accounts/user_update_form.html:185
-#: accounts/templates/accounts/user_update_form.html:189
-#: accounts/templates/registration/password_change_form_custom.html:26
-#: accounts/templates/registration/password_reset_confirm_custom.html:28
-msgid "Change Password"
-msgstr "Trocar senha"
-
-#: accounts/templates/accounts/user_update_form.html:196
-msgid "Update"
-msgstr "Atualizar"
-
-#: accounts/templates/registration/login.html:10
-#: accounts/templates/registration/password_change_form_custom.html:10
-#: accounts/templates/registration/password_reset_confirm_custom.html:12
-msgid "Please correct the error below and try again."
-msgstr "Por favor corrija o erro abaixo e tente novamente."
-
-#: accounts/templates/registration/login.html:34
-#: accounts/templates/registration/login.html:54 templates/base.html:99
-#: templates/base.html.py:101 templates/base.html:104
-#: templates/base.html.py:106 templates/header.html:39
-#: templates/header.html.py:41 templates/header.html:44
-#: templates/header.html.py:46
-msgid "Login"
-msgstr "Entrar"
-
-#: accounts/templates/registration/login.html:56
-msgid "Forgot Password?"
-msgstr "Esqueci minha Senha?"
-
-#: accounts/templates/registration/password_change_form_custom.html:54
-#: accounts/templates/registration/password_reset_confirm_custom.html:51
-msgid "Change my password"
-msgstr "Alterar minha senha"
-
-#: accounts/templates/registration/password_reset_confirm_custom.html:3
-msgid "Setting New password"
-msgstr "Definir Nova Senha"
-
-#: accounts/templates/registration/password_reset_form_custom.html:23
-msgid ""
-"Forgotten your password? Enter your email address below, and we'll email "
-"instructions for setting a new one."
-msgstr "Esqueceu sua senha? Digite seu email abaixo, e enviaremos instruções para redefinir sua senha."
-
-#: accounts/templates/registration/password_reset_form_custom.html:26
-msgid "Email address:"
-msgstr "Endereço de email: "
-
-#: accounts/templates/registration/password_reset_form_custom.html:37
-msgid "Reset password"
-msgstr "Redefinir senha"
-
-#: accounts/views.py:126
-msgid "Your profile has been created!"
-msgstr "Seu perfil foi criado!"
-
-#: accounts/views.py:186
-msgid "Your password was changed."
-msgstr "Sua senha foi modificada."
-
-#: accounts/views.py:202
-msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Sua senha foi modificada. Você já pode efetuar o login agora."
-
-#: home/context_processors.py:20
-msgid "Fork me!"
-msgstr "Fork me!"
-
-#: plugins/gitlab/models.py:27
-msgid "Gitlab Project"
-msgstr "Projeto no Gitlab"
-
-#: plugins/gitlab/models.py:28
-msgid "Gitlab Projects"
-msgstr "Projetos no Gitlab"
-
-#: plugins/gitlab/models.py:54
-msgid "Gitlab Group"
-msgstr "Grupo no Gitlab"
-
-#: plugins/gitlab/models.py:55
-msgid "Gitlab Groups"
-msgstr "Grupos no Gitlab"
-
-#: plugins/gitlab/models.py:91
-msgid "Gitlab Merge Request"
-msgstr "Envio de Contribuição no Gitlab"
-
-#: plugins/gitlab/models.py:92
-msgid "Gitlab Merge Requests"
-msgstr "Envio de Contribuições no Gitlab"
-
-#: plugins/gitlab/models.py:120
-msgid "Gitlab Issue"
-msgstr "Tíquete no Gitlab"
-
-#: plugins/gitlab/models.py:121
-msgid "Gitlab Issues"
-msgstr "Tíquetes no Gitlab"
-
-#: plugins/gitlab/models.py:176 plugins/gitlab/models.py:177
-msgid "Gitlab Comments"
-msgstr "Comentários no Gitlab"
-
-#: plugins/noosfero/models.py:39
-msgid "Community"
-msgstr "Comunidade"
-
-#: plugins/noosfero/models.py:40
-msgid "Communities"
-msgstr "Comunidades"
-
-#: plugins/noosfero/models.py:67
-msgid "Article"
-msgstr "Artigo"
-
-#: plugins/noosfero/models.py:68
-msgid "Articles"
-msgstr "Artigos"
-
-#: rss/feeds.py:13
-msgid "Latest Discussions"
-msgstr "Últimas discussões"
-
-#: rss/feeds.py:32
-msgid "Discussions Most Relevance"
-msgstr "Discussões Mais Relevantes"
-
-#: rss/feeds.py:51
-msgid "Latest collaborations"
-msgstr "Últimas colaborações"
-
-#: search/forms.py:16 search/templates/search/search.html:46
-#: templates/base.html:89 templates/header.html:29
-msgid "Search"
-msgstr "Busca"
-
-#: search/forms.py:18
-msgid "Type"
-msgstr "Tipo"
-
-#: search/forms.py:19 search/views.py:20
-msgid "Author"
-msgstr "Autor"
-
-#: search/forms.py:20
-msgid "Modified by"
-msgstr "Modificado por"
-
-#: search/forms.py:22
-msgid "Status"
-msgstr "Status"
-
-#: search/forms.py:26 search/views.py:23
-msgid "Mailinglist"
-msgstr "Lista de discussão"
-
-#: search/forms.py:30
-msgid "Milestone"
-msgstr "Marco"
-
-#: search/forms.py:31
-msgid "Priority"
-msgstr "Prioridade"
-
-#: search/forms.py:32
-msgid "Component"
-msgstr "Componente"
-
-#: search/forms.py:33
-msgid "Severity"
-msgstr "Severidade"
-
-#: search/forms.py:34
-msgid "Reporter"
-msgstr "Relator"
-
-#: search/forms.py:35
-msgid "Keywords"
-msgstr "Palavras chave"
-
-#: search/forms.py:36
-msgid "Collaborators"
-msgstr "Colaboradores"
-
-#: search/forms.py:37
-msgid "Repository"
-msgstr "Repositório"
-
-#: search/forms.py:39
-msgid "Name"
-msgstr "Nome"
-
-#: search/forms.py:40
-msgid "Institution"
-msgstr "Instituição"
-
-#: search/forms.py:41
-msgid "Role"
-msgstr "Papel"
-
-#: search/forms.py:42 search/templates/search/includes/search_filters.html:132
-#: search/templates/search/includes/search_filters.html:134
-#: search/templates/search/includes/search_filters.html:166
-#: search/templates/search/includes/search_filters.html:167
-msgid "Since"
-msgstr "Desde"
-
-#: search/forms.py:43 search/templates/search/includes/search_filters.html:141
-#: search/templates/search/includes/search_filters.html:143
-#: search/templates/search/includes/search_filters.html:170
-#: search/templates/search/includes/search_filters.html:171
-msgid "Until"
-msgstr "Até"
-
-#: search/forms.py:44
-msgid "Filename"
-msgstr "Nome do arquivo"
-
-#: search/forms.py:45
-msgid "Used by"
-msgstr "Usado por"
-
-#: search/forms.py:46
-msgid "File type"
-msgstr "Tipo do arquivo"
-
-#: search/forms.py:47
-msgid "Size"
-msgstr "Tamanho"
-
-#: search/templates/search/includes/search_filters.html:5
-#: search/templates/search/includes/search_filters.html:33
-#: search/templates/search/includes/search_filters.html:51
-#: search/templates/search/includes/search_filters.html:69
-msgid "Remove filter"
-msgstr "Remover filtro"
-
-#: search/templates/search/includes/search_filters.html:88
-#: search/templates/search/includes/search_filters.html:152
-#: search/templates/search/includes/search_filters.html:176
-msgid "Filter"
-msgstr "Filtro"
-
-#: search/templates/search/includes/search_filters.html:94
-msgid "Sort by"
-msgstr "Ordenar por"
-
-#: search/templates/search/includes/search_filters.html:111
-msgid "Types"
-msgstr "Tipos"
-
-#: search/templates/search/includes/search_filters.html:117 search/views.py:18
-msgid "Discussion"
-msgstr "Discussão"
-
-#: search/templates/search/search.html:5
-msgid "search"
-msgstr "busca"
-
-#: search/templates/search/search.html:51
-msgid "documents found"
-msgstr "documentos encontrados"
-
-#: search/templates/search/search.html:62
-msgid "Search here"
-msgstr "Pesquise aqui"
-
-#: search/templates/search/search.html:74
-#: search/templates/search/search.html:84
-msgid "Filters"
-msgstr "Filtros"
-
-#: search/templates/search/search.html:105
-msgid "No results for your search."
-msgstr "Não há resultados para sua busca."
-
-#: search/templates/search/search.html:107
-msgid "You are searching for"
-msgstr "Você está procurando por"
-
-#: settings.py:113
-msgid "English"
-msgstr "Inglês"
-
-#: settings.py:114
-msgid "Portuguese"
-msgstr "Português"
-
-#: settings.py:115
-msgid "Spanish"
-msgstr "Espanhol"
-
-#: settings.py:138
-msgid "Recent activity"
-msgstr "Atividade recente"
-
-#: settings.py:142
-msgid "Relevance"
-msgstr "Relevância"
-
-#: settings.py:151
-msgid "Document"
-msgstr "Documento"
-
-#: settings.py:153
-msgid "Presentation"
-msgstr "Apresentação"
-
-#: settings.py:154
-msgid "Text"
-msgstr "Texto"
-
-#: settings.py:155
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:21
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:21
 msgid "Code"
 msgstr "Código"
 
-#: settings.py:157
-msgid "Compressed"
-msgstr "Compactado"
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:26
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:26
+#, fuzzy
+#| msgid "Gitlab Projects"
+msgid "Public Projects"
+msgstr "Projetos no Gitlab"
 
-#: settings.py:158
-msgid "Image"
-msgstr "Imagem"
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:28
+#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:30
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:28
+#: colab-spb-plugin/tests/plugins.d/noosfero.py:30
+#, fuzzy
+#| msgid "My Profile"
+msgid "Profile"
+msgstr "Meu Perfil"
 
-#: settings.py:160
-msgid "Spreadsheet"
-msgstr "Planilha"
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:30
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:30
+#, fuzzy
+#| msgid "Gitlab Project"
+msgid "New Project"
+msgstr "Projeto no Gitlab"
 
-#: templates/404.html:5
-msgid "Not found. Keep searching! :)"
-msgstr "Não encontrado. Continue procurando! :)"
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:32
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:32
+#, fuzzy
+#| msgid "Gitlab Projects"
+msgid "Projects"
+msgstr "Projetos no Gitlab"
 
-#: templates/500.html:2
-msgid "Ooopz... something went wrong!"
-msgstr "Ooopa... algo saiu errado!"
-
-#: templates/base.html:83 templates/header.html:21
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:34
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:34
 msgid "Groups"
 msgstr "Grupos"
 
-#: templates/base.html:119 templates/header.html:59
-msgid "My Profile"
-msgstr "Meu Perfil"
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:36
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:36
+#, fuzzy
+#| msgid "Gitlab Issues"
+msgid "Issues"
+msgstr "Tíquetes no Gitlab"
 
-#: templates/base.html:120 templates/base.html.py:121 templates/header.html:60
-#: templates/header.html.py:61
-msgid "Logout"
-msgstr "Sair"
+#: colab-gitlab-plugin/tests/plugins.d/gitlab.py:38
+#: colab-spb-plugin/tests/plugins.d/gitlab.py:38
+#, fuzzy
+#| msgid "Gitlab Merge Requests"
+msgid "Merge Requests"
+msgstr "Envio de Contribuições no Gitlab"
 
-#: templates/base.html:132 templates/base.html.py:135 templates/header.html:72
-#: templates/header.html.py:75
-msgid "Search here..."
-msgstr "Pesquise aqui..."
+#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:21
+#: colab-spb-plugin/tests/plugins.d/noosfero.py:21
+msgid "Social"
+msgstr "Social"
 
-#: templates/base.html:149
-msgid "The login has failed. Please, try again."
-msgstr "O login falhou. Por favor, tente novamente."
+#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:26
+#: colab-spb-plugin/tests/plugins.d/noosfero.py:26
+#, fuzzy
+#| msgid "Username"
+msgid "Users"
+msgstr "Usuário"
 
-#: templates/footer.html:6
-msgid "Last email imported at"
-msgstr "Último email importado em"
+#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:28
+#: colab-spb-plugin/tests/plugins.d/noosfero.py:28
+msgid "Communities"
+msgstr "Comunidades"
 
-#: templates/footer.html:12
-msgid "The contents of this site is published under license"
-msgstr "O conteúdo deste site está publicado sob a licença"
+#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:32
+#: colab-spb-plugin/tests/plugins.d/noosfero.py:32
+msgid "Control Panel"
+msgstr "Painel de Controle"
 
-#: templates/footer.html:15
-msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
-msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
+#~ msgid "Personal info"
+#~ msgstr "Informações Pessoais"
 
-#: templates/header.html:26
-msgid "Paste"
-msgstr "Cole aqui"
+#~ msgid "Permissions"
+#~ msgstr "Permissões"
 
-#: templates/home.html:17
-msgid "Latest Collaborations"
-msgstr "Últimas Colaborações"
+#~ msgid "Important dates"
+#~ msgstr "Datas importantes"
 
-#: templates/home.html:21
-msgid "RSS - Latest collaborations"
-msgstr "RSS - Últimas Colaborações"
+#~ msgid "Social account does not exist"
+#~ msgstr "Conta social não existe"
 
-#: templates/home.html:30
-msgid "View more collaborations..."
-msgstr "Ver mais colaborações..."
+#~ msgid "This field cannot be blank."
+#~ msgstr "Este campo não pode ficar em branco."
 
-#: templates/home.html:37
-msgid "Collaboration Graph"
-msgstr "Gráfico de Colaborações"
+#~ msgid "Bio"
+#~ msgstr "Bio"
 
-#: templates/home.html:48
-msgid "Most Relevant Threads"
-msgstr "Discussões Mais Relevantes"
+#~ msgid "Write something about you in 200 characters or less."
+#~ msgstr "Escreva algo sobre você em 200 caracteres ou menos."
 
-#: templates/home.html:52
-msgid "RSS - Most Relevant Threads"
-msgstr "RSS - Discussões Mais Relevantes"
+#~ msgid "Mailing lists"
+#~ msgstr "Listas de e-mail"
 
-#: templates/home.html:60 templates/home.html.py:79
-msgid "View more discussions..."
-msgstr "Ver mais discussões..."
+#~ msgid "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
+#~ msgstr ""
+#~ "Este email ja está sendo utilizado.Caso seja o seu efetue o <a "
+#~ "href='%(url)s'>login</a>"
 
-#: templates/home.html:67
-msgid "Latest Threads"
-msgstr "Últimas Discussões"
+#~ msgid "A user with that username already exists."
+#~ msgstr "Já existe um usuário com este nome."
 
-#: templates/home.html:71
-msgid "RSS - Latest Threads"
-msgstr "RSS - Últimas Discussões"
+#~ msgid "The two password fields didn't match."
+#~ msgstr "Os dois campos de senha não conferem."
+
+#~ msgid "Password"
+#~ msgstr "Senha"
+
+#~ msgid "Password confirmation"
+#~ msgstr "Confirmação de senha"
+
+#~ msgid "Required. 30 characters or fewer. Letters and digits."
+#~ msgstr "Obrigatório. 30 caracteres ou menos. Letras ou digitos."
+
+#~ msgid "This value may contain only letters and numbers."
+#~ msgstr "Este campo pode conter apenas letras e números."
+
+#~ msgid ""
+#~ "Raw passwords are not stored, so there is no way to see this user's "
+#~ "password, but you can change the password using <a href=\"password/"
+#~ "\">this form</a>."
+#~ msgstr ""
+#~ "Senhas em claro não são armazenadas, então não será possível visualizar "
+#~ "sua senha, no entanto você poderá modificar sua senha utilizando <a href="
+#~ "\\\"password/\\\">este formulário</a>."
+
+#~ msgid ""
+#~ "Please enter a correct %(username)s and password. Note that both fields "
+#~ "may be case-sensitive."
+#~ msgstr ""
+#~ "Por favor entre com um %(username)s e senha. Note que ambos os campos "
+#~ "diferenciam letras maiúsculas de minúsculas"
+
+#~ msgid "This account is inactive."
+#~ msgstr "Esta conta está inativa."
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "New password"
+#~ msgstr "Nova senha"
+
+#~ msgid "New password confirmation"
+#~ msgstr "Confirmar nova senha"
+
+#~ msgid "Your old password was entered incorrectly. Please enter it again."
+#~ msgstr "Sua senha atual está incorreta. Por favor tente novamente."
+
+#~ msgid "Old password"
+#~ msgstr "Senha atual"
+
+#~ msgid "Password (again)"
+#~ msgstr "Senha (novamente)"
+
+#~ msgid "Enter a valid username."
+#~ msgstr "Insira um nome de usuário válido."
+
+#~ msgid "Group Subscriptions"
+#~ msgstr "Inscrições em grupos"
+
+#~ msgid "Update subscriptions"
+#~ msgstr "Atualizar inscrições"
+
+#~ msgid "Sign up"
+#~ msgstr "Cadastrar"
+
+#~ msgid "Please correct the errors below and try again."
+#~ msgstr "Por favor corrija os erros abaixo e tente novamente."
+
+#~ msgid "Required fields"
+#~ msgstr "Campos obrigatórios"
+
+#~ msgid "Personal Information"
+#~ msgstr "Informações pessoais"
+
+#~ msgid "Subscribe to groups"
+#~ msgstr "Inscreva-se nos grupos"
+
+#~ msgid "Register"
+#~ msgstr "Cadastre-se"
+
+#~ msgid "Messages"
+#~ msgstr "Mensagens"
+
+#~ msgid "Contributions"
+#~ msgstr "Contribuições"
+
+#~ msgid "edit profile"
+#~ msgstr "editar perfil"
+
+#~ msgid "group membership"
+#~ msgstr "Inscrições nos grupos"
+
+#~ msgid "Twitter account"
+#~ msgstr "Conta Twitter"
+
+#~ msgid "Facebook account"
+#~ msgstr "Conta Facebook"
+
+#~ msgid "Google talk account"
+#~ msgstr "Conta Google talk"
+
+#~ msgid "Github account"
+#~ msgstr "Conta Github"
+
+#~ msgid "Personal webpage"
+#~ msgstr "Página web pessoal"
+
+#~ msgid "Groups: "
+#~ msgstr "Grupos: "
+
+#~ msgid "Collaborations by Type"
+#~ msgstr "Colaborações por tipo"
+
+#~ msgid "Participation by Group"
+#~ msgstr "Participação por grupo"
+
+#~ msgid "Latest posted"
+#~ msgstr "Últimas postagens"
+
+#~ msgid "There are no posts by this user so far."
+#~ msgstr "Não há posts deste usuário até agora."
+
+#~ msgid "View more posts..."
+#~ msgstr "Ver mais postagens..."
+
+#~ msgid "Latest contributions"
+#~ msgstr "Últimas colaborações"
+
+#~ msgid "No contributions of this user so far."
+#~ msgstr "Não há contribuições deste usuário até agora."
+
+#~ msgid "View more contributions..."
+#~ msgstr "Ver mais colaborações..."
+
+#~ msgid "We sent a verification email to "
+#~ msgstr "Enviamos um email de verificação para "
+
+#~ msgid "Please follow the instructions in it."
+#~ msgstr "Por favor, siga as instruções."
+
+#~ msgid "profile information"
+#~ msgstr "informações do perfil"
+
+#~ msgid "Change your avatar at Gravatar.com"
+#~ msgstr "Troque seu avatar em Gravatar.com"
+
+#~ msgid "Emails"
+#~ msgstr "Emails"
+
+#~ msgid "Primary"
+#~ msgstr "Primário"
+
+#~ msgid "Setting..."
+#~ msgstr "Definindo..."
+
+#~ msgid "Set as Primary"
+#~ msgstr "Definir como Primário"
+
+#~ msgid "Deleting..."
+#~ msgstr "Apagando..."
+
+#~ msgid "Delete"
+#~ msgstr "Apagar"
+
+#~ msgid "Sending verification..."
+#~ msgstr "Enviando verificação..."
+
+#~ msgid "Verify"
+#~ msgstr "Verificar"
+
+#~ msgid "Add another email address:"
+#~ msgstr "Adicionar outro endereço de email"
+
+#~ msgid "Add"
+#~ msgstr "Adicionar"
+
+#~ msgid "Change Password"
+#~ msgstr "Trocar senha"
+
+#~ msgid "Update"
+#~ msgstr "Atualizar"
+
+#~ msgid "Please correct the error below and try again."
+#~ msgstr "Por favor corrija o erro abaixo e tente novamente."
+
+#~ msgid "Login"
+#~ msgstr "Entrar"
+
+#~ msgid "Forgot Password?"
+#~ msgstr "Esqueci minha Senha?"
+
+#~ msgid "Change my password"
+#~ msgstr "Alterar minha senha"
+
+#~ msgid "Setting New password"
+#~ msgstr "Definir Nova Senha"
+
+#~ msgid ""
+#~ "Forgotten your password? Enter your email address below, and we'll email "
+#~ "instructions for setting a new one."
+#~ msgstr ""
+#~ "Esqueceu sua senha? Digite seu email abaixo, e enviaremos instruções para "
+#~ "redefinir sua senha."
+
+#~ msgid "Email address:"
+#~ msgstr "Endereço de email: "
+
+#~ msgid "Reset password"
+#~ msgstr "Redefinir senha"
+
+#~ msgid "Your profile has been created!"
+#~ msgstr "Seu perfil foi criado!"
+
+#~ msgid "Your password was changed."
+#~ msgstr "Sua senha foi modificada."
+
+#~ msgid "Your password has been set. You may go ahead and log in now."
+#~ msgstr "Sua senha foi modificada. Você já pode efetuar o login agora."
+
+#~ msgid "Fork me!"
+#~ msgstr "Fork me!"
+
+#~ msgid "Gitlab Group"
+#~ msgstr "Grupo no Gitlab"
+
+#~ msgid "Gitlab Groups"
+#~ msgstr "Grupos no Gitlab"
+
+#~ msgid "Gitlab Merge Request"
+#~ msgstr "Envio de Contribuição no Gitlab"
+
+#~ msgid "Gitlab Issue"
+#~ msgstr "Tíquete no Gitlab"
+
+#~ msgid "Gitlab Comments"
+#~ msgstr "Comentários no Gitlab"
+
+#~ msgid "Community"
+#~ msgstr "Comunidade"
+
+#~ msgid "Article"
+#~ msgstr "Artigo"
+
+#~ msgid "Articles"
+#~ msgstr "Artigos"
+
+#~ msgid "Latest Discussions"
+#~ msgstr "Últimas discussões"
+
+#~ msgid "Discussions Most Relevance"
+#~ msgstr "Discussões Mais Relevantes"
+
+#~ msgid "Latest collaborations"
+#~ msgstr "Últimas colaborações"
+
+#~ msgid "Search"
+#~ msgstr "Busca"
+
+#~ msgid "Type"
+#~ msgstr "Tipo"
+
+#~ msgid "Author"
+#~ msgstr "Autor"
+
+#~ msgid "Modified by"
+#~ msgstr "Modificado por"
+
+#~ msgid "Status"
+#~ msgstr "Status"
+
+#~ msgid "Mailinglist"
+#~ msgstr "Lista de discussão"
+
+#~ msgid "Milestone"
+#~ msgstr "Marco"
+
+#~ msgid "Priority"
+#~ msgstr "Prioridade"
+
+#~ msgid "Component"
+#~ msgstr "Componente"
+
+#~ msgid "Severity"
+#~ msgstr "Severidade"
+
+#~ msgid "Reporter"
+#~ msgstr "Relator"
+
+#~ msgid "Keywords"
+#~ msgstr "Palavras chave"
+
+#~ msgid "Collaborators"
+#~ msgstr "Colaboradores"
+
+#~ msgid "Repository"
+#~ msgstr "Repositório"
+
+#~ msgid "Name"
+#~ msgstr "Nome"
+
+#~ msgid "Institution"
+#~ msgstr "Instituição"
+
+#~ msgid "Role"
+#~ msgstr "Papel"
+
+#~ msgid "Since"
+#~ msgstr "Desde"
+
+#~ msgid "Until"
+#~ msgstr "Até"
+
+#~ msgid "Filename"
+#~ msgstr "Nome do arquivo"
+
+#~ msgid "Used by"
+#~ msgstr "Usado por"
+
+#~ msgid "File type"
+#~ msgstr "Tipo do arquivo"
+
+#~ msgid "Size"
+#~ msgstr "Tamanho"
+
+#~ msgid "Remove filter"
+#~ msgstr "Remover filtro"
+
+#~ msgid "Filter"
+#~ msgstr "Filtro"
+
+#~ msgid "Sort by"
+#~ msgstr "Ordenar por"
+
+#~ msgid "Types"
+#~ msgstr "Tipos"
+
+#~ msgid "Discussion"
+#~ msgstr "Discussão"
+
+#~ msgid "search"
+#~ msgstr "busca"
+
+#~ msgid "documents found"
+#~ msgstr "documentos encontrados"
+
+#~ msgid "Search here"
+#~ msgstr "Pesquise aqui"
+
+#~ msgid "Filters"
+#~ msgstr "Filtros"
+
+#~ msgid "No results for your search."
+#~ msgstr "Não há resultados para sua busca."
+
+#~ msgid "You are searching for"
+#~ msgstr "Você está procurando por"
+
+#~ msgid "English"
+#~ msgstr "Inglês"
+
+#~ msgid "Portuguese"
+#~ msgstr "Português"
+
+#~ msgid "Spanish"
+#~ msgstr "Espanhol"
+
+#~ msgid "Recent activity"
+#~ msgstr "Atividade recente"
+
+#~ msgid "Relevance"
+#~ msgstr "Relevância"
+
+#~ msgid "Document"
+#~ msgstr "Documento"
+
+#~ msgid "Presentation"
+#~ msgstr "Apresentação"
+
+#~ msgid "Text"
+#~ msgstr "Texto"
+
+#~ msgid "Compressed"
+#~ msgstr "Compactado"
+
+#~ msgid "Image"
+#~ msgstr "Imagem"
+
+#~ msgid "Spreadsheet"
+#~ msgstr "Planilha"
+
+#~ msgid "Not found. Keep searching! :)"
+#~ msgstr "Não encontrado. Continue procurando! :)"
+
+#~ msgid "Ooopz... something went wrong!"
+#~ msgstr "Ooopa... algo saiu errado!"
+
+#~ msgid "Logout"
+#~ msgstr "Sair"
+
+#~ msgid "Search here..."
+#~ msgstr "Pesquise aqui..."
+
+#~ msgid "The login has failed. Please, try again."
+#~ msgstr "O login falhou. Por favor, tente novamente."
+
+#~ msgid "Last email imported at"
+#~ msgstr "Último email importado em"
+
+#~ msgid "The contents of this site is published under license"
+#~ msgstr "O conteúdo deste site está publicado sob a licença"
+
+#~ msgid "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
+#~ msgstr "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual"
+
+#~ msgid "Paste"
+#~ msgstr "Cole aqui"
+
+#~ msgid "Latest Collaborations"
+#~ msgstr "Últimas Colaborações"
+
+#~ msgid "RSS - Latest collaborations"
+#~ msgstr "RSS - Últimas Colaborações"
+
+#~ msgid "View more collaborations..."
+#~ msgstr "Ver mais colaborações..."
+
+#~ msgid "Collaboration Graph"
+#~ msgstr "Gráfico de Colaborações"
+
+#~ msgid "Most Relevant Threads"
+#~ msgstr "Discussões Mais Relevantes"
+
+#~ msgid "RSS - Most Relevant Threads"
+#~ msgstr "RSS - Discussões Mais Relevantes"
+
+#~ msgid "View more discussions..."
+#~ msgstr "Ver mais discussões..."
+
+#~ msgid "Latest Threads"
+#~ msgstr "Últimas Discussões"
+
+#~ msgid "RSS - Latest Threads"
+#~ msgstr "RSS - Últimas Discussões"

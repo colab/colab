@@ -22,6 +22,7 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     google_talk = indexes.CharField(model_attr='google_talk', null=True,
                                     stored=False)
     webpage = indexes.CharField(model_attr='webpage', null=True, stored=False)
+    date_joined = indexes.DateTimeField(model_attr='date_joined')
 
     def get_model(self):
         return User
