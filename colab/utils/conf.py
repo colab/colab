@@ -32,7 +32,7 @@ def _load_py_file(py_path, path):
     try:
         py_settings = importlib.import_module(py_path)
 
-    except IOError:
+    except ImportError:
         msg = ('Could not open settings file {}. Please '
                'check if the file exists and if user '
                'has read rights.').format(py_path)
