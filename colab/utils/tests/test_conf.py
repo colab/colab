@@ -57,7 +57,7 @@ class TestConf(TestCase):
                                        'non_python_file'])
     @patch('colab.utils.conf._load_py_file',
            side_effect=[{'SOCIAL_NETWORK_ENABLED': True, 'EMAIL_PORT': 25},
-                        {'TEST':'test'}])
+                        {'TEST': 'test'}])
     def test_load_py_settings_with_settings_d(self, mock_py, mock_listdir):
         py_settings = load_py_settings()
 
@@ -85,9 +85,9 @@ class TestConf(TestCase):
 
     @patch('os.getenv', return_value='/path/fake/widgets_settings.py')
     def test_load_widgets_settings_without_settings(self, mock):
-       self.assertIsNone(load_widgets_settings())
+        self.assertIsNone(load_widgets_settings())
 
     @patch('os.getenv', side_effect=['./tests/colab_settings.py',
                                      '/path/fake/widgets_settings.py'])
-    def test_load_widgets_settings_without_settings(self, mock):
-       self.assertIsNone(load_widgets_settings())
+    def test_load_widgets_settings_without_settings_d(self, mock):
+        self.assertIsNone(load_widgets_settings())
