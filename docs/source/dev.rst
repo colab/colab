@@ -43,12 +43,13 @@ Example Widget:
         class MyWidget(Widget):
             identifier = 'my_widget_id'
             name = 'My Widget'
-            def generate_content(self, request):
+            def generate_content(self, **kwargs):
                 # process HTML content
                 self.content = processed_content
 
 To add the widget in a view check the Widgets section in User Documentation.
 To use a widget in the templates, you have to use the ``import_widget`` tag inside the ``html`` block.
+This way, the kwargs parameter will have a ``context`` key from the ``html``.
 You can also set the variable that the widgets of an area will be imported.
 Or you can use the default name, which is ``widgets_area_name``.
 For example, in the ``profile`` area the variable name is ``widgets_profile``.
