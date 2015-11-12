@@ -9,6 +9,5 @@ register = template.Library()
 def import_widgets(context, area_id, widget_var=None):
     if not widget_var:
         widget_var = "widgets_{}".format(area_id)
-    context[widget_var] = WidgetManager.get_widgets(area_id,
-                                                    context['request'])
+    context[widget_var] = WidgetManager.get_widgets(area_id, context=context)
     return ""
