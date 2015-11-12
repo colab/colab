@@ -1,5 +1,10 @@
 {% extends "base.html" %}
-{% load i18n gravatar plugins %}
+{% load i18n gravatar plugins widgets_tag %}
+
+{% block html %}
+   {% import_widgets 'profile' %}
+   {{ block.super }}
+{% endblock %}
 
 {% block head_js %}
 <script>
@@ -105,7 +110,7 @@ $(function() {
 {% block head %}
   {{ block.super }}
 
-  {% for widget in widgets %}
+  {% for widget in widgets_profile %}
     {{ widget.get_header }}
   {% endfor %}
 
@@ -129,7 +134,7 @@ $(function() {
   <!-- Start of navs -->
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="pill" href="#profile">Profile</a></li>
-    {% for widget in widgets %}
+    {% for widget in widgets_profile %}
       <li>
         <a data-toggle="pill" href="#{{ widget.identifier }}">{{ widget.name }}</a>
       </li>
@@ -229,7 +234,7 @@ $(function() {
         </div>
       </form>
     </div>
-    {% for widget in widgets %}
+    {% for widget in widgets_profile %}
       <div id="{{ widget.identifier }}" class="tab-pane fade">
         <h2>{{ widget.name }}</h2>
         {{ widget.get_body }}
