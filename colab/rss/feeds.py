@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 
 from haystack.query import SearchQuerySet
 
+
 class LatestThreadsFeeds(Feed):
     title = _(u'Latest Discussions')
     link = '/rss/threads/latest/'

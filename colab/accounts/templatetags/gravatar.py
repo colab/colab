@@ -14,7 +14,7 @@ def gravatar(context, email, size=80):
             email = EmailAddress.objects.get(address=email)
         except EmailAddress.DoesNotExist:
             pass
-    
+
     email_md5 = getattr(email, 'md5', 'anonymous')
 
     request = context.get('request')

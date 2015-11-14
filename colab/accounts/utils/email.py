@@ -6,8 +6,10 @@ from django.conf import settings
 from django.template import Context, loader
 from django.utils.translation import ugettext as _
 
+
 def get_validation_key():
     return uuid4().hex
+
 
 def colab_send_email(subject, message, to):
     from_email = settings.COLAB_FROM_ADDRESS
