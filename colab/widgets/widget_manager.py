@@ -28,7 +28,7 @@ class Widget(object):
         head = self.content[start + len('<head>'):end]
         return mark_safe(head)
 
-    def generate_content(self, **kwarg):
+    def generate_content(self, **kwargs):
         self.content = ''
 
 
@@ -50,11 +50,11 @@ class WidgetManager(object):
                     WidgetManager.widget_categories[category].remove(widget)
 
     @staticmethod
-    def get_widgets(category, **kargs):
+    def get_widgets(category, **kwargs):
         if category not in WidgetManager.widget_categories:
             return []
 
         widgets = WidgetManager.widget_categories[category][:]
         for widget in widgets:
-            widget.generate_content(**kargs)
+            widget.generate_content(**kwargs)
         return widgets
