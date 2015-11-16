@@ -277,14 +277,14 @@ class EmailValidationView(View):
         try:
             email = EmailAddressValidation.objects.get(address=email_addr,
                                                        user_id=user_id)
-        except http.DoesNotExist:
+        except EmailAddressValidation.DoesNotExist:
             raise http.Http404
 
         try:
             location = reverse('archive_email_view',
                                kwargs={'key': email.validation_key})
             verification_url = request.build_absolute_uri(location)
-            send_verification_email(request, email_addr, email.user,
+            send_verification_email(email_addr, email.user,
                                     email.validation_key, verification_url)
         except smtplib.SMTPException:
             logging.exception('Error sending validation email')
