@@ -6,7 +6,7 @@ from colab.accounts.models import User
 
 
 class ViewsTest(TestCase):
-    
+
     def setUp(self):
         self.view = ColabProxyView()
         self.factory = RequestFactory()
@@ -18,5 +18,5 @@ class ViewsTest(TestCase):
         request = self.factory.get('/')
         request.user = self.user
 
-        with self.assertRaises(NotImplementedError): 
+        with self.assertRaises(NotImplementedError):
             self.view.dispatch(request, '/')
