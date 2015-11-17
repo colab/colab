@@ -13,6 +13,7 @@
 
 {% block html %}
   {% import_widgets 'collaboration_chart' %}
+  {% import_widgets 'participation_chart' %}
   {{block.super}}
 {% endblock html %}
 
@@ -109,19 +110,9 @@
       {{widget.get_body}}
     {% endfor %}
 
-    <div class="col-lg-4 col-md-4 col-sm-7">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Participation by Group" %}</h3>
-        </div>
-        <div class="panel-body">
-          <div class="chart collabs2">
-              <canvas width="200" height="200"></canvas>
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% for widget in widgets_participation_chart %}
+      {{widget.get_body}}
+    {% endfor %}
 
   </div> <!-- End of user-profile row -->
 

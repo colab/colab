@@ -1,11 +1,9 @@
 {% load i18n %}
 
 <head>
-  {% trans "Messages" as group_collabs %}
   {% trans "Contributions" as type_collabs %}
 
   {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=type_collabs %}
-  {% include "doughnut-chart.html" with chart_data=list_activity chart_canvas="collabs2" name=group_collabs %}
 </head>
 <body>
   <div class="col-lg-4 col-md-4 col-sm-7">
