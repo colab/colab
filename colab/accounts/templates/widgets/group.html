@@ -1,10 +1,8 @@
 {% load i18n %}
 
-<body>
 {% if user_.mailinglists %}
   <b>{% trans 'Groups: ' %}</b>
   {% for list in user_.mailinglists %}
     <a href="{% url 'haystack_search' %}?order=latest&amp;type=thread&amp;list={{ list }}"><span class="label label-primary">{{ list }}</span></a>
   {% endfor %}
 {% endif %}
-</body>
