@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from ..utils.blocks import EmailBlock, EmailBlockParser
+from ..utils.blocks import EmailBlock
 
 
 class TestEmailBlock(TestCase):
@@ -11,13 +11,13 @@ class TestEmailBlock(TestCase):
     def test_html2text_without_br_tag(self):
         html = '<a>Hello, world!</a>'
         text = self.email_block._html2text(html)
-        
+
         self.assertEquals(text, 'Hello, world!')
 
     def test_html2text_with_br_tag(self):
         html = '<a>Hello, world</a>!<br><p>Test with br tag</p>!'
         text = self.email_block._html2text(html)
-        
+
         self.assertEquals(text, 'Hello, world!\nTest with br tag!')
 
     def test_mark_links(self):
