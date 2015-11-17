@@ -7,11 +7,13 @@ from django.template import Context
 
 
 class WigetMock(Widget):
+
     def __init__(self, content=""):
         self.content = content
 
 
 class WidgetsTest(unittest.TestCase):
+
     @patch.object(WidgetManager, 'get_widgets')
     def test_import_widgets_tag(self, get_widgets):
         return_list = [WigetMock(), WigetMock(), WigetMock()]
