@@ -22,5 +22,7 @@ def send_verification_email(to, user, validation_key):
         loader.get_template('accounts/emails/email_verification.txt')
     message = msg_tmpl.render(Context({'to': to, 'user': user,
                                        'key': validation_key,
-                                       'SITE_URL': settings.SITE_URL}))
+                                       'SITE_URL': getattr(settings,
+                                                           "SITE_URL",
+                                                           "localhost")}))
     return colab_send_email(subject, message, to)
