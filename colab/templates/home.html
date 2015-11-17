@@ -1,85 +1,44 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n widgets_tag%}
+
+{% block html %}
+  {% import_widgets 'dashboard_latest_collaborations' %}
+  {% import_widgets 'dashboard_most_relevant_threads' %}
+  {% import_widgets 'dashboard_latest_threads' %}
+  {% import_widgets 'dashboard_collaboration_graph' %}
+  {{block.super}}
+{% endblock %}
 
 {% block title %}Home{% endblock %}
 
 {% block head_js %}
-  {% trans "Contributions" as collabs_name %}
-
-  {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=collabs_name %}
+  {% for widget in  widgets_dashboard_collaboration_graph %}
+    {{widget.get_header}}
+  {% endfor %}
 {% endblock %}
 
 {% block main-content %}
 
-  <div class="row">
-    <div class="col-lg-6 col-md-6">
-      <h3 class="column-align">
-        {% trans "Latest Collaborations" %}
-      </h3>
-      <a class="rss-icon" target="_blank"
-         href="{% url 'rss_latest_colab' %}"
-         title="{% trans 'RSS - Latest collaborations' %}">
-      </a>
-      <ul class="message-list">
-        {% for result in latest_results %}
-          {% include "message-preview.html" %}
-        {% endfor %}
-      </ul>
-      <a class="column-align"
-         href="{% url 'haystack_search' %}?order=latest">
-        {% trans "View more collaborations..." %}
-      </a>
-      <div>&nbsp;</div>
-    </div>
+ <div class="row">
 
+  {% for widget in  widgets_dashboard_latest_collaborations %}
+    {{widget.get_body}}
+  {% endfor %}
 
-    <div class="col-lg-6 col-md-6">
-      <h3 class="column-align">{% trans "Collaboration Graph" %}</h3>
-      <div class="chart collabs">
-          <canvas width="270" height="270"></canvas>
-        <p></p>
-      </div>
-    </div>
+  {% for widget in  widgets_dashboard_collaboration_graph %}
+    {{widget.get_body}}
+  {% endfor %}
+
   </div>
 
   <div class="row">
-    <div class="col-lg-6 col-md-6">
-      <h3 class="column-align">
-        {% trans "Most Relevant Threads" %}
-      </h3>
-      <a class="rss-icon" target="_blank"
-         href="{% url 'rss_hottest_threads' %}"
-         title="{% trans "RSS - Most Relevant Threads" %}">
-      </a>
-      <ul class="message-list">
-        {% for thread in hottest_threads %}
-          {% include "message-preview.html" with result=thread %}
-        {% endfor %}
-      </ul>
-      <a href="{% url 'haystack_search' %}?type=thread">
-        {% trans "View more discussions..." %}
-      </a>
-      <div>&nbsp;</div>
-    </div>
+    {% for widget in  widgets_dashboard_most_relevant_threads %}
+      {{widget.get_body}}
+    {% endfor %}
 
-    <div class="col-lg-6 col-md-6">
-      <h3 class="column-align">
-        {% trans "Latest Threads" %}
-      </h3>
-      <a class="rss-icon" target="_blank"
-         href="{% url 'rss_latest_threads' %}"
-         title="{% trans "RSS - Latest Threads" %}">
-      </a>
-      <ul class="message-list">
-        {% for thread in latest_threads %}
-          {% include "message-preview.html" with result=thread.latest_message %}
-        {% endfor %}
-      </ul>
-      <a href="{% url 'haystack_search' %}?type=thread&amp;order=latest">
-        {% trans "View more discussions..." %}
-      </a>
-      <div>&nbsp;</div>
-    </div>
+    {% for widget in  widgets_dashboard_latest_threads %}
+        {{widget.get_body}}
+    {% endfor %}
   </div>
 
 {% endblock %}

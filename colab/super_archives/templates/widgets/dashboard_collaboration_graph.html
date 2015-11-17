@@ -1,0 +1,16 @@
+{% load i18n %}
+<html>
+  <head>
+    {% trans "Contributions" as collabs_name %}
+    {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=collabs_name %}
+  </head>
+  <body>
+    <div class="col-lg-6 col-md-6">
+      <h3 class="column-align">{% trans "Collaboration Graph" %}</h3>
+      <div class="chart collabs">
+          <canvas width="270" height="270"></canvas>
+        <p></p>
+      </div>
+    </div>
+  </body>
+</html>
