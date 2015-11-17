@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+import datetime
 
 
 class Migration(migrations.Migration):
@@ -13,9 +14,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='TimeStampPlugin',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-                ('timestamp', models.DateTimeField(blank=True)),
+                ('id', models.IntegerField(serialize=False, primary_key=True)),
+                ('name', models.CharField(unique=True, max_length=255)),
+                ('timestamp', models.DateTimeField(default=datetime.datetime(1, 1, 1, 0, 0), blank=True)),
             ],
             options={
             },
