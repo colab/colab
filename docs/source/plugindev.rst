@@ -78,4 +78,4 @@ signals structure, some steps are required:
 * If you want to run celery manually to make some tests, you should execute:
 
 .. code-block:: shell
-   celery -A colab worker --loglevel=debug
+   colab-admin celeryC worker --loglevel=debug
