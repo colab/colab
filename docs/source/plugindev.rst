@@ -34,6 +34,7 @@ signals structure, some steps are required:
   be seen below:
 
 .. code-block:: python
+
    from colab.celery import app
 
    @app.task(bind=True)
@@ -48,6 +49,7 @@ signals structure, some steps are required:
 
 
 .. code-block:: python
+
    from colab.plugins.utils.apps import ColabPluginAppConfig
    from colab.signals.signals import register_signal, connect_signal
    from colab.plugins.PLUGIN.tasks import HANDLING_METHOD
@@ -71,6 +73,7 @@ signals structure, some steps are required:
   \*\*kwargs. As you can see below:
 
 .. code-block:: python
+
    from colab.signals.signals import send
 
    send(signal_name, sender)
@@ -78,4 +81,67 @@ signals structure, some steps are required:
 * If you want to run celery manually to make some tests, you should execute:
 
 .. code-block:: shell
+
    colab-admin celeryC worker --loglevel=debug
+
+Search
+----------
+
+In order to make some plugin model's searchable, it is necessary to create
+some files. First of all, it is necessary to create a directory named "search"
+inside the templates directory, that should be found on the plugin root
+directory.
+
+Once the search folder exist, it is necessary to create a html file that will
+describe how a model item will be displayed on the colab search page. This file
+name must follow the pattern:
+
+MODELNAME_search_preview.html
+
+Where the MODELNAME should be the name of the model object that will be
+represented on the html file. An example for this file can be seen bellow:
+
+.. code-block:: guess
+
+   {% load i18n tz highlight gravatar date_format %}
+
+    <div class="row">
+    <div class="col-md-2 center">
+        <a href="{% url 'user_profile' username=result.username %}">
+        {% block gravatar_img %}{% gravatar result.email 100 %}{% endblock gravatar_img %}
+        </a>
+    </div>
+    <div class="col-md-10">
+        <strong><a href="{% url 'user_profile' username=result.username %}">
+
+            {% if query %}
+                <h4>{% highlight result.name with query %}</h4></a>
+            {% else %}
+                <h4>{{ result.name }}</h4></a>
+            {% endif %}
+
+        </strong>
+        <small><strong>{% trans "Since" %}: {% date_format result.date_joined %}</strong></small><br>
+        <small>{% trans "Registered in" %}: <strong>{% trans "User" %}</strong></small><br>
+    </div>
+    </div>
+    <div class="row">
+    <hr>
+    </div>
+
+As can be seen in the above example, it also possible to highlight the elements being searched. This can be seen on
+the following example:
+
+.. code-block:: html
+
+    {% if query %}
+        <h4>{% highlight result.name with query %}</h4></a>
+    {% else %}
+        <h4>{{ result.name }}</h4></a>
+    {% endif %}
+
+It can be seen that if a query text was used on the search, it will highlight the element if it is present on the query, if not,
+the element will be displayed without a highlight. Therefore, in order to highlight some fields, it is necessary
+to first check if there is a query search. If there is, use the tag "highlight" before the field name. However, it
+must be said that the highlight tag should be followed by a complement, such as "with query", as can be seen on the example
+above. This complement is used to allow the highlight only if the attribute is actually present on the query used to perform a search.
