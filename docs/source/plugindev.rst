@@ -145,3 +145,20 @@ the element will be displayed without a highlight. Therefore, in order to highli
 to first check if there is a query search. If there is, use the tag "highlight" before the field name. However, it
 must be said that the highlight tag should be followed by a complement, such as "with query", as can be seen on the example
 above. This complement is used to allow the highlight only if the attribute is actually present on the query used to perform a search.
+
+Also a another file that must be created is the search_index.py one. This file
+must be placed at the plugin root directory. This file dictates how haystack
+will index the plugins models. If there is any doubt about how to create this
+file, it's possible to check the official haystack documentation that can be
+seen on the bellow link.
+
+`Guide to create a SearchIndexesFiles`_
+
+.. _`Guide to create a SearchIndexesFiles`: http://django-haystack.readthedocs.org/en/v2.4.0/tutorial.html#creating-searchindexes
+
+It can also be seen in the guide above that an indexes directory should be
+created. This directory should be placed inside the search directory originally
+created in this tutorial. Inside this directory, create a txt file for each
+model that can be queried. Each of this files must contain the model fields that
+will be search if no filter is applied. If there is any doubts to create these
+files, please check the `Guide to create a SearchIndexesFiles`_.
