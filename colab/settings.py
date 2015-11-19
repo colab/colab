@@ -140,6 +140,10 @@ ORDERING_DATA = {
         'name': _(u'Relevance'),
         'fields': None,
     },
+    'type': {
+        'name': _(u'Type'),
+        'fields': ('type',),
+    }
 }
 
 
