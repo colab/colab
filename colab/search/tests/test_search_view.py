@@ -19,22 +19,6 @@ class SearchViewTest(TestCase):
     def tearDown(self):
         call_command('clear_index', interactive=False, verbosity=0)
 
-    def test_search_thread(self):
-        request = self.client.get('/search/?q=thread')
-        thread_list = request.context['page'].object_list
-
-        self.assertEqual(3,  len(thread_list))
-
-        condition = any('This is a repply to Thread 1 on list A' in
-                        t.description for t in thread_list)
-        self.assertTrue(condition)
-        condition = any('This is a repply to Thread 1 on list B' in
-                        t.description for t in thread_list)
-        self.assertTrue(condition)
-        condition = any('This is a repply to Thread 1 on list C' in
-                        t.description for t in thread_list)
-        self.assertTrue(condition)
-
     def test_search_account_by_firstName(self):
         request = self.client.get('/search/?q=Chuck')
         user_list = request.context['page'].object_list
@@ -105,7 +89,7 @@ class SearchViewTest(TestCase):
         request = self.client.get('/search/?q=&type=thread+user')
         user_list = request.context['page'].object_list
 
-        self.assertEqual(6, len(user_list))
+        self.assertEqual(3, len(user_list))
 
         self.assertIn('admin@mail.com',  user_list[0].object.email)
         self.assertIn('admin',  user_list[0].object.username)
@@ -119,12 +103,3 @@ class SearchViewTest(TestCase):
         self.assertIn('Heisenberg',  user_list[2].object.first_name)
         self.assertIn('Norris',  user_list[2].object.last_name)
         self.assertIn('heisenbergnorris',  user_list[2].object.username)
-
-        self.assertIn('Admin Administrator',  user_list[3].author)
-        self.assertIn('Response to Thread 1A',  user_list[3].title)
-
-        self.assertIn('Admin Administrator',  user_list[4].author)
-        self.assertIn('Message 1 on Thread 1B',  user_list[4].title)
-
-        self.assertIn('Admin Administrator',  user_list[5].author)
-        self.assertIn('Message 1 on Thread 1C',  user_list[5].title)
