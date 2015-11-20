@@ -64,7 +64,6 @@ INSTALLED_APPS = (
     'colab.home',
     'colab.plugins',
     'colab.widgets',
-    'colab.super_archives',
     'colab.rss',
     'colab.search',
     'colab.tz',
