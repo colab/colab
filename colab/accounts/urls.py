@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls import patterns, url
 
 from .views import (UserProfileDetailView, UserProfileUpdateView,
-                    ManageUserSubscriptionsView)
+                    ManageUserSubscriptionsView, colab_password_change)
 
 from colab.accounts import views
 from django.contrib.auth import views as auth_views
@@ -29,8 +29,7 @@ urlpatterns = patterns('',
         {'template_name':'registration/password_reset_form_custom.html'},
         name="password_reset"),
 
-    url(r'^change-password/?$',auth_views.password_change,
-        {'template_name':'registration/password_change_form_custom.html'},
+    url(r'^change-password/?$', colab_password_change,
         name='password_change'),
 
     url(r'^change-password-done/?$',
