@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from django.utils.timezone import datetime
 
 
 class TimeStampPlugin(models.Model):
@@ -11,9 +11,15 @@ class TimeStampPlugin(models.Model):
     timestamp = models.DateTimeField(default=datetime.min, blank=True)
 
     @classmethod
-    def update_timestamp(cls, class_name):
+    def update_timestamp(cls, class_name, **kwargs):
         instance = TimeStampPlugin.objects.filter(name=class_name)[0]
-        instance.timestamp = datetime.now()
+        last_updated = kwargs.get('last_updated', '')
+
+        if last_updated:
+            instance.timestamp = datetime.strptime(last_updated,
+                                                   "%Y/%m/%d %H:%M:%S")
+        else:
+            instance.timestamp = datetime.now()
         instance.save()
 
     @classmethod
