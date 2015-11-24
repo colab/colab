@@ -1,0 +1,46 @@
+/* Header */
+
+#header-searchbox {
+    width: 190px;
+}
+
+#header-hr {
+    margin-top: 0;
+}
+
+.navbar-default .navbar-brand,
+.navbar a.dropdown-toggle.user {
+    padding: 0;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+#user-menu .wrapper {
+    padding: 3px 10px;
+    white-space: nowrap;
+}
+
+#user-menu .wrapper a {
+    margin: 5px 0;
+}
+
+#user-menu .user-info {
+    display: inline-block;
+    vertical-align: top;
+    padding-left: 5px;
+}
+
+#user-menu .user-info span {
+    display: block;
+}
+
+#user-menu .dropdown-menu .thumbnail {
+    width: 100px;
+    display: inline-block;
+}
+
+/* End of Header */
