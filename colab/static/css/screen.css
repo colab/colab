@@ -120,6 +120,12 @@ div.links-group {
     margin-bottom: 20px;
 }
 
+div.submit {
+    margin: auto;
+    margin-bottom: 2em;
+    width: 200px;
+}
+
 .checkbox ul {
     list-style: none;
     padding: 0;
