@@ -6,16 +6,11 @@
    {%  import_widgets 'button' %}
    {%  import_widgets 'list' %}
    {%  import_widgets 'group' %}
+  {% import_widgets 'charts' %}
    {{ block.super }}
 {% endblock %}
 
 {% block title %}Perfil{% endblock %}
-
-{% block html %}
-  {% import_widgets 'collaboration_chart' %}
-  {% import_widgets 'participation_chart' %}
-  {{block.super}}
-{% endblock html %}
 
 {% block head_js %}
   {% trans "Messages" as group_collabs %}
@@ -106,11 +101,7 @@
 
     </div>
 
-    {% for widget in widgets_collaboration_chart %}
-      {{widget.get_body}}
-    {% endfor %}
-
-    {% for widget in widgets_participation_chart %}
+    {% for widget in widgets_charts %}
       {{widget.get_body}}
     {% endfor %}
 
