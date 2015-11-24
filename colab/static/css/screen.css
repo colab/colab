@@ -115,6 +115,11 @@ form.signup .form-group {
     margin-left: 0.5em;
 }
 
+div.links-group {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 div.submit {
     margin: auto;
     margin-bottom: 2em;

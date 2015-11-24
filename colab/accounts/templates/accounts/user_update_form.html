@@ -228,8 +228,11 @@ $(function() {
           </div>
         </div>
         <div class="row">
-          <div class="submit">
-            <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Update" %}</button>
+          <div class="col-md-12">
+            <div class="links-group">
+              <button type="submit" class="btn btn-primary btn-lg" expanded="false">{% trans "Update" %}</button>
+              <a href="{% url 'user_profile' user %}" class="btn btn-default btn-lg" role="button">{% trans "Go to profile panel" %}</a>
+            </div>
           </div>
         </div>
       </form>
