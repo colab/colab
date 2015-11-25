@@ -2,7 +2,6 @@
 from collections import OrderedDict
 
 from django.contrib import messages
-from django.contrib.auth.views import password_change
 from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext as _
@@ -18,7 +17,6 @@ from colab.search.utils import get_collaboration_data, get_visible_threads
 from colab.accounts.models import User
 
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm)
-from .signals import user_password_changed
 from .utils import mailman
 
 
@@ -214,13 +212,3 @@ def myaccount_redirect(request, route):
     url = '/'.join(('/account', request.user.username, route))
 
     return redirect(url)
-
-
-def colab_password_change(request):
-    template_name = 'registration/password_change_form_custom.html'
-    response = password_change(request, template_name)
-    if response.status_code == 302:
-        user_password_changed.send(sender=colab_password_change.__name__,
-                                   user=request.user,
-                                   password=request.POST.get('new_password1'))
-    return response
