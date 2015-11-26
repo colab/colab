@@ -14,9 +14,10 @@ from .utils import mailman
 
 class ColabUserManager(UserManager):
 
-    def _create_user(self, *args, **kwargs):
+    def _create_user(self, username, email, password,
+                     is_staff, is_superuser, **kwargs):
+        args = (username, email, password, is_staff, is_superuser)
         user = super(ColabUserManager, self)._create_user(*args, **kwargs)
-        password = kwargs.get('password')
 
         user_created.send(user.__class__, user=user, password=password)
         return user
