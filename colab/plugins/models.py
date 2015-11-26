@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.timezone import datetime
+from django.utils import timezone
 
 
 class TimeStampPlugin(models.Model):
@@ -8,18 +8,19 @@ class TimeStampPlugin(models.Model):
     '''
     id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, unique=True, null=False)
-    timestamp = models.DateTimeField(default=datetime.min, blank=True)
+    timestamp = models.DateTimeField(default=timezone.datetime.min, blank=True)
 
     @classmethod
     def update_timestamp(cls, class_name, **kwargs):
-        instance = TimeStampPlugin.objects.filter(name=class_name)[0]
+        instance = TimeStampPlugin.objects.get_or_create(name=class_name)[0]
         last_updated = kwargs.get('last_updated', '')
 
         if last_updated:
-            instance.timestamp = datetime.strptime(last_updated,
-                                                   "%Y/%m/%d %H:%M:%S")
+            format = "%Y/%m/%d %H:%M:%S"
+            instance.timestamp = timezone.datetime.strptime(last_updated,
+                                                            format)
         else:
-            instance.timestamp = datetime.now()
+            instance.timestamp = timezone.datetime.now()
         instance.save()
 
     @classmethod
