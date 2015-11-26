@@ -1,12 +1,11 @@
 
 from django.conf import settings
 from django.conf.urls import patterns, url
+from django.contrib.auth import views as auth_views
 
 from .views import (UserProfileDetailView, UserProfileUpdateView,
                     ManageUserSubscriptionsView)
-
-from colab.accounts import views
-from django.contrib.auth import views as auth_views
+from .forms import PasswordChangeForm
 
 
 urlpatterns = patterns('',
@@ -30,7 +29,8 @@ urlpatterns = patterns('',
         name="password_reset"),
 
     url(r'^change-password/?$', auth_views.password_change,
-        {'template_name':'registration/password_change_form_custom.html'},
+        {'template_name': 'registration/password_change_form_custom.html',
+         'password_change_form': PasswordChangeForm},
         name='password_change'),
 
     url(r'^change-password-done/?$',

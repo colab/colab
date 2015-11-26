@@ -49,7 +49,7 @@ def _load_py_file(py_path, path):
         sys.path.remove(path)
 
     py_setting = {var: getattr(py_settings, var) for var in dir(py_settings)
-                  if not var.startswith('__')}
+                  if not var.startswith('_')}
 
     return py_setting
 
@@ -125,16 +125,7 @@ def load_colab_apps():
 
         app_label = app_name.split('.')[-1]
         COLAB_APPS[app_label] = {}
-        COLAB_APPS[app_label]['menu_title'] = py_settings_d.get('menu_title')
-
-        fields = ['verbose_name', 'upstream', 'urls',
-                  'menu_urls', 'middlewares', 'dependencies',
-                  'context_processors', 'private_token', 'name', 'extra']
-
-        for key in fields:
-            value = py_settings_d.get(key)
-            if value:
-                COLAB_APPS[app_label][key] = value
+        COLAB_APPS[app_label] = py_settings_d
 
     return {'COLAB_APPS': COLAB_APPS}
 

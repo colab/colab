@@ -2,9 +2,9 @@
 
 import urlparse
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
