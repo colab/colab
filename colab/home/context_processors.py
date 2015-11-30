@@ -16,7 +16,7 @@ def ribbon(request):
     if not enabled:
         return {'ribbon': False}
 
-    url = 'http://beta.softwarepublico.gov.br/gitlab/softwarepublico/colab'
+    url = 'http://github.com/colab/colab'
     text = _('Fork me!')
 
     return {

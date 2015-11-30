@@ -7,6 +7,8 @@ omit =
 	*/urls.py
 	*/settings.py
 	*/tests.py
+  colab/celery.py
+  colab/wsgi.py
 source =
     colab/
 

@@ -25,7 +25,7 @@ class EmailBlock(list):
 
     def _html2text(self, text):
         if RE_WRAPPED_BY_HTML.match(text.strip()):
-            return html2text(text)
+            return html2text(text).strip()
 
         text, n = RE_BR_TO_LINEBREAK.subn('\n', text)
         text = strip_tags(text)
