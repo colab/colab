@@ -17,7 +17,7 @@ from django.utils.text import capfirst
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 
-from .signals import user_created
+
 from .utils.validators import validate_social_account
 from .utils import mailman
 
@@ -242,14 +242,9 @@ class UserCreationForm(UserForm):
 
     def save(self, commit=True):
         user = super(UserCreationForm, self).save(commit=False)
-        password = self.cleaned_data["password1"]
-        user.set_password(password)
-
+        user.set_password(self.cleaned_data["password1"])
         if commit:
             user.save()
-
-        user_created.send(user.__class__, user=user, password=password)
-
         return user
 
 

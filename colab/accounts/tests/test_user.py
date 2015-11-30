@@ -374,22 +374,3 @@ class UserTest(TestCase):
         self.authenticate_user()
         self.validate_non_mandatory_fields('bio', '', ' ')
         self.user.delete()
-
-    @mock.patch('colab.accounts.signals.user_password_changed.send')
-    @mock.patch('colab.accounts.signals.user_created.send')
-    def test_user_created_signal(self, user_created_send,
-                                 user_password_changed_send):
-        user = User.objects.create_user(
-            username='test_user',
-            password='12345',
-            email='test@example.com',
-        )
-        user_created_send.assert_called_with(User, user=user, password='12345')
-        user_password_changed_send.assert_not_called()
-
-    @mock.patch('colab.accounts.signals.user_password_changed.send')
-    def test_user_password_changed_signal(self, user_password_changed_send):
-        user = User.objects.first()
-        user.set_password('54321')
-        user_password_changed_send.assert_called_with(User, user=user,
-                                                      password='54321')
