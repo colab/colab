@@ -23,6 +23,8 @@ signals structure, some steps are required:
   contain any special character, such as dot or comma. It is suggested to name
   the variable "short_name", but that nomenclature is not strictly
   necessary.
+* Finally, the variable namespace should also be defined. This variable is the
+  url namespace for django reverse.
 * In order to actually register the signals, it is necessary to implement the
   method register_signal, which require the name of the plugin that is
   registering the signals and a list of signals to be registered as parameters.
@@ -57,6 +59,7 @@ signals structure, some steps are required:
    class PluginApps(ColabPluginAppConfig):
         short_name = PLUGIN_NAME
         signals_list = [SIGNAL1, SIGNAL2]
+        namespace = PLUGIN_NAMESPACE
 
         def registered_signal(self):
             register_signal(self.short_name, self.signals_list)
