@@ -2,43 +2,22 @@
 {% load i18n widgets_tag%}
 
 {% block html %}
-  {% import_widgets 'dashboard_latest_collaborations' %}
-  {% import_widgets 'dashboard_most_relevant_threads' %}
-  {% import_widgets 'dashboard_latest_threads' %}
-  {% import_widgets 'dashboard_collaboration_graph' %}
+  {% import_widgets 'dashboard' %}
   {{block.super}}
 {% endblock %}
 
 {% block title %}Home{% endblock %}
 
 {% block head_js %}
-  {% for widget in  widgets_dashboard_collaboration_graph %}
+  {% for widget in  widgets_dashboard %}
     {{widget.get_header}}
   {% endfor %}
 {% endblock %}
 
 {% block main-content %}
 
- <div class="row">
-
-  {% for widget in  widgets_dashboard_latest_collaborations %}
+  {% for widget in  widgets_dashboard %}
     {{widget.get_body}}
   {% endfor %}
-
-  {% for widget in  widgets_dashboard_collaboration_graph %}
-    {{widget.get_body}}
-  {% endfor %}
-
-  </div>
-
-  <div class="row">
-    {% for widget in  widgets_dashboard_most_relevant_threads %}
-      {{widget.get_body}}
-    {% endfor %}
-
-    {% for widget in  widgets_dashboard_latest_threads %}
-        {{widget.get_body}}
-    {% endfor %}
-  </div>
 
 {% endblock %}
