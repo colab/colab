@@ -8,10 +8,19 @@ from django.core.urlresolvers import reverse
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
+from .signals import user_created, user_password_changed
 from .utils import mailman
 
 
 class ColabUserManager(UserManager):
+
+    def _create_user(self, username, email, password,
+                     is_staff, is_superuser, **kwargs):
+        args = (username, email, password, is_staff, is_superuser)
+        user = super(ColabUserManager, self)._create_user(*args, **kwargs)
+
+        user_created.send(user.__class__, user=user, password=password)
+        return user
 
     def create_user(self, username, email=None, password=None, **extra_fields):
 
@@ -66,6 +75,11 @@ class User(AbstractUser):
         # Forces username to be lowercase always
         self.username = self.username.lower()
         super(User, self).save(*args, **kwargs)
+
+    def set_password(self, raw_password):
+        super(User, self).set_password(raw_password)
+        if self.pk:
+            user_password_changed.send(User, user=self, password=raw_password)
 
 
 # We need to have `email` field set as unique but Django does not
