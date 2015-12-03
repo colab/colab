@@ -1,10 +1,12 @@
 from django.utils.safestring import mark_safe
+from django.template.loader import render_to_string
 
 
 class Widget(object):
     identifier = None
     name = None
     content = ''
+    template = ''
 
     def get_body(self):
         # avoiding regex in favor of performance
@@ -28,8 +30,11 @@ class Widget(object):
         head = self.content[start + len('<head>'):end]
         return mark_safe(head)
 
-    def generate_content(self, **kwarg):
-        self.content = ''
+    def generate_content(self, **kwargs):
+        if not self.template:
+            class_name = self.__class__.__name__
+            raise Exception("Template not defined in {}.".format(class_name))
+        self.content = render_to_string(self.template, kwargs.get('context'))
 
 
 class WidgetManager(object):
@@ -50,11 +55,11 @@ class WidgetManager(object):
                     WidgetManager.widget_categories[category].remove(widget)
 
     @staticmethod
-    def get_widgets(category, **kargs):
+    def get_widgets(category, **kwargs):
         if category not in WidgetManager.widget_categories:
             return []
 
         widgets = WidgetManager.widget_categories[category][:]
         for widget in widgets:
-            widget.generate_content(**kargs)
+            widget.generate_content(**kwargs)
         return widgets
