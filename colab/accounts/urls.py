@@ -5,7 +5,7 @@ from django.contrib.auth import views as auth_views
 
 from .views import (UserProfileDetailView, UserProfileUpdateView,
                     ManageUserSubscriptionsView)
-from .forms import PasswordChangeForm
+from .forms import ColabPasswordChangeForm, ColabSetPasswordForm
 
 
 urlpatterns = patterns('',
@@ -21,7 +21,8 @@ urlpatterns = patterns('',
 
     url(r'^password-reset-confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
         auth_views.password_reset_confirm,
-        {'template_name':'registration/password_reset_confirm_custom.html'},
+        {'template_name':'registration/password_reset_confirm_custom.html',
+         'set_password_form': ColabSetPasswordForm},
         name="password_reset_confirm"),
 
     url(r'^password-reset/?$', auth_views.password_reset,
@@ -30,7 +31,7 @@ urlpatterns = patterns('',
 
     url(r'^change-password/?$', auth_views.password_change,
         {'template_name': 'registration/password_change_form_custom.html',
-         'password_change_form': PasswordChangeForm},
+         'password_change_form': ColabPasswordChangeForm},
         name='password_change'),
 
     url(r'^change-password-done/?$',

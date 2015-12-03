@@ -10,7 +10,7 @@ from django.test import TestCase, override_settings
 from django.core.urlresolvers import reverse
 
 from colab.accounts.forms import UserCreationForm, UserChangeForm,\
-    UserUpdateForm, UserForm, get_lists_choices, SetPasswordForm
+    UserUpdateForm, UserForm, get_lists_choices, ColabSetPasswordForm
 from colab.accounts import forms as accounts_forms
 from colab.accounts.models import User
 from colab.accounts.utils import mailman
@@ -37,21 +37,21 @@ class SetPasswordFormTestCase(TestCase):
                 'new_password2': '12345'}
 
     def test_no_custom_validators(self):
-        form = SetPasswordForm(self.user, data=self.valid_form_data)
+        form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
         self.assertTrue(form.is_valid(), True)
 
     @override_settings(COLAB_APPS=TEST_COLAB_APPS)
     @patch('colab.accounts.tests.utils.password_validator')
     def test_custom_validator(self, validator):
-        form = SetPasswordForm(self.user, data=self.valid_form_data)
+        form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
         self.assertTrue(form.is_valid())
         validator.assert_called_with('12345')
 
     @override_settings(COLAB_APPS=TEST_COLAB_APPS)
     def test_custom_validator_raise_error(self):
-        form = SetPasswordForm(self.user, data=self.valid_form_data)
+        form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
         self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['new_password1'][0], 'Test error')
+        self.assertEqual(form.errors['new_password2'][0], 'Test error')
 
 
 class FormTest(TestCase):
