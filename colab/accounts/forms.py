@@ -179,7 +179,8 @@ class ColabSetPasswordFormMixin(object):
 
     def clean_new_password2(self):
         try:
-            password = super(ColabSetPasswordFormMixin, self).clean_new_password2()
+            password = super(ColabSetPasswordFormMixin,
+                             self).clean_new_password2()
         except AttributeError:
             password = self.cleaned_data['new_password2']
 
