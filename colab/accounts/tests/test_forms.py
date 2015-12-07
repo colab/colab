@@ -9,8 +9,10 @@ from mock import patch
 from django.test import TestCase, override_settings
 from django.core.urlresolvers import reverse
 
-from colab.accounts.forms import UserCreationForm, UserChangeForm,\
-    UserUpdateForm, UserForm, get_lists_choices, ColabSetPasswordForm
+from colab.accounts.forms import (UserCreationForm, UserChangeForm,
+                                  UserUpdateForm, UserForm, get_lists_choices,
+                                  ColabSetPasswordForm,
+                                  ColabPasswordChangeForm)
 from colab.accounts import forms as accounts_forms
 from colab.accounts.models import User
 from colab.accounts.utils import mailman
@@ -46,12 +48,6 @@ class SetPasswordFormTestCase(TestCase):
         form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
         self.assertTrue(form.is_valid())
         validator.assert_called_with('12345')
-
-    @override_settings(COLAB_APPS=TEST_COLAB_APPS)
-    def test_custom_validator_raise_error(self):
-        form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
-        self.assertFalse(form.is_valid())
-        self.assertEqual(form.errors['new_password2'][0], 'Test error')
 
 
 class FormTest(TestCase):
@@ -221,3 +217,38 @@ class FormTest(TestCase):
                                  ('listB', u'listB (B)'),
                                  ('listC', u'listC (C)'),
                                  ('listD', u'listD (D)')])
+
+
+class ChangePasswordFormTestCase(TestCase):
+
+    TEST_COLAB_APPS = {
+        'test_plugin': {
+            'password_validators': (
+                'colab.accounts.tests.utils.password_validator',
+            )
+        }
+    }
+
+    @property
+    def user(self):
+        u = User.objects.create_user(username='test_user',
+                                     email='test@example.com')
+        u.set_password("123colab4")
+        return u
+
+    @property
+    def valid_form_data(self):
+        return {'old_password': '123colab4',
+                'new_password1': '12345',
+                'new_password2': '12345'}
+
+    def test_no_custom_validators(self):
+        form = ColabPasswordChangeForm(self.user, data=self.valid_form_data)
+        self.assertTrue(form.is_valid(), True)
+
+    @override_settings(COLAB_APPS=TEST_COLAB_APPS)
+    @patch('colab.accounts.tests.utils.password_validator')
+    def test_custom_validator(self, validator):
+        form = ColabPasswordChangeForm(self.user, data=self.valid_form_data)
+        self.assertTrue(form.is_valid())
+        validator.assert_called_with('12345')
