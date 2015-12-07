@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from importlib import import_module
+
 from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.forms import (ReadOnlyPasswordHashField,
+                                       SetPasswordForm, PasswordChangeForm)
 from django.core.urlresolvers import reverse
 from django.utils.functional import lazy
 from django.utils.translation import ugettext_lazy as _
@@ -160,7 +163,41 @@ class ListsForm(forms.Form):
                                     choices=lazy(get_lists_choices, list)())
 
 
-class UserCreationForm(UserForm):
+class ColabSetPasswordFormMixin(object):
+
+    def apply_custom_validators(self, password):
+        for app in settings.COLAB_APPS.values():
+            if 'password_validators' in app:
+                for validator_path in app.get('password_validators'):
+                    module_path, func_name = validator_path.rsplit('.', 1)
+                    module = import_module(module_path)
+                    validator_func = getattr(module, func_name, None)
+                    if validator_func:
+                        validator_func(password)
+
+        return password
+
+    def clean_new_password2(self):
+        try:
+            password = super(ColabSetPasswordFormMixin,
+                             self).clean_new_password2()
+        except AttributeError:
+            password = self.cleaned_data['new_password2']
+
+        self.apply_custom_validators(password)
+        return password
+
+    def clean_password2(self):
+        try:
+            password = super(ColabSetPasswordFormMixin, self).clean_password2()
+        except AttributeError:
+            password = self.cleaned_data['password2']
+
+        self.apply_custom_validators(password)
+        return password
+
+
+class UserCreationForm(UserForm, ColabSetPasswordFormMixin):
     """
     A form that creates a user, with no privileges, from the given username and
     password.
@@ -231,6 +268,8 @@ class UserCreationForm(UserForm):
                 self.error_messages['password_mismatch'],
                 code='password_mismatch',
             )
+
+        super(UserCreationForm, self).clean_password2()
         return password2
 
     def save(self, commit=True):
@@ -282,3 +321,11 @@ class UserChangeForm(forms.ModelForm):
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
         return self.initial["password"]
+
+
+class ColabSetPasswordForm(ColabSetPasswordFormMixin, SetPasswordForm):
+    pass
+
+
+class ColabPasswordChangeForm(ColabSetPasswordFormMixin, PasswordChangeForm):
+    pass

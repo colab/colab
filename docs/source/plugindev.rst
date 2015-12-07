@@ -189,3 +189,32 @@ Example Usage:
 
        def get_last_updated_timestamp(self):
           return TimeStampPlugin.get_last_updated_timestamp('TestPlugin')
+
+
+Password Validation
+-------------------
+
+Allows the plugin to define rules to set the password. The validators
+are functions which receive the password as only argument and if it 
+doesn't match the desired rules raises a `ValidationError`. The message
+sent in the validation error will be displayed to user in the HTML form.
+
+Example:
+
+.. code-block:: python
+
+   ## myplugin/password_validators.py
+
+   def has_uppercase_char(password):
+       for char in password:
+           if char.isupper():
+               return
+
+       raise ValidationError('Password must have at least one upper case char')
+
+   ## /etc/colab/plugins.d/myplugin.py
+
+   password_validators = (
+       'myplugin.password_validators.has_uppercase_char',
+   )
+

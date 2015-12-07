@@ -6,14 +6,48 @@ Objective: Test parameters, and behavior.
 import datetime
 from mock import patch
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.core.urlresolvers import reverse
 
-from colab.accounts.forms import UserCreationForm, UserChangeForm,\
-    UserUpdateForm, UserForm, get_lists_choices
+from colab.accounts.forms import (UserCreationForm, UserChangeForm,
+                                  UserUpdateForm, UserForm, get_lists_choices,
+                                  ColabSetPasswordForm,
+                                  ColabPasswordChangeForm)
 from colab.accounts import forms as accounts_forms
 from colab.accounts.models import User
 from colab.accounts.utils import mailman
+
+
+class SetPasswordFormTestCase(TestCase):
+
+    TEST_COLAB_APPS = {
+        'test_plugin': {
+            'password_validators': (
+                'colab.accounts.tests.utils.password_validator',
+            )
+        }
+    }
+
+    @property
+    def user(self):
+        return User.objects.create_user(username='test_user',
+                                        email='test@example.com')
+
+    @property
+    def valid_form_data(self):
+        return {'new_password1': '12345',
+                'new_password2': '12345'}
+
+    def test_no_custom_validators(self):
+        form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
+        self.assertTrue(form.is_valid(), True)
+
+    @override_settings(COLAB_APPS=TEST_COLAB_APPS)
+    @patch('colab.accounts.tests.utils.password_validator')
+    def test_custom_validator(self, validator):
+        form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
+        self.assertTrue(form.is_valid())
+        validator.assert_called_with('12345')
 
 
 class FormTest(TestCase):
@@ -183,3 +217,121 @@ class FormTest(TestCase):
                                  ('listB', u'listB (B)'),
                                  ('listC', u'listC (C)'),
                                  ('listD', u'listD (D)')])
+
+
+class ChangePasswordFormTestCase(TestCase):
+
+    TEST_COLAB_APPS = {
+        'test_plugin': {
+            'password_validators': (
+                'colab.accounts.tests.utils.password_validator',
+            )
+        }
+    }
+
+    @property
+    def user(self):
+        u = User.objects.create_user(username='test_user',
+                                     email='test@example.com')
+        u.set_password("123colab4")
+        return u
+
+    @property
+    def valid_form_data(self):
+        return {'old_password': '123colab4',
+                'new_password1': '12345',
+                'new_password2': '12345'}
+
+    def test_no_custom_validators(self):
+        form = ColabPasswordChangeForm(self.user, data=self.valid_form_data)
+        self.assertTrue(form.is_valid(), True)
+
+    @override_settings(COLAB_APPS=TEST_COLAB_APPS)
+    @patch('colab.accounts.tests.utils.password_validator')
+    def test_custom_validator(self, validator):
+        form = ColabPasswordChangeForm(self.user, data=self.valid_form_data)
+        self.assertTrue(form.is_valid())
+        validator.assert_called_with('12345')
+
+
+class UserCreationFormTestCase(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.user = User.objects.create_user(username='user1234',
+                                            email='teste1234@example.com',
+                                            first_name='test_first_name',
+                                            last_name='test_last_name')
+
+        cls.user.set_password("123colab4")
+        cls.user.save()
+
+    def get_form_data(self, email, username='test_user',
+                      password1='12345', password2='12345'):
+        return {
+            'first_name': 'test_first_name',
+            'last_name': 'test_last_name',
+            'username': username,
+            'email': email,
+            'password1': password1,
+            'password2': password2
+        }
+
+    def test_clean_mail_error(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste1234@example.com'))
+        self.assertFalse(creation_form.is_valid())
+        self.assertTrue('email' in creation_form.errors)
+        self.assertEqual(1, len(creation_form.errors))
+
+    def test_clean_mail(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com'))
+        self.assertTrue(creation_form.is_valid())
+
+    def test_clean_username_error(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com',
+                                    username='user1234'))
+        self.assertFalse(creation_form.is_valid())
+        self.assertTrue('username' in creation_form.errors)
+        self.assertEqual(1, len(creation_form.errors))
+
+    def test_clean_username(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com',
+                                    username='user12345'))
+        self.assertTrue(creation_form.is_valid())
+
+    def test_clean_password2_empty_password1(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com',
+                                    username='user12345',
+                                    password1=''))
+        self.assertFalse(creation_form.is_valid())
+        self.assertTrue('password1' in creation_form.errors)
+        self.assertEqual(1, len(creation_form.errors))
+
+    def test_clean_password2_empty_password2(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com',
+                                    username='user12345',
+                                    password2=''))
+        self.assertFalse(creation_form.is_valid())
+        self.assertTrue('password2' in creation_form.errors)
+
+    def test_clean_password2_different_passwords(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com',
+                                    username='user12345',
+                                    password1='1234'))
+        self.assertFalse(creation_form.is_valid())
+        self.assertTrue('password2' in creation_form.errors)
+        self.assertEqual(1, len(creation_form.errors))
+        self.assertEqual(1, len(creation_form.errors))
+
+    def test_clean_password(self):
+        creation_form = UserCreationForm(
+            data=self.get_form_data('teste12345@example.com',
+                                    username='user12345'))
+        self.assertTrue(creation_form.is_valid())
