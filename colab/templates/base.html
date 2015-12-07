@@ -2,11 +2,12 @@
 {% load i18n gravatar plugins %}
 {% load static from staticfiles %}
 
+{% block html %}
 <html>
   <head>
   {% block head %}
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     {% block metarobots %}
       {% if ROBOTS_NOINDEX %}
         <meta name="robots" content="noindex, nofollow" />
@@ -46,6 +47,11 @@
     <link rel="stylesheet" href="{% static 'css/screen.css' %}"
         type="text/css" media="screen" />
 
+    <link rel="stylesheet" href="{% static 'css/header.css' %}"
+        type="text/css" media="screen" />
+
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}"
+        type="text/css" media="screen" />
   {% endblock %}
   </head>
 
@@ -101,3 +107,4 @@
   {% block footer_js %}{% endblock %}
   </body>
 </html>
+{% endblock %}

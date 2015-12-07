@@ -1,0 +1,25 @@
+{% load i18n tz highlight gravatar date_format %}
+
+<div class="row">
+  <div class="col-md-2 center">
+    <a href="{% url 'user_profile' username=result.username %}">
+      {% block gravatar_img %}{% gravatar result.email 100 %}{% endblock gravatar_img %}
+    </a>
+  </div>
+  <div class="col-md-10">
+    <strong><a href="{% url 'user_profile' username=result.username %}">
+
+        {% if query %}
+            <h4>{% highlight result.name with query %}</h4></a>
+        {% else %}
+            <h4>{{ result.name }}</h4></a>
+        {% endif %}
+
+    </strong>
+    <small><strong>{% trans "Since" %}: {% date_format result.date_joined %}</strong></small><br>
+    <small>{% trans "Registered in" %}: <strong>{% trans "User" %}</strong></small><br>
+  </div>
+</div>
+<div class="row">
+  <hr>
+</div>

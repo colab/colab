@@ -76,13 +76,7 @@ class BaseIndex(indexes.SearchIndex):
         )
 
     def prepare_modified_by(self, obj):
-        if hasattr(obj, 'modified_by'):
-            modified_by = obj.get_modified_by()
-            if modified_by:
-                return modified_by.get_full_name()
-        if self.author_obj:
-            return self.author_obj.get_full_name()
-        return obj.author
+        return self.prepare_fullname(obj)
 
     def prepare_modified_by_url(self, obj):
         if hasattr(obj, 'modified_by'):

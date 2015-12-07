@@ -32,7 +32,7 @@ def _load_py_file(py_path, path):
     try:
         py_settings = importlib.import_module(py_path)
 
-    except IOError:
+    except ImportError:
         msg = ('Could not open settings file {}. Please '
                'check if the file exists and if user '
                'has read rights.').format(py_path)
@@ -49,12 +49,12 @@ def _load_py_file(py_path, path):
         sys.path.remove(path)
 
     py_setting = {var: getattr(py_settings, var) for var in dir(py_settings)
-                  if not var.startswith('__')}
+                  if not var.startswith('_')}
 
     return py_setting
 
 
-def load_py_settings():
+def load_py_settings(settings_dir='/etc/colab/settings.d'):
     settings_file = os.getenv('COLAB_SETTINGS', '/etc/colab/settings.py')
     settings_module = settings_file.split('.')[-2].split('/')[-1]
     py_path = "/".join(settings_file.split('/')[:-1])
@@ -67,8 +67,6 @@ def load_py_settings():
 
     py_settings = _load_py_file(settings_module, py_path)
 
-    # Read settings from settings.d
-    settings_dir = '/etc/colab/settings.d'
     logger.info('Settings directory: %s', settings_dir)
 
     if not os.path.exists(settings_dir):
@@ -127,18 +125,47 @@ def load_colab_apps():
 
         app_label = app_name.split('.')[-1]
         COLAB_APPS[app_label] = {}
-        COLAB_APPS[app_label]['menu_title'] = py_settings_d.get('menu_title')
-
-        fields = ['verbose_name', 'upstream', 'urls',
-                  'menu_urls', 'middlewares', 'dependencies',
-                  'context_processors', 'private_token', 'name', 'extra']
-
-        for key in fields:
-            value = py_settings_d.get(key)
-            if value:
-                COLAB_APPS[app_label][key] = value
+        COLAB_APPS[app_label] = py_settings_d
 
     return {'COLAB_APPS': COLAB_APPS}
+
+
+def load_widgets_settings():
+    settings_file = os.getenv('COLAB_WIDGETS_SETTINGS',
+                              '/etc/colab/widgets_settings.py')
+    settings_module = settings_file.split('.')[-2].split('/')[-1]
+    py_path = "/".join(settings_file.split('/')[:-1])
+    logger.info('Widgets Settings file: %s', settings_file)
+
+    if not os.path.exists(py_path):
+        return
+
+    original_path = sys.path
+    sys.path.append(py_path)
+
+    if os.path.exists(settings_file):
+        importlib.import_module(settings_module)
+
+    # Read settings from widgets.d
+    settings_dir = os.getenv('COLAB_WIDGETS', '/etc/colab/widgets.d')
+    logger.info('Widgets Settings directory: %s', settings_dir)
+    sys.path = original_path
+
+    if not os.path.exists(settings_dir):
+        return
+
+    for file_name in os.listdir(settings_dir):
+        if not file_name.endswith('.py'):
+            continue
+
+        original_path = sys.path
+        sys.path.append(settings_dir)
+
+        file_module = file_name.split('.')[0]
+        importlib.import_module(file_module)
+        logger.info('Loaded %s/%s', settings_dir, file_name)
+
+        sys.path = original_path
 
 
 def validate_database(database_dict, default_db, debug):

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from django.contrib import admin
 from django.views.generic import RedirectView
-
+from accounts.views import UserProfileUpdateView
 
 admin.autodiscover()
 
@@ -24,9 +24,3 @@ urlpatterns = patterns('',
 
     url(r'', include('colab.plugins.urls')),
 )
-
-if settings.DEBUG:
-    urlpatterns += static.static(
-        settings.MEDIA_URL,
-        document_root=settings.MEDIA_ROOT
-    )

@@ -1,0 +1,33 @@
+{% load i18n tz highlight date_format %}
+
+<div class="row">
+  <div class="col-md-12">
+    <small>{% datetime_format result.modified %} -
+
+        {% if query %}
+            <a href="{{result.modified_by_url}}">{% highlight result.modified_by with query max_length "1000" %}</a>
+        {% else %}
+            <a href="{{result.modified_by_url}}">{{result.modified_by }}</a>
+        {% endif %}
+
+    </small><br>
+
+    {% if query %}
+        <h4><a href="{{result.url}}">{% highlight result.title with query max_length "1000"%}</a></h4>
+    {% else %}
+        <h4><a href="{{result.url}}">{{ result.title }}</a></h4>
+    {% endif %}
+
+    {% with result.latest_description|truncatewords:"85" as description %}
+
+        {% if query %}
+            {% highlight description with query max_length "1000" %}<br>
+        {% else %}
+            {{description | default_if_none:"a"}}<br>
+        {% endif %}
+
+    {% endwith %}
+    <small>{% trans "Registred in" %}: <strong>{% trans "Discussion" %}</strong></small>
+  </div>
+  <hr>
+</div>

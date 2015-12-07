@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n gravatar %}
+{% load i18n gravatar plugins widgets_tag %}
 
 {% block head_js %}
 <script>
@@ -102,7 +102,6 @@ $(function() {
 </script>
 {% endblock %}
 
-
 {% block main-content %}
 
   <div class="col-lg-12">
@@ -118,6 +117,17 @@ $(function() {
   <br>
   <br>
 
+  <style type="text/css">
+    .tab-pane{
+      border: 1px solid #DDD;
+      border-top: none;
+      padding: 10px;
+    }
+
+    .nav-tabs a:focus {
+       outline: none;
+    }
+  </style>
   <form method="post">
     {% csrf_token %}
 
@@ -192,9 +202,13 @@ $(function() {
       </div>
     </div>
     <div class="row">
-      <div class="submit">
-        <button type="submit" class="btn btn-primary btn-lg btn-block">{% trans "Update" %}</button>
+      <div class="col-md-12">
+        <div class="links-group">
+          <button type="submit" class="btn btn-primary btn-lg" expanded="false">{% trans "Update" %}</button>
+          <a href="{% url 'user_profile' user %}" class="btn btn-default btn-lg" role="button">{% trans "Go to profile panel" %}</a>
+        </div>
       </div>
     </div>
   </form>
+
 {% endblock %}

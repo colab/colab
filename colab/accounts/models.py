@@ -2,17 +2,25 @@
 
 import urlparse
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
-from django.core import validators
 from django.core.urlresolvers import reverse
+from django.db import models
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
+from .signals import user_created, user_password_changed
 from .utils import mailman
 
 
 class ColabUserManager(UserManager):
+
+    def _create_user(self, username, email, password,
+                     is_staff, is_superuser, **kwargs):
+        args = (username, email, password, is_staff, is_superuser)
+        user = super(ColabUserManager, self)._create_user(*args, **kwargs)
+
+        user_created.send(user.__class__, user=user, password=password)
+        return user
 
     def create_user(self, username, email=None, password=None, **extra_fields):
 
@@ -68,6 +76,11 @@ class User(AbstractUser):
         self.username = self.username.lower()
         super(User, self).save(*args, **kwargs)
 
+    def set_password(self, raw_password):
+        super(User, self).set_password(raw_password)
+        if self.pk:
+            user_password_changed.send(User, user=self, password=raw_password)
+
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
@@ -76,9 +89,4 @@ class User(AbstractUser):
 User._meta.get_field('email')._unique = True
 User._meta.get_field('username').help_text = _(
     u'Required. 30 characters or fewer. Letters and digits.'
-)
-User._meta.get_field('username').validators[0] = validators.RegexValidator(
-    r'^\w+$',
-    _('Enter a valid username.'),
-    'invalid'
 )

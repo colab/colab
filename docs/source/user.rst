@@ -58,6 +58,27 @@ View the following file:
 
 The file /etc/colab/settings.py have the configurations of colab, this configurations overrides the django settings.py
 
+Widgets
+-------
+
+A widget is a piece of HTML that will be inserted in a specific spot in a page to render some view.
+
+To configure the widgets you have to edit, or create, the file ``/etc/colab/widgets_settings.py``. Or you can create a py file inside the folder ``/etc/colab/widgets.d``.
+
+Example:
+
+.. code-block:: python
+
+   # Widget Manager handles all widgets and must be imported to register them
+   from colab.widgets.widget_manager import WidgetManager
+
+   # Specific code for Gitlab's Widget
+   from colab_gitlab.widgets import GitlabProfileWidget
+
+   WidgetManager.register_widget('profile', GitlabProfileWidget())
+
+
+In this example the Gitlab's widget is added in a new tab inside the user profile.
 
 Add a new plugin
 ----------------
@@ -65,7 +86,7 @@ Add a new plugin
 
 - Make sure the application has the following requirements
 
-  - Suport for remote user authentication
+  - Support for remote user authentication
 
   - A relative url root
 
@@ -76,6 +97,8 @@ Add a new plugin
   - on folder: /etc/colab/plugins.d/
 
   - create file: [plugin_name].py
+
+- Atention: Any URL used in the plugins' settings should not be preceded by "/"
 
 Use this template for the plugin configuration file
 
@@ -95,7 +118,6 @@ Use this template for the plugin configuration file
 
     urls = {
         'include': '[plugin_module_path].urls',
-        'namespace': '[plugin_name]',
         'prefix': '[application_prefix]/', # Exemple: http://site.com/[application_prefix]/
     }
 
@@ -104,10 +126,10 @@ Use this template for the plugin configuration file
     url = colab_url_factory('[plugin_name]')
 
     menu_urls = {
-        url(display=_('[name_of_link_page]'), viewname='[name_of_view_in_the_application]', kwargs={'path': '/[page_appication_path]/' }, auth=True),
+        url(display=_('[name_of_link_page]'), viewname='[name_of_view_in_the_application]', kwargs={'path': '[page_appication_path]/' }, auth=True),
 
         # You can have more than one url
-        url(display=_('[name_of_link_page]'), viewname='[another_name_of_view_in_the_application]', kwargs={'path': '/[another_page_appication_path]/' }, auth=True),
+        url(display=_('[name_of_link_page]'), viewname='[another_name_of_view_in_the_application]', kwargs={'path': '[another_page_appication_path]/' }, auth=True),
     }
 
 
@@ -143,6 +165,15 @@ Declares the additional installed apps that this plugin depends on.
 This doesn't automatically install the python dependecies, only add to django
 apps.
 
+.. attribute:: password_validators
+
+A lista of functions to validade password in the moment it's set.
+This allows plugins to define their own password validators. For
+example if the proxied app requires the password to have at least
+one upper case character it should provide a password validator
+for that.
+
+
 urls
 ++++
 
@@ -152,9 +183,8 @@ urls
 .. attribute:: prefix
 
     Declares the prefix for the url.
-.. attribute:: namespace
 
-    Declares the namespace for the url.
+    - Atention: Any URL used in the plugins' settings should not be preceded by "/"
 
 menu
 ++++
@@ -164,7 +194,7 @@ These variables defines the menu title and links of the plugin.
 .. attribute:: menu_title
 
     Declares the menu title.
-.. attribute:: menu_links
+.. attribute:: menu_urls
 
     Declares the menu items and its links.
     This should be a tuple object with several colab_url elements.
@@ -172,6 +202,9 @@ These variables defines the menu title and links of the plugin.
     namespace.
     The auth parameter indicates wether the link should only be displayed when
     the user is logged in.
+    The ``kwargs`` parameter receives a dict, where the key ``path`` should be
+    a path URL to the page. Remember that this path is a URL, therefore it
+    should never be preceded by "/".
 
 Example:
 
@@ -182,8 +215,8 @@ Example:
     url = colab_url_factory('plugin_app_name')
 
     menu_urls = (
-       url(display=_('Profile'), viewname='profile', kwargs={'path': '/profile/'}, auth=True),
-       url(display=_('Profile Two'), viewname='profile2', kwargs={'path': '/profile/2'}, auth=True),
+       url(display=_('Profile'), viewname='profile', kwargs={'path': 'profile/'}, auth=True),
+       url(display=_('Profile Two'), viewname='profile2', kwargs={'path': 'profile/2'}, auth=True),
     )
 
 Extra Template Folders

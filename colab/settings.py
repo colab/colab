@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'colab',
     'colab.home',
     'colab.plugins',
+    'colab.widgets',
     'colab.super_archives',
     'colab.rss',
     'colab.search',
@@ -80,11 +81,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = '/usr/share/nginx/colab/static/'
-MEDIA_ROOT = '/usr/share/nginx/colab/media/'
-
+STATIC_ROOT = '/var/lib/colab/static/'
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = \
     'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
@@ -134,7 +132,7 @@ ATTACHMENTS_FOLDER_PATH = '/mnt/trac/attachments/'
 # the indexes
 
 ORDERING_DATA = {
-    'latest':  {
+    'latest': {
         'name': _(u'Recent activity'),
         'fields': ('-modified', '-created'),
     },
@@ -142,6 +140,10 @@ ORDERING_DATA = {
         'name': _(u'Relevance'),
         'fields': None,
     },
+    'type': {
+        'name': _(u'Type'),
+        'fields': ('type',),
+    }
 }
 
 
@@ -293,3 +295,5 @@ TEMPLATE_DIRS += (
 )
 
 conf.validate_database(DATABASES, DEFAULT_DATABASE, DEBUG)
+
+conf.load_widgets_settings()

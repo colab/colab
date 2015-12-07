@@ -16,12 +16,12 @@
     <input type="hidden" name="since" value="{{ request.GET.since }}" />
     <input type="hidden" name="until" value="{{ request.GET.until }}" />
 
-    {% for field_lookup, field_display, field_value in filters.fields %}
+    {% for field_lookup, field_display, field_value, field_type, field_choices in filters.fields %}
       <div class="form-group">
         <label for="{{ field_lookup }}">{{ field_display }}</label>
-        {% if field_lookup == "list" %}
+        {% if field_type == "list" %}
           <select name="{{ field_lookup }}" class="form-control" multiple>
-            {% for value, option in form.fields.list.choices %}
+            {% for value, option in field_choices %}
               <option value="{{ value }}" {% if value in field_value %}selected{% endif %}>{{ option }}</option>
             {% endfor %}
           </select>
@@ -112,10 +112,12 @@
 
   <ul class="unstyled-list">
 
-    <li>
-      <span class="glyphicon glyphicon-envelope"></span>
-      <a href="{% append_to_get type='thread' %}">{% trans "Discussion" %}</a>
-    </li>
+      {% for type, name, icon in filters_options %}
+      <li>
+        <span class="glyphicon glyphicon-{{icon}}"></span>
+        <a href="{% append_to_get type=type %}">{% trans name %}</a>
+      </li>
+      {% endfor %}
   </ul>
 {% endif %}
 <hr />
