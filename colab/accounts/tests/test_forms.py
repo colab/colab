@@ -8,7 +8,6 @@ from mock import patch
 
 from django.test import TestCase, override_settings
 from django.core.urlresolvers import reverse
-from django.forms import ValidationError
 
 from colab.accounts.forms import (UserCreationForm, UserChangeForm,
                                   UserUpdateForm, UserForm, get_lists_choices,
@@ -282,7 +281,7 @@ class UserCreationFormTestCase(TestCase):
         creation_form = UserCreationForm(
             data=self.get_form_data('teste1234@example.com'))
         self.assertFalse(creation_form.is_valid())
-        self.assertTrue(creation_form.errors.has_key('email'))
+        self.assertTrue('email' in creation_form.errors)
         self.assertEqual(1, len(creation_form.errors))
 
     def test_clean_mail(self):
@@ -295,7 +294,7 @@ class UserCreationFormTestCase(TestCase):
             data=self.get_form_data('teste12345@example.com',
                                     username='user1234'))
         self.assertFalse(creation_form.is_valid())
-        self.assertTrue(creation_form.errors.has_key('username'))
+        self.assertTrue('username' in creation_form.errors)
         self.assertEqual(1, len(creation_form.errors))
 
     def test_clean_username(self):
@@ -304,14 +303,13 @@ class UserCreationFormTestCase(TestCase):
                                     username='user12345'))
         self.assertTrue(creation_form.is_valid())
 
-
     def test_clean_password2_empty_password1(self):
         creation_form = UserCreationForm(
             data=self.get_form_data('teste12345@example.com',
                                     username='user12345',
                                     password1=''))
         self.assertFalse(creation_form.is_valid())
-        self.assertTrue(creation_form.errors.has_key('password1'))
+        self.assertTrue('password1' in creation_form.errors)
         self.assertEqual(1, len(creation_form.errors))
 
     def test_clean_password2_empty_password2(self):
@@ -320,7 +318,7 @@ class UserCreationFormTestCase(TestCase):
                                     username='user12345',
                                     password2=''))
         self.assertFalse(creation_form.is_valid())
-        self.assertTrue(creation_form.errors.has_key('password2'))
+        self.assertTrue('password2' in creation_form.errors)
 
     def test_clean_password2_different_passwords(self):
         creation_form = UserCreationForm(
@@ -328,7 +326,7 @@ class UserCreationFormTestCase(TestCase):
                                     username='user12345',
                                     password1='1234'))
         self.assertFalse(creation_form.is_valid())
-        self.assertTrue(creation_form.errors.has_key('password2'))
+        self.assertTrue('password2' in creation_form.errors)
         self.assertEqual(1, len(creation_form.errors))
         self.assertEqual(1, len(creation_form.errors))
 
