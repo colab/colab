@@ -13,7 +13,8 @@ from django.http import Http404
 
 from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
-from colab.search.utils import get_collaboration_data, get_visible_threads
+from colab.plugins.utils.collaborations import (get_collaboration_data,
+                                                get_visible_threads)
 from colab.accounts.models import User
 
 from .forms import (UserCreationForm, ListsForm, UserUpdateForm)
