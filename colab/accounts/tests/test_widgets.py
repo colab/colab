@@ -12,7 +12,7 @@ class WidgetAccountTest(TestCase):
 
     def create_user(self):
         user = User()
-        user.username = "USERtestCoLaB"
+        user.username = "usertest"
         user.set_password("123colab4")
         user.email = "usertest@colab.com.br"
         user.id = 1
@@ -44,5 +44,12 @@ class WidgetAccountTest(TestCase):
         for template in templates:
             response = self.get_response_from_request(
                 "/account/" + self.user.username)
+    def test_account_chart_widgets(self):
+        templates = ['widgets/collaboration_chart.html',
+                     'widgets/participation_chart.html',
+                     ]
+        for template in templates:
+            response = self.get_response_from_request(
+                "/account/usertest")
             self.assertTemplateUsed(
                 template_name=template, response=response)
