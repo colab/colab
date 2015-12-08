@@ -6,7 +6,6 @@
 {% block main-content %}
   <h2>{% trans 'Groups'|title %}</h2>
   <hr/>
-
   {% for mailinglist in lists %}
     {% if mailinglist.get_latest or mailinglist.get_most_relevant %}
       <h3><b>{{ mailinglist.name|title|lower }} {% if mailinglist.description %} ({{ mailinglist.description }}){% endif %}</b></h3>
@@ -20,7 +19,7 @@
           <h4>{% trans 'latest'|title %}</h4>
           <ul class="message-list">
             {% for thread in mailinglist.get_latest %}
-              {% include "message-preview.html" with result=thread.latest_message %}
+              {% include "dashboard-message-preview.html" with result=thread.latest_message %}
             {% endfor %}
           </ul>
           <div class="text-right">
@@ -34,7 +33,7 @@
           <h4>{% trans 'most relevant'|title %}</h4>
           <ul class="message-list">
             {% for thread in mailinglist.get_most_relevant %}
-              {% include "message-preview.html" with result=thread %}
+              {% include "dashboard-message-preview.html" with result=thread %}
             {% endfor %}
           </ul>
           <div class="text-right">
