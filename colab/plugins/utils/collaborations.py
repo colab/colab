@@ -6,39 +6,10 @@ from collections import OrderedDict
 from django.core.cache import cache
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from django.db.models import Q as Condition
 
-from colab.super_archives.models import Thread, Message
 from colab.plugins.utils.models import Collaboration
-from colab.accounts.utils import mailman
-
-
-def get_visible_threads_queryset(logged_user):
-    queryset = Thread.objects
-    listnames_for_user = []
-    if logged_user:
-        lists_for_user = mailman.get_user_mailinglists(logged_user)
-        listnames_for_user = mailman.extract_listname_from_list(lists_for_user)
-
-    user_lists = Condition(mailinglist__name__in=listnames_for_user)
-    public_lists = Condition(mailinglist__is_private=False)
-    queryset = Thread.objects.filter(user_lists | public_lists)
-
-    return queryset
-
-
-def get_visible_threads(logged_user, filter_by_user=None):
-    thread_qs = get_visible_threads_queryset(logged_user)
-
-    if filter_by_user:
-        message_qs = Message.objects.filter(thread__in=thread_qs)
-        messages = message_qs.filter(
-            from_address__user__pk=filter_by_user.pk)
-    else:
-        latest_threads = thread_qs.all()
-        messages = [t.latest_message for t in latest_threads]
-
-    return messages
+from colab.super_archives.utils.collaborations import (get_visible_threads,
+                                                       count_threads)
 
 
 def get_collaboration_data(logged_user, filter_by_user=None):
@@ -52,8 +23,8 @@ def get_collaboration_data(logged_user, filter_by_user=None):
     if count_types is None:
         populate_count_types = True
         count_types = OrderedDict()
-        visible_threads = get_visible_threads(logged_user, filter_by_user)
-        count_types[_('Emails')] = len(visible_threads)
+
+        count_types[_('Emails')] = count_threads()
 
     messages = get_visible_threads(logged_user, filter_by_user)
 
