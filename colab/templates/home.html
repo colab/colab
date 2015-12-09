@@ -15,9 +15,13 @@
 {% endblock %}
 
 {% block main-content %}
-
-  {% for widget in  widgets_dashboard %}
-    {{widget.get_body}}
-  {% endfor %}
-
+  <div class="row">
+    {% for widget in  widgets_dashboard %}
+      <div class="{% if forloop.counter|divisibleby:2 %} clearfix {% endif %}">
+        <div class="col-lg-6 col-md-6">
+          {{widget.get_body}}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
