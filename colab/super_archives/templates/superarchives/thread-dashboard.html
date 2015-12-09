@@ -19,7 +19,7 @@
           <h4>{% trans 'latest'|title %}</h4>
           <ul class="message-list">
             {% for thread in mailinglist.get_latest %}
-              {% include "dashboard-message-preview.html" with result=thread.latest_message %}
+              {% include "message-preview.html" with result=thread.latest_message %}
             {% endfor %}
           </ul>
           <div class="text-right">
@@ -33,7 +33,7 @@
           <h4>{% trans 'most relevant'|title %}</h4>
           <ul class="message-list">
             {% for thread in mailinglist.get_most_relevant %}
-              {% include "dashboard-message-preview.html" with result=thread %}
+              {% include "message-preview.html" with result=thread %}
             {% endfor %}
           </ul>
           <div class="text-right">
