@@ -30,9 +30,11 @@ class TestConf(TestCase):
                           _load_py_file, 'settings_test', '/etc/colab/')
 
     def test_load_py_file_with_syntax_error(self):
+        with file('/tmp/settings_with_syntax_error.py', 'w') as temp_settings:
+            temp_settings.write('(')
+
         self.assertRaises(InaccessibleSettings,
-                          _load_py_file, 'settings_with_syntax_error',
-                          test_files_dir)
+                          _load_py_file, 'settings_with_syntax_error', '/tmp')
 
     def test_load_py_file(self):
         py_settings = _load_py_file('colab_settings', test_files_dir)
