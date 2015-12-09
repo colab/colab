@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n highlight superarchives %}
+{% load i18n tz highlight superarchives search_preview_templates %}
 {% load static from staticfiles %}
 
 {% block title %}{% trans 'search'|title %}{% endblock %}
@@ -70,7 +70,8 @@ We must use STATIC_URL because we have a language composing the URL
     <div class="col-md-10 col-lg-10">
       <ul class="list-unstyled">
       {% for result in page.object_list  %}
-        {% include "message-preview.html" %}
+        {% get_search_preview_templates result  as template_target %}
+        {% include template_target %}
       {% empty %}
         <li class="text-center">
           {% trans "No results for your search." %}
