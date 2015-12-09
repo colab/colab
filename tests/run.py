@@ -10,10 +10,16 @@ os.environ['COLAB_PLUGINS'] = 'tests/plugins.d'
 os.environ['COLAB_WIDGETS'] = 'tests/widgets.d'
 os.environ['COVERAGE_PROCESS_START'] = '.coveragerc'
 
-
-import django
 import coverage
 
+# Needs to come before the settings import, because some settings instantiate
+# objetcs. If they are executed before the coverage startup, those lines
+# won't be covered.
+if os.path.exists('.coverage'):
+    os.remove('.coverage')
+coverage.process_startup()
+
+import django
 from django.conf import settings
 from django.test.utils import get_runner
 import colab.settings
@@ -29,13 +35,6 @@ def runtests(test_suites=[]):
     sys.exit(failures)
 
 
-def run_with_coverage(test_suites=[]):
-    if os.path.exists('.coverage'):
-        os.remove('.coverage')
-    coverage.process_startup()
-    runtests(test_suites)
-
-
 if __name__ == '__main__':
     all_valid_apps = True
 
@@ -46,4 +45,4 @@ if __name__ == '__main__':
             all_valid_apps = False
 
     if all_valid_apps:
-        run_with_coverage(sys.argv[1:])
+        runtests(sys.argv[1:])
