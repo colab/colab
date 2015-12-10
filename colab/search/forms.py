@@ -47,7 +47,6 @@ class ColabSearchForm(SearchForm):
         for key in self.fields.keys():
             value = self.cleaned_data[key]
             if value and key not in self.excluded_fields:
-                print key, '-' + value
                 kwargs[key] = self.cleaned_data[key]
 
         sqs = sqs.filter(**kwargs)
