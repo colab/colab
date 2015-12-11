@@ -1,4 +1,4 @@
-{% load i18n tz highlight gravatar date_format %}
+{% load i18n tz highlight gravatar %}
 
 <div class="row">
   <div class="col-md-2 center">
@@ -16,7 +16,7 @@
         {% endif %}
 
     </strong>
-    <small><strong>{% trans "Since" %}: {% date_format result.date_joined %}</strong></small><br>
+    <small><strong>{% trans "Since" %}: {{ result.date_joined|date:"d F Y" }}</strong></small><br>
     <small>{% trans "Registered in" %}: <strong>{% trans "User" %}</strong></small><br>
   </div>
 </div>

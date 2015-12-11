@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-01 13:15+0000\n"
+"POT-Creation-Date: 2015-12-11 14:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,137 +17,158 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: super_archives/management/commands/import_emails.py:213
+#: colab/super_archives/filters.py:8
+#: colab/super_archives/templates/search/thread_search_preview.html:30
+msgid "Discussion"
+msgstr ""
+
+#: colab/super_archives/filters.py:11
+msgid "Author"
+msgstr ""
+
+#: colab/super_archives/filters.py:14
+msgid "Mailinglist"
+msgstr ""
+
+#: colab/super_archives/management/commands/import_emails.py:213
 msgid "[Colab] Warning - Email sent with a blank subject."
 msgstr ""
 
-#: super_archives/models.py:77
-#: super_archives/templates/message-preview.html:62
-#: super_archives/templates/message-thread.html:4
+#: colab/super_archives/models.py:77
+#: colab/super_archives/templates/dashboard/thread_search_preview.html:62
+#: colab/super_archives/templates/message-thread.html:4
 msgid "Anonymous"
 msgstr ""
 
-#: super_archives/models.py:133
+#: colab/super_archives/models.py:149
 msgid "Mailing List"
 msgstr ""
 
-#: super_archives/models.py:134
+#: colab/super_archives/models.py:150
 msgid "The Mailing List where is the thread"
 msgstr ""
 
-#: super_archives/models.py:137
+#: colab/super_archives/models.py:153
 msgid "Latest message"
 msgstr ""
 
-#: super_archives/models.py:138
+#: colab/super_archives/models.py:154
 msgid "Latest message posted"
 msgstr ""
 
-#: super_archives/models.py:139
+#: colab/super_archives/models.py:155
 msgid "Score"
 msgstr ""
 
-#: super_archives/models.py:140
+#: colab/super_archives/models.py:156
 msgid "Thread score"
 msgstr ""
 
-#: super_archives/models.py:153
+#: colab/super_archives/models.py:169
 msgid "Thread"
 msgstr ""
 
-#: super_archives/models.py:154
+#: colab/super_archives/models.py:170
 msgid "Threads"
 msgstr ""
 
-#: super_archives/models.py:267
+#: colab/super_archives/models.py:283
 msgid "Subject"
 msgstr ""
 
-#: super_archives/models.py:268
+#: colab/super_archives/models.py:284
 msgid "Please enter a message subject"
 msgstr ""
 
-#: super_archives/models.py:271
+#: colab/super_archives/models.py:287
 msgid "Message body"
 msgstr ""
 
-#: super_archives/models.py:272
+#: colab/super_archives/models.py:288
 msgid "Please enter a message body"
 msgstr ""
 
-#: super_archives/models.py:282
+#: colab/super_archives/models.py:298
 msgid "Message"
 msgstr ""
 
-#: super_archives/models.py:283
+#: colab/super_archives/models.py:299
 msgid "Messages"
 msgstr ""
 
-#: super_archives/templates/message-preview.html:42
-#: super_archives/templates/message-preview.html:62
+#: colab/super_archives/templates/dashboard/thread_search_preview.html:42
+#: colab/super_archives/templates/dashboard/thread_search_preview.html:62
 msgid "by"
 msgstr ""
 
-#: super_archives/templates/message-preview.html:65
-#: super_archives/templates/message-thread.html:161
+#: colab/super_archives/templates/dashboard/thread_search_preview.html:65
+#: colab/super_archives/templates/message-thread.html:161
 msgid "ago"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:35
+#: colab/super_archives/templates/message-thread.html:35
 msgid "You must login before voting."
 msgstr ""
 
-#: super_archives/templates/message-thread.html:132
+#: colab/super_archives/templates/message-thread.html:132
 msgid "Order by"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:136
+#: colab/super_archives/templates/message-thread.html:136
 msgid "Votes"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:140
+#: colab/super_archives/templates/message-thread.html:140
 msgid "Date"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:145
+#: colab/super_archives/templates/message-thread.html:145
 msgid "Related:"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:156
+#: colab/super_archives/templates/message-thread.html:156
 msgid "Statistics:"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:160
+#: colab/super_archives/templates/message-thread.html:160
 msgid "started at"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:166
+#: colab/super_archives/templates/message-thread.html:166
 msgid "viewed"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:167
-#: super_archives/templates/message-thread.html:172
-#: super_archives/templates/message-thread.html:177
+#: colab/super_archives/templates/message-thread.html:167
+#: colab/super_archives/templates/message-thread.html:172
+#: colab/super_archives/templates/message-thread.html:177
 msgid "times"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:171
+#: colab/super_archives/templates/message-thread.html:171
 msgid "answered"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:176
+#: colab/super_archives/templates/message-thread.html:176
 msgid "voted"
 msgstr ""
 
-#: super_archives/templates/message-thread.html:182
+#: colab/super_archives/templates/message-thread.html:182
 msgid "Tags:"
 msgstr ""
 
-#: super_archives/templates/superarchives/emails/email_blank_subject.txt:2
+#: colab/super_archives/templates/search/thread_search_preview.html:5
+msgid "at"
+msgstr ""
+
+#: colab/super_archives/templates/search/thread_search_preview.html:30
+msgid "Registred in"
+msgstr ""
+
+#: colab/super_archives/templates/superarchives/emails/email_blank_subject.txt:2
 msgid "Hello"
 msgstr ""
 
-#: super_archives/templates/superarchives/emails/email_blank_subject.txt:3
+#: colab/super_archives/templates/superarchives/emails/email_blank_subject.txt:3
 #, python-format
 msgid ""
 "\n"
@@ -161,109 +182,109 @@ msgid ""
 "Thank you.\n"
 msgstr ""
 
-#: super_archives/templates/superarchives/emails/email_verification.txt:2
+#: colab/super_archives/templates/superarchives/emails/email_verification.txt:2
 #, python-format
 msgid ""
 "Hey, we want to verify that you are indeed \"%(fullname)s (%(username)s)\".  "
 "If that's the case, please follow the link below:"
 msgstr ""
 
-#: super_archives/templates/superarchives/emails/email_verification.txt:6
+#: colab/super_archives/templates/superarchives/emails/email_verification.txt:6
 #, python-format
 msgid ""
 "If you're not %(username)s or didn't request verification you can ignore "
 "this email."
 msgstr ""
 
-#: super_archives/templates/superarchives/includes/message.html:17
-#: super_archives/templates/superarchives/includes/message.html:18
+#: colab/super_archives/templates/superarchives/includes/message.html:17
+#: colab/super_archives/templates/superarchives/includes/message.html:18
 msgid "Link to this message"
 msgstr ""
 
-#: super_archives/templates/superarchives/includes/message.html:46
+#: colab/super_archives/templates/superarchives/includes/message.html:46
 msgid "Reply"
 msgstr ""
 
-#: super_archives/templates/superarchives/includes/message.html:63
+#: colab/super_archives/templates/superarchives/includes/message.html:63
 msgid "Send a message"
 msgstr ""
 
-#: super_archives/templates/superarchives/includes/message.html:66
+#: colab/super_archives/templates/superarchives/includes/message.html:66
 msgid ""
 "After sending a message it will take few minutes before it shows up in here. "
 "Why don't you grab a coffee?"
 msgstr ""
 
-#: super_archives/templates/superarchives/includes/message.html:69
+#: colab/super_archives/templates/superarchives/includes/message.html:69
 msgid "Send"
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:4
-#: super_archives/templates/superarchives/thread-dashboard.html:7
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:4
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:7
 msgid "Groups"
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:14
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:13
 #, python-format
 msgid "%(number_of_users)s members"
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:20
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:19
 msgid "latest"
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:28
-#: super_archives/templates/superarchives/thread-dashboard.html:42
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:27
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:41
 msgid "more..."
 msgstr ""
 
-#: super_archives/templates/superarchives/thread-dashboard.html:34
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:33
 msgid "most relevant"
 msgstr ""
 
-#: super_archives/utils/email.py:14
+#: colab/super_archives/utils/email.py:14
 msgid "Please verify your email "
 msgstr ""
 
-#: super_archives/views.py:112
+#: colab/super_archives/views.py:113
 msgid "Error trying to connect to Mailman API"
 msgstr ""
 
-#: super_archives/views.py:115
+#: colab/super_archives/views.py:116
 msgid "Timeout trying to connect to Mailman API"
 msgstr ""
 
-#: super_archives/views.py:119
+#: colab/super_archives/views.py:120
 msgid ""
 "Your message was sent to this topic. It may take some minutes before it's "
 "delivered by email to the group. Why don't you breath some fresh air in the "
 "meanwhile?"
 msgstr ""
 
-#: super_archives/views.py:128
+#: colab/super_archives/views.py:129
 msgid "You cannot send an empty email"
 msgstr ""
 
-#: super_archives/views.py:130
+#: colab/super_archives/views.py:131
 msgid "Mailing list does not exist"
 msgstr ""
 
-#: super_archives/views.py:133
+#: colab/super_archives/views.py:134
 msgid "Unknown error trying to connect to Mailman API"
 msgstr ""
 
-#: super_archives/views.py:188
+#: colab/super_archives/views.py:170
 msgid ""
 "The email address you are trying to verify either has already been verified "
 "or does not exist."
 msgstr ""
 
-#: super_archives/views.py:199
+#: colab/super_archives/views.py:181
 msgid ""
 "The email address you are trying to verify is already an active email "
 "address."
 msgstr ""
 
-#: super_archives/views.py:213
+#: colab/super_archives/views.py:195
 msgid "Email address verified!"
 msgstr ""

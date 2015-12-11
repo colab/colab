@@ -1,8 +1,8 @@
-{% load i18n tz highlight date_format %}
+{% load i18n tz highlight %}
 
 <div class="row">
   <div class="col-md-12">
-    <small>{% datetime_format result.modified %} -
+    <small>{{ result.modified|date:"d F Y" }} {% trans "at" %} {{result.modified|date:"h:m" }} -
 
         {% if query %}
             <a href="{{result.modified_by_url}}">{% highlight result.modified_by with query max_length "1000" %}</a>
