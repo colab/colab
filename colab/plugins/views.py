@@ -23,6 +23,7 @@ class ColabProxyView(DiazoProxyView):
         raise NotImplementedError('app_label attribute must be set')
 
     def dispatch(self, request, *args, **kwargs):
+        self.request = request
 
         if request.user.is_authenticated():
 

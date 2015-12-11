@@ -12,7 +12,7 @@ REQUIREMENTS = [
     'Whoosh>=2.7.0',
 
     # revproxy
-    'django-revproxy[diazo]>=0.9.5',
+    'django-revproxy[diazo]>=0.9.8',
 
     # Async Signals
     'celery[redis]>=3.1.2',
