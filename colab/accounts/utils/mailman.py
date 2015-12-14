@@ -1,9 +1,13 @@
-
-import urlparse
-import requests
 import logging
+import requests
+import urlparse
+
+from uuid import uuid4
 
 from django.conf import settings
+from django.core import mail
+from django.template import Context, loader
+from django.utils.translation import ugettext as _
 
 TIMEOUT = 1
 
@@ -29,16 +33,38 @@ mandatory.'),
 }
 
 
+def send_create_list_email(**kargs):
+    """ Send the notification mail
+    kargs' params:
+        user = User object
+        password = list's password
+        listname = list's name
+    """
+    to = kargs.get('user', None)
+    if not to:
+        return
+
+    to = [to.email]
+    from_email = settings.COLAB_FROM_ADDRESS
+    subject = _('Created list {}.'.format(kargs.get('listname', '')))
+    msg_tmpl = loader.get_template('emails/create_list_confirmation.txt')
+    message = msg_tmpl.render(Context(kargs))
+    return mail.send_mail(subject, message, from_email, to)
+
+
 def create_list(listname, admin):
-    """
-    https://github.com/TracyWebTech/mailman-api/blob/master/mailmanapi/apiv2.py
-    """
     url = get_url('lists/', listname=listname)
+    password = uuid4().hex
     try:
         # By default, the password is the name of the list
         result = requests.post(url, timeout=TIMEOUT, data={
-                               'admin': admin, 'password': listname})
+                               'admin': admin.email, 'password': password})
         msg_type, message = MAILMAN_MSGS[result.json()]
+        send_create_list_email(
+            user=admin,
+            password=password,
+            listname=listname
+        )
         return msg_type, message % listname
     except:
         LOGGER.exception('Unable to create list')
