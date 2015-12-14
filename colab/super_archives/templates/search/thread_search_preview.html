@@ -18,7 +18,7 @@
         <h4><a href="{{result.url}}">{{ result.title }}</a></h4>
     {% endif %}
 
-    {% with result.latest_description|truncatewords:"85" as description %}
+    {% with result.latest_description|truncatechars:"85" as description %}
 
         {% if query %}
             {% highlight description with query max_length "1000" %}<br>
