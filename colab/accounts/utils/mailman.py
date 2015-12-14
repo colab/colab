@@ -29,6 +29,22 @@ mandatory.'),
 }
 
 
+def create_list(listname, admin):
+    """
+    https://github.com/TracyWebTech/mailman-api/blob/master/mailmanapi/apiv2.py
+    """
+    url = get_url('lists/', listname=listname)
+    try:
+        # By default, the password is the name of the list
+        result = requests.post(url, timeout=TIMEOUT, data={
+                               'admin': admin, 'password': listname})
+        msg_type, message = MAILMAN_MSGS[result.json()]
+        return msg_type, message % listname
+    except:
+        LOGGER.exception('Unable to create list')
+        return E, 'Error: Unable to create list'
+
+
 def get_url(path, listname=None):
     url = urlparse.urljoin(settings.MAILMAN_API_URL, path)
     if listname:
