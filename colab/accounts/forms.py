@@ -163,19 +163,35 @@ class ListsForm(forms.Form):
                                     choices=lazy(get_lists_choices, list)())
 
 
-class ColabSetPasswordFormMixin(object):
+class CustomValidator(object):
 
-    def apply_custom_validators(self, password):
+    def apply_custom_validators(self, validator_type, validator_field):
         for app in settings.COLAB_APPS.values():
-            if 'password_validators' in app:
-                for validator_path in app.get('password_validators'):
+            if validator_type in app:
+                for validator_path in app.get(validator_type):
                     module_path, func_name = validator_path.rsplit('.', 1)
                     module = import_module(module_path)
                     validator_func = getattr(module, func_name, None)
                     if validator_func:
-                        validator_func(password)
+                        validator_func(validator_field)
 
-        return password
+        return validator_field
+
+
+class ColabSetUsernameFormMixin(CustomValidator):
+
+    def clean_username(self):
+        try:
+            username = super(ColabSetUsernameFormMixin,
+                             self).clean_username()
+        except AttributeError:
+            username = self.cleaned_data['username']
+
+        self.apply_custom_validators('username_validators', username)
+        return username
+
+
+class ColabSetPasswordFormMixin(CustomValidator):
 
     def clean_new_password2(self):
         try:
@@ -184,7 +200,7 @@ class ColabSetPasswordFormMixin(object):
         except AttributeError:
             password = self.cleaned_data['new_password2']
 
-        self.apply_custom_validators(password)
+        self.apply_custom_validators('password_validators', password)
         return password
 
     def clean_password2(self):
@@ -193,7 +209,7 @@ class ColabSetPasswordFormMixin(object):
         except AttributeError:
             password = self.cleaned_data['password2']
 
-        self.apply_custom_validators(password)
+        self.apply_custom_validators('password_validators', password)
         return password
 
 
@@ -328,4 +344,8 @@ class ColabSetPasswordForm(ColabSetPasswordFormMixin, SetPasswordForm):
 
 
 class ColabPasswordChangeForm(ColabSetPasswordFormMixin, PasswordChangeForm):
+    pass
+
+
+class ColabSetUsernameForm(ColabSetUsernameFormMixin, UserCreationForm):
     pass
