@@ -218,3 +218,29 @@ Example:
        'myplugin.password_validators.has_uppercase_char',
    )
 
+Username Validation
+-------------------
+
+Allows the plugin to define rules to set the username. The validators
+are the same as the password validators ones. Therefore, they follow the same
+structure.
+
+Example:
+
+.. code-block:: python
+
+   ## myplugin/username_validators.py
+
+   def has_special_char(username):
+       for char in username:
+           if char.isupper():
+               return
+
+       raise ValidationError('Username must have at least one upper case char')
+
+   ## /etc/colab/plugins.d/myplugin.py
+
+    username_validators = (
+       'myplugin.username_validators.has_uppercase_char',
+   )
+
