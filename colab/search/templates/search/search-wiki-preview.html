@@ -1,9 +1,0 @@
-{% load i18n %}
-
-<span class="glyphicon glyphicon-book" title="{{ result.type }}"></span>
-
-<span class="subject">
-  <a href="{{ result.url }}">{{ result.name }}</a>
-</span>
-
-<span class="quiet">{% if result.wiki_text %}- {{ result.wiki_text|truncatechars:150 }}{% elif result.comment %}- {{ result.comment|truncatechars:150 }}{% endif %}</span>

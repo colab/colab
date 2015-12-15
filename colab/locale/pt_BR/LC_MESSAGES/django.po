@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-24 17:46+0000\n"
+"POT-Creation-Date: 2015-12-11 14:10+0000\n"
 "PO-Revision-Date: 2015-09-07 19:13+0000\n"
 "Last-Translator: Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/colab/colab/"
@@ -20,30 +20,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-
-#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:21
-msgid "Social"
-msgstr "Social"
-
-#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:26
-#, fuzzy
-#| msgid "Username"
-msgid "Users"
-msgstr "Usuário"
-
-#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:28
-msgid "Communities"
-msgstr "Comunidades"
-
-#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:30
-#, fuzzy
-#| msgid "My Profile"
-msgid "Profile"
-msgstr "Meu Perfil"
-
-#: colab-noosfero-plugin/tests/plugins.d/noosfero.py:32
-msgid "Control Panel"
-msgstr "Painel de Controle"
 
 #: colab/accounts/admin.py:18
 msgid "Personal info"
@@ -58,14 +34,14 @@ msgid "Important dates"
 msgstr "Datas importantes"
 
 #: colab/accounts/filters.py:7
-#: colab/accounts/templates/search/user_search_preview.html:12
+#: colab/accounts/templates/search/user_search_preview.html:20
 #, fuzzy
 #| msgid "Username"
 msgid "User"
 msgstr "Usuário"
 
-#: colab/accounts/filters.py:12 colab/accounts/forms.py:175
-#: colab/accounts/forms.py:246
+#: colab/accounts/filters.py:12 colab/accounts/forms.py:212
+#: colab/accounts/forms.py:290
 #, fuzzy
 #| msgid "Filename"
 msgid "Username"
@@ -83,60 +59,60 @@ msgstr "Instituição"
 msgid "Role"
 msgstr "Papel"
 
-#: colab/accounts/forms.py:30
+#: colab/accounts/forms.py:33
 msgid "Social account does not exist"
 msgstr "Conta social não existe"
 
-#: colab/accounts/forms.py:58 colab/accounts/forms.py:64
-#: colab/accounts/forms.py:70
+#: colab/accounts/forms.py:61 colab/accounts/forms.py:67
+#: colab/accounts/forms.py:73
 msgid "This field cannot be blank."
 msgstr "Este campo não pode ficar em branco."
 
-#: colab/accounts/forms.py:111
+#: colab/accounts/forms.py:114
 #: colab/accounts/templates/accounts/user_detail.html:38
 msgid "Bio"
 msgstr "Bio"
 
-#: colab/accounts/forms.py:112
+#: colab/accounts/forms.py:115
 msgid "Write something about you in 200 characters or less."
 msgstr "Escreva algo sobre você em 200 caracteres ou menos."
 
-#: colab/accounts/forms.py:157
+#: colab/accounts/forms.py:160
 msgid "Mailing lists"
 msgstr "Listas de e-mail"
 
-#: colab/accounts/forms.py:170
+#: colab/accounts/forms.py:207
 #, python-format
 msgid "Email already used. Is it you?  Please <a href='%(url)s'>login</a>"
 msgstr ""
 "Este email ja está sendo utilizado.Caso seja o seu efetue o <a "
 "href='%(url)s'>login</a>"
 
-#: colab/accounts/forms.py:172
+#: colab/accounts/forms.py:209
 msgid "A user with that username already exists."
 msgstr "Já existe um usuário com este nome."
 
-#: colab/accounts/forms.py:173
+#: colab/accounts/forms.py:210
 msgid "The two password fields didn't match."
 msgstr "Os dois campos de senha não conferem."
 
-#: colab/accounts/forms.py:183 colab/accounts/forms.py:251
+#: colab/accounts/forms.py:220 colab/accounts/forms.py:295
 msgid "Password"
 msgstr "Senha"
 
-#: colab/accounts/forms.py:185
+#: colab/accounts/forms.py:222
 msgid "Password confirmation"
 msgstr "Confirmação de senha"
 
-#: colab/accounts/forms.py:247 colab/accounts/models.py:77
+#: colab/accounts/forms.py:291 colab/accounts/models.py:91
 msgid "Required. 30 characters or fewer. Letters and digits."
 msgstr "Obrigatório. 30 caracteres ou menos. Letras ou digitos."
 
-#: colab/accounts/forms.py:249
+#: colab/accounts/forms.py:293
 msgid "This value may contain only letters and numbers."
 msgstr "Este campo pode conter apenas letras e números."
 
-#: colab/accounts/forms.py:252
+#: colab/accounts/forms.py:296
 msgid ""
 "Raw passwords are not stored, so there is no way to see this user's "
 "password, but you can change the password using <a href=\"password/\">this "
@@ -256,77 +232,76 @@ msgstr "Não há contribuições deste usuário até agora."
 msgid "View more contributions..."
 msgstr "Ver mais colaborações..."
 
-#: colab/accounts/templates/accounts/user_update_form.html:70
+#: colab/accounts/templates/accounts/user_update_form.html:65
 msgid "We sent a verification email to "
 msgstr "Enviamos um email de verificação para "
 
-#: colab/accounts/templates/accounts/user_update_form.html:71
+#: colab/accounts/templates/accounts/user_update_form.html:66
 msgid "Please follow the instructions in it."
 msgstr "Por favor, siga as instruções."
 
-#: colab/accounts/templates/accounts/user_update_form.html:123
+#: colab/accounts/templates/accounts/user_update_form.html:109
 msgid "profile information"
 msgstr "informações do perfil"
 
-#: colab/accounts/templates/accounts/user_update_form.html:128
+#: colab/accounts/templates/accounts/user_update_form.html:114
 msgid "Change your avatar at Gravatar.com"
 msgstr "Troque seu avatar em Gravatar.com"
 
-#: colab/accounts/templates/accounts/user_update_form.html:178
-#: colab/search/utils.py:56
+#: colab/accounts/templates/accounts/user_update_form.html:152
+#: colab/plugins/utils/collaborations.py:27
 msgid "Emails"
 msgstr "Emails"
 
-#: colab/accounts/templates/accounts/user_update_form.html:187
+#: colab/accounts/templates/accounts/user_update_form.html:161
 msgid "Primary"
 msgstr "Primário"
 
-#: colab/accounts/templates/accounts/user_update_form.html:190
+#: colab/accounts/templates/accounts/user_update_form.html:164
 msgid "Setting..."
 msgstr "Definindo..."
 
-#: colab/accounts/templates/accounts/user_update_form.html:190
+#: colab/accounts/templates/accounts/user_update_form.html:164
 msgid "Set as Primary"
 msgstr "Definir como Primário"
 
-#: colab/accounts/templates/accounts/user_update_form.html:191
+#: colab/accounts/templates/accounts/user_update_form.html:165
 msgid "Deleting..."
 msgstr "Apagando..."
 
-#: colab/accounts/templates/accounts/user_update_form.html:191
-#: colab/accounts/templates/accounts/user_update_form.html:203
+#: colab/accounts/templates/accounts/user_update_form.html:165
+#: colab/accounts/templates/accounts/user_update_form.html:177
 msgid "Delete"
 msgstr "Apagar"
 
-#: colab/accounts/templates/accounts/user_update_form.html:202
+#: colab/accounts/templates/accounts/user_update_form.html:176
 msgid "Sending verification..."
 msgstr "Enviando verificação..."
 
-#: colab/accounts/templates/accounts/user_update_form.html:202
+#: colab/accounts/templates/accounts/user_update_form.html:176
 msgid "Verify"
 msgstr "Verificar"
 
-#: colab/accounts/templates/accounts/user_update_form.html:210
+#: colab/accounts/templates/accounts/user_update_form.html:184
 msgid "Add another email address:"
 msgstr "Adicionar outro endereço de email"
 
-#: colab/accounts/templates/accounts/user_update_form.html:213
+#: colab/accounts/templates/accounts/user_update_form.html:187
 msgid "Add"
 msgstr "Adicionar"
 
-#: colab/accounts/templates/accounts/user_update_form.html:221
-#: colab/accounts/templates/accounts/user_update_form.html:225
+#: colab/accounts/templates/accounts/user_update_form.html:195
+#: colab/accounts/templates/accounts/user_update_form.html:199
 #: colab/accounts/templates/registration/password_change_form_custom.html:26
 #: colab/accounts/templates/registration/password_reset_confirm_custom.html:28
 msgid "Change Password"
 msgstr "Trocar senha"
 
-#: colab/accounts/templates/accounts/user_update_form.html:233
+#: colab/accounts/templates/accounts/user_update_form.html:207
 msgid "Update"
 msgstr "Atualizar"
 
-#: colab/accounts/templates/accounts/user_update_form.html:234
-#| msgid "Control Panel"
+#: colab/accounts/templates/accounts/user_update_form.html:208
 msgid "Go to profile panel"
 msgstr "Ir para meu perfil"
 
@@ -372,7 +347,7 @@ msgstr "Endereço de email: "
 msgid "Reset password"
 msgstr "Redefinir senha"
 
-#: colab/accounts/templates/search/user_search_preview.html:11
+#: colab/accounts/templates/search/user_search_preview.html:19
 #: colab/search/forms.py:19
 #: colab/search/templates/search/includes/search_filters.html:134
 #: colab/search/templates/search/includes/search_filters.html:136
@@ -381,36 +356,35 @@ msgstr "Redefinir senha"
 msgid "Since"
 msgstr "Desde"
 
-#: colab/accounts/templates/search/user_search_preview.html:12
-#, fuzzy
-#| msgid "Register"
+
+#: colab/accounts/templates/search/user_search_preview.html
 msgid "Registered in"
-msgstr "Cadastre-se"
+msgstr "Registrado em"
 
 #: colab/accounts/templatetags/date_format.py:8
 #, python-format
 msgid "%(m)s %(d)s %(y)s"
-msgstr ""
+msgstr "%(d)s %(m)s %(y)s"
 
 #: colab/accounts/templatetags/date_format.py:17
 #, python-format
 msgid "%(hour)s:%(min)s"
-msgstr ""
+msgstr "%(hour)s:%(min)s"
 
 #: colab/accounts/templatetags/date_format.py:19
 #, python-format
-msgid "%s at %s"
-msgstr ""
+msgid "%(formatted_date)s at %(formatted_time)s"
+msgstr "%(formatted_date)s as %(formatted_time)s"
 
-#: colab/accounts/views.py:126
+#: colab/accounts/views.py:127
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: colab/accounts/views.py:186
+#: colab/accounts/views.py:187
 msgid "Your password was changed."
 msgstr "Sua senha foi modificada."
 
-#: colab/accounts/views.py:202
+#: colab/accounts/views.py:203
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Sua senha foi modificada. Você já pode efetuar o login agora."
 
@@ -435,7 +409,7 @@ msgstr "Últimas colaborações"
 msgid "Search"
 msgstr "Busca"
 
-#: colab/search/forms.py:18
+#: colab/search/forms.py:18 colab/settings.py:144
 msgid "Type"
 msgstr "Tipo"
 
@@ -484,11 +458,11 @@ msgstr "Pesquise aqui"
 msgid "Filters"
 msgstr "Filtros"
 
-#: colab/search/templates/search/search.html:76
+#: colab/search/templates/search/search.html:77
 msgid "No results for your search."
 msgstr "Não há resultados para sua busca."
 
-#: colab/search/templates/search/search.html:78
+#: colab/search/templates/search/search.html:79
 msgid "You are searching for"
 msgstr "Você está procurando por"
 
@@ -512,31 +486,31 @@ msgstr "Atividade recente"
 msgid "Relevance"
 msgstr "Relevância"
 
-#: colab/settings.py:149
+#: colab/settings.py:153
 msgid "Document"
 msgstr "Documento"
 
-#: colab/settings.py:151
+#: colab/settings.py:155
 msgid "Presentation"
 msgstr "Apresentação"
 
-#: colab/settings.py:152
+#: colab/settings.py:156
 msgid "Text"
 msgstr "Texto"
 
-#: colab/settings.py:153
+#: colab/settings.py:157
 msgid "Code"
 msgstr "Código"
 
-#: colab/settings.py:155
+#: colab/settings.py:159
 msgid "Compressed"
 msgstr "Compactado"
 
-#: colab/settings.py:156
+#: colab/settings.py:160
 msgid "Image"
 msgstr "Imagem"
 
-#: colab/settings.py:158
+#: colab/settings.py:162
 msgid "Spreadsheet"
 msgstr "Planilha"
 
@@ -548,7 +522,7 @@ msgstr "Não encontrado. Continue procurando! :)"
 msgid "Ooopz... something went wrong!"
 msgstr "Ooopa... algo saiu errado!"
 
-#: colab/templates/base.html:74
+#: colab/templates/base.html:79
 msgid "The login has failed. Please, try again."
 msgstr "O login falhou. Por favor, tente novamente."
 
@@ -569,7 +543,6 @@ msgid "Groups"
 msgstr "Grupos"
 
 #: colab/templates/header.html:57
-#| msgid "My Profile"
 msgid "My Profile"
 msgstr "Meu Perfil"
 
@@ -618,132 +591,154 @@ msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
 
 #, fuzzy
-#~| msgid "Gitlab Projects"
-#~ msgid "Public Projects"
-#~ msgstr "Projetos no Gitlab"
+# ~| msgid "Gitlab Projects"
+msgid "Public Projects"
+msgstr "Projetos no Gitlab"
 
 #, fuzzy
-#~| msgid "Gitlab Project"
-#~ msgid "New Project"
-#~ msgstr "Projeto no Gitlab"
+# ~| msgid "My Profile"
+msgid "Profile"
+msgstr "Meu Perfil"
 
 #, fuzzy
-#~| msgid "Gitlab Projects"
-#~ msgid "Projects"
-#~ msgstr "Projetos no Gitlab"
+# ~| msgid "Gitlab Project"
+msgid "New Project"
+msgstr "Projeto no Gitlab"
 
 #, fuzzy
-#~| msgid "Gitlab Issues"
-#~ msgid "Issues"
-#~ msgstr "Tíquetes no Gitlab"
+# ~| msgid "Gitlab Projects"
+msgid "Projects"
+msgstr "Projetos no Gitlab"
 
 #, fuzzy
-#~| msgid "Gitlab Merge Requests"
-#~ msgid "Merge Requests"
-#~ msgstr "Envio de Contribuições no Gitlab"
+# ~| msgid "Gitlab Issues"
+msgid "Issues"
+msgstr "Tíquetes no Gitlab"
 
-#~ msgid ""
-#~ "Please enter a correct %(username)s and password. Note that both fields "
-#~ "may be case-sensitive."
-#~ msgstr ""
-#~ "Por favor entre com um %(username)s e senha. Note que ambos os campos "
-#~ "diferenciam letras maiúsculas de minúsculas"
+#, fuzzy
+# ~| msgid "Gitlab Merge Requests"
+msgid "Merge Requests"
+msgstr "Envio de Contribuições no Gitlab"
 
-#~ msgid "This account is inactive."
-#~ msgstr "Esta conta está inativa."
+msgid "Social"
+msgstr "Social"
 
-#~ msgid "Email"
-#~ msgstr "Email"
+#, fuzzy
+# ~| msgid "Username"
+msgid "Users"
+msgstr "Usuário"
 
-#~ msgid "New password"
-#~ msgstr "Nova senha"
+msgid "Communities"
+msgstr "Comunidades"
 
-#~ msgid "New password confirmation"
-#~ msgstr "Confirmar nova senha"
+msgid "Control Panel"
+msgstr "Painel de Controle"
 
-#~ msgid "Your old password was entered incorrectly. Please enter it again."
-#~ msgstr "Sua senha atual está incorreta. Por favor tente novamente."
+msgid ""
+"Please enter a correct %(username)s and password. Note that both fields "
+"may be case-sensitive."
+msgstr ""
+"Por favor entre com um %(username)s e senha. Note que ambos os campos "
+"diferenciam letras maiúsculas de minúsculas"
 
-#~ msgid "Old password"
-#~ msgstr "Senha atual"
+msgid "This account is inactive."
+msgstr "Esta conta está inativa."
 
-#~ msgid "Password (again)"
-#~ msgstr "Senha (novamente)"
+msgid "Email"
+msgstr "Email"
 
-#~ msgid "Enter a valid username."
-#~ msgstr "Insira um nome de usuário válido."
+msgid "New password"
+msgstr "Nova senha"
 
-#~ msgid "Gitlab Group"
-#~ msgstr "Grupo no Gitlab"
+msgid "New password confirmation"
+msgstr "Confirmar nova senha"
 
-#~ msgid "Gitlab Groups"
-#~ msgstr "Grupos no Gitlab"
+msgid "Your old password was entered incorrectly. Please enter it again."
+msgstr "Sua senha atual está incorreta. Por favor tente novamente."
 
-#~ msgid "Gitlab Merge Request"
-#~ msgstr "Envio de Contribuição no Gitlab"
+msgid "Old password"
+msgstr "Senha atual"
 
-#~ msgid "Gitlab Issue"
-#~ msgstr "Tíquete no Gitlab"
+msgid "Password (again)"
+msgstr "Senha (novamente)"
 
-#~ msgid "Gitlab Comments"
-#~ msgstr "Comentários no Gitlab"
+msgid "Enter a valid username."
+msgstr "Insira um nome de usuário válido."
 
-#~ msgid "Community"
-#~ msgstr "Comunidade"
+msgid "Gitlab Group"
+msgstr "Grupo no Gitlab"
 
-#~ msgid "Article"
-#~ msgstr "Artigo"
+msgid "Gitlab Groups"
+msgstr "Grupos no Gitlab"
 
-#~ msgid "Articles"
-#~ msgstr "Artigos"
+msgid "Gitlab Merge Request"
+msgstr "Envio de Contribuição no Gitlab"
 
-#~ msgid "Author"
-#~ msgstr "Autor"
+msgid "Gitlab Issue"
+msgstr "Tíquete no Gitlab"
 
-#~ msgid "Modified by"
-#~ msgstr "Modificado por"
+msgid "Gitlab Comments"
+msgstr "Comentários no Gitlab"
 
-#~ msgid "Status"
-#~ msgstr "Status"
+msgid "Community"
+msgstr "Comunidade"
 
-#~ msgid "Mailinglist"
-#~ msgstr "Lista de discussão"
+msgid "Article"
+msgstr "Artigo"
 
-#~ msgid "Milestone"
-#~ msgstr "Marco"
+msgid "Articles"
+msgstr "Artigos"
 
-#~ msgid "Priority"
-#~ msgstr "Prioridade"
+msgid "Author"
+msgstr "Autor"
 
-#~ msgid "Component"
-#~ msgstr "Componente"
+msgid "Modified by"
+msgstr "Modificado por"
 
-#~ msgid "Severity"
-#~ msgstr "Severidade"
+msgid "Status"
+msgstr "Status"
 
-#~ msgid "Reporter"
-#~ msgstr "Relator"
+msgid "Mailinglist"
+msgstr "Lista de discussão"
 
-#~ msgid "Keywords"
-#~ msgstr "Palavras chave"
+msgid "Milestone"
+msgstr "Marco"
 
-#~ msgid "Collaborators"
-#~ msgstr "Colaboradores"
+msgid "Priority"
+msgstr "Prioridade"
 
-#~ msgid "Repository"
-#~ msgstr "Repositório"
+msgid "Component"
+msgstr "Componente"
 
-#~ msgid "Used by"
-#~ msgstr "Usado por"
+msgid "Severity"
+msgstr "Severidade"
 
-#~ msgid "File type"
-#~ msgstr "Tipo do arquivo"
+msgid "Reporter"
+msgstr "Relator"
 
-#~ msgid "Size"
-#~ msgstr "Tamanho"
+msgid "Keywords"
+msgstr "Palavras chave"
 
-#~ msgid "Discussion"
-#~ msgstr "Discussão"
+msgid "Collaborators"
+msgstr "Colaboradores"
 
-#~ msgid "Paste"
-#~ msgstr "Cole aqui"
+msgid "Repository"
+msgstr "Repositório"
+
+msgid "Used by"
+msgstr "Usado por"
+
+msgid "File type"
+msgstr "Tipo do arquivo"
+
+msgid "Size"
+msgstr "Tamanho"
+
+msgid "Paste"
+msgstr "Cole aqui"
+
+msgid "Discussion"
+msgstr "Discussão"
+
+msgid "at"
+msgstr "às"

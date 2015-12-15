@@ -12,7 +12,7 @@ REQUIREMENTS = [
     'Whoosh>=2.7.0',
 
     # revproxy
-    'django-revproxy[diazo]>=0.9.5',
+    'django-revproxy[diazo]>=0.9.8',
 
     # Async Signals
     'celery[redis]>=3.1.2',
@@ -42,7 +42,7 @@ EXCLUDE_FROM_PACKAGES = []
 
 setup(
     name='colab',
-    version='1.12.2',
+    version='1.12.4',
     url='https://github.com/colab-community/colab',
     author='Sergio Oliveira',
     author_email='sergio@tracy.com.br',
