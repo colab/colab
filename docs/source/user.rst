@@ -83,6 +83,18 @@ In this example the Gitlab's widget is added in a new tab inside the user profil
 Widgets Areas
 +++++++++++++
 
+.. attribute:: List
+
+    The dashboard widget area can be found at the user profile. It provides general information like latest news and collaboration.
+
+.. attribute:: Button
+
+    The dashboard widget area can be found at the user profile. It provides adicional buttons to profile.
+
+.. attribute:: Group
+
+    The dashboard widget area can be found at the user profile. It provides adicional information to profile.
+
 .. attribute:: Dashboard
 
     The dashboard widget area can be found at ``/dashboard``. It provides general information like latest news and collaboration.
@@ -107,6 +119,22 @@ Core Widgets
 .. attribute:: Latest Threads
 
     Shows the list of latest threads, those threads are get from the public mailling lists.
+
+.. attribute:: Groups
+
+    Shows the groups that user is subscribed.
+
+.. attribute:: Group Membership
+
+    Adds a button to subscribed in a group.
+
+.. attribute:: Latest Posted
+
+    Shows the list of latest post, those post are get from the public mailling lists from the user.
+
+.. attribute:: Latest Contributions
+
+    Shows the list of latest contributions for the user.
 
 .. attribute:: Latest Collaborations
 
