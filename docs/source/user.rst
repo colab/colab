@@ -61,7 +61,7 @@ The file /etc/colab/settings.py have the configurations of colab, this configura
 Widgets
 -------
 
-A widget is a piece of HTML that will be inserted in a specific spot in a page to render some view.
+A widget is a piece of HTML that will be inserted in a specific area in a page to render some view.
 
 To configure the widgets you have to edit, or create, the file ``/etc/colab/widgets_settings.py``. Or you can create a py file inside the folder ``/etc/colab/widgets.d``.
 
@@ -79,6 +79,42 @@ Example:
 
 
 In this example the Gitlab's widget is added in a new tab inside the user profile.
+
+Widgets Areas
++++++++++++++
+
+.. attribute:: Dashboard
+
+    The dashboard widget area can be found at ``/dashboard``. It provides general information like latest news and collaboration.
+
+Core Widgets
+++++++++++++
+
+.. attribute:: Most Relevant Threads
+
+    Shows the list of most relevant threads.
+
+    .. code-block:: python
+
+       # Widget Manager handles all widgets and must be imported to register them
+       from colab.widgets.widget_manager import WidgetManager
+
+       # Specific code for Gitlab's Widget
+       from colab_gitlab.widgets import GitlabProfileWidget
+
+       WidgetManager.register_widget('profile', GitlabProfileWidget())
+
+.. attribute:: Latest Threads
+
+    Shows the list of latest threads, those threads are get from the public mailling lists.
+
+.. attribute:: Latest Collaborations
+
+    Shows the list of latest collaborations, in example, articles and blog post done recently.
+
+.. attribute:: Collaboration Graph
+
+    Displays a pie chart of all collaborations that are indexed.
 
 Add a new plugin
 ----------------
@@ -248,20 +284,8 @@ Extra Static Folders
 Settings
 --------
 
-Blog Planet
-+++++++++++
-.. TODO
-
 Paste
 +++++
-.. TODO
-
-XMPP
-++++
-.. TODO
-
-SVN
-+++
 .. TODO
 
 Social Networks

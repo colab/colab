@@ -40,6 +40,11 @@ if [ ! -s /etc/colab/settings.py ]; then
     rm -f /etc/colab/settings.pyc  # remove pyc if exists
 fi
 
+if [ ! -s /etc/colab/widgets_settings.py ]; then
+    colab-admin initwidgetsconfig > /etc/colab/widgets_settings.py
+    rm -f /etc/colab/widgets_settings.pyc  # remove pyc if exists
+fi
+
 colab-admin migrate
 colab-admin loaddata /vagrant/tests/test_data.json
 
