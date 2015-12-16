@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
-{% load i18n gravatar %}
+{% load i18n gravatar widgets_tag  %}
+
+{% block html %}
+   {%  import_widgets 'button' %}
+   {%  import_widgets 'list' %}
+   {%  import_widgets 'group' %}
+   {{ block.super }}
+{% endblock %}
 
 {% block title %}Perfil{% endblock %}
 
@@ -27,9 +34,10 @@
 
       {% if request.user == user_ or request.user.is_superuser %}
         <a class="btn btn-info" href="{% url 'user_profile_update' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "edit profile"|title %}</a>
-        <a class="btn btn-info" href="{% url 'user_list_subscriptions' user_ %}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;{% trans "group membership"|title %}</a>
+        {% for widget in widgets_button %}
+            {{widget.get_body}}
+        {% endfor%}
       {% endif %}
-
       {% if request.user.is_active %}
         {% if user_.bio %}
           <div class="divider"></div>
@@ -84,12 +92,9 @@
           {% endif %}
         {% endif %}
       </ul>
-      {% if user_.mailinglists %}
-        <b>{% trans 'Groups: ' %}</b>
-        {% for list in user_.mailinglists %}
-          <a href="{% url 'haystack_search' %}?order=latest&amp;type=thread&amp;list={{ list }}"><span class="label label-primary">{{ list }}</span></a>
-        {% endfor %}
-      {% endif %}
+      {% for widget in widgets_group %}
+          {{widget.get_body}}
+      {% endfor%}
 
       <div class="divider"></div>
 
@@ -110,7 +115,6 @@
       </div>
     </div>
 
-
     <div class="col-lg-4 col-md-4 col-sm-7">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -128,37 +132,9 @@
   </div> <!-- End of user-profile row -->
 
   <div class="row">
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <h3>{% trans "Latest posted" %} </h3>
-      <ul class="message-list">
-      {% for doc in emails %}
-        {% include "message-preview.html" with result=doc %}
-      {% empty %}
-        <li>{% trans "There are no posts by this user so far." %}</li>
-      {% endfor %}
-      </ul>
-      <a href="{% url 'haystack_search' %}?type=thread&amp;author={{ user_.username }}">
-        {% trans "View more posts..." %}
-      </a>
-      <div>&nbsp;</div>
-    </div>
-
-    <div class="col-lg-6 col-md-6 col-sm-12">
-      <h3>{% trans "Latest contributions" %}</h3>
-      <ul class="message-list">
-      {% for result in results %}
-        {% include "message-preview.html" %}
-      {% empty %}
-        <li>{% trans "No contributions of this user so far." %}</li>
-      {% endfor %}
-      </ul>
-      <a href="{% url 'haystack_search' %}?order=latest&amp;collaborators={{ user_.username }}">
-        {% trans "View more contributions..." %}
-      </a>
-      <div>&nbsp;</div>
-    </div>
-
+    {% for widget in widgets_list %}
+        {{widget.get_body}}
+    {% endfor%}
   </div>
 
 {% endblock %}
