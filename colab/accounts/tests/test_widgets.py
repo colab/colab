@@ -1,4 +1,3 @@
-
 from django.test import TestCase
 from colab.accounts.models import User
 from django.test import Client
@@ -40,16 +39,11 @@ class WidgetAccountTest(TestCase):
                      'widgets/group.html',
                      'widgets/latest_contributions.html',
                      'widgets/latest_posted.html',
-                     ]
-        for template in templates:
-            response = self.get_response_from_request(
-                "/account/" + self.user.username)
-    def test_account_chart_widgets(self):
-        templates = ['widgets/collaboration_chart.html',
+                     'widgets/collaboration_chart.html',
                      'widgets/participation_chart.html',
                      ]
         for template in templates:
-            response = self.get_response_from_request(
-                "/account/usertest")
+            url = "/account/" + self.user.username
+            response = self.get_response_from_request(url)
             self.assertTemplateUsed(
                 template_name=template, response=response)
