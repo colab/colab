@@ -3,20 +3,19 @@
 {% load i18n gravatar widgets_tag  %}
 
 {% block html %}
-   {%  import_widgets 'button' %}
-   {%  import_widgets 'list' %}
-   {%  import_widgets 'group' %}
+   {% import_widgets 'button' %}
+   {% import_widgets 'list' %}
+   {% import_widgets 'group' %}
+   {% import_widgets 'charts' %}
    {{ block.super }}
 {% endblock %}
 
 {% block title %}Perfil{% endblock %}
 
 {% block head_js %}
-  {% trans "Messages" as group_collabs %}
-  {% trans "Contributions" as type_collabs %}
-
-  {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=type_collabs %}
-  {% include "doughnut-chart.html" with chart_data=list_activity chart_canvas="collabs2" name=group_collabs %}
+  {% for widget in widgets_charts %}
+      {{widget.get_header}}
+  {% endfor %}
 {% endblock %}
 
 {% block main-content %}
@@ -100,34 +99,9 @@
 
     </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-7">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Collaborations by Type" %}</h3>
-        </div>
-        <div class="panel-body">
-          <div id="collabs"></div>
-          <div class="chart collabs">
-              <canvas width="200" height="200"></canvas>
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-7">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">{% trans "Participation by Group" %}</h3>
-        </div>
-        <div class="panel-body">
-          <div class="chart collabs2">
-              <canvas width="200" height="200"></canvas>
-            <p></p>
-          </div>
-        </div>
-      </div>
-    </div>
+    {% for widget in widgets_charts %}
+      {{widget.get_body}}
+    {% endfor %}
 
   </div> <!-- End of user-profile row -->
 

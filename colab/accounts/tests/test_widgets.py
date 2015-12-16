@@ -1,4 +1,3 @@
-
 from django.test import TestCase
 from colab.accounts.models import User
 from django.test import Client
@@ -12,7 +11,7 @@ class WidgetAccountTest(TestCase):
 
     def create_user(self):
         user = User()
-        user.username = "USERtestCoLaB"
+        user.username = "usertest"
         user.set_password("123colab4")
         user.email = "usertest@colab.com.br"
         user.id = 1
@@ -40,9 +39,11 @@ class WidgetAccountTest(TestCase):
                      'widgets/group.html',
                      'widgets/latest_contributions.html',
                      'widgets/latest_posted.html',
+                     'widgets/collaboration_chart.html',
+                     'widgets/participation_chart.html',
                      ]
         for template in templates:
-            response = self.get_response_from_request(
-                "/account/" + self.user.username)
+            url = "/account/" + self.user.username
+            response = self.get_response_from_request(url)
             self.assertTemplateUsed(
                 template_name=template, response=response)

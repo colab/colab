@@ -22,7 +22,7 @@ Run the following command to access colab virtual machine
       $ vagrant ssh
 
 Install Requirements without Vagrant
-++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++
 
 Install virtualenvwrapper
 
@@ -99,6 +99,10 @@ Widgets Areas
 
     The dashboard widget area can be found at ``/dashboard``. It provides general information like latest news and collaboration.
 
+.. attribute:: Charts
+
+    The charts widget area can be found at the user profile page. It provides an area for charts displays.
+
 Core Widgets
 ++++++++++++
 
@@ -155,6 +159,19 @@ Core Widgets
     Displays a pie chart of all collaborations that are indexed.
 
     **Suggested area:** dashboard
+
+.. attribute:: Collaboration Chart
+
+    Displays a pie chart of all collaborations created by user that are indexed.
+
+    **Suggested area:** charts
+
+.. attribute:: Participation Chart
+
+    Displays a pie chart of all participations from mail list.
+
+    **Suggested area:** charts
+
 
 Add a new plugin
 ----------------
