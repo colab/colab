@@ -13,6 +13,13 @@ from colab.super_archives.widgets.dashboard_latest_threads import \
 from colab.super_archives.widgets.dashboard_collaboration_graph import \
     DashboardCollaborationGraphWidget
 
+from colab.widgets.widget_manager import WidgetManager
+from colab.accounts.widgets.group import GroupWidget
+from colab.accounts.widgets.group_membership import GroupMembershipWidget
+from colab.accounts.widgets.latest_posted import LatestPostedWidget
+from colab.accounts.widgets.latest_contributions import \
+    LatestContributionsWidget
+
 
 # Dashboard Widgets
 WidgetManager.register_widget('dashboard',
@@ -23,6 +30,13 @@ WidgetManager.register_widget('dashboard',
                               DashboardMostRelevantThreadsWidget())
 WidgetManager.register_widget('dashboard',
                               DashboardLatestThreadsWidget())
+
+# Profile Widgets
+WidgetManager.register_widget('group', GroupWidget())
+WidgetManager.register_widget('button', GroupMembershipWidget())
+WidgetManager.register_widget('list', LatestPostedWidget())
+WidgetManager.register_widget('list', LatestContributionsWidget())
+
 """
 
 
