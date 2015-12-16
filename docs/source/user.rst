@@ -85,15 +85,15 @@ Widgets Areas
 
 .. attribute:: List
 
-    The dashboard widget area can be found at the user profile. It provides general information like latest news and collaboration.
+    The list widget area can be found at the user profile. It provides general information like latest news and collaboration.
 
 .. attribute:: Button
 
-    The dashboard widget area can be found at the user profile. It provides adicional buttons to profile.
+    The button widget area can be found at the user profile. It provides aditional buttons to profile.
 
 .. attribute:: Group
 
-    The dashboard widget area can be found at the user profile. It provides adicional information to profile.
+    The group widget area can be found at the user profile. It provides aditional information to profile.
 
 .. attribute:: Dashboard
 
@@ -124,25 +124,37 @@ Core Widgets
 
     Shows the groups that user is subscribed.
 
+    **Suggested area:** group
+
 .. attribute:: Group Membership
 
     Adds a button to subscribed in a group.
+
+    **Suggested area:** button
 
 .. attribute:: Latest Posted
 
     Shows the list of latest post, those post are get from the public mailling lists from the user.
 
-.. attribute:: Latest Contributions
+    **Suggested area:** list
+
+.. attribute:: Your Latest Contributions
 
     Shows the list of latest contributions for the user.
+
+    **Suggested area:** list
 
 .. attribute:: Latest Collaborations
 
     Shows the list of latest collaborations, in example, articles and blog post done recently.
 
+    **Suggested area:** dashboard
+
 .. attribute:: Collaboration Graph
 
     Displays a pie chart of all collaborations that are indexed.
+
+    **Suggested area:** dashboard
 
 Add a new plugin
 ----------------
