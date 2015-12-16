@@ -3,21 +3,19 @@
 {% load i18n gravatar widgets_tag  %}
 
 {% block html %}
-   {%  import_widgets 'button' %}
-   {%  import_widgets 'list' %}
-   {%  import_widgets 'group' %}
-  {% import_widgets 'charts' %}
+   {% import_widgets 'button' %}
+   {% import_widgets 'list' %}
+   {% import_widgets 'group' %}
+   {% import_widgets 'charts' %}
    {{ block.super }}
 {% endblock %}
 
 {% block title %}Perfil{% endblock %}
 
 {% block head_js %}
-  {% trans "Messages" as group_collabs %}
-  {% trans "Contributions" as type_collabs %}
-
-  {% include "doughnut-chart.html" with chart_data=type_count chart_canvas="collabs" name=type_collabs %}
-  {% include "doughnut-chart.html" with chart_data=list_activity chart_canvas="collabs2" name=group_collabs %}
+  {% for widget in widgets_charts %}
+      {{widget.get_header}}
+  {% endfor %}
 {% endblock %}
 
 {% block main-content %}
