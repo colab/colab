@@ -74,10 +74,10 @@ class WidgetManagerTest(TestCase):
         widget.content = "<head> Teste <head>"
         self.assertEqual(widget.get_header(), '')
 
-    def test_get_body_wrong(self):
+    def test_get_without_body(self):
         widget = self.default_widget_instance()
-        widget.content = "<body> Teste <body>"
-        self.assertEqual(widget.get_body(), '')
+        widget.content = "Teste"
+        self.assertEqual(widget.get_body(), widget.content)
 
     def test_generate_content(self):
         widgets = WidgetManager.get_widgets(self.widget_area)

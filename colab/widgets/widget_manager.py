@@ -14,7 +14,7 @@ class Widget(object):
         end = self.content.find('</body>')
 
         if -1 in [start, end]:
-            return ''
+            return self.content
 
         body = self.content[start + len('<body>'):end]
         return mark_safe(body)
