@@ -10,7 +10,6 @@ upstream = 'localhost'
 
 urls = {
     'include': '{{ app_name }}.urls',
-    'namespace': '{{ app_name }}',
     'prefix': '^{{ app_name }}/',
 }
 
