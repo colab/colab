@@ -231,7 +231,7 @@ Example:
 
    ## myplugin/username_validators.py
 
-   def has_special_char(username):
+   def has_uppercase_char(username):
        for char in username:
            if char.isupper():
                return
