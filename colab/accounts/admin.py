@@ -4,14 +4,14 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from .forms import UserCreationForm, UserChangeForm
+from .forms import ColabSetUsernameForm, UserChangeForm
 
 User = get_user_model()
 
 
 class CustomUserAdmin(UserAdmin):
     form = UserChangeForm
-    add_form = UserCreationForm
+    add_form = ColabSetUsernameForm
 
     fieldsets = (
         (None, {'fields': ('username', 'email', 'password')}),

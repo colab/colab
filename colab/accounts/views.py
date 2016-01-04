@@ -17,7 +17,7 @@ from colab.plugins.utils.collaborations import (get_collaboration_data,
                                                 get_visible_threads)
 from colab.accounts.models import User
 
-from .forms import (UserCreationForm, ListsForm, UserUpdateForm)
+from .forms import (ColabSetUsernameForm, ListsForm, UserUpdateForm)
 from .utils import mailman
 
 
@@ -86,13 +86,13 @@ def signup(request):
             return redirect('user_profile', username=request.user.username)
 
     if request.method == 'GET':
-        user_form = UserCreationForm()
+        user_form = ColabSetUsernameForm()
         lists_form = ListsForm()
 
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})
 
-    user_form = UserCreationForm(request.POST)
+    user_form = ColabSetUsernameForm(request.POST)
     lists_form = ListsForm(request.POST)
 
     if not user_form.is_valid() or not lists_form.is_valid():

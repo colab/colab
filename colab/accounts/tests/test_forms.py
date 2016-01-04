@@ -12,7 +12,8 @@ from django.core.urlresolvers import reverse
 from colab.accounts.forms import (UserCreationForm, UserChangeForm,
                                   UserUpdateForm, UserForm, get_lists_choices,
                                   ColabSetPasswordForm,
-                                  ColabPasswordChangeForm)
+                                  ColabPasswordChangeForm,
+                                  ColabSetUsernameForm)
 from colab.accounts import forms as accounts_forms
 from colab.accounts.models import User
 from colab.accounts.utils import mailman
@@ -48,6 +49,38 @@ class SetPasswordFormTestCase(TestCase):
         form = ColabSetPasswordForm(self.user, data=self.valid_form_data)
         self.assertTrue(form.is_valid())
         validator.assert_called_with('12345')
+
+
+class SetUsernameFormTestCase(TestCase):
+
+    TEST_COLAB_APPS = {
+        'test_plugin': {
+            'username_validators': (
+                'colab.accounts.tests.utils.username_validator',
+            )
+        }
+    }
+
+    @property
+    def valid_form_data(self):
+        return {'username': 'test_user',
+                'email': 'test@email.com',
+                'first_name': 'test',
+                'last_name': 'test',
+                'password1': '12345',
+                'password2': '12345'}
+
+    def test_no_custom_validators(self):
+        form = ColabSetUsernameForm(data=self.valid_form_data)
+        self.assertTrue(form.is_valid(), True)
+
+    @override_settings(COLAB_APPS=TEST_COLAB_APPS)
+    @patch('colab.accounts.tests.utils.username_validator')
+    def test_custom_validator(self, validator):
+        form = ColabSetUsernameForm(data=self.valid_form_data)
+
+        self.assertTrue(form.is_valid())
+        validator.assert_called_with('test_user')
 
 
 class FormTest(TestCase):
