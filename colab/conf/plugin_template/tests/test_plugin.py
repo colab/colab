@@ -2,7 +2,7 @@
 from django.test import TestCase, Client
 
 
-class PluginTest(TestCase):
+class {{ app_name_camel }}PluginTest(TestCase):
 
     def setUp(self):
         self.client = Client()
