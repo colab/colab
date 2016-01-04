@@ -4,6 +4,7 @@ import os
 import colab
 
 from django.core.management.commands.startapp import Command as StartAppCommand
+from django.core.management.base import CommandError
 
 
 class Command(StartAppCommand):
@@ -18,8 +19,13 @@ class Command(StartAppCommand):
 
         return super(Command, self).handle_template(template, subdir)
 
-    def handle(self, name, **kwargs):
-        kwargs['app_name_dash'] = name.replace('_', '-')
-        kwargs['app_name_camel'] = name.title().replace('_', '')
-        kwargs['app_name_verbose'] = name.replace('_', ' ').title()
-        super(Command, self).handle(name, **kwargs)
+    def handle(self, app_name=None, target=None, **options):
+        if app_name is None or app_name == "":
+            # XXX: remove this when update django to 1.8 or higher
+            raise CommandError(self.missing_args_message)
+
+        options['app_name_dash'] = app_name.replace('_', '-')
+        options['app_name_camel'] = app_name.title().replace('_', '')
+        options['app_name_verbose'] = app_name.replace('_', ' ').title()
+
+        super(Command, self).handle(app_name, target, **options)
