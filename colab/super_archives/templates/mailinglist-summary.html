@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n tz superarchives %}
+
+{% block main-content %}
+  <h2>{% block title %}{% trans "Groups"|title %}{% endblock %}</h2>
+  <hr/>
+
+  <h3><b>{{ mailinglist.name|lower }} {% if mailinglist.description %}({{ mailinglist.description }}){% endif %}</b></h3>
+  <div class="btn-group btn-group-sm">
+    <a href="#" class="btn btn-default" disabled="disabled">{% blocktrans with number_of_users=mailinglist.get_number_of_users %}{{ number_of_users }} members{% endblocktrans %}</a>
+  </div>
+  <hr/>
+
+{% endblock %}

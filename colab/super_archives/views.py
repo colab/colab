@@ -328,3 +328,17 @@ class VoteView(View):
         #   empty body, as per RFC2616.
         #   object deleted
         return http.HttpResponse(status=204)
+
+
+class MailingListView(View):
+
+   http_method_names = [u'get']
+
+   def get(self, request, mailinglist):
+       mailinglist = get_object_or_404(MailingList, name__iexact=mailinglist)
+
+       context = {
+           'mailinglist': mailinglist
+       } 
+
+       return render(request, 'mailinglist-summary.html', context)
