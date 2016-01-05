@@ -335,10 +335,14 @@ class MailingListView(View):
    http_method_names = [u'get']
 
    def get(self, request, mailinglist):
-       mailinglist = get_object_or_404(MailingList, name__iexact=mailinglist)
+        mailinglist = get_object_or_404(MailingList, name__iexact=mailinglist)
+        ml_messages = Message.objects.filter(thread__mailinglist=mailinglist)
 
-       context = {
-           'mailinglist': mailinglist
-       } 
+        order_by = request.GET.get('order')
 
-       return render(request, 'mailinglist-summary.html', context)
+        context = {
+            'mailinglist': mailinglist,
+            'ml_messages': ml_messages,
+        }
+
+        return render(request, 'mailinglist-summary.html', context)

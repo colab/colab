@@ -2,7 +2,12 @@
 {% load i18n tz superarchives %}
 
 {% block main-content %}
-  <h2>{% block title %}{% trans "Groups"|title %}{% endblock %}</h2>
+  <div class="row">
+    <div class="col-xs-6 col-sm-4 col-md-2 col-lg-2">
+      <h2>{% block page_title %}{% trans "Groups"|title %}{% endblock %}</h2>
+    </div>
+  </div>
+
   <hr/>
 
   <h3><b>{{ mailinglist.name|lower }} {% if mailinglist.description %}({{ mailinglist.description }}){% endif %}</b></h3>
@@ -11,4 +16,9 @@
   </div>
   <hr/>
 
+  {% for result in ml_messages %}
+    {% include 'search/thread_search_preview.html' %}
+  {% endfor %}
+
 {% endblock %}
+
