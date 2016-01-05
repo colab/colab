@@ -14,10 +14,7 @@ class Command(StartAppCommand):
     missing_args_message = "You must provide a plugin name"
 
     def handle_template(self, template, subdir):
-        if template is None:
-            return os.path.join(colab.__path__[0], 'conf', 'plugin_template')
-
-        return super(Command, self).handle_template(template, subdir)
+        return os.path.join(colab.__path__[0], 'conf', 'plugin_template')
 
     def handle(self, app_name=None, target=None, **options):
         if app_name is None or app_name == "":
