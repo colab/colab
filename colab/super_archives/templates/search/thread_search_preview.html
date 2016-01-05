@@ -1,33 +1,17 @@
-{% load i18n tz highlight %}
+{% extends "search-base.html" %}
+{% load superarchives set_var %}
 
-<div class="row">
-  <div class="col-md-12">
-    <small>{{ result.modified|date:"d F Y" }} {% trans "at" %} {{result.modified|date:"h:m" }} -
+{% block content %}
+  {% profile_url result.modified_by result.modified_by_url as user_url%}
+  {% set 'author' user_url %}
+  {% set 'title' result.title %}
+  {% set 'modified' result.modified %}
+  {% set 'modified_time' True %}
+  {% set 'url' result.url %}
+  {% set 'registered_in' "Discussion" %}
+  {% set 'description' result.latest_description|truncatechars:"85"|default_if_none:"" %}
 
-        {% if query %}
-            <a href="{{result.modified_by_url}}">{% highlight result.modified_by with query max_length "1000" %}</a>
-        {% else %}
-            <a href="{{result.modified_by_url}}">{{result.modified_by }}</a>
-        {% endif %}
+  {{ block.super }}
+{% endblock content %}
 
-    </small><br>
 
-    {% if query %}
-        <h4><a href="{{result.url}}">{% highlight result.title with query max_length "1000"%}</a></h4>
-    {% else %}
-        <h4><a href="{{result.url}}">{{ result.title }}</a></h4>
-    {% endif %}
-
-    {% with result.latest_description|truncatechars:"85" as description %}
-
-        {% if query %}
-            {% highlight description with query max_length "1000" %}<br>
-        {% else %}
-            {{description | default_if_none:"a"}}<br>
-        {% endif %}
-
-    {% endwith %}
-    <small class="colab-result-register">{% trans "Registred in" %}: <strong>{% trans "Discussion" %}</strong></small>
-  </div>
-  <hr>
-</div>
