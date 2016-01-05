@@ -7,6 +7,16 @@ Plugin Developer Documentation
 Getting Started
 ---------------
 
+To start a new plugin, run the command:
+
+.. code-block:: bash
+
+   $ colab-admin startplugin plugin_name [directory]
+
+Where ``plugin_name`` is the name of your new plugin. And ``directory``, which
+is optional, specifies the directory where the structure of your plugin will be
+created.
+
 Signals
 ----------
 Implement signals in plugins is optional! You may follow this steps only if you
