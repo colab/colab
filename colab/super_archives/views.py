@@ -330,19 +330,22 @@ class VoteView(View):
         return http.HttpResponse(status=204)
 
 
-class MailingListView(View):
+class MailingListView(ListView):
+    http_method_names = [u'get']
+    template_name = 'mailinglist-summary.html'
+    paginate_by = 10
 
-   http_method_names = [u'get']
+    model = Message
+    
+    def get_queryset(self):
+        query = Q(thread__mailinglist__name__iexact=self.kwargs['mailinglist'])
 
-   def get(self, request, mailinglist):
-        mailinglist = get_object_or_404(MailingList, name__iexact=mailinglist)
-        ml_messages = Message.objects.filter(thread__mailinglist=mailinglist)
+        return Message.objects.filter(query)
 
-        order_by = request.GET.get('order')
+    def get_context_data(self, **kwargs):
+        context = super(MailingListView, self).get_context_data(**kwargs)
+        mailinglist = MailingList.objects.get(name=self.kwargs['mailinglist'])
 
-        context = {
-            'mailinglist': mailinglist,
-            'ml_messages': ml_messages,
-        }
+        context['mailinglist'] = mailinglist
 
-        return render(request, 'mailinglist-summary.html', context)
+        return context
