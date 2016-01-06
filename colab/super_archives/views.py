@@ -333,19 +333,45 @@ class VoteView(View):
 class MailingListView(ListView):
     http_method_names = [u'get']
     template_name = 'mailinglist-summary.html'
-    paginate_by = 10
+    paginate_by = 6
+    model = Thread
 
-    model = Message
-    
+    def dispatch(self, request, *args, **kwargs):
+
+        self.order_data = {
+            'latest': {
+                'name': _(u'Recent activity'),
+                'field': '-latest_message__received_time'
+            },
+            'rating': {
+                'name': _(u'Rating'),
+                'field': '-score'
+            }
+        }
+
+        return super(MailingListView, self).dispatch(request, *args, **kwargs)
+
     def get_queryset(self):
-        query = Q(thread__mailinglist__name__iexact=self.kwargs['mailinglist'])
+        mailinglist_name = self.kwargs['mailinglist']
 
-        return Message.objects.filter(query)
+        query = Q(mailinglist__name__iexact=mailinglist_name)
+
+        order = self.request.GET.get('order')
+        order = self.order_data.get(order)
+
+        if order:
+            result = Thread.objects.filter(query).order_by(order['field'])
+        else:
+            result = Thread.objects.filter(query)
+
+        return result
 
     def get_context_data(self, **kwargs):
         context = super(MailingListView, self).get_context_data(**kwargs)
         mailinglist = MailingList.objects.get(name=self.kwargs['mailinglist'])
 
         context['mailinglist'] = mailinglist
+        context['order_data'] = self.order_data
+        context['selected'] = self.request.GET.get('order')
 
         return context

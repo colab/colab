@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-11 14:07+0000\n"
+"POT-Creation-Date: 2016-01-06 16:28-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,12 +106,29 @@ msgstr ""
 msgid "ago"
 msgstr ""
 
-#: colab/super_archives/templates/message-thread.html:35
-msgid "You must login before voting."
+#: colab/super_archives/templates/mailinglist-summary.html:7
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:4
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:7
+msgid "Groups"
 msgstr ""
 
+#: colab/super_archives/templates/mailinglist-summary.html:13
+msgid "messages found"
+msgstr ""
+
+#: colab/super_archives/templates/mailinglist-summary.html:24
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:13
+#, python-format
+msgid "%(number_of_users)s members"
+msgstr ""
+
+#: colab/super_archives/templates/mailinglist-summary.html:28
 #: colab/super_archives/templates/message-thread.html:132
 msgid "Order by"
+msgstr ""
+
+#: colab/super_archives/templates/message-thread.html:35
+msgid "You must login before voting."
 msgstr ""
 
 #: colab/super_archives/templates/message-thread.html:136
@@ -219,16 +236,6 @@ msgstr ""
 msgid "Send"
 msgstr ""
 
-#: colab/super_archives/templates/superarchives/thread-dashboard.html:4
-#: colab/super_archives/templates/superarchives/thread-dashboard.html:7
-msgid "Groups"
-msgstr ""
-
-#: colab/super_archives/templates/superarchives/thread-dashboard.html:13
-#, python-format
-msgid "%(number_of_users)s members"
-msgstr ""
-
 #: colab/super_archives/templates/superarchives/thread-dashboard.html:19
 msgid "latest"
 msgstr ""
@@ -287,4 +294,12 @@ msgstr ""
 
 #: colab/super_archives/views.py:195
 msgid "Email address verified!"
+msgstr ""
+
+#: colab/super_archives/views.py:343
+msgid "Recent activity"
+msgstr ""
+
+#: colab/super_archives/views.py:347
+msgid "Rating"
 msgstr ""
