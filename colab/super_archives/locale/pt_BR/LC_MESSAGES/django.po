@@ -120,7 +120,7 @@ msgstr "Grupos"
 #, fuzzy
 #| msgid "Message body"
 msgid "messages found"
-msgstr "Corpo do email"
+msgstr "mensagens encontradas"
 
 #: colab/super_archives/templates/mailinglist-summary.html:24
 #: colab/super_archives/templates/superarchives/thread-dashboard.html:13
