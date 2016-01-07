@@ -1,0 +1,60 @@
+[
+{
+ "fields": {
+  "last_name": "Administrator",
+  "webpage": "",
+  "twitter": "",
+  "is_staff": true,
+  "user_permissions": [],
+  "date_joined": "2015-01-28T12:34:58.770Z",
+  "google_talk": "",
+  "first_name": "Admin",
+  "is_superuser": true,
+  "last_login": "2016-01-06T19:27:43.553Z",
+  "verification_hash": null,
+  "role": "",
+  "email": "admin@mail.com",
+  "username": "admin",
+  "bio": "",
+  "needs_update": true,
+  "is_active": true,
+  "facebook": "",
+  "groups": [],
+  "password": "",
+  "institution": "",
+  "github": "",
+  "modified": "2015-01-28T12:45:27.375Z"
+ },
+ "model": "accounts.user",
+ "pk": 1
+},
+{
+ "fields": {
+  "last_name": "LastName",
+  "webpage": "",
+  "twitter": "",
+  "is_staff": false,
+  "user_permissions": [],
+  "date_joined": "2016-01-06T19:26:59Z",
+  "google_talk": "",
+  "first_name": "SampleUser",
+  "is_superuser": false,
+  "last_login": "2016-01-06T19:52:50.879Z",
+  "verification_hash": null,
+  "role": null,
+  "email": "sample_user@email.com",
+  "username": "SampleUser",
+  "bio": null,
+  "needs_update": true,
+  "is_active": true,
+  "facebook": "",
+  "groups": [],
+  "password": "",
+  "institution": null,
+  "github": null,
+  "modified": "2016-01-06T19:27:01.879Z"
+ },
+ "model": "accounts.user",
+ "pk": 2
+}
+]
