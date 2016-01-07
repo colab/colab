@@ -61,7 +61,7 @@
             {% if page_obj.has_previous %}
               {% if page_obj.previous_page_number > 1 %}
                 <li>
-                  <a href="?page={{page_obj.previous_page_number|add:-2 }}">{{ page_obj.number|add:-2 }}</a>
+                  <a href="?page={{page_obj.previous_page_number|add:-1 }}">{{ page_obj.number|add:-2 }}</a>
                 </li>
               {% endif %}
               <li>
