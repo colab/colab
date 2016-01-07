@@ -81,7 +81,7 @@
   {
     "fields": {
       "spam": false,
-      "subject_token": "no-subject",
+      "subject_token": "Subject1",
       "mailinglist": 1,
       "score": 34,
       "latest_message": 1
@@ -92,7 +92,7 @@
   {
     "fields": {
       "spam": false,
-      "subject_token": "no-subject",
+      "subject_token": "Subject2",
       "mailinglist": 2,
       "score": 34,
       "latest_message": 2
@@ -103,13 +103,35 @@
   {
     "fields": {
       "spam": false,
-      "subject_token": "no-subject",
+      "subject_token": "Subject3",
       "mailinglist": 3,
       "score": 33,
       "latest_message": 3
     },
     "model": "super_archives.thread",
     "pk": 3
+  },
+  {
+    "fields": {
+      "spam": false,
+      "subject_token": "Subject4",
+      "mailinglist": 3,
+      "score": 22,
+      "latest_message": 4
+    },
+    "model": "super_archives.thread",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "spam": false,
+      "subject_token": "Subject5",
+      "mailinglist": 3,
+      "score": 11,
+      "latest_message": 5
+    },
+    "model": "super_archives.thread",
+    "pk": 5
   },
   {
     "fields": {
@@ -134,7 +156,7 @@
       "spam": false,
       "subject_clean": "(no subject)",
       "message_id": "<20150224141545.1AECA19A5A0@localhost.localdomain>",
-      "subject": "[Lista] (no subject)"
+      "subject": "Subject2"
     },
     "model": "super_archives.message",
     "pk": 2
@@ -142,16 +164,44 @@
   {
     "fields": {
       "body": "Mensagem da lista privada nada",
-      "received_time": "2015-02-24T14:15:39Z",
+      "received_time": "2015-03-24T14:15:39Z",
       "from_address": 1,
       "thread": 3,
       "spam": false,
       "subject_clean": "(no subject)",
-      "message_id": "<20150224141545.1AECA19A5A0@localhost.localdomain>",
-      "subject": "[PrivateList] (no subject)"
+      "message_id": "<20150324141545.1AECA19A5A0@localhost.localdomain>",
+      "subject": "Message3"
     },
     "model": "super_archives.message",
     "pk": 3
+  },
+  {
+    "fields": {
+      "body": "Mensagem da lista privada nada",
+      "received_time": "2015-04-24T14:15:39Z",
+      "from_address": 1,
+      "thread": 4,
+      "spam": false,
+      "subject_clean": "(no subject)",
+      "message_id": "<20150424141545.1AECA19A5A0@localhost.localdomain>",
+      "subject": "Message4"
+    },
+    "model": "super_archives.message",
+    "pk": 4
+  },
+  {
+    "fields": {
+      "body": "Mensagem da lista privada nada",
+      "received_time": "2015-05-24T14:15:39Z",
+      "from_address": 1,
+      "thread": 5,
+      "spam": false,
+      "subject_clean": "(no subject)",
+      "message_id": "<20150524141545.1AECA19A5A0@localhost.localdomain>",
+      "subject": "Message5"
+    },
+    "model": "super_archives.message",
+    "pk": 5
   },
   {
     "fields": {
