@@ -6,7 +6,6 @@ class TimeStampPlugin(models.Model):
     '''
         Class used to store timestamps from plugins
     '''
-    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=255, unique=True, null=False)
     timestamp = models.DateTimeField(default=timezone.datetime.min, blank=True)
 
