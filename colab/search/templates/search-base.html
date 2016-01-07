@@ -1,0 +1,29 @@
+{% load i18n tz highlight %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-12">
+      <small>{{ modified|date:"d F Y"|default_if_none:"" }}
+        {% if modified_time %}
+          {% trans "at" %} {{result.modified|date:"h:m" }}
+        {% endif %}
+        {{author|safe|default_if_none:""}}
+      </small><br>
+      <h4><a href="{{url}}">
+        {% if title %}
+          {% highlight title with query %}
+        {% endif %}
+      </a></h4>
+      <p>
+        {% if description != "None" %}
+          <a href="{{url}}">{% highlight description with query %}</a>
+        {% endif %}
+      </p>
+      {% if registered_in %}
+        <small class="colab-result-register">{% trans "Registred in" %}:
+          <strong>{% trans registered_in %}</strong>
+        </small>
+      {% endif %}
+    </div>
+    <hr>
+  </div>
+{% endblock content %}

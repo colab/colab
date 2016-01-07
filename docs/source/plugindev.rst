@@ -112,52 +112,98 @@ name must follow the pattern:
 MODELNAME_search_preview.html
 
 Where the MODELNAME should be the name of the model object that will be
-represented on the html file. An example for this file can be seen bellow:
+represented on the html file. In this template, you can set the following variables:
 
-.. code-block:: guess
+* ``modified``: value in django datetime format.
+* ``modified_time``: if setted as True, it shows ``modified`` date and time.
+* ``author``: HTML code with a link of responsible for the result profile.
+* ``url``: link for the result location.
+* ``title``: title of the result.
+* ``description``: description of the result.
+* ``registered_in``: category of the result, as string.
 
-   {% load i18n tz highlight gravatar date_format %}
+To set variables, you have to load the set_var templatetag (``{% load set_var %}``) in your template, then you can set the variables using this syntax:
 
-    <div class="row">
-    <div class="col-md-2 center">
-        <a href="{% url 'user_profile' username=result.username %}">
-        {% block gravatar_img %}{% gravatar result.email 100 %}{% endblock gravatar_img %}
-        </a>
-    </div>
-    <div class="col-md-10">
-        <strong><a href="{% url 'user_profile' username=result.username %}">
+``{% set 'variable_name' variable_value %}``
 
-            {% if query %}
-                <h4>{% highlight result.name with query %}</h4></a>
-            {% else %}
-                <h4>{{ result.name }}</h4></a>
-            {% endif %}
+If you don't want a variable to be showed, you just shouldn't set it.
 
-        </strong>
-        <small><strong>{% trans "Since" %}: {% date_format result.date_joined %}</strong></small><br>
-        <small>{% trans "Registered in" %}: <strong>{% trans "User" %}</strong></small><br>
-    </div>
-    </div>
-    <div class="row">
-    <hr>
-    </div>
-
-As can be seen in the above example, it also possible to highlight the elements being searched. This can be seen on
-the following example:
+These variables will be used in the below code:
 
 .. code-block:: html
 
-    {% if query %}
-        <h4>{% highlight result.name with query %}</h4></a>
-    {% else %}
-        <h4>{{ result.name }}</h4></a>
-    {% endif %}
+    {% load i18n tz highlight %}
+    {% block content %}
+      <div class="row">
+        <div class="col-md-12">
+          <small>{{ modified|date:"d F Y"|default_if_none:"" }}
+            {% if modified_time %}
+              {% trans "at" %} {{result.modified|date:"h:m" }}
+            {% endif %}
+            {{author|safe|default_if_none:""}}
+          </small><br>
+          <h4><a href="{{url}}">
+            {% if title %}
+              {% highlight title with query %}
+            {% endif %}
+          </a></h4>
+          <p>
+            {% if description != "None" %}
+              <a href="{{url}}">{% highlight description with query %}</a>
+            {% endif %}
+          </p>
+          {% if registered_in %}
+            <small class="colab-result-register">{% trans "Registred in" %}:
+              <strong>{% trans registered_in %}</strong>
+            </small>
+          {% endif %}
+        </div>
+        <hr>
+      </div>
+    {% endblock content %}
 
-It can be seen that if a query text was used on the search, it will highlight the element if it is present on the query, if not,
-the element will be displayed without a highlight. Therefore, in order to highlight some fields, it is necessary
-to first check if there is a query search. If there is, use the tag "highlight" before the field name. However, it
-must be said that the highlight tag should be followed by a complement, such as "with query", as can be seen on the example
-above. This complement is used to allow the highlight only if the attribute is actually present on the query used to perform a search.
+As you can see above, it also possible to highlight the elements being searched.
+
+To illustrate how to use this template base, see the following code:
+
+.. code-block:: html
+
+  {% extends "search-base.html" %}
+  {% load set_var %}
+  {% block content %}
+    {% set 'title' result.title %}
+    {% set 'modified' result.modified %}
+    {% set 'url' result.url %}
+    {% set 'registered_in' "Code" %}
+    {% set 'description' result.description|default_if_none:" "|truncatechars:"140" %}
+
+    {{ block.super }}
+  {% endblock content %}
+
+And the follow HTML will be generated:
+
+.. code-block:: html
+
+  <div class="row">
+    <div class="col-md-12">
+      <small>24 October 2014
+      </small><br>
+      <h4><a href="/gitlab/softwarepublico/colab/merge_requests/1">
+          Settings fix
+      </a></h4>
+      <p>
+          <a href="/gitlab/softwarepublico/colab/merge_requests/1"> </a>
+      </p>
+        <small class="colab-result-register">Registred in:
+          <strong>Code</strong>
+        </small>
+    </div>
+    <hr>
+  </div>
+
+
+If your search preview doesn't match the base template, you just don't have to extend it and make your own HTML.
+
 
 Also a another file that must be created is the search_index.py one. This file
 must be placed at the plugin root directory. This file dictates how haystack
@@ -205,7 +251,7 @@ Password Validation
 -------------------
 
 Allows the plugin to define rules to set the password. The validators
-are functions which receive the password as only argument and if it 
+are functions which receive the password as only argument and if it
 doesn't match the desired rules raises a `ValidationError`. The message
 sent in the validation error will be displayed to user in the HTML form.
 
