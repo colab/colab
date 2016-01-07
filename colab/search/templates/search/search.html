@@ -95,7 +95,7 @@ We must use STATIC_URL because we have a language composing the URL
             {% if page.has_previous %}
               {% if page.previous_page_number > 1 %}
                 <li>
-                  <a href="{% append_to_get page=page.previous_page_number|add:-2 %}">{{ page.number|add:-2 }}</a>
+                  <a href="{% append_to_get page=page.previous_page_number|add:-1 %}">{{ page.number|add:-2 }}</a>
                 </li>
               {% endif %}
               <li>
