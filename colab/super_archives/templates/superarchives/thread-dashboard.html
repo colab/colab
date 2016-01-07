@@ -8,7 +8,7 @@
   <hr/>
   {% for mailinglist in lists %}
     {% if mailinglist.get_latest or mailinglist.get_most_relevant %}
-      <h3><b>{{ mailinglist.name|title|lower }} {% if mailinglist.description %} ({{ mailinglist.description }}){% endif %}</b></h3>
+      <h3><b><a href="{% url 'mailinglist_view' mailinglist.name %}">{{ mailinglist.name|title|lower }}</a> {% if mailinglist.description %} ({{ mailinglist.description }}){% endif %}</b></h3>
       <div class="btn-group btn-group-sm">
         <a href="#" class="btn btn-default" disabled="disabled">{% blocktrans with number_of_users=mailinglist.get_number_of_users %}{{ number_of_users }} members{% endblocktrans %}</a>
       </div>

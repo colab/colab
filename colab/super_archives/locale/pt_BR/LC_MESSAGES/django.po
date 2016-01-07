@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-11 14:10+0000\n"
+"POT-Creation-Date: 2016-01-06 16:28-0200\n"
 "PO-Revision-Date: 2014-11-21 17:38+0000\n"
 "Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
@@ -110,13 +110,32 @@ msgstr "por"
 msgid "ago"
 msgstr "atrás"
 
-#: colab/super_archives/templates/message-thread.html:35
-msgid "You must login before voting."
-msgstr "Você deve logar antes de votar."
+#: colab/super_archives/templates/mailinglist-summary.html:7
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:4
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:7
+msgid "Groups"
+msgstr "Grupos"
 
+#: colab/super_archives/templates/mailinglist-summary.html:13
+#, fuzzy
+#| msgid "Message body"
+msgid "messages found"
+msgstr "Corpo do email"
+
+#: colab/super_archives/templates/mailinglist-summary.html:24
+#: colab/super_archives/templates/superarchives/thread-dashboard.html:13
+#, python-format
+msgid "%(number_of_users)s members"
+msgstr "%(number_of_users)s membros"
+
+#: colab/super_archives/templates/mailinglist-summary.html:28
 #: colab/super_archives/templates/message-thread.html:132
 msgid "Order by"
 msgstr "Ordenar por"
+
+#: colab/super_archives/templates/message-thread.html:35
+msgid "You must login before voting."
+msgstr "Você deve logar antes de votar."
 
 #: colab/super_archives/templates/message-thread.html:136
 msgid "Votes"
@@ -240,16 +259,6 @@ msgstr ""
 msgid "Send"
 msgstr "Enviar"
 
-#: colab/super_archives/templates/superarchives/thread-dashboard.html:4
-#: colab/super_archives/templates/superarchives/thread-dashboard.html:7
-msgid "Groups"
-msgstr "Grupos"
-
-#: colab/super_archives/templates/superarchives/thread-dashboard.html:13
-#, python-format
-msgid "%(number_of_users)s members"
-msgstr "%(number_of_users)s membros"
-
 #: colab/super_archives/templates/superarchives/thread-dashboard.html:19
 msgid "latest"
 msgstr "última"
@@ -314,3 +323,16 @@ msgstr "O email que você está tentando verificar já é um email ativo."
 #: colab/super_archives/views.py:195
 msgid "Email address verified!"
 msgstr "Endereço de email verificado!"
+
+#: colab/super_archives/views.py:343
+msgid "Recent activity"
+msgstr ""
+
+#: colab/super_archives/views.py:347
+msgid "Rating"
+msgstr "Avaliação"
+
+#, fuzzy
+#~| msgid "Order by"
+#~ msgid "Order by:"
+#~ msgstr "Ordenar por"

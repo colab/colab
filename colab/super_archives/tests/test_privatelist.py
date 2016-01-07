@@ -51,8 +51,8 @@ class ArchivesViewTest(TestCase):
         latest_threads = request.context['latest_threads']
         hottest_threads = request.context['hottest_threads']
 
-        self.assertEqual(2, len(latest_threads))
-        self.assertEqual(2, len(hottest_threads))
+        self.assertEqual(4, len(latest_threads))
+        self.assertEqual(4, len(hottest_threads))
 
     def test_dont_see_private_thread_if_logged_out(self):
         request = self.client.get('/dashboard')
