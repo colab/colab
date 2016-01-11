@@ -6,9 +6,24 @@ from mock import patch, Mock
 
 from django.test import TestCase
 from colab.accounts.utils import mailman
+from colab.accounts.models import User
 
 
 class TestMailman(TestCase):
+
+    def create_user(self):
+        user = User()
+        user.username = "usertest"
+        user.set_password("123colab4")
+        user.email = "usertest@colab.com.br"
+        user.id = 1
+        user.twitter = "usertest"
+        user.facebook = "usertest"
+        user.first_name = "usertest"
+        user.last_name = "COLAB"
+        user.save()
+
+        return user
 
     @patch('colab.accounts.utils.mailman.requests')
     def request_mock(self, method, value, json_return, mock_requests):
@@ -40,11 +55,13 @@ class TestMailman(TestCase):
         self.assertFalse("success" in result)
 
     def test_create_list(self):
+        self.create_user()
         admin = Mock()
-        admin.email = 'test@test.test'
+        admin.username = 'usertest'
         value = ('testlist', admin)
         method = 'create_list'
         result = self.request_mock(method, value, 0)
-        self.assertTrue("success" in result)
+        self.assertIn("success", result)
+        value = ('testlist2', admin)
         result = self.request_mock(method, value, '')
-        self.assertFalse("success" in result)
+        self.assertNotIn("success", result)

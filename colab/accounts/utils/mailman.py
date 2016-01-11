@@ -8,6 +8,7 @@ from django.conf import settings
 from django.core import mail
 from django.template import Context, loader
 from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model
 
 TIMEOUT = 1
 
@@ -30,6 +31,12 @@ list\'s admin approval.'),
     7: (E, '%s: You are not a member of this list.'),
     8: (E, 'Missing information: `email_from`, `subject` and `body` are \
 mandatory.'),
+    9: (E, 'Bad list name'),
+    10: (E, 'AssertionError'),
+    11: (E, 'Invalid password'),
+    12: (E, 'Mailman unknown list error'),
+    13: (E, 'List already exists'),
+    14: (E, 'Invalid params'),
 }
 
 
@@ -57,11 +64,13 @@ def create_list(listname, admin):
     password = uuid4().hex
     try:
         # By default, the password is the name of the list
+        admin_user = get_user_model().objects.get(username=admin.username)
         result = requests.post(url, timeout=TIMEOUT, data={
-                               'admin': admin.email, 'password': password})
+                               'admin': admin_user.email,
+                               'password': password})
         msg_type, message = MAILMAN_MSGS[result.json()]
         send_create_list_email(
-            user=admin,
+            user=admin_user,
             password=password,
             listname=listname
         )
