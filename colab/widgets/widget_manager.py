@@ -38,6 +38,7 @@ class Widget(object):
             class_name = self.__class__.__name__
             raise Exception("Template not defined in {}.".format(class_name))
         self.content = render_to_string(self.template, kwargs.get('context'))
+        return kwargs.get('context')
 
 
 class WidgetManager(object):
