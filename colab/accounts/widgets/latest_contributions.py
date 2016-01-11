@@ -8,7 +8,7 @@ class LatestContributionsWidget(Widget):
 
     def generate_content(self, **kwargs):
         collaborations, count_types_extras = get_collaboration_data(
-            kwargs['context']['user'], kwargs['context']['object'].username)
+            kwargs['context']['user'], kwargs['context']['object'])
 
         collaborations.sort(key=lambda elem: elem.modified, reverse=True)
         kwargs['context']['results'] = collaborations[:10]
