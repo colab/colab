@@ -1,9 +1,14 @@
-
-import urlparse
-import requests
 import logging
+import requests
+import urlparse
+
+from uuid import uuid4
 
 from django.conf import settings
+from django.core import mail
+from django.template import Context, loader
+from django.utils.translation import ugettext as _
+from django.contrib.auth import get_user_model
 
 TIMEOUT = 1
 
@@ -26,7 +31,53 @@ list\'s admin approval.'),
     7: (E, '%s: You are not a member of this list.'),
     8: (E, 'Missing information: `email_from`, `subject` and `body` are \
 mandatory.'),
+    9: (E, 'Bad list name'),
+    10: (E, 'AssertionError'),
+    11: (E, 'Invalid password'),
+    12: (E, 'Mailman unknown list error'),
+    13: (E, 'List already exists'),
+    14: (E, 'Invalid params'),
 }
+
+
+def send_create_list_email(**kargs):
+    """ Send the notification mail
+    kargs' params:
+        user = User object
+        password = list's password
+        listname = list's name
+    """
+    to = kargs.get('user', None)
+    if not to:
+        return
+
+    to = [to.email]
+    from_email = settings.COLAB_FROM_ADDRESS
+    subject = _('Created list {}.'.format(kargs.get('listname', '')))
+    msg_tmpl = loader.get_template('emails/create_list_confirmation.txt')
+    message = msg_tmpl.render(Context(kargs))
+    return mail.send_mail(subject, message, from_email, to)
+
+
+def create_list(listname, admin):
+    url = get_url('lists/', listname=listname)
+    password = uuid4().hex
+    try:
+        # By default, the password is the name of the list
+        admin_user = get_user_model().objects.get(username=admin.username)
+        result = requests.post(url, timeout=TIMEOUT, data={
+                               'admin': admin_user.email,
+                               'password': password})
+        msg_type, message = MAILMAN_MSGS[result.json()]
+        send_create_list_email(
+            user=admin_user,
+            password=password,
+            listname=listname
+        )
+        return msg_type, message % listname
+    except:
+        LOGGER.exception('Unable to create list')
+        return E, 'Error: Unable to create list'
 
 
 def get_url(path, listname=None):

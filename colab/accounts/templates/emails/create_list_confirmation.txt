@@ -1,0 +1,5 @@
+{% load i18n %}
+{% blocktrans with fullname=user.get_full_name|title password=password listname=listname %}
+Hello {{fullname}},
+The list {{listname}} was created. The password is {{password}}.
+{% endblocktrans %}
