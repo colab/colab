@@ -8,15 +8,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
-BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
-BASE_DIR = os.path.dirname(__file__)
+import mimetypes
 
 # Used for settings translation
 from django.utils.translation import ugettext_lazy as _
+
+# Normally you should not import ANYTHING from Django directly
+# into your settings, but ImproperlyConfigured is an exception.
+from django.core.exceptions import ImproperlyConfigured
+from django.contrib.messages import constants as messages
+from .utils import conf
+
+BASE_DIR = os.path.dirname(__file__)
+
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -88,11 +96,6 @@ STATICFILES_STORAGE = \
     'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 
-# Normally you should not import ANYTHING from Django directly
-# into your settings, but ImproperlyConfigured is an exception.
-from django.core.exceptions import ImproperlyConfigured
-
-
 def get_env_setting(setting):
     """ Get the environment setting or return exception """
     try:
@@ -104,7 +107,6 @@ def get_env_setting(setting):
 
 # Allow Django runserver to serve SVG files
 #   https://code.djangoproject.com/ticket/20162
-import mimetypes
 mimetypes.add_type('image/svg+xml', '.svg')
 
 LANGUAGES = (
@@ -224,7 +226,6 @@ LOCALE_PATHS = (
 
 AUTH_USER_MODEL = 'accounts.User'
 
-from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.INFO: 'alert-info',
     messages.SUCCESS: 'alert-success',
@@ -252,7 +253,6 @@ REVPROXY_ADD_REMOTE_USER = True
 # Tastypie settings
 TASTYPIE_DEFAULT_FORMATS = ['json', ]
 
-from .utils import conf
 
 SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 
