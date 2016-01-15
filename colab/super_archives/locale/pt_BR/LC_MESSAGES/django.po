@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-06 16:28-0200\n"
+"POT-Creation-Date: 2016-01-15 19:18+0000\n"
 "PO-Revision-Date: 2014-11-21 17:38+0000\n"
 "Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
@@ -20,7 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: colab/super_archives/filters.py:8
-#: colab/super_archives/templates/search/thread_search_preview.html:30
 msgid "Discussion"
 msgstr ""
 
@@ -110,28 +109,34 @@ msgstr "por"
 msgid "ago"
 msgstr "atrás"
 
-#: colab/super_archives/templates/mailinglist-summary.html:7
+#: colab/super_archives/templates/mailinglist-summary.html:8
 #: colab/super_archives/templates/superarchives/thread-dashboard.html:4
 #: colab/super_archives/templates/superarchives/thread-dashboard.html:7
 msgid "Groups"
 msgstr "Grupos"
 
-#: colab/super_archives/templates/mailinglist-summary.html:13
+#: colab/super_archives/templates/mailinglist-summary.html:14
 #, fuzzy
 #| msgid "Message body"
 msgid "messages found"
 msgstr "mensagens encontradas"
 
-#: colab/super_archives/templates/mailinglist-summary.html:24
+#: colab/super_archives/templates/mailinglist-summary.html:25
 #: colab/super_archives/templates/superarchives/thread-dashboard.html:13
 #, python-format
 msgid "%(number_of_users)s members"
 msgstr "%(number_of_users)s membros"
 
-#: colab/super_archives/templates/mailinglist-summary.html:28
+#: colab/super_archives/templates/mailinglist-summary.html:29
 #: colab/super_archives/templates/message-thread.html:132
 msgid "Order by"
 msgstr "Ordenar por"
+
+#: colab/super_archives/templates/mailinglist-summary.html:50
+#, fuzzy
+#| msgid "Date"
+msgid "at"
+msgstr "Data"
 
 #: colab/super_archives/templates/message-thread.html:35
 msgid "You must login before voting."
@@ -178,16 +183,6 @@ msgstr "votada"
 #: colab/super_archives/templates/message-thread.html:182
 msgid "Tags:"
 msgstr "Tags:"
-
-#: colab/super_archives/templates/search/thread_search_preview.html:5
-#, fuzzy
-#| msgid "Date"
-msgid "at"
-msgstr "Data"
-
-#: colab/super_archives/templates/search/thread_search_preview.html:30
-msgid "Registred in"
-msgstr ""
 
 #: colab/super_archives/templates/superarchives/emails/email_blank_subject.txt:2
 msgid "Hello"
@@ -272,6 +267,12 @@ msgstr "mais..."
 msgid "most relevant"
 msgstr "Mais relevante"
 
+#: colab/super_archives/templates/widgets/dashboard_most_relevant_threads.html:8
+#, fuzzy
+#| msgid "most relevant"
+msgid "Most Relevant Threads"
+msgstr "Mais relevante"
+
 #: colab/super_archives/utils/email.py:14
 msgid "Please verify your email "
 msgstr "Por favor verifique seu email"
@@ -331,6 +332,14 @@ msgstr ""
 #: colab/super_archives/views.py:347
 msgid "Rating"
 msgstr "Avaliação"
+
+#: colab/super_archives/views.py:357
+msgid "You are not logged in"
+msgstr "Você não esta logado"
+
+#: colab/super_archives/views.py:399
+msgid "You don't have permission to access this list"
+msgstr "Você não tem permissão para acessar esta lista"
 
 #, fuzzy
 #~| msgid "Order by"
