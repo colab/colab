@@ -1,7 +1,6 @@
 # -*- coding:utf-8 -*-
-import mock
+from mock import patch
 
-from colab.accounts.utils import mailman
 from django.test import TestCase, Client
 
 
@@ -15,13 +14,11 @@ class ArchivesViewTest(TestCase):
     def authenticate_user(self):
         self.client.login(username='johndoe', password='1234')
 
-    def test_see_only_private_list_if_member(self):
-        mailman.get_user_mailinglists = mock.Mock(
-            return_value=[{'listname': 'privatelist'}])
-        mailman.extract_listname_from_list = mock.Mock(
-            return_value=['privatelist'])
-        mailman.list_users = mock.Mock(return_value=['johndoe@example.com'])
-
+    @patch('colab.super_archives.views.mailman.get_user_mailinglists',
+           return_value=[{'listname': 'privatelist'}])
+    @patch('colab.super_archives.views.mailman.list_users',
+           return_value=['johndoe@example.com'])
+    def test_see_only_private_list_if_member(self, mocklist, mockemail):
         self.authenticate_user()
         request = self.client.get('/archives/thread/')
 
@@ -39,12 +36,9 @@ class ArchivesViewTest(TestCase):
         self.assertEqual('lista', list_data[0].name)
         self.assertEqual(1, len(list_data))
 
-    def test_see_private_thread_in_dashboard_if_member(self):
-        mailman.get_user_mailinglists = mock.Mock(
-            return_value="[{'listname': 'privatelist'}]")
-        mailman.extract_listname_from_list = mock.Mock(
-            return_value="['privatelist']")
-
+    @patch('colab.super_archives.views.mailman.get_user_mailinglists',
+           return_value=[{'listname': 'privatelist'}])
+    def test_see_private_thread_in_dashboard_if_member(self, mocklist):
         self.authenticate_user()
         request = self.client.get('/dashboard')
 

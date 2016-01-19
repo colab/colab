@@ -49,7 +49,7 @@
         "is_active": true,
         "facebook": "",
         "groups": [],
-        "password": "123colab4",
+        "password": "pbkdf2_sha256$12000$iiKCMnLZnFJw$UTx89LB8oYTiw9UqkcglzFLmIaZtbr+ZzF1cG3vfcyo=",
         "institution": "",
         "github": "",
         "modified": "2015-01-28T12:45:27.375Z"
