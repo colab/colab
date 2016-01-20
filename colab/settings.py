@@ -214,8 +214,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'colab.middlewares.cookie_middleware.CookiePreHandlerMiddleware',
-    'colab.middlewares.cookie_middleware.CookiePostHandlerMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
