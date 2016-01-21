@@ -58,6 +58,9 @@ class StringMorsel(Morsel):
     def __repr__(self):
         return str(self)
 
+    def split(self, *args):
+        return self.value.split(*args)
+
 
 class CookieHandler(SimpleCookie):
 
