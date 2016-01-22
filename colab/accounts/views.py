@@ -9,13 +9,14 @@ from django.shortcuts import render, redirect
 from django.core.urlresolvers import reverse
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 
 from colab.super_archives.models import (EmailAddress,
                                          EmailAddressValidation)
 from colab.plugins.utils.collaborations import (get_collaboration_data,
                                                 get_visible_threads)
 from colab.accounts.models import User
+from colab.widgets.widget_manager import WidgetManager
 
 from .forms import (ColabSetUsernameForm, ListsForm, UserUpdateForm)
 from .utils import mailman
@@ -31,6 +32,14 @@ class UserProfileBaseMixin(object):
 class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     template_name = 'accounts/user_update_form.html'
     form_class = UserUpdateForm
+
+    def post(self, request, *args, **kwargs):
+        result =  super(UserProfileUpdateView, self).post(request, *args,
+                                                          **kwargs)
+        if request.GET.get('code', None):
+            return HttpResponseRedirect(self.get_success_url())
+
+        return result
 
     def get_success_url(self):
         return reverse('user_profile', kwargs={'username':

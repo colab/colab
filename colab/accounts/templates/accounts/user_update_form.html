@@ -1,7 +1,16 @@
 {% extends "base.html" %}
 {% load i18n gravatar plugins widgets_tag %}
 
+{% block html %}
+   {% import_widgets 'profile' %}
+   {{ block.super }}
+{% endblock %}
+
 {% block head_js %}
+  {% for widget in widgets_profile %}
+      {{widget.get_header}}
+  {% endfor %}
+</script>
 <script>
 $(function() {
 
@@ -210,5 +219,9 @@ $(function() {
       </div>
     </div>
   </form>
+
+  {% for widget in widgets_profile %}
+      {{widget.get_body}}
+  {% endfor %}
 
 {% endblock %}
