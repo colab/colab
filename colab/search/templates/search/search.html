@@ -2,7 +2,7 @@
 {% load i18n tz highlight superarchives search_preview_templates %}
 {% load static from staticfiles %}
 
-{% block title %}{% trans 'search'|title %}{% endblock %}
+{% block pagetitle %}{% trans 'search'|title %}{% endblock %}
 
 {% block head_js %}
 <script type="text/javascript" src="{% static 'third-party/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
