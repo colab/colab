@@ -110,14 +110,15 @@ $(function() {
   // Active profile bars
   active = function (identifier){
       $('#navbar li').each(function(index,value){
-        $(this).removeClass('active')
+        $(this).removeClass('active');
       })
-      $("."+identifier).addClass('active')
+      $(identifier).addClass('active');
       $('#profile_content .profile_item').each(function(index,value){
-        $(this).addClass('hidden')
+        $(this).addClass('hidden');
       })
-      $('#'+identifier).removeClass('hidden')
+      $(identifier+'-content').removeClass('hidden');
   }
+  if (location.hash != '') active(location.hash)
 });
 </script>
 {% endblock %}
@@ -151,15 +152,15 @@ $(function() {
 
   {% if widgets_profile %}
       <ul id='navbar' class="nav nav-tabs">
-          <li  class='colab_profile active' role="presentation"><a href="#" onclick="active('colab_profile')">{% trans 'Colab Profile' %}</a></li>
+          <li  id='colab_profile' class='active' role="presentation"><a href="#colab_profile" onclick="active('#colab_profile')">{% trans 'Colab Profile' %}</a></li>
       {% for widget in widgets_profile %}
-      <li class='{{widget.identifier}}' role="presentation"><a href="#" onclick="active('{{widget.identifier}}')">{{widget.name}}</a></li>
+      <li id='{{widget.identifier}}' role="presentation"><a href="#{{widget.identifier}}" onclick="active('#{{widget.identifier}}')">{{widget.name}}</a></li>
       {% endfor %}
       </ul>
   {% endif %}
 
   <div id='profile_content'>
-      <div class='profile_item' id='colab_profile'>
+      <div class='profile_item' id='colab_profile-content'>
           <form method="post">
             {% csrf_token %}
 
@@ -246,7 +247,7 @@ $(function() {
         </div>
 
       {% for widget in widgets_profile %}
-        <div id='{{widget.identifier}}' class='profile_item hidden'>
+        <div id='{{widget.identifier}}-content' class='profile_item hidden'>
           {{widget.get_body}}
         </div>
       {% endfor %}
