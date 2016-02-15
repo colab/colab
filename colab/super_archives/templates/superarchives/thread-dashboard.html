@@ -23,7 +23,7 @@
             {% endfor %}
           </ul>
           <div class="text-right">
-            <a href="{% url 'haystack_search' %}?order=latest&list={{ mailinglist.name }}&type=thread">
+            <a href="{% url 'haystack_search' %}?order=latest&tag={{ mailinglist.name }}&type=thread">
               {% trans "more..." %}
             </a>
           </div>
