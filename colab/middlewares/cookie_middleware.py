@@ -22,7 +22,7 @@ class CookiePreHandlerMiddleware(object):
 
 class CookiePostHandlerMiddleware(object):
     """
-    This middleware modifies updates the response will all modified cookies.
+    This middleware modifies updates the response with all modified cookies.
 
     This should be the last middleware you load.
     """
