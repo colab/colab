@@ -68,6 +68,7 @@ INSTALLED_APPS = (
     'colab.tz',
     'colab.utils',
     'colab.signals',
+    'colab.middlewares',
 )
 
 ROOT_URLCONF = 'colab.urls'
@@ -213,6 +214,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
