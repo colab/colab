@@ -587,6 +587,10 @@ msgstr "Latest Threads"
 msgid "RSS - Latest Threads"
 msgstr "RSS - Latest Threads"
 
+#: templates/403.html:5
+msgid "You can't be here :/"
+msgstr "You can't be here :/"
+
 #, fuzzy
 #~| msgid "Gitlab Projects"
 #~ msgid "Public Projects"
