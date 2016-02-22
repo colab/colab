@@ -300,3 +300,16 @@ Example:
        'myplugin.username_validators.has_uppercase_char',
    )
 
+Blacklist
+-------------------
+
+If you don't want a page to be accessed, you should in your configuration file
+(/etc/colab/plugins.d) create an array of regexes strings named 'blacklist' that
+stands for the urls. The pages will then return a 403 error (forbidden).
+
+
+Ex:
+
+.. code-block:: python
+
+    blacklist = [r'^dashboard$']

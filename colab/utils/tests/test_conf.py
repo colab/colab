@@ -1,6 +1,6 @@
 import sys
 
-from django.test import TestCase, override_settings
+from django.test import TestCase, override_settings, Client
 from django.conf import settings
 
 from ..conf import (DatabaseUndefined, validate_database,
@@ -101,3 +101,8 @@ class TestConf(TestCase):
                                      '/path/fake/widgets_settings.py'])
     def test_load_widgets_settings_without_settings_d(self, mock):
         self.assertIsNone(load_widgets_settings())
+
+    def test_blacklist(self):
+        client = Client()
+        response = client.get('/test_blacklist')
+        self.assertEquals(403, response.status_code)
