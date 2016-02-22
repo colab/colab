@@ -590,6 +590,10 @@ msgstr "Últimas Discussões"
 msgid "RSS - Latest Threads"
 msgstr "RSS - Últimas Discussões"
 
+#: templates/403.html:5
+msgid "You can't be here :/"
+msgstr "Você não pode acessar essa página :/"
+
 #, fuzzy
 # ~| msgid "Gitlab Projects"
 msgid "Public Projects"
