@@ -303,8 +303,8 @@ Example:
 Blacklist
 -------------------
 
-If you don't want a page to be accessed, you should in your configuration file
-(/etc/colab/plugins.d) create an array of regexes strings named 'blacklist' that
+If you don't want a page to be accessed, you should add in your configuration file
+(/etc/colab/plugins.d) an array of regex strings named 'blacklist' that
 stands for the urls. The pages will then return a 403 error (forbidden).
 
 
@@ -313,3 +313,21 @@ Ex:
 .. code-block:: python
 
     blacklist = [r'^dashboard$']
+
+It also must be said that the full url will that will be blocked is a
+combination of the plugin prefix and one of the elements of the blacklist array.
+For example, given a plugin with this configuration:
+
+
+.. code-block:: python
+
+    urls = {
+        'include': 'colab_plugin.urls',
+        'prefix':  '^plugin/',
+        }
+
+    blacklist = [r'^feature$']
+
+The actual url that will be blocked will them be: plugin/feature.
+
+
