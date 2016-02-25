@@ -9,14 +9,15 @@ class Widget(object):
     template = ''
 
     def get_body(self):
-        # avoiding regex in favor of performance
-        start = self.content.find('<body>')
+        start = self.content.find('<body')
+        start = self.content.find('>', start)
         end = self.content.find('</body>')
 
         if -1 in [start, end]:
             return self.content
 
-        body = self.content[start + len('<body>'):end]
+        # 1 correspond to string size of '>'
+        body = self.content[start + 1:end]
         return mark_safe(body)
 
     def get_header(self):

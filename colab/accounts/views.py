@@ -32,6 +32,16 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     template_name = 'accounts/user_update_form.html'
     form_class = UserUpdateForm
 
+    def post(self, request, *args, **kwargs):
+        if request.GET.get('path', '') and not request.POST.get('colab_form'):
+            request.method = 'GET'
+            result = super(UserProfileUpdateView, self).get(request, *args,
+                                                            **kwargs)
+        else:
+            result = super(UserProfileUpdateView, self).post(request, *args,
+                                                             **kwargs)
+        return result
+
     def get_success_url(self):
         return reverse('user_profile', kwargs={'username':
                                                self.object.username})
