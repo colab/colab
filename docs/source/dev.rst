@@ -78,3 +78,16 @@ This variable will be inserted directly in the page ``context``.
 .. warning::
 
     Warning! Remember to use the tag ``{{ block.super }}`` inside the html block. Otherwise, the page will appear blank.
+
+
+Blacklist
+----------
+
+The blacklist is an array of urls that the user cannot access directly. This
+variable holds an array of urls regex that must be blocked. This variable must
+be set on settings.py, exactly as the following example:
+
+.. code-block:: python
+
+    BLACKLIST = [r'^dashboard$']
+
