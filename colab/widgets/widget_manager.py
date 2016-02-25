@@ -16,7 +16,8 @@ class Widget(object):
         if -1 in [start, end]:
             return self.content
 
-        body = self.content[start + len('>'):end]
+        # 1 correspond to string size of '>'
+        body = self.content[start + 1:end]
         return mark_safe(body)
 
     def get_header(self):
