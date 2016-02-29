@@ -369,7 +369,7 @@ class MailingListView(ListView):
 
         query = Q(mailinglist__name__iexact=mailinglist_name)
 
-        order = self.request.GET.get('order')
+        order = self.request.GET.get('order', 'latest')
         order = self.order_data.get(order)
 
         if order:
@@ -385,7 +385,7 @@ class MailingListView(ListView):
 
         context['mailinglist'] = mailinglist
         context['order_data'] = self.order_data
-        context['selected'] = self.request.GET.get('order')
+        context['selected'] = self.request.GET.get('order', 'latest')
 
         return context
 
