@@ -14,6 +14,8 @@ import mimetypes
 
 # Used for settings translation
 from django.utils.translation import ugettext_lazy as _
+from datetime import timedelta
+
 
 # Normally you should not import ANYTHING from Django directly
 # into your settings, but ImproperlyConfigured is an exception.
@@ -299,3 +301,5 @@ TEMPLATE_DIRS += (
 conf.validate_database(DATABASES, DEFAULT_DATABASE, DEBUG)
 
 conf.load_widgets_settings()
+
+ACCOUNT_VERIFICATION_TIME = timedelta(hours=48)
