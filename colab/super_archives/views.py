@@ -372,10 +372,7 @@ class MailingListView(ListView):
         order = self.request.GET.get('order', 'latest')
         order = self.order_data.get(order)
 
-        if order:
-            result = Thread.objects.filter(query).order_by(order['field'])
-        else:
-            result = Thread.objects.filter(query)
+        result = Thread.objects.filter(query).order_by(order['field'])
 
         return result
 

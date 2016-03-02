@@ -17,16 +17,6 @@ class MailingListViewTest(TestCase):
     def authenticate_user(self):
         self.client.login(username=self.username, password='admin')
 
-    def test_get_query_set_with_no_order(self):
-        response = self.client.get('/archives/mailinglist/lista')
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(len(response.context['thread_list']), 1)
-        self.assertEqual(response.context['thread_list'][0].mailinglist.name,
-                         'lista')
-        self.assertEqual(response.context['thread_list'][0].subject_token,
-                         'Subject2')
-
     def test_get_query_set_with_latest_order(self):
         response = self.client.get(
             '/archives/mailinglist/publiclist?order=latest'
