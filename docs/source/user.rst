@@ -368,3 +368,13 @@ Menu
 Templates
 +++++++++
 .. TODO
+
+Verify Inactive User
+++++++++
+
+.. attribute:: ACCOUNT_VERIFICATION_TIME
+
+   :default: timedelta(hours=48)
+
+   This variable will be used to remove inactive user.
+   By default, this time is 48 hours.
