@@ -1,10 +1,10 @@
-
 from datetime import timedelta
-from django.utils import timezone
-from celery.decorators import periodic_task
-from django.conf import settings
 
-from .models import User
+from celery.decorators import periodic_task
+from colab.accounts.models import User
+from django.conf import settings
+from django.utils import timezone
+
 
 @periodic_task(run_every=timedelta(minutes=60))
 def account_verification():
