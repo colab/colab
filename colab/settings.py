@@ -204,6 +204,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
+    'colab.accounts.context_processors.redirect_login',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -217,6 +218,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'colab.middlewares.cookie_middleware.CookiePreHandlerMiddleware',
+    'colab.middlewares.cookie_middleware.CookiePostHandlerMiddleware',
+    'colab.middlewares.redirect_login.RedirectLoginMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
