@@ -33,7 +33,7 @@ class UserProfileUpdateView(UserProfileBaseMixin, UpdateView):
     form_class = UserUpdateForm
 
     def post(self, request, *args, **kwargs):
-        if request.GET.get('path', '') and not request.POST.get('colab_form'):
+        if not request.POST.get('colab_form'):
             request.method = 'GET'
             result = super(UserProfileUpdateView, self).get(request, *args,
                                                             **kwargs)
