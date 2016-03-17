@@ -74,12 +74,13 @@ LOGGING = {{
             'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
         }},
     'django': {{
-        handlers': ['console'],
+        'handlers': ['console'],
             'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
         'revproxy': {{
             'handlers': ['console'],
             'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
         }},
+      }},
         'haystack': {{
             'handlers': ['console'],
             'propagate': False,
