@@ -48,28 +48,48 @@ ALLOWED_HOSTS = [
 ## Disable indexing
 ROBOTS_NOINDEX = False
 
+import sys
+import os
+if os.environ.get('COLAB_DEBUG') and not os.environ.get('COLAB_LOGLEVEL'):
+    os.environ['COLAB_LOGLEVEL'] = 'DEBUG'
+
 LOGGING = {{
     'version': 1,
-
-    'handlers': {{
-        'null': {{
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        }},
+    'formatters': {{
+        'simple': {{
+            'format': '%(levelname)s: %(message)s'
+        }}
     }},
-
+    'handlers': {{
+        'console': {{
+            'level': 'DEBUG',
+            'formatter': 'simple',
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        }}
+    }},
     'loggers': {{
-        'colab.mailman': {{
-            'handlers': ['null'],
-            'propagate': False,
+        'colab': {{
+            'handlers': ['console'],
+            'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
         }},
+    'django': {{
+        'handlers': ['console'],
+            'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
+        'revproxy': {{
+            'handlers': ['console'],
+            'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
+        }},
+      }},
         'haystack': {{
-            'handlers': ['null'],
+            'handlers': ['console'],
             'propagate': False,
+            'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
         }},
         'pysolr': {{
-            'handlers': ['null'],
+            'handlers': ['console'],
             'propagate': False,
+            'level': os.environ.get('COLAB_LOGLEVEL', 'ERROR'),
         }},
     }},
 }}
