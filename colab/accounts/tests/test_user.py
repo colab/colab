@@ -42,7 +42,8 @@ class UserTest(TestCase):
     def validate_mandatory_fields(self, expected_first_name,
                                   expected_last_name, first_name, last_name):
         data = {'first_name': first_name,
-                'last_name': last_name}
+                'last_name': last_name,
+                'colab_form': 'true'}
         self.client.post('/account/' + self.user.username + '/edit', data)
         user = User.objects.get(id=1)
         self.assertEqual(expected_first_name, user.first_name)
@@ -51,7 +52,8 @@ class UserTest(TestCase):
     def validate_non_mandatory_fields(self, field_name, expected_value, value):
         data = {'first_name': 'usertestcolab',
                 'last_name': 'colab',
-                field_name: value}
+                field_name: value,
+                'colab_form': 'true'}
         self.client.post('/account/' + self.user.username + '/edit', data)
         user = User.objects.get(id=1)
         self.assertEqual(expected_value, getattr(user, field_name))
