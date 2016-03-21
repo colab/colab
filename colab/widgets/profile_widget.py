@@ -30,17 +30,19 @@ class ProfileWidget(Widget):
         return self.colab_form
 
     def must_respond(self, request):
-        return not self.is_colab_form(request) and \
-               self.prefix in request.GET.get('path', '') or \
-               self.prefix in request.POST.get('path', '')
+        if self.is_colab_form(request):
+            return False
+        return self.prefix in request.GET.get('path', '') or \
+            self.prefix in request.POST.get('path', '')
 
     def change_request_method(self, request):
-        if not len(request.POST) or not self.must_respond(request):
-            request.method = "GET"
-        elif not request.POST.get("_method", None):
-            request.method = "POST"
-        else:
-            request.method = request.POST.get("_method").upper()
+        request.method = 'GET'
+
+        if self.must_respond(request) and len(request.POST) > 0:
+            if not request.POST.get('_method', None):
+                request.method = "POST"
+            else:
+                request.method = request.POST.get("_method").upper()
 
     def requested_url(self, request):
         url = request.POST.get('path', request.GET.get('path', ''))
