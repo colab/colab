@@ -49,8 +49,7 @@ class TestConf(TestCase):
     def test_load_py_settings_with_inaccessible_settings(self, mock):
         self.assertRaises(InaccessibleSettings, load_py_settings)
 
-    @patch('os.getenv', return_value=test_files_dir + '/colab_settings.py')
-    def test_load_py_settings_without_settings_d(self, mock):
+    def test_load_py_settings_without_settings_d(self):
         py_settings = load_py_settings('/path/fake/settings.d/test.py')
 
         self.assertIn('SOCIAL_NETWORK_ENABLED', py_settings)
