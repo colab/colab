@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
+
 class RedirectLoginMiddleware(object):
 
     def process_request(self, request):

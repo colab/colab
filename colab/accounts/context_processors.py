@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.urlresolvers import reverse
 
+
 def social_network_enabled(request):
     return {'SOCIAL_NETWORK_ENABLED': getattr(settings,
                                               'SOCIAL_NETWORK_ENABLED',
