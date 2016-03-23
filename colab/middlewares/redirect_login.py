@@ -1,6 +1,7 @@
 from django.utils import timezone
 from datetime import timedelta
 from django.core.urlresolvers import reverse
+from django.conf import settings
 
 class RedirectLoginMiddleware(object):
 
@@ -11,9 +12,11 @@ class RedirectLoginMiddleware(object):
         if request.is_ajax():
             return
 
-        if 'text/html' in request.META['HTTP_ACCEPT']:
-            if request.path != reverse('login'):
+        if request.path == reverse('login'):
+            return
+
+        if 'text/html' in request.META.get('HTTP_ACCEPT', ''):
+            if request.path not in settings.COLAB_APPS_LOGIN_URLS:
                 cookie_expire = timezone.now() + timedelta(minutes=1)
-                print cookie_expire
                 request.COOKIES.set('_previous_path', value=request.path,
                                     expires=cookie_expire, max_age=10)
