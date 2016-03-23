@@ -1,4 +1,5 @@
 import sys
+import os
 
 from django.test import TestCase, override_settings, Client
 from django.conf import settings
@@ -50,6 +51,11 @@ class TestConf(TestCase):
         self.assertRaises(InaccessibleSettings, load_py_settings)
 
     def test_load_py_settings_without_settings_d(self):
+        COLAB_SETTINGS_DIR = ''
+        if 'COLAB_SETTINGS_DIR' in os.environ:
+            COLAB_SETTINGS_DIR = os.environ['COLAB_SETTINGS_DIR']
+            del os.environ['COLAB_SETTINGS_DIR']
+
         py_settings = load_py_settings('/path/fake/settings.d/test.py')
 
         self.assertIn('SOCIAL_NETWORK_ENABLED', py_settings)
@@ -57,6 +63,9 @@ class TestConf(TestCase):
 
         self.assertIn('EMAIL_PORT', py_settings)
         self.assertEquals(py_settings['EMAIL_PORT'], 25)
+
+        if COLAB_SETTINGS_DIR:
+            os.environ['COLAB_SETTINGS_DIR'] = COLAB_SETTINGS_DIR
 
     @patch('os.listdir', return_value=[test_files_dir + '/settings.d/test.py',
                                        'non_python_file'])
