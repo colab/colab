@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.urlresolvers import reverse
 
 def social_network_enabled(request):
     return {'SOCIAL_NETWORK_ENABLED': getattr(settings,
@@ -8,10 +9,7 @@ def social_network_enabled(request):
 
 def redirect_login(request):
     previous_path = request.COOKIES.get('_previous_path')
-    print previous_path
     if previous_path is None:
-        print "entrou no if"
-        return {'previous_path': '/dashboard'}
+        return {'previous_path': reverse('home')}
     else:
-        print "entrou no else"
         return {'previous_path': previous_path}
