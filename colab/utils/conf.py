@@ -55,6 +55,7 @@ def _load_py_file(py_path, path):
 
 
 def load_py_settings(settings_dir='/etc/colab/settings.d'):
+    settings_dir = os.getenv('COLAB_SETTINGS_DIR', settings_dir)
     settings_file = os.getenv('COLAB_SETTINGS', '/etc/colab/settings.py')
     settings_module = settings_file.split('.')[-2].split('/')[-1]
     py_path = "/".join(settings_file.split('/')[:-1])
