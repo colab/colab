@@ -8,8 +8,7 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 
 from colab.plugins.utils.models import Collaboration
-from colab.super_archives.utils.collaborations import (get_visible_threads,
-                                                       count_threads)
+from colab.super_archives.utils.collaborations import (get_visible_threads)
 
 
 def get_collaboration_data(logged_user, filter_by_user=None):
@@ -20,13 +19,13 @@ def get_collaboration_data(logged_user, filter_by_user=None):
     latest_results = []
     populate_count_types = False
 
+    messages = get_visible_threads(logged_user, filter_by_user)
+
     if count_types is None:
         populate_count_types = True
         count_types = OrderedDict()
 
-        count_types[_('Emails')] = count_threads()
-
-    messages = get_visible_threads(logged_user, filter_by_user)
+        count_types[_('Emails')] = len(messages)
 
     latest_results.extend(messages)
 
