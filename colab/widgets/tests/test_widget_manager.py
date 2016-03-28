@@ -15,14 +15,14 @@ class WidgetManagerTest(TestCase):
     widget_area = 'profile'
     widget_id = 'widget_id'
 
-    def ovewrited_widget_instance(self, content):
+    def overwritten_widget_instance(self, content=""):
 
-        class WidgetOverwrited(Widget):
+        class WidgetOverwritten(Widget):
             identifier = 'widget_id'
 
             def generate_content(self, request=None):
                 self.content = content
-        return WidgetOverwrited()
+        return WidgetOverwritten()
 
     def default_widget_instance(self):
 
@@ -32,11 +32,13 @@ class WidgetManagerTest(TestCase):
         return WidgetDefault()
 
     def setUp(self):
-        custom_widget = self.ovewrited_widget_instance(self.html_content)
-        WidgetManager.register_widget(self.widget_area, custom_widget)
+        self.widget = self.overwritten_widget_instance(self.html_content)
+        WidgetManager.register_widget(self.widget_area, self.widget)
 
     def tearDown(self):
         WidgetManager.unregister_widget(self.widget_area, self.widget_id)
+        WidgetManager.bootstrap_conflict = False
+        WidgetManager.jquery_conflict = False
 
     def test_widget_default_values(self):
         widget = self.default_widget_instance()
@@ -50,7 +52,7 @@ class WidgetManagerTest(TestCase):
 
     def test_remove_widgets_in_key_area(self):
         area = 'admin'
-        widget_instance = self.ovewrited_widget_instance(self.html_content)
+        widget_instance = self.overwritten_widget_instance(self.html_content)
 
         WidgetManager.register_widget(area, widget_instance)
         WidgetManager.unregister_widget(area, self.widget_id)
@@ -58,16 +60,16 @@ class WidgetManagerTest(TestCase):
         self.assertEqual(len(WidgetManager.get_widgets(area)), 0)
 
     def test_get_body(self):
-        custom_widget = self.ovewrited_widget_instance(self.html_content)
+        self.widget = self.overwritten_widget_instance(self.html_content)
 
-        custom_widget.generate_content()
-        self.assertEqual(custom_widget.get_body(), "<p>T</p>")
+        self.widget.generate_content()
+        self.assertEqual(self.widget.get_body(), "<p>T</p>")
 
     def test_get_header(self):
-        custom_widget = self.ovewrited_widget_instance(self.html_content)
+        self.widget = self.overwritten_widget_instance(self.html_content)
 
-        custom_widget.generate_content()
-        self.assertEqual(custom_widget.get_header(), "<meta charset='UTF-8'>")
+        self.widget.generate_content()
+        self.assertEqual(self.widget.get_header(), "<meta charset='UTF-8'>")
 
     def test_get_header_wrong(self):
         widget = self.default_widget_instance()
@@ -96,3 +98,17 @@ class WidgetManagerTest(TestCase):
         widget.template = self.html_content
         with self.assertRaises(Exception):
             widget.generate_content()
+
+    def test_bootstrap_conflict(self):
+        self.widget.bootstrap_conflict = True
+        WidgetManager.get_widgets(self.widget_area)
+
+        self.assertTrue(WidgetManager.bootstrap_conflict)
+        self.assertFalse(WidgetManager.jquery_conflict)
+
+    def test_jquery_conflict(self):
+        self.widget.jquery_conflict = True
+        WidgetManager.get_widgets(self.widget_area)
+
+        self.assertTrue(WidgetManager.jquery_conflict)
+        self.assertFalse(WidgetManager.bootstrap_conflict)

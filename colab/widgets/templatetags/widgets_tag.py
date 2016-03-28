@@ -11,5 +11,7 @@ def import_widgets(context, area_id, widget_var=None):
         widget_var = "widgets_{}".format(area_id)
 
     context[widget_var] = WidgetManager.get_widgets(area_id, context=context)
+    context['bootstrap_conflict'] = WidgetManager.bootstrap_conflict
+    context['jquery_conflict'] = WidgetManager.jquery_conflict
 
     return ""

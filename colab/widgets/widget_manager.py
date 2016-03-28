@@ -7,6 +7,8 @@ class Widget(object):
     name = None
     content = ''
     template = ''
+    bootstrap_conflict = False
+    jquery_conflict = False
 
     def get_body(self):
         start = self.content.find('<body')
@@ -40,6 +42,8 @@ class Widget(object):
 
 class WidgetManager(object):
     widget_categories = {}
+    bootstrap_conflict = False
+    jquery_conflict = False
 
     @staticmethod
     def register_widget(category, widget):
@@ -63,4 +67,13 @@ class WidgetManager(object):
         widgets = WidgetManager.widget_categories[category][:]
         for widget in widgets:
             widget.generate_content(**kwargs)
+
+            if not WidgetManager.bootstrap_conflict and \
+               widget.bootstrap_conflict:
+                WidgetManager.bootstrap_conflict = True
+
+            if not WidgetManager.jquery_conflict and \
+               widget.jquery_conflict:
+                WidgetManager.jquery_conflict = True
+
         return widgets

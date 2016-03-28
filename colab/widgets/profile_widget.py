@@ -7,6 +7,8 @@ class ProfileWidget(Widget):
     colab_form = None
     request = None
     _prefix = None
+    bootstrap_conflict = False
+    jquery_conflict = False
 
     @property
     def prefix(self):
