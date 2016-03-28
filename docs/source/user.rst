@@ -91,6 +91,12 @@ A widget is a piece of HTML that will be inserted in a specific area in a page t
 
 To configure the widgets you have to edit, or create, the file ``/etc/colab/widgets_settings.py``. Or you can create a py file inside the folder ``/etc/colab/widgets.d``.
 
+Colab can generate its own default widgets settings file for development environment with
+
+.. code-block:: shell
+
+   $ colab-admin initwidgetsconfig > /etc/colab/widgets_settings.py
+
 Example:
 
 .. code-block:: python
