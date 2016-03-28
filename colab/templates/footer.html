@@ -1,18 +1,22 @@
 {% load i18n gravatar plugins %}
 {% load static from staticfiles %}
 
-<div class="footer row">
-  {% if user.is_staff %}
-  <p class="col-lg-12 text-center">{% trans "Last email imported at" %} {{ last_imported_message.received_time|date:'DATETIME_FORMAT' }}</p>
-  {% endif %}
-  <p class="col-lg-12 text-center">
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR"><img src="{% static 'img/cc_by_sa.png' %}"/></a>
-  </p>
-  <p class="col-lg-12 text-center">
-    {% trans "The contents of this site is published under license" %}:
-    <br>
-    <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">
-      {% trans "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual" %}.
-    </a>
-  </p>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            {% if user.is_staff %}
+            <p class="col-lg-12 text-center">{% trans "Last email imported at" %} {{ last_imported_message.received_time|date:'DATETIME_FORMAT' }}</p>
+            {% endif %}
+            <p class="col-lg-12 text-center">
+                <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR"><img src="{% static 'img/cc_by_sa.png' %}"/></a>
+            </p>
+            <p class="col-lg-12 text-center">
+                {% trans "The contents of this site is published under license" %}:
+                <br>
+                <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR">
+                    {% trans "Creative Commons 4.0 Brasil - Atribuir Fonte - Compartilhar Igual" %}.
+                </a>
+            </p>
+        </div>
+    </div>
 </div>
