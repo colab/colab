@@ -26,7 +26,7 @@ Install Requirements without Vagrant
 
 Install virtualenvwrapper
 
-Use this link to configure the virtualenvwreapper: https://virtualenvwrapper.readthedocs.org
+Use this link to configure the virtualenvwrapper: https://virtualenvwrapper.readthedocs.org
 
 Run the following command
 
@@ -287,12 +287,12 @@ Declares the context processors of the plugin in a list format too.
 .. attribute:: dependency
 
 Declares the additional installed apps that this plugin depends on.
-This doesn't automatically install the python dependecies, only add to django
+This doesn't automatically install the python dependencies, only add to django
 apps.
 
 .. attribute:: password_validators
 
-A lista of functions to validade password in the moment it's set.
+A list of functions to validate password in the moment it's set.
 This allows plugins to define their own password validators. For
 example if the proxied app requires the password to have at least
 one upper case character it should provide a password validator
