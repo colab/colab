@@ -74,6 +74,14 @@ This variable will be inserted directly in the page ``context``.
 
     {% endblock %}
 
+    {% block body %}
+      {{ block.super }}
+
+      {% for widget in widgets_profile %}
+        {{ widget.get_body }}
+      {% endfor %}
+
+    {% endblock %}
 
 .. warning::
 
