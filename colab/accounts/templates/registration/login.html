@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block main-content %}
-
-
 <div class="row">
   {% if form.errors %}
     {% if form.errors.items|length == 1 %}
@@ -27,7 +25,9 @@
 <br>
 <form action="{% url 'login' %}" method="post" role="form" class="form-horizontal signup">
   {% csrf_token %}
-
+  {% if previous_path %}
+    <input type="hidden" value="{{previous_path}}" name="previous_path">
+  {% endif %}
   <div class="row">
     <div class="col-md-4 col-md-offset-4 col-lg-4 col-lg-4 col-sm-8 col-sm-offset-2 col-xs-12">
       <div class="panel panel-default">
@@ -59,4 +59,3 @@
 </form>
 
 {% endblock %}
-

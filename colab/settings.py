@@ -204,6 +204,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
+    'colab.accounts.context_processors.redirect_login',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -217,6 +218,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'colab.tz.middleware.TimezoneMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'colab.middlewares.cookie_middleware.CookiePreHandlerMiddleware',
+    'colab.middlewares.cookie_middleware.CookiePostHandlerMiddleware',
+    'colab.middlewares.redirect_login.RedirectLoginMiddleware',
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -263,6 +267,7 @@ SOCIAL_NETWORK_ENABLED = locals().get('SOCIAL_NETWORK_ENABLED') or False
 locals().update(conf.load_py_settings())
 locals().update(conf.load_colab_apps())
 
+COLAB_APPS_LOGIN_URLS = []
 COLAB_APPS = locals().get('COLAB_APPS') or {}
 
 for app_name, app in COLAB_APPS.items():
@@ -283,6 +288,10 @@ for app_name, app in COLAB_APPS.items():
         for context_processor in app.get('context_processors'):
             if context_processor not in TEMPLATE_CONTEXT_PROCESSORS:
                 TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
+
+    plugin_urls = app.get('urls')
+    if 'login' in plugin_urls:
+        COLAB_APPS_LOGIN_URLS.append(plugin_urls.get('login'))
 
 colab_templates = locals().get('COLAB_TEMPLATES') or ()
 colab_statics = locals().get('COLAB_STATICS') or []
