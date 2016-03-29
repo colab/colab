@@ -28,8 +28,8 @@ Plugins are used in order to integrate new Web applications. Currently the follo
 
 * Mailman
 * Gitlab
-* Trac
-* Jenkins
+* Noosfero
+* Mezuro
 
 If you need to integrate a diffirent tool please refer to :ref:`plugin-dev`.
 
