@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'haystack',
     'hitcounter',
     'taggit',
+    'behave_django',
 
     # Own apps
     'colab',
