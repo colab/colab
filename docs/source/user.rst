@@ -399,7 +399,10 @@ Menu
 
 Templates
 +++++++++
-.. TODO
+.. attribute:: COLAB_TEMPLATES
+   :default: ()
+
+   This variable will be used to override default templates.
 
 Verify Inactive User
 ++++++++
