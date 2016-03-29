@@ -8,7 +8,8 @@ from django.db import models
 from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
-from .signals import user_created, user_password_changed
+from .signals import (user_created, user_password_changed,
+                      user_basic_info_updated)
 from .utils import mailman
 
 
@@ -75,6 +76,7 @@ class User(AbstractUser):
         # Forces username to be lowercase always
         self.username = self.username.lower()
         super(User, self).save(*args, **kwargs)
+        user_basic_info_updated.send(User, user=self)
 
     def set_password(self, raw_password):
         super(User, self).set_password(raw_password)
