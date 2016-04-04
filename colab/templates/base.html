@@ -32,12 +32,16 @@
     <![endif]-->
     {% endif %}
 
-
-    <!-- JQuery 2+ won't work for IE < 9 -->
-    <script type="text/javascript" src="{% static 'third-party/jquery-2.0.3.min.js' %}"></script>
+    {% block jquery_js%}
+        <!-- JQuery 2+ won't work for IE < 9 -->
+        <script type="text/javascript" src="{% static 'third-party/jquery-2.0.3.min.js' %}"></script>
+    {% endblock %}
+    {% block bootstrap_js%}
+        <script type="text/javascript" src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
+    {% endblock%}
     <script type="text/javascript" src="{% static 'third-party/jquery.debouncedresize.js' %}"></script>
     <script type="text/javascript" src="{% static 'third-party/jquery.cookie.js' %}"></script>
-    <script src="{% static 'third-party/bootstrap/js/bootstrap.min.js' %}"></script>
+
 
     {% include "includes/google_analytics.html" %}
 

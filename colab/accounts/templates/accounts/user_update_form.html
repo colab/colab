@@ -6,6 +6,19 @@
    {{ block.super }}
 {% endblock %}
 
+{% block bootstrap_js %}
+    <script>jQuery.noConflict();</script>
+    {% if not bootstrap_conflict %}
+        {{block.super}}
+    {% endif %}
+{% endblock%}
+
+{% block jquery_js %}
+    {% if not jquery_conflict %}
+        {{block.super}}
+    {% endif %}
+{% endblock %}
+
 {% block head_js %}
   {% for widget in widgets_profile %}
       {{widget.get_header}}
