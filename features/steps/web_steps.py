@@ -9,7 +9,8 @@ def step_impl(context, url):
 
 @when(u'I click in "{link}"')
 def step_impl(context, link):
-    context.driver.find_element_by_xpath("//a[contains(., '%s')]" % link).click()
+    context.driver.find_element_by_xpath("//a[contains(., '%s')]" %
+                                         link).click()
 
 
 @when(u'I click in "{button_value}" button')

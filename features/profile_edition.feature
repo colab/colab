@@ -1,4 +1,4 @@
-@selenium
+
 Feature: User Profile Edition
     In order to update my personal information
     As an User

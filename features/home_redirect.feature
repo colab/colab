@@ -1,5 +1,4 @@
 
-@selenium
 Feature: Home redirect
   In order to be able to choose the home page
   As a developer

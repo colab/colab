@@ -1,5 +1,4 @@
 
-@selenium
 Feature: User sign in
   In order to be able to access the system funcionalities
   As an User

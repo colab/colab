@@ -129,3 +129,52 @@ Follow the steps below:
 .. code-block::
 
   python setup.py test
+
+How to run Acceptance Tests
+---------------------------
+
+Follow the steps below to run the acceptance tests. 
+
+1- Log in virtual machine:
+
+1.1 - To run without opening a graphic interface 
+
+.. code-block::
+
+  vagrant ssh
+
+1.2 - To run opening a graphic interface 
+
+.. code-block::
+
+  vagrant ssh -- -X
+
+2- Use colab virtualenv:
+
+.. code-block::
+
+  workon colab
+
+3- Enter into colab source code directory:
+
+.. code-block::
+
+  cd /vagrant
+
+4- Run all the acceptance tests with:
+
+.. code-block::
+
+  COLAB_SETTINGS=tests/colab_settings.py colab-admin behave
+
+4.1 To run without opening a browser:
+.. code-block::
+
+  COLAB_SETTINGS=tests/colab_settings.py xvfb-run -a colab-admin behave 
+
+4.2 To run a specific feature:
+
+.. code-block::
+
+  COLAB_SETTINGS=tests/colab_settings.py colab-admin behave /path/to/features/file.feature
+
