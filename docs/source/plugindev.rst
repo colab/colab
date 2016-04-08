@@ -331,3 +331,19 @@ For example, given a plugin with this configuration:
 The actual url that will be blocked will them be: plugin/feature.
 
 
+Change Header
+-----------------
+
+If you want to change the header on your plugin pages, you should add in your
+configuration file (/etc/colab/plugins.d/) a boolean variable 'change_header',
+where True uses the slim header and False uses the default header. The default value
+of 'change_header' variable is False.
+
+.. code-block:: python
+
+    urls = {
+        'include': 'colab_plugin.urls',
+        'prefix':  '^plugin/',
+        }
+
+    change_header = True
