@@ -73,10 +73,20 @@ class User(AbstractUser):
 
     def save(self, *args, **kwargs):
 
+        # verify if primary email was updated
+        current_user = User.objects.filter(pk=self.pk).first()
+        update_email = False
+
+        if current_user and current_user.email != self.email:
+            update_email = True
+
         # Forces username to be lowercase always
         self.username = self.username.lower()
+
         super(User, self).save(*args, **kwargs)
-        user_basic_info_updated.send(User, user=self)
+
+        user_basic_info_updated.send(User, user=self,
+                                     update_email=update_email)
 
     def set_password(self, raw_password):
         super(User, self).set_password(raw_password)
