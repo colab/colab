@@ -92,6 +92,10 @@ div.submit {
 
 /* User profile */
 
+#password_container  {
+    float: right
+}
+
 .colab-vcard {
     min-height: 400px;
 }
