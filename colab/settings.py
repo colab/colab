@@ -201,6 +201,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'colab.super_archives.context_processors.mailarchive',
     'colab.plugins.context_processors.colab_apps',
+    'colab.plugins.context_processors.change_header',
     'colab.home.context_processors.robots',
     'colab.home.context_processors.ribbon',
     'colab.home.context_processors.google_analytics',
