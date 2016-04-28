@@ -26,11 +26,29 @@
               </div>
             {% endfor %}
           </div>
+          <div class="panel-footer text-center">
+            <span class="step-links">
+              {% if lists.has_previous %}
+                  <a href="?page=1&per_page={{ per_page }}"><span class="glyphicon glyphicon-backward"></span></a>
+
+                  <a href="?page={{ lists.previous_page_number }}&per_page={{ per_page }}"><span class="glyphicon glyphicon-chevron-left"></span></a>
+              {% endif %}
+
+              <span class="current">
+                  {% trans 'Page' %} {{ lists.number }} {% trans 'of' %} {{ lists.paginator.num_pages }}.
+              </span>
+
+              {% if lists.has_next %}
+                  <a href="?page={{ lists.next_page_number }}&per_page={{ per_page }}"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                  <a href="?page={{ lists.paginator.num_pages }}&per_page={{ per_page }}"><span class="glyphicon glyphicon-forward"></span></a>
+              {% endif %}
+            </span>
+          </div>
         </div>
       </div>
       {% endfor %}
-    </div>
-
+    </div>   
     <div class="row">
       <div class="text-center">
         <button class="btn btn-lg btn-primary" type="submit">{% trans 'Update subscriptions' %}</button>
