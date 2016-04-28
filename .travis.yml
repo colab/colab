@@ -5,17 +5,23 @@ sudo: false
 python:
   - "2.7"
 
+addons:
+  apt:
+    packages:
+    - xvfb
+    - firefox
+
 env:
   global:
     - COLAB_SETTINGS=tests/colab_settings.py
 
 install:
-  - pip install coveralls flake8 behave behave_django
+  - pip install coveralls flake8 behave behave_django selenium
   - pip install .
 
 script:
   - python setup.py test
-  - colab-admin behave
+  - xvfb-run -a colab-admin behave --format=progress
   - flake8 colab
 
 after_success:

@@ -17,6 +17,10 @@ REQUIREMENTS = [
     # Async Signals
     'celery[redis]>=3.1.2',
 
+    # Acceptance tests
+    'selenium>=2.53.1',
+    'behave_django>=0.3.0',
+
     ### Move out of colab (as plugins):
 
     # Deps for super_archives
@@ -32,8 +36,6 @@ TEST_REQUIREMENTS = [
     'coveralls>=0.5',
     'flake8>=2.3.0',
     'mock==1.0.1',
-    'behave>= 1.2.0',
-    'behave_django>=0.2.2',
 ]
 
 

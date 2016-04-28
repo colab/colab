@@ -24,6 +24,9 @@ yum -y groupinstall "Development tools"
 
 yum install -y git unzip gettext libxml2-devel libxslt-devel openssl-devel libffi-devel python-devel python-pip python-virtualenvwrapper redis
 
+### Acceptance Tests dependencies
+
+yum install -y Xvfb firefox
 
 ### Init Redis
 systemctl enable redis
