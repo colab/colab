@@ -94,10 +94,13 @@ class User(AbstractUser):
             user_password_changed.send(User, user=self, password=raw_password)
 
     def delete(self, using=None):
+
+        emails = " ".join(self.emails.values_list('address', flat=True))
         super(User, self).delete(using)
+
         user = User.objects.filter(id=self.id)
         if not user:
-            delete_user.send(User,user=self)
+            delete_user.send(User, user=self, emails=emails)
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
