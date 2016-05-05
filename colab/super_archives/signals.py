@@ -5,7 +5,6 @@ from colab.accounts.signals import (delete_user)
 
 @receiver(delete_user)
 def delete_user_from_superarchive(sender, **kwargs):
-    pass
     user = kwargs.get('user')
     emails = []
 
