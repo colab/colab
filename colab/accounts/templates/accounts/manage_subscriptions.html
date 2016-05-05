@@ -22,6 +22,9 @@
               <div class="checkbox" title="{{ list.description }}">
                 <label>
                   <input name="{{ email }}" value="{{ list.listname }}" type="checkbox" {% if checked %}checked{% endif%}>{{ list.listname }}</input>
+                  {% if list.archive_private != 0 %}
+                    <span class="label label-default">{% trans 'Private' %}</span>
+                  {% endif %}
                 </label>
               </div>
             {% endfor %}
