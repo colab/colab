@@ -24,15 +24,15 @@
       {{widget.get_header}}
   {% endfor %}
 <script>
-$(function() {
+jQuery(function() {
 
-  $('#add-email').on('click', function(event) {
-    $.ajax({
+  jQuery('#add-email').on('click', function(event) {
+    jQuery.ajax({
       url: "{% url 'archive_email_view' %}",
       type: 'post',
-      data: { email: $('#new_email').val(), user: '{{ user_.pk }}' },
+      data: { email: jQuery('#new_email').val(), user: '{{ user_.pk }}' },
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
       }
     }).done(function() {
       location.reload();
@@ -41,71 +41,71 @@ $(function() {
     event.preventDefault();
   });
 
-  $('#new_email').on('keypress', function(event) {
+  jQuery('#new_email').on('keypress', function(event) {
     if (event.which == 13) {
       event.preventDefault();
-      $('#add-email').trigger('click');
+      jQuery('#add-email').trigger('click');
     }
   });
 
-  $('.delete-email').on('click', function(event) {
-    var $email_block = $(event.target).parent().parent();
-    $.ajax({
+  jQuery('.delete-email').on('click', function(event) {
+    var $email_block = jQuery(event.target).parent().parent();
+    jQuery.ajax({
       url: "{% url 'archive_email_view' %}",
       type: 'delete',
       data: {
-        email: $('.email-address', $email_block).text(),
+        email: jQuery('.email-address', $email_block).text(),
         user: '{{ user_.pk }}'
       },
       context: $email_block[0],
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
       }
     }).done(function() {
-        $(this).remove();
+        jQuery(this).remove();
     });
 
     event.preventDefault();
   });
 
-  $('.verify-email').on('click', function(event) {
-    var $email_block = $(event.target).parent().parent();
-    $.ajax({
+  jQuery('.verify-email').on('click', function(event) {
+    var $email_block = jQuery(event.target).parent().parent();
+    jQuery.ajax({
       url: "{% url 'archive_email_validation_view' %}",
       type: 'post',
       data: {
-        email: $('.email-address', $email_block).text(),
+        email: jQuery('.email-address', $email_block).text(),
         user: '{{ user_.pk }}'
       },
       context: $email_block[0],
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
       }
     }).done(function() {
-      var email = $('.email-address', $(this)).text();
+      var email = jQuery('.email-address', jQuery(this)).text();
       var msg = '{% trans "We sent a verification email to " %}' + email + '. ' +
                 '{% trans "Please follow the instructions in it." %}';
-      $('#alert-message').text(msg);
-      $('#alert-js').removeClass('alert-warning').addClass('alert-success');
-      $('#alert-js').show();
+      jQuery('#alert-message').text(msg);
+      jQuery('#alert-js').removeClass('alert-warning').addClass('alert-success');
+      jQuery('#alert-js').show();
       window.scroll(0, 0);
-      $('.verify-email').button('reset');
+      jQuery('.verify-email').button('reset');
     });
 
     event.preventDefault();
   });
 
-  $('.set-primary').on('click', function(event) {
-    var $email_block = $(event.target).parent().parent();
-    $.ajax({
+  jQuery('.set-primary').on('click', function(event) {
+    var $email_block = jQuery(event.target).parent().parent();
+    jQuery.ajax({
       url: "{% url 'archive_email_view' %}",
       type: 'update',
       data: {
-        email: $('.email-address', $email_block).text(),
+        email: jQuery('.email-address', $email_block).text(),
         user: '{{ user_.pk }}'
       },
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
       }
     }).done(function() {
       location.reload();
@@ -115,20 +115,20 @@ $(function() {
   });
 
   // User feedbacks
-  $('.panel-default').on('click', '.set-primary, .verify-email, .delete-email', function() {
-    $(this).button('loading');
+  jQuery('.panel-default').on('click', '.set-primary, .verify-email, .delete-email', function() {
+    jQuery(this).button('loading');
   });
 
   // Active profile bars
   active = function (identifier){
-      $('#navbar li').each(function(index,value){
-        $(this).removeClass('active');
+      jQuery('#navbar li').each(function(index,value){
+        jQuery(this).removeClass('active');
       })
-      $(identifier).addClass('active');
-      $('#profile_content .profile_item').each(function(index,value){
-        $(this).addClass('hidden');
+      jQuery(identifier).addClass('active');
+      jQuery('#profile_content .profile_item').each(function(index,value){
+        jQuery(this).addClass('hidden');
       })
-      $(identifier+'-content').removeClass('hidden');
+      jQuery(identifier+'-content').removeClass('hidden');
   }
   if (location.hash != '') active(location.hash)
 });
