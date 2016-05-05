@@ -7,7 +7,7 @@ from uuid import uuid4
 from django.conf import settings
 from django.core import mail
 from django.template import Context, loader
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
 
 TIMEOUT = 1
