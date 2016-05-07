@@ -30,6 +30,9 @@ urlpatterns = patterns('',
         {'template_name':'registration/password_reset_form_custom.html'},
         name="password_reset"),
 
+    url(r'^resend-email-verification/?$', 'colab.accounts.views.resend_email_verification',
+        name="resend_email_verification"),
+
     url(r'^change-password/?$', auth_views.password_change,
         {'template_name': 'registration/password_change_form_custom.html',
          'password_change_form': ColabPasswordChangeForm},
