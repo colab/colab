@@ -192,11 +192,12 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
         return super(ManageUserSubscriptionsView,
                      self).get_context_data(**context)
 
+
 def resend_email_verification(request):
     if request.method == 'GET':
         return render(request, 'registration/resend_email_verification.html')
 
-    email = request.POST.get('email','')
+    email = request.POST.get('email', '')
     user = User.objects.filter(email=email).first()
 
     if not user:
@@ -218,6 +219,7 @@ def resend_email_verification(request):
         messages.error(request, msg)
 
     return redirect('home')
+
 
 def password_changed(request):
     messages.success(request, _('Your password was changed.'))
