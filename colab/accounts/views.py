@@ -193,6 +193,34 @@ class ManageUserSubscriptionsView(UserProfileBaseMixin, DetailView):
                      self).get_context_data(**context)
 
 
+def resend_email_verification(request):
+    if request.method == 'GET':
+        return render(request, 'registration/resend_email_verification.html')
+
+    email = request.POST.get('email', '')
+    user = User.objects.filter(email=email).first()
+
+    if not user:
+        msg = _('This emails is not registered yet.')
+        messages.error(request, msg)
+        return render(request, 'registration/resend_email_verification.html')
+
+    email = EmailAddressValidation.objects.get_or_create(address=email,
+                                                         user_id=user.id)[0]
+
+    location = reverse('archive_email_view',
+                       kwargs={'key': email.validation_key})
+    verification_url = request.build_absolute_uri(location)
+    if EmailAddressValidation.verify_email(email, verification_url):
+        msg = _('A email was sent by us. Verify your message box.')
+        messages.success(request, msg)
+    else:
+        msg = _('An error occurred while sending mail.')
+        messages.error(request, msg)
+
+    return redirect('home')
+
+
 def password_changed(request):
     messages.success(request, _('Your password was changed.'))
 
