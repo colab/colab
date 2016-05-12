@@ -1,4 +1,3 @@
-
 from django.apps import AppConfig
 
 
@@ -7,5 +6,4 @@ class SuperArchivesConfig(AppConfig):
     verbose_name = 'Super Archives'
 
     def ready(self):
-        pass
-        # from . import signals
+        import colab.super_archives.signals  # NOQA

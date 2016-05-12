@@ -9,7 +9,7 @@ from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from .signals import (user_created, user_password_changed,
-                      user_basic_info_updated)
+                      user_basic_info_updated, delete_user)
 from .utils import mailman
 
 
@@ -93,6 +93,14 @@ class User(AbstractUser):
         if self.pk:
             user_password_changed.send(User, user=self, password=raw_password)
 
+    def delete(self, using=None):
+
+        emails = " ".join(self.emails.values_list('address', flat=True))
+        super(User, self).delete(using)
+
+        user = User.objects.filter(id=self.id)
+        if not user:
+            delete_user.send(User, user=self, emails=emails)
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).

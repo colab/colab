@@ -1,23 +1,16 @@
-
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.conf import settings
-
 from .models import EmailAddress
+from django.dispatch import receiver
+from colab.accounts.signals import (delete_user)
 
 
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_email_address(sender, instance, created, **kwargs):
-    if not created:
-        return
+@receiver(delete_user)
+def delete_user_from_superarchive(sender, **kwargs):
+    user = kwargs.get('user')
+    emails = []
 
-    email, email_created = EmailAddress.objects.get_or_create(
-        address=instance.email,
-        defaults={
-            'real_name': instance.get_full_name(),
-            'user': instance,
-        }
-    )
+    if kwargs.get('emails'):
+        emails = kwargs.get('emails').split(' ')
 
-    email.user = instance
-    email.save()
+    for email in emails:
+        EmailAddress.objects.filter(address=email).first().delete()
+        user.update_subscription(email, [])
