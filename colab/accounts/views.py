@@ -105,6 +105,16 @@ def signup(request):
     user_form = ColabSetUsernameForm(request.POST)
     lists_form = ListsForm(request.POST)
 
+    user_email = user_form.data.get('email', '')
+    existent_user = User.objects.filter(email=user_email).first()
+
+    if existent_user and existent_user.is_active is False:
+        message = "This user already exists, but is not active. \
+                   Please check your spam or  \
+                   <a href='/account/resend-email-verification/'>\
+                   resend an email</a>"
+        messages.info(request, message)
+
     if not user_form.is_valid() or not lists_form.is_valid():
         return render(request, 'accounts/user_create_form.html',
                       {'user_form': user_form, 'lists_form': lists_form})

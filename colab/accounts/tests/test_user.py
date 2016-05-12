@@ -416,7 +416,7 @@ class UserTest(TestCase):
                           "/account/change-password-done")
 
     def test_password_reset_done_custom_message(self):
-        self.message_test("We&#39;ve emailed you instructions for setting " +
+        self.message_test("We've emailed you instructions for setting " +
                           "your password. You should be receiving them " +
                           "shortly.", "/account/password-reset-done/")
 
