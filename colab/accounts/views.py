@@ -109,10 +109,10 @@ def signup(request):
     existent_user = User.objects.filter(email=user_email).first()
 
     if existent_user and existent_user.is_active is False:
-        message = "This user already exists, but is not active. \
+        message = _("This user already exists, but is not active. \
                    Please check your spam or  \
                    <a href='/account/resend-email-verification/'>\
-                   resend an email</a>"
+                   resend an email</a>")
         messages.info(request, message)
 
     if not user_form.is_valid() or not lists_form.is_valid():

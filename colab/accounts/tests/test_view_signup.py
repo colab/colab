@@ -36,3 +36,17 @@ class TestSignUpView(TestCase):
         url = "http://testserver/account/usertestcolab"
         self.assertEquals(url, response.url)
         self.client.logout()
+
+    def test_signup_with_valid_email_and_inactive_user(self):
+        message = "This user already exists, but is not active. \
+                   Please check your spam or  \
+                   <a href='/account/resend-email-verification/'>\
+                   resend an email</a>"
+
+        options = {'username': 'another_user',
+                   'email': 'usertest@colab.com.br'}
+        self.user.is_active = False
+        self.user.save()
+        response = self.client.post("/account/register/", options)
+        self.assertTrue(200, response.status_code)
+        self.assertIn(message, response.content)
