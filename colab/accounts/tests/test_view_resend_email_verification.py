@@ -45,7 +45,7 @@ class TestResendEmailVerification(TestCase):
 
         self.assertEquals(302, response.status_code)
 
-        msg = 'A email was sent by us. Verify your message box.'
+        msg = 'An email was sent to you. Verify your message box.'
         response = self.client.get("/account/resend-email-verification/")
         self.assertEquals(200, response.status_code)
         self.assertIn(msg, response.content)

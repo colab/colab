@@ -38,11 +38,9 @@ class TestSignUpView(TestCase):
         self.client.logout()
 
     def test_signup_with_valid_email_and_inactive_user(self):
-        message = "This user already exists, but is not active. \
-                   Please check your spam or  \
-                   <a href='/account/resend-email-verification/'>\
-                   resend an email</a>"
-
+        message = ("This user already exists, but is not active. \
+Please check your spam or <a href='/account/resend-email-verification/'> \
+resend an email</a>")
         options = {'username': 'another_user',
                    'email': 'usertest@colab.com.br'}
         self.user.is_active = False

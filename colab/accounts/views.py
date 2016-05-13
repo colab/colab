@@ -110,9 +110,9 @@ def signup(request):
 
     if existent_user and existent_user.is_active is False:
         message = _("This user already exists, but is not active. \
-                   Please check your spam or  \
-                   <a href='/account/resend-email-verification/'>\
-                   resend an email</a>")
+Please check your spam or <a href='/account/resend-email-verification/'> \
+resend an email</a>")
+
         messages.info(request, message)
 
     if not user_form.is_valid() or not lists_form.is_valid():
@@ -222,7 +222,7 @@ def resend_email_verification(request):
                        kwargs={'key': email.validation_key})
     verification_url = request.build_absolute_uri(location)
     if EmailAddressValidation.verify_email(email, verification_url):
-        msg = _('A email was sent by us. Verify your message box.')
+        msg = _('An email was sent to you. Verify your message box.')
         messages.success(request, msg)
     else:
         msg = _('An error occurred while sending mail.')
