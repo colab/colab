@@ -228,7 +228,7 @@ def resend_email_verification(request):
         msg = _('An error occurred while sending mail.')
         messages.error(request, msg)
 
-    return redirect('resend_email_verification')
+    return redirect('login')
 
 
 def password_changed(request):
