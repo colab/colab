@@ -299,3 +299,8 @@ span.highlighted {
 .chart > p > label {
     margin: 0 2px;
 }
+
+/* MESSAGES FORMAT  */
+.container.messages {
+    margin-top: 30px;
+}

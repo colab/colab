@@ -80,25 +80,31 @@
         {% endif %}
     {% endblock %}
 
-      {% block messages %}
-        {% if request.GET.bid_login_failed %}
-          <div class="alert alert-dismissable alert-danger">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {% trans 'The login has failed. Please, try again.' %}
-          </div>
-        {% endif %}
+          {% block messages %}
+            {% if request.GET.bid_login_failed %}
+              <div class="alert alert-dismissable alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {% trans 'The login has failed. Please, try again.' %}
+              </div>
+            {% endif %}
 
-        {% for message in messages %}
-          <div class="alert alert-dismissable {{ message.tags }}">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            {{ message | safe }}
-          </div>
-        {% endfor %}
-        <div id="alert-js" class="alert alert-dismissable alert-warning" hidden>
-          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          <span id="alert-message"></span>
-        </div>
-      {% endblock %}
+            {% for message in messages %}
+                <div class="container messages">
+                  <div class="row">
+                          <div class="col-md-12">
+                              <div class="alert alert-dismissable {{ message.tags }}">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{ message | safe }}
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+            {% endfor %}
+            <div id="alert-js" class="alert alert-dismissable alert-warning" hidden>
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <span id="alert-message"></span>
+            </div>
+          {% endblock %}
 
     <div id="main-content" class="container">
       {% block main-content %}{% endblock %}

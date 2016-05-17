@@ -244,14 +244,14 @@ def password_reset_done_custom(request):
              "your password. You should be receiving them shortly."))
     messages.success(request, msg)
 
-    return redirect('home')
+    return redirect('login')
 
 
 def password_reset_complete_custom(request):
     msg = _('Your password has been set. You may go ahead and log in now.')
     messages.success(request, msg)
 
-    return redirect('home')
+    return redirect('login')
 
 
 def myaccount_redirect(request, route):
