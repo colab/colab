@@ -9,7 +9,9 @@ from django.utils.crypto import get_random_string
 from django.utils.translation import ugettext_lazy as _
 
 from .signals import (user_created, user_password_changed,
-                      user_basic_info_updated, delete_user)
+                      user_basic_info_updated)
+# from .signals import delete_user
+
 from .utils import mailman
 
 
@@ -94,14 +96,12 @@ class User(AbstractUser):
             user_password_changed.send(User, user=self, password=raw_password)
 
     def delete(self, using=None):
-
-        emails = " ".join(self.emails.values_list('address', flat=True))
-        super(User, self).delete(using)
-
-
-        #TODO:
+        # TODO:
         # To maintain to integrity of the database we should deactive the user
         # instead of delete. Or we will lose some data.
+
+        # emails = " ".join(self.emails.values_list('address', flat=True))
+        super(User, self).delete(using)
 
         # user = User.objects.filter(id=self.id)
         # if not user:
