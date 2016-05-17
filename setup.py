@@ -45,7 +45,7 @@ EXCLUDE_FROM_PACKAGES = []
 
 setup(
     name='colab',
-    version='1.13.8',
+    version='1.13.9',
     url='https://github.com/colab-community/colab',
     author='Sergio Oliveira',
     author_email='sergio@tracy.com.br',
