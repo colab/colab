@@ -480,8 +480,8 @@ msgid "This emails is not registered yet."
 msgstr "Este email não está registrado ainda."
 
 #: colab/accounts/views.py:225
-msgid "An email was sent to you. Verify your message box."
-msgstr "Um email foi enviado para você. Verifique sua caixa de email."
+msgid "An email was sent to you. Verify your inbox or spam."
+msgstr "Um email foi enviado para você. Verifique sua caixa de email ou possivelmente sua caixa de spam."
 
 #: colab/accounts/views.py:228
 msgid "An error occurred while sending mail."

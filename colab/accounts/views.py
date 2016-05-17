@@ -222,7 +222,7 @@ def resend_email_verification(request):
                        kwargs={'key': email.validation_key})
     verification_url = request.build_absolute_uri(location)
     if EmailAddressValidation.verify_email(email, verification_url):
-        msg = _('An email was sent to you. Verify your message box.')
+        msg = _('An email was sent to you. Verify your inbox or spam.')
         messages.success(request, msg)
     else:
         msg = _('An error occurred while sending mail.')
