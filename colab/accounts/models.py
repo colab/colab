@@ -98,9 +98,14 @@ class User(AbstractUser):
         emails = " ".join(self.emails.values_list('address', flat=True))
         super(User, self).delete(using)
 
-        user = User.objects.filter(id=self.id)
-        if not user:
-            delete_user.send(User, user=self, emails=emails)
+
+        #TODO:
+        # To maintain to integrity of the database we should deactive the user
+        # instead of delete. Or we will lose some data.
+
+        # user = User.objects.filter(id=self.id)
+        # if not user:
+        #     delete_user.send(User, user=self, emails=emails)
 
 # We need to have `email` field set as unique but Django does not
 #   support field overriding (at least not until 1.6).
