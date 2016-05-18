@@ -1,8 +1,8 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) 2016
+# This file is distributed under the same license as the colab_superarchive package.
 #
 # Translators:
+# Macártur Sousa <macartursc@gmail.com>, 2016
 # Sergio Oliveira <seocam@seocam.com>, 2014
 msgid ""
 msgstr ""
@@ -21,15 +21,13 @@ msgstr ""
 
 #: colab/super_archives/filters.py:8
 msgid "Discussion"
-msgstr ""
+msgstr "Discussão"
 
 #: colab/super_archives/filters.py:11
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: colab/super_archives/filters.py:14
-#, fuzzy
-#| msgid "Mailing List"
 msgid "Mailinglist"
 msgstr "Lista de discussão"
 
@@ -133,8 +131,6 @@ msgid "Order by"
 msgstr "Ordenar por"
 
 #: colab/super_archives/templates/mailinglist-summary.html:50
-#, fuzzy
-#| msgid "Date"
 msgid "at"
 msgstr "Data"
 
@@ -268,8 +264,6 @@ msgid "most relevant"
 msgstr "Mais relevante"
 
 #: colab/super_archives/templates/widgets/dashboard_most_relevant_threads.html:8
-#, fuzzy
-#| msgid "most relevant"
 msgid "Most Relevant Threads"
 msgstr "Mais relevante"
 
@@ -340,8 +334,3 @@ msgstr "Você não esta logado"
 #: colab/super_archives/views.py:399
 msgid "You don't have permission to access this list"
 msgstr "Você não tem permissão para acessar esta lista"
-
-#, fuzzy
-#~| msgid "Order by"
-#~ msgid "Order by:"
-#~ msgstr "Ordenar por"

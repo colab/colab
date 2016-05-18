@@ -1,5 +1,5 @@
 {% extends "search-base.html" %}
-{% load superarchives set_var %}
+{% load superarchives set_var i18n %}
 
 {% block content %}
   {% profile_url result.modified_by result.modified_by_url as user_url%}
@@ -8,7 +8,8 @@
   {% set 'modified' result.modified %}
   {% set 'modified_time' True %}
   {% set 'url' result.url %}
-  {% set 'registered_in' "Discussion" %}
+  {% trans "Discussion" as disucssion_text %}
+  {% set 'registered_in' disucssion_text %}
   {% set 'description' result.latest_description|truncatechars:"85"|default_if_none:"" %}
 
   {{ block.super }}
