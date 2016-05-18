@@ -6,7 +6,8 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import (ReadOnlyPasswordHashField,
-                                       SetPasswordForm, PasswordChangeForm)
+                                       SetPasswordForm, PasswordChangeForm,
+                                       AuthenticationForm)
 from django.core.urlresolvers import reverse
 from django.utils.functional import lazy
 from django.utils.translation import ugettext_lazy as _
@@ -104,6 +105,16 @@ class UserForm(forms.ModelForm):
     def clean_github(self):
         github = self.cleaned_data["github"].strip()
         return github
+
+
+class LoginAuthenticationForm(AuthenticationForm):
+
+    error_messages = {
+        'invalid_login': _("Please enter a correct %(username)s and password. "
+                           "Note that both fields may be case-sensitive."),
+        'inactive': _("This user is inactive. Try to resend your email "
+                      "verification and activate your account."),
+    }
 
 
 class UserUpdateForm(UserForm):

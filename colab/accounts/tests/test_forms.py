@@ -9,7 +9,8 @@ from colab.accounts import forms as accounts_forms
 from colab.accounts.forms import (ColabPasswordChangeForm,
                                   ColabSetPasswordForm, ColabSetUsernameForm,
                                   UserChangeForm, UserCreationForm, UserForm,
-                                  UserUpdateForm, get_lists_choices)
+                                  UserUpdateForm, get_lists_choices,
+                                  LoginAuthenticationForm)
 from colab.accounts.models import User
 from colab.accounts.utils import mailman
 from django.core.urlresolvers import reverse
@@ -370,3 +371,37 @@ class UserCreationFormTestCase(TestCase):
             data=self.get_form_data('teste12345@example.com',
                                     username='user12345'))
         self.assertTrue(creation_form.is_valid())
+
+
+class LoginFormTest(TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.user = User.objects.create_user(username='user1234',
+                                            email='teste1234@example.com',
+                                            first_name='test_first_name',
+                                            last_name='test_last_name')
+
+        cls.user.set_password("12345")
+        cls.user.is_active = False
+        cls.user.save()
+
+    @classmethod
+    def tearDownClass(cls):
+        User.objects.all().delete()
+
+    def get_form_data(self, username='user1234', password='12345'):
+        return {
+            'username': username,
+            'password': password,
+        }
+
+    def test_inactive_login_message(self):
+        login_form = LoginAuthenticationForm(
+            data=self.get_form_data(username='user1234', password="12345"))
+
+        message = ("This user is inactive. Try to resend your email "
+                   "verification and activate your account.")
+        result = login_form.errors['__all__'][0]
+
+        self.assertIn(message, result)

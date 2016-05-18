@@ -5,12 +5,14 @@ from django.contrib.auth import views as auth_views
 
 from .views import (UserProfileDetailView, UserProfileUpdateView,
                     ManageUserSubscriptionsView)
-from .forms import ColabPasswordChangeForm, ColabSetPasswordForm
+from .forms import (ColabPasswordChangeForm, ColabSetPasswordForm,
+                    LoginAuthenticationForm)
 
 
 urlpatterns = patterns('',
     url(r'^login/?$', 'django.contrib.auth.views.login',
-        {'redirect_field_name': 'previous_path'}, name='login'),
+        {'redirect_field_name': 'previous_path',
+         'authentication_form': LoginAuthenticationForm}, name='login'),
 
     url(r'^logout/?$',  'django.contrib.auth.views.logout',
         {'next_page':'home'}, name='logout'),
