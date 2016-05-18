@@ -66,7 +66,7 @@ Feature: User sign in
     When I fill "colabtest" in "id_password" field
     When I click in "Login" button
     Then The browser URL should be "/account/login"
-    Then I should see "This account is inactive" in "main-content"
+    Then I should see "This user is inactive. Try to resend your email verification and activate your account." in "main-content"
 
   Scenario: Sign in with no user information given
     When I access the URL "/"
@@ -94,4 +94,3 @@ Feature: User sign in
     When I click in "Login" button
     Then The browser URL should be "/account/login"
     Then The field "id_username" should have an error
-
