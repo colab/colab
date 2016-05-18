@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 20:03+0000\n"
+"POT-Creation-Date: 2016-05-18 21:25+0000\n"
 "PO-Revision-Date: 2015-09-07 19:13+0000\n"
 "Last-Translator: Lucas Kanashiro Duarte <kanashiro.duarte@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/colab/colab/"
@@ -490,25 +490,30 @@ msgstr ""
 msgid "Your profile has been created!"
 msgstr "Seu perfil foi criado!"
 
-#: colab/accounts/views.py:214
+#: colab/accounts/views.py:148
+msgid "Please verify your inbox or spam and activate your account."
+msgstr ""
+"Por favor verifique sua caixa de email ou caixa de spam e ative sua conta."
+
+#: colab/accounts/views.py:215
 msgid "This emails is not registered yet."
 msgstr "Este email não está registrado ainda."
 
-#: colab/accounts/views.py:225
+#: colab/accounts/views.py:226
 msgid "An email was sent to you. Verify your inbox or spam."
 msgstr ""
 "Um email foi enviado para você. Verifique sua caixa de email ou "
 "possivelmente sua caixa de spam."
 
-#: colab/accounts/views.py:228
+#: colab/accounts/views.py:229
 msgid "An error occurred while sending mail."
 msgstr "Um erro ocorreu ao enviar o email."
 
-#: colab/accounts/views.py:235
+#: colab/accounts/views.py:236
 msgid "Your password was changed."
 msgstr "Sua senha foi modificada."
 
-#: colab/accounts/views.py:251
+#: colab/accounts/views.py:252
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Sua senha foi modificada. Você já pode efetuar o login agora."
 

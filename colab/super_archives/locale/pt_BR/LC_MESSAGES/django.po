@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: colab\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-18 20:03+0000\n"
+"POT-Creation-Date: 2016-05-18 21:25+0000\n"
 "PO-Revision-Date: 2014-11-21 17:38+0000\n"
 "Last-Translator: Sergio Oliveira <seocam@seocam.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
@@ -115,8 +115,6 @@ msgid "Groups"
 msgstr "Grupos"
 
 #: colab/super_archives/templates/mailinglist-summary.html:14
-#, fuzzy
-#| msgid "Message body"
 msgid "messages found"
 msgstr "mensagens encontradas"
 
@@ -285,8 +283,6 @@ msgid "View more collaborations..."
 msgstr ""
 
 #: colab/super_archives/templates/widgets/dashboard_latest_threads.html:8
-#, fuzzy
-#| msgid "Threads"
 msgid "Latest Threads"
 msgstr "Discussões"
 
@@ -304,8 +300,6 @@ msgid "Most Relevant Threads"
 msgstr "Mais relevante"
 
 #: colab/super_archives/templates/widgets/dashboard_most_relevant_threads.html:12
-#, fuzzy
-#| msgid "Most Relevant Threads"
 msgid "RSS - Most Relevant Threads"
 msgstr "Mais relevante"
 

@@ -145,6 +145,7 @@ resend an email</a>")
     mailman.update_subscription(user.email, mailing_lists)
 
     messages.success(request, _('Your profile has been created!'))
+    messages.warning(request, _('Please verify your inbox or spam and activate your account.'))
 
     return redirect('user_profile', username=user.username)
 
