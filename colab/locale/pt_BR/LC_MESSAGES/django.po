@@ -283,6 +283,9 @@ msgid ""
 "Hello %(fullname)s,\n"
 "The list %(listname)s was created. The password is %(password)s.\n"
 msgstr ""
+"\n"
+"Ola %(fullname)s,\n"
+"A lista %(listname)s foi criada. A senha é %(password)s\n"
 
 #: colab/accounts/templates/registration/login.html:8
 #: colab/accounts/templates/registration/password_change_form_custom.html:10
@@ -485,6 +488,8 @@ msgid ""
 "This user already exists, but is not active. Please check your spam or <a "
 "href='/account/resend-email-verification/'> resend an email</a>"
 msgstr ""
+"Este usuário já existe, mas não está ativo. Por favor verifique sua caixa de spam ou acesse <a "
+"href='/account/resend-email-verification/'> reenviar o email</a>"
 
 #: colab/accounts/views.py:147
 msgid "Your profile has been created!"
