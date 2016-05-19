@@ -6,7 +6,8 @@ from .models import User
 
 class UserIndex(indexes.SearchIndex, indexes.Indexable):
     # common fields
-    text = indexes.EdgeNgramField(document=True, use_template=True, stored=False)
+    text = indexes.EdgeNgramField(document=True,
+                                  use_template=True, stored=False)
     url = indexes.EdgeNgramField(model_attr='get_absolute_url', indexed=False)
     title = indexes.EdgeNgramField(model_attr='get_full_name')
     description = indexes.EdgeNgramField(null=True)
@@ -19,9 +20,10 @@ class UserIndex(indexes.SearchIndex, indexes.Indexable):
     email = indexes.EdgeNgramField(model_attr='email', stored=False)
     institution = indexes.EdgeNgramField(model_attr='institution', null=True)
     role = indexes.EdgeNgramField(model_attr='role', null=True)
-    google_talk = indexes.EdgeNgramField(model_attr='google_talk', null=True,
-                                    stored=False)
-    webpage = indexes.EdgeNgramField(model_attr='webpage', null=True, stored=False)
+    google_talk = indexes.EdgeNgramField(model_attr='google_talk',
+                                         null=True, stored=False)
+    webpage = indexes.EdgeNgramField(model_attr='webpage',
+                                     null=True, stored=False)
     date_joined = indexes.DateTimeField(model_attr='date_joined')
 
     def get_model(self):
