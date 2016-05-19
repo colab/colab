@@ -9,8 +9,8 @@ from .models import Thread
 
 
 class ThreadIndex(BaseIndex, indexes.Indexable):
-    title = indexes.CharField(model_attr='latest_message__subject_clean')
-    description = indexes.CharField(use_template=True)
+    title = indexes.EdgeNgramField(model_attr='latest_message__subject_clean')
+    description = indexes.EdgeNgramField(use_template=True)
     latest_description = indexes.CharField(
         model_attr='latest_message__description',
         indexed=False,
@@ -19,9 +19,9 @@ class ThreadIndex(BaseIndex, indexes.Indexable):
     modified = indexes.DateTimeField(
         model_attr='latest_message__modified'
     )
-    tag = indexes.CharField(model_attr='mailinglist__name')
-    collaborators = indexes.CharField(use_template=True, stored=False)
-    mailinglist_url = indexes.CharField(
+    tag = indexes.EdgeNgramField(model_attr='mailinglist__name')
+    collaborators = indexes.EdgeNgramField(use_template=True, stored=False)
+    mailinglist_url = indexes.EdgeNgramField(
         model_attr='mailinglist__get_absolute_url',
         indexed=False,
     )
