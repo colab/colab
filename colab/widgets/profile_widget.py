@@ -64,5 +64,7 @@ class ProfileWidget(Widget):
 
         if hasattr(response, 'content'):
             self.content = response.content
-        else:
+        elif hasattr(response, 'streaming_content'):
             self.content = "".join(response.streaming_content)
+        else:
+            self.content = ""

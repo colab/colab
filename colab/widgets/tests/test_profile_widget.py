@@ -172,3 +172,17 @@ class WidgetProfileTest(unittest.TestCase):
 
         self.widget_prifile_mock.generate_content(context={})
         self.assertEquals(self.widget_prifile_mock.content, content)
+
+    @patch.object(WidgetProfileMock, 'dispatch')
+    @patch.object(WidgetProfileMock, 'change_request_method')
+    @patch.object(WidgetProfileMock, 'requested_url')
+    def test_generate_content_without_streaming_content(
+            self, requested_url_mock, change_request_method_mock,
+            dispatch_mock):
+
+        dispatch_mock.return_value = None
+        change_request_method_mock.return_value = None
+        requested_url_mock.return_value = None
+
+        self.widget_prifile_mock.generate_content(context={})
+        self.assertEquals(self.widget_prifile_mock.content, "")
