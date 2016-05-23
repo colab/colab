@@ -68,7 +68,7 @@ class ColabSearchForm(SearchForm):
             hayString = 'haystack.backends.whoosh_backend.WhooshEngine'
             if settings.HAYSTACK_CONNECTIONS['default']['ENGINE'] != hayString:
                         sqs = sqs.filter(content=AltParser(
-                                         'edismax', q, **dismax_opts))
+                                         'dismax', q, **dismax_opts))
 
             else:
                 sqs = sqs.filter(content=AutoQuery(q))
