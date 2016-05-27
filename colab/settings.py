@@ -313,3 +313,5 @@ conf.validate_database(DATABASES, DEFAULT_DATABASE, DEBUG)
 conf.load_widgets_settings()
 
 ACCOUNT_VERIFICATION_TIME = timedelta(hours=48)
+
+SESSION_COOKIE_AGE = 1209600
