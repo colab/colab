@@ -58,7 +58,7 @@ class ColabSearchForm(SearchForm):
 
             dismax_opts = {
                 'q.alt': '*.*',
-                'pf': 'title^2.1 author^1.9 description^1.7',
+                'qf': 'title^2.1 author^1.9 description^1.7',
                 'mm': '2<70%',
 
                 # Date boosting:
