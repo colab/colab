@@ -19,7 +19,7 @@ class ColabUserManager(UserManager):
 
     def _create_user(self, username, email, password,
                      is_staff, is_superuser, **kwargs):
-        args = (username, email, password, is_staff, is_superuser)
+        args = (username.lower(), email, password, is_staff, is_superuser)
         user = super(ColabUserManager, self)._create_user(*args, **kwargs)
 
         user_created.send(user.__class__, user=user, password=password)
