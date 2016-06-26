@@ -1,23 +1,20 @@
 $(function (){
 
-  ENTER_BUTTON = 13;
-  searchMaillingLists();
+  searchMailingLists();
 
   $('#search_list').on('click', function(event) {
-    searchMaillingLists();
+    searchMailingLists();
   });
 
-  $('#list_name').on('keypress', function(event) {
-    if (event.which == ENTER_BUTTON) {
-      event.preventDefault();
-    }
-    $('#search_list').trigger('click');
+  $('#list_name').on('input', function(event) {
+    searchMailingLists();
   });
   
-  function searchMaillingLists(){
+  function searchMailingLists(){
     var userName = $('#user_name').val();
+
     $.ajax({
-      url: "/archives/"+userName+"/subscriptions",
+      url: "/archives/"+ userName +"/subscriptions"+ location.search,
       type: 'post',
       data: { listname: $('#list_name').val(), user: '{{ user_.pk }}' },
       success: function(data){
@@ -28,5 +25,7 @@ $(function (){
       }
     });
   }
-  
+
+  // Make sure to pass listname when page changes
+  $(document).on('click', 'span.step-links a', function(){ this.href += '&list_name=' + $('#list_name').val();});
 });
