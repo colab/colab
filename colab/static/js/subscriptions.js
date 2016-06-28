@@ -1,7 +1,5 @@
 $(function (){
 
-  searchMailingLists();
-
   $('#search_list').on('click', function(event) {
     searchMailingLists();
   });
