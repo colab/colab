@@ -320,3 +320,31 @@ def myaccount_redirect(request, route):
     url = '/'.join(('/account', request.user.username, route))
 
     return redirect(url)
+
+
+def resend_email_verification(request):
+    if request.method == 'GET':
+        return render(request, 'registration/resend_email_verification.html')
+
+    email = request.POST.get('email', '')
+    user = User.objects.filter(email=email).first()
+
+    if not user:
+        msg = _('This emails is not registered yet.')
+        messages.error(request, msg)
+        return render(request, 'registration/resend_email_verification.html')
+
+    email = EmailAddressValidation.objects.get_or_create(address=email,
+                                                         user_id=user.id)[0]
+
+    location = reverse('archive_email_view',
+                       kwargs={'key': email.validation_key})
+    verification_url = request.build_absolute_uri(location)
+    if EmailAddressValidation.verify_email(email, verification_url):
+        msg = _('An email was sent to you. Verify your inbox or spam.')
+        messages.success(request, msg)
+    else:
+        msg = _('An error occurred while sending mail.')
+        messages.error(request, msg)
+
+    return redirect('login')

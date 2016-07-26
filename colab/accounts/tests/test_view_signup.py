@@ -1,4 +1,5 @@
-t Sign Up view
+"""
+Test Sign Up view
 This test related with accounts/views.py
 """
 
