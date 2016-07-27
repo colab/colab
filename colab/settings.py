@@ -282,6 +282,17 @@ for app_name, app in COLAB_APPS.items():
             if context_processor not in TEMPLATE_CONTEXT_PROCESSORS:
                 TEMPLATE_CONTEXT_PROCESSORS += (context_processor,)
 
+    if 'settings_variables' in app:
+        for variable, value in app.get('settings_variables').iteritems():
+            var_type = type(value)
+            is_list_or_tuple = var_type is tuple or var_type is list
+
+            if variable in globals() and is_list_or_tuple:
+                if value not in globals()[variable]:
+                    globals()[variable] += value
+            else:
+                globals()[variable] = value
+
     plugin_urls = app.get('urls')
     if 'login' in plugin_urls:
         COLAB_APPS_LOGIN_URLS.append(plugin_urls.get('login'))
