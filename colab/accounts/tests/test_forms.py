@@ -4,16 +4,22 @@ Objective: Test parameters, and behavior.
 """
 
 import datetime
+
 from django.test import TestCase, override_settings
 from django.core.urlresolvers import reverse
-from mock import patch
-from colab.accounts import forms as accounts_forms
-from colab.accounts.models import User
+
 from colab.accounts.forms import (UserCreationForm, UserChangeForm,
                                   UserUpdateForm, UserForm,
                                   ColabSetPasswordForm,
                                   ColabPasswordChangeForm,
                                   ColabSetUsernameForm)
+from colab.accounts import forms as accounts_forms
+from colab.accounts.forms import (ColabPasswordChangeForm,
+                                  ColabSetPasswordForm, ColabSetUsernameForm,
+                                  UserChangeForm, UserCreationForm, UserForm,
+                                  UserUpdateForm)
+from colab.accounts.models import User
+from mock import patch
 
 
 class SetPasswordFormTestCase(TestCase):

@@ -1,9 +1,7 @@
-from django.conf.urls import patterns, include, url, static
+from django.conf.urls import patterns, include, url
 from django.conf import settings
-from django.views.generic import TemplateView
 from django.contrib import admin
 from django.views.generic import RedirectView
-from accounts.views import UserProfileUpdateView
 from django.views.defaults import permission_denied
 
 admin.autodiscover()
