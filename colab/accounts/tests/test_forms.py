@@ -14,10 +14,6 @@ from colab.accounts.forms import (UserCreationForm, UserChangeForm,
                                   ColabPasswordChangeForm,
                                   ColabSetUsernameForm)
 from colab.accounts import forms as accounts_forms
-from colab.accounts.forms import (ColabPasswordChangeForm,
-                                  ColabSetPasswordForm, ColabSetUsernameForm,
-                                  UserChangeForm, UserCreationForm, UserForm,
-                                  UserUpdateForm)
 from colab.accounts.models import User
 from mock import patch
 
