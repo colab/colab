@@ -5,7 +5,6 @@
     <div class="container">
         <div class="row">
             {% if user.is_staff %}
-            <p class="col-lg-12 text-center">{% trans "Last email imported at" %} {{ last_imported_message.received_time|date:'DATETIME_FORMAT' }}</p>
             {% endif %}
             <p class="col-lg-12 text-center">
                 <a href="http://creativecommons.org/licenses/by-sa/4.0/deed.pt_BR"><img src="{% static 'img/cc_by_sa.png' %}"/></a>

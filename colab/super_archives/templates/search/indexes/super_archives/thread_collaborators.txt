@@ -1,5 +1,0 @@
-{% for message in object.message_set.iterator %}
-  {{ message.from_address.get_full_name }}
-  {{ message.from_address.get_full_name|slugify }}
-  {{ message.from_address.user.username }}
-{% endfor %}

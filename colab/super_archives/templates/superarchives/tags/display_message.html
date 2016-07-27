@@ -1,5 +1,0 @@
-{% for block in blocks %}
-  {% if block.is_reply %}
-    <button class="btn btn-info btn-xs toggle-reply" onclick="$(this).next().toggle();">...</button>
-    <div style="display: none; color: #707;">{% else %}<div>{% endif %}{{ block|safe|linebreaksbr }}</div>
-{% endfor %}

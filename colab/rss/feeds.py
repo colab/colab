@@ -6,15 +6,13 @@ from django.utils.translation import ugettext as _
 
 from haystack.query import SearchQuerySet
 
-from colab.super_archives.models import Thread
-
 
 class LatestThreadsFeeds(Feed):
     title = _(u'Latest Discussions')
     link = '/rss/threads/latest/'
 
     def items(self):
-        return Thread.objects.all()[:20]
+        return []
 
     def item_link(self, item):
         return item.latest_message.url
@@ -33,7 +31,7 @@ class HottestThreadsFeeds(Feed):
     link = '/rss/threads/hottest/'
 
     def items(self):
-        return Thread.highest_score.all()[:20]
+        return []
 
     def item_link(self, item):
         return item.latest_message.url

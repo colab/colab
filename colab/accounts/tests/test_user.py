@@ -75,10 +75,6 @@ class UserTest(TestCase):
         self.assertEqual('https://www.facebook.com/usertestcolab',
                          link_facebook)
 
-    def test_mailinglists(self):
-        empty_list = ()
-        self.assertEqual(empty_list, self.user.mailinglists())
-
     def test_save(self):
         username_test = "USERtestCoLaB"
 
@@ -376,31 +372,6 @@ class UserTest(TestCase):
     def test_user_without_login(self):
         response = self.client.get("/account/" + self.user.username + "/edit")
         self.assertEqual(response.status_code, 403)
-
-    def test_signup_with_post_not_success(self):
-        data_user = {
-            'username': 'username',
-            'password1': 'safepassword',
-            'password2': 'safepassword',
-        }
-        before = User.objects.count()
-        self.client.post('/account/register', data=data_user)
-        after = User.objects.count()
-        self.assertEqual(before, after)
-
-    def test_signup_with_post_with_success(self):
-        data_user = {
-            'username': 'username',
-            'first_name': 'first name',
-            'last_name': 'last name',
-            'email': 'mail@mail.com',
-            'password1': 'safepassword',
-            'password2': 'safepassword',
-        }
-        before = User.objects.count()
-        self.client.post('/account/register', data=data_user)
-        after = User.objects.count()
-        self.assertEqual(before + 1, after)
 
     def test_user_logged_in_profile(self):
         self.authenticate_user()

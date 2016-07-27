@@ -1,7 +1,7 @@
 
 from django import template
 
-from colab.super_archives.models import EmailAddress
+from colab.accounts.models import EmailAddress
 
 
 register = template.Library()

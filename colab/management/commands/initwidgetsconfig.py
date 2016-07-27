@@ -4,13 +4,9 @@ from django.core.management.base import BaseCommand
 CONFIG_TEMPLATE = r"""
 from colab.widgets.widget_manager import WidgetManager
 
-from colab.super_archives.widgets.dashboard_latest_collaborations import \
+from colab.widgets.dashboard.dashboard_latest_collaborations import \
     DashboardLatestCollaborationsWidget
-from colab.super_archives.widgets.dashboard_most_relevant_threads import \
-    DashboardMostRelevantThreadsWidget
-from colab.super_archives.widgets.dashboard_latest_threads import \
-    DashboardLatestThreadsWidget
-from colab.super_archives.widgets.dashboard_collaboration_graph import \
+from colab.widgets.dashboard.dashboard_collaboration_graph import \
     DashboardCollaborationGraphWidget
 
 from colab.accounts.widgets.group import GroupWidget
@@ -27,18 +23,6 @@ WidgetManager.register_widget('dashboard',
                               DashboardLatestCollaborationsWidget())
 WidgetManager.register_widget('dashboard',
                               DashboardCollaborationGraphWidget())
-WidgetManager.register_widget('dashboard',
-                              DashboardMostRelevantThreadsWidget())
-WidgetManager.register_widget('dashboard',
-                              DashboardLatestThreadsWidget())
-
-# Profile Widgets
-WidgetManager.register_widget('group', GroupWidget())
-WidgetManager.register_widget('button', GroupMembershipWidget())
-WidgetManager.register_widget('list', LatestPostedWidget())
-WidgetManager.register_widget('list', LatestContributionsWidget())
-WidgetManager.register_widget('charts', CollaborationChart())
-WidgetManager.register_widget('charts', ParticipationChart())
 """
 
 

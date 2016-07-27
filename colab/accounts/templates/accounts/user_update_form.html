@@ -24,15 +24,22 @@
       {{widget.get_header}}
   {% endfor %}
 <script>
-jQuery(function() {
+$(function() {
 
-  jQuery('#add-email').on('click', function(event) {
-    jQuery.ajax({
-      url: "{% url 'archive_email_view' %}",
+  $('#add-email').on('click', function(event) {
+    $.ajax({
+      url: "{% url 'email_view' %}",
       type: 'post',
-      data: { email: jQuery('#new_email').val(), user: '{{ user_.pk }}' },
+      data: { email: $('#new_email').val(), user: '{{ user_.pk }}' },
+      error: function () {
+        var msg = '{% trans "Invalid email" %}';
+        $('#alert-message').text(msg);
+        $('#alert-js').removeClass('alert-warning').addClass('alert-danger');
+        $('#alert-js').show();
+        window.scroll(0, 0);
+      },
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
       }
     }).done(function() {
       location.reload();
@@ -41,71 +48,71 @@ jQuery(function() {
     event.preventDefault();
   });
 
-  jQuery('#new_email').on('keypress', function(event) {
+  $('#new_email').on('keypress', function(event) {
     if (event.which == 13) {
       event.preventDefault();
-      jQuery('#add-email').trigger('click');
+      $('#add-email').trigger('click');
     }
   });
 
-  jQuery('.delete-email').on('click', function(event) {
-    var $email_block = jQuery(event.target).parent().parent();
-    jQuery.ajax({
-      url: "{% url 'archive_email_view' %}",
+  $('.delete-email').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'email_view' %}",
       type: 'delete',
       data: {
-        email: jQuery('.email-address', $email_block).text(),
+        email: $('.email-address', $email_block).text(),
         user: '{{ user_.pk }}'
       },
       context: $email_block[0],
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
       }
     }).done(function() {
-        jQuery(this).remove();
+        $(this).remove();
     });
 
     event.preventDefault();
   });
 
-  jQuery('.verify-email').on('click', function(event) {
-    var $email_block = jQuery(event.target).parent().parent();
-    jQuery.ajax({
-      url: "{% url 'archive_email_validation_view' %}",
+  $('.verify-email').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'email_validation_view' %}",
       type: 'post',
       data: {
-        email: jQuery('.email-address', $email_block).text(),
+        email: $('.email-address', $email_block).text(),
         user: '{{ user_.pk }}'
       },
       context: $email_block[0],
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
       }
     }).done(function() {
-      var email = jQuery('.email-address', jQuery(this)).text();
+      var email = $('.email-address', $(this)).text();
       var msg = '{% trans "We sent a verification email to " %}' + email + '. ' +
                 '{% trans "Please follow the instructions in it." %}';
-      jQuery('#alert-message').text(msg);
-      jQuery('#alert-js').removeClass('alert-warning').addClass('alert-success');
-      jQuery('#alert-js').show();
+      $('#alert-message').text(msg);
+      $('#alert-js').removeClass('alert-warning').addClass('alert-success');
+      $('#alert-js').show();
       window.scroll(0, 0);
-      jQuery('.verify-email').button('reset');
+      $('.verify-email').button('reset');
     });
 
     event.preventDefault();
   });
 
-  jQuery('.set-primary').on('click', function(event) {
-    var $email_block = jQuery(event.target).parent().parent();
-    jQuery.ajax({
-      url: "{% url 'archive_email_view' %}",
+  $('.set-primary').on('click', function(event) {
+    var $email_block = $(event.target).parent().parent();
+    $.ajax({
+      url: "{% url 'email_validation_view' %}",
       type: 'update',
       data: {
-        email: jQuery('.email-address', $email_block).text(),
+        email: $('.email-address', $email_block).text(),
         user: '{{ user_.pk }}'
       },
       beforeSend: function(xhr, settings) {
-        xhr.setRequestHeader("X-CSRFToken", jQuery.cookie('csrftoken'));
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
       }
     }).done(function() {
       location.reload();
@@ -114,21 +121,21 @@ jQuery(function() {
     event.preventDefault();
   });
 
-  // User feedbacks
-  jQuery('.panel-default').on('click', '.set-primary, .verify-email, .delete-email', function() {
-    jQuery(this).button('loading');
+  // User feedback
+  $('.panel-default').on('click', '.set-primary, .verify-email, .delete-email', function() {
+    $(this).button('loading');
   });
 
   // Active profile bars
   active = function (identifier){
-      jQuery('#navbar li').each(function(index,value){
-        jQuery(this).removeClass('active');
+      $('#navbar li').each(function(index,value){
+        $(this).removeClass('active');
       })
-      jQuery(identifier).addClass('active');
-      jQuery('#profile_content .profile_item').each(function(index,value){
-        jQuery(this).addClass('hidden');
+      $(identifier).addClass('active');
+      $('#profile_content .profile_item').each(function(index,value){
+        $(this).addClass('hidden');
       })
-      jQuery(identifier+'-content').removeClass('hidden');
+      $(identifier+'-content').removeClass('hidden');
   }
   if (location.hash != '') active(location.hash)
 });
@@ -234,7 +241,7 @@ jQuery(function() {
                   </div>
                 </div>
               </div>
-              <div  id="password_container"  class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
+              <div class="col-lg-4 col-md-5 col-sm-12 col-xm-12">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">

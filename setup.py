@@ -8,7 +8,7 @@ REQUIREMENTS = [
     'django-hitcounter>=0.1.1',
 
     # Search
-    'django-haystack>=2.2',
+    'django-haystack>=2.2, <2.5',
     'Whoosh>=2.7.0',
 
     # revproxy
@@ -35,7 +35,8 @@ TEST_REQUIREMENTS = [
 
     # Acceptance tests
     'selenium>=2.53.1',
-    'behave_django>=0.3.0',
+    'behave>=1.2.5',
+    'behave-django>=0.3.0',
 
 ]
 

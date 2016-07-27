@@ -9,13 +9,11 @@ from django.contrib.auth.forms import (ReadOnlyPasswordHashField,
                                        SetPasswordForm, PasswordChangeForm,
                                        AuthenticationForm)
 from django.core.urlresolvers import reverse
-from django.utils.functional import lazy
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 
 from .signals import user_created
 from .utils.validators import validate_social_account
-from .utils import mailman
 
 User = get_user_model()
 
@@ -144,34 +142,6 @@ class UserUpdateForm(UserForm):
                                      required=False)
         facebook = SocialAccountField(url='https://graph.facebook.com/',
                                       required=False)
-
-
-def get_lists_choices():
-    lists_names = []
-    for mlist in mailman.all_lists():
-        name = mlist.get('listname')
-        desc = mlist.get('description')
-        formatted_desc = u'{} ({})'.format(name, desc)
-        lists_names.append((name, formatted_desc))
-    return lists_names
-
-
-# XXX: This field is no longer required when using django 1.8
-class MultipleChoiceFieldLazy(forms.MultipleChoiceField):
-    def _set_choices(self, value):
-        self._choices = self.widget.choices = value
-
-    def _get_choices(self):
-        return list(self._choices)
-
-    choices = property(_get_choices, _set_choices)
-
-
-class ListsForm(forms.Form):
-    lists = MultipleChoiceFieldLazy(label=_(u'Mailing lists'),
-                                    required=False,
-                                    widget=forms.CheckboxSelectMultiple,
-                                    choices=lazy(get_lists_choices, list)())
 
 
 class CustomValidator(object):
